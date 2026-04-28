@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Scroll Screenshotter",
+  "version": "2.0.0",
+  "description": "Scrolls the page in small steps, captures a screenshot at every step, and downloads them all as a sequenced ZIP.",
+  "permissions": ["activeTab", "tabs", "scripting", "downloads", "offscreen", "storage", "notifications"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Scroll Screenshotter"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

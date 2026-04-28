@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      width: 280px; padding: 14px; margin: 0; }
+    h3 { margin: 0 0 10px; font-size: 15px; }
+    p.hint { margin: 0 0 10px; font-size: 11px; color: #666; line-height: 1.4; }
+    label { display: block; font-size: 12px; margin-top: 8px; }
+    input { width: 100%; box-sizing: border-box; padding: 5px 6px; font-size: 12px;
+      border: 1px solid #ccc; border-radius: 4px; }
+    button { width: 100%; padding: 10px; margin-top: 10px; font-size: 13px;
+      cursor: pointer; border: 0; border-radius: 8px; font-weight: 600; }
+    #start { background: #2aa7ee; color: #fff; }
+    #start:hover { background: #1f93d6; }
+    #start:disabled { background: #aaa; cursor: not-allowed; }
+    #cancel { background: #f1c40f; color: #2c2c2c; }
+    #cancel:hover { background: #d9b00d; }
+    .progress { height: 6px; background: #eee; border-radius: 3px; overflow: hidden;
+      margin-top: 10px; }
+    .progress > div { height: 100%; width: 0%; background: #2aa7ee; transition: width .2s; }
+    #status { font-size: 12px; margin-top: 8px; color: #333; min-height: 16px;
+      white-space: pre-wrap; }
+    .warn { color: #b00; font-size: 11px; margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <h3>Scroll Screenshotter</h3>
+  <p class="hint">Page apne aap scroll hoga. Har step pe ek SS liya jaayega. End me sab ZIP me Downloads me chala jaayega. <b>Tab change mat karo capture ke time.</b></p>
+
+  <label>Scroll step (px) — chhota = zyaada SS
+    <input id="step" type="number" value="150" min="50" max="2000" />
+  </label>
+  <label>Delay between shots (ms)
+    <input id="delay" type="number" value="700" min="600" />
+  </label>
+
+  <button id="start">📸 Start Capture</button>
+  <button id="cancel">✖ Cancel</button>
+
+  <div class="progress"><div id="bar"></div></div>
+  <div id="status"></div>
+</body>
+<script src="popup.js"></script>
+</html>
