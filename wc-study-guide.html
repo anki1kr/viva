@@ -328,9 +328,6 @@
       <li><a href="#t6">PYQ Quick Solutions <small>(Unit III/IV only)</small></a></li>
       <li><a href="#sessional-booster">Sessional Exam Booster <small>(30 marks)</small></a></li>
     </ol>
-    <div style="margin-top:24px; font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:14px;">
-      <strong>Sessional scope:</strong> <em>Units III &amp; IV only.</em> Units I &amp; II have been removed. PYQ rows tagged <span class="pyq-tag">PYQ</span>.
-    </div>
   </aside>
 
   <main>
@@ -393,46 +390,10 @@
   <p>The PSTN is built in <strong>levels</strong>: subscriber → local exchange → tandem → toll → international gateway. Wireless adds <strong>BTS → BSC → MSC</strong> on top of this.</p>
   <div class="diagram">
     <div class="diagram-title">Mobile-to-PSTN Routing Chain</div>
-    <svg role="img" aria-label="Mobile-to-PSTN routing chain: mobile station connects to BTS, then BSC, then MSC, then through tandem and toll switches to the PSTN" viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr1" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0d6efd"/>
-        </marker>
-      </defs>
-      <!-- Boxes -->
-      <rect x="10"  y="60" width="100" height="50" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="60"  y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">MS</text>
-      <text x="60"  y="125" text-anchor="middle" font-size="11" fill="#5a6577">Mobile</text>
-
-      <rect x="160" y="60" width="100" height="50" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="210" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">BTS</text>
-      <text x="210" y="125" text-anchor="middle" font-size="11" fill="#5a6577">Cell site</text>
-
-      <rect x="310" y="60" width="100" height="50" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="360" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">BSC</text>
-      <text x="360" y="125" text-anchor="middle" font-size="11" fill="#5a6577">Group of cells</text>
-
-      <rect x="460" y="60" width="100" height="50" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="510" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">MSC</text>
-      <text x="510" y="125" text-anchor="middle" font-size="11" fill="#5a6577">Switch</text>
-
-      <rect x="610" y="60" width="140" height="50" rx="8" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="680" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#b54708">PSTN</text>
-      <text x="680" y="125" text-anchor="middle" font-size="11" fill="#5a6577">Called party</text>
-
-      <!-- Arrows -->
-      <line x1="110" y1="85" x2="158" y2="85" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr1)"/>
-      <line x1="260" y1="85" x2="308" y2="85" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr1)"/>
-      <line x1="410" y1="85" x2="458" y2="85" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr1)"/>
-      <line x1="560" y1="85" x2="608" y2="85" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr1)"/>
-
-      <text x="135" y="78" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">Air</text>
-      <text x="285" y="78" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">Abis</text>
-      <text x="435" y="78" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">A</text>
-      <text x="585" y="78" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">SS7</text>
-
-      <text x="380" y="25" text-anchor="middle" font-size="13" font-weight="600" fill="#1a2233">Wireless infrastructure layered on top of the fixed network</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20210401115316/gsm11.png"
+         alt="Mobile-to-PSTN routing chain: MS connects to BTS, then BSC, then MSC, then through to the PSTN via GSM architecture"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Each hop adds switching/management — from radio cell to PSTN</div>
   </div>
 
@@ -564,34 +525,10 @@
   </div>
   <div class="diagram">
     <div class="diagram-title">FDMA — Frequency Division Multiple Access</div>
-    <svg role="img" aria-label="FDMA spectrum diagram: five users (U1 to U5) each occupy a separate narrow frequency sub-band continuously over time" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#1a2233"/>
-        </marker>
-      </defs>
-      <!-- Axes -->
-      <line x1="80" y1="280" x2="80" y2="20" stroke="#1a2233" stroke-width="2" marker-end="url(#arr2)"/>
-      <line x1="80" y1="280" x2="500" y2="280" stroke="#1a2233" stroke-width="2" marker-end="url(#arr2)"/>
-      <text x="40" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Frequency</text>
-      <text x="490" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Time</text>
-
-      <!-- 5 stacked bands U1-U5 -->
-      <rect x="80" y="220" width="380" height="48" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="270" y="250" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">U1</text>
-
-      <rect x="80" y="172" width="380" height="48" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="270" y="202" text-anchor="middle" font-size="14" font-weight="700" fill="#1a7f37">U2</text>
-
-      <rect x="80" y="124" width="380" height="48" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="270" y="154" text-anchor="middle" font-size="14" font-weight="700" fill="#b54708">U3</text>
-
-      <rect x="80" y="76" width="380" height="48" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
-      <text x="270" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#b42318">U4</text>
-
-      <rect x="80" y="28" width="380" height="48" fill="#e7f0ff" stroke="#6f42c1" stroke-width="2"/>
-      <text x="270" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="#6f42c1">U5</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200713171311/FDMA1.png"
+         alt="FDMA diagram: five users each occupy a separate narrow frequency sub-band continuously over time"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Each user owns a narrow sub-band continuously for the entire call</div>
   </div>
   <p><strong>Used in:</strong> 1G AMPS, satellite, FM radio, cable TV.</p>
@@ -604,55 +541,10 @@
   </div>
   <div class="diagram">
     <div class="diagram-title">TDMA — Time Division Multiple Access</div>
-    <svg role="img" aria-label="TDMA frame diagram: a single frequency carrier shared by users U1 to U4 in repeating time slots, two frames shown end-to-end" viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr3" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#1a2233"/>
-        </marker>
-      </defs>
-      <!-- Axes -->
-      <line x1="80" y1="180" x2="80" y2="40" stroke="#1a2233" stroke-width="2" marker-end="url(#arr3)"/>
-      <line x1="80" y1="180" x2="620" y2="180" stroke="#1a2233" stroke-width="2" marker-end="url(#arr3)"/>
-      <text x="40" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Frequency</text>
-      <text x="610" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Time</text>
-      <text x="40" y="100" text-anchor="middle" font-size="11" fill="#5a6577">same</text>
-      <text x="40" y="115" text-anchor="middle" font-size="11" fill="#5a6577">band</text>
-
-      <!-- 8 horizontal slots (frame x2) -->
-      <rect x="85"  y="80" width="62" height="80" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="116" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">U1</text>
-
-      <rect x="147" y="80" width="62" height="80" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="178" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">U2</text>
-
-      <rect x="209" y="80" width="62" height="80" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="240" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">U3</text>
-
-      <rect x="271" y="80" width="62" height="80" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
-      <text x="302" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#b42318">U4</text>
-
-      <rect x="333" y="80" width="62" height="80" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="364" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">U1</text>
-
-      <rect x="395" y="80" width="62" height="80" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="426" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">U2</text>
-
-      <rect x="457" y="80" width="62" height="80" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="488" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">U3</text>
-
-      <rect x="519" y="80" width="62" height="80" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
-      <text x="550" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#b42318">U4</text>
-
-      <!-- Frame brackets -->
-      <line x1="85"  y1="65" x2="333" y2="65" stroke="#5a6577" stroke-width="1"/>
-      <line x1="85"  y1="60" x2="85"  y2="75" stroke="#5a6577" stroke-width="1"/>
-      <line x1="333" y1="60" x2="333" y2="75" stroke="#5a6577" stroke-width="1"/>
-      <text x="209" y="55" text-anchor="middle" font-size="11" font-style="italic" fill="#5a6577">one frame</text>
-
-      <line x1="333" y1="65" x2="581" y2="65" stroke="#5a6577" stroke-width="1"/>
-      <line x1="581" y1="60" x2="581" y2="75" stroke="#5a6577" stroke-width="1"/>
-      <text x="457" y="55" text-anchor="middle" font-size="11" font-style="italic" fill="#5a6577">repeats</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200713172234/TDMA.png"
+         alt="TDMA diagram: a single frequency carrier shared by users in repeating time slots"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Single frequency, time slots cycle U1 → U4 → U1 → U4 …</div>
   </div>
   <p><strong>Used in:</strong> GSM (8 slots/carrier), DECT, 2G PDC.</p>
@@ -673,52 +565,10 @@
   </div>
   <div class="diagram">
     <div class="diagram-title">CDMA — Codes Sum in Air, RX Recovers with Same Code</div>
-    <svg role="img" aria-label="CDMA diagram: three users multiply data by orthogonal codes, signals sum over the air, receiver despreads with the same code to recover one user's bits while the others appear as background noise" viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr4" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0d6efd"/>
-        </marker>
-      </defs>
-
-      <!-- Three users -->
-      <circle cx="80" cy="50"  r="28" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text   x="80" y="55"  text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">U1</text>
-
-      <circle cx="80" cy="140" r="28" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text   x="80" y="145" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">U2</text>
-
-      <circle cx="80" cy="230" r="28" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text   x="80" y="235" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">U3</text>
-
-      <!-- Multiplier labels -->
-      <text x="200" y="40"  text-anchor="middle" font-size="12" fill="#1a2233">data<tspan font-size="13" dx="4">×</tspan> Code1</text>
-      <text x="200" y="130" text-anchor="middle" font-size="12" fill="#1a2233">data<tspan font-size="13" dx="4">×</tspan> Code2</text>
-      <text x="200" y="220" text-anchor="middle" font-size="12" fill="#1a2233">data<tspan font-size="13" dx="4">×</tspan> Code3</text>
-
-      <!-- Lines from users to summing node -->
-      <line x1="108" y1="50"  x2="320" y2="135" stroke="#0d6efd" stroke-width="2"/>
-      <line x1="108" y1="140" x2="320" y2="140" stroke="#1a7f37" stroke-width="2"/>
-      <line x1="108" y1="230" x2="320" y2="145" stroke="#b54708" stroke-width="2"/>
-
-      <!-- Summing node -->
-      <circle cx="350" cy="140" r="32" fill="#fff5e1" stroke="#f0b429" stroke-width="2"/>
-      <text   x="350" y="148" text-anchor="middle" font-size="22" font-weight="700" fill="#b54708">Σ</text>
-      <text   x="350" y="190" text-anchor="middle" font-size="11" font-style="italic" fill="#5a6577">summed in air</text>
-
-      <!-- Arrow from sum to receiver -->
-      <line x1="382" y1="140" x2="490" y2="140" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr4)"/>
-      <text x="436" y="130" text-anchor="middle" font-size="11" fill="#5a6577">RX signal</text>
-
-      <!-- Receiver block -->
-      <rect x="500" y="110" width="130" height="60" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="565" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">RX × Code1</text>
-      <text x="565" y="155" text-anchor="middle" font-size="11" fill="#5a6577">despread</text>
-
-      <!-- Arrow to user1 data -->
-      <line x1="630" y1="140" x2="700" y2="140" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr4)"/>
-      <text x="730" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">User1</text>
-      <text x="730" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">data</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200714093650/CDMA.png"
+         alt="CDMA diagram: users multiply data by orthogonal codes, signals sum over the air, receiver despreads with the same code to recover data"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Other users appear as background noise — orthogonal codes cancel them out</div>
   </div>
 
@@ -788,98 +638,20 @@
   </div>
   <div class="diagram">
     <div class="diagram-title">FHSS — Carrier Hops Pseudo-Randomly Across Channels</div>
-    <svg role="img" aria-label="FHSS hop pattern: carrier frequency hops pseudo-randomly across channels f1 to f4 in the sequence f3, f1, f4, f2, f1 over successive dwell intervals" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr5" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#1a2233"/>
-        </marker>
-      </defs>
-
-      <!-- Axes -->
-      <line x1="80" y1="280" x2="80" y2="20" stroke="#1a2233" stroke-width="2" marker-end="url(#arr5)"/>
-      <line x1="80" y1="280" x2="580" y2="280" stroke="#1a2233" stroke-width="2" marker-end="url(#arr5)"/>
-      <text x="40" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Frequency</text>
-      <text x="570" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Time</text>
-
-      <!-- Frequency labels -->
-      <text x="60" y="245" text-anchor="end" font-size="12" fill="#5a6577">f1</text>
-      <text x="60" y="195" text-anchor="end" font-size="12" fill="#5a6577">f2</text>
-      <text x="60" y="145" text-anchor="end" font-size="12" fill="#5a6577">f3</text>
-      <text x="60" y="95"  text-anchor="end" font-size="12" fill="#5a6577">f4</text>
-
-      <!-- Light gridlines -->
-      <line x1="80" y1="240" x2="580" y2="240" stroke="#e3e7ee" stroke-width="1" stroke-dasharray="3,3"/>
-      <line x1="80" y1="190" x2="580" y2="190" stroke="#e3e7ee" stroke-width="1" stroke-dasharray="3,3"/>
-      <line x1="80" y1="140" x2="580" y2="140" stroke="#e3e7ee" stroke-width="1" stroke-dasharray="3,3"/>
-      <line x1="80" y1="90"  x2="580" y2="90"  stroke="#e3e7ee" stroke-width="1" stroke-dasharray="3,3"/>
-
-      <!-- Hop blocks (scatter pattern f3, f1, f4, f2, f1) -->
-      <rect x="90"  y="120" width="90" height="40" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="135" y="145" text-anchor="middle" font-size="11" font-weight="700" fill="#0d6efd">hop1</text>
-
-      <rect x="190" y="220" width="90" height="40" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="235" y="245" text-anchor="middle" font-size="11" font-weight="700" fill="#1a7f37">hop2</text>
-
-      <rect x="290" y="70"  width="90" height="40" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="335" y="95"  text-anchor="middle" font-size="11" font-weight="700" fill="#b54708">hop3</text>
-
-      <rect x="390" y="170" width="90" height="40" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
-      <text x="435" y="195" text-anchor="middle" font-size="11" font-weight="700" fill="#b42318">hop4</text>
-
-      <rect x="490" y="220" width="80" height="40" fill="#e7f0ff" stroke="#6f42c1" stroke-width="2"/>
-      <text x="530" y="245" text-anchor="middle" font-size="11" font-weight="700" fill="#6f42c1">hop5</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221017180240/FrequencyHoppingSpreadSpectrumFHSS.png"
+         alt="FHSS hop pattern: carrier frequency hops pseudo-randomly across channels over successive dwell intervals"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Each block = one hop dwell; sequence is known to TX and RX only</div>
   </div>
 
   <h4>FHSS Block Diagram</h4>
   <div class="diagram">
     <div class="diagram-title">FHSS Transmitter Block Diagram</div>
-    <svg role="img" aria-label="FHSS transmitter block diagram: data feeds the modulator, modulator output enters the mixer, frequency synthesizer driven by PN code generator supplies the hopping carrier to the mixer, output is the spread RF signal" viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr6" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0d6efd"/>
-        </marker>
-      </defs>
-
-      <!-- Data input -->
-      <text x="40" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Data</text>
-      <line x1="70" y1="60" x2="158" y2="60" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr6)"/>
-
-      <!-- Modulator -->
-      <rect x="160" y="30" width="160" height="60" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="240" y="65" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">Modulator</text>
-
-      <!-- Modulator output -->
-      <line x1="320" y1="60" x2="408" y2="60" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr6)"/>
-      <text x="365" y="50" text-anchor="middle" font-size="11" font-style="italic" fill="#5a6577">f0 + d(t)</text>
-
-      <!-- Mixer -->
-      <circle cx="450" cy="60" r="38" fill="#fff5e1" stroke="#f0b429" stroke-width="2"/>
-      <text   x="450" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">Mixer</text>
-      <text   x="450" y="73" text-anchor="middle" font-size="16" font-weight="700" fill="#b54708">×</text>
-
-      <!-- Mixer to Spread RF output -->
-      <line x1="488" y1="60" x2="568" y2="60" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr6)"/>
-      <text x="640" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">Spread RF</text>
-      <text x="640" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">signal</text>
-
-      <!-- Frequency Synthesizer -->
-      <rect x="350" y="180" width="200" height="60" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="450" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">Frequency</text>
-      <text x="450" y="225" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">Synthesizer</text>
-
-      <!-- Synth to mixer (up arrow) -->
-      <line x1="450" y1="180" x2="450" y2="100" stroke="#1a7f37" stroke-width="2" marker-end="url(#arr6)"/>
-
-      <!-- PN Code Gen -->
-      <rect x="350" y="290" width="200" height="60" rx="8" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="450" y="315" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">PN Code Gen</text>
-      <text x="450" y="335" text-anchor="middle" font-size="11" fill="#5a6577">(hop sequence)</text>
-
-      <!-- PN to Synth (up arrow) -->
-      <line x1="450" y1="290" x2="450" y2="240" stroke="#b54708" stroke-width="2" marker-end="url(#arr6)"/>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20220627142315/FHSS.png"
+         alt="FHSS transmitter block diagram: data feeds modulator, mixer combines with frequency synthesizer driven by PN code generator to produce spread RF signal"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">PN code drives the synthesizer; mixer multiplies modulated signal by hopping carrier</div>
   </div>
 
@@ -1152,46 +924,11 @@
 
   <div class="diagram">
     <div class="diagram-title">FDMA / TDMA / CDMA — How Three Users Share One Channel</div>
-    <svg role="img" aria-label="Side-by-side comparison of FDMA, TDMA and CDMA showing how three users share one channel by partitioning frequency, time and code-space respectively" viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg">
-      <!-- FDMA -->
-      <text x="120" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">FDMA</text>
-      <line x1="20" y1="200" x2="20" y2="40" stroke="#1a2233" stroke-width="1"/>
-      <line x1="20" y1="200" x2="220" y2="200" stroke="#1a2233" stroke-width="1"/>
-      <text x="10" y="120" text-anchor="end" font-size="10" fill="#5a6577">freq</text>
-      <text x="120" y="218" text-anchor="middle" font-size="10" fill="#5a6577">time →</text>
-      <rect x="22" y="50"  width="196" height="40" fill="#e7f0ff" stroke="#0d6efd"/>
-      <rect x="22" y="95"  width="196" height="45" fill="#e6f4ea" stroke="#1a7f37"/>
-      <rect x="22" y="145" width="196" height="50" fill="#fdf3e7" stroke="#b54708"/>
-      <text x="120" y="75"  text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">User A — band 1</text>
-      <text x="120" y="123" text-anchor="middle" font-size="11" fill="#1a7f37" font-weight="700">User B — band 2</text>
-      <text x="120" y="175" text-anchor="middle" font-size="11" fill="#b54708" font-weight="700">User C — band 3</text>
-
-      <!-- TDMA -->
-      <text x="360" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">TDMA</text>
-      <line x1="260" y1="200" x2="260" y2="40" stroke="#1a2233" stroke-width="1"/>
-      <line x1="260" y1="200" x2="460" y2="200" stroke="#1a2233" stroke-width="1"/>
-      <text x="250" y="120" text-anchor="end" font-size="10" fill="#5a6577">freq</text>
-      <text x="360" y="218" text-anchor="middle" font-size="10" fill="#5a6577">time →</text>
-      <rect x="262" y="50"  width="65" height="145" fill="#e7f0ff" stroke="#0d6efd"/>
-      <rect x="328" y="50"  width="65" height="145" fill="#e6f4ea" stroke="#1a7f37"/>
-      <rect x="394" y="50"  width="65" height="145" fill="#fdf3e7" stroke="#b54708"/>
-      <text x="295" y="125" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">A</text>
-      <text x="361" y="125" text-anchor="middle" font-size="11" fill="#1a7f37" font-weight="700">B</text>
-      <text x="427" y="125" text-anchor="middle" font-size="11" fill="#b54708" font-weight="700">C</text>
-      <text x="361" y="178" text-anchor="middle" font-size="9"  fill="#5a6577">slot 1 / slot 2 / slot 3</text>
-
-      <!-- CDMA -->
-      <text x="600" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">CDMA</text>
-      <line x1="500" y1="200" x2="500" y2="40" stroke="#1a2233" stroke-width="1"/>
-      <line x1="500" y1="200" x2="700" y2="200" stroke="#1a2233" stroke-width="1"/>
-      <text x="490" y="120" text-anchor="end" font-size="10" fill="#5a6577">freq</text>
-      <text x="600" y="218" text-anchor="middle" font-size="10" fill="#5a6577">time →</text>
-      <rect x="502" y="50" width="196" height="145" fill="#e7f0ff" stroke="#0d6efd"/>
-      <text x="600" y="100" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">A + B + C all share</text>
-      <text x="600" y="120" text-anchor="middle" font-size="11" fill="#1a7f37" font-weight="700">band &amp; time</text>
-      <text x="600" y="145" text-anchor="middle" font-size="10" fill="#b54708">distinguished by code</text>
-      <text x="600" y="170" text-anchor="middle" font-size="10" fill="#b54708">(orthogonal Walsh / PN)</text>
-    </svg>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200713171311/FDMA1.png" alt="FDMA" loading="lazy" style="max-width:32%; border-radius:6px;" />
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200713172234/TDMA.png" alt="TDMA" loading="lazy" style="max-width:32%; border-radius:6px;" />
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200714093650/CDMA.png" alt="CDMA" loading="lazy" style="max-width:32%; border-radius:6px;" />
+    </div>
     <div class="caption">FDMA partitions frequency, TDMA partitions time, CDMA partitions code-space</div>
   </div>
 
@@ -1315,66 +1052,10 @@ rx · code2 = [+2 +0 +2 +0] · [+1 -1 +1 -1] = +4 -&gt; bit = +1  <span class="c
 
   <div class="diagram">
     <div class="diagram-title">Mobile-Terminated Call Flow — Traffic Routing</div>
-    <svg role="img" aria-label="Mobile-terminated call traffic-routing flow: caller in PSTN reaches GMSC, GMSC queries HLR which returns MSRN from VLR, GMSC routes to visited MSC, MSC pages BTS, BTS pages MS, then voice path is established back through" viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arrTR" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0d6efd"/>
-        </marker>
-      </defs>
-      <!-- Caller PSTN -->
-      <rect x="20"  y="40"  width="100" height="50" rx="6" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
-      <text x="70"  y="70"  text-anchor="middle" font-size="13" font-weight="700" fill="#b42318">Caller (PSTN)</text>
-
-      <!-- GMSC -->
-      <rect x="170" y="40"  width="100" height="50" rx="6" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="220" y="70"  text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">GMSC</text>
-
-      <!-- HLR -->
-      <rect x="320" y="20"  width="100" height="50" rx="6" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="370" y="50"  text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">HLR (home)</text>
-
-      <!-- Visited MSC -->
-      <rect x="170" y="180" width="120" height="50" rx="6" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="230" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">MSC / VLR (visited)</text>
-
-      <!-- BTS -->
-      <rect x="340" y="180" width="80"  height="50" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="380" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">BTS</text>
-
-      <!-- MS -->
-      <rect x="470" y="180" width="80"  height="50" rx="6" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="510" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">Called MS</text>
-
-      <!-- Numbered arrows -->
-      <line x1="120" y1="65" x2="168" y2="65" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrTR)"/>
-      <text x="144" y="58" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">1</text>
-
-      <line x1="270" y1="55" x2="318" y2="42" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrTR)"/>
-      <text x="294" y="40" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">2 query</text>
-
-      <line x1="318" y1="60" x2="270" y2="75" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrTR)"/>
-      <text x="294" y="84" text-anchor="middle" font-size="11" fill="#1a7f37" font-weight="700">3 MSRN</text>
-
-      <line x1="220" y1="90" x2="220" y2="178" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrTR)"/>
-      <text x="234" y="138" font-size="11" fill="#0d6efd" font-weight="700">4 route</text>
-
-      <line x1="290" y1="205" x2="338" y2="205" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrTR)"/>
-      <text x="314" y="198" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">5 page</text>
-
-      <line x1="420" y1="205" x2="468" y2="205" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrTR)"/>
-      <text x="444" y="198" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">6 page</text>
-
-      <line x1="468" y1="220" x2="420" y2="220" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrTR)"/>
-      <text x="444" y="240" text-anchor="middle" font-size="11" fill="#1a7f37" font-weight="700">7 ack</text>
-
-      <line x1="338" y1="220" x2="290" y2="220" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrTR)"/>
-
-      <!-- Voice path -->
-      <line x1="70" y1="90" x2="70" y2="290" stroke="#b42318" stroke-width="2" stroke-dasharray="6 3"/>
-      <line x1="70" y1="290" x2="510" y2="290" stroke="#b42318" stroke-width="2" stroke-dasharray="6 3"/>
-      <line x1="510" y1="290" x2="510" y2="232" stroke="#b42318" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrTR)"/>
-      <text x="290" y="305" text-anchor="middle" font-size="11" fill="#b42318" font-weight="700">8 voice path established</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221215122432/Screenshot-(52).png"
+         alt="Mobile-terminated call flow: caller reaches GMSC, GMSC queries HLR, HLR returns MSRN from VLR, GMSC routes to visited MSC, MSC pages BTS, BTS pages MS, then voice path is established"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">8-step Mobile-Terminated call: caller → GMSC → HLR (locate) → visited MSC → BTS → MS, then voice path back through</div>
   </div>
 
@@ -1434,48 +1115,10 @@ rx · code2 = [+2 +0 +2 +0] · [+1 -1 +1 -1] = +4 -&gt; bit = +1  <span class="c
 
   <div class="diagram">
     <div class="diagram-title">ISDN Reference Architecture (Subscriber Side)</div>
-    <svg role="img" aria-label="ISDN subscriber-side reference architecture: TE1 connects at S, TE2 via TA at R then S, NT2 separates S from T, NT1 separates T from U, U loop runs to the local exchange LE" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arrIS" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0d6efd"/>
-        </marker>
-      </defs>
-      <!-- TE1 -->
-      <rect x="20"  y="80" width="80" height="50" rx="6" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="60"  y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#0d6efd">TE1</text>
-      <text x="60"  y="122" text-anchor="middle" font-size="9"  fill="#5a6577">ISDN phone</text>
-
-      <!-- TE2 + TA -->
-      <rect x="20"  y="20" width="80" height="40" rx="6" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
-      <text x="60"  y="44" text-anchor="middle" font-size="12" font-weight="700" fill="#0d6efd">TE2</text>
-      <rect x="120" y="20" width="60" height="40" rx="6" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="150" y="44" text-anchor="middle" font-size="12" font-weight="700" fill="#b54708">TA</text>
-
-      <!-- NT2 -->
-      <rect x="220" y="50" width="100" height="80" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="270" y="85" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">NT2</text>
-      <text x="270" y="105" text-anchor="middle" font-size="9" fill="#5a6577">PBX/router</text>
-
-      <!-- NT1 -->
-      <rect x="370" y="60" width="100" height="60" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="420" y="92" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">NT1</text>
-      <text x="420" y="108" text-anchor="middle" font-size="9" fill="#5a6577">line termination</text>
-
-      <!-- LE -->
-      <rect x="520" y="60" width="150" height="60" rx="6" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
-      <text x="595" y="95" text-anchor="middle" font-size="12" font-weight="700" fill="#b42318">LE — Local Exchange</text>
-
-      <!-- Arrows -->
-      <line x1="100" y1="105" x2="218" y2="90"  stroke="#0d6efd" stroke-width="2" marker-end="url(#arrIS)"/>
-      <text x="160" y="98" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">S</text>
-      <line x1="100" y1="40" x2="118" y2="40" stroke="#0d6efd" stroke-width="2"/>
-      <text x="190" y="14" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">R</text>
-      <line x1="180" y1="40" x2="270" y2="50" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrIS)"/>
-      <line x1="320" y1="90" x2="368" y2="90" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrIS)"/>
-      <text x="344" y="82" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">T</text>
-      <line x1="470" y1="90" x2="518" y2="90" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrIS)"/>
-      <text x="494" y="82" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">U</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250917151654371178/ISDN-Protocol-Architecture.webp"
+         alt="ISDN reference architecture: TE1 connects at S, TE2 via TA at R then S, NT2 separates S from T, NT1 separates T from U, U loop runs to the local exchange"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Reference points R, S, T, U separate ISDN equipment (TE/TA/NT2/NT1) and the loop to the local exchange</div>
   </div>
 

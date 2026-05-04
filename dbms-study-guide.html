@@ -186,6 +186,93 @@
     text-transform: uppercase; letter-spacing: .08em;
     margin-bottom: 12px; text-align: center;
   }
+  /* === EASY ENGLISH EXPLAINER === */
+  .simple {
+    background: linear-gradient(135deg, #ecfaf5 0%, #dff5ec 100%);
+    border-left: 4px solid #0d7958;
+    border-radius: 8px;
+    padding: 18px 20px 14px;
+    margin: 18px 0;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(13, 121, 88, 0.06);
+  }
+  .simple::before {
+    content: "IN SIMPLE WORDS";
+    position: absolute;
+    top: -10px; left: 14px;
+    background: #0d7958;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: .14em;
+  }
+  .simple p { margin: 8px 0; color: #1a3a30; }
+  .simple p:first-of-type { margin-top: 0; }
+  .simple .analogy {
+    background: rgba(255,255,255,0.7);
+    border-left: 3px solid #0d7958;
+    padding: 10px 14px;
+    margin-top: 12px;
+    border-radius: 4px;
+    font-size: 14.5px;
+  }
+  .simple .analogy::before {
+    content: "REAL-WORLD ANALOGY";
+    display: block;
+    font-size: 10px; font-weight: 700;
+    color: #0d7958; letter-spacing: .12em;
+    margin-bottom: 4px;
+  }
+  .simple code {
+    background: rgba(13, 121, 88, 0.1);
+    color: #0d5f44;
+  }
+
+  /* === STEP-BY-STEP WORKED EXAMPLE === */
+  .walkthrough {
+    background: #fffaf0;
+    border: 1px solid #f0c97a;
+    border-radius: 8px;
+    padding: 16px 20px 14px;
+    margin: 18px 0;
+    position: relative;
+  }
+  .walkthrough::before {
+    content: "WORKED EXAMPLE — STEP BY STEP";
+    position: absolute;
+    top: -10px; left: 14px;
+    background: #b8730f;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 100px;
+    letter-spacing: .14em;
+  }
+  .walkthrough .step {
+    display: flex; gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(184, 115, 15, 0.22);
+  }
+  .walkthrough .step:first-of-type { padding-top: 4px; }
+  .walkthrough .step:last-child { border-bottom: none; padding-bottom: 0; }
+  .walkthrough .step-n {
+    background: #b8730f; color: #fff;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .walkthrough .step-body { flex: 1; min-width: 0; }
+  .walkthrough .step-body strong { color: #8b5a0b; }
+  .walkthrough .step-body code {
+    background: #fbe7c0; color: #6b4205;
+    word-break: break-word;
+  }
+  .walkthrough .step-body pre { margin: 8px 0 4px; }
+
   /* ===== MOBILE NAV TOGGLE ===== */
   .nav-toggle {
     display: none;
@@ -337,9 +424,6 @@
       <li><a href="#t11">Distributed Database System</a></li>
       <li><a href="#sessional-booster" style="color:var(--brand);font-weight:600;">Sessional Exam Booster</a></li>
     </ol>
-    <div style="margin-top:24px; font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:14px;">
-      Tip: Click reveal buttons in quizzes. Use Ctrl+F to search.
-    </div>
   </aside>
 
   <main>
@@ -358,7 +442,27 @@
 <!-- ============================== TOPIC 1 — RELATIONAL ALGEBRA ============================== -->
 <section id="t1">
   <h2 class="topic"><span class="num">01</span> Relational Algebra <span class="unit">UNIT 3</span></h2>
-  <p class="lead">Relational Algebra (introduced by E. F. Codd, 1970) is a <strong>procedural query language</strong> — you tell the DBMS <em>what</em> to do AND <em>how</em> to do it. Each operator takes one or two relations and returns a new relation, so operations can be chained.</p>
+  <p class="lead">Relational Algebra (introduced by E. F. Codd, 1970) is a <strong>procedural query language</strong> — you tell the DBMS <em>what</em> to do AND <em>how</em> to do it. Each operator takes one or two relations and returns a new relation, so operations can be chained. It forms the fundamental block for modern SQL and DBMS systems such as Oracle, Microsoft SQL Server, and IBM Db2.</p>
+
+  <div class="box def">
+    <span class="label">Key Concepts</span>
+    <ul style="margin:4px 0 0;">
+      <li><strong>Relations</strong>: A table consisting of rows and columns. Each relation has a unique name and is made up of tuples.</li>
+      <li><strong>Tuples</strong>: A single row in a relation — one data record. Each tuple contains values for each attribute.</li>
+      <li><strong>Attributes</strong>: Columns in a relation, each representing a specific property. Example: Name, Age, Grade in a Students relation.</li>
+      <li><strong>Domains</strong>: The set of possible values that an attribute can hold (e.g., integers, strings, dates).</li>
+    </ul>
+  </div>
+
+  <div class="box tip">
+    <span class="label">Importance of Relational Algebra</span>
+    <ul style="margin:4px 0 0;">
+      <li><strong>Query Optimization</strong>: Database engines use relational algebra to find the most efficient way to execute SQL queries.</li>
+      <li><strong>Data Integrity</strong>: Well-defined operations ensure accuracy and consistency of retrieved data.</li>
+      <li><strong>Foundation for SQL</strong>: Every SQL operation (SELECT, JOIN, etc.) has a corresponding relational algebra concept.</li>
+      <li><strong>Simplified Query Representation</strong>: Breaks complex queries into smaller, logical steps.</li>
+    </ul>
+  </div>
 
   <div class="diagram">
     <div class="diagram-title">Relational Algebra — Operation Hierarchy</div>
@@ -437,6 +541,7 @@
       <tr><td>3</td><td>Baljeet</td><td>19</td></tr>
       <tr><td>4</td><td>Harsh</td><td>20</td></tr>
       <tr><td>5</td><td>Prateek</td><td>21</td></tr>
+      <tr><td>6</td><td>Prateek</td><td>23</td></tr>
       </tbody></table>
     </div>
     <div class="card"><h5>EMPLOYEE</h5>
@@ -465,18 +570,31 @@
     <span class="label">Definition</span>
     Returns selected attributes (vertical slice). Notation: <code>π<sub>a1,a2,…</sub>(R)</code>. Equivalent to SQL <code>SELECT col1, col2</code>. <strong>Eliminates duplicates.</strong>
   </div>
-  <p><strong>Example:</strong> <code>π<sub>NAME</sub>(STUDENT)</code> → {Aman, Atul, Baljeet, Harsh, Prateek}.</p>
+  <p><strong>Example:</strong> <code>π<sub>NAME</sub>(STUDENT)</code> → {Aman, Atul, Baljeet, Harsh, Prateek} — note "Prateek" appears only once even though ROLL 5 and ROLL 6 both have NAME=Prateek. Also known as <strong>vertical partitioning</strong>.</p>
+  <div class="simple">
+    <p>Projection cuts out columns. Like taking a wide spreadsheet and hiding most columns — you only see the ones you asked for. And it removes duplicate rows automatically.</p>
+  </div>
 
   <h4>③ Union (∪) — combine rows</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    Returns all tuples from R or S (no duplicates). <strong>Both relations must be union-compatible</strong> — same attributes &amp; domains.
+    Returns all tuples from R or S (no duplicates). <strong>Both relations must be union-compatible</strong> — same number of attributes with matching domains.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — π<sub>NAME</sub>(STUDENT) ∪ π<sub>NAME</sub>(EMPLOYEE)</span>
+    All names from both tables, duplicates removed:
+    <code>Aman, Anant, Ashish, Atul, Baljeet, Harsh, Pranav, Prateek</code> — "Baljeet" and "Harsh" appear in both but output has one copy each.
   </div>
 
   <h4>④ Set Difference (−) — rows in R not in S</h4>
   <div class="box def">
     <span class="label">Definition</span>
     <code>R − S</code> returns tuples present in R but not in S. Also requires union-compatibility.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — π<sub>NAME</sub>(STUDENT) − π<sub>NAME</sub>(EMPLOYEE)</span>
+    Names in STUDENT but not in EMPLOYEE: <code>Aman, Atul, Prateek</code>
+    (Baljeet and Harsh exist in EMPLOYEE, so they are excluded.)
   </div>
 
   <h4>⑤ Cartesian Product (×) — pair every row with every row</h4>
@@ -538,7 +656,11 @@
   <h4>⑥ Rename (ρ) — alias output</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    Renames a relation or its attributes. Notation: <code>ρ<sub>NEW</sub>(R)</code> or <code>ρ<sub>NEW(a1,a2)</sub>(R)</code>.
+    Renames a relation or its attributes. Notation: <code>ρ<sub>NEW</sub>(R)</code> or <code>ρ<sub>NEW(a1,a2)</sub>(R)</code>. It is a binary operator.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — rename the result of a projection</span>
+    <code>ρ(STUDENT_NAME, π<sub>NAME</sub>(STUDENT))</code> — the output relation is named <strong>STUDENT_NAME</strong> and contains {Aman, Atul, Baljeet, Harsh, Prateek}.
   </div>
 
   <hr>
@@ -579,27 +701,106 @@
     </svg>
   </div>
 
+  <p>Inner Join returns only tuples that satisfy the condition. It has three sub-types: <strong>Theta Join</strong>, <strong>Equi Join</strong>, and <strong>Natural Join</strong>.</p>
+
+  <h4>Sample tables for Join examples</h4>
+  <div class="grid-2">
+    <div class="card"><h5>EMPLOYEE</h5>
+      <table style="margin:0;font-size:12px;"><thead><tr><th>E_NO</th><th>E_NAME</th><th>CITY</th><th>EXPERIENCE</th></tr></thead><tbody>
+        <tr><td>E-1</td><td>Ram</td><td>Delhi</td><td>04</td></tr>
+        <tr><td>E-2</td><td>Varun</td><td>Chandigarh</td><td>09</td></tr>
+        <tr><td>E-3</td><td>Ravi</td><td>Noida</td><td>03</td></tr>
+        <tr><td>E-4</td><td>Amit</td><td>Bangalore</td><td>07</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card"><h5>DEPARTMENT</h5>
+      <table style="margin:0;font-size:12px;"><thead><tr><th>D_NO</th><th>D_NAME</th><th>E_NO</th><th>MIN_EXP</th></tr></thead><tbody>
+        <tr><td>D-1</td><td>HR</td><td>E-1</td><td>03</td></tr>
+        <tr><td>D-2</td><td>IT</td><td>E-2</td><td>05</td></tr>
+        <tr><td>D-3</td><td>Marketing</td><td>E-3</td><td>02</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
   <h4>Theta Join (⋈<sub>θ</sub>)</h4>
-  <p>Combines two relations on a condition θ that may be <code>&gt;, &lt;, ≥, ≤, ≠, =</code>. Equivalent to <code>σ<sub>θ</sub>(R × S)</code>.</p>
+  <div class="box def">
+    <span class="label">Definition</span>
+    Combines two relations using a condition θ that may involve any comparison: <code>&gt;, &lt;, ≥, ≤, ≠, =</code>. Notation: <code>R ⋈<sub>θ</sub> S</code>. Equivalent to <code>σ<sub>θ</sub>(R × S)</code>.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — EMPLOYEE ⋈ EXPERIENCE ≥ MIN_EXP DEPARTMENT</span>
+    Rows where employee's experience ≥ department's minimum requirement:
+    <table style="font-size:12px;margin-top:6px;"><thead><tr><th>E_NO</th><th>E_NAME</th><th>CITY</th><th>EXP</th><th>D_NO</th><th>D_NAME</th><th>MIN_EXP</th></tr></thead><tbody>
+      <tr><td>E-1</td><td>Ram</td><td>Delhi</td><td>04</td><td>D-1</td><td>HR</td><td>03</td></tr>
+      <tr><td>E-1</td><td>Ram</td><td>Delhi</td><td>04</td><td>D-3</td><td>Marketing</td><td>02</td></tr>
+      <tr><td>E-2</td><td>Varun</td><td>Chandigarh</td><td>09</td><td>D-1</td><td>HR</td><td>03</td></tr>
+      <tr><td>E-2</td><td>Varun</td><td>Chandigarh</td><td>09</td><td>D-2</td><td>IT</td><td>05</td></tr>
+      <tr><td>E-2</td><td>Varun</td><td>Chandigarh</td><td>09</td><td>D-3</td><td>Marketing</td><td>02</td></tr>
+      <tr><td>E-3</td><td>Ravi</td><td>Noida</td><td>03</td><td>D-1</td><td>HR</td><td>03</td></tr>
+      <tr><td>E-3</td><td>Ravi</td><td>Noida</td><td>03</td><td>D-3</td><td>Marketing</td><td>02</td></tr>
+      <tr><td>E-4</td><td>Amit</td><td>Bangalore</td><td>07</td><td>D-1</td><td>HR</td><td>03</td></tr>
+      <tr><td>E-4</td><td>Amit</td><td>Bangalore</td><td>07</td><td>D-2</td><td>IT</td><td>05</td></tr>
+      <tr><td>E-4</td><td>Amit</td><td>Bangalore</td><td>07</td><td>D-3</td><td>Marketing</td><td>02</td></tr>
+    </tbody></table>
+  </div>
 
   <h4>Equi Join</h4>
-  <p>Special theta join where condition uses only equality (<code>=</code>). Most common in practice.</p>
+  <div class="box def">
+    <span class="label">Definition</span>
+    A special case of Theta Join where the condition uses <strong>only equality (=)</strong> comparisons. A non-equijoin uses any other operator.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — EMPLOYEE ⋈ E_NO = E_NO DEPARTMENT</span>
+    <table style="font-size:12px;margin-top:6px;"><thead><tr><th>E_NO</th><th>E_NAME</th><th>CITY</th><th>EXP</th><th>D_NO</th><th>D_NAME</th><th>E_NO</th><th>MIN_EXP</th></tr></thead><tbody>
+      <tr><td>E-1</td><td>Ram</td><td>Delhi</td><td>04</td><td>D-1</td><td>HR</td><td>E-1</td><td>03</td></tr>
+      <tr><td>E-2</td><td>Varun</td><td>Chandigarh</td><td>09</td><td>D-2</td><td>IT</td><td>E-2</td><td>05</td></tr>
+      <tr><td>E-3</td><td>Ravi</td><td>Noida</td><td>03</td><td>D-3</td><td>Marketing</td><td>E-3</td><td>02</td></tr>
+    </tbody></table>
+    <p style="margin-top:6px;font-size:12px;">Notice: E_NO appears <strong>twice</strong> (from both tables). Natural Join would merge them into one.</p>
+  </div>
 
   <h4>Natural Join (⋈)</h4>
-  <p>Joins on <strong>all attributes with the same name</strong> in both relations and keeps a single copy of each common column. No condition needed.</p>
+  <div class="box def">
+    <span class="label">Definition</span>
+    Joins on <strong>all attributes with the same name and domain</strong> in both relations and keeps a <strong>single copy</strong> of each common column. No condition needed. Usually performed on foreign keys. Notation: <code>R ⋈ S</code>.
+  </div>
   <div class="box eg">
-    <span class="label">Example — Natural Join</span>
-    <code>EMPLOYEE(E_NO, NAME, CITY) ⋈ DEPARTMENT(D_NO, D_NAME, E_NO)</code> joins on <code>E_NO</code>; output has columns E_NO, NAME, CITY, D_NO, D_NAME (E_NO appears once).
+    <span class="label">Example — EMPLOYEE ⋈ DEPARTMENT (on E_NO)</span>
+    <table style="font-size:12px;margin-top:6px;"><thead><tr><th>E_NO</th><th>E_NAME</th><th>CITY</th><th>EXPERIENCE</th><th>D_NO</th><th>D_NAME</th><th>MIN_EXP</th></tr></thead><tbody>
+      <tr><td>E-1</td><td>Ram</td><td>Delhi</td><td>04</td><td>D-1</td><td>HR</td><td>03</td></tr>
+      <tr><td>E-2</td><td>Varun</td><td>Chandigarh</td><td>09</td><td>D-2</td><td>IT</td><td>05</td></tr>
+      <tr><td>E-3</td><td>Ravi</td><td>Noida</td><td>03</td><td>D-3</td><td>Marketing</td><td>02</td></tr>
+    </tbody></table>
+    <p style="margin-top:6px;font-size:12px;">E_NO appears only <strong>once</strong> — Natural Join automatically deduplicates the common attribute.</p>
   </div>
 
   <h4>Intersection (∩) — common rows</h4>
-  <p><code>R ∩ S</code> returns tuples present in both. Equivalent to <code>R − (R − S)</code>.</p>
+  <p><code>R ∩ S</code> returns tuples present in both. Equivalent to <code>R − (R − S)</code>. Requires union-compatibility.</p>
 
   <h4>Division (÷) — "for all"</h4>
   <p>Used for queries like <em>"find students who took every course"</em>. <code>R(A,B) ÷ S(B)</code> returns A-values paired with every B in S.</p>
 
+  <h3>1.5 Complete Operations Summary</h3>
+  <table>
+    <thead><tr><th>Category</th><th>Operation</th><th>Purpose / Description</th><th>Syntax</th></tr></thead>
+    <tbody>
+      <tr><td>Unary</td><td>Selection (σ)</td><td>Retrieves rows that satisfy a condition</td><td>σ<sub>condition</sub>(R)</td></tr>
+      <tr><td>Unary</td><td>Projection (π)</td><td>Retrieves specific columns from a relation</td><td>π<sub>col1,col2</sub>(R)</td></tr>
+      <tr><td>Unary</td><td>Rename (ρ)</td><td>Renames a relation or its attributes</td><td>ρ<sub>new_name</sub>(R)</td></tr>
+      <tr><td>Binary</td><td>Union (∪)</td><td>Combines rows from two relations (no duplicates)</td><td>R ∪ S</td></tr>
+      <tr><td>Binary</td><td>Intersection (∩)</td><td>Returns rows common to both relations</td><td>R ∩ S</td></tr>
+      <tr><td>Binary</td><td>Set Difference (−)</td><td>Rows in R but not in S</td><td>R − S</td></tr>
+      <tr><td>Binary</td><td>Cartesian Product (×)</td><td>Combines every row of R with every row of S</td><td>R × S</td></tr>
+      <tr><td>Join</td><td>Theta Join (⋈<sub>θ</sub>)</td><td>Joins on any condition (&gt;, &lt;, =, etc.)</td><td>R ⋈<sub>θ</sub> S</td></tr>
+      <tr><td>Join</td><td>Equi Join (⋈<sub>=</sub>)</td><td>Special Theta Join using only equality</td><td>R ⋈<sub>A=B</sub> S</td></tr>
+      <tr><td>Join</td><td>Natural Join (⋈)</td><td>Auto-joins on same-named attributes; one copy kept</td><td>R ⋈ S</td></tr>
+      <tr><td>Join</td><td>Outer Joins (⟕, ⟖, ⟗)</td><td>Includes unmatched rows (Left, Right, or Full)</td><td>R ⟕ S</td></tr>
+      <tr><td>Advanced</td><td>Division (÷)</td><td>Finds tuples related to all tuples in another relation</td><td>R ÷ S</td></tr>
+    </tbody>
+  </table>
+
   <hr>
-  <h3>1.4 Generalized Projection &amp; Aggregate Functions</h3>
+  <h3>1.6 Generalized Projection &amp; Aggregate Functions</h3>
   <div class="box def">
     <span class="label">Generalized Projection</span>
     Allows arithmetic in the projection list. <code>π<sub>F1,F2,…,Fn</sub>(R)</code> where each F is a function over attributes.
@@ -623,6 +824,101 @@
     <div class="answer">Both inputs must have the same number of attributes with matching domains, otherwise the resulting tuples would be undefined.</div>
     <div class="q">Q3. How does Natural Join differ from Equi Join? <button class="reveal">Show</button></div>
     <div class="answer">Natural Join automatically matches on every common-named attribute and keeps one copy of it; Equi Join needs an explicit equality condition and keeps both copies.</div>
+  </div>
+
+  <h3 style="margin-top:42px; padding-top:16px; border-top:2px dashed var(--brand);">PYQ Spotlight (May 2025) — Relational Algebra</h3>
+  <p class="lead" style="font-size:14px;">Three questions from the May-2025 paper test concepts from this topic. Read these as the "applied form" of everything above.</p>
+
+  <h4>Q1(e). What are the unary operations in Relational Algebra? <span style="color:var(--muted); font-size:13px; font-weight:normal;">(1.5 marks)</span></h4>
+  <div class="box def">
+    <span class="label">Quick answer</span>
+    Unary operations act on a <strong>single relation</strong> at a time. The three fundamental unary operations are:
+    <ul style="margin:6px 0 0;">
+      <li><strong>Selection (σ)</strong> — picks rows that satisfy a condition. Example: <code>σ<sub>Marks &gt; 70</sub>(STUDENT)</code>.</li>
+      <li><strong>Projection (π)</strong> — picks specific columns; duplicates removed. Example: <code>π<sub>Name, City</sub>(STUDENT)</code>.</li>
+      <li><strong>Rename (ρ)</strong> — renames the relation or its attributes. Example: <code>ρ<sub>S(R, N, M, C)</sub>(STUDENT)</code>.</li>
+    </ul>
+    SQL equivalents: σ → <code>WHERE</code>, π → <code>SELECT col1, col2</code>, ρ → <code>AS</code>.
+  </div>
+
+  <h4>Q1(i). What is the purpose of GROUP BY clause in SELECT statement? <span style="color:var(--muted); font-size:13px; font-weight:normal;">(1.5 marks)</span></h4>
+  <div class="box def">
+    <span class="label">Quick answer</span>
+    <code>GROUP BY</code> partitions the rows of a table into groups, where rows with the same value in the listed columns end up in the same group. Aggregate functions (SUM, AVG, COUNT, MIN, MAX) are then applied <strong>once per group</strong>, producing one summary row per distinct group value. Filter on the aggregated result using <code>HAVING</code>.
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+<pre><code><span class="keyword">SELECT</span> Dept, <span class="keyword">SUM</span>(Salary) <span class="keyword">AS</span> Total
+<span class="keyword">FROM</span> EMPLOYEE
+<span class="keyword">GROUP BY</span> Dept;</code></pre>
+    Returns one row per Dept, each with the sum of all salaries in that department.
+  </div>
+
+  <h4>Q5(a). Relational Algebra Queries on Employee / Books / Loan <span style="color:var(--muted); font-size:13px; font-weight:normal;">(10 marks)</span></h4>
+  <div class="box bad">
+    <span class="label">Schema given in PYQ</span>
+<pre><code>Employee(<u>empno</u>, name, office, age)
+Books(<u>isbn</u>, title, authors, publisher)
+Loan(<u>empno, isbn</u>, date)</code></pre>
+  </div>
+
+  <div class="box eg">
+    <span class="label">Query 1 — names of employees who borrowed a book published by 'XYZ Ltd'</span>
+<pre><code>π<sub>name</sub>(
+  Employee ⋈ Loan ⋈ σ<sub>publisher = 'XYZ Ltd'</sub>(Books)
+)</code></pre>
+SQL form:
+<pre><code><span class="keyword">SELECT DISTINCT</span> E.name
+<span class="keyword">FROM</span> Employee E, Loan L, Books B
+<span class="keyword">WHERE</span> E.empno = L.empno
+  <span class="keyword">AND</span> L.isbn = B.isbn
+  <span class="keyword">AND</span> B.publisher = <span class="string">'XYZ Ltd'</span>;</code></pre>
+  </div>
+
+  <div class="box eg">
+    <span class="label">Query 2 — names of employees who borrowed ALL books published by 'XYZ Ltd'</span>
+    Use the <strong>division operator (÷)</strong> — "find empno paired with every XYZ-Ltd isbn":
+<pre><code>XYZ_books   = π<sub>isbn</sub>( σ<sub>publisher='XYZ Ltd'</sub>(Books) )
+emp_loans   = π<sub>empno, isbn</sub>(Loan)
+qualifying  = emp_loans ÷ XYZ_books
+result      = π<sub>name</sub>( Employee ⋈ qualifying )</code></pre>
+  </div>
+
+  <div class="box eg">
+    <span class="label">Query 3 — employees who borrowed more than five different books published by 'XYZ Ltd'</span>
+<pre><code>T = π<sub>empno, isbn</sub>(  Loan ⋈ σ<sub>publisher='XYZ Ltd'</sub>(Books)  )
+G = empno 𝒢<sub>COUNT-DISTINCT(isbn) AS cnt</sub>(T)
+H = π<sub>empno</sub>( σ<sub>cnt &gt; 5</sub>(G) )
+result = π<sub>name</sub>( Employee ⋈ H )</code></pre>
+SQL form:
+<pre><code><span class="keyword">SELECT</span> E.name
+<span class="keyword">FROM</span> Employee E
+<span class="keyword">WHERE</span> E.empno <span class="keyword">IN</span> (
+  <span class="keyword">SELECT</span> L.empno
+  <span class="keyword">FROM</span> Loan L <span class="keyword">JOIN</span> Books B <span class="keyword">ON</span> L.isbn = B.isbn
+  <span class="keyword">WHERE</span> B.publisher = <span class="string">'XYZ Ltd'</span>
+  <span class="keyword">GROUP BY</span> L.empno
+  <span class="keyword">HAVING COUNT</span>(<span class="keyword">DISTINCT</span> L.isbn) &gt; 5
+);</code></pre>
+  </div>
+
+  <div class="box eg">
+    <span class="label">Query 4 — for each publisher, employees who borrowed more than five books of that publisher</span>
+<pre><code>T = π<sub>empno, isbn, publisher</sub>( Loan ⋈ Books )
+G = (empno, publisher) 𝒢<sub>COUNT-DISTINCT(isbn) AS cnt</sub>(T)
+H = π<sub>empno, publisher</sub>( σ<sub>cnt &gt; 5</sub>(G) )
+result = π<sub>name, publisher</sub>( Employee ⋈ H )</code></pre>
+SQL form:
+<pre><code><span class="keyword">SELECT</span> E.name, B.publisher
+<span class="keyword">FROM</span> Employee E, Loan L, Books B
+<span class="keyword">WHERE</span> E.empno = L.empno <span class="keyword">AND</span> L.isbn = B.isbn
+<span class="keyword">GROUP BY</span> E.empno, E.name, B.publisher
+<span class="keyword">HAVING COUNT</span>(<span class="keyword">DISTINCT</span> L.isbn) &gt; 5;</code></pre>
+  </div>
+
+  <div class="box tip">
+    <span class="label">Pattern recap</span>
+    "ALL of …" → division (÷). "More than N different …" → group by + COUNT(DISTINCT) + HAVING. "Some / any …" → ordinary join + project.
   </div>
 </section>
 
@@ -730,6 +1026,21 @@
 <!-- ============================== TOPIC 3 — FUNCTIONAL DEPENDENCIES ============================== -->
 <section id="t3">
   <h2 class="topic"><span class="num">03</span> Functional Dependencies <span class="unit">UNIT 4</span></h2>
+
+  <div class="box def">
+    <span class="label">Unit 4 Overview — Relational Database Design</span>
+    <strong>Relational Database Design</strong> is the process of organizing data into tables such that data is stored efficiently, redundancy is minimized, and data integrity is maintained.
+    <br><br><strong>Objectives of Database Design:</strong>
+    <ul style="margin:6px 0 0;">
+      <li>Reduce <strong>data redundancy</strong> (duplicate data)</li>
+      <li>Ensure <strong>data consistency</strong></li>
+      <li>Maintain <strong>data integrity</strong></li>
+      <li>Improve <strong>query performance</strong></li>
+      <li>Make the database <strong>easy to maintain</strong></li>
+    </ul>
+    The key tools for achieving good design are: <strong>Functional Dependencies</strong>, <strong>Normalization</strong>, and <strong>Decomposition</strong>.
+  </div>
+
   <p class="lead">A <strong>Functional Dependency (FD)</strong> X → Y means: <em>"if two rows agree on X, they must also agree on Y"</em>. FDs are the foundation of normalization and were formalised with Armstrong's RAT axioms (Reflexivity, Augmentation, Transitivity) in 1974.</p>
 
   <div class="diagram">
@@ -853,6 +1164,44 @@
     <div class="q">Q2. Distinguish trivial from non-trivial FD. <button class="reveal">Show</button></div>
     <div class="answer">Trivial: dependent ⊆ determinant (always holds). Non-trivial: dependent is not a subset of determinant.</div>
   </div>
+
+  <h3 style="margin-top:42px; padding-top:16px; border-top:2px dashed var(--brand);">PYQ Spotlight (May 2025) — Functional Dependencies</h3>
+  <p class="lead" style="font-size:14px;">Two short-answer questions from the May-2025 paper test FD concepts directly. These are 1.5-mark questions — the answers must be precise and short.</p>
+
+  <h4>Q1(d). What do you mean by trivial dependency? <span style="color:var(--muted); font-size:13px; font-weight:normal;">(1.5 marks)</span></h4>
+  <div class="box def">
+    <span class="label">Quick answer</span>
+    A functional dependency <code>X → Y</code> is called a <strong>trivial dependency</strong> when <code>Y ⊆ X</code> — that is, the attribute set on the right-hand side is already a subset of the left-hand side. Trivial FDs are always true and give no useful information for normalization.
+  </div>
+  <div class="box eg">
+    <span class="label">Examples</span>
+    <ul style="margin:0;">
+      <li><code>{Roll, Name} → Name</code> — RHS Name is inside LHS, trivial.</li>
+      <li><code>A → A</code> — same attribute on both sides, trivial.</li>
+      <li><code>{EmpID, DOB} → DOB</code> — DOB is on both sides, trivial.</li>
+    </ul>
+    <p style="margin-top:6px;">Counter (non-trivial): <code>Roll → Name</code> — Name is NOT in {Roll}, so this is the useful kind that drives normalization.</p>
+  </div>
+
+  <h4>Q1(j). Write any two Armstrong's inference rules. <span style="color:var(--muted); font-size:13px; font-weight:normal;">(1.5 marks)</span></h4>
+  <div class="box def">
+    <span class="label">Quick answer — any two of the three primary rules (RAT)</span>
+    <ol style="margin:6px 0 0;">
+      <li><strong>Reflexivity (R):</strong> If <code>Y ⊆ X</code>, then <code>X → Y</code>. (Every set determines its subsets.)</li>
+      <li><strong>Augmentation (A):</strong> If <code>X → Y</code>, then <code>XZ → YZ</code> for any attribute set Z. (Adding the same attribute to both sides preserves the FD.)</li>
+      <li><strong>Transitivity (T):</strong> If <code>X → Y</code> and <code>Y → Z</code>, then <code>X → Z</code>.</li>
+    </ol>
+    These three are <em>sound</em> and <em>complete</em>: every valid FD can be derived from them. Derived rules — Union, Decomposition, Pseudo-transitivity — follow from these three.
+  </div>
+  <div class="box eg">
+    <span class="label">Example using Augmentation</span>
+    Given <code>Roll → Name</code>. By augmentation with attribute Branch, we get <code>{Roll, Branch} → {Name, Branch}</code> — still a valid FD.
+  </div>
+
+  <div class="box tip">
+    <span class="label">Why these matter</span>
+    Armstrong's axioms let you compute the <strong>closure</strong> of an attribute set, which in turn lets you find candidate keys and test whether a decomposition is dependency-preserving. See the next topic (Closure of FD &amp; Candidate Keys) for the full algorithm.
+  </div>
 </section>
 
 <!-- ============================== TOPIC 4 — ANOMALIES ============================== -->
@@ -924,6 +1273,30 @@
 <section id="t5">
   <h2 class="topic"><span class="num">05</span> Normalization (1NF → 5NF) <span class="unit">UNIT 4</span></h2>
   <p class="lead"><strong>Normalization</strong> is the systematic decomposition of tables to eliminate redundancy and anomalies, while preserving information. Each "normal form" adds a stricter rule. In production, 3NF/BCNF is the sweet spot.</p>
+
+  <div class="simple">
+    <p>Without normalization, databases suffer from insertion, update, and deletion anomalies. For example, updating a department name in one record but not others causes inconsistencies. Normalization ensures each fact is stored only once, making updates consistent and queries more reliable.</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h5>Advantages</h5>
+      <ul style="margin:0;font-size:13px;">
+        <li>Eliminates redundancy and anomalies</li>
+        <li>Improves data consistency and integrity</li>
+        <li>Makes schema scalable and easier to maintain</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h5>Disadvantages</h5>
+      <ul style="margin:0;font-size:13px;">
+        <li>More tables → more JOIN operations (performance impact)</li>
+        <li>Requires expert design knowledge</li>
+        <li>May reduce query speed for read-heavy systems</li>
+      </ul>
+    </div>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin:4px 0 14px;">In practice, most production databases are normalized up to 3NF or BCNF, balancing data integrity with performance.</p>
 
   <div class="diagram">
     <div class="diagram-title">The Normal-Form ladder — each step removes one defect</div>
@@ -1091,6 +1464,61 @@ EmployeeProject(EmpCode, ProjectID)</code></pre>
     <div class="q">Q3. Define a multi-valued dependency. <button class="reveal">Show</button></div>
     <div class="answer">X →→ Y when one X-value is associated with a set of independent Y-values, and the remaining attributes are also independent of Y.</div>
   </div>
+
+  <h3 style="margin-top:42px; padding-top:16px; border-top:2px dashed var(--brand);">PYQ Spotlight (May 2025) — Normalization</h3>
+  <p class="lead" style="font-size:14px;">Two questions from the May-2025 paper test normalization theory directly. Q1(c) is a quick definition; Q5(b) is a 5-mark explanation.</p>
+
+  <h4>Q1(c). What is the lossless join property? <span style="color:var(--muted); font-size:13px; font-weight:normal;">(1.5 marks)</span></h4>
+  <div class="box def">
+    <span class="label">Quick answer</span>
+    A decomposition of relation R into R<sub>1</sub> and R<sub>2</sub> is <strong>lossless</strong> if joining them back gives exactly R — no extra "spurious" tuples and no information lost: <code>R = R<sub>1</sub> ⋈ R<sub>2</sub></code>.
+    <p style="margin-top:6px;"><strong>Test:</strong> the decomposition is lossless if the common attributes <code>(R<sub>1</sub> ∩ R<sub>2</sub>)</code> form a super-key of at least one of R<sub>1</sub> or R<sub>2</sub>.</p>
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+    <code>R(EmpID, Name, DeptID)</code> split into <code>R<sub>1</sub>(EmpID, Name)</code> and <code>R<sub>2</sub>(EmpID, DeptID)</code>. Common attribute = EmpID, which is the key of both halves → <strong>lossless</strong>. Joining R<sub>1</sub> ⋈ R<sub>2</sub> on EmpID reconstructs R exactly.
+  </div>
+  <div class="box bad">
+    <span class="label">Counter-example (lossy)</span>
+    The same R split into <code>R<sub>1</sub>(EmpID, Name)</code> and <code>R<sub>2</sub>(Name, DeptID)</code>. Common attribute = Name, which is NOT a key (two employees can share a name). The join produces spurious tuples → <strong>lossy</strong>.
+  </div>
+
+  <h4>Q5(b). What do you mean by BCNF? How is it different from 3NF? <span style="color:var(--muted); font-size:13px; font-weight:normal;">(5 marks)</span></h4>
+  <div class="box def">
+    <span class="label">BCNF (Boyce-Codd Normal Form)</span>
+    A relation R is in BCNF if and only if for every non-trivial functional dependency <code>X → Y</code> in R, the left-hand side <code>X</code> is a <strong>super-key</strong> of R.
+    <p style="margin-top:6px;">BCNF is a stricter version of 3NF — it removes the "Y is prime" loophole that 3NF allows.</p>
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:14px;">3NF vs BCNF — comparison</h5>
+  <table>
+    <thead><tr><th>Aspect</th><th>3NF</th><th>BCNF</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rule</strong></td><td>For every FD X → Y: X is super-key <em>OR</em> Y is a prime attribute</td><td>For every FD X → Y: X must be a super-key (no exception)</td></tr>
+      <tr><td><strong>Strength</strong></td><td>Weaker</td><td>Stronger — every BCNF table is in 3NF</td></tr>
+      <tr><td><strong>Lossless join</strong></td><td>Always achievable</td><td>Always achievable</td></tr>
+      <tr><td><strong>Dependency preservation</strong></td><td>Always achievable</td><td>Not always achievable</td></tr>
+      <tr><td><strong>Redundancy</strong></td><td>May still allow some</td><td>Eliminates all FD-based redundancy</td></tr>
+      <tr><td><strong>Practical choice</strong></td><td>Default in most production systems</td><td>Used when no FD would be lost in decomposition</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box eg">
+    <span class="label">Worked example — 3NF passes but BCNF fails</span>
+    <code>EmpProj(EmpID, ProjID, ProjLeader)</code> with FD <code>ProjLeader → ProjID</code>.
+    <ul style="margin-top:6px;">
+      <li>Candidate keys: {EmpID, ProjID} and {EmpID, ProjLeader}.</li>
+      <li>Prime attributes: EmpID, ProjID, ProjLeader (all attributes are prime here).</li>
+      <li>For <code>ProjLeader → ProjID</code>: ProjLeader is NOT a super-key, but ProjID IS a prime attribute → <strong>3NF passes</strong>.</li>
+      <li>For BCNF, ProjLeader must be a super-key, which it isn't → <strong>BCNF fails</strong>.</li>
+    </ul>
+    <p style="margin-top:6px;">Decompose to BCNF: <code>EMP_PROJ(EmpID, ProjID)</code> + <code>PROJ_LEAD(ProjLeader, ProjID)</code>. Lossless, but the FD <code>ProjLeader → ProjID</code> is now in only one table — still dependency-preserving here, but in some schemas BCNF decomposition can lose dependencies.</p>
+  </div>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink); font-size:14px;">"3NF allows the prime exception, BCNF doesn't."</strong>
+  </div>
 </section>
 
 <!-- ============================== TOPIC 6 — CLOSURE & CANDIDATE KEYS ============================== -->
@@ -1142,12 +1570,22 @@ EmployeeProject(EmpCode, ProjectID)</code></pre>
   <h3>6.1 Worked Example</h3>
   <div class="box eg">
     <span class="label">Example — student_details(Roll_No, Name, Marks, Location)</span>
-    FDs: <code>Roll_No → Name, Marks</code>; <code>Name → Marks, Location</code>.
-    <pre>Step 1: {Roll_No}⁺ = {Roll_No}
-Step 2: apply FD1 → {Roll_No, Name, Marks}
-Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
-        ────────────────────────────────────
-        {Roll_No}⁺ = {Roll_No, Name, Marks, Location}  ← all attrs!</pre>
+    FDs: <code>FD1: Roll_No → Name, Marks</code>; <code>FD2: Name → Marks, Location</code>.
+    <pre>Closure of Roll_No:
+  Step 1: {Roll_No}⁺ = {Roll_No}
+  Step 2: apply FD1 (LHS=Roll_No ⊆ closure) → {Roll_No, Name, Marks}
+  Step 3: apply FD2 (Name now in closure)   → {Roll_No, Name, Marks, Location}
+  ─────────────────────────────────────────
+  {Roll_No}⁺ = {Roll_No, Name, Marks, Location}  ← all attributes!
+
+Closure of Name:
+  Step 1: {Name}⁺ = {Name}
+  Step 2: apply FD2 → {Name, Marks, Location}
+  No FD with Marks or Location on LHS → done
+  {Name}⁺ = {Name, Marks, Location}
+
+Note: {Marks}⁺ = {Marks}  and  {Location}⁺ = {Location}
+(no FD starts with Marks or Location)</pre>
     Since {Roll_No}<sup>+</sup> covers every attribute, <strong>Roll_No is a candidate key</strong>.
   </div>
 
@@ -1171,6 +1609,122 @@ Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
   <div class="mnemonic">
     <strong>Memory hook</strong>
     <strong style="color:var(--ink);font-size:14px;">"Start with self, snowball with FDs, stop when stable"</strong>
+  </div>
+
+  <h3 style="margin-top:42px; padding-top:16px; border-top:2px dashed var(--brand);">PYQ Spotlight (May 2025) — Worked Closure &amp; Decomposition</h3>
+  <p class="lead" style="font-size:14px;">A 10-mark question from the May-2025 paper that exercises closure-finding, candidate-key derivation, and full decomposition into 2NF and 3NF — the most common "difficult" exam scenario.</p>
+
+  <div class="box bad">
+    <span class="label">Question (Paper Q7(a) — 10 marks)</span>
+    Consider the relation <code>R(A, B, C, D, E, F, G, H)</code> with the set of functional dependencies
+    <code>F = { A → DE, &nbsp; B → F, &nbsp; AB → C, &nbsp; C → GH, &nbsp; G → H }</code>.
+    What is the candidate key for R? Decompose R into 2NF and 3NF relations.
+  </div>
+
+  <div class="walkthrough">
+    <h5 style="margin:0 0 12px; color:#8b5a0b; font-size:14px; text-transform:uppercase; letter-spacing:.08em;">Step-by-step solution</h5>
+
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>List all attributes that NEVER appear on the RHS of any FD.</strong> RHS attributes in F: D, E, F, C, G, H. So attributes never on any RHS = <strong>{A, B}</strong>. Any candidate key MUST contain both A and B (otherwise no FD can produce them).
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>Compute the closure of {A, B} using Armstrong's axioms.</strong>
+<pre><code>{A, B}<sup>+</sup> = {A, B}                       <span class="comment">// start</span>
+       = {A, B, D, E}                <span class="comment">// A → DE</span>
+       = {A, B, D, E, F}             <span class="comment">// B → F</span>
+       = {A, B, C, D, E, F}          <span class="comment">// AB → C</span>
+       = {A, B, C, D, E, F, G, H}    <span class="comment">// C → GH</span></code></pre>
+        Closure reaches all 8 attributes ⇒ {A, B} is a super-key. Since neither {A}<sup>+</sup> = {A, D, E} nor {B}<sup>+</sup> = {B, F} reaches all attributes, no proper subset works. <strong>Candidate key = {A, B}</strong>.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <strong>Identify prime vs non-prime attributes.</strong> Prime (in some candidate key) = {A, B}. Non-prime = {C, D, E, F, G, H}.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <strong>Test 2NF — look for partial dependencies.</strong> A partial dependency is a non-prime attribute determined by part of the candidate key.
+        <ul style="margin-top:6px;">
+          <li><code>A → DE</code>: A is part of {A,B}, D &amp; E are non-prime → <strong>partial dependency</strong> (2NF violation).</li>
+          <li><code>B → F</code>: B is part of {A,B}, F is non-prime → <strong>partial dependency</strong> (2NF violation).</li>
+          <li><code>AB → C</code>: full key on LHS — fine.</li>
+          <li><code>C → GH</code>, <code>G → H</code>: LHS is not a sub-key — these are transitive, not partial.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <strong>Decompose into 2NF.</strong> Pull each partial dependency into its own table:
+<pre><code>R<sub>1</sub>(<u>A</u>, D, E)            <span class="comment">// from A → DE</span>
+R<sub>2</sub>(<u>B</u>, F)               <span class="comment">// from B → F</span>
+R<sub>3</sub>(<u>A, B</u>, C, G, H)      <span class="comment">// remainder</span></code></pre>
+        Now every non-prime attribute depends on the WHOLE key of its table. R is in 2NF.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">6</div>
+      <div class="step-body">
+        <strong>Test 3NF on R<sub>3</sub>.</strong> Candidate key of R<sub>3</sub> is {A, B}. Check FDs that hold inside R<sub>3</sub>:
+        <ul style="margin-top:6px;">
+          <li><code>AB → C</code>: AB is super-key — fine.</li>
+          <li><code>C → GH</code>: C is not a super-key, GH are non-prime → <strong>transitive dependency</strong> (3NF violation).</li>
+          <li><code>G → H</code>: G is not a super-key, H is non-prime → <strong>transitive dependency</strong> (3NF violation).</li>
+        </ul>
+        R<sub>1</sub> and R<sub>2</sub> are already in 3NF (no transitive dependencies inside them).
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">7</div>
+      <div class="step-body">
+        <strong>Decompose R<sub>3</sub> into 3NF.</strong> Each transitive FD gets its own table:
+<pre><code>R<sub>3a</sub>(<u>A, B</u>, C)   <span class="comment">// holds AB → C</span>
+R<sub>3b</sub>(<u>C</u>, G)      <span class="comment">// holds C → G  (H reached via G → H)</span>
+R<sub>3c</sub>(<u>G</u>, H)      <span class="comment">// holds G → H</span></code></pre>
+        Note: We split <code>C → GH</code> into <code>C → G</code> and rely on <code>G → H</code> to reach H — this is the <em>3NF synthesis</em> approach using the canonical cover.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">8</div>
+      <div class="step-body">
+        <strong>Final 3NF schema.</strong>
+<pre><code>R<sub>1</sub>(<u>A</u>, D, E)
+R<sub>2</sub>(<u>B</u>, F)
+R<sub>3a</sub>(<u>A, B</u>, C)
+R<sub>3b</sub>(<u>C</u>, G)
+R<sub>3c</sub>(<u>G</u>, H)</code></pre>
+        Decomposition is <strong>lossless</strong> (each split keeps a key in the common attributes) and <strong>dependency-preserving</strong> (every original FD is enforceable on a single table).
+      </div>
+    </div>
+  </div>
+
+  <div class="box tip">
+    <span class="label">Final answer summary (write this in the exam)</span>
+    <ul style="margin:0;">
+      <li><strong>Candidate key:</strong> {A, B}</li>
+      <li><strong>2NF tables:</strong> R<sub>1</sub>(A, D, E), R<sub>2</sub>(B, F), R<sub>3</sub>(A, B, C, G, H)</li>
+      <li><strong>3NF tables:</strong> R<sub>1</sub>(A, D, E), R<sub>2</sub>(B, F), R<sub>3a</sub>(A, B, C), R<sub>3b</sub>(C, G), R<sub>3c</sub>(G, H)</li>
+    </ul>
+  </div>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink); font-size:14px;">"Closure → Key → 2NF (kill partial) → 3NF (kill transitive)"</strong> — exactly the four steps for any decomposition question.
   </div>
 </section>
 
@@ -1357,6 +1911,109 @@ Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
   <div class="mnemonic">
     <strong>Memory hook</strong>
     <strong style="color:var(--ink);font-size:14px;">"Push selections down, projections down, joins last"</strong> — heuristic that makes most plans cheaper.
+  </div>
+
+  <h3 style="margin-top:42px; padding-top:16px; border-top:2px dashed var(--brand);">PYQ Spotlight (May 2025) — Steps in Query Processing</h3>
+  <p class="lead" style="font-size:14px;">A 5-mark question from the May-2025 paper. The full answer is below in the exact order an examiner expects.</p>
+
+  <div class="box bad">
+    <span class="label">Question (Paper Q4(c) — 5 marks)</span>
+    Explain the steps involved in processing a query.
+  </div>
+
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Query processing</strong> is the sequence of activities the DBMS performs to take a high-level SQL query, transform it into an efficient executable plan, run that plan, and return the result to the user. Standard query processing has <strong>four phases</strong>: parsing, translation, optimization, evaluation.
+  </div>
+
+  <div class="walkthrough">
+    <h5 style="margin:0 0 12px; color:#8b5a0b; font-size:14px; text-transform:uppercase; letter-spacing:.08em;">Four phases of query processing</h5>
+
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Parsing &amp; Translation.</strong> The SQL query is sent to the parser, which checks <em>syntactic correctness</em> (matching parentheses, valid keywords). If syntactically valid, the parser builds a <strong>parse tree</strong> and converts the SQL into an equivalent <strong>relational algebra expression</strong>.
+        <pre><code><span class="comment">-- Input SQL</span>
+<span class="keyword">SELECT</span> name <span class="keyword">FROM</span> employee <span class="keyword">WHERE</span> sal &gt; 50000;
+
+<span class="comment">-- Translated relational algebra</span>
+π<sub>name</sub>( σ<sub>sal &gt; 50000</sub>(employee) )</code></pre>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>Translation &amp; Validation.</strong> Each table and column referenced in the query is checked against the <strong>data dictionary / system catalog</strong>. The DBMS verifies the table exists, the columns exist with compatible types, and the user has the required <strong>access rights</strong> (SELECT/INSERT/UPDATE permissions). If anything fails here, the query is rejected with a semantic error.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <strong>Optimization.</strong> The <strong>query optimizer</strong> rewrites the algebra expression into an equivalent but <em>cheaper</em> one. It uses two kinds of rules:
+        <ul style="margin-top:6px;">
+          <li><strong>Heuristic rules</strong> — push selection (σ) and projection (π) as deep as possible (do filters early, before joins) to reduce intermediate result size.</li>
+          <li><strong>Cost-based optimization</strong> — uses statistics from the catalog (table sizes, index availability, selectivity estimates) to compare multiple equivalent plans and pick the cheapest by estimated I/O + CPU cost.</li>
+        </ul>
+        The output of this phase is a chosen <strong>execution plan</strong>.
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <strong>Evaluation / Execution.</strong> The <strong>execution engine</strong> (a.k.a. query processor) runs the chosen plan operator-by-operator: it reads tuples from disk via the storage manager, applies σ / π / ⋈ / aggregates as the plan dictates, and produces the result tuples. The result is returned to the user / application.
+      </div>
+    </div>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">Query processing pipeline</div>
+    <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrPyqQp" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+
+      <rect x="20" y="60" width="120" height="80" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="80" y="90" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="13">SQL Query</text>
+      <text x="80" y="108" text-anchor="middle" font-size="11" fill="#1a2233">user input</text>
+
+      <line x1="140" y1="100" x2="178" y2="100" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrPyqQp)"/>
+
+      <rect x="180" y="60" width="120" height="80" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="240" y="84" text-anchor="middle" font-weight="700" fill="#b54708" font-size="12">Parser</text>
+      <text x="240" y="102" text-anchor="middle" font-size="10" fill="#1a2233">Syntax check</text>
+      <text x="240" y="118" text-anchor="middle" font-size="10" fill="#1a2233">+ translate to RA</text>
+
+      <line x1="300" y1="100" x2="338" y2="100" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrPyqQp)"/>
+
+      <rect x="340" y="60" width="120" height="80" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="400" y="84" text-anchor="middle" font-weight="700" fill="#1a7f37" font-size="12">Optimizer</text>
+      <text x="400" y="102" text-anchor="middle" font-size="10" fill="#1a2233">Rewrite + pick</text>
+      <text x="400" y="118" text-anchor="middle" font-size="10" fill="#1a2233">cheapest plan</text>
+
+      <line x1="460" y1="100" x2="498" y2="100" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrPyqQp)"/>
+
+      <rect x="500" y="60" width="120" height="80" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="560" y="84" text-anchor="middle" font-weight="700" fill="#b42318" font-size="12">Execution</text>
+      <text x="560" y="102" text-anchor="middle" font-size="10" fill="#1a2233">Run operators,</text>
+      <text x="560" y="118" text-anchor="middle" font-size="10" fill="#1a2233">return result</text>
+
+      <text x="370" y="170" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">Catalog &amp; statistics feed both Parser and Optimizer (validation + cost estimation).</text>
+    </svg>
+  </div>
+
+  <div class="box tip">
+    <span class="label">Key heuristic — write this for the bonus mark</span>
+    <strong>"Push selections and projections down."</strong> Apply σ (filter) and π (project) as early as possible — before joins — so intermediate results shrink and the join operates on far fewer rows.
+  </div>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink); font-size:14px;">"Parse · Translate · Optimize · Execute"</strong> — four phases, in that exact order.
   </div>
 </section>
 
@@ -1710,9 +2367,88 @@ Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
   <!-- ====================== Q1 — SQL DATA TYPES & DML ====================== -->
   <h3 style="margin-top:42px;">Q1. Explain SQL Data Types and Basic SQL Queries (SELECT, INSERT, UPDATE, DELETE)</h3>
 
+  <div class="box tip">
+    <span class="label">8-mark scoring template — write the answer in this order</span>
+    <ol style="margin:6px 0 0;">
+      <li><strong>(1m)</strong> One-line definition of SQL + the four sub-languages (DDL/DML/DCL/TCL).</li>
+      <li><strong>(2m)</strong> SQL data types — the five families (Numeric, Character, Date/Time, Boolean, Binary) with at least one example each.</li>
+      <li><strong>(3m)</strong> Each DML command with syntax + one worked example: SELECT, INSERT, UPDATE, DELETE.</li>
+      <li><strong>(1m)</strong> Comparison table of the four DML commands.</li>
+      <li><strong>(1m)</strong> Diagram OR a real-world note (CHAR vs VARCHAR, or DELETE vs TRUNCATE vs DROP).</li>
+    </ol>
+  </div>
+
   <div class="box def">
     <span class="label">Definition — SQL</span>
     SQL (Structured Query Language) is the standard language to define, manipulate, query and control data in a relational DBMS. It has four sub-languages: <strong>DDL</strong> (CREATE, ALTER, DROP), <strong>DML</strong> (SELECT, INSERT, UPDATE, DELETE), <strong>DCL</strong> (GRANT, REVOKE), <strong>TCL</strong> (COMMIT, ROLLBACK). The four "basic queries" asked here are all DML.
+  </div>
+
+  <div class="simple">
+    <p>SQL is just the <strong>language we use to talk to a database</strong>. Think of the database as a giant Excel sheet — SQL is how you tell it: "show me these rows", "add a new row", "change this value", "delete that row".</p>
+    <p>Out of the four sub-languages, <strong>DML</strong> is the one you use every day because it works with the actual data inside tables (the four basic queries asked here).</p>
+    <div class="analogy">
+      A <strong>data type</strong> is like the input box on an online form: a "Name" box accepts letters, an "Age" box accepts only numbers, a "Date of Birth" box accepts only a date. SQL data types do the same job — they decide <em>what kind of value</em> a column is allowed to store.
+    </div>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">DML — the four ways data flows in and out of a table</div>
+    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrQ1" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+        <marker id="arrQ1g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1a7f37"/>
+        </marker>
+        <marker id="arrQ1a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#b54708"/>
+        </marker>
+        <marker id="arrQ1r" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#b42318"/>
+        </marker>
+      </defs>
+
+      <!-- Center: STUDENT table -->
+      <rect x="270" y="120" width="180" height="120" rx="8" fill="#ffffff" stroke="#1a2233" stroke-width="2"/>
+      <rect x="270" y="120" width="180" height="24" rx="8" fill="#1a2233"/>
+      <text x="360" y="137" text-anchor="middle" font-weight="700" fill="#ffffff" font-size="13">STUDENT</text>
+      <line x1="270" y1="168" x2="450" y2="168" stroke="#e3e7ee" stroke-width="1"/>
+      <line x1="270" y1="192" x2="450" y2="192" stroke="#e3e7ee" stroke-width="1"/>
+      <line x1="270" y1="216" x2="450" y2="216" stroke="#e3e7ee" stroke-width="1"/>
+      <text x="282" y="162" font-family="monospace" font-size="11" fill="#1a2233">1  Aman    20  78</text>
+      <text x="282" y="186" font-family="monospace" font-size="11" fill="#1a2233">2  Atul    18  65</text>
+      <text x="282" y="210" font-family="monospace" font-size="11" fill="#1a2233">3  Baljeet 19  82</text>
+      <text x="282" y="234" font-family="monospace" font-size="11" fill="#1a2233">4  Harsh   20  55</text>
+
+      <!-- SELECT (top-left, brand blue) -->
+      <rect x="20" y="20" width="220" height="80" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="130" y="42" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="14">SELECT</text>
+      <text x="130" y="60" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">read rows from a table</text>
+      <text x="130" y="84" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">SELECT * FROM STUDENT;</text>
+      <line x1="240" y1="80" x2="295" y2="135" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ1)"/>
+
+      <!-- INSERT (top-right, good green) -->
+      <rect x="480" y="20" width="220" height="80" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="590" y="42" text-anchor="middle" font-weight="700" fill="#1a7f37" font-size="14">INSERT</text>
+      <text x="590" y="60" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">add a new row</text>
+      <text x="590" y="84" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">INSERT INTO STUDENT …;</text>
+      <line x1="480" y1="80" x2="425" y2="135" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrQ1g)"/>
+
+      <!-- UPDATE (bottom-left, warn amber) -->
+      <rect x="20" y="260" width="220" height="80" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="130" y="282" text-anchor="middle" font-weight="700" fill="#b54708" font-size="14">UPDATE</text>
+      <text x="130" y="300" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">modify existing rows</text>
+      <text x="130" y="324" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">UPDATE STUDENT SET …;</text>
+      <line x1="240" y1="280" x2="295" y2="225" stroke="#b54708" stroke-width="2" marker-end="url(#arrQ1a)"/>
+
+      <!-- DELETE (bottom-right, bad red) -->
+      <rect x="480" y="260" width="220" height="80" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="590" y="282" text-anchor="middle" font-weight="700" fill="#b42318" font-size="14">DELETE</text>
+      <text x="590" y="300" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">remove rows</text>
+      <text x="590" y="324" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">DELETE FROM STUDENT …;</text>
+      <line x1="480" y1="280" x2="425" y2="225" stroke="#b42318" stroke-width="2" marker-end="url(#arrQ1r)"/>
+    </svg>
   </div>
 
   <h4>(a) SQL Data Types</h4>
@@ -1746,6 +2482,31 @@ Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
   <div class="box tip">
     <span class="label">Quick tip</span>
     <strong>CHAR vs VARCHAR:</strong> CHAR(10) always stores 10 bytes (space-padded); VARCHAR(10) stores only the actual length + 1-2 bytes overhead. Use CHAR for fixed codes (country code "IN"), VARCHAR for names.
+  </div>
+
+  <h4>WHERE-clause operators — used inside SELECT/UPDATE/DELETE</h4>
+  <table>
+    <thead><tr><th>Category</th><th>Operator</th><th>Meaning</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="2"><strong>Comparison</strong></td><td><code>= , &lt;&gt;</code></td><td>Equal / not equal</td><td><code>City = 'Delhi'</code></td></tr>
+      <tr><td><code>&lt; &gt; &lt;= &gt;=</code></td><td>Less / greater (and equal-to forms)</td><td><code>Marks &gt;= 75</code></td></tr>
+      <tr><td rowspan="3"><strong>Logical</strong></td><td><code>AND</code></td><td>Both conditions true</td><td><code>City='Delhi' AND Marks&gt;70</code></td></tr>
+      <tr><td><code>OR</code></td><td>Any condition true</td><td><code>City='Delhi' OR City='Pune'</code></td></tr>
+      <tr><td><code>NOT</code></td><td>Negation</td><td><code>NOT (City='Delhi')</code></td></tr>
+      <tr><td rowspan="4"><strong>Special</strong></td><td><code>BETWEEN ... AND</code></td><td>Range inclusive</td><td><code>Age BETWEEN 18 AND 22</code></td></tr>
+      <tr><td><code>IN (...)</code></td><td>Match any in list</td><td><code>City IN ('Delhi','Pune')</code></td></tr>
+      <tr><td><code>LIKE 'pattern'</code></td><td>Pattern match (% any, _ one char)</td><td><code>Name LIKE 'A%'</code></td></tr>
+      <tr><td><code>IS NULL / IS NOT NULL</code></td><td>NULL check</td><td><code>Phone IS NULL</code></td></tr>
+    </tbody>
+  </table>
+  <div class="box eg">
+    <span class="label">Combined example</span>
+<pre><code><span class="keyword">SELECT</span> Name, Marks
+<span class="keyword">FROM</span> STUDENT
+<span class="keyword">WHERE</span> Age <span class="keyword">BETWEEN</span> 18 <span class="keyword">AND</span> 22
+  <span class="keyword">AND</span> City <span class="keyword">IN</span> (<span class="string">'Delhi'</span>, <span class="string">'Pune'</span>)
+  <span class="keyword">AND</span> Name <span class="keyword">LIKE</span> <span class="string">'A%'</span>
+<span class="keyword">ORDER BY</span> Marks <span class="keyword">DESC</span>;</code></pre>
   </div>
 
   <h4>(b) Basic SQL Queries — DML</h4>
@@ -1852,10 +2613,100 @@ Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
     <strong style="color:var(--ink);font-size:14px;">"S-I-U-D — See, Insert, Update, Delete"</strong> — the four DML verbs. SELECT reads, the other three change data and need COMMIT to persist.
   </div>
 
+  <div class="walkthrough">
+    <h5 style="margin:0 0 12px; color:#8b5a0b; font-size:14px; text-transform:uppercase; letter-spacing:.08em;">A complete day with the STUDENT table</h5>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Create &amp; load:</strong> a new student joins.
+<pre><code><span class="keyword">INSERT INTO</span> STUDENT <span class="keyword">VALUES</span> (5, <span class="string">'Prateek'</span>, 21, 90, <span class="string">'Jaipur'</span>);</code></pre>
+        Now the table has 5 rows.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>Check before you change</strong> — never run UPDATE without first running the matching SELECT.
+<pre><code><span class="keyword">SELECT</span> Roll, Name, Marks <span class="keyword">FROM</span> STUDENT <span class="keyword">WHERE</span> City = <span class="string">'Delhi'</span>;</code></pre>
+        Returns Aman (78) and Baljeet (82) — the two rows that will be affected.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <strong>Apply the change:</strong> bonus 5 marks to Delhi students.
+<pre><code><span class="keyword">UPDATE</span> STUDENT <span class="keyword">SET</span> Marks = Marks + 5 <span class="keyword">WHERE</span> City = <span class="string">'Delhi'</span>;</code></pre>
+        Aman → 83, Baljeet → 87. Two rows changed.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <strong>Clean up:</strong> remove anyone still below 60.
+<pre><code><span class="keyword">DELETE FROM</span> STUDENT <span class="keyword">WHERE</span> Marks &lt; 60;</code></pre>
+        Harsh (55) is removed. Table now has 4 rows.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <strong>Read final state:</strong>
+<pre><code><span class="keyword">SELECT</span> Name, Marks <span class="keyword">FROM</span> STUDENT <span class="keyword">ORDER BY</span> Marks <span class="keyword">DESC</span>;</code></pre>
+        Result order: Prateek (90), Baljeet (87), Aman (83), Atul (65).
+      </div>
+    </div>
+  </div>
+
+  <h4>DELETE vs TRUNCATE vs DROP — popular trick question</h4>
+  <table>
+    <thead><tr><th>Aspect</th><th>DELETE</th><th>TRUNCATE</th><th>DROP</th></tr></thead>
+    <tbody>
+      <tr><td>Category</td><td>DML</td><td>DDL</td><td>DDL</td></tr>
+      <tr><td>Removes</td><td>Specific rows (with WHERE) or all rows</td><td>All rows, fast</td><td>Entire table — schema + data</td></tr>
+      <tr><td>WHERE clause</td><td>Yes</td><td>No</td><td>No</td></tr>
+      <tr><td>Rollback</td><td>Yes (within transaction)</td><td>Usually no (auto-commit)</td><td>No (auto-commit)</td></tr>
+      <tr><td>Triggers fire?</td><td>Yes</td><td>No</td><td>No</td></tr>
+      <tr><td>Speed</td><td>Slow (row-by-row)</td><td>Fast (deallocates pages)</td><td>Fast</td></tr>
+      <tr><td>Identity reset?</td><td>No</td><td>Yes (resets AUTO_INCREMENT)</td><td>N/A</td></tr>
+    </tbody>
+  </table>
+  <div class="box bad">
+    <span class="label">Exam favourite one-liner</span>
+    <strong>DELETE</strong> = empty the cupboard but keep the cupboard. <strong>TRUNCATE</strong> = wipe everything inside fast, no question asked. <strong>DROP</strong> = take the cupboard away too.
+  </div>
+
+  <h4>Applications / where you'll really use this</h4>
+  <ul>
+    <li><strong>SELECT</strong> — every report, dashboard, search bar, recommendation system pulls data with SELECT.</li>
+    <li><strong>INSERT</strong> — sign-up forms, new orders, transaction logs, audit trails.</li>
+    <li><strong>UPDATE</strong> — profile edits, stock decrement, order status changes, password resets.</li>
+    <li><strong>DELETE</strong> — "unsubscribe", remove single record. (Note: most production systems "soft-delete" instead — set <code>is_deleted=true</code> rather than DELETE, to keep an audit trail.)</li>
+  </ul>
+
+  <div class="simple">
+    <p><strong>CHAR vs VARCHAR — the easy way to remember:</strong></p>
+    <p>• <code>CHAR(10)</code> is a fixed-size shoe rack with 10 slots — even if you put 2 shoes, the other 8 slots stay empty (wasted space, but fast lookup).</p>
+    <p>• <code>VARCHAR(10)</code> is a stretchy bag — uses only the space your data actually needs, up to 10 characters.</p>
+    <div class="analogy">
+      Use CHAR for <em>fixed-length</em> codes like country codes (<code>'IN'</code>, <code>'US'</code>) or PINs. Use VARCHAR for names, addresses, emails — anything where the length varies a lot.
+    </div>
+  </div>
+
   <hr>
 
   <!-- ====================== Q2 — FUNCTIONAL DEPENDENCIES ====================== -->
   <h3 style="margin-top:42px;">Q2. Explain Functional Dependencies and Their Types</h3>
+
+  <div class="box tip">
+    <span class="label">8-mark scoring template — write the answer in this order</span>
+    <ol style="margin:6px 0 0;">
+      <li><strong>(1m)</strong> Definition of Functional Dependency with notation X → Y and one example.</li>
+      <li><strong>(3m)</strong> Types of FDs — Trivial, Non-Trivial, Multi-Valued, Transitive, Partial, Fully Functional — each with definition + example.</li>
+      <li><strong>(2m)</strong> Armstrong's axioms (Reflexivity, Augmentation, Transitivity) and derived rules.</li>
+      <li><strong>(1m)</strong> Closure of attribute set X⁺ — definition and how to compute it.</li>
+      <li><strong>(1m)</strong> Why FDs matter — link to normalization (which NF each FD type violates).</li>
+    </ol>
+  </div>
 
   <div class="box def">
     <span class="label">Definition</span>
@@ -1865,6 +2716,14 @@ Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
       <li><strong>Y</strong> = dependent (Right-Hand Side, RHS)</li>
     </ul>
     Formally: ∀ t<sub>1</sub>, t<sub>2</sub> ∈ R, if t<sub>1</sub>[X] = t<sub>2</sub>[X] then t<sub>1</sub>[Y] = t<sub>2</sub>[Y].
+  </div>
+
+  <div class="simple">
+    <p><code>X → Y</code> simply means: <strong>"if I know X, I can always tell you Y."</strong> X is the clue, Y is the answer the clue gives you.</p>
+    <p>So <code>Roll_No → Name</code> reads as: "tell me a Roll Number and I'll tell you the student's name." It does <em>not</em> work the other way — two students can have the same name but different roll numbers, so Name → Roll_No does not hold.</p>
+    <div class="analogy">
+      Your <strong>Aadhaar number → your Name, Date of Birth, Address</strong>. One Aadhaar always points to one set of personal details. But the reverse is false — many people share the same name, so Name does <em>not</em> determine Aadhaar.
+    </div>
   </div>
 
   <p><strong>Sample STUDENT relation:</strong></p>
@@ -1878,6 +2737,92 @@ Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
   </table>
   <p>Here <code>Roll_No → Name</code>, <code>Roll_No → Branch</code>, and <code>Branch → HOD</code> all hold.</p>
 
+  <div class="diagram">
+    <div class="diagram-title">FD taxonomy + transitive-chain example</div>
+    <svg viewBox="0 0 720 410" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrQ2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+        <marker id="arrQ2red" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#b42318"/>
+        </marker>
+      </defs>
+
+      <!-- =================== PART A: FD TAXONOMY =================== -->
+      <text x="360" y="16" text-anchor="middle" font-weight="700" font-size="12" fill="#5a6577" letter-spacing="1">PART A — TYPES OF FUNCTIONAL DEPENDENCIES</text>
+
+      <!-- Root -->
+      <rect x="270" y="28" width="180" height="44" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="360" y="48" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="13">Functional Dependency</text>
+      <text x="360" y="64" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">X → Y</text>
+
+      <!-- Lines from root to Trivial / Non-Trivial -->
+      <line x1="320" y1="72" x2="160" y2="100" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ2)"/>
+      <line x1="400" y1="72" x2="560" y2="100" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ2)"/>
+
+      <!-- Trivial (muted/neutral) -->
+      <rect x="60" y="100" width="200" height="50" rx="8" fill="#f4f6fa" stroke="#5a6577" stroke-width="2"/>
+      <text x="160" y="120" text-anchor="middle" font-weight="700" fill="#5a6577" font-size="12">Trivial  (Y ⊆ X)</text>
+      <text x="160" y="138" text-anchor="middle" font-size="10" font-family="monospace" fill="#1a2233">{Roll, Name} → Name</text>
+
+      <!-- Non-Trivial (brand) -->
+      <rect x="460" y="100" width="200" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="560" y="120" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="12">Non-Trivial  (Y ⊄ X)</text>
+      <text x="560" y="138" text-anchor="middle" font-size="10" font-family="monospace" fill="#1a2233">drives normalization</text>
+
+      <!-- Lines from Non-Trivial down to 3 sub-types -->
+      <line x1="500" y1="150" x2="160" y2="190" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ2)"/>
+      <line x1="560" y1="150" x2="380" y2="190" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ2)"/>
+      <line x1="620" y1="150" x2="600" y2="190" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ2)"/>
+
+      <!-- Partial (warn) -->
+      <rect x="40" y="190" width="200" height="56" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="140" y="208" text-anchor="middle" font-weight="700" fill="#b54708" font-size="12">Partial</text>
+      <text x="140" y="224" text-anchor="middle" font-size="10" fill="#1a2233">depends on part of key</text>
+      <text x="140" y="240" text-anchor="middle" font-size="10" font-family="monospace" fill="#b54708">violates 2NF</text>
+
+      <!-- Transitive (warn) -->
+      <rect x="260" y="190" width="200" height="56" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="360" y="208" text-anchor="middle" font-weight="700" fill="#b54708" font-size="12">Transitive</text>
+      <text x="360" y="224" text-anchor="middle" font-size="10" fill="#1a2233">X→Y, Y→Z ⇒ X→Z</text>
+      <text x="360" y="240" text-anchor="middle" font-size="10" font-family="monospace" fill="#b54708">violates 3NF</text>
+
+      <!-- Multi-Valued (bad red) -->
+      <rect x="480" y="190" width="200" height="56" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="580" y="208" text-anchor="middle" font-weight="700" fill="#b42318" font-size="12">Multi-Valued (X →→ Y)</text>
+      <text x="580" y="224" text-anchor="middle" font-size="10" fill="#1a2233">independent set values</text>
+      <text x="580" y="240" text-anchor="middle" font-size="10" font-family="monospace" fill="#b42318">violates 4NF</text>
+
+      <!-- Divider -->
+      <line x1="40" y1="266" x2="680" y2="266" stroke="#e3e7ee" stroke-width="1" stroke-dasharray="4 4"/>
+
+      <!-- =================== PART B: TRANSITIVE CHAIN =================== -->
+      <text x="360" y="284" text-anchor="middle" font-weight="700" font-size="12" fill="#5a6577" letter-spacing="1">PART B — TRANSITIVE FD CHAIN</text>
+
+      <!-- Three boxes -->
+      <rect x="60" y="300" width="160" height="50" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="140" y="322" text-anchor="middle" font-weight="700" fill="#1a7f37" font-family="monospace" font-size="13">Roll_No</text>
+      <text x="140" y="340" text-anchor="middle" font-size="10" fill="#5a6577">X</text>
+
+      <rect x="280" y="300" width="160" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="360" y="322" text-anchor="middle" font-weight="700" fill="#1f6feb" font-family="monospace" font-size="13">Branch</text>
+      <text x="360" y="340" text-anchor="middle" font-size="10" fill="#5a6577">Y</text>
+
+      <rect x="500" y="300" width="160" height="50" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="580" y="322" text-anchor="middle" font-weight="700" fill="#1a7f37" font-family="monospace" font-size="13">HOD</text>
+      <text x="580" y="340" text-anchor="middle" font-size="10" fill="#5a6577">Z</text>
+
+      <!-- Direct arrows X→Y, Y→Z -->
+      <line x1="220" y1="325" x2="278" y2="325" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ2)"/>
+      <line x1="440" y1="325" x2="498" y2="325" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ2)"/>
+
+      <!-- Curved transitive arrow Roll_No → HOD (red, below boxes) -->
+      <path d="M 140 350 Q 360 380 580 350" fill="none" stroke="#b42318" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrQ2red)"/>
+      <text x="360" y="378" text-anchor="middle" font-size="11" font-style="italic" fill="#b42318" font-weight="700">transitively  (X → Z)</text>
+    </svg>
+  </div>
+
   <h4>Types of Functional Dependencies</h4>
 
   <h5 style="color:var(--brand); font-size:15px; margin-top:14px;">① Trivial FD</h5>
@@ -1889,8 +2834,13 @@ Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
   <h5 style="color:var(--brand); font-size:15px; margin-top:14px;">② Non-Trivial FD</h5>
   <div class="box def">
     X → Y where Y ⊄ X — the RHS is <em>not</em> a subset of the LHS. This is the useful kind that drives normalization.
-    <p style="margin-top:6px;"><em>Example:</em> Roll_No → Name (Name is independent of Roll_No).</p>
-    <p><em>Sub-case — Completely Non-Trivial:</em> X ∩ Y = ∅ (no overlap at all).</p>
+    <p style="margin-top:6px;"><em>Example 1:</em> <code>Roll_No → Name</code> — Name is a different attribute, not part of Roll_No. Useful FD.</p>
+    <p><em>Example 2:</em> <code>Emp_ID → Salary</code> — Salary depends on Emp_ID but is not contained in it.</p>
+    <p><em>Example 3:</em> <code>PAN_No → DOB</code> — Date of birth is determined by PAN, but DOB ⊄ PAN_No.</p>
+    <p><em>Example 4 (partial overlap):</em> <code>{Roll_No, Name} → {Name, Branch}</code> — RHS shares <code>Name</code> with LHS but also has <code>Branch</code> (not in LHS), so still non-trivial.</p>
+    <p style="margin-top:8px;"><em>Sub-case — Completely Non-Trivial:</em> X ∩ Y = ∅ (no overlap at all).</p>
+    <p><em>Example:</em> <code>Roll_No → Name</code> — {Roll_No} ∩ {Name} = ∅, so this is completely non-trivial.</p>
+    <p><em>Counter-example:</em> <code>{A, B} → {B, C}</code> is non-trivial but <strong>not</strong> completely non-trivial because B is common on both sides.</p>
   </div>
 
   <h5 style="color:var(--brand); font-size:15px; margin-top:14px;">③ Multi-Valued Dependency (X →→ Y)</h5>
@@ -1926,6 +2876,30 @@ Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
     <em>Derived rules:</em> Union (X→Y, X→Z ⇒ X→YZ), Decomposition (X→YZ ⇒ X→Y &amp; X→Z), Pseudo-transitivity (X→Y, WY→Z ⇒ WX→Z).
   </div>
 
+  <h4>Closure of an Attribute Set (X⁺)</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    The <strong>closure of attribute set X</strong>, written <code>X⁺</code>, is the set of all attributes that can be functionally determined by X using the given FDs and Armstrong's axioms. <strong>If X⁺ contains every attribute of the relation, then X is a super-key</strong>.
+  </div>
+  <div class="box eg">
+    <span class="label">Worked example — find candidate keys</span>
+    Given <code>R(A, B, C, D, E)</code> with FDs <code>{A→B, B→C, C→D, D→E}</code>:
+    <ol style="margin-top:6px;">
+      <li><strong>{A}⁺</strong> = start with A → add B (A→B) → add C (B→C) → add D (C→D) → add E (D→E) = <strong>{A,B,C,D,E}</strong>. So A is a super-key, and since no proper subset of A could be smaller, <strong>A is a candidate key</strong>.</li>
+      <li><strong>{B}⁺</strong> = {B,C,D,E} — does not include A → B is not a super-key.</li>
+      <li><strong>{C}⁺</strong> = {C,D,E} — not a super-key either.</li>
+    </ol>
+  </div>
+  <div class="box tip">
+    <span class="label">Algorithm — computing X⁺ in 4 steps</span>
+    <ol style="margin:0;">
+      <li>Start with <code>X⁺ := X</code>.</li>
+      <li>Scan every FD <code>Y → Z</code>. If <code>Y ⊆ X⁺</code>, add Z to X⁺.</li>
+      <li>Repeat step 2 until X⁺ stops growing.</li>
+      <li>If X⁺ = all attributes of R → X is a super-key. The smallest such X is a candidate key.</li>
+    </ol>
+  </div>
+
   <table>
     <thead><tr><th>Type</th><th>Condition</th><th>Causes Violation Of</th></tr></thead>
     <tbody>
@@ -1938,14 +2912,256 @@ Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
     </tbody>
   </table>
 
+  <div class="walkthrough">
+    <h5 style="margin:0 0 12px; color:#8b5a0b; font-size:14px; text-transform:uppercase; letter-spacing:.08em;">How to spot each FD type — quick recipe</h5>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Trivial?</strong> Check whether the right side is already inside the left side. <code>{Roll, Name} → Name</code> — Name is on both sides, so trivial.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>Partial?</strong> Look at the candidate key. If it has 2+ attributes <em>and</em> some non-key attribute depends on only one of them, it's partial. Example in <code>R(StuID, CourseID, StuName)</code> with key {StuID, CourseID}: <code>StuID → StuName</code> is partial.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <strong>Transitive?</strong> Find a chain. <code>EmpID → DeptID</code> and <code>DeptID → DeptName</code> means <code>EmpID → DeptName</code> transitively. Two arrows in a row = transitive.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <strong>Multi-valued (→→)?</strong> Same X gives an <em>independent set</em> on each side. <code>Student →→ Course</code> and <code>Student →→ Hobby</code> — courses and hobbies don't depend on each other.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <strong>Fully functional?</strong> Try to drop one attribute from the left side. If the FD breaks, it was fully functional. <code>{EmpID, ProjID} → Hours</code> — drop ProjID and you can't tell hours; drop EmpID and you can't either. So both are needed = fully functional.
+      </div>
+    </div>
+  </div>
+
+  <div class="box eg">
+    <span class="label">Extra examples — one per type</span>
+    <ul style="margin:6px 0 0;">
+      <li><strong>Trivial:</strong> {Aadhaar, Name} → Aadhaar — name is right-side, Aadhaar is in both, so trivial.</li>
+      <li><strong>Non-trivial:</strong> Aadhaar → Address — address is a separate attribute, useful FD.</li>
+      <li><strong>Transitive:</strong> Order_ID → Customer_ID and Customer_ID → Customer_City, so Order_ID → Customer_City.</li>
+      <li><strong>Partial:</strong> in <code>R(OrderID, ProductID, ProductName, Qty)</code> with key {OrderID, ProductID}, ProductName depends only on ProductID — partial dependency.</li>
+      <li><strong>Multi-valued:</strong> in <code>TEACHER(TID, Class, Subject)</code>, a teacher teaches several classes <em>and</em> several subjects independently — TID →→ Class, TID →→ Subject.</li>
+      <li><strong>Fully functional:</strong> {FlightID, Date} → SeatsAvailable — you need both the flight number <em>and</em> the date to know how many seats are left.</li>
+    </ul>
+  </div>
+
+  <h4>Why Functional Dependencies matter</h4>
+  <div class="box def">
+    <span class="label">Link to normalization &amp; anomalies</span>
+    Each "bad" FD type causes a different normal-form violation, which causes one or more of the three anomalies (insert, update, delete):
+    <ul style="margin-top:6px;">
+      <li><strong>Partial FD</strong> → violates 2NF → leads to update anomaly when the duplicated value changes.</li>
+      <li><strong>Transitive FD</strong> → violates 3NF → leads to delete anomaly (e.g., remove last student of a department also wipes the HOD info).</li>
+      <li><strong>FD with non-superkey LHS</strong> → violates BCNF → strongest form, removes all FD-related anomalies.</li>
+      <li><strong>Multi-valued (→→)</strong> → violates 4NF → causes spurious tuples in cross-products.</li>
+    </ul>
+  </div>
+  <div class="box tip">
+    <span class="label">Properties &amp; uses of FDs</span>
+    <ul style="margin:0;">
+      <li>Used to find <strong>candidate keys</strong> (via attribute closure).</li>
+      <li>Used to test whether a decomposition is <strong>lossless</strong> and <strong>dependency-preserving</strong>.</li>
+      <li>Used by the query optimiser to <strong>simplify queries</strong> (e.g., remove redundant joins).</li>
+      <li>FDs are <strong>semantic constraints</strong>, decided by the application, not derivable from data alone.</li>
+    </ul>
+  </div>
+
   <hr>
 
   <!-- ====================== Q3 — NORMALIZATION ====================== -->
   <h3 style="margin-top:42px;">Q3. Explain Normalization and Its Types with Examples</h3>
 
+  <div class="box tip">
+    <span class="label">8-mark scoring template — write the answer in this order</span>
+    <ol style="margin:6px 0 0;">
+      <li><strong>(1m)</strong> Definition of normalization + the three goals (eliminate redundancy, remove anomalies, preserve information).</li>
+      <li><strong>(1m)</strong> The three anomalies: Insert, Update, Delete (one example each).</li>
+      <li><strong>(3m)</strong> Normal forms 1NF, 2NF, 3NF — rule + worked example for each (BCNF, 4NF, 5NF if space allows).</li>
+      <li><strong>(1m)</strong> Lossless join &amp; dependency preservation — the two properties of a good decomposition.</li>
+      <li><strong>(1m)</strong> 3NF vs BCNF comparison + advantages/disadvantages.</li>
+      <li><strong>(1m)</strong> Summary cheat-sheet table.</li>
+    </ol>
+  </div>
+
   <div class="box def">
     <span class="label">Definition</span>
     <strong>Normalization</strong> is the systematic process of decomposing relations to (a) eliminate redundancy, (b) remove insertion/update/deletion anomalies, and (c) preserve information through lossless joins. Proposed by E. F. Codd (1970). Each normal form imposes a stricter rule.
+  </div>
+
+  <div class="simple">
+    <p><strong>Normalization = cleaning up a messy table by splitting it into smaller, well-organised tables.</strong> Each normal form (1NF, 2NF, 3NF, …) is one extra rule the table must follow.</p>
+    <p>Without normalization, the same fact gets stored in many rows. So if HOD's phone number changes, you have to update it in <em>every</em> row of every student in that department — and miss one row, your data is now wrong (an "anomaly").</p>
+    <div class="analogy">
+      Like organising a messy wardrobe: first you stop folding shirts and pants together (1NF — atomic), then you give each clothing type its own shelf (2NF — kill partial dependency), then you stop storing your laundry-shop's address inside the shirt shelf (3NF — kill transitive dependency).
+    </div>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">One messy table → 1NF → 2NF → 3NF (visual decomposition)</div>
+    <svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrQ3" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+
+      <!-- ============== Column 1: Un-normalized ============== -->
+      <text x="90" y="22" text-anchor="middle" font-weight="700" fill="#b42318" font-size="13">Un-normalized</text>
+      <rect x="10" y="36" width="160" height="170" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="90" y="56" text-anchor="middle" font-weight="700" font-size="11" fill="#b42318">STUDENT (raw)</text>
+      <line x1="14" y1="64" x2="166" y2="64" stroke="#b42318" stroke-width="1"/>
+      <g font-size="10" font-family="monospace" fill="#1a2233">
+        <text x="18" y="80" font-weight="700">ID</text>
+        <text x="44" y="80" font-weight="700">Name</text>
+        <text x="84" y="80" font-weight="700">Courses</text>
+        <text x="135" y="80" font-weight="700">HOD</text>
+      </g>
+      <line x1="14" y1="86" x2="166" y2="86" stroke="#b42318" stroke-width="0.5" stroke-dasharray="2 2"/>
+      <g font-size="10" font-family="monospace" fill="#1a2233">
+        <text x="18" y="102">101</text>
+        <text x="44" y="102">Aman</text>
+        <text x="84" y="102">DBMS,OS</text>
+        <text x="135" y="102">MrX</text>
+        <text x="18" y="124">102</text>
+        <text x="44" y="124">Atul</text>
+        <text x="84" y="124">CN</text>
+        <text x="135" y="124">MrX</text>
+      </g>
+      <line x1="14" y1="138" x2="166" y2="138" stroke="#b42318" stroke-width="0.5" stroke-dasharray="2 2"/>
+      <text x="90" y="158" text-anchor="middle" font-size="10" fill="#b42318" font-weight="700">Defect</text>
+      <text x="90" y="174" text-anchor="middle" font-size="9.5" fill="#1a2233">multi-valued "Courses"</text>
+      <text x="90" y="188" text-anchor="middle" font-size="9.5" fill="#1a2233">+ HOD repeated</text>
+
+      <!-- Arrow 1 → 2 -->
+      <line x1="172" y1="120" x2="198" y2="120" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ3)"/>
+      <text x="185" y="110" text-anchor="middle" font-size="9.5" fill="#1f6feb" font-weight="700">split</text>
+
+      <!-- ============== Column 2: 1NF ============== -->
+      <text x="280" y="22" text-anchor="middle" font-weight="700" fill="#b54708" font-size="13">1NF (atomic)</text>
+      <rect x="200" y="36" width="160" height="170" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="280" y="56" text-anchor="middle" font-weight="700" font-size="11" fill="#b54708">STUDENT</text>
+      <line x1="204" y1="64" x2="356" y2="64" stroke="#b54708" stroke-width="1"/>
+      <g font-size="10" font-family="monospace" fill="#1a2233">
+        <text x="208" y="80" font-weight="700">ID</text>
+        <text x="234" y="80" font-weight="700">Name</text>
+        <text x="278" y="80" font-weight="700">Course</text>
+        <text x="324" y="80" font-weight="700">HOD</text>
+      </g>
+      <line x1="204" y1="86" x2="356" y2="86" stroke="#b54708" stroke-width="0.5" stroke-dasharray="2 2"/>
+      <g font-size="10" font-family="monospace" fill="#1a2233">
+        <text x="208" y="102">101</text>
+        <text x="234" y="102">Aman</text>
+        <text x="278" y="102">DBMS</text>
+        <text x="324" y="102">MrX</text>
+        <text x="208" y="118">101</text>
+        <text x="234" y="118">Aman</text>
+        <text x="278" y="118">OS</text>
+        <text x="324" y="118">MrX</text>
+        <text x="208" y="134">102</text>
+        <text x="234" y="134">Atul</text>
+        <text x="278" y="134">CN</text>
+        <text x="324" y="134">MrX</text>
+      </g>
+      <line x1="204" y1="148" x2="356" y2="148" stroke="#b54708" stroke-width="0.5" stroke-dasharray="2 2"/>
+      <text x="280" y="166" text-anchor="middle" font-size="10" fill="#b54708" font-weight="700">Atomic</text>
+      <text x="280" y="182" text-anchor="middle" font-size="9.5" fill="#1a2233">but partial dep:</text>
+      <text x="280" y="195" text-anchor="middle" font-size="9.5" font-family="monospace" fill="#1a2233">ID → Name</text>
+
+      <!-- Arrow 2 → 3 -->
+      <line x1="362" y1="120" x2="388" y2="120" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ3)"/>
+      <text x="375" y="110" text-anchor="middle" font-size="9.5" fill="#1f6feb" font-weight="700">2NF</text>
+
+      <!-- ============== Column 3: 2NF ============== -->
+      <text x="470" y="22" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="13">2NF (no partial)</text>
+
+      <rect x="390" y="36" width="160" height="78" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="470" y="54" text-anchor="middle" font-weight="700" font-size="11" fill="#1f6feb">STUDENT</text>
+      <line x1="394" y1="62" x2="546" y2="62" stroke="#1f6feb" stroke-width="1"/>
+      <g font-size="10" font-family="monospace" fill="#1a2233">
+        <text x="398" y="78" font-weight="700">ID</text>
+        <text x="430" y="78" font-weight="700">Name</text>
+        <text x="490" y="78" font-weight="700">HOD</text>
+        <text x="398" y="94">101</text>
+        <text x="430" y="94">Aman</text>
+        <text x="490" y="94">MrX</text>
+        <text x="398" y="108">102</text>
+        <text x="430" y="108">Atul</text>
+        <text x="490" y="108">MrX</text>
+      </g>
+
+      <rect x="390" y="124" width="160" height="62" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="470" y="142" text-anchor="middle" font-weight="700" font-size="11" fill="#1f6feb">ENROLL</text>
+      <line x1="394" y1="150" x2="546" y2="150" stroke="#1f6feb" stroke-width="1"/>
+      <g font-size="10" font-family="monospace" fill="#1a2233">
+        <text x="408" y="166" font-weight="700">ID</text>
+        <text x="468" y="166" font-weight="700">Course</text>
+        <text x="408" y="180">101</text>
+        <text x="468" y="180">DBMS, OS</text>
+      </g>
+
+      <text x="470" y="200" text-anchor="middle" font-size="9.5" fill="#1f6feb" font-style="italic">but transitive: HOD→Phone</text>
+
+      <!-- Arrow 3 → 4 -->
+      <line x1="552" y1="120" x2="578" y2="120" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrQ3)"/>
+      <text x="565" y="110" text-anchor="middle" font-size="9.5" fill="#1f6feb" font-weight="700">3NF</text>
+
+      <!-- ============== Column 4: 3NF ============== -->
+      <text x="660" y="22" text-anchor="middle" font-weight="700" fill="#1a7f37" font-size="13">3NF (final)</text>
+
+      <rect x="580" y="36" width="135" height="50" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="647" y="52" text-anchor="middle" font-weight="700" font-size="11" fill="#1a7f37">STUDENT</text>
+      <text x="647" y="71" text-anchor="middle" font-family="monospace" font-size="10" fill="#1a2233">ID, Name, Branch</text>
+
+      <rect x="580" y="94" width="135" height="50" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="647" y="110" text-anchor="middle" font-weight="700" font-size="11" fill="#1a7f37">BRANCH</text>
+      <text x="647" y="129" text-anchor="middle" font-family="monospace" font-size="10" fill="#1a2233">Branch, HOD, Phone</text>
+
+      <rect x="580" y="152" width="135" height="50" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="647" y="168" text-anchor="middle" font-weight="700" font-size="11" fill="#1a7f37">ENROLL</text>
+      <text x="647" y="187" text-anchor="middle" font-family="monospace" font-size="10" fill="#1a2233">ID, Course</text>
+
+      <!-- Divider -->
+      <line x1="20" y1="232" x2="700" y2="232" stroke="#e3e7ee" stroke-width="1"/>
+
+      <!-- Summary strip -->
+      <text x="360" y="252" text-anchor="middle" font-weight="700" fill="#1a2233" font-size="12">Each step removes one specific defect</text>
+
+      <rect x="20" y="266" width="160" height="58" rx="6" fill="#fdecec" stroke="#b42318" stroke-width="1.5"/>
+      <text x="100" y="284" text-anchor="middle" font-weight="700" fill="#b42318" font-size="11">Raw</text>
+      <text x="100" y="300" text-anchor="middle" font-size="9.5" fill="#1a2233">multi-valued +</text>
+      <text x="100" y="313" text-anchor="middle" font-size="9.5" fill="#1a2233">repeated facts</text>
+
+      <rect x="200" y="266" width="160" height="58" rx="6" fill="#fff5e1" stroke="#b54708" stroke-width="1.5"/>
+      <text x="280" y="284" text-anchor="middle" font-weight="700" fill="#b54708" font-size="11">1NF</text>
+      <text x="280" y="300" text-anchor="middle" font-size="9.5" fill="#1a2233">atomic cells, but</text>
+      <text x="280" y="313" text-anchor="middle" font-size="9.5" fill="#1a2233">redundancy worsened</text>
+
+      <rect x="380" y="266" width="160" height="58" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="460" y="284" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="11">2NF</text>
+      <text x="460" y="300" text-anchor="middle" font-size="9.5" fill="#1a2233">no partial</text>
+      <text x="460" y="313" text-anchor="middle" font-size="9.5" fill="#1a2233">dependency</text>
+
+      <rect x="560" y="266" width="150" height="58" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="1.5"/>
+      <text x="635" y="284" text-anchor="middle" font-weight="700" fill="#1a7f37" font-size="11">3NF</text>
+      <text x="635" y="300" text-anchor="middle" font-size="9.5" fill="#1a2233">no transitive —</text>
+      <text x="635" y="313" text-anchor="middle" font-size="9.5" fill="#1a2233">each fact stored once</text>
+
+      <text x="360" y="350" text-anchor="middle" font-size="10.5" fill="#5a6577" font-style="italic">FD chain: ID → Name &nbsp; · &nbsp; Course → Branch → HOD → HOD_Phone</text>
+      <text x="360" y="368" text-anchor="middle" font-size="10.5" fill="#5a6577">Result: zero update / insert / delete anomalies, lossless join preserved.</text>
+    </svg>
   </div>
 
   <h4>Goals of Normalization</h4>
@@ -2017,6 +3233,38 @@ HOD_INFO(HOD, HOD_Phone)</code></pre>
 PROJ_LEAD(ProjLeader, ProjID)</code></pre>
   </div>
 
+  <h4>Two properties every good decomposition must satisfy</h4>
+  <div class="box def">
+    <span class="label">① Lossless Join Decomposition</span>
+    Splitting R into R₁ and R₂ is <strong>lossless</strong> if joining them back gives exactly the original R — no extra "spurious" tuples. <br>
+    <strong>Test:</strong> R = R₁ ⋈ R₂ is lossless if <code>(R₁ ∩ R₂)</code> is a super-key of either R₁ or R₂.
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+    R(EmpID, EmpName, DeptID) split into R₁(EmpID, EmpName) and R₂(EmpID, DeptID) — common attribute is EmpID, which is the key of both → <strong>lossless</strong>.
+  </div>
+  <div class="box def">
+    <span class="label">② Dependency-Preserving Decomposition</span>
+    Every FD of the original R can be checked using only one of the decomposed tables (no costly join required to enforce a constraint).
+  </div>
+  <div class="box bad">
+    <span class="label">Trade-off</span>
+    Decomposition into 3NF is always lossless <em>and</em> dependency-preserving. Decomposition into BCNF is always lossless, but <strong>not always dependency-preserving</strong> — that's why 3NF is sometimes preferred in practice.
+  </div>
+
+  <h4>3NF vs BCNF — the most-asked comparison</h4>
+  <table>
+    <thead><tr><th>Aspect</th><th>3NF</th><th>BCNF</th></tr></thead>
+    <tbody>
+      <tr><td>Rule</td><td>For X→Y: X is super-key OR Y is prime</td><td>For X→Y: X must be super-key (no exception)</td></tr>
+      <tr><td>Strength</td><td>Weaker</td><td>Stricter (every BCNF table is in 3NF)</td></tr>
+      <tr><td>Lossless join</td><td>Always</td><td>Always</td></tr>
+      <tr><td>Dependency-preserving</td><td>Always</td><td>Not always</td></tr>
+      <tr><td>Redundancy</td><td>May still allow some</td><td>Removes all FD-based redundancy</td></tr>
+      <tr><td>Practical choice</td><td>Default in most systems</td><td>Used when no FD is lost</td></tr>
+    </tbody>
+  </table>
+
   <h4>⑤ Fourth Normal Form (4NF) — No Multi-Valued Dependency</h4>
   <div class="box def">
     <strong>Rule:</strong> BCNF + no non-trivial multi-valued dependency. If X →→ Y holds, X must be a super-key.
@@ -2051,14 +3299,121 @@ STU_HOBBY(Roll, Hobby)</code></pre>
     <strong style="color:var(--ink);font-size:14px;">"Atom · Part · Trans · Super · Multi · Join"</strong> — 1NF kills non-atoms, 2NF kills Partial, 3NF kills Transitive, BCNF wants Super-key, 4NF kills Multi-valued, 5NF kills Join dep.
   </div>
 
+  <div class="simple">
+    <p><strong>What are these "anomalies" everyone keeps mentioning?</strong></p>
+    <p>• <strong>Insert anomaly</strong> — you can't add a new HOD until at least one student joins their department (forced to leave fields empty).</p>
+    <p>• <strong>Update anomaly</strong> — HOD's phone changes; you must update it in 50 student rows. Miss one and the data lies.</p>
+    <p>• <strong>Delete anomaly</strong> — the last student of a department leaves; deleting their row also wipes out the only record of the HOD's phone.</p>
+    <p>Normalization fixes all three by storing each fact <em>exactly once</em>.</p>
+  </div>
+
+  <div class="walkthrough">
+    <h5 style="margin:0 0 12px; color:#8b5a0b; font-size:14px; text-transform:uppercase; letter-spacing:.08em;">One dataset, walked all the way to 3NF</h5>
+    <div class="step">
+      <div class="step-n">0</div>
+      <div class="step-body">
+        <strong>Start (un-normalized):</strong> single table with multi-valued column and repeating facts.
+        <table style="font-size:12.5px; margin-top:6px;">
+          <thead><tr><th>StuID</th><th>Name</th><th>Courses</th><th>Branch</th><th>HOD</th><th>HOD_Phone</th></tr></thead>
+          <tbody>
+            <tr><td>101</td><td>Aman</td><td>DBMS, OS</td><td>CSE</td><td>Mr X</td><td>9876</td></tr>
+            <tr><td>102</td><td>Atul</td><td>CN</td><td>CSE</td><td>Mr X</td><td>9876</td></tr>
+          </tbody>
+        </table>
+        Two problems: "Courses" is multi-valued; HOD/Phone are repeated for every student.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Apply 1NF</strong> — break the multi-valued cell so each row holds one course.
+        <table style="font-size:12.5px; margin-top:6px;">
+          <thead><tr><th>StuID</th><th>Name</th><th>Course</th><th>Branch</th><th>HOD</th><th>HOD_Phone</th></tr></thead>
+          <tbody>
+            <tr><td>101</td><td>Aman</td><td>DBMS</td><td>CSE</td><td>Mr X</td><td>9876</td></tr>
+            <tr><td>101</td><td>Aman</td><td>OS</td><td>CSE</td><td>Mr X</td><td>9876</td></tr>
+            <tr><td>102</td><td>Atul</td><td>CN</td><td>CSE</td><td>Mr X</td><td>9876</td></tr>
+          </tbody>
+        </table>
+        Now atomic — but redundancy got worse. Composite key = {StuID, Course}.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>Apply 2NF</strong> — Name depends only on StuID (part of the key) → partial dependency. Split it out.
+<pre><code>STUDENT(<u>StuID</u>, Name, Branch, HOD, HOD_Phone)
+ENROLL(<u>StuID, Course</u>)</code></pre>
+        Each non-key attribute now depends on the <em>whole</em> key of its table.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <strong>Apply 3NF</strong> — in STUDENT, <code>Branch → HOD → HOD_Phone</code> is a transitive chain. Split HOD info out.
+<pre><code>STUDENT(<u>StuID</u>, Name, Branch)
+BRANCH(<u>Branch</u>, HOD, HOD_Phone)
+ENROLL(<u>StuID, Course</u>)</code></pre>
+        HOD's phone is now stored in exactly one row. Update once, fixed everywhere — no more anomalies.
+      </div>
+    </div>
+  </div>
+
+  <h4>Advantages &amp; disadvantages</h4>
+  <div class="grid-2">
+    <div class="card">
+      <h5 style="color:var(--good);">Advantages of Normalization</h5>
+      <ul style="margin:0; padding-left:18px;">
+        <li>Eliminates data redundancy</li>
+        <li>Removes insert / update / delete anomalies</li>
+        <li>Saves storage space</li>
+        <li>Faster updates (single source of truth)</li>
+        <li>Cleaner schema, easier to maintain</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h5 style="color:var(--bad);">Disadvantages / Trade-offs</h5>
+      <ul style="margin:0; padding-left:18px;">
+        <li>More tables = more <strong>joins</strong> at query time</li>
+        <li>Joins are expensive on very large data</li>
+        <li>Read-heavy systems sometimes <strong>denormalize</strong> (controlled redundancy) for speed</li>
+        <li>Over-normalization can fragment related data</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box tip">
+    <span class="label">Rule of thumb</span>
+    OLTP systems (banking, inventory) → normalize aggressively (3NF / BCNF). OLAP / analytics / data-warehouse → denormalize (star schema) for fast aggregation reads.
+  </div>
+
   <hr>
 
   <!-- ====================== Q4 — AGGREGATE & GROUPING ====================== -->
   <h3 style="margin-top:42px;">Q4. Explain Aggregate Functions and Grouping in Relational Algebra</h3>
 
+  <div class="box tip">
+    <span class="label">8-mark scoring template — write the answer in this order</span>
+    <ol style="margin:6px 0 0;">
+      <li><strong>(1m)</strong> Definition of aggregate function + list of the five common aggregates (SUM, AVG, COUNT, MIN, MAX).</li>
+      <li><strong>(2m)</strong> Aggregate-functions table with return type and applicable column types.</li>
+      <li><strong>(2m)</strong> Grouping operator 𝒢 — notation + 1 example without grouping + 1 with grouping.</li>
+      <li><strong>(1m)</strong> Equivalent SQL form (GROUP BY) + WHERE vs HAVING distinction.</li>
+      <li><strong>(1m)</strong> NULL handling rules + DISTINCT inside aggregates.</li>
+      <li><strong>(1m)</strong> Diagram OR application area (sales report / payroll summary).</li>
+    </ol>
+  </div>
+
   <div class="box def">
     <span class="label">Definition — Aggregate function</span>
     An <strong>aggregate function</strong> takes a collection (multiset) of values and reduces them to a single summary value. It is used in relational algebra and SQL to compute totals, averages, counts, etc., over a set of tuples. Common aggregates: <code>SUM, AVG, COUNT, MIN, MAX</code>.
+  </div>
+
+  <div class="simple">
+    <p>An aggregate <strong>squeezes many rows into one summary number</strong>. SUM adds them up, AVG averages them, COUNT counts how many, MIN/MAX picks the smallest/largest.</p>
+    <p><strong>Grouping</strong> means: first sort the rows into buckets (one bucket per department, per city, etc.), <em>then</em> apply the aggregate to each bucket separately.</p>
+    <div class="analogy">
+      Imagine 100 students' marks on a sheet. <em>Without grouping:</em> "what is the class average?" → one number. <em>With <code>GROUP BY Section</code>:</em> "what is the average of each section?" → one number per section. The grouping attribute is the column you sort by, the aggregate is the calculation done inside each bucket.
+    </div>
   </div>
 
   <h4>Standard Aggregate Functions</h4>
@@ -2092,6 +3447,131 @@ STU_HOBBY(Roll, Hobby)</code></pre>
       <tr><td>E5</td><td>Pranav</td><td>MECH</td><td>28000</td></tr>
     </tbody>
   </table>
+
+  <div class="diagram">
+    <div class="diagram-title">GROUP BY in action — partition rows, then aggregate each bucket</div>
+    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrQ4" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+
+      <!-- Algebra notation header -->
+      <text x="360" y="20" text-anchor="middle" font-size="14" font-weight="700" fill="#1a2233">
+        Dept 𝒢 SUM(Salary) (EMPLOYEE)
+      </text>
+
+      <!-- Stage labels -->
+      <text x="90"  y="42" text-anchor="middle" font-size="11" fill="#5a6577" font-weight="700" letter-spacing="1">INPUT</text>
+      <text x="360" y="42" text-anchor="middle" font-size="11" fill="#5a6577" font-weight="700" letter-spacing="1">PARTITION BY Dept</text>
+      <text x="620" y="42" text-anchor="middle" font-size="11" fill="#5a6577" font-weight="700" letter-spacing="1">AGGREGATE</text>
+
+      <!-- Stage 1: EMPLOYEE table -->
+      <rect x="20" y="55" width="180" height="180" rx="8" fill="#ffffff" stroke="#5a6577" stroke-width="2"/>
+      <rect x="20" y="55" width="180" height="22" rx="8" fill="#e3e7ee" stroke="#5a6577" stroke-width="2"/>
+      <text x="110" y="71" text-anchor="middle" font-size="12" font-weight="700" fill="#1a2233">EMPLOYEE</text>
+      <line x1="20" y1="77" x2="200" y2="77" stroke="#5a6577" stroke-width="2"/>
+
+      <g font-size="10.5" font-family="monospace" fill="#1a2233">
+        <text x="30"  y="93">EmpID</text><text x="78"  y="93">Name</text><text x="128" y="93">Dept</text><text x="170" y="93">Sal</text>
+        <line x1="20" y1="98" x2="200" y2="98" stroke="#e3e7ee"/>
+        <text x="30"  y="113">E1</text><text x="78"  y="113">Aman</text>   <text x="128" y="113">CSE</text> <text x="170" y="113">30000</text>
+        <text x="30"  y="131">E2</text><text x="78"  y="131">Atul</text>   <text x="128" y="131">CSE</text> <text x="170" y="131">40000</text>
+        <text x="30"  y="149">E3</text><text x="78"  y="149">Baljeet</text><text x="128" y="149">ECE</text> <text x="170" y="149">35000</text>
+        <text x="30"  y="167">E4</text><text x="78"  y="167">Harsh</text>  <text x="128" y="167">ECE</text> <text x="170" y="167">50000</text>
+        <text x="30"  y="185">E5</text><text x="78"  y="185">Pranav</text> <text x="128" y="185">MECH</text><text x="170" y="185">28000</text>
+      </g>
+
+      <!-- Stage 2: Three buckets -->
+      <!-- CSE bucket (brand blue) -->
+      <rect x="260" y="60" width="200" height="58" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="270" y="78" font-size="12" font-weight="700" fill="#1f6feb">CSE</text>
+      <g font-size="10.5" font-family="monospace" fill="#1a2233">
+        <text x="305" y="78">E1 Aman    30000</text>
+        <text x="305" y="93">E2 Atul    40000</text>
+      </g>
+      <text x="270" y="111" font-size="10" fill="#5a6577" font-style="italic">2 rows</text>
+
+      <!-- ECE bucket (good green) -->
+      <rect x="260" y="135" width="200" height="58" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="270" y="153" font-size="12" font-weight="700" fill="#1a7f37">ECE</text>
+      <g font-size="10.5" font-family="monospace" fill="#1a2233">
+        <text x="305" y="153">E3 Baljeet 35000</text>
+        <text x="305" y="168">E4 Harsh   50000</text>
+      </g>
+      <text x="270" y="186" font-size="10" fill="#5a6577" font-style="italic">2 rows</text>
+
+      <!-- MECH bucket (warn amber) -->
+      <rect x="260" y="210" width="200" height="42" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="270" y="228" font-size="12" font-weight="700" fill="#b54708">MECH</text>
+      <g font-size="10.5" font-family="monospace" fill="#1a2233">
+        <text x="305" y="228">E5 Pranav  28000</text>
+      </g>
+      <text x="270" y="246" font-size="10" fill="#5a6577" font-style="italic">1 row</text>
+
+      <!-- Arrows from Stage 1 to Stage 2 buckets -->
+      <line x1="200" y1="113" x2="258" y2="89"  stroke="#1f6feb" stroke-width="1.5" marker-end="url(#arrQ4)"/>
+      <line x1="200" y1="131" x2="258" y2="95"  stroke="#1f6feb" stroke-width="1.5" marker-end="url(#arrQ4)"/>
+      <line x1="200" y1="149" x2="258" y2="160" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrQ4)"/>
+      <line x1="200" y1="167" x2="258" y2="166" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrQ4)"/>
+      <line x1="200" y1="185" x2="258" y2="231" stroke="#b54708" stroke-width="1.5" marker-end="url(#arrQ4)"/>
+
+      <!-- Stage 3: Result table -->
+      <rect x="520" y="80" width="180" height="160" rx="8" fill="#ffffff" stroke="#1a2233" stroke-width="2"/>
+      <rect x="520" y="80" width="180" height="26" rx="8" fill="#1a2233"/>
+      <text x="610" y="98" text-anchor="middle" font-size="11" font-weight="700" fill="#ffffff">RESULT</text>
+
+      <g font-size="11" font-family="monospace" fill="#1a2233">
+        <text x="540" y="124" font-weight="700">Dept</text>
+        <text x="615" y="124" font-weight="700">SUM(Salary)</text>
+        <line x1="520" y1="130" x2="700" y2="130" stroke="#1a2233" stroke-width="1.2"/>
+
+        <!-- CSE row -->
+        <rect x="520" y="135" width="180" height="32" fill="#e8f0fe"/>
+        <text x="540" y="155" fill="#1f6feb" font-weight="700">CSE</text>
+        <text x="640" y="155">70000</text>
+
+        <!-- ECE row -->
+        <rect x="520" y="167" width="180" height="32" fill="#e6f4ea"/>
+        <text x="540" y="187" fill="#1a7f37" font-weight="700">ECE</text>
+        <text x="640" y="187">85000</text>
+
+        <!-- MECH row -->
+        <rect x="520" y="199" width="180" height="32" fill="#fff5e1"/>
+        <text x="540" y="219" fill="#b54708" font-weight="700">MECH</text>
+        <text x="640" y="219">28000</text>
+      </g>
+      <rect x="520" y="80" width="180" height="160" rx="8" fill="none" stroke="#1a2233" stroke-width="2"/>
+
+      <!-- Arrows from buckets to result rows, with SUM annotation -->
+      <line x1="460" y1="89"  x2="518" y2="151" stroke="#1f6feb" stroke-width="1.5" marker-end="url(#arrQ4)"/>
+      <text x="478" y="112" font-size="9.5" font-family="monospace" fill="#1f6feb">30k+40k</text>
+
+      <line x1="460" y1="164" x2="518" y2="183" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrQ4)"/>
+      <text x="478" y="178" font-size="9.5" font-family="monospace" fill="#1a7f37">35k+50k</text>
+
+      <line x1="460" y1="231" x2="518" y2="215" stroke="#b54708" stroke-width="1.5" marker-end="url(#arrQ4)"/>
+      <text x="478" y="232" font-size="9.5" font-family="monospace" fill="#b54708">28k</text>
+
+      <!-- Footer caption -->
+      <text x="360" y="285" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">
+        Step 1: scan all rows.  Step 2: drop each row into its Dept bucket.  Step 3: SUM the Salary column inside every bucket.
+      </text>
+      <text x="360" y="305" text-anchor="middle" font-size="11" fill="#1a2233">
+        One output row per distinct group — never fewer, never more.
+      </text>
+
+      <!-- Legend strip -->
+      <rect x="120" y="325" width="14" height="14" rx="3" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="140" y="336" font-size="10.5" fill="#1a2233">CSE bucket</text>
+      <rect x="240" y="325" width="14" height="14" rx="3" fill="#e6f4ea" stroke="#1a7f37" stroke-width="1.5"/>
+      <text x="260" y="336" font-size="10.5" fill="#1a2233">ECE bucket</text>
+      <rect x="360" y="325" width="14" height="14" rx="3" fill="#fff5e1" stroke="#b54708" stroke-width="1.5"/>
+      <text x="380" y="336" font-size="10.5" fill="#1a2233">MECH bucket</text>
+      <text x="490" y="336" font-size="10.5" fill="#5a6577" font-style="italic">→ aggregate per bucket</text>
+    </svg>
+  </div>
 
   <h5 style="color:var(--brand); font-size:15px; margin-top:18px;">Without grouping — global aggregate</h5>
   <div class="box eg">
@@ -2145,6 +3625,55 @@ STU_HOBBY(Roll, Hobby)</code></pre>
 <span class="keyword">HAVING</span> <span class="keyword">SUM</span>(Salary) &gt; 50000;</code></pre>
   </div>
 
+  <h4>NULL handling — common exam trick</h4>
+  <table>
+    <thead><tr><th>Function</th><th>Behaviour with NULL</th><th>Example on column with NULLs</th></tr></thead>
+    <tbody>
+      <tr><td><code>SUM(col)</code></td><td>Ignores NULLs</td><td>SUM of {10, NULL, 20} = 30</td></tr>
+      <tr><td><code>AVG(col)</code></td><td>Ignores NULLs (divides by non-null count)</td><td>AVG of {10, NULL, 20} = 15 (not 10)</td></tr>
+      <tr><td><code>MIN/MAX(col)</code></td><td>Ignores NULLs</td><td>MIN of {10, NULL, 20} = 10</td></tr>
+      <tr><td><code>COUNT(col)</code></td><td>Counts only non-NULL values</td><td>COUNT = 2</td></tr>
+      <tr><td><code>COUNT(*)</code></td><td>Counts all rows including NULLs</td><td>COUNT(*) = 3</td></tr>
+    </tbody>
+  </table>
+
+  <h4>DISTINCT inside aggregates</h4>
+  <div class="box def">
+    <code>DISTINCT</code> removes duplicates <em>before</em> the aggregate is computed.
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+    Marks column = {78, 65, 78, 90, 65}.
+<pre><code><span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(Marks)          <span class="comment">-- 5 (all rows)</span>
+<span class="keyword">SELECT</span> <span class="keyword">COUNT</span>(<span class="keyword">DISTINCT</span> Marks) <span class="comment">-- 3 (unique values)</span>
+<span class="keyword">SELECT</span> <span class="keyword">SUM</span>(<span class="keyword">DISTINCT</span> Marks)   <span class="comment">-- 78+65+90 = 233</span></code></pre>
+  </div>
+
+  <h4>GROUP BY rules — never get penalty marks</h4>
+  <div class="box bad">
+    <span class="label">Hard rule</span>
+    Every column in the SELECT list that is <strong>not inside an aggregate function</strong> must appear in the GROUP BY clause. Otherwise the SQL engine throws an error (or in MySQL old modes, returns nondeterministic results).
+  </div>
+  <div class="box eg">
+    <span class="label">Right vs Wrong</span>
+<pre><code><span class="comment">-- WRONG: Name is not in GROUP BY and not aggregated</span>
+<span class="keyword">SELECT</span> Dept, Name, <span class="keyword">SUM</span>(Salary) <span class="keyword">FROM</span> EMPLOYEE <span class="keyword">GROUP BY</span> Dept;
+
+<span class="comment">-- RIGHT: only the grouping column + aggregates</span>
+<span class="keyword">SELECT</span> Dept, <span class="keyword">SUM</span>(Salary) <span class="keyword">FROM</span> EMPLOYEE <span class="keyword">GROUP BY</span> Dept;</code></pre>
+  </div>
+
+  <h4>WHERE vs HAVING — clean comparison</h4>
+  <table>
+    <thead><tr><th>Aspect</th><th>WHERE</th><th>HAVING</th></tr></thead>
+    <tbody>
+      <tr><td>Filters</td><td>Individual rows</td><td>Whole groups (after grouping)</td></tr>
+      <tr><td>When applied</td><td>Before GROUP BY</td><td>After GROUP BY</td></tr>
+      <tr><td>Aggregate allowed?</td><td>No</td><td>Yes (uses SUM/AVG/COUNT…)</td></tr>
+      <tr><td>Example</td><td><code>WHERE Salary &gt; 20000</code></td><td><code>HAVING SUM(Salary) &gt; 100000</code></td></tr>
+    </tbody>
+  </table>
+
   <div class="box tip">
     <span class="label">Important properties</span>
     <ul style="margin:0;">
@@ -2160,10 +3689,57 @@ STU_HOBBY(Roll, Hobby)</code></pre>
     <strong style="color:var(--ink);font-size:14px;">"Group on the LEFT of 𝒢, Aggregates on the RIGHT"</strong> — <code>Dept 𝒢<sub>SUM(Sal)</sub>(EMP)</code>: partition by Dept (left), summarize Sal (right).
   </div>
 
+  <div class="box eg">
+    <span class="label">Two more worked examples on the same EMPLOYEE table</span>
+<pre><code><span class="comment">-- Example 5: average salary per department</span>
+<span class="keyword">SELECT</span> Dept, <span class="keyword">AVG</span>(Salary) <span class="keyword">AS</span> AvgSal
+<span class="keyword">FROM</span> EMPLOYEE <span class="keyword">GROUP BY</span> Dept;</code></pre>
+    <table style="font-size:13px; margin-top:4px;">
+      <thead><tr><th>Dept</th><th>AvgSal</th></tr></thead>
+      <tbody>
+        <tr><td>CSE</td><td>35000</td></tr>
+        <tr><td>ECE</td><td>42500</td></tr>
+        <tr><td>MECH</td><td>28000</td></tr>
+      </tbody>
+    </table>
+<pre><code><span class="comment">-- Example 6: only departments where avg salary &gt; 30000</span>
+<span class="keyword">SELECT</span> Dept, <span class="keyword">AVG</span>(Salary) <span class="keyword">AS</span> AvgSal
+<span class="keyword">FROM</span> EMPLOYEE <span class="keyword">GROUP BY</span> Dept
+<span class="keyword">HAVING</span> <span class="keyword">AVG</span>(Salary) &gt; 30000;</code></pre>
+    Result drops MECH (28000), keeps CSE and ECE.
+  </div>
+
+  <div class="simple">
+    <p><strong>WHERE vs HAVING — easy to mix up:</strong></p>
+    <p>• <code>WHERE</code> filters <em>individual rows before</em> they are grouped. ("Skip employees earning &lt; 20000.")</p>
+    <p>• <code>HAVING</code> filters <em>whole groups after</em> the aggregation. ("Skip departments whose total salary &lt; 50000.")</p>
+    <p>If you can't use the aggregate function inside the filter (because aggregation hasn't happened yet) → use WHERE. If you need the aggregate result (SUM, AVG…) for the filter → use HAVING.</p>
+  </div>
+
+  <h4>Real-world applications</h4>
+  <ul>
+    <li><strong>Sales reports</strong> — total revenue per region (<code>GROUP BY region 𝒢 SUM(amount)</code>).</li>
+    <li><strong>Payroll</strong> — average salary per department, count of employees per dept.</li>
+    <li><strong>E-commerce</strong> — top-selling products (<code>GROUP BY product_id 𝒢 SUM(qty)</code>) ordered by total sales.</li>
+    <li><strong>Bank dashboards</strong> — daily transaction counts and totals per branch.</li>
+    <li><strong>Education</strong> — section-wise / class-wise / subject-wise average marks.</li>
+  </ul>
+
   <hr>
 
   <!-- ====================== Q5 — TRC vs DRC ====================== -->
   <h3 style="margin-top:42px;">Q5. Differentiate between Tuple Relational Calculus and Domain Relational Calculus</h3>
+
+  <div class="box tip">
+    <span class="label">8-mark scoring template — write the answer in this order</span>
+    <ol style="margin:6px 0 0;">
+      <li><strong>(1m)</strong> Definition of Relational Calculus (declarative, non-procedural).</li>
+      <li><strong>(2m)</strong> TRC — syntax <code>{ t | P(t) }</code> + 1 worked example.</li>
+      <li><strong>(2m)</strong> DRC — syntax <code>{ ⟨x₁,…,xₙ⟩ | P(…) }</code> + 1 worked example.</li>
+      <li><strong>(2m)</strong> Comparison table (variable type, syntax, attribute access, verbosity, closeness to SQL/QBE…).</li>
+      <li><strong>(1m)</strong> Quantifiers (∃, ∀) + safety condition + Codd's equivalence theorem (TRC ≡ DRC ≡ Algebra).</li>
+    </ol>
+  </div>
 
   <div class="box def">
     <span class="label">Definition — Relational Calculus</span>
@@ -2172,6 +3748,134 @@ STU_HOBBY(Roll, Hobby)</code></pre>
       <li><strong>TRC (Tuple Relational Calculus)</strong> — variables range over <em>tuples</em> (whole rows).</li>
       <li><strong>DRC (Domain Relational Calculus)</strong> — variables range over <em>attribute domains</em> (single column values).</li>
     </ul>
+  </div>
+
+  <div class="simple">
+    <p>Both TRC and DRC let you describe <strong>what answer you want</strong> without writing the steps. The only difference is the <em>variable</em>:</p>
+    <p>• <strong>TRC</strong> uses one variable for the <em>whole row</em>. So <code>t.Name</code> means "the Name column of the row called t". Like saying "give me the entire student record, then read the Name field."</p>
+    <p>• <strong>DRC</strong> uses one variable per <em>column</em>. You list the columns directly: <code>⟨roll, name, marks, city⟩</code>. Like saying "give me these four specific values".</p>
+    <div class="analogy">
+      <strong>TRC = "show me the whole student card, I'll read Name off it."</strong> Single placeholder for the whole row.<br>
+      <strong>DRC = "show me Roll, Name, Marks, City separately."</strong> One placeholder per field. Closer in spirit to filling in a Query-By-Example form.
+    </div>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">TRC vs DRC — what does the variable cover?</div>
+    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrQ5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6feb"/>
+        </marker>
+        <marker id="arrQ5g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
+        </marker>
+      </defs>
+
+      <!-- Vertical divider -->
+      <line x1="360" y1="20" x2="360" y2="340" stroke="#e3e7ee" stroke-width="2" stroke-dasharray="4 4"/>
+
+      <!-- ======================== LEFT — TRC ======================== -->
+      <rect x="14" y="14" width="332" height="332" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="180" y="36" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="13">TRC — variable spans the whole row</text>
+
+      <!-- STUDENT mini-table (TRC) -->
+      <rect x="40" y="60" width="280" height="92" rx="6" fill="#ffffff" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="180" y="76" text-anchor="middle" font-weight="700" fill="#1a2233" font-size="11">STUDENT</text>
+      <line x1="40" y1="84" x2="320" y2="84" stroke="#1f6feb" stroke-width="1"/>
+      <line x1="40" y1="104" x2="320" y2="104" stroke="#e3e7ee" stroke-width="1"/>
+      <line x1="40" y1="126" x2="320" y2="126" stroke="#e3e7ee" stroke-width="1"/>
+
+      <g font-family="monospace" font-size="11" fill="#1a2233">
+        <!-- header -->
+        <text x="58" y="98" font-weight="700">Roll</text>
+        <text x="118" y="98" font-weight="700">Name</text>
+        <text x="198" y="98" font-weight="700">Marks</text>
+        <text x="262" y="98" font-weight="700">City</text>
+        <!-- row 1 -->
+        <text x="58" y="119">101</text>
+        <text x="118" y="119">Asha</text>
+        <text x="198" y="119">62</text>
+        <text x="262" y="119">Pune</text>
+        <!-- row 2 -->
+        <text x="58" y="141">102</text>
+        <text x="118" y="141">Bina</text>
+        <text x="198" y="141">85</text>
+        <text x="262" y="141">Delhi</text>
+      </g>
+
+      <!-- Bracket around row 2 (the tuple t) -->
+      <rect x="36" y="128" width="288" height="20" rx="4" fill="none" stroke="#1f6feb" stroke-width="2"/>
+      <text x="22" y="143" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="13" font-style="italic">t</text>
+
+      <!-- t.Name pointer -->
+      <text x="60" y="186" font-family="monospace" font-size="12" fill="#1f6feb" font-weight="700">t.Name</text>
+      <line x1="100" y1="180" x2="135" y2="146" stroke="#1f6feb" stroke-width="1.5" marker-end="url(#arrQ5)"/>
+
+      <!-- Caption -->
+      <rect x="30" y="230" width="300" height="92" rx="6" fill="#ffffff" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="180" y="250" text-anchor="middle" font-weight="700" fill="#1a2233" font-size="11">Query</text>
+      <text x="180" y="276" text-anchor="middle" font-family="monospace" font-size="12" fill="#1a2233">{ t.Name | t &#8712; STUDENT</text>
+      <text x="180" y="294" text-anchor="middle" font-family="monospace" font-size="12" fill="#1a2233">&#8743; t.Marks &gt; 70 }</text>
+      <text x="180" y="314" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">one variable t holds the whole row</text>
+
+      <!-- ======================== RIGHT — DRC ======================== -->
+      <rect x="374" y="14" width="332" height="332" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="540" y="36" text-anchor="middle" font-weight="700" fill="#1a7f37" font-size="13">DRC — one variable per column</text>
+
+      <!-- Column-variable badges above table -->
+      <g>
+        <rect x="396" y="50" width="38" height="18" rx="9" fill="#1a7f37" stroke="#1a7f37"/>
+        <text x="415" y="63" text-anchor="middle" font-family="monospace" font-weight="700" fill="#ffffff" font-size="11">r</text>
+
+        <rect x="456" y="50" width="38" height="18" rx="9" fill="#1a7f37" stroke="#1a7f37"/>
+        <text x="475" y="63" text-anchor="middle" font-family="monospace" font-weight="700" fill="#ffffff" font-size="11">n</text>
+
+        <rect x="536" y="50" width="38" height="18" rx="9" fill="#1a7f37" stroke="#1a7f37"/>
+        <text x="555" y="63" text-anchor="middle" font-family="monospace" font-weight="700" fill="#ffffff" font-size="11">m</text>
+
+        <rect x="600" y="50" width="38" height="18" rx="9" fill="#1a7f37" stroke="#1a7f37"/>
+        <text x="619" y="63" text-anchor="middle" font-family="monospace" font-weight="700" fill="#ffffff" font-size="11">c</text>
+      </g>
+
+      <!-- Down arrows from each badge -->
+      <line x1="415" y1="70" x2="415" y2="86" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrQ5g)"/>
+      <line x1="475" y1="70" x2="475" y2="86" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrQ5g)"/>
+      <line x1="555" y1="70" x2="555" y2="86" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrQ5g)"/>
+      <line x1="619" y1="70" x2="619" y2="86" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrQ5g)"/>
+
+      <!-- STUDENT mini-table (DRC) -->
+      <rect x="396" y="92" width="280" height="86" rx="6" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5"/>
+      <text x="536" y="106" text-anchor="middle" font-weight="700" fill="#1a2233" font-size="11">STUDENT</text>
+      <line x1="396" y1="112" x2="676" y2="112" stroke="#1a7f37" stroke-width="1"/>
+      <line x1="396" y1="132" x2="676" y2="132" stroke="#e3e7ee" stroke-width="1"/>
+      <line x1="396" y1="154" x2="676" y2="154" stroke="#e3e7ee" stroke-width="1"/>
+
+      <g font-family="monospace" font-size="11" fill="#1a2233">
+        <!-- header -->
+        <text x="408" y="126" font-weight="700">Roll</text>
+        <text x="464" y="126" font-weight="700">Name</text>
+        <text x="540" y="126" font-weight="700">Marks</text>
+        <text x="610" y="126" font-weight="700">City</text>
+        <!-- row 1 -->
+        <text x="408" y="147">101</text>
+        <text x="464" y="147">Asha</text>
+        <text x="540" y="147">62</text>
+        <text x="610" y="147">Pune</text>
+        <!-- row 2 -->
+        <text x="408" y="169">102</text>
+        <text x="464" y="169">Bina</text>
+        <text x="540" y="169">85</text>
+        <text x="610" y="169">Delhi</text>
+      </g>
+
+      <!-- Caption -->
+      <rect x="386" y="230" width="300" height="92" rx="6" fill="#ffffff" stroke="#1a7f37" stroke-width="1.5"/>
+      <text x="536" y="250" text-anchor="middle" font-weight="700" fill="#1a2233" font-size="11">Query</text>
+      <text x="536" y="276" text-anchor="middle" font-family="monospace" font-size="12" fill="#1a2233">{ &#10216;n&#10217; | &#8707; r,m,c (&#10216;r,n,m,c&#10217; &#8712; STUDENT</text>
+      <text x="536" y="294" text-anchor="middle" font-family="monospace" font-size="12" fill="#1a2233">&#8743; m &gt; 70) }</text>
+      <text x="536" y="314" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">four domain variables, one per column</text>
+    </svg>
   </div>
 
   <h4>Tuple Relational Calculus (TRC)</h4>
@@ -2193,6 +3897,34 @@ STU_HOBBY(Roll, Hobby)</code></pre>
     <span class="label">Example — same query in DRC</span>
 <pre><code>{ ⟨n⟩ | ∃ r, m, c (⟨r, n, m, c⟩ ∈ STUDENT ∧ m &gt; 70) }</code></pre>
     Here r, n, m, c are domain variables for Roll, Name, Marks, City respectively.
+  </div>
+
+  <h4>Quantifiers — ∃ (exists) and ∀ (for all)</h4>
+  <div class="box def">
+    <span class="label">Existential ∃ — "there exists at least one"</span>
+    Used to assert that some tuple satisfying a condition exists.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — students who have taken at least one course</span>
+<pre><code>TRC: { s.Name | s ∈ STUDENT
+              ∧ ∃ e ( e ∈ ENROLL ∧ e.StuID = s.StuID ) }</code></pre>
+  </div>
+  <div class="box def">
+    <span class="label">Universal ∀ — "for every"</span>
+    Used to assert a property holds for all tuples in some set.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — students enrolled in every course</span>
+<pre><code>TRC: { s.Name | s ∈ STUDENT
+              ∧ ∀ c ( c ∈ COURSE →
+                       ∃ e ( e ∈ ENROLL
+                           ∧ e.StuID = s.StuID
+                           ∧ e.CourseID = c.CourseID ) ) }</code></pre>
+    Read as: "for every course c, there exists an enrolment of student s in c".
+  </div>
+  <div class="box tip">
+    <span class="label">Useful identity</span>
+    <code>∀x P(x) ≡ ¬∃x ¬P(x)</code> — universal quantification can always be rewritten using negation + existential quantification (and vice versa).
   </div>
 
   <h4>Comparison Table</h4>
@@ -2218,15 +3950,123 @@ STU_HOBBY(Roll, Hobby)</code></pre>
     Both TRC and DRC are <strong>equivalent in expressive power</strong> — any query expressible in one is also expressible in the other, and both are equivalent to relational algebra (Codd's theorem). Both are <em>non-procedural</em>: you describe the answer, not the steps.
   </div>
 
+  <h4>Three more queries — same question in TRC <em>and</em> DRC</h4>
+  <p>Schema: <code>STUDENT(Roll, Name, Marks, City)</code>. Look at how the same idea is expressed differently.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h5>Query A — TRC</h5>
+      <p style="margin:6px 0; font-size:13px; color:var(--muted);">"Names of students from Delhi"</p>
+<pre><code>{ t.Name | t ∈ STUDENT
+        ∧ t.City = 'Delhi' }</code></pre>
+    </div>
+    <div class="card">
+      <h5>Query A — DRC</h5>
+      <p style="margin:6px 0; font-size:13px; color:var(--muted);">Same question, domain variables</p>
+<pre><code>{ ⟨n⟩ | ∃ r, m, c
+   ( ⟨r,n,m,c⟩ ∈ STUDENT
+   ∧ c = 'Delhi' ) }</code></pre>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h5>Query B — TRC</h5>
+      <p style="margin:6px 0; font-size:13px; color:var(--muted);">"Roll &amp; Marks of toppers (&gt; 80)"</p>
+<pre><code>{ ⟨t.Roll, t.Marks⟩ |
+   t ∈ STUDENT ∧ t.Marks &gt; 80 }</code></pre>
+    </div>
+    <div class="card">
+      <h5>Query B — DRC</h5>
+      <p style="margin:6px 0; font-size:13px; color:var(--muted);">List two domain variables</p>
+<pre><code>{ ⟨r, m⟩ | ∃ n, c
+   ( ⟨r,n,m,c⟩ ∈ STUDENT
+   ∧ m &gt; 80 ) }</code></pre>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h5>Query C — TRC</h5>
+      <p style="margin:6px 0; font-size:13px; color:var(--muted);">"Names of students <em>not</em> in Delhi"</p>
+<pre><code>{ t.Name | t ∈ STUDENT
+        ∧ ¬(t.City = 'Delhi') }</code></pre>
+    </div>
+    <div class="card">
+      <h5>Query C — DRC</h5>
+      <p style="margin:6px 0; font-size:13px; color:var(--muted);">Negation works the same way</p>
+<pre><code>{ ⟨n⟩ | ∃ r, m, c
+   ( ⟨r,n,m,c⟩ ∈ STUDENT
+   ∧ c ≠ 'Delhi' ) }</code></pre>
+    </div>
+  </div>
+
+  <div class="simple">
+    <p><strong>Conversion recipe — TRC ➜ DRC in 3 steps:</strong></p>
+    <p>1. Replace the tuple variable <code>t</code> with a list of domain variables, one per column: <code>⟨r, n, m, c⟩</code>.</p>
+    <p>2. Replace each <code>t.Attribute</code> with the matching domain variable.</p>
+    <p>3. Wrap any unused variables with <code>∃</code> (exists) at the front.</p>
+  </div>
+
   <div class="mnemonic">
     <strong>Memory hook</strong>
     <strong style="color:var(--ink);font-size:14px;">"TRC = Take Rows; DRC = Take Domains"</strong>
+  </div>
+
+  <h4>Safety condition — why some expressions are illegal</h4>
+  <div class="box def">
+    A relational-calculus expression is <strong>safe</strong> if it produces a finite, well-defined result on every database instance. An <strong>unsafe</strong> expression could return infinitely many tuples (anything not in the database).
+  </div>
+  <div class="box bad">
+    <span class="label">Unsafe example</span>
+<pre><code>{ t | ¬(t ∈ STUDENT) }</code></pre>
+    This asks for "every tuple that is NOT in STUDENT" — that's an infinite set (every imaginable tuple). Not allowed.
+  </div>
+  <div class="box eg">
+    <span class="label">Safe rewrite</span>
+<pre><code>{ t | t ∈ ALL_PEOPLE ∧ ¬(t ∈ STUDENT) }</code></pre>
+    Now the answer is bounded by the finite ALL_PEOPLE relation.
+  </div>
+
+  <h4>Advantages, limitations &amp; equivalence</h4>
+  <div class="grid-2">
+    <div class="card">
+      <h5 style="color:var(--good);">Advantages</h5>
+      <ul style="margin:0; padding-left:18px;">
+        <li><strong>Declarative</strong> — describe <em>what</em>, not <em>how</em>.</li>
+        <li>Closer to natural-language reasoning than algebra.</li>
+        <li>Forms the theoretical basis for SQL (TRC) and QBE (DRC).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h5 style="color:var(--bad);">Limitations</h5>
+      <ul style="margin:0; padding-left:18px;">
+        <li>Must check the safety condition manually.</li>
+        <li>Less optimisation hints than relational algebra.</li>
+        <li>DRC is verbose — many domain variables for wide relations.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box tip">
+    <span class="label">Codd's equivalence theorem</span>
+    Relational Algebra ≡ TRC (safe) ≡ DRC (safe). Any query expressible in one is expressible in the other two — they have the same expressive power. SQL itself was designed using TRC as its theoretical foundation.
   </div>
 
   <hr>
 
   <!-- ====================== Q6 — CARTESIAN & BINARY OPERATIONS ====================== -->
   <h3 style="margin-top:42px;">Q6. Describe Cartesian Product and Binary Relational Operations with Suitable Examples</h3>
+
+  <div class="box tip">
+    <span class="label">8-mark scoring template — write the answer in this order</span>
+    <ol style="margin:6px 0 0;">
+      <li><strong>(1m)</strong> Definition of binary operation + the five fundamental operations.</li>
+      <li><strong>(2m)</strong> Cartesian Product (×) — definition + size formula (m·n) + worked example.</li>
+      <li><strong>(2m)</strong> Set operations Union (∪), Intersection (∩), Set Difference (−) — each with example, mention union-compatibility.</li>
+      <li><strong>(2m)</strong> Joins — Theta, Equi, Natural, Outer — with at least one example each.</li>
+      <li><strong>(1m)</strong> Division (÷) operator OR commutative/associative properties summary.</li>
+    </ol>
+  </div>
 
   <div class="box def">
     <span class="label">Definition — Binary operation</span>
@@ -2239,6 +4079,18 @@ STU_HOBBY(Roll, Hobby)</code></pre>
       <li>Join (⋈) — Theta, Equi, Natural, Outer</li>
     </ol>
     The first three require <strong>union-compatibility</strong> (same arity, same attribute domains). Cartesian product and join do not.
+  </div>
+
+  <div class="simple">
+    <p>Binary operations take <strong>two tables in, give one table out</strong>. Three of them work like math sets, two of them combine columns:</p>
+    <p>• <strong>Union (∪)</strong> — combine rows, drop duplicates.<br>
+       • <strong>Intersection (∩)</strong> — keep only rows that appear in both.<br>
+       • <strong>Set Difference (−)</strong> — rows in first but not in second.<br>
+       • <strong>Cartesian Product (×)</strong> — every row of A paired with every row of B (no condition).<br>
+       • <strong>Join (⋈)</strong> — Cartesian product followed by a filter.</p>
+    <div class="analogy">
+      <strong>Cartesian Product = "all possible outfits".</strong> 3 shirts × 4 pants = 12 outfits. <em>Join</em> = same idea but with a condition: "only outfits where shirt-colour matches pant-colour" — Cartesian product first, then filter. That's why every join is just <code>σ<sub>condition</sub>(R × S)</code>.
+    </div>
   </div>
 
   <p><strong>Sample relations used throughout:</strong></p>
@@ -2255,6 +4107,128 @@ STU_HOBBY(Roll, Hobby)</code></pre>
         <tr><td>c2</td><td>20</td></tr>
       </tbody></table>
     </div>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">Cartesian Product — every R-row paired with every S-row</div>
+    <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrQ6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#1f6feb"/>
+        </marker>
+      </defs>
+
+      <text x="300" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#1a2233">R × S — every row of R paired with every row of S</text>
+
+      <!-- R(A,B) table top-left -->
+      <rect x="20" y="40" width="120" height="80" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="80" y="58" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="12">R(A, B)</text>
+      <g font-size="11" font-family="monospace" fill="#1a2233">
+        <text x="40" y="78">A</text><text x="100" y="78">B</text>
+        <line x1="32" y1="84" x2="128" y2="84" stroke="#e3e7ee"/>
+        <text x="40" y="98">a1</text><text x="100" y="98">1</text>
+        <text x="40" y="114">a2</text><text x="100" y="114">2</text>
+      </g>
+
+      <!-- S(C,D) table bottom-left -->
+      <rect x="20" y="170" width="120" height="80" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="80" y="188" text-anchor="middle" font-weight="700" fill="#1a7f37" font-size="12">S(C, D)</text>
+      <g font-size="11" font-family="monospace" fill="#1a2233">
+        <text x="40" y="208">C</text><text x="100" y="208">D</text>
+        <line x1="32" y1="214" x2="128" y2="214" stroke="#e3e7ee"/>
+        <text x="40" y="228">c1</text><text x="100" y="228">10</text>
+        <text x="40" y="244">c2</text><text x="100" y="244">20</text>
+      </g>
+
+      <!-- 2x2 result grid -->
+      <text x="400" y="58" text-anchor="middle" font-weight="700" fill="#1a2233" font-size="12">R × S  (2 × 2 = 4 rows)</text>
+
+      <!-- header column labels for grid -->
+      <text x="320" y="80" text-anchor="middle" font-size="10" fill="#5a6577" font-family="monospace">S row: (c1,10)</text>
+      <text x="480" y="80" text-anchor="middle" font-size="10" fill="#5a6577" font-family="monospace">S row: (c2,20)</text>
+
+      <!-- cell 1: a1,1 × c1,10 -->
+      <rect x="240" y="90" width="160" height="60" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="320" y="112" text-anchor="middle" font-size="11" font-family="monospace" fill="#1a2233">(a1, 1, c1, 10)</text>
+      <text x="320" y="138" text-anchor="middle" font-size="9" fill="#5a6577">R₁ × S₁</text>
+
+      <!-- cell 2: a1,1 × c2,20 -->
+      <rect x="400" y="90" width="160" height="60" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="480" y="112" text-anchor="middle" font-size="11" font-family="monospace" fill="#1a2233">(a1, 1, c2, 20)</text>
+      <text x="480" y="138" text-anchor="middle" font-size="9" fill="#5a6577">R₁ × S₂</text>
+
+      <!-- cell 3: a2,2 × c1,10 -->
+      <rect x="240" y="160" width="160" height="60" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="320" y="182" text-anchor="middle" font-size="11" font-family="monospace" fill="#1a2233">(a2, 2, c1, 10)</text>
+      <text x="320" y="208" text-anchor="middle" font-size="9" fill="#5a6577">R₂ × S₁</text>
+
+      <!-- cell 4: a2,2 × c2,20 -->
+      <rect x="400" y="160" width="160" height="60" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="480" y="182" text-anchor="middle" font-size="11" font-family="monospace" fill="#1a2233">(a2, 2, c2, 20)</text>
+      <text x="480" y="208" text-anchor="middle" font-size="9" fill="#5a6577">R₂ × S₂</text>
+
+      <!-- row labels -->
+      <text x="200" y="125" text-anchor="end" font-size="10" fill="#1f6feb" font-family="monospace">R row (a1,1) →</text>
+      <text x="200" y="195" text-anchor="end" font-size="10" fill="#1f6feb" font-family="monospace">R row (a2,2) →</text>
+
+      <!-- arrows from R rows down into grid -->
+      <line x1="140" y1="98" x2="235" y2="115" stroke="#1f6feb" stroke-width="1.5" marker-end="url(#arrQ6)"/>
+      <line x1="140" y1="114" x2="235" y2="185" stroke="#1f6feb" stroke-width="1.5" marker-end="url(#arrQ6)"/>
+
+      <!-- arrows from S rows up into grid columns -->
+      <line x1="140" y1="228" x2="310" y2="155" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrQ6)"/>
+      <line x1="140" y1="244" x2="470" y2="155" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#arrQ6)"/>
+
+      <text x="300" y="270" text-anchor="middle" font-size="11" fill="#5a6577">|R| · |S| tuples · attributes(R) ∪ attributes(S)</text>
+    </svg>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">Set operations on union-compatible relations</div>
+    <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="qSixInterR"><circle cx="390" cy="100" r="50"/></clipPath>
+        <clipPath id="qSixDiffR"><circle cx="630" cy="100" r="50"/></clipPath>
+      </defs>
+
+      <!-- ===== Union ===== -->
+      <text x="125" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#1a2233">Union  (R ∪ S)</text>
+      <circle cx="100" cy="100" r="50" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <circle cx="150" cy="100" r="50" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="78" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="#1f6feb">R</text>
+      <text x="172" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="#1f6feb">S</text>
+      <text x="125" y="170" text-anchor="middle" font-size="10" font-family="monospace" fill="#1a2233">R ∪ S = rows in R, S, or both</text>
+      <text x="125" y="186" text-anchor="middle" font-size="10" font-family="monospace" fill="#5a6577">{Aman, Atul, Baljeet}</text>
+
+      <!-- ===== Intersection ===== -->
+      <text x="365" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#1a2233">Intersection  (R ∩ S)</text>
+      <circle cx="340" cy="100" r="50" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <circle cx="390" cy="100" r="50" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <g clip-path="url(#qSixInterR)">
+        <circle cx="340" cy="100" r="50" fill="#e8f0fe"/>
+      </g>
+      <circle cx="340" cy="100" r="50" fill="none" stroke="#1f6feb" stroke-width="2"/>
+      <circle cx="390" cy="100" r="50" fill="none" stroke="#1f6feb" stroke-width="2"/>
+      <text x="318" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="#1f6feb">R</text>
+      <text x="412" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="#1f6feb">S</text>
+      <text x="365" y="170" text-anchor="middle" font-size="10" font-family="monospace" fill="#1a2233">R ∩ S = rows in BOTH</text>
+      <text x="365" y="186" text-anchor="middle" font-size="10" font-family="monospace" fill="#5a6577">{Atul}</text>
+
+      <!-- ===== Difference ===== -->
+      <text x="605" y="22" text-anchor="middle" font-size="12" font-weight="700" fill="#1a2233">Difference  (R − S)</text>
+      <circle cx="580" cy="100" r="50" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <g clip-path="url(#qSixDiffR)">
+        <circle cx="580" cy="100" r="50" fill="#ffffff"/>
+      </g>
+      <circle cx="630" cy="100" r="50" fill="none" stroke="#1f6feb" stroke-width="2"/>
+      <circle cx="580" cy="100" r="50" fill="none" stroke="#1f6feb" stroke-width="2"/>
+      <text x="558" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="#1f6feb">R</text>
+      <text x="652" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="#1f6feb">S</text>
+      <text x="605" y="170" text-anchor="middle" font-size="10" font-family="monospace" fill="#1a2233">R − S = in R, NOT in S</text>
+      <text x="605" y="186" text-anchor="middle" font-size="10" font-family="monospace" fill="#5a6577">{Aman}</text>
+
+      <text x="360" y="210" text-anchor="middle" font-size="10" fill="#5a6577">All three require union-compatibility (same arity, same domains)</text>
+    </svg>
   </div>
 
   <h4>① Cartesian Product (R × S) — pair every row with every row</h4>
@@ -2331,6 +4305,23 @@ STU_HOBBY(Roll, Hobby)</code></pre>
     <code>EMPLOYEE(EmpID, Name, DeptID) ⋈ DEPT(DeptID, DeptName)</code> joins on DeptID. Output: <code>(EmpID, Name, DeptID, DeptName)</code> — DeptID kept only once.
   </div>
 
+  <div class="box tip">
+    <span class="label">Equi-join vs Natural-join — subtle but exam-favourite distinction</span>
+    <table style="margin:6px 0 0; font-size:13px;">
+      <thead><tr><th>Aspect</th><th>Equi Join</th><th>Natural Join</th></tr></thead>
+      <tbody>
+        <tr><td>Condition</td><td>Explicit equality, e.g. <code>R.X = S.Y</code></td><td>Implicit — on all common attribute names</td></tr>
+        <tr><td>Common column</td><td>Appears <strong>twice</strong> in result</td><td>Appears <strong>once</strong> (duplicate eliminated)</td></tr>
+        <tr><td>Attribute names</td><td>Can be different on R and S</td><td>Must be identical</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="box eg">
+    <span class="label">Theta-join example</span>
+    <code>EMP(EID, Sal) ⋈<sub>EMP.Sal &gt; DEPT.Budget</sub> DEPT(DID, Budget)</code>
+    pairs every employee whose salary exceeds the department budget — uses <code>&gt;</code> instead of <code>=</code>, so it is theta-join (not equi-join).
+  </div>
+
   <h5 style="color:var(--brand); font-size:15px;">Outer Joins</h5>
   <div class="box def">
     Preserve unmatched tuples by padding with NULLs:
@@ -2338,6 +4329,105 @@ STU_HOBBY(Roll, Hobby)</code></pre>
       <li><strong>Left Outer (⟕)</strong> — keeps every tuple from R; pads R-only with NULL on S side.</li>
       <li><strong>Right Outer (⟖)</strong> — keeps every tuple from S.</li>
       <li><strong>Full Outer (⟗)</strong> — keeps every tuple from both sides.</li>
+    </ul>
+  </div>
+
+  <div class="walkthrough">
+    <h5 style="margin:0 0 12px; color:#8b5a0b; font-size:14px; text-transform:uppercase; letter-spacing:.08em;">All five join types on the same data</h5>
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Two small relations:</strong>
+        <div class="grid-2" style="margin-top:8px;">
+          <div>
+            <strong>EMP(EID, Name, DID)</strong>
+            <table style="font-size:12.5px; margin-top:4px;">
+              <thead><tr><th>EID</th><th>Name</th><th>DID</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>Aman</td><td>D1</td></tr>
+                <tr><td>2</td><td>Atul</td><td>D2</td></tr>
+                <tr><td>3</td><td>Harsh</td><td>NULL</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <strong>DEPT(DID, DName)</strong>
+            <table style="font-size:12.5px; margin-top:4px;">
+              <thead><tr><th>DID</th><th>DName</th></tr></thead>
+              <tbody>
+                <tr><td>D1</td><td>CSE</td></tr>
+                <tr><td>D2</td><td>ECE</td></tr>
+                <tr><td>D3</td><td>MECH</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>Cartesian Product (EMP × DEPT):</strong> 3 × 3 = 9 rows, no condition. Every employee paired with every department, even mismatched ones.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">3</div>
+      <div class="step-body">
+        <strong>Natural Join (EMP ⋈ DEPT)</strong> — match on shared column DID:
+        <table style="font-size:12.5px; margin-top:4px;">
+          <thead><tr><th>EID</th><th>Name</th><th>DID</th><th>DName</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Aman</td><td>D1</td><td>CSE</td></tr>
+            <tr><td>2</td><td>Atul</td><td>D2</td><td>ECE</td></tr>
+          </tbody>
+        </table>
+        Harsh (no DID) and MECH (no employee) drop out.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">4</div>
+      <div class="step-body">
+        <strong>Left Outer Join (EMP ⟕ DEPT)</strong> — keep all employees, pad missing dept with NULL:
+        <table style="font-size:12.5px; margin-top:4px;">
+          <thead><tr><th>EID</th><th>Name</th><th>DID</th><th>DName</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Aman</td><td>D1</td><td>CSE</td></tr>
+            <tr><td>2</td><td>Atul</td><td>D2</td><td>ECE</td></tr>
+            <tr><td>3</td><td>Harsh</td><td>NULL</td><td>NULL</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">5</div>
+      <div class="step-body">
+        <strong>Right Outer Join (EMP ⟖ DEPT)</strong> — keep all departments, pad missing employees:
+        <table style="font-size:12.5px; margin-top:4px;">
+          <thead><tr><th>EID</th><th>Name</th><th>DID</th><th>DName</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Aman</td><td>D1</td><td>CSE</td></tr>
+            <tr><td>2</td><td>Atul</td><td>D2</td><td>ECE</td></tr>
+            <tr><td>NULL</td><td>NULL</td><td>D3</td><td>MECH</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-n">6</div>
+      <div class="step-body">
+        <strong>Full Outer Join (EMP ⟗ DEPT)</strong> — keep all rows from both sides, pad both sides with NULL where unmatched. Output = 4 rows (Aman, Atul, Harsh, MECH).
+      </div>
+    </div>
+  </div>
+
+  <div class="box eg">
+    <span class="label">Set operations on two name lists</span>
+    Let <code>STUDENT(name) = {Aman, Atul, Harsh}</code> and <code>EMPLOYEE(name) = {Atul, Harsh, Baljeet}</code>.
+    <ul style="margin:8px 0 0;">
+      <li><strong>Union:</strong> <code>STU ∪ EMP = {Aman, Atul, Harsh, Baljeet}</code> — duplicates removed.</li>
+      <li><strong>Intersection:</strong> <code>STU ∩ EMP = {Atul, Harsh}</code> — names in both.</li>
+      <li><strong>Difference:</strong> <code>STU − EMP = {Aman}</code> — students who are not employees.</li>
+      <li><strong>Reverse difference:</strong> <code>EMP − STU = {Baljeet}</code> — note it is <em>not</em> the same as STU − EMP.</li>
     </ul>
   </div>
 
@@ -2376,7 +4466,39 @@ STU_HOBBY(Roll, Hobby)</code></pre>
     <div class="q">Q6. What is the difference between DELETE and DROP in SQL? <button class="reveal">Show</button></div>
     <div class="answer">DELETE removes <em>rows</em> (DML, can be rolled back, table structure stays). DROP removes the <em>entire table/structure</em> (DDL, auto-committed in many systems).</div>
   </div>
-</section>
+
+  <h4>Division Operator (÷) — the bonus operation</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <code>R ÷ S</code> returns those tuples in R that are paired with <strong>every</strong> tuple in S. Useful for "find X that has done ALL of Y" queries.
+    <p style="margin-top:6px;">Schema: attributes(R ÷ S) = attributes(R) − attributes(S).</p>
+  </div>
+  <div class="box eg">
+    <span class="label">Classic example — students who took every course</span>
+    Let <code>ENROLL(StuID, CourseID)</code> and <code>COURSE(CourseID)</code> contain the full list of courses. Then:
+<pre><code>ENROLL ÷ COURSE = { StuID values where the student appears
+                    paired with EVERY CourseID in COURSE }</code></pre>
+    If COURSE = {C1, C2, C3} and Aman is enrolled in all three, Aman appears in the result. Atul (only C1) does not.
+  </div>
+
+  <h4>Properties of relational operations</h4>
+  <table>
+    <thead><tr><th>Operation</th><th>Commutative?</th><th>Associative?</th></tr></thead>
+    <tbody>
+      <tr><td>Union (∪)</td><td>Yes — <code>R∪S = S∪R</code></td><td>Yes</td></tr>
+      <tr><td>Intersection (∩)</td><td>Yes</td><td>Yes</td></tr>
+      <tr><td>Set Difference (−)</td><td>No — <code>R−S ≠ S−R</code></td><td>No</td></tr>
+      <tr><td>Cartesian Product (×)</td><td>Not strictly (column order changes)</td><td>Yes</td></tr>
+      <tr><td>Natural Join (⋈)</td><td>Yes (on common attrs)</td><td>Yes</td></tr>
+      <tr><td>Theta Join (⋈<sub>θ</sub>)</td><td>Yes (rewrite θ)</td><td>Conditional</td></tr>
+      <tr><td>Division (÷)</td><td>No</td><td>No</td></tr>
+    </tbody>
+  </table>
+  <div class="box tip">
+    <span class="label">Why these properties matter</span>
+    Query optimisers exploit commutativity/associativity to reorder joins for performance — e.g., always do the most selective join first to keep intermediate results small.
+  </div>
+
 
 <!-- ============================== TOPIC 12 — SESSIONAL EXAM BOOSTER ============================== -->
 <section id="sessional-booster" style="border-top:4px solid var(--brand); margin-top:60px; padding-top:20px;">

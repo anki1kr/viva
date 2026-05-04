@@ -348,9 +348,6 @@
       <li><a href="#t7">x86 Architecture &amp; Parallel Processors</a></li>
       <li><a href="#sessional-booster">Sessional Exam Booster (30 marks)</a></li>
     </ol>
-    <div style="margin-top:24px; font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:14px;">
-      Tip: Use <kbd>Ctrl+F</kbd> to find any term instantly. Every section ends with a quiz.
-    </div>
   </aside>
 
   <main>
@@ -395,38 +392,10 @@
   <h4>The pyramid (top = fastest)</h4>
   <div class="diagram">
     <div class="diagram-title">Memory Hierarchy Pyramid</div>
-    <svg viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Memory hierarchy pyramid: from top (fast, small, costly) to bottom (slow, large, cheap) — Registers (~1 ns), Cache L1/L2/L3 (SRAM, 1-10 ns), Main Memory (DRAM, 50-100 ns), Secondary Storage (SSD/HDD, ms), Tertiary/Tape (seconds).">
-      <defs>
-        <marker id="arr1" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0e7490"/>
-        </marker>
-      </defs>
-      <!-- Pyramid bars (top = fastest, smallest) -->
-      <rect x="240" y="20" width="160" height="40" rx="6" fill="#0e7490" stroke="#0c5e75" stroke-width="1"/>
-      <text x="320" y="45" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Registers</text>
-      <text x="420" y="45" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">≈ 1 ns · bytes (inside CPU)</text>
-
-      <rect x="210" y="70" width="220" height="40" rx="6" fill="#1f8eaa" stroke="#0c5e75" stroke-width="1"/>
-      <text x="320" y="95" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Cache (L1 / L2 / L3)</text>
-      <text x="450" y="95" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">SRAM · 1–10 ns · KB–MB</text>
-
-      <rect x="170" y="120" width="300" height="50" rx="6" fill="#3aa8c2" stroke="#0c5e75" stroke-width="1"/>
-      <text x="320" y="150" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Main Memory</text>
-      <text x="490" y="150" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">DRAM · 50–100 ns · GB</text>
-
-      <rect x="120" y="180" width="400" height="55" rx="6" fill="#7cc2d4" stroke="#0c5e75" stroke-width="1"/>
-      <text x="320" y="213" text-anchor="middle" fill="white" font-size="14" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Secondary Storage</text>
-      <text x="540" y="213" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">SSD/HDD · ms · TB</text>
-
-      <rect x="80" y="245" width="480" height="60" rx="6" fill="#b6dde7" stroke="#0c5e75" stroke-width="1"/>
-      <text x="320" y="280" text-anchor="middle" fill="#0c5e75" font-size="14" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Tertiary / Tape (archival)</text>
-      <text x="580" y="280" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">seconds · PB</text>
-
-      <!-- side labels -->
-      <text x="20" y="50" font-size="11" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">FAST · SMALL · COSTLY</text>
-      <text x="20" y="295" font-size="11" font-weight="700" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">SLOW · LARGE · CHEAP</text>
-      <line x1="40" y1="60" x2="40" y2="280" stroke="#0e7490" stroke-width="2" marker-end="url(#arr1)"/>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250111112435920586/Memory-Hierarchy-Design.webp"
+         alt="Memory hierarchy pyramid: from top (fast, small, costly) to bottom (slow, large, cheap) — Registers, Cache L1/L2/L3, Main Memory, Secondary Storage, Tertiary/Tape"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Fast, small, costly storage near the CPU; slow, large, cheap storage at the base.</div>
   </div>
 
@@ -506,66 +475,10 @@
   <h4>Family tree</h4>
   <div class="diagram">
     <div class="diagram-title">Semiconductor Memory Family Tree</div>
-    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Semiconductor memory family tree: top node Semiconductor Memory branches into RAM (read/write, volatile) and ROM (read-only, non-volatile). RAM splits into SRAM (cache) and DRAM (main memory). ROM splits into MROM (mask), PROM (one-time), EPROM (UV-erase), and EEPROM/Flash (electrically erasable).">
-      <!-- Root -->
-      <rect x="280" y="10" width="160" height="40" rx="8" fill="#0e7490" stroke="#0c5e75"/>
-      <text x="360" y="35" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Semiconductor Memory</text>
-
-      <!-- Level 1: RAM and ROM -->
-      <line x1="360" y1="50" x2="360" y2="70" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="180" y1="70" x2="540" y2="70" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="180" y1="70" x2="180" y2="90" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="540" y1="70" x2="540" y2="90" stroke="#0e7490" stroke-width="1.5"/>
-
-      <rect x="110" y="90" width="140" height="55" rx="8" fill="#e0f2fe" stroke="#0e7490"/>
-      <text x="180" y="111" text-anchor="middle" fill="#0e7490" font-size="14" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">RAM</text>
-      <text x="180" y="128" text-anchor="middle" fill="#5a6577" font-size="11" font-family="-apple-system, Segoe UI, sans-serif">Read/Write</text>
-      <text x="180" y="141" text-anchor="middle" fill="#5a6577" font-size="11" font-family="-apple-system, Segoe UI, sans-serif">Volatile</text>
-
-      <rect x="470" y="90" width="140" height="55" rx="8" fill="#e0f2fe" stroke="#0e7490"/>
-      <text x="540" y="111" text-anchor="middle" fill="#0e7490" font-size="14" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">ROM</text>
-      <text x="540" y="128" text-anchor="middle" fill="#5a6577" font-size="11" font-family="-apple-system, Segoe UI, sans-serif">Read-only</text>
-      <text x="540" y="141" text-anchor="middle" fill="#5a6577" font-size="11" font-family="-apple-system, Segoe UI, sans-serif">Non-volatile</text>
-
-      <!-- Level 2: RAM children (SRAM, DRAM) -->
-      <line x1="180" y1="145" x2="180" y2="165" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="100" y1="165" x2="260" y2="165" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="100" y1="165" x2="100" y2="185" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="260" y1="165" x2="260" y2="185" stroke="#0e7490" stroke-width="1.5"/>
-
-      <rect x="40" y="185" width="120" height="50" rx="6" fill="#fff" stroke="#1a7f37"/>
-      <text x="100" y="206" text-anchor="middle" fill="#1a7f37" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">SRAM</text>
-      <text x="100" y="223" text-anchor="middle" fill="#5a6577" font-size="11" font-family="-apple-system, Segoe UI, sans-serif">cache</text>
-
-      <rect x="200" y="185" width="120" height="50" rx="6" fill="#fff" stroke="#1a7f37"/>
-      <text x="260" y="206" text-anchor="middle" fill="#1a7f37" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">DRAM</text>
-      <text x="260" y="223" text-anchor="middle" fill="#5a6577" font-size="11" font-family="-apple-system, Segoe UI, sans-serif">main memory</text>
-
-      <!-- Level 2: ROM children (MROM, PROM, EPROM, EEPROM/Flash) -->
-      <line x1="540" y1="145" x2="540" y2="165" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="400" y1="165" x2="680" y2="165" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="400" y1="165" x2="400" y2="185" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="490" y1="165" x2="490" y2="185" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="585" y1="165" x2="585" y2="185" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="680" y1="165" x2="680" y2="185" stroke="#0e7490" stroke-width="1.5"/>
-
-      <rect x="350" y="185" width="100" height="50" rx="6" fill="#fff" stroke="#b54708"/>
-      <text x="400" y="205" text-anchor="middle" fill="#b54708" font-size="12" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">MROM</text>
-      <text x="400" y="222" text-anchor="middle" fill="#5a6577" font-size="10" font-family="-apple-system, Segoe UI, sans-serif">mask</text>
-
-      <rect x="445" y="185" width="90" height="50" rx="6" fill="#fff" stroke="#b54708"/>
-      <text x="490" y="205" text-anchor="middle" fill="#b54708" font-size="12" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">PROM</text>
-      <text x="490" y="222" text-anchor="middle" fill="#5a6577" font-size="10" font-family="-apple-system, Segoe UI, sans-serif">1-time</text>
-
-      <rect x="535" y="185" width="100" height="50" rx="6" fill="#fff" stroke="#b54708"/>
-      <text x="585" y="205" text-anchor="middle" fill="#b54708" font-size="12" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">EPROM</text>
-      <text x="585" y="222" text-anchor="middle" fill="#5a6577" font-size="10" font-family="-apple-system, Segoe UI, sans-serif">UV-erase</text>
-
-      <rect x="630" y="185" width="100" height="50" rx="6" fill="#fff" stroke="#b54708"/>
-      <text x="680" y="203" text-anchor="middle" fill="#b54708" font-size="12" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">EEPROM</text>
-      <text x="680" y="217" text-anchor="middle" fill="#b54708" font-size="11" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">/ Flash</text>
-      <text x="680" y="231" text-anchor="middle" fill="#5a6577" font-size="10" font-family="-apple-system, Segoe UI, sans-serif">elec-erase</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20231229134227/RAM.png"
+         alt="Semiconductor memory family tree: Semiconductor Memory branches into RAM (volatile) and ROM (non-volatile). RAM splits into SRAM and DRAM. ROM splits into MROM, PROM, EPROM, and EEPROM/Flash."
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Two top-level branches: volatile read/write RAM, and non-volatile ROM family.</div>
   </div>
 
@@ -939,52 +852,10 @@ High-order interleaving:
   <h4>Internal structure of an interface</h4>
   <div class="diagram">
     <div class="diagram-title">I/O Interface — Internal Structure</div>
-    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr6" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0e7490"/>
-        </marker>
-      </defs>
-
-      <!-- System Bus (left) -->
-      <text x="80" y="180" text-anchor="middle" font-size="13" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">System</text>
-      <text x="80" y="198" text-anchor="middle" font-size="13" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">Bus</text>
-      <line x1="100" y1="180" x2="190" y2="180" stroke="#0e7490" stroke-width="2"/>
-      <line x1="100" y1="220" x2="190" y2="220" stroke="#0e7490" stroke-width="2"/>
-
-      <!-- Outer container -->
-      <rect x="190" y="40" width="380" height="290" rx="10" fill="none" stroke="#0e7490" stroke-width="2"/>
-      <text x="380" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">I/O Interface</text>
-
-      <!-- Sub-compartments -->
-      <rect x="210" y="80" width="220" height="40" rx="6" fill="#e0f2fe" stroke="#0e7490"/>
-      <text x="320" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">Data Register ↔ Buffer</text>
-
-      <rect x="210" y="130" width="220" height="40" rx="6" fill="#e0f2fe" stroke="#0e7490"/>
-      <text x="320" y="155" text-anchor="middle" font-size="12" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">Status Register</text>
-
-      <rect x="210" y="180" width="220" height="40" rx="6" fill="#e0f2fe" stroke="#0e7490"/>
-      <text x="320" y="205" text-anchor="middle" font-size="12" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">Control Register</text>
-
-      <rect x="210" y="230" width="220" height="40" rx="6" fill="#fdf3e7" stroke="#b54708"/>
-      <text x="320" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">Address Decoder</text>
-
-      <rect x="210" y="280" width="220" height="40" rx="6" fill="#fdf3e7" stroke="#b54708"/>
-      <text x="320" y="305" text-anchor="middle" font-size="12" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">Control Logic</text>
-
-      <!-- Side annotations (right side: device-facing) -->
-      <text x="445" y="105" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">data lines →</text>
-      <text x="445" y="155" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">BUSY · READY · ERROR</text>
-      <text x="445" y="205" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">READ · WRITE · RESET</text>
-      <text x="445" y="255" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">recognise device addr</text>
-      <text x="445" y="305" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">timing · handshake</text>
-
-      <!-- Device on right -->
-      <rect x="610" y="160" width="90" height="60" rx="8" fill="#1a7f37" stroke="#0c5e2a"/>
-      <text x="655" y="195" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Device</text>
-      <line x1="570" y1="100" x2="610" y2="180" stroke="#1a7f37" stroke-width="2" marker-end="url(#arr6)"/>
-      <line x1="570" y1="200" x2="610" y2="200" stroke="#1a7f37" stroke-width="2" marker-end="url(#arr6)"/>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250911165552577923/iO_iNTERFACE.png"
+         alt="I/O Interface internal structure: System Bus connects to interface containing Data Register, Status Register, Control Register, Address Decoder, and Control Logic, which connects to the Device"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Standard register layout the CPU uses to talk to any I/O device.</div>
   </div>
 
@@ -1053,52 +924,10 @@ store_to_memory(data);</code></pre>
 
   <div class="diagram">
     <div class="diagram-title">Interrupt-Driven I/O Timeline</div>
-    <svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr7" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0e7490"/>
-        </marker>
-      </defs>
-
-      <!-- CPU lane -->
-      <text x="20" y="60" font-size="13" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">CPU</text>
-      <line x1="60" y1="55" x2="730" y2="55" stroke="#0e7490" stroke-width="2" marker-end="url(#arr7)"/>
-
-      <rect x="65" y="40" width="80" height="30" rx="4" fill="#e0f2fe" stroke="#0e7490"/>
-      <text x="105" y="60" text-anchor="middle" font-size="11" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">work</text>
-
-      <rect x="155" y="40" width="80" height="30" rx="4" fill="#1a7f37" stroke="#0c5e2a"/>
-      <text x="195" y="60" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">start I/O</text>
-
-      <rect x="245" y="40" width="180" height="30" rx="4" fill="#e0f2fe" stroke="#0e7490"/>
-      <text x="335" y="60" text-anchor="middle" font-size="11" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">other work</text>
-
-      <rect x="445" y="40" width="60" height="30" rx="4" fill="#fdecec" stroke="#b42318"/>
-      <text x="475" y="60" text-anchor="middle" font-size="11" font-weight="700" fill="#b42318" font-family="-apple-system, Segoe UI, sans-serif">save</text>
-
-      <rect x="510" y="40" width="80" height="30" rx="4" fill="#fdf3e7" stroke="#b54708"/>
-      <text x="550" y="60" text-anchor="middle" font-size="11" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">ISR</text>
-
-      <rect x="595" y="40" width="60" height="30" rx="4" fill="#fdecec" stroke="#b42318"/>
-      <text x="625" y="60" text-anchor="middle" font-size="11" font-weight="700" fill="#b42318" font-family="-apple-system, Segoe UI, sans-serif">restore</text>
-
-      <rect x="660" y="40" width="60" height="30" rx="4" fill="#e0f2fe" stroke="#0e7490"/>
-      <text x="690" y="60" text-anchor="middle" font-size="11" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">work</text>
-
-      <!-- Device lane -->
-      <text x="20" y="160" font-size="13" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">DEV</text>
-      <line x1="60" y1="155" x2="730" y2="155" stroke="#1a7f37" stroke-width="2" marker-end="url(#arr7)"/>
-
-      <rect x="195" y="140" width="245" height="30" rx="4" fill="#1a7f37" stroke="#0c5e2a"/>
-      <text x="317" y="160" text-anchor="middle" font-size="11" fill="white" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">device busy</text>
-
-      <!-- Interrupt arrow from device-end to CPU -->
-      <line x1="440" y1="140" x2="475" y2="73" stroke="#b42318" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arr7)"/>
-      <text x="445" y="120" font-size="12" font-weight="700" fill="#b42318" font-family="-apple-system, Segoe UI, sans-serif">⚡ INT</text>
-
-      <!-- Time axis -->
-      <text x="700" y="200" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">time →</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221111174234/InterruptdrivenIOcycle.png"
+         alt="Interrupt-Driven I/O Timeline: CPU runs other work during device busy phase, then handles ISR on interrupt signal"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">CPU runs unrelated work during device busy phase; an interrupt diverts it to the ISR only when the device is ready.</div>
   </div>
 
@@ -1162,57 +991,10 @@ store_to_memory(data);</code></pre>
 
   <div class="diagram">
     <div class="diagram-title">DMA Controller Wiring</div>
-    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr8" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0e7490"/>
-        </marker>
-        <marker id="arr8g" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#1a7f37"/>
-        </marker>
-      </defs>
-
-      <!-- CPU -->
-      <rect x="40" y="60" width="140" height="80" rx="10" fill="#e0f2fe" stroke="#0e7490" stroke-width="2"/>
-      <text x="110" y="95" text-anchor="middle" font-size="16" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">CPU</text>
-      <text x="110" y="118" text-anchor="middle" font-size="11" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">(idle during transfer)</text>
-
-      <!-- DMA -->
-      <rect x="290" y="60" width="140" height="80" rx="10" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="360" y="95" text-anchor="middle" font-size="15" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">DMA</text>
-      <text x="360" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">Controller</text>
-
-      <!-- Device -->
-      <rect x="540" y="60" width="140" height="80" rx="10" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="610" y="105" text-anchor="middle" font-size="16" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">Device</text>
-
-      <!-- CPU <-> DMA arrows: HOLD (CPU->DMA - actually DMA->CPU). Per ASCII: CPU receives HOLD, sends HLDA. -->
-      <line x1="290" y1="85" x2="180" y2="85" stroke="#0e7490" stroke-width="2" marker-end="url(#arr8)"/>
-      <text x="200" y="78" font-size="11" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">HOLD</text>
-
-      <line x1="180" y1="115" x2="290" y2="115" stroke="#0e7490" stroke-width="2" marker-end="url(#arr8)"/>
-      <text x="205" y="135" font-size="11" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">HLDA</text>
-
-      <!-- DMA <-> Device arrows: DREQ (Device->DMA), DACK (DMA->Device) -->
-      <line x1="540" y1="85" x2="430" y2="85" stroke="#1a7f37" stroke-width="2" marker-end="url(#arr8g)"/>
-      <text x="450" y="78" font-size="11" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">DREQ</text>
-
-      <line x1="430" y1="115" x2="540" y2="115" stroke="#1a7f37" stroke-width="2" marker-end="url(#arr8g)"/>
-      <text x="455" y="135" font-size="11" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">DACK</text>
-
-      <!-- Main Memory -->
-      <rect x="240" y="240" width="240" height="70" rx="10" fill="#0e7490" stroke="#0c5e75" stroke-width="2"/>
-      <text x="360" y="282" text-anchor="middle" font-size="15" fill="white" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Main Memory</text>
-
-      <!-- DMA -> Memory (address/RD/WR) -->
-      <line x1="360" y1="140" x2="360" y2="240" stroke="#b54708" stroke-width="2" marker-end="url(#arr8)"/>
-      <text x="370" y="195" font-size="11" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">addr / RD / WR</text>
-
-      <!-- Memory <-> Device data path (curved) -->
-      <path d="M 480 275 C 580 275, 610 200, 610 140" fill="none" stroke="#1a7f37" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr8g)"/>
-      <text x="540" y="225" font-size="11" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">data flows</text>
-      <text x="540" y="240" font-size="11" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">memory ↔ device</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250417112714089270/DMA_.webp"
+         alt="DMA Controller: CPU, DMA Controller, and Device interconnected with HOLD/HLDA and DREQ/DACK signals, data flows directly between memory and device"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">DMA arbitrates the bus with HOLD/HLDA, hand-shakes with the device via DREQ/DACK, and moves data straight between memory and device.</div>
   </div>
 
@@ -1297,44 +1079,10 @@ store_to_memory(data);</code></pre>
   <h4>Block diagram</h4>
   <div class="diagram">
     <div class="diagram-title">Hardwired Control Unit — Block Diagram</div>
-    <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr10" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0e7490"/>
-        </marker>
-      </defs>
-
-      <!-- Combinational logic block -->
-      <rect x="200" y="50" width="320" height="120" rx="10" fill="#e0f2fe" stroke="#0e7490" stroke-width="2"/>
-      <text x="360" y="100" text-anchor="middle" font-size="14" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">Combinational Logic / Decoder</text>
-      <text x="360" y="125" text-anchor="middle" font-size="12" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">(gates, K-maps, encoders)</text>
-
-      <!-- Inputs -->
-      <text x="40" y="80" font-size="12" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">Opcode</text>
-      <line x1="100" y1="75" x2="200" y2="75" stroke="#0e7490" stroke-width="2" marker-end="url(#arr10)"/>
-
-      <text x="40" y="115" font-size="12" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">Flags</text>
-      <line x1="100" y1="110" x2="200" y2="110" stroke="#0e7490" stroke-width="2" marker-end="url(#arr10)"/>
-
-      <text x="40" y="150" font-size="12" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">State</text>
-      <line x1="100" y1="145" x2="200" y2="145" stroke="#0e7490" stroke-width="2" marker-end="url(#arr10)"/>
-
-      <!-- Output: Control signals -->
-      <line x1="520" y1="110" x2="640" y2="110" stroke="#1a7f37" stroke-width="2" marker-end="url(#arr10)"/>
-      <text x="585" y="100" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">Control</text>
-      <text x="585" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">signals</text>
-
-      <!-- State counter -->
-      <rect x="270" y="220" width="180" height="60" rx="8" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="360" y="255" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">State Counter</text>
-
-      <!-- Counter -> Logic block (state input) -->
-      <line x1="360" y1="220" x2="360" y2="170" stroke="#b54708" stroke-width="2" marker-end="url(#arr10)"/>
-
-      <!-- Clock input -->
-      <text x="500" y="255" font-size="12" font-weight="700" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">Clock</text>
-      <line x1="540" y1="250" x2="450" y2="250" stroke="#5a6577" stroke-width="2" marker-end="url(#arr10)"/>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/1-9.jpg"
+         alt="Hardwired Control Unit block diagram: Combinational Logic decodes opcode, flags, and state to generate control signals; a clocked state counter drives sequencing"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Fixed combinational logic decodes opcode + state + flags into control signals; a clocked state counter drives sequencing.</div>
   </div>
 
@@ -1375,62 +1123,10 @@ store_to_memory(data);</code></pre>
   <h4>Block diagram</h4>
   <div class="diagram">
     <div class="diagram-title">Microprogrammed Control Unit</div>
-    <svg viewBox="0 0 820 380" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr11" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0e7490"/>
-        </marker>
-      </defs>
-
-      <!-- Opcode -> Mapping -->
-      <text x="20" y="55" font-size="12" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">Opcode</text>
-      <line x1="80" y1="50" x2="120" y2="50" stroke="#0e7490" stroke-width="2" marker-end="url(#arr11)"/>
-
-      <rect x="125" y="30" width="130" height="40" rx="8" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="190" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">Mapping Logic</text>
-
-      <!-- Mapping output enters CAR -->
-      <line x1="190" y1="70" x2="190" y2="120" stroke="#b54708" stroke-width="2" marker-end="url(#arr11)"/>
-
-      <!-- CAR -->
-      <rect x="140" y="130" width="100" height="50" rx="8" fill="#e0f2fe" stroke="#0e7490" stroke-width="2"/>
-      <text x="190" y="158" text-anchor="middle" font-size="13" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">CAR</text>
-      <text x="190" y="172" text-anchor="middle" font-size="10" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">μPC</text>
-
-      <!-- Control Memory ROM -->
-      <line x1="240" y1="155" x2="290" y2="155" stroke="#0e7490" stroke-width="2" marker-end="url(#arr11)"/>
-      <rect x="295" y="120" width="150" height="70" rx="8" fill="#0e7490" stroke="#0c5e75" stroke-width="2"/>
-      <text x="370" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="white" font-family="-apple-system, Segoe UI, sans-serif">Control Memory</text>
-      <text x="370" y="170" text-anchor="middle" font-size="13" font-weight="700" fill="white" font-family="-apple-system, Segoe UI, sans-serif">(ROM)</text>
-
-      <!-- ROM -> CBR/uIR -->
-      <line x1="445" y1="155" x2="495" y2="155" stroke="#0e7490" stroke-width="2" marker-end="url(#arr11)"/>
-      <rect x="500" y="130" width="120" height="50" rx="8" fill="#e0f2fe" stroke="#0e7490" stroke-width="2"/>
-      <text x="560" y="155" text-anchor="middle" font-size="13" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">CBR / μIR</text>
-      <text x="560" y="172" text-anchor="middle" font-size="10" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">current μ-instr.</text>
-
-      <!-- CBR -> Decode -->
-      <line x1="620" y1="155" x2="670" y2="155" stroke="#0e7490" stroke-width="2" marker-end="url(#arr11)"/>
-      <rect x="675" y="130" width="100" height="50" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="725" y="160" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">Decode</text>
-
-      <!-- Decode -> Control signals (output arrow exits right) -->
-      <line x1="725" y1="180" x2="725" y2="220" stroke="#1a7f37" stroke-width="2" marker-end="url(#arr11)"/>
-      <text x="725" y="240" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">Control signals →</text>
-
-      <!-- Sequencer below CBR -->
-      <line x1="560" y1="180" x2="560" y2="270" stroke="#0e7490" stroke-width="2" marker-end="url(#arr11)"/>
-      <rect x="380" y="280" width="350" height="50" rx="8" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="555" y="310" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">Sequencer / Next-Address Logic</text>
-
-      <!-- Flags input to sequencer -->
-      <text x="755" y="310" font-size="12" font-weight="700" fill="#5a6577" font-family="-apple-system, Segoe UI, sans-serif">flags</text>
-      <line x1="800" y1="305" x2="730" y2="305" stroke="#5a6577" stroke-width="2" marker-end="url(#arr11)"/>
-
-      <!-- Sequencer feedback to CAR -->
-      <line x1="380" y1="305" x2="190" y2="305" stroke="#b54708" stroke-width="2"/>
-      <line x1="190" y1="305" x2="190" y2="180" stroke="#b54708" stroke-width="2" marker-end="url(#arr11)"/>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/2-9.jpg"
+         alt="Microprogrammed Control Unit: CAR addresses Control Memory ROM, fetched microinstruction in CBR is decoded into control signals while sequencer chooses the next address"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">CAR addresses Control Memory; the fetched microinstruction (CBR) is decoded into control signals while the sequencer chooses the next address using flags or branch fields.</div>
   </div>
 
@@ -1533,70 +1229,10 @@ store_to_memory(data);</code></pre>
   <h4>Time-space diagram</h4>
   <div class="diagram">
     <div class="diagram-title">5-Stage Pipeline — Time-Space Diagram</div>
-    <svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg">
-      <!-- Cycle headers -->
-      <text x="60" y="35" font-size="12" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">Cycle:</text>
-      <g font-size="12" font-weight="700" fill="#5a6577" font-family="Cascadia Code, Consolas, monospace" text-anchor="middle">
-        <text x="160" y="35">1</text>
-        <text x="240" y="35">2</text>
-        <text x="320" y="35">3</text>
-        <text x="400" y="35">4</text>
-        <text x="480" y="35">5</text>
-        <text x="560" y="35">6</text>
-        <text x="640" y="35">7</text>
-        <text x="720" y="35">8</text>
-      </g>
-
-      <!-- Vertical grid lines -->
-      <g stroke="#e3e7ee" stroke-width="1">
-        <line x1="120" y1="50" x2="120" y2="280"/>
-        <line x1="200" y1="50" x2="200" y2="280"/>
-        <line x1="280" y1="50" x2="280" y2="280"/>
-        <line x1="360" y1="50" x2="360" y2="280"/>
-        <line x1="440" y1="50" x2="440" y2="280"/>
-        <line x1="520" y1="50" x2="520" y2="280"/>
-        <line x1="600" y1="50" x2="600" y2="280"/>
-        <line x1="680" y1="50" x2="680" y2="280"/>
-        <line x1="760" y1="50" x2="760" y2="280"/>
-      </g>
-
-      <!-- Stage colours: IF #0e7490, ID #1f8eaa, EX #b54708, MEM #1a7f37, WB #4338ca -->
-      <!-- Row I1 -->
-      <text x="40" y="80" font-size="13" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">I1</text>
-      <rect x="122" y="65" width="76" height="30" rx="3" fill="#0e7490"/><text x="160" y="85" text-anchor="middle" font-size="11" fill="white" font-weight="700">IF</text>
-      <rect x="202" y="65" width="76" height="30" rx="3" fill="#1f8eaa"/><text x="240" y="85" text-anchor="middle" font-size="11" fill="white" font-weight="700">ID</text>
-      <rect x="282" y="65" width="76" height="30" rx="3" fill="#b54708"/><text x="320" y="85" text-anchor="middle" font-size="11" fill="white" font-weight="700">EX</text>
-      <rect x="362" y="65" width="76" height="30" rx="3" fill="#1a7f37"/><text x="400" y="85" text-anchor="middle" font-size="11" fill="white" font-weight="700">MEM</text>
-      <rect x="442" y="65" width="76" height="30" rx="3" fill="#4338ca"/><text x="480" y="85" text-anchor="middle" font-size="11" fill="white" font-weight="700">WB</text>
-
-      <!-- Row I2 -->
-      <text x="40" y="125" font-size="13" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">I2</text>
-      <rect x="202" y="110" width="76" height="30" rx="3" fill="#0e7490"/><text x="240" y="130" text-anchor="middle" font-size="11" fill="white" font-weight="700">IF</text>
-      <rect x="282" y="110" width="76" height="30" rx="3" fill="#1f8eaa"/><text x="320" y="130" text-anchor="middle" font-size="11" fill="white" font-weight="700">ID</text>
-      <rect x="362" y="110" width="76" height="30" rx="3" fill="#b54708"/><text x="400" y="130" text-anchor="middle" font-size="11" fill="white" font-weight="700">EX</text>
-      <rect x="442" y="110" width="76" height="30" rx="3" fill="#1a7f37"/><text x="480" y="130" text-anchor="middle" font-size="11" fill="white" font-weight="700">MEM</text>
-      <rect x="522" y="110" width="76" height="30" rx="3" fill="#4338ca"/><text x="560" y="130" text-anchor="middle" font-size="11" fill="white" font-weight="700">WB</text>
-
-      <!-- Row I3 -->
-      <text x="40" y="170" font-size="13" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">I3</text>
-      <rect x="282" y="155" width="76" height="30" rx="3" fill="#0e7490"/><text x="320" y="175" text-anchor="middle" font-size="11" fill="white" font-weight="700">IF</text>
-      <rect x="362" y="155" width="76" height="30" rx="3" fill="#1f8eaa"/><text x="400" y="175" text-anchor="middle" font-size="11" fill="white" font-weight="700">ID</text>
-      <rect x="442" y="155" width="76" height="30" rx="3" fill="#b54708"/><text x="480" y="175" text-anchor="middle" font-size="11" fill="white" font-weight="700">EX</text>
-      <rect x="522" y="155" width="76" height="30" rx="3" fill="#1a7f37"/><text x="560" y="175" text-anchor="middle" font-size="11" fill="white" font-weight="700">MEM</text>
-      <rect x="602" y="155" width="76" height="30" rx="3" fill="#4338ca"/><text x="640" y="175" text-anchor="middle" font-size="11" fill="white" font-weight="700">WB</text>
-
-      <!-- Row I4 -->
-      <text x="40" y="215" font-size="13" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">I4</text>
-      <rect x="362" y="200" width="76" height="30" rx="3" fill="#0e7490"/><text x="400" y="220" text-anchor="middle" font-size="11" fill="white" font-weight="700">IF</text>
-      <rect x="442" y="200" width="76" height="30" rx="3" fill="#1f8eaa"/><text x="480" y="220" text-anchor="middle" font-size="11" fill="white" font-weight="700">ID</text>
-      <rect x="522" y="200" width="76" height="30" rx="3" fill="#b54708"/><text x="560" y="220" text-anchor="middle" font-size="11" fill="white" font-weight="700">EX</text>
-      <rect x="602" y="200" width="76" height="30" rx="3" fill="#1a7f37"/><text x="640" y="220" text-anchor="middle" font-size="11" fill="white" font-weight="700">MEM</text>
-      <rect x="682" y="200" width="76" height="30" rx="3" fill="#4338ca"/><text x="720" y="220" text-anchor="middle" font-size="11" fill="white" font-weight="700">WB</text>
-
-      <!-- After cycle 5 marker -->
-      <line x1="442" y1="50" x2="442" y2="280" stroke="#1a7f37" stroke-width="2" stroke-dasharray="4 3"/>
-      <text x="445" y="270" font-size="11" font-weight="700" fill="#1a7f37" font-family="-apple-system, Segoe UI, sans-serif">↑ steady state: 1 instr/cycle (CPI ≈ 1)</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20251110154035499096/pipelined.webp"
+         alt="5-Stage Pipeline time-space diagram: each instruction occupies staggered IF/ID/EX/MEM/WB stages; once full, one instruction completes per cycle"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Each instruction enters one cycle later, occupying staggered stages; once the pipeline is full one instruction completes every cycle.</div>
   </div>
 
@@ -1734,50 +1370,10 @@ store_to_memory(data);</code></pre>
   <h4>Two functional units in the 8086 — overlap of fetch and execute</h4>
   <div class="diagram">
     <div class="diagram-title">8086 — BIU / EU Split</div>
-    <svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="arr14" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
-          <polygon points="0 0, 12 6, 0 12" fill="#0e7490"/>
-        </marker>
-      </defs>
-
-      <!-- BIU container (top) -->
-      <rect x="40" y="20" width="640" height="130" rx="12" fill="#e0f2fe" stroke="#0e7490" stroke-width="2"/>
-      <text x="360" y="48" text-anchor="middle" font-size="15" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">BIU — Bus Interface Unit</text>
-
-      <text x="60" y="78" font-size="12" fill="#1a2233" font-family="-apple-system, Segoe UI, sans-serif">• Calculates physical addresses</text>
-      <text x="60" y="100" font-size="12" fill="#1a2233" font-family="-apple-system, Segoe UI, sans-serif">• Fetches instructions → fills 6-byte INSTRUCTION QUEUE</text>
-      <text x="60" y="122" font-size="12" fill="#1a2233" font-family="-apple-system, Segoe UI, sans-serif">• Holds segment registers (CS, DS, SS, ES) and IP</text>
-
-      <!-- Instruction Queue visual on right -->
-      <g>
-        <rect x="500" y="65" width="160" height="28" rx="4" fill="#fff" stroke="#0e7490"/>
-        <line x1="525" y1="65" x2="525" y2="93" stroke="#0e7490"/>
-        <line x1="550" y1="65" x2="550" y2="93" stroke="#0e7490"/>
-        <line x1="575" y1="65" x2="575" y2="93" stroke="#0e7490"/>
-        <line x1="600" y1="65" x2="600" y2="93" stroke="#0e7490"/>
-        <line x1="625" y1="65" x2="625" y2="93" stroke="#0e7490"/>
-        <text x="580" y="84" text-anchor="middle" font-size="9" fill="#5a6577" font-family="Cascadia Code, Consolas, monospace">6-byte queue</text>
-      </g>
-
-      <!-- Instruction stream arrow between -->
-      <line x1="360" y1="155" x2="360" y2="200" stroke="#0e7490" stroke-width="3" marker-end="url(#arr14)"/>
-      <text x="375" y="183" font-size="12" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">instruction stream</text>
-
-      <!-- EU container (bottom) -->
-      <rect x="40" y="210" width="640" height="130" rx="12" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="360" y="238" text-anchor="middle" font-size="15" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">EU — Execution Unit</text>
-
-      <text x="60" y="268" font-size="12" fill="#1a2233" font-family="-apple-system, Segoe UI, sans-serif">• Decodes and executes instructions</text>
-      <text x="60" y="290" font-size="12" fill="#1a2233" font-family="-apple-system, Segoe UI, sans-serif">• Holds general-purpose registers, ALU, FLAGS</text>
-      <text x="60" y="312" font-size="12" fill="#1a2233" font-family="-apple-system, Segoe UI, sans-serif">• Asks BIU for data when needed</text>
-
-      <!-- Mini ALU/Registers cluster on right of EU -->
-      <rect x="510" y="255" width="70" height="35" rx="4" fill="#fff" stroke="#b54708"/>
-      <text x="545" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">ALU</text>
-      <rect x="590" y="255" width="80" height="35" rx="4" fill="#fff" stroke="#b54708"/>
-      <text x="630" y="277" text-anchor="middle" font-size="11" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">Registers</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20220816090623/blockdiagramof8086microprocessor1-300x228.jpg"
+         alt="8086 block diagram showing BIU (Bus Interface Unit) with 6-byte instruction queue and EU (Execution Unit) with ALU and registers"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">BIU prefetches up to 6 bytes ahead while EU decodes and executes — primitive pipelining inside the 8086.</div>
   </div>
 
@@ -2135,52 +1731,10 @@ Read top-down → .101</pre>
 
   <div class="diagram">
     <div class="diagram-title">Von Neumann Architecture</div>
-    <svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <marker id="vnArr" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-          <polygon points="0 0, 10 5, 0 10" fill="#0e7490"/>
-        </marker>
-      </defs>
-      <!-- CPU big box -->
-      <rect x="40" y="60" width="260" height="200" rx="10" fill="#e0f2fe" stroke="#0e7490" stroke-width="2"/>
-      <text x="170" y="82" text-anchor="middle" fill="#0e7490" font-size="14" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">CPU</text>
-
-      <!-- ALU -->
-      <rect x="60" y="100" width="100" height="50" rx="6" fill="white" stroke="#0e7490"/>
-      <text x="110" y="130" text-anchor="middle" fill="#0e7490" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">ALU</text>
-
-      <!-- CU -->
-      <rect x="180" y="100" width="100" height="50" rx="6" fill="white" stroke="#0e7490"/>
-      <text x="230" y="130" text-anchor="middle" fill="#0e7490" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Control Unit</text>
-
-      <!-- Registers -->
-      <rect x="60" y="170" width="220" height="60" rx="6" fill="white" stroke="#0e7490"/>
-      <text x="170" y="195" text-anchor="middle" fill="#0e7490" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Registers</text>
-      <text x="170" y="215" text-anchor="middle" fill="#5a6577" font-size="11" font-family="-apple-system, Segoe UI, sans-serif">PC · IR · MAR · MDR · AC</text>
-
-      <!-- Memory -->
-      <rect x="380" y="100" width="220" height="120" rx="10" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-      <text x="490" y="125" text-anchor="middle" fill="#b54708" font-size="14" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Main Memory</text>
-      <text x="490" y="148" text-anchor="middle" fill="#5a6577" font-size="11" font-family="-apple-system, Segoe UI, sans-serif">(stores BOTH</text>
-      <text x="490" y="163" text-anchor="middle" fill="#5a6577" font-size="11" font-family="-apple-system, Segoe UI, sans-serif">instructions &amp; data)</text>
-      <text x="490" y="195" text-anchor="middle" fill="#b54708" font-size="11" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">single address space</text>
-
-      <!-- I/O -->
-      <rect x="380" y="240" width="220" height="50" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-      <text x="490" y="270" text-anchor="middle" fill="#1a7f37" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Input / Output</text>
-
-      <!-- System bus (single, shared) -->
-      <line x1="300" y1="160" x2="380" y2="160" stroke="#0e7490" stroke-width="3" marker-end="url(#vnArr)"/>
-      <line x1="380" y1="170" x2="300" y2="170" stroke="#0e7490" stroke-width="3" marker-end="url(#vnArr)"/>
-      <text x="340" y="150" text-anchor="middle" fill="#0e7490" font-size="11" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">SHARED BUS</text>
-
-      <line x1="300" y1="265" x2="380" y2="265" stroke="#1a7f37" stroke-width="2" marker-end="url(#vnArr)"/>
-      <line x1="380" y1="275" x2="300" y2="275" stroke="#1a7f37" stroke-width="2" marker-end="url(#vnArr)"/>
-      <text x="340" y="295" text-anchor="middle" fill="#1a7f37" font-size="10" font-family="-apple-system, Segoe UI, sans-serif">I/O bus</text>
-
-      <!-- Title -->
-      <text x="320" y="30" text-anchor="middle" fill="#1a2233" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">Single memory + single bus = "Von Neumann bottleneck"</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250814172625219026/central_processing_unit.webp"
+         alt="Von Neumann Architecture: CPU (ALU + Control Unit + Registers) connected to Main Memory and I/O over a single shared bus — the stored-program design"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">CPU (ALU + CU + Registers) talks to a single memory over one shared bus — the classic stored-program design.</div>
   </div>
 
@@ -2229,76 +1783,10 @@ C<sub>out</sub>  = A·B + C<sub>in</sub>·(A ⊕ B)
   <h4>Circuit (built from two half-adders + OR)</h4>
   <div class="diagram">
     <div class="diagram-title">Full-Adder Circuit (2 half-adders + OR)</div>
-    <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Full-adder circuit diagram: inputs A, B, and Cin feed two half-adders (XOR1 with AND1, then XOR2 with AND2); the two AND outputs are combined by an OR gate to produce Cout, while XOR2 produces the Sum output.">
-      <defs>
-        <marker id="faArr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-          <polygon points="0 0, 8 4, 0 8" fill="#0e7490"/>
-        </marker>
-      </defs>
-      <!-- Inputs -->
-      <text x="20" y="55" font-size="14" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">A</text>
-      <text x="20" y="95" font-size="14" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">B</text>
-      <text x="20" y="200" font-size="14" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">C<tspan font-size="10" baseline-shift="sub">in</tspan></text>
-
-      <line x1="40" y1="50" x2="120" y2="50" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="40" y1="90" x2="120" y2="90" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="40" y1="195" x2="280" y2="195" stroke="#0e7490" stroke-width="1.5"/>
-
-      <!-- Half-adder 1 (XOR1 + AND1) -->
-      <rect x="120" y="40" width="80" height="40" rx="6" fill="#e0f2fe" stroke="#0e7490"/>
-      <text x="160" y="65" text-anchor="middle" fill="#0e7490" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">XOR1</text>
-
-      <rect x="120" y="100" width="80" height="40" rx="6" fill="#fff" stroke="#1a7f37"/>
-      <text x="160" y="125" text-anchor="middle" fill="#1a7f37" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">AND1</text>
-
-      <!-- branch B and A into AND1 -->
-      <line x1="80" y1="50" x2="80" y2="115" stroke="#0e7490" stroke-width="1"/>
-      <line x1="80" y1="115" x2="120" y2="115" stroke="#0e7490" stroke-width="1"/>
-      <line x1="100" y1="90" x2="100" y2="125" stroke="#0e7490" stroke-width="1"/>
-      <line x1="100" y1="125" x2="120" y2="125" stroke="#0e7490" stroke-width="1"/>
-
-      <!-- XOR1 → XOR2 (carries A⊕B) -->
-      <line x1="200" y1="60" x2="280" y2="60" stroke="#0e7490" stroke-width="1.5" marker-end="url(#faArr)"/>
-      <text x="240" y="50" text-anchor="middle" fill="#5a6577" font-size="11" font-style="italic" font-family="-apple-system, Segoe UI, sans-serif">A⊕B</text>
-
-      <!-- XOR2 -->
-      <rect x="290" y="80" width="80" height="40" rx="6" fill="#e0f2fe" stroke="#0e7490"/>
-      <text x="330" y="105" text-anchor="middle" fill="#0e7490" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">XOR2</text>
-
-      <!-- C_in into XOR2 -->
-      <line x1="280" y1="195" x2="280" y2="110" stroke="#0e7490" stroke-width="1.5"/>
-      <line x1="280" y1="110" x2="290" y2="110" stroke="#0e7490" stroke-width="1.5"/>
-
-      <!-- Branch A⊕B into AND2 -->
-      <line x1="260" y1="60" x2="260" y2="155" stroke="#0e7490" stroke-width="1"/>
-      <line x1="260" y1="155" x2="290" y2="155" stroke="#0e7490" stroke-width="1"/>
-
-      <!-- AND2 -->
-      <rect x="290" y="145" width="80" height="40" rx="6" fill="#fff" stroke="#1a7f37"/>
-      <text x="330" y="170" text-anchor="middle" fill="#1a7f37" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">AND2</text>
-
-      <!-- C_in into AND2 -->
-      <line x1="280" y1="175" x2="290" y2="175" stroke="#0e7490" stroke-width="1"/>
-
-      <!-- OR -->
-      <rect x="430" y="120" width="80" height="50" rx="6" fill="#fdf3e7" stroke="#b54708"/>
-      <text x="470" y="150" text-anchor="middle" fill="#b54708" font-size="13" font-weight="700" font-family="-apple-system, Segoe UI, sans-serif">OR</text>
-
-      <!-- AND1 → OR -->
-      <line x1="200" y1="120" x2="220" y2="120" stroke="#1a7f37" stroke-width="1.5"/>
-      <line x1="220" y1="120" x2="220" y2="135" stroke="#1a7f37" stroke-width="1.5"/>
-      <line x1="220" y1="135" x2="430" y2="135" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#faArr)"/>
-
-      <!-- AND2 → OR -->
-      <line x1="370" y1="165" x2="430" y2="165" stroke="#1a7f37" stroke-width="1.5" marker-end="url(#faArr)"/>
-
-      <!-- Outputs -->
-      <line x1="370" y1="100" x2="560" y2="100" stroke="#0e7490" stroke-width="2" marker-end="url(#faArr)"/>
-      <text x="580" y="105" font-size="14" font-weight="700" fill="#0e7490" font-family="-apple-system, Segoe UI, sans-serif">Sum</text>
-
-      <line x1="510" y1="145" x2="560" y2="145" stroke="#b54708" stroke-width="2" marker-end="url(#faArr)"/>
-      <text x="580" y="150" font-size="14" font-weight="700" fill="#b54708" font-family="-apple-system, Segoe UI, sans-serif">C<tspan font-size="10" baseline-shift="sub">out</tspan></text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250405122421803770/frame_16.webp"
+         alt="Full-adder circuit diagram: inputs A, B, and Cin feed two half-adders; the two AND outputs combine via OR to produce Cout, while XOR2 produces Sum"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">First half-adder produces partial sum and partial carry; second XOR adds C<sub>in</sub>; OR merges the two carry sources.</div>
   </div>
 

@@ -359,9 +359,6 @@
       <li><a href="#t8">Skewness</a></li>
       <li><a href="#sessional-booster">Sessional Exam Booster</a></li>
     </ol>
-    <div style="margin-top:24px; font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:14px;">
-      Purple boxes = PYQ (May 2025 BCA-DS-23-204). Click reveal buttons in quizzes.
-    </div>
   </aside>
 
   <main>
@@ -411,15 +408,10 @@
 
   <div class="diagram">
     <div class="diagram-title">Sum Rule — inclusion-exclusion</div>
-    <svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
-      <rect x="20" y="20" width="440" height="160" fill="#fafbfd" stroke="#5a6577" stroke-dasharray="4 3"/>
-      <text x="40" y="40" font-size="11" fill="#5a6577">S (sample space)</text>
-      <circle cx="190" cy="110" r="65" fill="#1f6feb" fill-opacity="0.35" stroke="#1f6feb" stroke-width="2"/>
-      <text x="160" y="115" text-anchor="middle" font-weight="700" fill="#1f6feb">A</text>
-      <circle cx="290" cy="110" r="65" fill="#1a7f37" fill-opacity="0.35" stroke="#1a7f37" stroke-width="2"/>
-      <text x="320" y="115" text-anchor="middle" font-weight="700" fill="#1a7f37">B</text>
-      <text x="240" y="115" text-anchor="middle" font-weight="700" fill="#b54708" font-size="14">A ∩ B</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20210406223750/Screenshot20210406at103730PM.png"
+         alt="Venn diagram showing P(A∪B) = P(A)+P(B)−P(A∩B)"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">Counting A and B separately double-counts A ∩ B — subtract it once.</div>
   </div>
 
@@ -731,33 +723,10 @@
 
   <div class="diagram">
     <div class="diagram-title">Binomial PMF — B(10, 0.5)</div>
-    <svg viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Binomial probability mass function bar chart for n=10, p=0.5, peaking at k=5">
-      <line x1="40" y1="200" x2="560" y2="200" stroke="#1a2233"/>
-      <line x1="40" y1="200" x2="40" y2="40" stroke="#1a2233"/>
-      <text x="20" y="50" font-size="11" fill="#5a6577">P</text>
-      <text x="555" y="220" font-size="11" fill="#5a6577">k</text>
-      <!-- bars: probabilities for B(10,0.5): 1, 10, 45, 120, 210, 252, 210, 120, 45, 10, 1 / 1024 -->
-      <g fill="#1f6feb">
-        <rect x="55" y="199" width="35" height="1"/>
-        <rect x="100" y="195" width="35" height="5"/>
-        <rect x="145" y="180" width="35" height="20"/>
-        <rect x="190" y="148" width="35" height="52"/>
-        <rect x="235" y="110" width="35" height="90"/>
-        <rect x="280" y="92" width="35" height="108"/>
-        <rect x="325" y="110" width="35" height="90"/>
-        <rect x="370" y="148" width="35" height="52"/>
-        <rect x="415" y="180" width="35" height="20"/>
-        <rect x="460" y="195" width="35" height="5"/>
-        <rect x="505" y="199" width="35" height="1"/>
-      </g>
-      <g font-size="11" fill="#5a6577" text-anchor="middle">
-        <text x="72" y="218">0</text><text x="117" y="218">1</text><text x="162" y="218">2</text>
-        <text x="207" y="218">3</text><text x="252" y="218">4</text><text x="297" y="218">5</text>
-        <text x="342" y="218">6</text><text x="387" y="218">7</text><text x="432" y="218">8</text>
-        <text x="477" y="218">9</text><text x="522" y="218">10</text>
-      </g>
-      <text x="297" y="80" text-anchor="middle" font-size="12" font-weight="700" fill="#b54708">μ = np = 5</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20251217155135944373/Binomial-Distribution.webp"
+         alt="Binomial distribution PMF bar chart for n=10 p=0.5"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
   </div>
 
   <div class="box eg">
@@ -943,40 +912,10 @@
 
   <div class="diagram">
     <div class="diagram-title">Normal Distribution — 68-95-99.7 rule</div>
-    <svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg">
-      <line x1="40" y1="200" x2="700" y2="200" stroke="#1a2233"/>
-
-      <!-- bell curve fill regions -->
-      <path d="M 40,200 Q 200,200 270,170 Q 320,130 360,55 Q 400,130 450,170 Q 520,200 700,200 Z" fill="#fdecec" stroke="none"/>
-      <path d="M 220,200 Q 270,180 300,135 Q 330,80 360,55 Q 390,80 420,135 Q 450,180 500,200 Z" fill="#fdf3e7" stroke="none"/>
-      <path d="M 280,200 Q 310,160 335,100 Q 348,75 360,55 Q 372,75 385,100 Q 410,160 440,200 Z" fill="#e6f4ea" stroke="none"/>
-
-      <!-- bell outline -->
-      <path d="M 40,200 Q 200,200 270,170 Q 320,130 360,55 Q 400,130 450,170 Q 520,200 700,200" fill="none" stroke="#1f6feb" stroke-width="2.5"/>
-
-      <!-- markers -->
-      <line x1="280" y1="200" x2="280" y2="220" stroke="#1a2233"/>
-      <line x1="220" y1="200" x2="220" y2="225" stroke="#1a2233"/>
-      <line x1="160" y1="200" x2="160" y2="230" stroke="#1a2233"/>
-      <line x1="360" y1="55" x2="360" y2="220" stroke="#1a2233" stroke-dasharray="3 3"/>
-      <line x1="440" y1="200" x2="440" y2="220" stroke="#1a2233"/>
-      <line x1="500" y1="200" x2="500" y2="225" stroke="#1a2233"/>
-      <line x1="560" y1="200" x2="560" y2="230" stroke="#1a2233"/>
-
-      <!-- axis labels -->
-      <text x="160" y="245" text-anchor="middle" font-size="11">μ−3σ</text>
-      <text x="220" y="240" text-anchor="middle" font-size="11">μ−2σ</text>
-      <text x="280" y="235" text-anchor="middle" font-size="11">μ−σ</text>
-      <text x="360" y="235" text-anchor="middle" font-size="11" font-weight="700">μ</text>
-      <text x="440" y="235" text-anchor="middle" font-size="11">μ+σ</text>
-      <text x="500" y="240" text-anchor="middle" font-size="11">μ+2σ</text>
-      <text x="560" y="245" text-anchor="middle" font-size="11">μ+3σ</text>
-
-      <!-- region labels -->
-      <text x="360" y="155" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">68% (±1σ)</text>
-      <text x="360" y="178" text-anchor="middle" font-size="12" fill="#b54708">95% (±2σ)</text>
-      <text x="360" y="195" text-anchor="middle" font-size="11" fill="#b42318">99.7% (±3σ)</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230811122554/Probability-Density-for-Normal-Distribution.png"
+         alt="Normal distribution showing 68-95-99.7 empirical rule"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
     <div class="caption">68% within 1σ, 95% within 2σ, 99.7% within 3σ — the "empirical rule".</div>
   </div>
 
@@ -1248,22 +1187,10 @@
 
   <div class="diagram">
     <div class="diagram-title">Mean · Median · Mode on a distribution</div>
-    <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg">
-      <line x1="40" y1="180" x2="560" y2="180" stroke="#1a2233"/>
-      <path d="M 40,180 Q 200,180 270,150 Q 320,120 360,40 Q 400,120 450,150 Q 520,180 560,180" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
-
-      <line x1="360" y1="40" x2="360" y2="200" stroke="#1a7f37" stroke-dasharray="4 3" stroke-width="2"/>
-      <text x="360" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">Mode (peak)</text>
-
-      <line x1="350" y1="180" x2="350" y2="200" stroke="#b54708" stroke-width="2"/>
-      <text x="280" y="215" text-anchor="middle" font-size="12" fill="#b54708">Median</text>
-
-      <line x1="345" y1="200" x2="345" y2="215" stroke="#b42318" stroke-width="2"/>
-      <text x="430" y="215" text-anchor="middle" font-size="12" fill="#b42318">Mean</text>
-
-      <text x="300" y="125" font-size="11" fill="#5a6577" font-style="italic">in a perfectly symmetric distribution</text>
-      <text x="300" y="142" font-size="11" fill="#5a6577" font-style="italic">all three coincide</text>
-    </svg>
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230416231106/Graph.png"
+         alt="Bell curve showing positions of mean, median, and mode"
+         loading="lazy"
+         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
   </div>
 
   <h3>6.4 Combined / Pooled Mean (multi-group)</h3>
@@ -1473,45 +1400,11 @@
 
   <div class="diagram">
     <div class="diagram-title">Three shapes of skewness</div>
-    <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
-      <!-- Negative skew (left-tailed) -->
-      <g transform="translate(20,30)">
-        <line x1="0" y1="180" x2="200" y2="180" stroke="#1a2233"/>
-        <path d="M 0,180 Q 30,178 70,170 Q 100,150 130,90 Q 160,30 175,30 Q 195,40 200,180 Z" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
-        <line x1="100" y1="150" x2="100" y2="195" stroke="#b42318" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <line x1="140" y1="80" x2="140" y2="195" stroke="#b54708" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <line x1="170" y1="40" x2="170" y2="195" stroke="#1a7f37" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <text x="100" y="210" text-anchor="middle" font-size="10" fill="#b42318">Mean</text>
-        <text x="140" y="222" text-anchor="middle" font-size="10" fill="#b54708">Med</text>
-        <text x="170" y="210" text-anchor="middle" font-size="10" fill="#1a7f37">Mode</text>
-        <text x="100" y="250" text-anchor="middle" font-weight="700" fill="#b42318">Negative skew</text>
-        <text x="100" y="245" text-anchor="middle" font-size="10" fill="#5a6577">(left tail)</text>
-      </g>
-
-      <!-- Symmetric -->
-      <g transform="translate(260,30)">
-        <line x1="0" y1="180" x2="200" y2="180" stroke="#1a2233"/>
-        <path d="M 0,180 Q 50,180 90,140 Q 100,90 100,40 Q 100,90 110,140 Q 150,180 200,180 Z" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
-        <line x1="100" y1="40" x2="100" y2="195" stroke="#1a7f37" stroke-width="2" stroke-dasharray="3 2"/>
-        <text x="100" y="210" text-anchor="middle" font-size="10" fill="#1a7f37">Mean = Median = Mode</text>
-        <text x="100" y="240" text-anchor="middle" font-weight="700" fill="#1a7f37">Symmetric</text>
-        <text x="100" y="255" text-anchor="middle" font-size="10" fill="#5a6577">(skewness = 0)</text>
-      </g>
-
-      <!-- Positive skew (right-tailed) -->
-      <g transform="translate(500,30)">
-        <line x1="0" y1="180" x2="200" y2="180" stroke="#1a2233"/>
-        <path d="M 0,180 Q 5,40 25,30 Q 40,30 70,90 Q 100,150 130,170 Q 170,178 200,180 Z" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
-        <line x1="30" y1="40" x2="30" y2="195" stroke="#1a7f37" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <line x1="60" y1="80" x2="60" y2="195" stroke="#b54708" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <line x1="100" y1="150" x2="100" y2="195" stroke="#b42318" stroke-width="1.5" stroke-dasharray="3 2"/>
-        <text x="30" y="210" text-anchor="middle" font-size="10" fill="#1a7f37">Mode</text>
-        <text x="60" y="222" text-anchor="middle" font-size="10" fill="#b54708">Med</text>
-        <text x="100" y="210" text-anchor="middle" font-size="10" fill="#b42318">Mean</text>
-        <text x="100" y="250" text-anchor="middle" font-weight="700" fill="#b54708">Positive skew</text>
-        <text x="100" y="245" text-anchor="middle" font-size="10" fill="#5a6577">(right tail)</text>
-      </g>
-    </svg>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230315103841/Positive-skew.png" alt="Positive skew distribution" loading="lazy" style="max-width:32%; border-radius:6px;" />
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230315103921/Zero-skew.png" alt="Symmetric zero skew distribution" loading="lazy" style="max-width:32%; border-radius:6px;" />
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230315103902/Negative-skew.png" alt="Negative skew distribution" loading="lazy" style="max-width:32%; border-radius:6px;" />
+    </div>
   </div>
 
   <h3>8.1 Identifying Skewness</h3>
@@ -1802,46 +1695,10 @@
 
     <div class="diagram">
       <div class="diagram-title">Binomial PMF — n = 10, p = 0.5</div>
-      <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="arrSB1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-            <polygon points="0 0, 8 4, 0 8" fill="#1a2233"/>
-          </marker>
-        </defs>
-        <!-- axes -->
-        <line x1="50" y1="200" x2="500" y2="200" stroke="#1a2233" stroke-width="1.5" marker-end="url(#arrSB1)"/>
-        <line x1="50" y1="200" x2="50" y2="20"  stroke="#1a2233" stroke-width="1.5" marker-end="url(#arrSB1)"/>
-        <text x="495" y="220" font-size="11" fill="#5a6577">k</text>
-        <text x="20"  y="30"  font-size="11" fill="#5a6577">P(X=k)</text>
-
-        <!-- bars: heights proportional to PMF for n=10, p=0.5 -->
-        <rect x="60"  y="198" width="36" height="2"   fill="#1f6feb"/>
-        <rect x="100" y="190" width="36" height="10"  fill="#1f6feb"/>
-        <rect x="140" y="166" width="36" height="34"  fill="#1f6feb"/>
-        <rect x="180" y="120" width="36" height="80"  fill="#1f6feb"/>
-        <rect x="220" y="74"  width="36" height="126" fill="#1f6feb"/>
-        <rect x="260" y="56"  width="36" height="144" fill="#b54708"/>
-        <rect x="300" y="74"  width="36" height="126" fill="#1f6feb"/>
-        <rect x="340" y="120" width="36" height="80"  fill="#1f6feb"/>
-        <rect x="380" y="166" width="36" height="34"  fill="#1f6feb"/>
-        <rect x="420" y="190" width="36" height="10"  fill="#1f6feb"/>
-        <rect x="460" y="198" width="36" height="2"   fill="#1f6feb"/>
-
-        <!-- x labels -->
-        <text x="78"  y="215" text-anchor="middle" font-size="10">0</text>
-        <text x="118" y="215" text-anchor="middle" font-size="10">1</text>
-        <text x="158" y="215" text-anchor="middle" font-size="10">2</text>
-        <text x="198" y="215" text-anchor="middle" font-size="10">3</text>
-        <text x="238" y="215" text-anchor="middle" font-size="10">4</text>
-        <text x="278" y="215" text-anchor="middle" font-size="10" font-weight="700" fill="#b54708">5</text>
-        <text x="318" y="215" text-anchor="middle" font-size="10">6</text>
-        <text x="358" y="215" text-anchor="middle" font-size="10">7</text>
-        <text x="398" y="215" text-anchor="middle" font-size="10">8</text>
-        <text x="438" y="215" text-anchor="middle" font-size="10">9</text>
-        <text x="478" y="215" text-anchor="middle" font-size="10">10</text>
-
-        <text x="278" y="48" text-anchor="middle" font-size="11" fill="#b54708">mean = np = 5</text>
-      </svg>
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20251217155135944373/Binomial-Distribution.webp"
+           alt="Binomial distribution PMF for n=10 p=0.5"
+           loading="lazy"
+           style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
       <div class="caption">Symmetric for p = 0.5; peak at k = np = 5. Skews right when p &lt; 0.5, left when p &gt; 0.5.</div>
     </div>
 
@@ -1869,54 +1726,10 @@
 
     <div class="diagram">
       <div class="diagram-title">Poisson PMF for λ = 1.5, 3, 6 — peak shifts with λ</div>
-      <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="arrSB2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-            <polygon points="0 0, 8 4, 0 8" fill="#1a2233"/>
-          </marker>
-        </defs>
-        <line x1="50" y1="200" x2="500" y2="200" stroke="#1a2233" stroke-width="1.5" marker-end="url(#arrSB2)"/>
-        <line x1="50" y1="200" x2="50"  y2="20"  stroke="#1a2233" stroke-width="1.5" marker-end="url(#arrSB2)"/>
-        <text x="495" y="220" font-size="11" fill="#5a6577">k</text>
-        <text x="20"  y="30"  font-size="11" fill="#5a6577">P(X=k)</text>
-
-        <!-- λ=1.5 (blue), heights ~ {.22,.33,.25,.13,.05,.01,...} scaled ×400 -->
-        <rect x="60"  y="112" width="14" height="88"  fill="#1f6feb"/>
-        <rect x="105" y="68"  width="14" height="132" fill="#1f6feb"/>
-        <rect x="150" y="100" width="14" height="100" fill="#1f6feb"/>
-        <rect x="195" y="148" width="14" height="52"  fill="#1f6feb"/>
-        <rect x="240" y="180" width="14" height="20"  fill="#1f6feb"/>
-        <rect x="285" y="194" width="14" height="6"   fill="#1f6feb"/>
-
-        <!-- λ=3 (orange) heights ~ {.05,.15,.22,.22,.17,.10,.05,.02} -->
-        <rect x="76"  y="180" width="14" height="20"  fill="#b54708"/>
-        <rect x="121" y="140" width="14" height="60"  fill="#b54708"/>
-        <rect x="166" y="112" width="14" height="88"  fill="#b54708"/>
-        <rect x="211" y="112" width="14" height="88"  fill="#b54708"/>
-        <rect x="256" y="132" width="14" height="68"  fill="#b54708"/>
-        <rect x="301" y="160" width="14" height="40"  fill="#b54708"/>
-        <rect x="346" y="180" width="14" height="20"  fill="#b54708"/>
-        <rect x="391" y="192" width="14" height="8"   fill="#b54708"/>
-
-        <!-- λ=6 (green) heights ~ {.001,.015,.045,.09,.13,.16,.16,.14,.10,.07,.04,.02,.01} -->
-        <rect x="92"  y="194" width="14" height="6"   fill="#1a7f37"/>
-        <rect x="137" y="182" width="14" height="18"  fill="#1a7f37"/>
-        <rect x="182" y="164" width="14" height="36"  fill="#1a7f37"/>
-        <rect x="227" y="148" width="14" height="52"  fill="#1a7f37"/>
-        <rect x="272" y="136" width="14" height="64"  fill="#1a7f37"/>
-        <rect x="317" y="136" width="14" height="64"  fill="#1a7f37"/>
-        <rect x="362" y="144" width="14" height="56"  fill="#1a7f37"/>
-        <rect x="407" y="160" width="14" height="40"  fill="#1a7f37"/>
-        <rect x="452" y="176" width="14" height="24"  fill="#1a7f37"/>
-
-        <!-- legend -->
-        <rect x="380" y="30" width="10" height="10" fill="#1f6feb"/>
-        <text x="395" y="40" font-size="11">λ = 1.5</text>
-        <rect x="380" y="48" width="10" height="10" fill="#b54708"/>
-        <text x="395" y="58" font-size="11">λ = 3</text>
-        <rect x="380" y="66" width="10" height="10" fill="#1a7f37"/>
-        <text x="395" y="76" font-size="11">λ = 6</text>
-      </svg>
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20251211152640610986/Poisson-distribution.webp"
+           alt="Poisson distribution PMF for different lambda values"
+           loading="lazy"
+           style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
       <div class="caption">As λ grows, the peak moves right and the curve becomes more symmetric (≈ Normal for λ ≥ 10).</div>
     </div>
 
@@ -1943,50 +1756,10 @@
 
     <div class="diagram">
       <div class="diagram-title">Standard Normal Curve — 68 / 95 / 99.7 rule</div>
-      <svg viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="arrSB3" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-            <polygon points="0 0, 8 4, 0 8" fill="#1a2233"/>
-          </marker>
-        </defs>
-        <!-- shaded 1σ region -->
-        <path d="M 200 200 Q 220 180 240 140 Q 260 70 280 50 Q 300 70 320 140 Q 340 180 360 200 Z"
-              fill="#1f6feb" fill-opacity="0.45"/>
-        <!-- shaded 2σ extra (lighter) -->
-        <path d="M 140 200 Q 160 195 200 188 L 200 200 Z" fill="#1f6feb" fill-opacity="0.20"/>
-        <path d="M 360 200 L 360 188 Q 400 195 420 200 Z" fill="#1f6feb" fill-opacity="0.20"/>
-
-        <!-- bell curve (approx) -->
-        <path d="M 60 200 Q 120 199 160 195 Q 200 188 240 140 Q 280 50 320 140 Q 360 188 400 195 Q 440 199 500 200"
-              stroke="#1f6feb" stroke-width="2.5" fill="none"/>
-
-        <!-- axis -->
-        <line x1="40" y1="200" x2="520" y2="200" stroke="#1a2233" stroke-width="1.5" marker-end="url(#arrSB3)"/>
-        <text x="515" y="220" font-size="11" fill="#5a6577">X</text>
-
-        <!-- ticks: μ-3σ … μ+3σ -->
-        <line x1="80"  y1="195" x2="80"  y2="205" stroke="#1a2233"/>
-        <line x1="140" y1="195" x2="140" y2="205" stroke="#1a2233"/>
-        <line x1="200" y1="195" x2="200" y2="205" stroke="#1a2233"/>
-        <line x1="280" y1="195" x2="280" y2="210" stroke="#b54708" stroke-width="2"/>
-        <line x1="360" y1="195" x2="360" y2="205" stroke="#1a2233"/>
-        <line x1="420" y1="195" x2="420" y2="205" stroke="#1a2233"/>
-        <line x1="480" y1="195" x2="480" y2="205" stroke="#1a2233"/>
-
-        <text x="80"  y="222" text-anchor="middle" font-size="10">μ−3σ</text>
-        <text x="140" y="222" text-anchor="middle" font-size="10">μ−2σ</text>
-        <text x="200" y="222" text-anchor="middle" font-size="10">μ−σ</text>
-        <text x="280" y="225" text-anchor="middle" font-size="11" font-weight="700" fill="#b54708">μ</text>
-        <text x="360" y="222" text-anchor="middle" font-size="10">μ+σ</text>
-        <text x="420" y="222" text-anchor="middle" font-size="10">μ+2σ</text>
-        <text x="480" y="222" text-anchor="middle" font-size="10">μ+3σ</text>
-
-        <!-- area labels -->
-        <text x="280" y="120" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">68%</text>
-        <text x="170" y="170" text-anchor="middle" font-size="11" fill="#1f6feb">95%</text>
-        <text x="390" y="170" text-anchor="middle" font-size="11" fill="#1f6feb">95%</text>
-        <text x="80"  y="60"  font-size="11" fill="#5a6577">99.7% within μ ± 3σ</text>
-      </svg>
+      <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230811122554/Probability-Density-for-Normal-Distribution.png"
+           alt="Standard normal distribution 68-95-99.7 rule"
+           loading="lazy"
+           style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
       <div class="caption">Total area = 1. Z = (X − μ)/σ converts any normal variable to the standard normal table.</div>
     </div>
 
