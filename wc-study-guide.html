@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0d6efd" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="format-detection" content="telephone=no" />
+<title>Wireless Communication Study Guide — Interactive</title>
+<style>
+  :root {
+    --bg: #f7f9fc;
+    --panel: #ffffff;
+    --ink: #1a2233;
+    --muted: #5a6577;
+    --brand: #0d6efd;
+    --brand-soft: #e7f0ff;
+    --good: #1a7f37;
+    --good-soft: #e6f4ea;
+    --warn: #b54708;
+    --warn-soft: #fdf3e7;
+    --bad: #b42318;
+    --bad-soft: #fdecec;
+    --line: #e3e7ee;
+    --code-bg: #0d1117;
+    --code-ink: #e6edf3;
+    --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 12px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+  }
+  .layout { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+  aside {
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    background: var(--panel); border-right: 1px solid var(--line); padding: 24px 18px;
+  }
+  aside h1 { font-size: 18px; margin: 0 0 4px; color: var(--brand); }
+  aside .sub { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+  aside ol { list-style: none; padding: 0; margin: 0; counter-reset: nav; }
+  aside ol li { counter-increment: nav; margin: 4px 0; }
+  aside ol li a {
+    display: flex; gap: 8px; padding: 8px 10px; color: var(--ink);
+    text-decoration: none; border-radius: 6px; font-size: 14px; transition: background .15s;
+  }
+  aside ol li a::before {
+    content: counter(nav, decimal-leading-zero); color: var(--muted);
+    font-variant-numeric: tabular-nums; font-weight: 600; flex-shrink: 0;
+  }
+  aside ol li a:hover { background: var(--brand-soft); }
+  aside ol li a.active { background: var(--brand-soft); color: var(--brand); font-weight: 600; }
+  main { padding: 40px 56px 80px; max-width: 1000px; min-width: 0; overflow-wrap: break-word; }
+  h2.topic {
+    font-size: 28px; margin-top: 56px; padding-bottom: 10px;
+    border-bottom: 3px solid var(--brand); display: flex; align-items: baseline; gap: 12px;
+  }
+  h2.topic .num {
+    background: var(--brand); color: white; font-size: 16px;
+    padding: 4px 12px; border-radius: 100px; font-weight: 700;
+  }
+  h2.topic .unit {
+    background: var(--warn-soft); color: var(--warn); font-size: 12px;
+    padding: 3px 10px; border-radius: 100px; font-weight: 700; margin-left: auto;
+  }
+  h3 { font-size: 20px; margin-top: 32px; color: var(--ink); }
+  h4 { font-size: 16px; margin-top: 22px; color: var(--brand); }
+  p { margin: 10px 0; }
+  .lead { font-size: 17px; color: var(--muted); }
+  .box {
+    border-left: 4px solid var(--brand); background: var(--brand-soft);
+    padding: 14px 18px; margin: 16px 0; border-radius: 4px;
+  }
+  .box.def { border-color: var(--brand); background: var(--brand-soft); }
+  .box.eg  { border-color: var(--good);  background: var(--good-soft); }
+  .box.tip { border-color: var(--warn);  background: var(--warn-soft); }
+  .box.bad { border-color: var(--bad);   background: var(--bad-soft); }
+  .box .label {
+    font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; margin-bottom: 6px; display: block;
+  }
+  .box.def .label { color: var(--brand); }
+  .box.eg  .label { color: var(--good); }
+  .box.tip .label { color: var(--warn); }
+  .box.bad .label { color: var(--bad); }
+  table {
+    width: 100%; border-collapse: collapse; margin: 14px 0;
+    background: var(--panel); box-shadow: var(--shadow);
+    border-radius: 6px; overflow: hidden; font-size: 14px;
+  }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: #f0f3f8; font-weight: 600; }
+  tbody tr:nth-child(even) { background: #fafbfd; }
+  tbody tr:hover { background: var(--brand-soft); }
+  pre, code { font-family: "Cascadia Code", "Fira Code", Consolas, monospace; }
+  code { background: #eef1f6; padding: 2px 6px; border-radius: 3px; font-size: 13px; color: #1f3a5f; }
+  pre {
+    background: var(--code-bg); color: var(--code-ink);
+    padding: 14px 18px; border-radius: 6px; overflow-x: auto;
+    font-size: 13px; line-height: 1.55;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  .keyword { color: #ff7b72; font-weight: 600; }
+  .string  { color: #a5d6ff; }
+  .comment { color: #8b949e; font-style: italic; }
+  .mnemonic {
+    background: linear-gradient(135deg, #fff5e1, #fff);
+    border: 2px dashed #f0b429; padding: 14px 18px;
+    border-radius: 8px; margin: 18px 0; font-style: italic;
+  }
+  .mnemonic strong {
+    font-style: normal; color: var(--warn); font-size: 13px;
+    letter-spacing: .08em; display: block; margin-bottom: 6px;
+  }
+  .pill {
+    background: var(--brand-soft); color: var(--brand);
+    padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600;
+  }
+  .pill.green { background: var(--good-soft); color: var(--good); }
+  .pill.red   { background: var(--bad-soft);  color: var(--bad); }
+  .pill.amber { background: var(--warn-soft); color: var(--warn); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 8px; padding: 16px; box-shadow: var(--shadow);
+  }
+  .card h5 { margin: 0 0 8px; color: var(--brand); font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+  .quiz {
+    background: #f0f7ff; border: 2px solid #bbd6ff;
+    border-radius: 10px; padding: 16px 20px; margin: 24px 0;
+  }
+  .quiz h4 { margin-top: 0; color: var(--brand); }
+  .quiz .q { font-weight: 600; margin: 14px 0 6px; }
+  .quiz button.reveal {
+    background: var(--brand); color: white; border: none;
+    padding: 4px 12px; border-radius: 100px; font-size: 12px;
+    cursor: pointer; margin-left: 8px;
+  }
+  .quiz button.reveal:hover { background: #0a58ca; }
+  .quiz .answer {
+    display: none; background: #fff; border-left: 3px solid var(--good);
+    padding: 8px 12px; margin-top: 6px; border-radius: 4px; color: var(--ink);
+  }
+  .quiz .answer.show { display: block; }
+  hr { border: none; border-top: 1px dashed var(--line); margin: 30px 0; }
+  .hero {
+    background: linear-gradient(135deg, #0d6efd, #6f42c1);
+    color: white; padding: 40px; border-radius: 12px; margin-bottom: 30px;
+    overflow-wrap: break-word;
+  }
+  .hero h1 { margin: 0 0 8px; font-size: 32px; }
+  .hero p { margin: 0; opacity: .92; font-size: 16px; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: 12px; margin: 14px 0; color: var(--muted); }
+  .legend span { padding: 3px 10px; border-radius: 100px; }
+  /* ===== MOBILE NAV TOGGLE ===== */
+  .nav-toggle {
+    display: none;
+    background: var(--brand); color: white; border: none;
+    padding: 8px 14px; border-radius: 6px; font-size: 13px;
+    cursor: pointer; font-weight: 600; align-items: center; gap: 6px;
+    margin-bottom: 12px; width: 100%;
+  }
+  .nav-toggle svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ===== RESPONSIVE BREAKPOINT ===== */
+  @media (max-width: 880px) {
+    .layout { grid-template-columns: 1fr; }
+    aside {
+      position: relative; height: auto; border-right: none;
+      border-bottom: 1px solid var(--line); padding: 16px 14px;
+    }
+    aside ol { display: none; }
+    aside ol.nav-open { display: block; }
+    .nav-toggle { display: flex; }
+    main { padding: 18px 16px 60px; width: 100%; }
+    .hero { padding: 24px 18px; border-radius: 8px; margin-bottom: 20px; }
+    .hero h1 { font-size: 22px; }
+    .hero p { font-size: 14px; }
+    h2.topic { font-size: 20px; margin-top: 36px; flex-wrap: wrap; }
+    h3 { font-size: 17px; }
+    h4 { font-size: 15px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+    .mnemonic { padding: 12px 14px; }
+    .quiz { padding: 14px 14px; }
+    pre { font-size: 12px; }
+    .diagram { padding: 12px; }
+    .formula { font-size: 14px; }
+    .box { padding: 12px 14px; }
+  }
+  @media (max-width: 480px) {
+    main { padding: 14px 12px 50px; }
+    .hero { padding: 20px 14px; }
+    .hero h1 { font-size: 18px; }
+    h2.topic { font-size: 17px; }
+    .quiz button.reveal { padding: 5px 10px; font-size: 11px; }
+  }
+  .pyq-tag {
+    display: inline-block; background: #fff3cd; color: #856404;
+    border: 1px solid #ffeeba; padding: 1px 8px;
+    border-radius: 4px; font-size: 11px; font-weight: 700;
+    margin-left: 6px; vertical-align: middle;
+  }
+  .formula {
+    background: #f3f8ff; border: 1px solid #bbd6ff;
+    padding: 12px 18px; margin: 12px 0; border-radius: 6px;
+    text-align: center; font-size: 16px; font-family: "Cambria Math", serif;
+  }
+  .diagram {
+    background: #fbfcfe;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .diagram svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  .diagram .caption {
+    font-size: 12px; color: var(--muted); margin-top: 10px;
+    font-style: italic; text-align: center;
+  }
+  .diagram-title {
+    font-size: 13px; font-weight: 700; color: var(--brand);
+    text-transform: uppercase; letter-spacing: .08em;
+    margin-bottom: 12px; text-align: center;
+  }
+  /* ===== OVERFLOW PREVENTION ===== */
+  *, *::before, *::after { box-sizing: border-box; }
+  img, svg, video, iframe { max-width: 100%; height: auto; }
+  pre, table { max-width: 100%; }
+  /* hide horizontal overflow only on mobile (so sticky sidebar works on desktop) */
+  @media (max-width: 880px) { body { overflow-x: hidden; } }
+
+  /* ============================================================ */
+  /* ===== ENHANCED MOBILE RESPONSIVENESS (320 / 480 / 768) ====== */
+  /* ===== Desktop layout (>880px) is left untouched ============= */
+  /* ============================================================ */
+  @media (max-width: 880px) {
+    /* sticky nav bar on phone — toggle stays reachable while scrolling */
+    aside {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--panel);
+      box-shadow: 0 2px 6px rgba(0,0,0,.06);
+    }
+    table { white-space: normal; font-size: 13px; }
+    th, td { padding: 8px 10px; word-break: break-word; }
+    aside ol li a { padding: 12px; min-height: 44px; align-items: center; }
+    .nav-toggle { padding: 12px 16px; min-height: 44px; font-size: 15px; }
+    .quiz button.reveal {
+      padding: 10px 18px; font-size: 14px;
+      min-height: 44px; margin-left: 0; margin-top: 8px;
+      display: inline-block;
+    }
+    aside ol.nav-open {
+      max-height: 60vh; overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    input, textarea, select { font-size: 16px; }
+    code { word-break: break-word; }
+    .formula { font-size: 14px; padding: 10px 14px; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 15px; line-height: 1.6; }
+    aside { padding: 12px 12px; }
+    aside h1 { font-size: 16px; }
+    aside .sub { font-size: 11px; }
+    main { padding: 14px 14px 50px; }
+    .hero { padding: 22px 16px; border-radius: 8px; }
+    .hero h1 { font-size: 20px; }
+    .hero p { font-size: 13.5px; }
+    h2.topic { font-size: 18px; gap: 8px; padding-bottom: 8px; }
+    h2.topic .num { font-size: 13px; padding: 3px 9px; }
+    h3 { font-size: 16px; }
+    h4 { font-size: 14px; }
+    .legend { gap: 6px; font-size: 11px; }
+    .legend span { padding: 3px 8px; }
+    .quiz { padding: 12px 14px; margin: 18px 0; }
+    .mnemonic { padding: 10px 12px; }
+    .box { padding: 10px 12px; }
+    pre { font-size: 11.5px; padding: 12px; }
+    .diagram { padding: 10px; margin: 14px 0; }
+    .formula { font-size: 13px; padding: 10px 12px; }
+  }
+  @media (max-width: 380px) {
+    body { font-size: 14.5px; }
+    aside { padding: 10px 10px; }
+    main { padding: 12px 10px 40px; }
+    .hero { padding: 18px 14px; }
+    .hero h1 { font-size: 18px; }
+    .hero p { font-size: 13px; }
+    h2.topic { font-size: 17px; }
+    h3 { font-size: 15.5px; }
+    table { font-size: 12px; }
+    th, td { padding: 6px 8px; }
+    pre { font-size: 11px; padding: 10px; }
+    .quiz button.reveal { padding: 9px 14px; font-size: 13px; }
+    .formula { font-size: 12px; }
+  }
+  .diagram svg { width: 100%; height: auto; max-width: 100%; }
+  @media (hover: none) and (pointer: coarse) {
+    a { -webkit-tap-highlight-color: rgba(0,0,0,.05); }
+  }
+  @media print {
+    aside, .nav-toggle { display: none; }
+    main { padding: 0; }
+    .layout { grid-template-columns: 1fr; }
+  }</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside>
+    <h1>Wireless Communication</h1>
+    <div class="sub">BCA-IV Sem · BCG-216-V · Interactive Notes</div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Navigation
+    </button>
+    <ol id="navList">
+      <li><a href="#t1">Wireless Networking <small>(Unit IV)</small></a></li>
+      <li><a href="#t2">Multiple Access Techniques <small>(Unit III)</small></a></li>
+      <li><a href="#t6">PYQ Quick Solutions <small>(Unit III/IV only)</small></a></li>
+      <li><a href="#sessional-booster">Sessional Exam Booster <small>(30 marks)</small></a></li>
+    </ol>
+    <div style="margin-top:24px; font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:14px;">
+      <strong>Sessional scope:</strong> <em>Units III &amp; IV only.</em> Units I &amp; II have been removed. PYQ rows tagged <span class="pyq-tag">PYQ</span>.
+    </div>
+  </aside>
+
+  <main>
+    <div class="hero">
+      <h1>Wireless Communication — Sessional Booster (Units III &amp; IV)</h1>
+      <p>Targeted pack for the 30-mark sessional. Only the in-syllabus content (Wireless Networking + Multiple Access Techniques) plus a dense Q&amp;A booster. Units I &amp; II are out of scope and have been removed.</p>
+    </div>
+
+    <div class="legend">
+      <span class="pill">Definition</span>
+      <span class="pill green">Example / Result</span>
+      <span class="pill amber">Mnemonic / Tip</span>
+      <span class="pill red">Pitfall / Warning</span>
+      <span class="pyq-tag">PYQ</span> appeared in May-2025
+    </div>
+
+    <div class="box tip">
+      <span class="label">How to use this guide</span>
+      Only <strong>Unit III</strong> (Multiple Access &amp; Spread Spectrum) and <strong>Unit IV</strong> (Wireless Networking, ISDN, signaling, traffic routing) are in this sessional. Read the two topic sections top-to-bottom, then drill the <strong>Sessional Exam Booster</strong> at the end (1-mark recall + 4-mark mini answers + 8-mark full answers).
+    </div>
+
+<!-- ============================== TOPIC 1 — Unit IV ============================== -->
+<section id="t1">
+  <h2 class="topic"><span class="num">01</span> Wireless Networking <span class="unit">UNIT IV</span></h2>
+  <p class="lead">Unit IV covers how wireless networks differ from wired/fixed telephone networks, how data is routed, signaling between switches, and integrated services like ISDN. These are easy 5–7 mark questions if you remember the differences and diagrams.</p>
+
+  <h3>1.1 Wireless vs Fixed Telephone Networks <span class="pyq-tag">PYQ 7(iii) WAN/WLAN</span></h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    A <strong>wireless network</strong> uses electromagnetic waves (radio, microwave, IR) instead of physical cables to connect devices. A <strong>fixed telephone network (PSTN)</strong> uses copper twisted pair / fibre to deliver dedicated voice circuits.
+  </div>
+
+  <table>
+    <thead><tr><th>Aspect</th><th>Wireless Network</th><th>Fixed Telephone Network</th></tr></thead>
+    <tbody>
+      <tr><td>Medium</td><td>Air (RF, microwave)</td><td>Copper / fibre cables</td></tr>
+      <tr><td>Mobility</td><td>User can move freely</td><td>Tied to a wall jack</td></tr>
+      <tr><td>Bandwidth</td><td>Limited & shared</td><td>Dedicated per line</td></tr>
+      <tr><td>Reliability</td><td>Affected by fading, interference, weather</td><td>Very reliable</td></tr>
+      <tr><td>Setup cost</td><td>Low (no trenching)</td><td>High (lay cables)</td></tr>
+      <tr><td>Security</td><td>Open medium — needs encryption</td><td>Physically harder to tap</td></tr>
+      <tr><td>Examples</td><td>GSM, CDMA, Wi-Fi, Bluetooth</td><td>Landline PSTN</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.2 Development of Wireless Networks (Generations)</h3>
+  <table>
+    <thead><tr><th>Gen</th><th>Year</th><th>Tech</th><th>Speed</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>1G</td><td>1980s</td><td>AMPS, NMT (analog)</td><td>~2.4 kbps voice</td><td>Voice only, FDMA</td></tr>
+      <tr><td>2G</td><td>1990s</td><td>GSM, CDMA (digital)</td><td>~64 kbps</td><td>Voice + SMS, TDMA/CDMA</td></tr>
+      <tr><td>2.5G</td><td>2000</td><td>GPRS, EDGE</td><td>~144 kbps</td><td>Always-on data</td></tr>
+      <tr><td>3G</td><td>2003</td><td>UMTS, CDMA2000</td><td>~2 Mbps</td><td>Video calling, web</td></tr>
+      <tr><td>4G</td><td>2010</td><td>LTE, WiMAX (all-IP)</td><td>~100 Mbps – 1 Gbps</td><td>HD video, VoLTE</td></tr>
+      <tr><td>5G</td><td>2019</td><td>NR, mmWave</td><td>1–10 Gbps</td><td>IoT, ultra-low latency</td></tr>
+    </tbody>
+  </table>
+
+  <h3>1.3 Fixed Network Transmission Hierarchy</h3>
+  <p>The PSTN is built in <strong>levels</strong>: subscriber → local exchange → tandem → toll → international gateway. Wireless adds <strong>BTS → BSC → MSC</strong> on top of this.</p>
+  <div class="diagram">
+    <div class="diagram-title">Mobile-to-PSTN Routing Chain</div>
+    <svg role="img" aria-label="Mobile-to-PSTN routing chain: mobile station connects to BTS, then BSC, then MSC, then through tandem and toll switches to the PSTN" viewBox="0 0 760 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr1" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#0d6efd"/>
+        </marker>
+      </defs>
+      <!-- Boxes -->
+      <rect x="10"  y="60" width="100" height="50" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="60"  y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">MS</text>
+      <text x="60"  y="125" text-anchor="middle" font-size="11" fill="#5a6577">Mobile</text>
+
+      <rect x="160" y="60" width="100" height="50" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="210" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">BTS</text>
+      <text x="210" y="125" text-anchor="middle" font-size="11" fill="#5a6577">Cell site</text>
+
+      <rect x="310" y="60" width="100" height="50" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="360" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">BSC</text>
+      <text x="360" y="125" text-anchor="middle" font-size="11" fill="#5a6577">Group of cells</text>
+
+      <rect x="460" y="60" width="100" height="50" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="510" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">MSC</text>
+      <text x="510" y="125" text-anchor="middle" font-size="11" fill="#5a6577">Switch</text>
+
+      <rect x="610" y="60" width="140" height="50" rx="8" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
+      <text x="680" y="90" text-anchor="middle" font-size="14" font-weight="700" fill="#b54708">PSTN</text>
+      <text x="680" y="125" text-anchor="middle" font-size="11" fill="#5a6577">Called party</text>
+
+      <!-- Arrows -->
+      <line x1="110" y1="85" x2="158" y2="85" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr1)"/>
+      <line x1="260" y1="85" x2="308" y2="85" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr1)"/>
+      <line x1="410" y1="85" x2="458" y2="85" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr1)"/>
+      <line x1="560" y1="85" x2="608" y2="85" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr1)"/>
+
+      <text x="135" y="78" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">Air</text>
+      <text x="285" y="78" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">Abis</text>
+      <text x="435" y="78" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">A</text>
+      <text x="585" y="78" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">SS7</text>
+
+      <text x="380" y="25" text-anchor="middle" font-size="13" font-weight="600" fill="#1a2233">Wireless infrastructure layered on top of the fixed network</text>
+    </svg>
+    <div class="caption">Each hop adds switching/management — from radio cell to PSTN</div>
+  </div>
+
+  <h3>1.4 Traffic Routing in Wireless Network <span class="pyq-tag">PYQ 5(b) — 7 marks</span></h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Traffic routing</strong> is the process of selecting a path for a call/data packet from the calling mobile, through the wireless infrastructure, to the destination — possibly across the PSTN.
+  </div>
+
+  <h4>Steps in routing a mobile call</h4>
+  <ol>
+    <li><strong>Call origination:</strong> MS sends a request on the control channel to the BTS.</li>
+    <li><strong>Authentication & registration:</strong> MSC checks HLR/VLR — is the user valid, where is the called party?</li>
+    <li><strong>Destination lookup:</strong> If the called number is mobile, the GMSC queries the called user's <em>HLR</em>; HLR returns a routing number from the current <em>VLR</em>.</li>
+    <li><strong>Channel assignment:</strong> A free traffic channel is assigned in the cell.</li>
+    <li><strong>Path setup:</strong> A circuit is created MS → BTS → BSC → MSC → (PSTN or other MSC) → called party.</li>
+    <li><strong>Conversation:</strong> Voice/data flows on the assigned channel.</li>
+    <li><strong>Handover routing:</strong> If the user moves, traffic is re-routed to the new BTS.</li>
+    <li><strong>Release:</strong> Channel freed when call ends.</li>
+  </ol>
+
+  <h4>Routing Strategies</h4>
+  <table>
+    <thead><tr><th>Strategy</th><th>How it works</th></tr></thead>
+    <tbody>
+      <tr><td>Fixed routing</td><td>Same predetermined path every call (used in legacy PSTN)</td></tr>
+      <tr><td>Dynamic routing</td><td>Path chosen based on real-time traffic / congestion</td></tr>
+      <tr><td>Alternate routing</td><td>Try primary path; if busy, fall back to alternates</td></tr>
+      <tr><td>Hierarchical routing</td><td>Local → tandem → toll switches in tiers</td></tr>
+    </tbody>
+  </table>
+  <div class="box tip"><span class="label">Exam tip</span>For 7 marks: write the <em>definition</em>, the <em>8 steps above with a labelled diagram</em>, and any 2 routing strategies. Mention HLR/VLR and handover.</div>
+
+  <h3>1.5 Common Channel Signaling (CCS / SS7)</h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Common Channel Signaling</strong> separates the signaling (call setup messages) from the voice channel — all signaling is sent on a dedicated network (SS7). This is faster, supports more services, and prevents fraud.
+  </div>
+  <ul>
+    <li><strong>CAS (Channel Associated Signaling):</strong> signaling carried in-band with each voice circuit (legacy).</li>
+    <li><strong>CCS / SS7:</strong> signaling on a separate packet network. Used in GSM, ISDN, modern PSTN.</li>
+    <li>Enables: caller-ID, call forwarding, roaming, SMS, prepaid billing.</li>
+  </ul>
+
+  <h3>1.6 Wireless Data Services</h3>
+  <ul>
+    <li><strong>SMS</strong> – short text up to 160 chars over signaling channel.</li>
+    <li><strong>MMS</strong> – multimedia (image/audio/video).</li>
+    <li><strong>GPRS / EDGE</strong> – packet data on 2.5G.</li>
+    <li><strong>WAP</strong> – simplified Web for old mobiles.</li>
+    <li><strong>VoLTE</strong> – voice over LTE packet data.</li>
+  </ul>
+
+  <h3>1.7 ISDN — Integrated Services Digital Network <span class="pyq-tag">PYQ 1(i) — 1.5 marks</span></h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>ISDN</strong> is a set of standards for the simultaneous digital transmission of <em>voice, video, data, and signaling</em> over the traditional telephone network using <strong>digital circuits</strong> end-to-end.
+  </div>
+
+  <h4>ISDN Channels</h4>
+  <table>
+    <thead><tr><th>Channel</th><th>Speed</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>B (Bearer)</td><td>64 kbps</td><td>Carries user voice/data</td></tr>
+      <tr><td>D (Delta)</td><td>16 / 64 kbps</td><td>Signaling & control</td></tr>
+      <tr><td>H</td><td>384 kbps – 1.92 Mbps</td><td>High-speed bulk data (H0,H11,H12)</td></tr>
+    </tbody>
+  </table>
+
+  <h4>ISDN Interfaces</h4>
+  <ul>
+    <li><strong>BRI (Basic Rate Interface):</strong> 2B + 1D = 144 kbps — for homes & small offices.</li>
+    <li><strong>PRI (Primary Rate Interface):</strong> 23B + 1D (US, 1.544 Mbps) or 30B + 1D (Europe, 2.048 Mbps) — for businesses.</li>
+  </ul>
+
+  <h3>1.8 Advanced Intelligent Networks (AIN)</h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>AIN</strong> is an architecture where the call-handling logic (intelligence) is moved <em>out</em> of the switching nodes into a separate <strong>Service Control Point (SCP)</strong>. New services can be deployed without upgrading every switch.
+  </div>
+  <p>Components: SSP (Service Switching Point), STP (Signal Transfer Point), SCP (Service Control Point), IP (Intelligent Peripheral). Enables 800-numbers, prepaid mobile, virtual private numbers, calling-card services.</p>
+
+  <h3>1.9 WAN vs WLAN <span class="pyq-tag">PYQ 7(iii) — 5 marks</span></h3>
+  <table>
+    <thead><tr><th>Feature</th><th>WAN</th><th>WLAN</th></tr></thead>
+    <tbody>
+      <tr><td>Coverage</td><td>Country / continent (1000s of km)</td><td>Building / campus (10–100 m)</td></tr>
+      <tr><td>Owner</td><td>Telecom carrier (public)</td><td>Organisation (private)</td></tr>
+      <tr><td>Speed</td><td>Slower per user, links 1.5 Mbps – 100 Gbps</td><td>11 Mbps – 9.6 Gbps (Wi-Fi 6)</td></tr>
+      <tr><td>Standards</td><td>MPLS, Frame Relay, GSM, LTE</td><td>IEEE 802.11 a/b/g/n/ac/ax</td></tr>
+      <tr><td>Cost</td><td>High (leased lines)</td><td>Low (off-the-shelf APs)</td></tr>
+      <tr><td>Examples</td><td>Internet, telephone backbone</td><td>Office Wi-Fi, college Wi-Fi</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"WAN = Wide / Any-distance / Network of operators"</strong> ;
+    <strong style="color:var(--ink);font-size:14px;">"WLAN = Wireless / Local / Around-Network"</strong>.
+  </div>
+
+  <div class="quiz">
+    <h4>Quick Quiz — Unit IV</h4>
+    <div class="q">Q1. What does the D channel of ISDN carry? <button class="reveal">Reveal</button></div>
+    <div class="answer">Signaling and control information (16 kbps in BRI, 64 kbps in PRI).</div>
+    <div class="q">Q2. Two ways routing in wireless differs from fixed routing. <button class="reveal">Reveal</button></div>
+    <div class="answer">(1) Path may change mid-call due to handover. (2) HLR/VLR lookups locate a moving subscriber, not a fixed phone number.</div>
+    <div class="q">Q3. BRI total bandwidth? <button class="reveal">Reveal</button></div>
+    <div class="answer">2 × 64 + 16 = <strong>144 kbps</strong>.</div>
+  </div>
+</section>
+
+<!-- ============================== TOPIC 2 — Unit III ============================== -->
+<section id="t2">
+  <h2 class="topic"><span class="num">02</span> Multiple Access Techniques <span class="unit">UNIT III</span></h2>
+  <p class="lead">Multiple-access techniques let many users share the limited radio spectrum. The four core schemes — FDMA, TDMA, CDMA, SDMA — and Spread Spectrum (FHSS / DSSS) appear almost every year.</p>
+
+  <h3>2.1 What is Multiple Access?</h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Multiple access</strong> means dividing a shared communication resource (frequency band) among many users <em>simultaneously</em>, without their signals interfering with each other.
+  </div>
+  <p>The three basic resources we can divide are: <strong>Frequency, Time, Code</strong> — giving FDMA, TDMA, CDMA. A fourth uses <strong>Space</strong> → SDMA.</p>
+
+  <h3>2.2 FDMA — Frequency Division Multiple Access</h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>FDMA</strong> divides the total available bandwidth into many <em>narrow non-overlapping frequency bands</em>; each user gets one band for the entire duration of the call.
+  </div>
+  <div class="diagram">
+    <div class="diagram-title">FDMA — Frequency Division Multiple Access</div>
+    <svg role="img" aria-label="FDMA spectrum diagram: five users (U1 to U5) each occupy a separate narrow frequency sub-band continuously over time" viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1a2233"/>
+        </marker>
+      </defs>
+      <!-- Axes -->
+      <line x1="80" y1="280" x2="80" y2="20" stroke="#1a2233" stroke-width="2" marker-end="url(#arr2)"/>
+      <line x1="80" y1="280" x2="500" y2="280" stroke="#1a2233" stroke-width="2" marker-end="url(#arr2)"/>
+      <text x="40" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Frequency</text>
+      <text x="490" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Time</text>
+
+      <!-- 5 stacked bands U1-U5 -->
+      <rect x="80" y="220" width="380" height="48" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="270" y="250" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">U1</text>
+
+      <rect x="80" y="172" width="380" height="48" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="270" y="202" text-anchor="middle" font-size="14" font-weight="700" fill="#1a7f37">U2</text>
+
+      <rect x="80" y="124" width="380" height="48" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
+      <text x="270" y="154" text-anchor="middle" font-size="14" font-weight="700" fill="#b54708">U3</text>
+
+      <rect x="80" y="76" width="380" height="48" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="270" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#b42318">U4</text>
+
+      <rect x="80" y="28" width="380" height="48" fill="#e7f0ff" stroke="#6f42c1" stroke-width="2"/>
+      <text x="270" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="#6f42c1">U5</text>
+    </svg>
+    <div class="caption">Each user owns a narrow sub-band continuously for the entire call</div>
+  </div>
+  <p><strong>Used in:</strong> 1G AMPS, satellite, FM radio, cable TV.</p>
+  <p><strong>Pros:</strong> simple hardware, no synchronisation needed.<br><strong>Cons:</strong> guard bands waste spectrum; poor flexibility; idle channels can't help busy ones.</p>
+
+  <h3>2.3 TDMA — Time Division Multiple Access</h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>TDMA</strong> gives each user the entire frequency band but only for a short <em>time slot</em> in a repeating frame. Slots cycle through users so every user gets a regular turn.
+  </div>
+  <div class="diagram">
+    <div class="diagram-title">TDMA — Time Division Multiple Access</div>
+    <svg role="img" aria-label="TDMA frame diagram: a single frequency carrier shared by users U1 to U4 in repeating time slots, two frames shown end-to-end" viewBox="0 0 640 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr3" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1a2233"/>
+        </marker>
+      </defs>
+      <!-- Axes -->
+      <line x1="80" y1="180" x2="80" y2="40" stroke="#1a2233" stroke-width="2" marker-end="url(#arr3)"/>
+      <line x1="80" y1="180" x2="620" y2="180" stroke="#1a2233" stroke-width="2" marker-end="url(#arr3)"/>
+      <text x="40" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Frequency</text>
+      <text x="610" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Time</text>
+      <text x="40" y="100" text-anchor="middle" font-size="11" fill="#5a6577">same</text>
+      <text x="40" y="115" text-anchor="middle" font-size="11" fill="#5a6577">band</text>
+
+      <!-- 8 horizontal slots (frame x2) -->
+      <rect x="85"  y="80" width="62" height="80" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="116" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">U1</text>
+
+      <rect x="147" y="80" width="62" height="80" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="178" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">U2</text>
+
+      <rect x="209" y="80" width="62" height="80" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
+      <text x="240" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">U3</text>
+
+      <rect x="271" y="80" width="62" height="80" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="302" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#b42318">U4</text>
+
+      <rect x="333" y="80" width="62" height="80" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="364" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">U1</text>
+
+      <rect x="395" y="80" width="62" height="80" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="426" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">U2</text>
+
+      <rect x="457" y="80" width="62" height="80" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
+      <text x="488" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">U3</text>
+
+      <rect x="519" y="80" width="62" height="80" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="550" y="125" text-anchor="middle" font-size="13" font-weight="700" fill="#b42318">U4</text>
+
+      <!-- Frame brackets -->
+      <line x1="85"  y1="65" x2="333" y2="65" stroke="#5a6577" stroke-width="1"/>
+      <line x1="85"  y1="60" x2="85"  y2="75" stroke="#5a6577" stroke-width="1"/>
+      <line x1="333" y1="60" x2="333" y2="75" stroke="#5a6577" stroke-width="1"/>
+      <text x="209" y="55" text-anchor="middle" font-size="11" font-style="italic" fill="#5a6577">one frame</text>
+
+      <line x1="333" y1="65" x2="581" y2="65" stroke="#5a6577" stroke-width="1"/>
+      <line x1="581" y1="60" x2="581" y2="75" stroke="#5a6577" stroke-width="1"/>
+      <text x="457" y="55" text-anchor="middle" font-size="11" font-style="italic" fill="#5a6577">repeats</text>
+    </svg>
+    <div class="caption">Single frequency, time slots cycle U1 → U4 → U1 → U4 …</div>
+  </div>
+  <p><strong>Used in:</strong> GSM (8 slots/carrier), DECT, 2G PDC.</p>
+  <p><strong>Pros:</strong> efficient spectrum use, supports variable bit-rate per user.<br><strong>Cons:</strong> needs strict time synchronisation; sensitive to <em>multipath</em> and the <em>near-far effect</em>.</p>
+
+  <h3>2.4 Near/Far Effect in TDMA <span class="pyq-tag">PYQ 1(h) — 1.5 marks</span></h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    The <strong>near-far effect</strong> happens when a transmitter close to the receiver overpowers a far-away transmitter on adjacent slots/codes, causing the weaker signal to be lost.
+  </div>
+  <p>In TDMA each slot is on the same frequency, so a strong signal in one slot can leak into adjacent slots if timing is slightly off. <strong>Mitigation:</strong> tight power control (each MS adjusts power so the BTS receives all users at the same level) and accurate timing advance.</p>
+  <div class="box bad"><span class="label">Where it hurts most</span>CDMA suffers worse than TDMA because all CDMA users share frequency <em>and</em> time; in TDMA only timing/leakage between slots matters.</div>
+
+  <h3>2.5 CDMA — Code Division Multiple Access <span class="pyq-tag">PYQ 2(a) — 10 marks</span></h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>CDMA</strong> lets all users transmit at the same frequency at the same time, but each user's data is multiplied by a unique <em>spreading code</em> (PN sequence). The receiver multiplies the received mix by the same code to recover that user's data; other users appear as background noise.
+  </div>
+  <div class="diagram">
+    <div class="diagram-title">CDMA — Codes Sum in Air, RX Recovers with Same Code</div>
+    <svg role="img" aria-label="CDMA diagram: three users multiply data by orthogonal codes, signals sum over the air, receiver despreads with the same code to recover one user's bits while the others appear as background noise" viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr4" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#0d6efd"/>
+        </marker>
+      </defs>
+
+      <!-- Three users -->
+      <circle cx="80" cy="50"  r="28" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text   x="80" y="55"  text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">U1</text>
+
+      <circle cx="80" cy="140" r="28" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text   x="80" y="145" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">U2</text>
+
+      <circle cx="80" cy="230" r="28" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
+      <text   x="80" y="235" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">U3</text>
+
+      <!-- Multiplier labels -->
+      <text x="200" y="40"  text-anchor="middle" font-size="12" fill="#1a2233">data<tspan font-size="13" dx="4">×</tspan> Code1</text>
+      <text x="200" y="130" text-anchor="middle" font-size="12" fill="#1a2233">data<tspan font-size="13" dx="4">×</tspan> Code2</text>
+      <text x="200" y="220" text-anchor="middle" font-size="12" fill="#1a2233">data<tspan font-size="13" dx="4">×</tspan> Code3</text>
+
+      <!-- Lines from users to summing node -->
+      <line x1="108" y1="50"  x2="320" y2="135" stroke="#0d6efd" stroke-width="2"/>
+      <line x1="108" y1="140" x2="320" y2="140" stroke="#1a7f37" stroke-width="2"/>
+      <line x1="108" y1="230" x2="320" y2="145" stroke="#b54708" stroke-width="2"/>
+
+      <!-- Summing node -->
+      <circle cx="350" cy="140" r="32" fill="#fff5e1" stroke="#f0b429" stroke-width="2"/>
+      <text   x="350" y="148" text-anchor="middle" font-size="22" font-weight="700" fill="#b54708">Σ</text>
+      <text   x="350" y="190" text-anchor="middle" font-size="11" font-style="italic" fill="#5a6577">summed in air</text>
+
+      <!-- Arrow from sum to receiver -->
+      <line x1="382" y1="140" x2="490" y2="140" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr4)"/>
+      <text x="436" y="130" text-anchor="middle" font-size="11" fill="#5a6577">RX signal</text>
+
+      <!-- Receiver block -->
+      <rect x="500" y="110" width="130" height="60" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="565" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">RX × Code1</text>
+      <text x="565" y="155" text-anchor="middle" font-size="11" fill="#5a6577">despread</text>
+
+      <!-- Arrow to user1 data -->
+      <line x1="630" y1="140" x2="700" y2="140" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr4)"/>
+      <text x="730" y="135" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">User1</text>
+      <text x="730" y="150" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">data</text>
+    </svg>
+    <div class="caption">Other users appear as background noise — orthogonal codes cancel them out</div>
+  </div>
+
+  <h4>Properties</h4>
+  <ul>
+    <li><strong>Spread bandwidth</strong> (much wider than data bandwidth).</li>
+    <li><strong>Soft capacity</strong>: more users → more noise, no hard cut-off.</li>
+    <li><strong>Universal frequency reuse</strong> (N = 1).</li>
+    <li><strong>Soft handoff</strong> (talk to two BTS at once).</li>
+    <li>Resistant to jamming, multipath, eavesdropping.</li>
+    <li>Strong <em>power control</em> mandatory to handle near-far.</li>
+  </ul>
+
+  <h4>Areas where CDMA is used</h4>
+  <ul>
+    <li><strong>2G mobile:</strong> IS-95 (cdmaOne).</li>
+    <li><strong>3G:</strong> CDMA2000, WCDMA / UMTS.</li>
+    <li>GPS satellites (each satellite has its own PN code).</li>
+    <li>Military comms (anti-jamming).</li>
+    <li>Wi-Fi 802.11b uses DSSS (a form of CDMA).</li>
+    <li>Bluetooth uses FHSS — also a spread-spectrum technique.</li>
+  </ul>
+
+  <h3>2.6 SDMA — Space Division Multiple Access</h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>SDMA</strong> reuses the same frequency in different geographical areas / antenna beams. Cellular frequency reuse and smart-antenna beamforming are SDMA examples.
+  </div>
+
+  <h3>2.7 Packet Radio</h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    In <strong>packet radio</strong>, users transmit small data packets when they have data — there is no fixed slot or channel allocation. Examples: ALOHA, slotted ALOHA, CSMA/CA (Wi-Fi), GPRS.
+  </div>
+  <p><strong>Pure ALOHA</strong> efficiency = 18%. <strong>Slotted ALOHA</strong> = 36%.</p>
+
+  <h3>2.8 Spread Spectrum <span class="pyq-tag">PYQ 6(a) — 10 marks</span></h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Spread spectrum</strong> intentionally spreads a narrow-band signal across a much wider bandwidth. The signal looks like low-power noise to anyone who doesn't know the spreading pattern.
+  </div>
+
+  <h4>Need / Why we spread</h4>
+  <ul>
+    <li><strong>Anti-jamming:</strong> a narrow-band jammer can't kill a wide signal.</li>
+    <li><strong>Anti-interception / privacy:</strong> looks like noise without the code.</li>
+    <li><strong>Multiple access:</strong> different codes = different users (CDMA).</li>
+    <li><strong>Multipath resistance:</strong> reflected copies arrive de-correlated.</li>
+    <li><strong>Low power spectral density:</strong> co-exists with narrowband systems.</li>
+  </ul>
+
+  <h4>Types of Spread Spectrum</h4>
+  <table>
+    <thead><tr><th>Type</th><th>How it spreads</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>FHSS — Frequency Hopping</td><td>Carrier hops between many frequencies on a fast pseudo-random pattern</td><td>Bluetooth, military</td></tr>
+      <tr><td>DSSS — Direct Sequence</td><td>Each data bit is XORed with a fast PN chip sequence</td><td>cdmaOne, Wi-Fi 802.11b, GPS</td></tr>
+      <tr><td>THSS — Time Hopping</td><td>Transmit only in pseudo-random time slots</td><td>Ultra-Wide-Band</td></tr>
+      <tr><td>Hybrid</td><td>Combination (e.g. FH/DS)</td><td>Some military</td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.9 FHSS — Frequency Hopping Spread Spectrum (Detail) <span class="pyq-tag">PYQ 6(a)</span></h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    In <strong>FHSS</strong> the carrier frequency hops over a set of channels in a pseudo-random pattern known to both transmitter and receiver. Each "hop" lasts a few ms (slow FH) or less than one bit (fast FH).
+  </div>
+  <div class="diagram">
+    <div class="diagram-title">FHSS — Carrier Hops Pseudo-Randomly Across Channels</div>
+    <svg role="img" aria-label="FHSS hop pattern: carrier frequency hops pseudo-randomly across channels f1 to f4 in the sequence f3, f1, f4, f2, f1 over successive dwell intervals" viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr5" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1a2233"/>
+        </marker>
+      </defs>
+
+      <!-- Axes -->
+      <line x1="80" y1="280" x2="80" y2="20" stroke="#1a2233" stroke-width="2" marker-end="url(#arr5)"/>
+      <line x1="80" y1="280" x2="580" y2="280" stroke="#1a2233" stroke-width="2" marker-end="url(#arr5)"/>
+      <text x="40" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Frequency</text>
+      <text x="570" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Time</text>
+
+      <!-- Frequency labels -->
+      <text x="60" y="245" text-anchor="end" font-size="12" fill="#5a6577">f1</text>
+      <text x="60" y="195" text-anchor="end" font-size="12" fill="#5a6577">f2</text>
+      <text x="60" y="145" text-anchor="end" font-size="12" fill="#5a6577">f3</text>
+      <text x="60" y="95"  text-anchor="end" font-size="12" fill="#5a6577">f4</text>
+
+      <!-- Light gridlines -->
+      <line x1="80" y1="240" x2="580" y2="240" stroke="#e3e7ee" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="80" y1="190" x2="580" y2="190" stroke="#e3e7ee" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="80" y1="140" x2="580" y2="140" stroke="#e3e7ee" stroke-width="1" stroke-dasharray="3,3"/>
+      <line x1="80" y1="90"  x2="580" y2="90"  stroke="#e3e7ee" stroke-width="1" stroke-dasharray="3,3"/>
+
+      <!-- Hop blocks (scatter pattern f3, f1, f4, f2, f1) -->
+      <rect x="90"  y="120" width="90" height="40" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="135" y="145" text-anchor="middle" font-size="11" font-weight="700" fill="#0d6efd">hop1</text>
+
+      <rect x="190" y="220" width="90" height="40" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="235" y="245" text-anchor="middle" font-size="11" font-weight="700" fill="#1a7f37">hop2</text>
+
+      <rect x="290" y="70"  width="90" height="40" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
+      <text x="335" y="95"  text-anchor="middle" font-size="11" font-weight="700" fill="#b54708">hop3</text>
+
+      <rect x="390" y="170" width="90" height="40" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="435" y="195" text-anchor="middle" font-size="11" font-weight="700" fill="#b42318">hop4</text>
+
+      <rect x="490" y="220" width="80" height="40" fill="#e7f0ff" stroke="#6f42c1" stroke-width="2"/>
+      <text x="530" y="245" text-anchor="middle" font-size="11" font-weight="700" fill="#6f42c1">hop5</text>
+    </svg>
+    <div class="caption">Each block = one hop dwell; sequence is known to TX and RX only</div>
+  </div>
+
+  <h4>FHSS Block Diagram</h4>
+  <div class="diagram">
+    <div class="diagram-title">FHSS Transmitter Block Diagram</div>
+    <svg role="img" aria-label="FHSS transmitter block diagram: data feeds the modulator, modulator output enters the mixer, frequency synthesizer driven by PN code generator supplies the hopping carrier to the mixer, output is the spread RF signal" viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr6" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#0d6efd"/>
+        </marker>
+      </defs>
+
+      <!-- Data input -->
+      <text x="40" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#1a2233">Data</text>
+      <line x1="70" y1="60" x2="158" y2="60" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr6)"/>
+
+      <!-- Modulator -->
+      <rect x="160" y="30" width="160" height="60" rx="8" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="240" y="65" text-anchor="middle" font-size="14" font-weight="700" fill="#0d6efd">Modulator</text>
+
+      <!-- Modulator output -->
+      <line x1="320" y1="60" x2="408" y2="60" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr6)"/>
+      <text x="365" y="50" text-anchor="middle" font-size="11" font-style="italic" fill="#5a6577">f0 + d(t)</text>
+
+      <!-- Mixer -->
+      <circle cx="450" cy="60" r="38" fill="#fff5e1" stroke="#f0b429" stroke-width="2"/>
+      <text   x="450" y="55" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">Mixer</text>
+      <text   x="450" y="73" text-anchor="middle" font-size="16" font-weight="700" fill="#b54708">×</text>
+
+      <!-- Mixer to Spread RF output -->
+      <line x1="488" y1="60" x2="568" y2="60" stroke="#0d6efd" stroke-width="2" marker-end="url(#arr6)"/>
+      <text x="640" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">Spread RF</text>
+      <text x="640" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">signal</text>
+
+      <!-- Frequency Synthesizer -->
+      <rect x="350" y="180" width="200" height="60" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="450" y="205" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">Frequency</text>
+      <text x="450" y="225" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">Synthesizer</text>
+
+      <!-- Synth to mixer (up arrow) -->
+      <line x1="450" y1="180" x2="450" y2="100" stroke="#1a7f37" stroke-width="2" marker-end="url(#arr6)"/>
+
+      <!-- PN Code Gen -->
+      <rect x="350" y="290" width="200" height="60" rx="8" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
+      <text x="450" y="315" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">PN Code Gen</text>
+      <text x="450" y="335" text-anchor="middle" font-size="11" fill="#5a6577">(hop sequence)</text>
+
+      <!-- PN to Synth (up arrow) -->
+      <line x1="450" y1="290" x2="450" y2="240" stroke="#b54708" stroke-width="2" marker-end="url(#arr6)"/>
+    </svg>
+    <div class="caption">PN code drives the synthesizer; mixer multiplies modulated signal by hopping carrier</div>
+  </div>
+
+  <h4>Slow vs Fast Hopping</h4>
+  <table>
+    <thead><tr><th>Type</th><th>Hop rate vs symbol rate</th><th>Comment</th></tr></thead>
+    <tbody>
+      <tr><td>Slow FH</td><td>Many symbols per hop</td><td>Easier sync, used in Bluetooth</td></tr>
+      <tr><td>Fast FH</td><td>Multiple hops per symbol</td><td>Stronger anti-jam, harder hardware</td></tr>
+    </tbody>
+  </table>
+
+  <h4>FHSS Advantages</h4>
+  <ul>
+    <li>Strong jamming resistance — jammer must cover whole hop set.</li>
+    <li>Privacy — sequence acts as a key.</li>
+    <li>Co-existence with other systems on the same band.</li>
+    <li>Less affected by narrow-band fading.</li>
+  </ul>
+
+  <h3>2.10 Capacity of a Cellular System</h3>
+  <div class="formula">Capacity C = M · k · N<sub>c</sub> &nbsp; users<br>where M = number of cells, k = channels per cell, N<sub>c</sub> = number of clusters</div>
+  <p>For Frequency Reuse with cluster size <em>N</em> and total channels <em>S</em>: <strong>k = S / N</strong> (channels per cell). Smaller N → higher capacity but more co-channel interference.</p>
+
+  <h3>2.11 FDMA vs TDMA <span class="pyq-tag">PYQ 7(ii) — 5 marks</span></h3>
+  <table>
+    <thead><tr><th>Feature</th><th>FDMA</th><th>TDMA</th></tr></thead>
+    <tbody>
+      <tr><td>Resource divided</td><td>Frequency</td><td>Time</td></tr>
+      <tr><td>User access</td><td>Owns one frequency continuously</td><td>Shares frequency in turn-based slots</td></tr>
+      <tr><td>Synchronisation</td><td>Not needed</td><td>Tight bit/slot sync needed</td></tr>
+      <tr><td>Guard requirement</td><td>Guard <em>bands</em> between channels</td><td>Guard <em>times</em> between slots</td></tr>
+      <tr><td>Hardware</td><td>Simple analog</td><td>Digital, faster DSP</td></tr>
+      <tr><td>Burst transmission</td><td>Continuous</td><td>Bursty</td></tr>
+      <tr><td>Handoff</td><td>Hard handoff only</td><td>MAHO supported (better)</td></tr>
+      <tr><td>Used in</td><td>1G AMPS, satellite</td><td>2G GSM, DECT</td></tr>
+      <tr><td>Affected by near-far</td><td>Less</td><td>More (between slots)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"FTC-S = Frequency, Time, Code, Space"</strong> — the four ways to share spectrum (FDMA, TDMA, CDMA, SDMA).
+  </div>
+
+  <div class="quiz">
+    <h4>Quick Quiz — Unit III</h4>
+    <div class="q">Q1. Which scheme has a soft capacity limit? <button class="reveal">Reveal</button></div>
+    <div class="answer">CDMA — adding more users only raises the noise floor, no hard cut.</div>
+    <div class="q">Q2. Why does FHSS resist narrow-band jamming? <button class="reveal">Reveal</button></div>
+    <div class="answer">A narrowband jammer covers only one of many hopping channels, so most hops are unaffected.</div>
+    <div class="q">Q3. The near-far problem is worst in which access scheme? <button class="reveal">Reveal</button></div>
+    <div class="answer">CDMA. All users share the frequency, so a strong nearby user drowns weak distant users unless tight power control is applied.</div>
+  </div>
+</section>
+
+<!-- ============================== TOPIC 6 — PYQ MAP (Unit III & IV only) ============================== -->
+<section id="t6">
+  <h2 class="topic"><span class="num">03</span> May-2025 PYQ → Answer Map <span class="unit">UNIT III &amp; IV</span></h2>
+  <p class="lead">Filtered to PYQ rows that touch <strong>Unit III</strong> (Multiple Access &amp; Spread Spectrum) or <strong>Unit IV</strong> (Wireless Networking, ISDN, signaling, traffic routing). Out-of-syllabus rows have been removed.</p>
+
+  <div class="box tip">
+    <span class="label">Heads up</span>
+    The May-2025 paper covered all units. The rows below are only those whose answers live in §1 (Unit IV) or §2 (Unit III). Use them as practice — your sessional only draws from these two units.
+  </div>
+
+  <h3>6.1 Part-A (1.5 marks each)</h3>
+  <table>
+    <thead><tr><th>Q</th><th>Question</th><th>Answer location</th></tr></thead>
+    <tbody>
+      <tr><td>1(h)</td><td>Near/far effect in TDMA</td><td>§2.4 — strong nearby signal leaks into adjacent slots; mitigated by power control + timing advance</td></tr>
+      <tr><td>1(i)</td><td>ISDN brief</td><td>§1.7 — digital integrated voice/data, B+D channels, BRI 2B+D, PRI 23/30 B+D</td></tr>
+    </tbody>
+  </table>
+
+  <h3>6.2 Part-B (full questions)</h3>
+  <table>
+    <thead><tr><th>Q</th><th>Question</th><th>Marks</th><th>Answer location</th></tr></thead>
+    <tbody>
+      <tr><td>2(a)</td><td>CDMA concept + areas of use</td><td>10</td><td>§2.5 — definition, properties, applications (IS-95, CDMA2000, GPS, Wi-Fi DSSS, military)</td></tr>
+      <tr><td>5(b)</td><td>Traffic routing in wireless network</td><td>7</td><td>§1.4 — 8-step call flow, HLR/VLR lookup, routing strategies</td></tr>
+      <tr><td>6(a)</td><td>Need + types of spread spectrum + FHSS detail</td><td>10</td><td>§2.8–2.9 — anti-jam/privacy/MA, FHSS/DSSS/THSS, FHSS block diagram</td></tr>
+      <tr><td>7(ii)</td><td>FDMA vs TDMA</td><td>5</td><td>§2.11 — comparison table</td></tr>
+      <tr><td>7(iii)</td><td>WANs vs WLANs</td><td>5</td><td>§1.9 — comparison table</td></tr>
+    </tbody>
+  </table>
+
+  <h3>6.3 Strategy: 30-mark sessional pacing</h3>
+  <ol>
+    <li><strong>Section A first (10 min):</strong> 6 × 1-mark recall — full-forms, one-line definitions. Use the 1-mark table in §07.1.</li>
+    <li><strong>Section B (3 × 8m, ~15 min each):</strong> pick the strongest 3 from Q1–Q7 in §07.3 (GSM-style architecture not in scope; focus on CDMA, FDMA/TDMA, Spread Spectrum / FHSS, ISDN, WAN-vs-WLAN, Traffic Routing).</li>
+    <li><strong>If a Q splits 4+4:</strong> use the §07.2 mini-card answers — definition + 4 bullets + 1 example each.</li>
+    <li><strong>Diagrams score:</strong> always draw FDMA/TDMA/CDMA grid, FHSS hop pattern, traffic-routing call flow, ISDN BRI/PRI block.</li>
+    <li><strong>Numericals:</strong> formula → substitute → answer with units (e.g., BRI = 2B+1D = 144 kbps).</li>
+  </ol>
+
+  <div class="box tip" style="margin-top: 30px;">
+    <span class="label">Final study tip</span>
+    Re-read §1 (Unit IV) and §2 (Unit III) once. Then close them and try the quizzes inside each section + the Final Sessional Drill at the end of §7. The questions you stumble on are tonight's revision list.
+  </div>
+
+  <div class="box eg">
+    <span class="label">Last-30-minute revision priority</span>
+    1) CDMA concept + Walsh code example (8m) → 2) FDMA / TDMA / CDMA comparison (4m or 8m) → 3) Spread spectrum need + FHSS detail (8m) → 4) Traffic routing call flow (4m or 8m) → 5) ISDN BRI/PRI (4m) → 6) WAN vs WLAN table (4m) → 7) All Section-A 1-mark recall.
+  </div>
+</section>
+
+<!-- ============================== TOPIC 7 — Sessional Exam Booster (Unit III & IV) ============================== -->
+<section id="sessional-booster">
+  <h2 class="topic"><span class="num">04</span> Sessional Exam Booster <span class="unit">30 MARKS · UNIT III &amp; IV</span></h2>
+  <p class="lead">Targeted pack for the 30-mark sessional: <strong>Section A</strong> = 6×1-mark short answers, <strong>Section B</strong> = 3×8-mark long answers (each may be split as 4+4). <strong>Every Q below is from Unit III (Multiple Access &amp; Spread Spectrum) or Unit IV (Wireless Networking, ISDN, Signaling, Traffic Routing)</strong>.</p>
+
+  <div class="box tip">
+    <span class="label">How to use this booster</span>
+    Read the <strong>1-mark table</strong> in one pass — these are pure recall. For Section B, memorise <strong>any 3 full 8-mark answers</strong> and <strong>4–5 of the 4-mark mini answers</strong> (since an 8-mark Q may split as 4+4). The likely-Q mapping at the end shows which unit each tier pulls from.
+  </div>
+
+  <h3>7.1 1-Mark Quick Answers (Section A — 6 × 1 = 6 marks)</h3>
+  <p>One-line definitions, full-forms and one-word answers. Aim to write <em>1–2 lines max</em> per question. <strong>20 entries</strong> — all Unit III &amp; IV.</p>
+  <table>
+    <thead><tr><th style="width:42%">Question</th><th>Answer</th></tr></thead>
+    <tbody>
+      <tr><td>Full form of <strong>FDMA / TDMA / CDMA / SDMA</strong></td><td>Frequency / Time / Code / Space Division Multiple Access.</td></tr>
+      <tr><td>Full form of <strong>FHSS / DSSS / THSS</strong></td><td>Frequency-Hopping / Direct-Sequence / Time-Hopping Spread Spectrum.</td></tr>
+      <tr><td>Full form of <strong>ISDN</strong></td><td>Integrated Services Digital Network.</td></tr>
+      <tr><td>Full form of <strong>WAN / WLAN / WPAN</strong></td><td>Wide / Local / Personal Area Network (W = wireless variants).</td></tr>
+      <tr><td>Full form of <strong>SS7 / CCS</strong></td><td>Signaling System No. 7 / Common Channel Signaling.</td></tr>
+      <tr><td>Full form of <strong>BRI / PRI</strong> (ISDN)</td><td>Basic Rate Interface (2B+1D) / Primary Rate Interface (23B+1D US, 30B+1D EU).</td></tr>
+      <tr><td>Full form of <strong>HLR / VLR</strong></td><td>Home Location Register (permanent) / Visitor Location Register (temporary).</td></tr>
+      <tr><td>What is the <strong>near-far problem</strong>?</td><td>A nearby transmitter overpowers a distant one on the same frequency; critical in CDMA, mitigated by tight power control.</td></tr>
+      <tr><td>What is a <strong>chip</strong> in CDMA?</td><td>One symbol of the spreading PN code — much shorter in time than a data bit (chip rate &gt;&gt; bit rate).</td></tr>
+      <tr><td>What are <strong>Walsh codes</strong> used for?</td><td>Mutually orthogonal spreading codes that let multiple CDMA users share one channel without interference.</td></tr>
+      <tr><td><strong>Processing gain</strong> in spread spectrum?</td><td>G<sub>p</sub> = Bandwidth<sub>spread</sub> / Bandwidth<sub>info</sub> = R<sub>chip</sub> / R<sub>bit</sub> (dB form: 10 log G<sub>p</sub>).</td></tr>
+      <tr><td>How many channels does Bluetooth FHSS use?</td><td>79 channels × 1 MHz in 2.4 GHz ISM band, hopping 1600 times/sec.</td></tr>
+      <tr><td>BRI total bandwidth?</td><td>2B + 1D = 2 × 64 + 16 = <strong>144 kbps</strong>.</td></tr>
+      <tr><td>PRI bandwidth (US T1)?</td><td>23B + 1D = <strong>1.544 Mbps</strong> (Europe E1: 30B + 1D = 2.048 Mbps).</td></tr>
+      <tr><td>One advantage of <strong>WLAN over WAN</strong></td><td>Much higher per-user bit-rate at far lower cost (no carrier fees).</td></tr>
+      <tr><td>Pure ALOHA vs Slotted ALOHA efficiency?</td><td>Pure ≈ 18% (1/2e); Slotted ≈ 36% (1/e) — slot synchronisation doubles throughput.</td></tr>
+      <tr><td>Why is <strong>spread spectrum</strong> resistant to jamming?</td><td>The narrowband jammer can only hit a small fraction of the wideband signal — most data survives.</td></tr>
+      <tr><td>One <strong>D-channel</strong> function in ISDN?</td><td>Out-of-band signaling (call setup, teardown, supplementary services).</td></tr>
+      <tr><td>What is a <strong>guard band</strong> in FDMA?</td><td>An unused frequency gap between adjacent user channels to prevent inter-channel interference.</td></tr>
+      <tr><td>Soft handoff is unique to which scheme?</td><td>CDMA — make-before-break, the MS talks to two BTS at once and picks the better one.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>7.2 4-Mark Mini Answers (half-of-8-mark slots)</h3>
+  <p>Each card = <strong>1-line definition + 3–4 bullets + tiny example</strong>. Perfect when an 8-mark question splits as 4+4. <strong>10 cards</strong>, all from Unit III/IV.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <h5>M1 · FDMA — definition + working <span style="font-size:10px;color:var(--muted);">[Unit III]</span></h5>
+      <p><strong>FDMA</strong> divides total bandwidth into narrow non-overlapping bands; each user owns one band for the entire call duration.</p>
+      <ul>
+        <li>Used in 1G AMPS, FM radio, satellite uplinks.</li>
+        <li>Needs <em>guard bands</em> between channels — wastes spectrum.</li>
+        <li>No time synchronisation needed across users.</li>
+        <li>Cannot share idle bands with busy users (low utilisation).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M2 · TDMA — definition + working <span style="font-size:10px;color:var(--muted);">[Unit III]</span></h5>
+      <p><strong>TDMA</strong> gives every user the entire band but only for a short repeating <em>time slot</em> in a frame.</p>
+      <ul>
+        <li>Used in GSM (8 slots per 200 kHz carrier) and DECT.</li>
+        <li>Requires strict <em>timing advance</em> at the BTS.</li>
+        <li>Supports variable bit-rate by allocating multiple slots.</li>
+        <li>Susceptible to multipath delay spread → equaliser needed.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M3 · CDMA — definition + working <span style="font-size:10px;color:var(--muted);">[Unit III]</span></h5>
+      <p><strong>CDMA</strong> gives every user the same band <em>and</em> the same time slot, separated only by a unique orthogonal PN/Walsh code.</p>
+      <ul>
+        <li>Universal frequency reuse (N = 1).</li>
+        <li>Soft capacity — adding users raises noise, no hard cut-off.</li>
+        <li>Soft handoff — talks to two BTS at once.</li>
+        <li>Power control mandatory to fight near-far problem.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M4 · SDMA — definition + working <span style="font-size:10px;color:var(--muted);">[Unit III]</span></h5>
+      <p><strong>SDMA</strong> reuses the same frequency / time / code in different <em>spatial</em> regions using directional antennas, sectoring or beam-forming.</p>
+      <ul>
+        <li>Examples: 3-sector cell, satellite spot beams, 5G massive MIMO.</li>
+        <li>Increases capacity without extra spectrum.</li>
+        <li>Combined with FDMA/TDMA/CDMA in real systems.</li>
+        <li>Requires antenna arrays and beam tracking.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M5 · Spread Spectrum — need <span style="font-size:10px;color:var(--muted);">[Unit III]</span></h5>
+      <p><strong>Spread spectrum</strong> stretches a narrow signal over a much wider band using a code known to both TX and RX.</p>
+      <ul>
+        <li>Anti-jamming — narrow jammer can't kill a wide signal.</li>
+        <li>Privacy / LPI — looks like background noise.</li>
+        <li>Multiple access via codes (CDMA).</li>
+        <li>Multipath fading resistance via decorrelation.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M6 · FHSS vs DSSS <span style="font-size:10px;color:var(--muted);">[Unit III]</span></h5>
+      <p>Two main spread-spectrum techniques.</p>
+      <ul>
+        <li><strong>FHSS</strong> — carrier hops over many frequencies on a PN pattern (Bluetooth, military).</li>
+        <li><strong>DSSS</strong> — each data bit XORed with high-rate PN chips (IS-95, Wi-Fi 802.11b, GPS).</li>
+        <li>FHSS resists narrowband jammers; DSSS gives higher processing gain.</li>
+        <li>FHSS easier to sync; DSSS gives better data rate.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M7 · ISDN — channels &amp; interfaces <span style="font-size:10px;color:var(--muted);">[Unit IV]</span></h5>
+      <p><strong>ISDN</strong> carries voice + data + signaling end-to-end over digital telephone lines.</p>
+      <ul>
+        <li><strong>B</strong> channel = 64 kbps user data.</li>
+        <li><strong>D</strong> channel = 16 / 64 kbps out-of-band signaling.</li>
+        <li><strong>BRI</strong> = 2B + 1D = 144 kbps (home).</li>
+        <li><strong>PRI</strong> = 23B+1D (1.544 Mbps US) or 30B+1D (2.048 Mbps EU).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M8 · WAN vs WLAN <span style="font-size:10px;color:var(--muted);">[Unit IV]</span></h5>
+      <p><strong>WAN</strong> spans countries; <strong>WLAN</strong> covers a building / campus.</p>
+      <ul>
+        <li>WAN: MPLS, LTE, leased lines; carrier-owned.</li>
+        <li>WLAN: IEEE 802.11 Wi-Fi; user-owned APs.</li>
+        <li>WAN — low per-user speed, high cost.</li>
+        <li>WLAN — high speed, low cost, limited range (≈ 100 m).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M9 · Common Channel Signaling (SS7) <span style="font-size:10px;color:var(--muted);">[Unit IV]</span></h5>
+      <p><strong>CCS / SS7</strong> sends call-control signaling on a separate dedicated channel — not in the voice path.</p>
+      <ul>
+        <li>Faster call setup (≈ 1–2 sec) than in-band MF tones.</li>
+        <li>Enables roaming, SMS, IN services, number portability.</li>
+        <li>Used between MSCs, HLR/VLR queries, mobility management.</li>
+        <li>Layered protocol: MTP1/2/3 → SCCP → TCAP / ISUP / MAP.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M10 · Traffic Routing in Wireless Network <span style="font-size:10px;color:var(--muted);">[Unit IV]</span></h5>
+      <p>How the network finds and reaches a moving subscriber.</p>
+      <ul>
+        <li>Caller dials → GMSC queries called party's <strong>HLR</strong>.</li>
+        <li>HLR returns the address of the current <strong>VLR/MSC</strong>.</li>
+        <li>GMSC routes the call to that MSC; MSC pages the MS via BTS.</li>
+        <li>MS responds → traffic channel assigned → call connects.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>7.3 8-Mark Full Answers (Section B — 3 × 8 = 24 marks)</h3>
+  <p>Each model answer = <strong>definition + detailed explanation + diagram / code + comparison or example</strong>. <strong>6 model answers</strong> below — memorise any 3, examiner picks 3 from the unit-III/IV pool, you choose the strongest.</p>
+
+  <!-- ============== Q1 Multiple-Access Comparison ============== -->
+  <h4>Q1 · Compare FDMA, TDMA and CDMA with a diagram <span style="font-size:11px;color:var(--muted);">[Unit III]</span></h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Multiple Access</strong> techniques let many users share a single radio resource (frequency band) without interfering. The three main schemes — <strong>FDMA, TDMA, CDMA</strong> — partition the resource along <em>frequency</em>, <em>time</em>, and <em>code</em> dimensions respectively.
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">FDMA / TDMA / CDMA — How Three Users Share One Channel</div>
+    <svg role="img" aria-label="Side-by-side comparison of FDMA, TDMA and CDMA showing how three users share one channel by partitioning frequency, time and code-space respectively" viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg">
+      <!-- FDMA -->
+      <text x="120" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">FDMA</text>
+      <line x1="20" y1="200" x2="20" y2="40" stroke="#1a2233" stroke-width="1"/>
+      <line x1="20" y1="200" x2="220" y2="200" stroke="#1a2233" stroke-width="1"/>
+      <text x="10" y="120" text-anchor="end" font-size="10" fill="#5a6577">freq</text>
+      <text x="120" y="218" text-anchor="middle" font-size="10" fill="#5a6577">time →</text>
+      <rect x="22" y="50"  width="196" height="40" fill="#e7f0ff" stroke="#0d6efd"/>
+      <rect x="22" y="95"  width="196" height="45" fill="#e6f4ea" stroke="#1a7f37"/>
+      <rect x="22" y="145" width="196" height="50" fill="#fdf3e7" stroke="#b54708"/>
+      <text x="120" y="75"  text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">User A — band 1</text>
+      <text x="120" y="123" text-anchor="middle" font-size="11" fill="#1a7f37" font-weight="700">User B — band 2</text>
+      <text x="120" y="175" text-anchor="middle" font-size="11" fill="#b54708" font-weight="700">User C — band 3</text>
+
+      <!-- TDMA -->
+      <text x="360" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">TDMA</text>
+      <line x1="260" y1="200" x2="260" y2="40" stroke="#1a2233" stroke-width="1"/>
+      <line x1="260" y1="200" x2="460" y2="200" stroke="#1a2233" stroke-width="1"/>
+      <text x="250" y="120" text-anchor="end" font-size="10" fill="#5a6577">freq</text>
+      <text x="360" y="218" text-anchor="middle" font-size="10" fill="#5a6577">time →</text>
+      <rect x="262" y="50"  width="65" height="145" fill="#e7f0ff" stroke="#0d6efd"/>
+      <rect x="328" y="50"  width="65" height="145" fill="#e6f4ea" stroke="#1a7f37"/>
+      <rect x="394" y="50"  width="65" height="145" fill="#fdf3e7" stroke="#b54708"/>
+      <text x="295" y="125" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">A</text>
+      <text x="361" y="125" text-anchor="middle" font-size="11" fill="#1a7f37" font-weight="700">B</text>
+      <text x="427" y="125" text-anchor="middle" font-size="11" fill="#b54708" font-weight="700">C</text>
+      <text x="361" y="178" text-anchor="middle" font-size="9"  fill="#5a6577">slot 1 / slot 2 / slot 3</text>
+
+      <!-- CDMA -->
+      <text x="600" y="20" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">CDMA</text>
+      <line x1="500" y1="200" x2="500" y2="40" stroke="#1a2233" stroke-width="1"/>
+      <line x1="500" y1="200" x2="700" y2="200" stroke="#1a2233" stroke-width="1"/>
+      <text x="490" y="120" text-anchor="end" font-size="10" fill="#5a6577">freq</text>
+      <text x="600" y="218" text-anchor="middle" font-size="10" fill="#5a6577">time →</text>
+      <rect x="502" y="50" width="196" height="145" fill="#e7f0ff" stroke="#0d6efd"/>
+      <text x="600" y="100" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">A + B + C all share</text>
+      <text x="600" y="120" text-anchor="middle" font-size="11" fill="#1a7f37" font-weight="700">band &amp; time</text>
+      <text x="600" y="145" text-anchor="middle" font-size="10" fill="#b54708">distinguished by code</text>
+      <text x="600" y="170" text-anchor="middle" font-size="10" fill="#b54708">(orthogonal Walsh / PN)</text>
+    </svg>
+    <div class="caption">FDMA partitions frequency, TDMA partitions time, CDMA partitions code-space</div>
+  </div>
+
+  <table>
+    <thead><tr><th>Aspect</th><th>FDMA</th><th>TDMA</th><th>CDMA</th></tr></thead>
+    <tbody>
+      <tr><td>Resource shared by</td><td>Frequency bands</td><td>Time slots</td><td>Orthogonal codes</td></tr>
+      <tr><td>Synchronisation</td><td>Not required</td><td>Strict (frame timing)</td><td>Chip-level sync via PN</td></tr>
+      <tr><td>Guard requirement</td><td>Guard bands</td><td>Guard times</td><td>None (codes orthogonal)</td></tr>
+      <tr><td>Frequency reuse N</td><td>7</td><td>3 or 4</td><td>1 (universal)</td></tr>
+      <tr><td>Hand-off type</td><td>Hard</td><td>Hard</td><td>Soft</td></tr>
+      <tr><td>Capacity limit</td><td>Bands available</td><td>Slots × frames</td><td>Soft — noise rises</td></tr>
+      <tr><td>Used in</td><td>1G AMPS, FM radio</td><td>GSM, DECT</td><td>IS-95, CDMA2000, GPS</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box eg">
+    <span class="label">One-line takeaway</span>
+    "FDMA = different rooms; TDMA = same room, different times; CDMA = same room, same time, but each pair speaks a different language."
+  </div>
+
+  <hr>
+
+  <!-- ============== Q2 CDMA ============== -->
+  <h4>Q2 · Explain CDMA — concept, properties and areas of use <span style="font-size:11px;color:var(--muted);">[Unit III]</span></h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>CDMA (Code Division Multiple Access)</strong> is a spread-spectrum scheme where every user transmits on the same frequency at the same time, but each user's bits are multiplied by a unique <em>orthogonal pseudo-noise (PN) code</em>. The receiver despreads with the same code to recover the data; other users appear as noise.
+  </div>
+
+  <p><strong>How it works:</strong> data bit (1 or −1) is multiplied with a high-rate PN sequence (chips). Bandwidth becomes <code>R<sub>chip</sub></code> (much wider than data rate). The mixed wideband signal is transmitted. At the receiver, multiplying by the same PN code (correlation) recovers the original bit; other users' codes are orthogonal and integrate to ≈ 0.</p>
+
+<pre><code><span class="comment">// Walsh-code example (2 users)</span>
+<span class="keyword">user1</span>: data = +1, code = [+1 +1 +1 +1] -&gt; tx = [+1 +1 +1 +1]
+<span class="keyword">user2</span>: data = +1, code = [+1 -1 +1 -1] -&gt; tx = [+1 -1 +1 -1]
+sum    on air      = [+2  0 +2  0]
+
+<span class="comment">// Receiver despreads with code1</span>
+rx · code1 = [+2 +0 +2 +0] · [+1 +1 +1 +1] = +4 -&gt; bit = +1  <span class="comment">(user1 data recovered)</span>
+rx · code2 = [+2 +0 +2 +0] · [+1 -1 +1 -1] = +4 -&gt; bit = +1  <span class="comment">(user2 data recovered)</span></code></pre>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">Properties</h5>
+  <ul>
+    <li><strong>Universal frequency reuse</strong> (N = 1) — all cells share the same band.</li>
+    <li><strong>Soft capacity</strong> — adding users raises noise floor; no hard cut-off.</li>
+    <li><strong>Soft handoff</strong> — talk to two BTS at once (make-before-break).</li>
+    <li>Resistant to multipath, jamming and eavesdropping.</li>
+    <li>Strong <strong>power control</strong> mandatory (near-far problem).</li>
+    <li>Wide bandwidth ≈ 1.25 MHz (IS-95) or 5 MHz (WCDMA).</li>
+  </ul>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">Areas of use</h5>
+  <ul>
+    <li>2G mobile — IS-95 / cdmaOne.</li>
+    <li>3G — CDMA2000, WCDMA / UMTS.</li>
+    <li>GPS — every satellite has its own PN code.</li>
+    <li>Wi-Fi 802.11b — DSSS form of CDMA.</li>
+    <li>Military communications — anti-jam, low intercept probability.</li>
+  </ul>
+
+  <hr>
+
+  <!-- ============== Q3 Spread Spectrum + FHSS ============== -->
+  <h4>Q3 · Explain Spread Spectrum — need, types and FHSS in detail <span style="font-size:11px;color:var(--muted);">[Unit III]</span></h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Spread spectrum</strong> intentionally widens a narrow-band signal across a far larger bandwidth using a code known to both transmitter and receiver. The signal looks like low-power noise to anyone without the code.
+  </div>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">Need</h5>
+  <ul>
+    <li><strong>Anti-jamming</strong> — narrow-band jammers can't overpower a wide signal.</li>
+    <li><strong>Privacy / LPI</strong> — looks like noise without the code.</li>
+    <li><strong>Multiple access</strong> — different codes = different users (CDMA).</li>
+    <li><strong>Multipath resistance</strong> — reflections decorrelate.</li>
+    <li><strong>Low spectral density</strong> — co-exists with narrowband systems.</li>
+  </ul>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">Types</h5>
+  <table>
+    <thead><tr><th>Type</th><th>Mechanism</th><th>Used in</th></tr></thead>
+    <tbody>
+      <tr><td>FHSS</td><td>Carrier hops between many frequencies on a PN pattern</td><td>Bluetooth, military</td></tr>
+      <tr><td>DSSS</td><td>Each data bit XORed with high-rate PN chip sequence</td><td>IS-95, Wi-Fi 802.11b, GPS</td></tr>
+      <tr><td>THSS</td><td>Transmits only in PN-selected time slots</td><td>UWB</td></tr>
+      <tr><td>Hybrid</td><td>Combination (e.g. FH/DS)</td><td>Some military</td></tr>
+    </tbody>
+  </table>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">FHSS — detail</h5>
+  <p>In <strong>Frequency Hopping Spread Spectrum</strong>, the carrier frequency hops over a set of channels in a pseudo-random pattern known to both TX and RX. Each "hop" lasts a few ms (slow FH) or less than one bit (fast FH).</p>
+
+<pre><code><span class="comment">// FHSS transmitter pseudo-flow</span>
+<span class="keyword">for</span> each hop_interval <span class="keyword">in</span> session:
+    f = pn_sequence.next()           <span class="comment">// pick channel</span>
+    carrier = generate(f)
+    tx_signal = modulate(carrier, data_chunk)
+    transmit(tx_signal)
+
+<span class="comment">// Receiver — must use SAME PN sequence</span>
+<span class="keyword">for</span> each hop_interval:
+    f = pn_sequence.next()
+    rx_data = demod(receive(), generate(f))</code></pre>
+
+  <p><strong>Bluetooth FHSS:</strong> 79 channels × 1 MHz in the 2.4 GHz ISM band, hopping at <strong>1600 hops/s</strong>.</p>
+
+  <div class="box eg">
+    <span class="label">Advantage / disadvantage</span>
+    + Robust against narrowband interference and jamming, low intercept probability, supports many users via different hop sequences.<br>
+    − Synchronisation between TX and RX is critical, requires fast frequency synthesizer, lower data rate per channel than DSSS.
+  </div>
+
+  <hr>
+
+  <!-- ============== Q4 Traffic Routing in Wireless Network ============== -->
+  <h4>Q4 · Explain Traffic Routing in a Wireless Network with a diagram <span style="font-size:11px;color:var(--muted);">[Unit IV]</span></h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Traffic routing</strong> in a wireless network is the procedure by which the network locates a moving subscriber and delivers an incoming call to the cell currently serving that subscriber. It relies on databases (HLR, VLR) and signaling (SS7/MAP) — not on a fixed wire.
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">Mobile-Terminated Call Flow — Traffic Routing</div>
+    <svg role="img" aria-label="Mobile-terminated call traffic-routing flow: caller in PSTN reaches GMSC, GMSC queries HLR which returns MSRN from VLR, GMSC routes to visited MSC, MSC pages BTS, BTS pages MS, then voice path is established back through" viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrTR" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#0d6efd"/>
+        </marker>
+      </defs>
+      <!-- Caller PSTN -->
+      <rect x="20"  y="40"  width="100" height="50" rx="6" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="70"  y="70"  text-anchor="middle" font-size="13" font-weight="700" fill="#b42318">Caller (PSTN)</text>
+
+      <!-- GMSC -->
+      <rect x="170" y="40"  width="100" height="50" rx="6" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
+      <text x="220" y="70"  text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">GMSC</text>
+
+      <!-- HLR -->
+      <rect x="320" y="20"  width="100" height="50" rx="6" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="370" y="50"  text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">HLR (home)</text>
+
+      <!-- Visited MSC -->
+      <rect x="170" y="180" width="120" height="50" rx="6" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
+      <text x="230" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#b54708">MSC / VLR (visited)</text>
+
+      <!-- BTS -->
+      <rect x="340" y="180" width="80"  height="50" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="380" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7f37">BTS</text>
+
+      <!-- MS -->
+      <rect x="470" y="180" width="80"  height="50" rx="6" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="510" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#0d6efd">Called MS</text>
+
+      <!-- Numbered arrows -->
+      <line x1="120" y1="65" x2="168" y2="65" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrTR)"/>
+      <text x="144" y="58" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">1</text>
+
+      <line x1="270" y1="55" x2="318" y2="42" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrTR)"/>
+      <text x="294" y="40" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">2 query</text>
+
+      <line x1="318" y1="60" x2="270" y2="75" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrTR)"/>
+      <text x="294" y="84" text-anchor="middle" font-size="11" fill="#1a7f37" font-weight="700">3 MSRN</text>
+
+      <line x1="220" y1="90" x2="220" y2="178" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrTR)"/>
+      <text x="234" y="138" font-size="11" fill="#0d6efd" font-weight="700">4 route</text>
+
+      <line x1="290" y1="205" x2="338" y2="205" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrTR)"/>
+      <text x="314" y="198" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">5 page</text>
+
+      <line x1="420" y1="205" x2="468" y2="205" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrTR)"/>
+      <text x="444" y="198" text-anchor="middle" font-size="11" fill="#0d6efd" font-weight="700">6 page</text>
+
+      <line x1="468" y1="220" x2="420" y2="220" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrTR)"/>
+      <text x="444" y="240" text-anchor="middle" font-size="11" fill="#1a7f37" font-weight="700">7 ack</text>
+
+      <line x1="338" y1="220" x2="290" y2="220" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrTR)"/>
+
+      <!-- Voice path -->
+      <line x1="70" y1="90" x2="70" y2="290" stroke="#b42318" stroke-width="2" stroke-dasharray="6 3"/>
+      <line x1="70" y1="290" x2="510" y2="290" stroke="#b42318" stroke-width="2" stroke-dasharray="6 3"/>
+      <line x1="510" y1="290" x2="510" y2="232" stroke="#b42318" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrTR)"/>
+      <text x="290" y="305" text-anchor="middle" font-size="11" fill="#b42318" font-weight="700">8 voice path established</text>
+    </svg>
+    <div class="caption">8-step Mobile-Terminated call: caller → GMSC → HLR (locate) → visited MSC → BTS → MS, then voice path back through</div>
+  </div>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">Step-by-step</h5>
+  <ol>
+    <li>Caller dials the MS number (MSISDN); call enters the network at the <strong>GMSC</strong>.</li>
+    <li>GMSC queries the called subscriber's <strong>HLR</strong> with the MSISDN.</li>
+    <li>HLR looks up the current <strong>VLR</strong> address and asks it for an <strong>MSRN</strong> (Mobile Station Roaming Number) — a temporary routing number — and returns it to GMSC.</li>
+    <li>GMSC routes the call to the <strong>visited MSC</strong> using the MSRN.</li>
+    <li>Visited MSC consults its VLR to find the cell-area, then sends a <strong>paging</strong> message to all BTSs in that area.</li>
+    <li>BTSs broadcast page on the air interface; the called <strong>MS responds</strong>.</li>
+    <li>MSC assigns a traffic channel; authentication and ciphering complete.</li>
+    <li><strong>Voice path</strong> is established: caller ↔ GMSC ↔ MSC ↔ BTS ↔ MS.</li>
+  </ol>
+
+  <div class="box eg">
+    <span class="label">Why this design</span>
+    HLR-VLR split keeps subscriber data near the user (low latency) while still globally reachable. SS7/MAP signaling carries all the queries on a separate channel from the voice — that is Common Channel Signaling.
+  </div>
+
+  <hr>
+
+  <!-- ============== Q5 ISDN ============== -->
+  <h4>Q5 · Explain ISDN — services, channels and reference architecture <span style="font-size:11px;color:var(--muted);">[Unit IV]</span></h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>ISDN (Integrated Services Digital Network)</strong> is a set of CCITT/ITU standards (1980s) that delivers <em>voice, data and signaling end-to-end in digital form</em> over the existing copper telephone loop, replacing the analog local subscriber line with a digital one.
+  </div>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">Services</h5>
+  <ul>
+    <li><strong>Bearer services</strong> — voice, data, fax, video at 64 kbps multiples.</li>
+    <li><strong>Tele-services</strong> — telephony, telex, teletex, videotex, fax G3/G4.</li>
+    <li><strong>Supplementary services</strong> — caller ID, call forwarding, conference, hold.</li>
+  </ul>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">Channels</h5>
+  <table>
+    <thead><tr><th>Channel</th><th>Bandwidth</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><strong>B</strong></td><td>64 kbps</td><td>User data — voice, data, video (one call each).</td></tr>
+      <tr><td><strong>D</strong></td><td>16 kbps (BRI) / 64 kbps (PRI)</td><td>Out-of-band signaling (call setup, control). Can carry low-speed packet data.</td></tr>
+      <tr><td><strong>H</strong></td><td>384 kbps – 1.92 Mbps</td><td>High-speed bulk data (H0, H11, H12).</td></tr>
+    </tbody>
+  </table>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">Interfaces</h5>
+  <ul>
+    <li><strong>BRI (Basic Rate Interface):</strong> 2B + 1D = 2(64) + 16 = <strong>144 kbps</strong> — for homes and small offices.</li>
+    <li><strong>PRI (Primary Rate Interface):</strong>
+      <ul>
+        <li>US/Japan T1 — 23B + 1D = 23(64) + 64 = <strong>1.544 Mbps</strong>.</li>
+        <li>Europe E1 — 30B + 1D = 30(64) + 64 = <strong>2.048 Mbps</strong>.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="diagram">
+    <div class="diagram-title">ISDN Reference Architecture (Subscriber Side)</div>
+    <svg role="img" aria-label="ISDN subscriber-side reference architecture: TE1 connects at S, TE2 via TA at R then S, NT2 separates S from T, NT1 separates T from U, U loop runs to the local exchange LE" viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrIS" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#0d6efd"/>
+        </marker>
+      </defs>
+      <!-- TE1 -->
+      <rect x="20"  y="80" width="80" height="50" rx="6" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="60"  y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#0d6efd">TE1</text>
+      <text x="60"  y="122" text-anchor="middle" font-size="9"  fill="#5a6577">ISDN phone</text>
+
+      <!-- TE2 + TA -->
+      <rect x="20"  y="20" width="80" height="40" rx="6" fill="#e7f0ff" stroke="#0d6efd" stroke-width="2"/>
+      <text x="60"  y="44" text-anchor="middle" font-size="12" font-weight="700" fill="#0d6efd">TE2</text>
+      <rect x="120" y="20" width="60" height="40" rx="6" fill="#fdf3e7" stroke="#b54708" stroke-width="2"/>
+      <text x="150" y="44" text-anchor="middle" font-size="12" font-weight="700" fill="#b54708">TA</text>
+
+      <!-- NT2 -->
+      <rect x="220" y="50" width="100" height="80" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="270" y="85" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">NT2</text>
+      <text x="270" y="105" text-anchor="middle" font-size="9" fill="#5a6577">PBX/router</text>
+
+      <!-- NT1 -->
+      <rect x="370" y="60" width="100" height="60" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="420" y="92" text-anchor="middle" font-size="12" font-weight="700" fill="#1a7f37">NT1</text>
+      <text x="420" y="108" text-anchor="middle" font-size="9" fill="#5a6577">line termination</text>
+
+      <!-- LE -->
+      <rect x="520" y="60" width="150" height="60" rx="6" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="595" y="95" text-anchor="middle" font-size="12" font-weight="700" fill="#b42318">LE — Local Exchange</text>
+
+      <!-- Arrows -->
+      <line x1="100" y1="105" x2="218" y2="90"  stroke="#0d6efd" stroke-width="2" marker-end="url(#arrIS)"/>
+      <text x="160" y="98" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">S</text>
+      <line x1="100" y1="40" x2="118" y2="40" stroke="#0d6efd" stroke-width="2"/>
+      <text x="190" y="14" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">R</text>
+      <line x1="180" y1="40" x2="270" y2="50" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrIS)"/>
+      <line x1="320" y1="90" x2="368" y2="90" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrIS)"/>
+      <text x="344" y="82" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">T</text>
+      <line x1="470" y1="90" x2="518" y2="90" stroke="#0d6efd" stroke-width="2" marker-end="url(#arrIS)"/>
+      <text x="494" y="82" text-anchor="middle" font-size="10" fill="#5a6577" font-style="italic">U</text>
+    </svg>
+    <div class="caption">Reference points R, S, T, U separate ISDN equipment (TE/TA/NT2/NT1) and the loop to the local exchange</div>
+  </div>
+
+  <div class="box eg">
+    <span class="label">Numerical example</span>
+    A small office uses BRI: 2 × 64 + 16 = <strong>144 kbps</strong>. A medium office on E1 PRI: 30 × 64 + 64 = <strong>2.048 Mbps</strong> — 14× more capacity per loop.
+  </div>
+
+  <hr>
+
+  <!-- ============== Q6 WAN vs WLAN ============== -->
+  <h4>Q6 · Differentiate WAN and WLAN — characteristics, advantages, applications <span style="font-size:11px;color:var(--muted);">[Unit IV]</span></h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    A <strong>WAN (Wide Area Network)</strong> spans large geographical areas — cities, countries, continents — using carrier infrastructure (leased lines, MPLS, cellular core, satellites). A <strong>WLAN (Wireless LAN)</strong> covers a small area (a building, a campus) using the unlicensed ISM band and the IEEE 802.11 standard.
+  </div>
+
+  <table>
+    <thead><tr><th>Aspect</th><th>WAN</th><th>WLAN (Wi-Fi)</th></tr></thead>
+    <tbody>
+      <tr><td>Coverage</td><td>Cities to continents (km–thousands of km)</td><td>~100 m indoor; up to ~250 m outdoor</td></tr>
+      <tr><td>Standard / tech</td><td>MPLS, frame-relay, leased line, cellular (4G/5G), satellite</td><td>IEEE 802.11 a/b/g/n/ac/ax (Wi-Fi 6)</td></tr>
+      <tr><td>Spectrum</td><td>Licensed (carrier-allocated)</td><td>Unlicensed 2.4 GHz / 5 GHz / 6 GHz ISM</td></tr>
+      <tr><td>Per-user data rate</td><td>Low to medium (kbps to ~Gbps in 5G)</td><td>High (54 Mbps – 9.6 Gbps)</td></tr>
+      <tr><td>Ownership</td><td>Telecom carrier owns the backbone</td><td>End user owns AP &amp; equipment</td></tr>
+      <tr><td>Cost (per user)</td><td>High recurring fees</td><td>Low one-time hardware cost</td></tr>
+      <tr><td>Latency</td><td>Higher (10–100 ms)</td><td>Low (1–10 ms)</td></tr>
+      <tr><td>Setup time</td><td>Weeks (provisioning)</td><td>Minutes (plug-and-play)</td></tr>
+      <tr><td>Typical use</td><td>Inter-branch corporate links, internet backbone, banking</td><td>Office, home, café, campus internet</td></tr>
+      <tr><td>Mobility</td><td>Limited to coverage of carrier</td><td>Limited to AP coverage; roams between APs</td></tr>
+    </tbody>
+  </table>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">Advantages of WLAN over WAN</h5>
+  <ul>
+    <li>Much higher per-user bandwidth (Wi-Fi 6 ≈ 9.6 Gbps vs typical WAN tens of Mbps).</li>
+    <li>No carrier fees — uses unlicensed spectrum.</li>
+    <li>Quick to deploy and reconfigure; supports many concurrent devices.</li>
+  </ul>
+
+  <h5 style="color:var(--brand);font-size:13px;letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px;">Where WAN beats WLAN</h5>
+  <ul>
+    <li>Geographic reach — only WAN connects offices across cities.</li>
+    <li>Guaranteed SLA / QoS via carrier contracts.</li>
+    <li>Wide-area mobility (e.g. cellular WAN follows you; Wi-Fi does not).</li>
+  </ul>
+
+  <div class="box eg">
+    <span class="label">Practical pairing</span>
+    A modern office combines both — internal users connect over <strong>WLAN</strong> for high-speed local sharing, and the building's gateway uses a <strong>WAN</strong> (leased line / MPLS) to reach head office and the internet.
+  </div>
+
+  <h3>7.4 Likely Q-by-Unit Mapping</h3>
+  <p>Sessional questions are pulled from <strong>only Unit III and Unit IV</strong>. Use this table to plan revision priority.</p>
+  <table>
+    <thead><tr><th>Marks tier</th><th>Most likely topics</th><th>Source unit / section</th></tr></thead>
+    <tbody>
+      <tr><td>1 mark · Section A</td><td>Full-forms (FDMA/TDMA/CDMA/SDMA, FHSS/DSSS, ISDN, BRI/PRI, WAN/WLAN, SS7), 1-line definitions (near-far, chip, Walsh code, processing gain, guard band, soft handoff)</td><td>Unit III (§2) and Unit IV (§1)</td></tr>
+      <tr><td>4 mark · half slot</td><td>Define + bullets + example: FDMA / TDMA / CDMA / SDMA, Spread Spectrum need, FHSS vs DSSS, ISDN channels, WAN vs WLAN, SS7/CCS, Traffic Routing</td><td>Unit III §2.2-2.9 · Unit IV §1.1, §1.4-1.9</td></tr>
+      <tr><td>8 mark · full Q</td><td>FDMA/TDMA/CDMA comparison (Q1), CDMA concept + Walsh + use (Q2), Spread Spectrum + FHSS (Q3), Traffic Routing in wireless network (Q4), ISDN services + channels + reference architecture (Q5), WAN vs WLAN (Q6)</td><td>Unit III §2.5/§2.8/§2.11 · Unit IV §1.4/§1.7/§1.9</td></tr>
+      <tr><td>Numerical (sometimes in 8-mark)</td><td>Processing gain G<sub>p</sub> = R<sub>chip</sub>/R<sub>bit</sub>; ISDN BRI = 144 kbps, PRI = 1.544 / 2.048 Mbps</td><td>§2.8 · §1.7</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quiz">
+    <h4>Final Sessional Drill — 30 marks worth (Unit III &amp; IV)</h4>
+    <div class="q">Q1 (1m). Expand <strong>SDMA</strong> and give one example. <button class="reveal">Reveal</button></div>
+    <div class="answer">Space Division Multiple Access — reusing the same band/time/code in different spatial regions. Example: 3-sector cell or 5G massive-MIMO beamforming.</div>
+
+    <div class="q">Q2 (1m). What is the chip rate vs bit rate ratio called? <button class="reveal">Reveal</button></div>
+    <div class="answer"><strong>Processing gain</strong>, G<sub>p</sub> = R<sub>chip</sub> / R<sub>bit</sub>. Higher G<sub>p</sub> → better jamming resistance and despreading gain.</div>
+
+    <div class="q">Q3 (1m). BRI bandwidth in kbps? <button class="reveal">Reveal</button></div>
+    <div class="answer">2B + 1D = 2(64) + 16 = <strong>144 kbps</strong>.</div>
+
+    <div class="q">Q4 (1m). Why does CDMA need power control? <button class="reveal">Reveal</button></div>
+    <div class="answer">To fight the <em>near-far problem</em> — without it a nearby user's signal would drown distant users sharing the same band.</div>
+
+    <div class="q">Q5 (4m). Differentiate FHSS and DSSS. <button class="reveal">Reveal</button></div>
+    <div class="answer">FHSS hops the carrier across many narrow channels on a PN pattern (used in Bluetooth, military). DSSS XORs each data bit with a high-rate PN chip sequence (used in IS-95, Wi-Fi 802.11b, GPS). FHSS resists narrowband jammers; DSSS gives higher processing gain and data rate but is more complex to sync.</div>
+
+    <div class="q">Q6 (4m). List the steps of traffic routing for a mobile-terminated call. <button class="reveal">Reveal</button></div>
+    <div class="answer">Caller → GMSC → query HLR → HLR returns MSRN from VLR → GMSC routes to visited MSC → MSC pages BTS → BTS pages MS → MS replies → traffic channel assigned → voice path established.</div>
+
+    <div class="q">Q7 (8m). Compare FDMA, TDMA and CDMA in terms of resource sharing, sync, capacity and applications. <button class="reveal">Reveal</button></div>
+    <div class="answer">FDMA splits frequency (no sync, guard bands, 1G AMPS), TDMA splits time (strict sync, GSM 8 slots/200 kHz), CDMA splits codes (universal reuse N=1, soft capacity, soft handoff, IS-95/CDMA2000/GPS). Capacity ranking: CDMA &gt; TDMA &gt; FDMA per MHz. CDMA needs strong power control; FDMA is simplest. Comparison table + diagram of frequency-time-code partitioning earns full marks.</div>
+
+    <div class="q">Q8 (8m). Explain ISDN — services, channels, BRI / PRI bandwidths and reference points. <button class="reveal">Reveal</button></div>
+    <div class="answer">ISDN delivers voice + data + signaling end-to-end in digital form over the existing copper loop. Three service classes: bearer (raw data pipe), tele (telephony, fax G3/G4), supplementary (caller ID, forwarding). Channels: B = 64 kbps user data, D = 16/64 kbps signaling, H = 384 kbps–1.92 Mbps bulk. BRI = 2B+1D = 144 kbps; PRI = 23B+1D (1.544 Mbps US) or 30B+1D (2.048 Mbps EU). Reference points R/S/T/U separate TE2-TA-NT2-NT1-LE in the subscriber loop.</div>
+  </div>
+
+  <div class="mnemonic">
+    <strong>Last-line memory hook (Unit III &amp; IV)</strong>
+    "<strong style="color:var(--ink);">F</strong>requency / <strong style="color:var(--ink);">T</strong>ime / <strong style="color:var(--ink);">C</strong>ode / <strong style="color:var(--ink);">S</strong>pace" → the four MA techniques · "<strong style="color:var(--ink);">F</strong>HSS hops, <strong style="color:var(--ink);">D</strong>SSS chips" → spread-spectrum types · "<strong style="color:var(--ink);">2</strong>B + <strong style="color:var(--ink);">1</strong>D = <strong style="color:var(--ink);">144</strong> kbps" → ISDN BRI · "<strong style="color:var(--ink);">G</strong>MSC → <strong style="color:var(--ink);">H</strong>LR → <strong style="color:var(--ink);">V</strong>LR → <strong style="color:var(--ink);">M</strong>SC → <strong style="color:var(--ink);">B</strong>TS → <strong style="color:var(--ink);">M</strong>S" → traffic routing call path.
+  </div>
+</section>
+
+  </main>
+</div>
+
+<script>
+  // Reveal quiz answers
+  document.querySelectorAll('.quiz button.reveal').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans = btn.parentElement.nextElementSibling;
+      if (ans && ans.classList.contains('answer')) {
+        ans.classList.toggle('show');
+        btn.textContent = ans.classList.contains('show') ? 'Hide' : 'Reveal';
+      }
+    });
+  });
+
+  // Active section in sidebar
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('aside ol li a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  if (navToggle && navList) {
+    navToggle.addEventListener('click', () => {
+      const open = navList.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', open);
+    });
+    navList.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navList.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+</script>
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
+</body>
+</html>

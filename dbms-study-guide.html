@@ -1,0 +1,2919 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#1f6feb" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="format-detection" content="telephone=no" />
+<title>DBMS Study Guide — Interactive (Units 3 & 4)</title>
+<style>
+  :root {
+    --bg: #f7f9fc;
+    --panel: #ffffff;
+    --ink: #1a2233;
+    --muted: #5a6577;
+    --brand: #1f6feb;
+    --brand-soft: #e8f0fe;
+    --brand-dark: #1858c4;
+    --good: #1a7f37;
+    --good-soft: #e6f4ea;
+    --warn: #b54708;
+    --warn-soft: #fdf3e7;
+    --bad: #b42318;
+    --bad-soft: #fdecec;
+    --line: #e3e7ee;
+    --code-bg: #0d1117;
+    --code-ink: #e6edf3;
+    --shadow: 0 1px 2px rgba(0,0,0,.05), 0 4px 12px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+  }
+  .layout { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+  aside {
+    position: sticky; top: 0; height: 100vh; overflow-y: auto;
+    background: var(--panel); border-right: 1px solid var(--line); padding: 24px 18px;
+  }
+  aside h1 { font-size: 18px; margin: 0 0 4px; color: var(--brand); }
+  aside .sub { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+  aside ol { list-style: none; padding: 0; margin: 0; counter-reset: nav; }
+  aside ol li { counter-increment: nav; margin: 4px 0; }
+  aside ol li a {
+    display: flex; gap: 8px; padding: 8px 10px; color: var(--ink); text-decoration: none;
+    border-radius: 6px; font-size: 14px; transition: background .15s;
+  }
+  aside ol li a::before {
+    content: counter(nav, decimal-leading-zero);
+    color: var(--muted); font-variant-numeric: tabular-nums; font-weight: 600; flex-shrink: 0;
+  }
+  aside ol li a:hover { background: var(--brand-soft); }
+  aside ol li a.active { background: var(--brand-soft); color: var(--brand); font-weight: 600; }
+  main { padding: 40px 56px 80px; max-width: 1000px; min-width: 0; overflow-wrap: break-word; }
+  h2.topic {
+    font-size: 28px; margin-top: 56px; padding-bottom: 10px;
+    border-bottom: 3px solid var(--brand);
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  h2.topic .num {
+    background: var(--brand); color: white; font-size: 16px;
+    padding: 4px 12px; border-radius: 100px; font-weight: 700;
+  }
+  h2.topic .unit {
+    font-size: 12px; color: var(--muted); font-weight: 500; margin-left: auto;
+    background: var(--brand-soft); padding: 4px 10px; border-radius: 100px;
+  }
+  h3 { font-size: 20px; margin-top: 32px; color: var(--ink); }
+  h4 { font-size: 16px; margin-top: 22px; color: var(--brand); }
+  p { margin: 10px 0; }
+  .lead { font-size: 17px; color: var(--muted); }
+  .box {
+    border-left: 4px solid var(--brand); background: var(--brand-soft);
+    padding: 14px 18px; margin: 16px 0; border-radius: 4px;
+  }
+  .box.def { border-color: var(--brand); background: var(--brand-soft); }
+  .box.eg  { border-color: var(--good);  background: var(--good-soft); }
+  .box.tip { border-color: var(--warn);  background: var(--warn-soft); }
+  .box.bad { border-color: var(--bad);   background: var(--bad-soft); }
+  .box .label {
+    font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    margin-bottom: 6px; display: block;
+  }
+  .box.def .label { color: var(--brand); }
+  .box.eg  .label { color: var(--good); }
+  .box.tip .label { color: var(--warn); }
+  .box.bad .label { color: var(--bad); }
+  table {
+    width: 100%; border-collapse: collapse; margin: 14px 0;
+    background: var(--panel); box-shadow: var(--shadow);
+    border-radius: 6px; overflow: hidden; font-size: 14px;
+  }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+  th { background: #f0f3f8; font-weight: 600; }
+  tbody tr:nth-child(even) { background: #fafbfd; }
+  tbody tr:hover { background: var(--brand-soft); }
+  pre, code { font-family: "Cascadia Code", "Fira Code", Consolas, monospace; }
+  code {
+    background: #eef1f6; padding: 2px 6px; border-radius: 3px;
+    font-size: 13px; color: #1f3a5f;
+  }
+  pre {
+    background: var(--code-bg); color: var(--code-ink);
+    padding: 14px 18px; border-radius: 6px;
+    overflow-x: auto; font-size: 13px; line-height: 1.55;
+  }
+  pre code { background: transparent; color: inherit; padding: 0; }
+  .keyword { color: #ff7b72; font-weight: 600; }
+  .string  { color: #a5d6ff; }
+  .comment { color: #8b949e; font-style: italic; }
+  .mnemonic {
+    background: linear-gradient(135deg, #fff5e1, #fff);
+    border: 2px dashed #f0b429;
+    padding: 14px 18px; border-radius: 8px; margin: 18px 0; font-style: italic;
+  }
+  .mnemonic strong {
+    font-style: normal; color: var(--warn);
+    font-size: 13px; letter-spacing: .08em;
+    display: block; margin-bottom: 6px;
+  }
+  .pill {
+    background: var(--brand-soft); color: var(--brand);
+    padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600;
+  }
+  .pill.green { background: var(--good-soft); color: var(--good); }
+  .pill.red   { background: var(--bad-soft);  color: var(--bad); }
+  .pill.amber { background: var(--warn-soft); color: var(--warn); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 8px; padding: 16px; box-shadow: var(--shadow);
+  }
+  .card h5 { margin: 0 0 8px; color: var(--brand); font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+  .quiz {
+    background: #f0f7ff; border: 2px solid #bbd6ff;
+    border-radius: 10px; padding: 16px 20px; margin: 24px 0;
+  }
+  .quiz h4 { margin-top: 0; color: var(--brand); }
+  .quiz .q { font-weight: 600; margin: 14px 0 6px; }
+  .quiz button.reveal {
+    background: var(--brand); color: white; border: none;
+    padding: 4px 12px; border-radius: 100px; font-size: 12px;
+    cursor: pointer; margin-left: 8px;
+  }
+  .quiz button.reveal:hover { background: var(--brand-dark); }
+  .quiz .answer {
+    display: none; background: #fff; border-left: 3px solid var(--good);
+    padding: 8px 12px; margin-top: 6px; border-radius: 4px; color: var(--ink);
+  }
+  .quiz .answer.show { display: block; }
+  hr { border: none; border-top: 1px dashed var(--line); margin: 30px 0; }
+  .hero {
+    background: linear-gradient(135deg, #1f6feb, #6f42c1);
+    color: white; padding: 40px; border-radius: 12px; margin-bottom: 30px;
+    overflow-wrap: break-word;
+  }
+  .hero h1 { margin: 0 0 8px; font-size: 32px; }
+  .hero p { margin: 0; opacity: .92; font-size: 16px; }
+  .legend {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    font-size: 12px; margin: 14px 0; color: var(--muted);
+  }
+  .legend span { padding: 3px 10px; border-radius: 100px; }
+  /* === DIAGRAMS === */
+  .diagram {
+    background: #fbfcfe;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .diagram svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+  .diagram .caption {
+    font-size: 12px; color: var(--muted); margin-top: 10px;
+    font-style: italic; text-align: center;
+  }
+  .diagram-title {
+    font-size: 13px; font-weight: 700; color: var(--brand);
+    text-transform: uppercase; letter-spacing: .08em;
+    margin-bottom: 12px; text-align: center;
+  }
+  /* ===== MOBILE NAV TOGGLE ===== */
+  .nav-toggle {
+    display: none;
+    background: var(--brand); color: white; border: none;
+    padding: 8px 14px; border-radius: 6px; font-size: 13px;
+    cursor: pointer; font-weight: 600; align-items: center; gap: 6px;
+    margin-bottom: 12px; width: 100%;
+  }
+  .nav-toggle svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* ===== RESPONSIVE BREAKPOINT ===== */
+  @media (max-width: 880px) {
+    .layout { grid-template-columns: 1fr; }
+    aside {
+      position: relative; height: auto; border-right: none;
+      border-bottom: 1px solid var(--line); padding: 16px 14px;
+    }
+    aside ol { display: none; }
+    aside ol.nav-open { display: block; }
+    .nav-toggle { display: flex; }
+    main { padding: 18px 16px 60px; width: 100%; }
+    .hero { padding: 24px 18px; border-radius: 8px; margin-bottom: 20px; }
+    .hero h1 { font-size: 22px; }
+    .hero p { font-size: 14px; }
+    h2.topic { font-size: 20px; margin-top: 36px; flex-wrap: wrap; }
+    h3 { font-size: 17px; }
+    h4 { font-size: 15px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+    .mnemonic { padding: 12px 14px; }
+    .quiz { padding: 14px 14px; }
+    pre { font-size: 12px; }
+    .diagram { padding: 12px; }
+    .box { padding: 12px 14px; }
+  }
+  @media (max-width: 480px) {
+    main { padding: 14px 12px 50px; }
+    .hero { padding: 20px 14px; }
+    .hero h1 { font-size: 18px; }
+    h2.topic { font-size: 17px; }
+    .quiz button.reveal { padding: 5px 10px; font-size: 11px; }
+  }
+  /* ===== OVERFLOW PREVENTION ===== */
+  *, *::before, *::after { box-sizing: border-box; }
+  img, svg, video, iframe { max-width: 100%; height: auto; }
+  pre, table { max-width: 100%; }
+  /* hide horizontal overflow only on mobile (so sticky sidebar works on desktop) */
+  @media (max-width: 880px) { body { overflow-x: hidden; } }
+
+  /* ============================================================ */
+  /* ===== ENHANCED MOBILE RESPONSIVENESS (320 / 480 / 768) ====== */
+  /* ===== Desktop layout (>880px) is left untouched ============= */
+  /* ============================================================ */
+  @media (max-width: 880px) {
+    /* sticky nav bar on phone — toggle stays reachable while scrolling */
+    aside {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--panel);
+      box-shadow: 0 2px 6px rgba(0,0,0,.06);
+    }
+    /* tables: allow wrapping; horizontal scroll only when content forces it */
+    table { white-space: normal; font-size: 13px; }
+    th, td { padding: 8px 10px; word-break: break-word; }
+    /* touch-friendly nav links + reveal buttons (min 44px tap target) */
+    aside ol li a { padding: 12px; min-height: 44px; align-items: center; }
+    .nav-toggle { padding: 12px 16px; min-height: 44px; font-size: 15px; }
+    .quiz button.reveal {
+      padding: 10px 18px; font-size: 14px;
+      min-height: 44px; margin-left: 0; margin-top: 8px;
+      display: inline-block;
+    }
+    aside ol.nav-open {
+      max-height: 60vh; overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    input, textarea, select { font-size: 16px; }
+    code { word-break: break-word; }
+  }
+  @media (max-width: 600px) {
+    body { font-size: 15px; line-height: 1.6; }
+    aside { padding: 12px 12px; }
+    aside h1 { font-size: 16px; }
+    aside .sub { font-size: 11px; }
+    main { padding: 14px 14px 50px; }
+    .hero { padding: 22px 16px; border-radius: 8px; }
+    .hero h1 { font-size: 20px; }
+    .hero p { font-size: 13.5px; }
+    h2.topic { font-size: 18px; gap: 8px; padding-bottom: 8px; }
+    h2.topic .num { font-size: 13px; padding: 3px 9px; }
+    h3 { font-size: 16px; }
+    h4 { font-size: 14px; }
+    .legend { gap: 6px; font-size: 11px; }
+    .legend span { padding: 3px 8px; }
+    .quiz { padding: 12px 14px; margin: 18px 0; }
+    .mnemonic { padding: 10px 12px; }
+    .box { padding: 10px 12px; }
+    pre { font-size: 11.5px; padding: 12px; }
+    .diagram { padding: 10px; margin: 14px 0; }
+  }
+  @media (max-width: 380px) {
+    body { font-size: 14.5px; }
+    aside { padding: 10px 10px; }
+    main { padding: 12px 10px 40px; }
+    .hero { padding: 18px 14px; }
+    .hero h1 { font-size: 18px; }
+    .hero p { font-size: 13px; }
+    h2.topic { font-size: 17px; }
+    h3 { font-size: 15.5px; }
+    table { font-size: 12px; }
+    th, td { padding: 6px 8px; }
+    pre { font-size: 11px; padding: 10px; }
+    .quiz button.reveal { padding: 9px 14px; font-size: 13px; }
+  }
+  /* SVG diagrams scale fluidly */
+  .diagram svg { width: 100%; height: auto; max-width: 100%; }
+  /* Better tap feedback on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    a { -webkit-tap-highlight-color: rgba(0,0,0,.05); }
+  }
+  /* Print-friendly */
+  @media print {
+    aside, .nav-toggle { display: none; }
+    main { padding: 0; }
+    .layout { grid-template-columns: 1fr; }
+  }</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside>
+    <h1>DBMS Study Guide</h1>
+    <div class="sub">Units 3 &amp; 4 — Interactive notes</div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Navigation
+    </button>
+    <ol id="navList">
+      <li><a href="#t12" style="color:var(--bad);font-weight:600;">★ Sessional Exam Q&amp;A</a></li>
+      <li><a href="#t1">Relational Algebra</a></li>
+      <li><a href="#t2">Relational Calculus (TRC/DRC)</a></li>
+      <li><a href="#t3">Functional Dependencies</a></li>
+      <li><a href="#t4">Anomalies in DBMS</a></li>
+      <li><a href="#t5">Normalization (1NF→5NF)</a></li>
+      <li><a href="#t6">Closure &amp; Candidate Keys</a></li>
+      <li><a href="#t7">Views in SQL</a></li>
+      <li><a href="#t8">Query Processing &amp; Optimization</a></li>
+      <li><a href="#t9">Concurrency Control &amp; Recovery</a></li>
+      <li><a href="#t10">Database Security</a></li>
+      <li><a href="#t11">Distributed Database System</a></li>
+      <li><a href="#sessional-booster" style="color:var(--brand);font-weight:600;">Sessional Exam Booster</a></li>
+    </ol>
+    <div style="margin-top:24px; font-size:11px; color:var(--muted); border-top:1px solid var(--line); padding-top:14px;">
+      Tip: Click reveal buttons in quizzes. Use Ctrl+F to search.
+    </div>
+  </aside>
+
+  <main>
+    <div class="hero">
+      <h1>Database Management Systems</h1>
+      <p>Comprehensive guide for Unit 3 (Relational Algebra &amp; Calculus) and Unit 4 (Design, Normalization, Views, Query Processing, Concurrency, Security, Distributed DB) — definitions, SVG diagrams, examples, mnemonics, and quizzes.</p>
+    </div>
+
+    <div class="legend">
+      <span class="pill">Definition</span>
+      <span class="pill green">Example</span>
+      <span class="pill amber">Mnemonic / Tip</span>
+      <span class="pill red">Anomaly / Pitfall</span>
+    </div>
+
+<!-- ============================== TOPIC 1 — RELATIONAL ALGEBRA ============================== -->
+<section id="t1">
+  <h2 class="topic"><span class="num">01</span> Relational Algebra <span class="unit">UNIT 3</span></h2>
+  <p class="lead">Relational Algebra (introduced by E. F. Codd, 1970) is a <strong>procedural query language</strong> — you tell the DBMS <em>what</em> to do AND <em>how</em> to do it. Each operator takes one or two relations and returns a new relation, so operations can be chained.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">Relational Algebra — Operation Hierarchy</div>
+    <svg viewBox="0 0 760 420" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <polygon points="0 0, 8 4, 0 8" fill="#1f6feb"/>
+        </marker>
+      </defs>
+      <!-- Root -->
+      <rect x="280" y="10" width="200" height="44" rx="8" fill="#1f6feb"/>
+      <text x="380" y="38" text-anchor="middle" fill="white" font-weight="700" font-size="15">RELATIONAL ALGEBRA</text>
+
+      <!-- Branches -->
+      <line x1="380" y1="54" x2="180" y2="90" stroke="#1f6feb" stroke-width="2"/>
+      <line x1="380" y1="54" x2="580" y2="90" stroke="#1f6feb" stroke-width="2"/>
+
+      <!-- Basic title -->
+      <rect x="80" y="90" width="200" height="36" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="180" y="113" text-anchor="middle" fill="#1f6feb" font-weight="700" font-size="13">BASIC (6 ops)</text>
+
+      <!-- Derived title -->
+      <rect x="480" y="90" width="200" height="36" rx="6" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="580" y="113" text-anchor="middle" fill="#b54708" font-weight="700" font-size="13">DERIVED</text>
+
+      <!-- Basic ops grid -->
+      <g font-size="12" fill="#1a2233">
+        <rect x="20" y="146" width="100" height="36" rx="5" fill="white" stroke="#1f6feb"/>
+        <text x="70" y="169" text-anchor="middle">Select σ</text>
+        <rect x="130" y="146" width="100" height="36" rx="5" fill="white" stroke="#1f6feb"/>
+        <text x="180" y="169" text-anchor="middle">Project π</text>
+        <rect x="240" y="146" width="100" height="36" rx="5" fill="white" stroke="#1f6feb"/>
+        <text x="290" y="169" text-anchor="middle">Union ∪</text>
+
+        <rect x="20" y="194" width="100" height="36" rx="5" fill="white" stroke="#1f6feb"/>
+        <text x="70" y="217" text-anchor="middle">SetDiff −</text>
+        <rect x="130" y="194" width="100" height="36" rx="5" fill="white" stroke="#1f6feb"/>
+        <text x="180" y="217" text-anchor="middle">Cartesian ×</text>
+        <rect x="240" y="194" width="100" height="36" rx="5" fill="white" stroke="#1f6feb"/>
+        <text x="290" y="217" text-anchor="middle">Rename ρ</text>
+      </g>
+
+      <!-- Derived ops -->
+      <g font-size="12" fill="#1a2233">
+        <rect x="420" y="146" width="110" height="36" rx="5" fill="white" stroke="#b54708"/>
+        <text x="475" y="169" text-anchor="middle">Intersection ∩</text>
+        <rect x="540" y="146" width="80" height="36" rx="5" fill="white" stroke="#b54708"/>
+        <text x="580" y="169" text-anchor="middle">Join ⋈</text>
+        <rect x="630" y="146" width="100" height="36" rx="5" fill="white" stroke="#b54708"/>
+        <text x="680" y="169" text-anchor="middle">Division ÷</text>
+      </g>
+
+      <!-- Join expansion -->
+      <line x1="580" y1="182" x2="580" y2="220" stroke="#b54708" stroke-width="1.5"/>
+      <line x1="480" y1="240" x2="680" y2="240" stroke="#b54708" stroke-width="1.5"/>
+      <line x1="480" y1="240" x2="480" y2="260" stroke="#b54708" stroke-width="1.5"/>
+      <line x1="680" y1="240" x2="680" y2="260" stroke="#b54708" stroke-width="1.5"/>
+
+      <rect x="420" y="260" width="120" height="36" rx="5" fill="#fff5e1" stroke="#b54708"/>
+      <text x="480" y="283" text-anchor="middle" font-weight="600" font-size="12" fill="#1a2233">INNER</text>
+      <rect x="620" y="260" width="120" height="36" rx="5" fill="#fff5e1" stroke="#b54708"/>
+      <text x="680" y="283" text-anchor="middle" font-weight="600" font-size="12" fill="#1a2233">OUTER</text>
+
+      <text x="480" y="320" text-anchor="middle" font-size="11" fill="#5a6577">Theta · Equi · Natural</text>
+      <text x="680" y="320" text-anchor="middle" font-size="11" fill="#5a6577">Left · Right · Full</text>
+    </svg>
+    <div class="caption">All other operations (joins, intersection, division) can be built from the 6 basic operators.</div>
+  </div>
+
+  <h3>1.1 Sample Tables (used throughout)</h3>
+  <div class="grid-2">
+    <div class="card"><h5>STUDENT</h5>
+      <table style="margin:0;font-size:13px;"><thead><tr><th>ROLL</th><th>NAME</th><th>AGE</th></tr></thead><tbody>
+      <tr><td>1</td><td>Aman</td><td>20</td></tr>
+      <tr><td>2</td><td>Atul</td><td>18</td></tr>
+      <tr><td>3</td><td>Baljeet</td><td>19</td></tr>
+      <tr><td>4</td><td>Harsh</td><td>20</td></tr>
+      <tr><td>5</td><td>Prateek</td><td>21</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card"><h5>EMPLOYEE</h5>
+      <table style="margin:0;font-size:13px;"><thead><tr><th>E_NO</th><th>NAME</th><th>AGE</th></tr></thead><tbody>
+      <tr><td>E-1</td><td>Anant</td><td>20</td></tr>
+      <tr><td>E-2</td><td>Ashish</td><td>23</td></tr>
+      <tr><td>E-3</td><td>Baljeet</td><td>25</td></tr>
+      <tr><td>E-4</td><td>Harsh</td><td>20</td></tr>
+      <tr><td>E-5</td><td>Pranav</td><td>22</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <hr>
+  <h3>1.2 The Six Basic Operations</h3>
+
+  <h4>① Selection (σ) — pick rows</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    Unary operator that returns rows of relation R that satisfy predicate <code>p</code>. Notation: <code>σ<sub>p</sub>(R)</code>. Equivalent to SQL <code>WHERE</code>.
+  </div>
+  <p><strong>Example:</strong> <code>σ<sub>AGE=20</sub>(STUDENT)</code> → returns Aman (20) and Harsh (20).</p>
+
+  <h4>② Projection (π) — pick columns</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    Returns selected attributes (vertical slice). Notation: <code>π<sub>a1,a2,…</sub>(R)</code>. Equivalent to SQL <code>SELECT col1, col2</code>. <strong>Eliminates duplicates.</strong>
+  </div>
+  <p><strong>Example:</strong> <code>π<sub>NAME</sub>(STUDENT)</code> → {Aman, Atul, Baljeet, Harsh, Prateek}.</p>
+
+  <h4>③ Union (∪) — combine rows</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    Returns all tuples from R or S (no duplicates). <strong>Both relations must be union-compatible</strong> — same attributes &amp; domains.
+  </div>
+
+  <h4>④ Set Difference (−) — rows in R not in S</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <code>R − S</code> returns tuples present in R but not in S. Also requires union-compatibility.
+  </div>
+
+  <h4>⑤ Cartesian Product (×) — pair every row with every row</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <code>R × S</code> produces every combination of rows. If |R| = m and |S| = n, output has m·n rows. Foundation of all joins.
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">Cartesian Product — visual</div>
+    <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+      <!-- R table -->
+      <text x="60" y="20" text-anchor="middle" font-weight="700" fill="#1f6feb">R(A,B)</text>
+      <rect x="20" y="30" width="80" height="30" fill="#e8f0fe" stroke="#1f6feb"/>
+      <text x="40" y="50" text-anchor="middle" font-size="13">a</text>
+      <text x="80" y="50" text-anchor="middle" font-size="13">1</text>
+      <rect x="20" y="60" width="80" height="30" fill="white" stroke="#1f6feb"/>
+      <text x="40" y="80" text-anchor="middle" font-size="13">b</text>
+      <text x="80" y="80" text-anchor="middle" font-size="13">2</text>
+
+      <!-- × symbol -->
+      <text x="160" y="65" text-anchor="middle" font-size="32" fill="#b54708" font-weight="700">×</text>
+
+      <!-- S table -->
+      <text x="260" y="20" text-anchor="middle" font-weight="700" fill="#1a7f37">S(C,D)</text>
+      <rect x="220" y="30" width="80" height="30" fill="#e6f4ea" stroke="#1a7f37"/>
+      <text x="240" y="50" text-anchor="middle" font-size="13">x</text>
+      <text x="280" y="50" text-anchor="middle" font-size="13">9</text>
+      <rect x="220" y="60" width="80" height="30" fill="white" stroke="#1a7f37"/>
+      <text x="240" y="80" text-anchor="middle" font-size="13">y</text>
+      <text x="280" y="80" text-anchor="middle" font-size="13">8</text>
+
+      <!-- = -->
+      <text x="350" y="65" text-anchor="middle" font-size="28" fill="#5a6577">=</text>
+
+      <!-- Result -->
+      <text x="540" y="20" text-anchor="middle" font-weight="700" fill="#6f42c1">R × S (m·n rows)</text>
+      <g font-size="13">
+        <rect x="400" y="30" width="280" height="30" fill="#f5f0fb" stroke="#6f42c1"/>
+        <text x="430" y="50" text-anchor="middle">a</text><text x="490" y="50" text-anchor="middle">1</text>
+        <text x="550" y="50" text-anchor="middle">x</text><text x="650" y="50" text-anchor="middle">9</text>
+
+        <rect x="400" y="60" width="280" height="30" fill="white" stroke="#6f42c1"/>
+        <text x="430" y="80" text-anchor="middle">a</text><text x="490" y="80" text-anchor="middle">1</text>
+        <text x="550" y="80" text-anchor="middle">y</text><text x="650" y="80" text-anchor="middle">8</text>
+
+        <rect x="400" y="90" width="280" height="30" fill="#f5f0fb" stroke="#6f42c1"/>
+        <text x="430" y="110" text-anchor="middle">b</text><text x="490" y="110" text-anchor="middle">2</text>
+        <text x="550" y="110" text-anchor="middle">x</text><text x="650" y="110" text-anchor="middle">9</text>
+
+        <rect x="400" y="120" width="280" height="30" fill="white" stroke="#6f42c1"/>
+        <text x="430" y="140" text-anchor="middle">b</text><text x="490" y="140" text-anchor="middle">2</text>
+        <text x="550" y="140" text-anchor="middle">y</text><text x="650" y="140" text-anchor="middle">8</text>
+      </g>
+      <text x="360" y="200" text-anchor="middle" font-size="12" fill="#5a6577">Each row of R paired with every row of S → 2 × 2 = 4 rows in the output.</text>
+    </svg>
+  </div>
+
+  <h4>⑥ Rename (ρ) — alias output</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    Renames a relation or its attributes. Notation: <code>ρ<sub>NEW</sub>(R)</code> or <code>ρ<sub>NEW(a1,a2)</sub>(R)</code>.
+  </div>
+
+  <hr>
+  <h3>1.3 Derived Operations — Joins</h3>
+
+  <div class="diagram">
+    <div class="diagram-title">Visualising the four common JOINs</div>
+    <svg viewBox="0 0 720 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Inner Join -->
+      <g transform="translate(60,30)">
+        <circle cx="40" cy="60" r="40" fill="#cfe0fa" opacity=".7"/>
+        <circle cx="80" cy="60" r="40" fill="#cfe0fa" opacity=".7"/>
+        <path d="M 60,28 a 40,40 0 0 1 0,64 a 40,40 0 0 1 0,-64 z" fill="#1f6feb" opacity="0.85"/>
+        <text x="60" y="135" text-anchor="middle" font-size="13" font-weight="700">INNER JOIN</text>
+        <text x="60" y="152" text-anchor="middle" font-size="11" fill="#5a6577">matched only</text>
+      </g>
+      <!-- Left Outer -->
+      <g transform="translate(220,30)">
+        <circle cx="40" cy="60" r="40" fill="#1f6feb" opacity=".85"/>
+        <circle cx="80" cy="60" r="40" fill="#cfe0fa" opacity=".7"/>
+        <text x="60" y="135" text-anchor="middle" font-size="13" font-weight="700">LEFT OUTER</text>
+        <text x="60" y="152" text-anchor="middle" font-size="11" fill="#5a6577">all of L + matched R</text>
+      </g>
+      <!-- Right Outer -->
+      <g transform="translate(380,30)">
+        <circle cx="40" cy="60" r="40" fill="#cfe0fa" opacity=".7"/>
+        <circle cx="80" cy="60" r="40" fill="#1f6feb" opacity=".85"/>
+        <text x="60" y="135" text-anchor="middle" font-size="13" font-weight="700">RIGHT OUTER</text>
+        <text x="60" y="152" text-anchor="middle" font-size="11" fill="#5a6577">all of R + matched L</text>
+      </g>
+      <!-- Full Outer -->
+      <g transform="translate(540,30)">
+        <circle cx="40" cy="60" r="40" fill="#1f6feb" opacity=".85"/>
+        <circle cx="80" cy="60" r="40" fill="#1f6feb" opacity=".85"/>
+        <text x="60" y="135" text-anchor="middle" font-size="13" font-weight="700">FULL OUTER</text>
+        <text x="60" y="152" text-anchor="middle" font-size="11" fill="#5a6577">everything (NULLs)</text>
+      </g>
+    </svg>
+  </div>
+
+  <h4>Theta Join (⋈<sub>θ</sub>)</h4>
+  <p>Combines two relations on a condition θ that may be <code>&gt;, &lt;, ≥, ≤, ≠, =</code>. Equivalent to <code>σ<sub>θ</sub>(R × S)</code>.</p>
+
+  <h4>Equi Join</h4>
+  <p>Special theta join where condition uses only equality (<code>=</code>). Most common in practice.</p>
+
+  <h4>Natural Join (⋈)</h4>
+  <p>Joins on <strong>all attributes with the same name</strong> in both relations and keeps a single copy of each common column. No condition needed.</p>
+  <div class="box eg">
+    <span class="label">Example — Natural Join</span>
+    <code>EMPLOYEE(E_NO, NAME, CITY) ⋈ DEPARTMENT(D_NO, D_NAME, E_NO)</code> joins on <code>E_NO</code>; output has columns E_NO, NAME, CITY, D_NO, D_NAME (E_NO appears once).
+  </div>
+
+  <h4>Intersection (∩) — common rows</h4>
+  <p><code>R ∩ S</code> returns tuples present in both. Equivalent to <code>R − (R − S)</code>.</p>
+
+  <h4>Division (÷) — "for all"</h4>
+  <p>Used for queries like <em>"find students who took every course"</em>. <code>R(A,B) ÷ S(B)</code> returns A-values paired with every B in S.</p>
+
+  <hr>
+  <h3>1.4 Generalized Projection &amp; Aggregate Functions</h3>
+  <div class="box def">
+    <span class="label">Generalized Projection</span>
+    Allows arithmetic in the projection list. <code>π<sub>F1,F2,…,Fn</sub>(R)</code> where each F is a function over attributes.
+    <pre style="margin-top:8px;"><code>π<sub>SSN, Salary−Deduction, 2000*Years_service, 0.25*Salary</sub>(EMPLOYEE)</code></pre>
+  </div>
+  <div class="box def">
+    <span class="label">Aggregate functions</span>
+    <code>sum, avg, count, min, max</code> — collapse a collection of values to a single value. Used with grouping in SQL <code>GROUP BY</code>.
+  </div>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"σ π ∪ − × ρ"</strong> — six basic ops: <em>S</em>elect, <em>P</em>roject, <em>U</em>nion, <em>D</em>ifference, <em>C</em>artesian, <em>R</em>ename. Everything else is derived.
+  </div>
+
+  <div class="quiz">
+    <h4>Quick Check — Topic 1</h4>
+    <div class="q">Q1. Which operator is unary &amp; row-filtering? <button class="reveal">Show</button></div>
+    <div class="answer">Selection (σ) — picks rows that satisfy a predicate.</div>
+    <div class="q">Q2. Why must Union &amp; Set-Difference be union-compatible? <button class="reveal">Show</button></div>
+    <div class="answer">Both inputs must have the same number of attributes with matching domains, otherwise the resulting tuples would be undefined.</div>
+    <div class="q">Q3. How does Natural Join differ from Equi Join? <button class="reveal">Show</button></div>
+    <div class="answer">Natural Join automatically matches on every common-named attribute and keeps one copy of it; Equi Join needs an explicit equality condition and keeps both copies.</div>
+  </div>
+</section>
+
+<!-- ============================== TOPIC 2 — RELATIONAL CALCULUS ============================== -->
+<section id="t2">
+  <h2 class="topic"><span class="num">02</span> Relational Calculus — TRC &amp; DRC <span class="unit">UNIT 3</span></h2>
+  <p class="lead">Relational Calculus is a <strong>declarative (non-procedural)</strong> query language — you say <em>what</em> you want, not <em>how</em>. Two flavours: <strong>Tuple</strong> Relational Calculus (variable ranges over rows) and <strong>Domain</strong> Relational Calculus (variables range over attribute values).</p>
+
+  <div class="diagram">
+    <div class="diagram-title">Algebra vs Calculus — what the variable ranges over</div>
+    <svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg">
+      <!-- Procedural side -->
+      <rect x="20" y="20" width="280" height="60" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="160" y="44" text-anchor="middle" font-weight="700" fill="#1f6feb">PROCEDURAL</text>
+      <text x="160" y="65" text-anchor="middle" font-size="12" fill="#1a2233">Relational Algebra — "How + What"</text>
+
+      <!-- Declarative side -->
+      <rect x="420" y="20" width="280" height="60" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="560" y="44" text-anchor="middle" font-weight="700" fill="#b54708">DECLARATIVE</text>
+      <text x="560" y="65" text-anchor="middle" font-size="12" fill="#1a2233">Relational Calculus — "What only"</text>
+
+      <!-- TRC -->
+      <rect x="380" y="120" width="140" height="80" rx="8" fill="white" stroke="#b54708"/>
+      <text x="450" y="142" text-anchor="middle" font-weight="700" font-size="13" fill="#b54708">TRC</text>
+      <text x="450" y="162" text-anchor="middle" font-size="11" fill="#5a6577">Tuple variable</text>
+      <text x="450" y="180" text-anchor="middle" font-family="monospace" font-size="12">{ t | P(t) }</text>
+
+      <!-- DRC -->
+      <rect x="540" y="120" width="160" height="80" rx="8" fill="white" stroke="#b54708"/>
+      <text x="620" y="142" text-anchor="middle" font-weight="700" font-size="13" fill="#b54708">DRC</text>
+      <text x="620" y="162" text-anchor="middle" font-size="11" fill="#5a6577">Domain variable</text>
+      <text x="620" y="180" text-anchor="middle" font-family="monospace" font-size="11">{ ⟨x1,x2⟩ | P(...) }</text>
+
+      <!-- arrows -->
+      <line x1="560" y1="80" x2="450" y2="120" stroke="#b54708" stroke-width="2"/>
+      <line x1="560" y1="80" x2="620" y2="120" stroke="#b54708" stroke-width="2"/>
+
+      <!-- Note -->
+      <text x="160" y="150" text-anchor="middle" font-size="12" fill="#5a6577" font-style="italic">SQL is mostly declarative</text>
+      <text x="160" y="170" text-anchor="middle" font-size="12" fill="#5a6577" font-style="italic">(closer to calculus)</text>
+    </svg>
+  </div>
+
+  <h3>2.1 Tuple Relational Calculus (TRC)</h3>
+  <div class="box def">
+    <span class="label">Syntax</span>
+    <code>{ t | P(t) }</code> — return all tuples <code>t</code> for which predicate <code>P(t)</code> is true. <code>t</code> ranges over rows.
+  </div>
+
+  <h4>Sample Customer table</h4>
+  <table><thead><tr><th>Customer_id</th><th>Name</th><th>Zipcode</th></tr></thead><tbody>
+    <tr><td>1</td><td>Rohit</td><td>12345</td></tr>
+    <tr><td>2</td><td>Rahul</td><td>13245</td></tr>
+    <tr><td>3</td><td>Rohit</td><td>56789</td></tr>
+    <tr><td>4</td><td>Amit</td><td>12345</td></tr>
+  </tbody></table>
+
+  <div class="box eg">
+    <span class="label">Example 1 — get all customers with Zipcode 12345</span>
+    <pre><code>{ t | t ∈ Customer ∧ t.Zipcode = 12345 }</code></pre>
+    Returns rows for Rohit (id 1) and Amit (id 4).
+  </div>
+
+  <div class="box eg">
+    <span class="label">Example 2 — get only customer_ids</span>
+    <pre><code>{ t | ∃s ( s ∈ Customer ∧ s.Customer_id = t.Customer_id ) }</code></pre>
+  </div>
+
+  <h3>2.2 Domain Relational Calculus (DRC)</h3>
+  <div class="box def">
+    <span class="label">Syntax</span>
+    <code>{ ⟨x1, x2, …, xn⟩ | P(x1, x2, …, xn) }</code> — variables range over column <em>domains</em>, not whole rows.
+  </div>
+
+  <div class="box eg">
+    <span class="label">Example — same query, in DRC</span>
+    <pre><code>{ ⟨x1, x2, x3⟩ | ⟨x1, x2, x3⟩ ∈ Customer ∧ x3 = 12345 }</code></pre>
+  </div>
+
+  <h3>2.3 TRC vs DRC vs Algebra — quick compare</h3>
+  <table>
+    <thead><tr><th>Feature</th><th>Algebra</th><th>TRC</th><th>DRC</th></tr></thead>
+    <tbody>
+      <tr><td>Style</td><td>Procedural</td><td>Declarative</td><td>Declarative</td></tr>
+      <tr><td>Variable</td><td>—</td><td>Tuple (whole row)</td><td>Domain (one attribute)</td></tr>
+      <tr><td>Quantifiers</td><td>No</td><td>∃, ∀</td><td>∃, ∀</td></tr>
+      <tr><td>Closest to SQL</td><td>Engine internals</td><td>Yes</td><td>QBE-style</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"Algebra ACTS, Calculus ASKS"</strong> — algebra performs operations; calculus describes the result.
+  </div>
+
+  <div class="quiz">
+    <h4>Quick Check — Topic 2</h4>
+    <div class="q">Q1. State the TRC expression syntax. <button class="reveal">Show</button></div>
+    <div class="answer"><code>{ t | P(t) }</code> — t is a tuple variable, P(t) is the predicate.</div>
+    <div class="q">Q2. What does a DRC variable range over? <button class="reveal">Show</button></div>
+    <div class="answer">The domain (set of legal values) of a single attribute, not the whole row.</div>
+  </div>
+</section>
+
+<!-- ============================== TOPIC 3 — FUNCTIONAL DEPENDENCIES ============================== -->
+<section id="t3">
+  <h2 class="topic"><span class="num">03</span> Functional Dependencies <span class="unit">UNIT 4</span></h2>
+  <p class="lead">A <strong>Functional Dependency (FD)</strong> X → Y means: <em>"if two rows agree on X, they must also agree on Y"</em>. FDs are the foundation of normalization and were formalised with Armstrong's RAT axioms (Reflexivity, Augmentation, Transitivity) in 1974.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">Functional dependency on R(A, B, C, D, E)</div>
+    <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+        <marker id="arr3" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#b54708"/>
+        </marker>
+      </defs>
+
+      <!-- Relation header -->
+      <rect x="120" y="40" width="360" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <g font-family="monospace" font-size="20" font-weight="700" fill="#1a2233">
+        <text x="170" y="72">A</text>
+        <text x="230" y="72">B</text>
+        <text x="290" y="72">C</text>
+        <text x="350" y="72">D</text>
+        <text x="410" y="72">E</text>
+      </g>
+      <text x="300" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="#1f6feb">R ( A B C D E )</text>
+
+      <!-- FD1: A → C, D -->
+      <path d="M 170 90 Q 170 130, 290 130 Q 290 95, 290 92" fill="none" stroke="#1f6feb" stroke-width="2" marker-end="url(#arr2)"/>
+      <path d="M 170 90 Q 170 150, 350 150 Q 350 95, 350 92" fill="none" stroke="#1f6feb" stroke-width="2" marker-end="url(#arr2)"/>
+      <text x="180" y="175" font-size="13" fill="#1f6feb" font-weight="700">FD1: A → CD</text>
+
+      <!-- FD2: BC → D, E -->
+      <path d="M 260 90 Q 260 195, 350 195 Q 350 195, 350 92" fill="none" stroke="#b54708" stroke-width="2" marker-end="url(#arr3)" stroke-dasharray="4 3"/>
+      <path d="M 260 90 Q 260 210, 410 210 Q 410 210, 410 92" fill="none" stroke="#b54708" stroke-width="2" marker-end="url(#arr3)" stroke-dasharray="4 3"/>
+      <text x="380" y="175" font-size="13" fill="#b54708" font-weight="700">FD2: BC → DE</text>
+    </svg>
+    <div class="caption">Arrows go from determinant (LHS) to dependent (RHS). Dashed = composite determinant.</div>
+  </div>
+
+  <h3>3.1 Notation &amp; Terminology</h3>
+  <ul>
+    <li><strong>X → Y</strong> reads "X functionally determines Y".</li>
+    <li><strong>Determinant</strong> = Left-Hand Side (LHS).</li>
+    <li><strong>Dependent</strong> = Right-Hand Side (RHS).</li>
+    <li><strong>Prime attribute</strong> = part of any candidate key.</li>
+    <li><strong>Non-prime attribute</strong> = not in any candidate key.</li>
+  </ul>
+
+  <h3>3.2 Four Types of FDs</h3>
+
+  <div class="grid-2">
+    <div class="card">
+      <h5>① Trivial FD</h5>
+      <p>Y ⊆ X. RHS is a subset of LHS — always holds.</p>
+      <p><em>Example:</em> {Emp_id, Name} → {Name}</p>
+    </div>
+    <div class="card">
+      <h5>② Non-Trivial FD</h5>
+      <p>Y ⊄ X. The interesting kind — drives normalization.</p>
+      <p><em>Example:</em> {Emp_id} → {Name}</p>
+    </div>
+    <div class="card">
+      <h5>③ Multivalued FD (X →→ Y)</h5>
+      <p>X determines a <em>set</em> of Y values, where Y and remaining attrs are independent.</p>
+      <p><em>Example:</em> Emp_id →→ {Name, Age} when Name ↛ Age.</p>
+    </div>
+    <div class="card">
+      <h5>④ Transitive FD</h5>
+      <p>If A → B and B → C, then A → C transitively. Causes 3NF violation.</p>
+      <p><em>Example:</em> Emp_id → Dept and Dept → Street_no ⇒ Emp_id → Street_no.</p>
+    </div>
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">Transitive Dependency — A reaches C via B</div>
+    <svg viewBox="0 0 560 140" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arr4" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1a2233"/>
+        </marker>
+        <marker id="arr5" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#b42318"/>
+        </marker>
+      </defs>
+      <!-- A -->
+      <circle cx="80" cy="60" r="36" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="80" y="56" text-anchor="middle" font-weight="700" fill="#1f6feb">Emp_id</text>
+      <text x="80" y="72" text-anchor="middle" font-size="11" fill="#5a6577">(A)</text>
+      <!-- B -->
+      <circle cx="280" cy="60" r="36" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="280" y="56" text-anchor="middle" font-weight="700" fill="#1a7f37">Dept</text>
+      <text x="280" y="72" text-anchor="middle" font-size="11" fill="#5a6577">(B)</text>
+      <!-- C -->
+      <circle cx="480" cy="60" r="40" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="480" y="56" text-anchor="middle" font-weight="700" fill="#b54708">Street_no</text>
+      <text x="480" y="72" text-anchor="middle" font-size="11" fill="#5a6577">(C)</text>
+
+      <!-- Arrows -->
+      <line x1="116" y1="60" x2="240" y2="60" stroke="#1a2233" stroke-width="2" marker-end="url(#arr4)"/>
+      <line x1="316" y1="60" x2="436" y2="60" stroke="#1a2233" stroke-width="2" marker-end="url(#arr4)"/>
+      <path d="M 80 96 Q 280 130, 480 100" fill="none" stroke="#b42318" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr5)"/>
+      <text x="280" y="130" text-anchor="middle" font-size="12" fill="#b42318" font-weight="700">A → C (transitive)</text>
+    </svg>
+  </div>
+
+  <div class="box tip">
+    <span class="label">Armstrong's RAT axioms</span>
+    <strong>R</strong>eflexivity: if Y ⊆ X then X → Y.
+    <strong>A</strong>ugmentation: if X → Y then XZ → YZ.
+    <strong>T</strong>ransitivity: if X → Y and Y → Z then X → Z.
+  </div>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"Trivial Tells the obvious, Transitive Travels through a middle"</strong>
+  </div>
+
+  <div class="quiz">
+    <h4>Quick Check — Topic 3</h4>
+    <div class="q">Q1. What's the formal meaning of A → B? <button class="reveal">Show</button></div>
+    <div class="answer">For any two tuples that agree on A, they must also agree on B.</div>
+    <div class="q">Q2. Distinguish trivial from non-trivial FD. <button class="reveal">Show</button></div>
+    <div class="answer">Trivial: dependent ⊆ determinant (always holds). Non-trivial: dependent is not a subset of determinant.</div>
+  </div>
+</section>
+
+<!-- ============================== TOPIC 4 — ANOMALIES ============================== -->
+<section id="t4">
+  <h2 class="topic"><span class="num">04</span> Anomalies in DBMS <span class="unit">UNIT 4</span></h2>
+  <p class="lead">An <strong>anomaly</strong> is an inconsistency caused by storing redundant data in poorly-designed tables. The cure is normalization. Three classic anomalies: <strong>Update, Insert, Delete</strong>.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">One bad table → three anomalies</div>
+    <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
+      <!-- Bad table -->
+      <rect x="200" y="20" width="320" height="120" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="360" y="40" text-anchor="middle" font-weight="700" fill="#b42318" font-size="13">STUDENT_CLUB (flat, redundant)</text>
+      <g font-size="11" font-family="monospace" fill="#1a2233">
+        <text x="220" y="60">stu_id</text><text x="290" y="60">name</text><text x="370" y="60">address</text><text x="460" y="60">club</text>
+        <text x="220" y="78">330</text><text x="290" y="78">Muthu</text><text x="370" y="78">Rajasthan</text><text x="460" y="78">Literature</text>
+        <text x="220" y="92">330</text><text x="290" y="92">Muthu</text><text x="370" y="92">Rajasthan</text><text x="460" y="92">Finance</text>
+        <text x="220" y="106">331</text><text x="290" y="106">Mukesh</text><text x="370" y="106">Mumbai</text><text x="460" y="106">Crypto</text>
+        <text x="220" y="120">332</text><text x="290" y="120">Nanda</text><text x="370" y="120">Karnataka</text><text x="460" y="120">Public Sp.</text>
+      </g>
+
+      <!-- Three anomaly boxes -->
+      <line x1="280" y1="140" x2="120" y2="190" stroke="#b42318"/>
+      <line x1="360" y1="140" x2="360" y2="190" stroke="#b42318"/>
+      <line x1="440" y1="140" x2="600" y2="190" stroke="#b42318"/>
+
+      <rect x="40" y="190" width="160" height="70" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="120" y="210" text-anchor="middle" font-weight="700" fill="#b54708">UPDATE</text>
+      <text x="120" y="230" text-anchor="middle" font-size="11" fill="#1a2233">Change Muthu's address?</text>
+      <text x="120" y="246" text-anchor="middle" font-size="11" fill="#1a2233">Must edit BOTH rows</text>
+
+      <rect x="280" y="190" width="160" height="70" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="360" y="210" text-anchor="middle" font-weight="700" fill="#b54708">INSERT</text>
+      <text x="360" y="230" text-anchor="middle" font-size="11" fill="#1a2233">New student, no club?</text>
+      <text x="360" y="246" text-anchor="middle" font-size="11" fill="#1a2233">Can't insert (NULL key)</text>
+
+      <rect x="520" y="190" width="160" height="70" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="600" y="210" text-anchor="middle" font-weight="700" fill="#b54708">DELETE</text>
+      <text x="600" y="230" text-anchor="middle" font-size="11" fill="#1a2233">Close Crypto club?</text>
+      <text x="600" y="246" text-anchor="middle" font-size="11" fill="#1a2233">Loses Mukesh entirely</text>
+    </svg>
+  </div>
+
+  <h3>4.1 Update Anomaly</h3>
+  <div class="box bad">
+    <span class="label">Problem</span>
+    Muthu joins two clubs → his address is stored twice. If we update one row but forget the other, the database holds <strong>two different addresses for the same student</strong>.
+  </div>
+
+  <h3>4.2 Insert Anomaly</h3>
+  <div class="box bad">
+    <span class="label">Problem</span>
+    A new student Nanda joins the college but cannot enrol in a club yet. Because <code>stu_club</code> is part of the primary key (NOT NULL), <strong>we cannot insert Nanda at all</strong> until she joins a club.
+  </div>
+
+  <h3>4.3 Delete Anomaly</h3>
+  <div class="box bad">
+    <span class="label">Problem</span>
+    The college closes the Crypto club. Mukesh belonged <em>only</em> to Crypto, so deleting Crypto rows <strong>also deletes Mukesh's record entirely</strong> — losing unrelated information.
+  </div>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"UID — Update, Insert, Delete"</strong> — three anomalies, all cured by splitting tables (normalization).
+  </div>
+</section>
+
+<!-- ============================== TOPIC 5 — NORMALIZATION ============================== -->
+<section id="t5">
+  <h2 class="topic"><span class="num">05</span> Normalization (1NF → 5NF) <span class="unit">UNIT 4</span></h2>
+  <p class="lead"><strong>Normalization</strong> is the systematic decomposition of tables to eliminate redundancy and anomalies, while preserving information. Each "normal form" adds a stricter rule. In production, 3NF/BCNF is the sweet spot.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">The Normal-Form ladder — each step removes one defect</div>
+    <svg viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrnf" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+
+      <!-- 1NF -->
+      <rect x="40" y="20" width="260" height="48" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="170" y="42" text-anchor="middle" font-weight="700" fill="#1f6feb">1NF</text>
+      <text x="170" y="60" text-anchor="middle" font-size="12">atomic values only</text>
+      <text x="450" y="50" font-size="12" fill="#b42318">↑ kills multi-valued / composite columns</text>
+
+      <line x1="170" y1="70" x2="170" y2="90" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrnf)"/>
+
+      <!-- 2NF -->
+      <rect x="40" y="90" width="260" height="48" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="170" y="112" text-anchor="middle" font-weight="700" fill="#1f6feb">2NF</text>
+      <text x="170" y="130" text-anchor="middle" font-size="12">no partial dependency</text>
+      <text x="450" y="120" font-size="12" fill="#b42318">↑ kills partial dep on candidate key</text>
+
+      <line x1="170" y1="140" x2="170" y2="160" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrnf)"/>
+
+      <!-- 3NF -->
+      <rect x="40" y="160" width="260" height="48" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="170" y="182" text-anchor="middle" font-weight="700" fill="#1f6feb">3NF</text>
+      <text x="170" y="200" text-anchor="middle" font-size="12">no transitive dependency</text>
+      <text x="450" y="190" font-size="12" fill="#b42318">↑ kills A → B → C chains</text>
+
+      <line x1="170" y1="210" x2="170" y2="230" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrnf)"/>
+
+      <!-- BCNF -->
+      <rect x="40" y="230" width="260" height="48" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="170" y="252" text-anchor="middle" font-weight="700" fill="#b54708">BCNF</text>
+      <text x="170" y="270" text-anchor="middle" font-size="12">every LHS is a super-key</text>
+      <text x="450" y="260" font-size="12" fill="#b42318">↑ kills 3NF's "Y is prime" loophole</text>
+
+      <line x1="170" y1="280" x2="170" y2="300" stroke="#b54708" stroke-width="2" marker-end="url(#arrnf)"/>
+
+      <!-- 4NF -->
+      <rect x="40" y="300" width="260" height="36" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="170" y="324" text-anchor="middle" font-weight="700" fill="#b54708">4NF — no multi-valued dep</text>
+      <text x="450" y="324" font-size="12" fill="#b42318">↑ kills X →→ Y when X isn't super-key</text>
+
+      <line x1="170" y1="338" x2="170" y2="350" stroke="#b54708" stroke-width="2" marker-end="url(#arrnf)"/>
+
+      <!-- 5NF -->
+      <rect x="40" y="350" width="260" height="24" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="170" y="367" text-anchor="middle" font-weight="700" fill="#b54708" font-size="12">5NF — no join dependency</text>
+      <text x="450" y="367" font-size="12" fill="#b42318">↑ kills spurious tuples on rejoin</text>
+    </svg>
+  </div>
+
+  <h3>5.1 First Normal Form (1NF) — Atomicity</h3>
+  <div class="box def">
+    <span class="label">Rule</span>
+    Every attribute holds a single (atomic) value — no repeating groups, no composite columns, no comma-separated lists.
+  </div>
+
+  <div class="grid-2">
+    <div class="card"><h5>Violates 1NF</h5>
+      <table style="margin:0;font-size:12px;"><thead><tr><th>EmpID</th><th>Name</th><th>Phone</th></tr></thead><tbody>
+        <tr><td>101</td><td>John</td><td>9876, 9982</td></tr>
+        <tr><td>101</td><td>John</td><td>8902</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card"><h5>In 1NF</h5>
+      <table style="margin:0;font-size:12px;"><thead><tr><th>EmpID</th><th>Name</th><th>Phone</th></tr></thead><tbody>
+        <tr><td>101</td><td>John</td><td>9876</td></tr>
+        <tr><td>101</td><td>John</td><td>9982</td></tr>
+        <tr><td>101</td><td>John</td><td>8902</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <h3>5.2 Second Normal Form (2NF) — No Partial Dependency</h3>
+  <div class="box def">
+    <span class="label">Rule</span>
+    1NF + every non-prime attribute is fully functionally dependent on the <em>entire</em> candidate key (not just part of it).
+  </div>
+
+  <div class="box eg">
+    <span class="label">Example</span>
+    <code>EmployeeProjectDetail(EmpCode, ProjectID, EmpName, ProjectName)</code> — candidate key {EmpCode, ProjectID}.
+    <ul>
+      <li>EmpName depends on EmpCode only → <strong>partial</strong></li>
+      <li>ProjectName depends on ProjectID only → <strong>partial</strong></li>
+    </ul>
+    <strong>Decompose into 3 tables:</strong>
+    <pre><code>EmployeeDetail(EmpCode, EmpName)
+ProjectDetail(ProjectID, ProjectName)
+EmployeeProject(EmpCode, ProjectID)</code></pre>
+  </div>
+
+  <h3>5.3 Third Normal Form (3NF) — No Transitive Dependency</h3>
+  <div class="box def">
+    <span class="label">Rule</span>
+    2NF + for every non-trivial FD X → Y, either X is a super-key, OR Y is a prime attribute.
+  </div>
+
+  <div class="box eg">
+    <span class="label">Example</span>
+    <code>EmpDetail(EmpCode, EmpName, Zipcode, City)</code>:
+    <code>EmpCode → Zipcode</code> and <code>Zipcode → City</code> ⇒ <code>EmpCode → City</code> transitively.
+    <strong>Fix:</strong> split into <code>EmpDetail(EmpCode, EmpName, Zipcode)</code> and <code>Location(Zipcode, City)</code>.
+  </div>
+
+  <h3>5.4 Boyce-Codd Normal Form (BCNF)</h3>
+  <div class="box def">
+    <span class="label">Rule</span>
+    3NF + for <strong>every</strong> non-trivial FD X → Y, X must be a super-key.
+  </div>
+
+  <div class="box eg">
+    <span class="label">Example</span>
+    <code>EmpProjLead(EmpCode, ProjectID, ProjectLeader)</code> with FD <code>ProjectLeader → ProjectID</code>. ProjectLeader is not a super-key but ProjectID is prime → 3NF passes, BCNF fails.
+    <strong>Decompose:</strong> <code>EmpProject(EmpCode, ProjectID)</code> and <code>ProjectLead(ProjectLeader, ProjectID)</code>.
+  </div>
+
+  <h3>5.5 Fourth Normal Form (4NF) — No Multi-Valued Dependency</h3>
+  <div class="box def">
+    <span class="label">Rule</span>
+    BCNF + no non-trivial multi-valued dependency. If X →→ Y, then X must be a super-key.
+  </div>
+
+  <div class="box eg">
+    <span class="label">Example</span>
+    <code>StudentEnrol(s_id, course, hobby)</code> — a student takes multiple courses AND has multiple hobbies, with no relation between course &amp; hobby. The cross-product creates fake rows.
+    <strong>Fix:</strong> split into <code>CourseOpted(s_id, course)</code> and <code>Hobbies(s_id, hobby)</code>.
+  </div>
+
+  <h3>5.6 Fifth Normal Form (5NF / PJNF)</h3>
+  <div class="box def">
+    <span class="label">Rule</span>
+    4NF + no join dependency — the relation cannot be losslessly decomposed except trivially. Eliminates "spurious tuples" that appear when only 2-way joins are used.
+  </div>
+
+  <h3>5.7 Summary Cheat-Sheet</h3>
+  <table>
+    <thead><tr><th>NF</th><th>Forbids</th><th>Cure</th></tr></thead>
+    <tbody>
+      <tr><td>1NF</td><td>Multi-valued / composite columns</td><td>Atomize values</td></tr>
+      <tr><td>2NF</td><td>Partial dependency</td><td>Move attribute to its own table</td></tr>
+      <tr><td>3NF</td><td>Transitive dependency</td><td>Extract intermediate determinant</td></tr>
+      <tr><td>BCNF</td><td>Non-superkey LHS in any FD</td><td>Decompose around the determinant</td></tr>
+      <tr><td>4NF</td><td>Multi-valued dependency</td><td>Separate independent multi-valued attrs</td></tr>
+      <tr><td>5NF</td><td>Join dependency</td><td>3-way decomposition</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"Atom, Part, Trans, Super, Multi, Join"</strong> — 1NF kills non-Atoms, 2NF kills Partial, 3NF kills Transitive, BCNF wants Super-key, 4NF kills Multi-valued, 5NF kills Join dependency.
+  </div>
+
+  <div class="quiz">
+    <h4>Quick Check — Topic 5</h4>
+    <div class="q">Q1. What violates 1NF? <button class="reveal">Show</button></div>
+    <div class="answer">Any non-atomic column — multi-valued, composite, or list-typed attribute.</div>
+    <div class="q">Q2. Why is BCNF stricter than 3NF? <button class="reveal">Show</button></div>
+    <div class="answer">3NF allows X → Y if Y is a prime attribute; BCNF removes this exception and requires every determinant to be a super-key.</div>
+    <div class="q">Q3. Define a multi-valued dependency. <button class="reveal">Show</button></div>
+    <div class="answer">X →→ Y when one X-value is associated with a set of independent Y-values, and the remaining attributes are also independent of Y.</div>
+  </div>
+</section>
+
+<!-- ============================== TOPIC 6 — CLOSURE & CANDIDATE KEYS ============================== -->
+<section id="t6">
+  <h2 class="topic"><span class="num">06</span> Closure of FD &amp; Candidate Keys <span class="unit">UNIT 4</span></h2>
+  <p class="lead">The <strong>closure</strong> {X}<sup>+</sup> is the set of all attributes functionally derivable from X, given a set of FDs. It's the algorithm used to find candidate keys and prove which normal form a relation is in.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">Three-step closure algorithm</div>
+    <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrcl" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+      <!-- Step 1 -->
+      <rect x="20" y="50" width="190" height="100" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="115" y="75" text-anchor="middle" font-weight="700" fill="#1f6feb">STEP 1</text>
+      <text x="115" y="100" text-anchor="middle" font-size="12">Start with X itself</text>
+      <text x="115" y="120" text-anchor="middle" font-family="monospace" font-size="13">{X}⁺ ← X</text>
+      <text x="115" y="140" text-anchor="middle" font-size="11" fill="#5a6577">(seed the closure)</text>
+
+      <line x1="210" y1="100" x2="240" y2="100" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrcl)"/>
+
+      <!-- Step 2 -->
+      <rect x="240" y="50" width="220" height="100" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="350" y="75" text-anchor="middle" font-weight="700" fill="#1f6feb">STEP 2</text>
+      <text x="350" y="100" text-anchor="middle" font-size="12">Add RHS of any FD</text>
+      <text x="350" y="118" text-anchor="middle" font-size="12">whose LHS ⊆ {X}⁺</text>
+      <text x="350" y="140" text-anchor="middle" font-size="11" fill="#5a6577">(grow the closure)</text>
+
+      <line x1="460" y1="100" x2="490" y2="100" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrcl)"/>
+
+      <!-- Step 3 -->
+      <rect x="490" y="50" width="210" height="100" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="595" y="75" text-anchor="middle" font-weight="700" fill="#1f6feb">STEP 3</text>
+      <text x="595" y="100" text-anchor="middle" font-size="12">Repeat Step 2 until</text>
+      <text x="595" y="118" text-anchor="middle" font-size="12">no more attrs added</text>
+      <text x="595" y="140" text-anchor="middle" font-size="11" fill="#5a6577">(stable point)</text>
+
+      <!-- loop arrow -->
+      <path d="M 595 50 Q 595 20, 350 20 Q 105 20, 110 50" fill="none" stroke="#1f6feb" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrcl)"/>
+      <text x="350" y="14" text-anchor="middle" font-size="11" fill="#1f6feb" font-style="italic">repeat</text>
+
+      <text x="360" y="195" text-anchor="middle" font-size="13" fill="#1a7f37" font-weight="700">If {X}⁺ = all attributes of R → X is a super-key</text>
+    </svg>
+  </div>
+
+  <h3>6.1 Worked Example</h3>
+  <div class="box eg">
+    <span class="label">Example — student_details(Roll_No, Name, Marks, Location)</span>
+    FDs: <code>Roll_No → Name, Marks</code>; <code>Name → Marks, Location</code>.
+    <pre>Step 1: {Roll_No}⁺ = {Roll_No}
+Step 2: apply FD1 → {Roll_No, Name, Marks}
+Step 3: apply FD2 (Name on RHS) → {Roll_No, Name, Marks, Location}
+        ────────────────────────────────────
+        {Roll_No}⁺ = {Roll_No, Name, Marks, Location}  ← all attrs!</pre>
+    Since {Roll_No}<sup>+</sup> covers every attribute, <strong>Roll_No is a candidate key</strong>.
+  </div>
+
+  <h3>6.2 Finding Candidate Keys</h3>
+  <div class="box def">
+    <span class="label">Rule</span>
+    A set X is a <strong>candidate key</strong> iff (a) {X}<sup>+</sup> = all attributes of R, AND (b) no proper subset of X has this property (minimality).
+  </div>
+
+  <div class="box eg">
+    <span class="label">Example 2 — R(A,B,C,D,E)</span>
+    FDs: A→BC, C→B, D→E, E→D.
+    <pre>{A}⁺   = {A,B,C}        ← misses D,E — not a key
+{D}⁺   = {D,E}          ← partial
+{E}⁺   = {D,E}          ← partial
+{A,D}⁺ = {A,B,C,D,E}    ← FULL → candidate key
+{A,E}⁺ = {A,B,C,D,E}    ← FULL → candidate key</pre>
+    Two candidate keys: <code>{A,D}</code> and <code>{A,E}</code>.
+  </div>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"Start with self, snowball with FDs, stop when stable"</strong>
+  </div>
+</section>
+
+<!-- ============================== TOPIC 7 — VIEWS ============================== -->
+<section id="t7">
+  <h2 class="topic"><span class="num">07</span> Views in SQL <span class="unit">UNIT 4</span></h2>
+  <p class="lead">A <strong>view</strong> is a stored SQL query that behaves like a virtual table. It holds <em>no data of its own</em> — only the definition. Used to simplify complex queries, restrict access to sensitive columns, and present customised perspectives.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">View — a virtual table over base tables</div>
+    <svg viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrv" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+      <!-- Base tables -->
+      <rect x="30" y="30" width="140" height="40" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="100" y="55" text-anchor="middle" font-weight="600" fill="#1a2233">Customers</text>
+      <rect x="30" y="100" width="140" height="40" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="100" y="125" text-anchor="middle" font-weight="600" fill="#1a2233">Products</text>
+      <rect x="30" y="170" width="140" height="40" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="100" y="195" text-anchor="middle" font-weight="600" fill="#1a2233">Orders</text>
+
+      <text x="100" y="20" text-anchor="middle" font-size="11" fill="#5a6577" font-weight="700">BASE TABLES</text>
+
+      <!-- arrows to view -->
+      <line x1="170" y1="50" x2="280" y2="115" stroke="#1f6feb" stroke-width="1.5"/>
+      <line x1="170" y1="120" x2="280" y2="120" stroke="#1f6feb" stroke-width="1.5"/>
+      <line x1="170" y1="190" x2="280" y2="125" stroke="#1f6feb" stroke-width="1.5"/>
+
+      <!-- Stored definition (view) -->
+      <rect x="280" y="80" width="220" height="80" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="390" y="105" text-anchor="middle" font-weight="700" fill="#b54708">CustomerOrders</text>
+      <text x="390" y="125" text-anchor="middle" font-size="11" fill="#1a2233" font-style="italic">stored SELECT … JOIN …</text>
+      <text x="390" y="142" text-anchor="middle" font-size="11" fill="#5a6577">(definition only — no data)</text>
+
+      <line x1="500" y1="120" x2="540" y2="120" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrv)"/>
+
+      <!-- User query -->
+      <rect x="540" y="80" width="160" height="80" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="620" y="105" text-anchor="middle" font-weight="700" fill="#1a7f37">User query</text>
+      <text x="620" y="125" text-anchor="middle" font-size="11" font-family="monospace" fill="#1a2233">SELECT *</text>
+      <text x="620" y="142" text-anchor="middle" font-size="11" font-family="monospace" fill="#1a2233">FROM CustomerOrders;</text>
+
+      <text x="390" y="200" text-anchor="middle" font-size="12" fill="#5a6577" font-style="italic">Looks like a table — but the SELECT runs every time.</text>
+    </svg>
+  </div>
+
+  <h3>7.1 Creating a View</h3>
+  <pre><code><span class="keyword">CREATE VIEW</span> CustomerOrders <span class="keyword">AS</span>
+<span class="keyword">SELECT</span> c.first_name, c.last_name, p.product_name, o.quantity, o.order_date
+<span class="keyword">FROM</span> Orders o
+<span class="keyword">JOIN</span> Customers c <span class="keyword">ON</span> o.customer_id = c.customer_id
+<span class="keyword">JOIN</span> Products  p <span class="keyword">ON</span> o.product_id = p.product_id;</code></pre>
+
+  <h3>7.2 Updating Through a View</h3>
+  <p>Simple views (one base table, no aggregates) are <strong>updatable</strong> — changes propagate to the underlying table. Complex views with JOIN, GROUP BY, or aggregates are typically <strong>read-only</strong>.</p>
+
+  <h3>7.3 Simple vs Complex Views</h3>
+  <table>
+    <thead><tr><th>Aspect</th><th>Simple View</th><th>Complex View</th></tr></thead>
+    <tbody>
+      <tr><td>Source</td><td>One table</td><td>Multiple tables (JOIN)</td></tr>
+      <tr><td>Aggregates</td><td>No</td><td>Yes (SUM, AVG, GROUP BY)</td></tr>
+      <tr><td>Updatable?</td><td>Usually yes</td><td>Usually no</td></tr>
+    </tbody>
+  </table>
+
+  <h3>7.4 Advantages &amp; Disadvantages</h3>
+  <div class="grid-2">
+    <div class="card"><h5>Advantages</h5>
+      Simplifies complex queries · Restricts column/row access · Reusable building block · Improves query readability.
+    </div>
+    <div class="card"><h5>Disadvantages</h5>
+      Performance overhead (re-runs underlying query) · Limited update capability · Dependency issues — dropping base table breaks the view.
+    </div>
+  </div>
+
+  <h3>7.5 Dropping a View</h3>
+  <pre><code><span class="keyword">DROP VIEW</span> ProductStock;  <span class="comment">-- removes view, base table untouched</span></code></pre>
+</section>
+
+<!-- ============================== TOPIC 8 — QUERY PROCESSING ============================== -->
+<section id="t8">
+  <h2 class="topic"><span class="num">08</span> Query Processing &amp; Optimization <span class="unit">UNIT 4</span></h2>
+  <p class="lead">Query processing is the pipeline that turns a high-level SQL query into actual rows. It has a <strong>compile-time</strong> phase (parse → optimize → generate plan) and a <strong>run-time</strong> phase (execute the plan).</p>
+
+  <div class="diagram">
+    <div class="diagram-title">Query Processing pipeline</div>
+    <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrqp" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+
+      <!-- SQL Query -->
+      <rect x="240" y="20" width="240" height="40" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="360" y="46" text-anchor="middle" font-weight="700" fill="#1a7f37">SQL Query</text>
+
+      <line x1="360" y1="60" x2="360" y2="80" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrqp)"/>
+
+      <!-- Parser -->
+      <rect x="200" y="80" width="320" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="360" y="100" text-anchor="middle" font-weight="700" fill="#1f6feb">Parser + Translator</text>
+      <text x="360" y="118" text-anchor="middle" font-size="11" fill="#5a6577">Lexical · Syntactic · Semantic · → relational algebra</text>
+
+      <line x1="360" y1="130" x2="360" y2="150" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrqp)"/>
+
+      <!-- Optimizer -->
+      <rect x="200" y="150" width="320" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="360" y="170" text-anchor="middle" font-weight="700" fill="#1f6feb">Optimizer</text>
+      <text x="360" y="188" text-anchor="middle" font-size="11" fill="#5a6577">Compares plans by CPU, I/O, tuple count → picks cheapest</text>
+
+      <!-- Side: Statistics -->
+      <rect x="540" y="150" width="160" height="50" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="620" y="172" text-anchor="middle" font-weight="700" fill="#b54708" font-size="13">Catalog / Stats</text>
+      <text x="620" y="188" text-anchor="middle" font-size="11" fill="#5a6577">indexes, row counts</text>
+      <line x1="540" y1="175" x2="520" y2="175" stroke="#b54708" stroke-width="1.5" stroke-dasharray="4 3"/>
+
+      <line x1="360" y1="200" x2="360" y2="220" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrqp)"/>
+
+      <!-- Executor -->
+      <rect x="200" y="220" width="320" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="360" y="240" text-anchor="middle" font-weight="700" fill="#1f6feb">Execution Engine</text>
+      <text x="360" y="258" text-anchor="middle" font-size="11" fill="#5a6577">Run physical operators against data</text>
+
+      <line x1="360" y1="270" x2="360" y2="285" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrqp)"/>
+
+      <!-- Result -->
+      <rect x="290" y="285" width="140" height="30" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="360" y="305" text-anchor="middle" font-weight="700" fill="#1a7f37">Rows / Result</text>
+    </svg>
+  </div>
+
+  <h3>8.1 Parsing &amp; Translation</h3>
+  <ul>
+    <li><strong>Lexical analysis</strong> — break SQL into tokens, strip whitespace/comments.</li>
+    <li><strong>Syntactic analysis</strong> — verify SQL grammar (proper SELECT… FROM… WHERE…).</li>
+    <li><strong>Semantic analysis</strong> — check tables/columns exist, types match.</li>
+    <li><strong>Translation</strong> — produce a relational algebra tree.</li>
+  </ul>
+
+  <h3>8.2 Two evaluation plans for one query</h3>
+  <div class="diagram">
+    <div class="diagram-title">"Push selection down" — Plan B is cheaper</div>
+    <svg viewBox="0 0 660 220" xmlns="http://www.w3.org/2000/svg">
+      <!-- Plan A -->
+      <text x="160" y="20" text-anchor="middle" font-weight="700" fill="#b42318">Plan A — project first</text>
+      <rect x="120" y="30" width="80" height="34" rx="6" fill="white" stroke="#b42318" stroke-width="2"/>
+      <text x="160" y="52" text-anchor="middle" font-family="monospace" font-size="13">π name</text>
+      <line x1="160" y1="64" x2="160" y2="80" stroke="#b42318" stroke-width="1.5"/>
+      <rect x="100" y="80" width="120" height="34" rx="6" fill="white" stroke="#b42318" stroke-width="2"/>
+      <text x="160" y="102" text-anchor="middle" font-family="monospace" font-size="12">σ salary&gt;10000</text>
+      <line x1="160" y1="114" x2="160" y2="130" stroke="#b42318" stroke-width="1.5"/>
+      <rect x="120" y="130" width="80" height="34" rx="6" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="160" y="152" text-anchor="middle" font-size="13">employee</text>
+      <text x="160" y="190" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">filters AFTER projecting all rows</text>
+
+      <!-- Plan B -->
+      <text x="500" y="20" text-anchor="middle" font-weight="700" fill="#1a7f37">Plan B — select first</text>
+      <rect x="460" y="30" width="80" height="34" rx="6" fill="white" stroke="#1a7f37" stroke-width="2"/>
+      <text x="500" y="52" text-anchor="middle" font-family="monospace" font-size="13">π name</text>
+      <line x1="500" y1="64" x2="500" y2="80" stroke="#1a7f37" stroke-width="1.5"/>
+      <rect x="440" y="80" width="120" height="34" rx="6" fill="white" stroke="#1a7f37" stroke-width="2"/>
+      <text x="500" y="102" text-anchor="middle" font-family="monospace" font-size="12">σ salary&gt;10000</text>
+      <line x1="500" y1="114" x2="500" y2="130" stroke="#1a7f37" stroke-width="1.5"/>
+      <rect x="460" y="130" width="80" height="34" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="500" y="152" text-anchor="middle" font-size="13">employee</text>
+      <text x="500" y="190" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">filters EARLY → fewer rows projected</text>
+    </svg>
+  </div>
+
+  <h3>8.3 Cost Factors</h3>
+  <ul>
+    <li>CPU time</li>
+    <li>Number of tuples to be scanned</li>
+    <li>Disk access time (most expensive)</li>
+    <li>Number of I/O operations</li>
+    <li>Index availability</li>
+  </ul>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"Push selections down, projections down, joins last"</strong> — heuristic that makes most plans cheaper.
+  </div>
+</section>
+
+<!-- ============================== TOPIC 9 — CONCURRENCY CONTROL ============================== -->
+<section id="t9">
+  <h2 class="topic"><span class="num">09</span> Concurrency Control &amp; Recovery <span class="unit">UNIT 4</span></h2>
+  <p class="lead">When many transactions run together, the DBMS must make their <em>interleaved</em> execution behave as if they ran serially. Recovery ensures the database returns to a consistent state after a crash.</p>
+
+  <h3>9.1 Recovery with Concurrent Transactions — Four Schemes</h3>
+  <div class="diagram">
+    <svg viewBox="0 0 720 130" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="30" width="160" height="70" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="100" y="55" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="13">1. Interaction</text>
+      <text x="100" y="73" text-anchor="middle" font-size="11" fill="#5a6577">with concurrency</text>
+      <text x="100" y="88" text-anchor="middle" font-size="11" fill="#5a6577">control state</text>
+
+      <rect x="200" y="30" width="160" height="70" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="280" y="55" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="13">2. Transaction</text>
+      <text x="280" y="73" text-anchor="middle" font-size="11" fill="#5a6577">rollback by</text>
+      <text x="280" y="88" text-anchor="middle" font-size="11" fill="#5a6577">scanning log</text>
+
+      <rect x="380" y="30" width="160" height="70" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="460" y="55" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="13">3. Checkpoints</text>
+      <text x="460" y="73" text-anchor="middle" font-size="11" fill="#5a6577">periodic stable</text>
+      <text x="460" y="88" text-anchor="middle" font-size="11" fill="#5a6577">snapshots</text>
+
+      <rect x="560" y="30" width="140" height="70" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="630" y="55" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="13">4. Restart</text>
+      <text x="630" y="73" text-anchor="middle" font-size="11" fill="#5a6577">build undo &amp;</text>
+      <text x="630" y="88" text-anchor="middle" font-size="11" fill="#5a6577">redo lists</text>
+    </svg>
+  </div>
+
+  <h3>9.2 Checkpoints</h3>
+  <div class="box def">
+    <span class="label">Definition</span>
+    A <strong>checkpoint</strong> is a saved snapshot of the application state, written periodically to the log. It marks a point at which all committed transactions have been persisted to disk.
+  </div>
+  <p>After a crash, recovery only needs to scan log records <em>after</em> the last checkpoint — drastically shortening recovery time.</p>
+
+  <p><strong>Concurrent checkpoint format:</strong> <code>&lt;checkpoint L&gt;</code> where L is the list of transactions active at that moment. A <strong>fuzzy checkpoint</strong> allows transactions to continue while buffer blocks are being written out.</p>
+
+  <h3>9.3 Restart Recovery — undo &amp; redo lists</h3>
+
+  <div class="diagram">
+    <div class="diagram-title">After a crash: scan log backward to last checkpoint</div>
+    <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
+      <!-- Log timeline -->
+      <line x1="40" y1="80" x2="680" y2="80" stroke="#5a6577" stroke-width="2"/>
+      <text x="40" y="60" font-size="11" font-weight="700" fill="#5a6577">START</text>
+      <text x="640" y="60" font-size="11" font-weight="700" fill="#b42318">CRASH ✕</text>
+
+      <!-- Events -->
+      <circle cx="120" cy="80" r="6" fill="#1a7f37"/>
+      <text x="120" y="105" text-anchor="middle" font-size="11">T6 update Y</text>
+      <circle cx="220" cy="80" r="6" fill="#1a7f37"/>
+      <text x="220" y="105" text-anchor="middle" font-size="11">T6 commit ✓</text>
+
+      <!-- checkpoint -->
+      <rect x="290" y="68" width="100" height="24" rx="6" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="340" y="85" text-anchor="middle" font-size="11" font-weight="700" fill="#b54708">checkpoint</text>
+      <text x="340" y="115" text-anchor="middle" font-size="10" fill="#5a6577">L = {T7, T8}</text>
+
+      <circle cx="450" cy="80" r="6" fill="#1a7f37"/>
+      <text x="450" y="105" text-anchor="middle" font-size="11">T8 update X</text>
+      <circle cx="540" cy="80" r="6" fill="#1a7f37"/>
+      <text x="540" y="105" text-anchor="middle" font-size="11">T7 commit ✓</text>
+      <circle cx="610" cy="80" r="6" fill="#b42318"/>
+      <text x="610" y="105" text-anchor="middle" font-size="11" fill="#b42318">T8 in-flight</text>
+
+      <!-- Undo / Redo lists -->
+      <rect x="60" y="170" width="280" height="80" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="200" y="195" text-anchor="middle" font-weight="700" fill="#b42318">UNDO list</text>
+      <text x="200" y="217" text-anchor="middle" font-size="12">{ T8 } — never committed</text>
+      <text x="200" y="237" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">reverse its updates</text>
+
+      <rect x="380" y="170" width="280" height="80" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="520" y="195" text-anchor="middle" font-weight="700" fill="#1a7f37">REDO list</text>
+      <text x="520" y="217" text-anchor="middle" font-size="12">{ T6, T7 } — committed</text>
+      <text x="520" y="237" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">re-apply if not yet on disk</text>
+    </svg>
+  </div>
+
+  <h3>9.4 Common Concurrency Issues</h3>
+  <table>
+    <thead><tr><th>Problem</th><th>What happens</th></tr></thead>
+    <tbody>
+      <tr><td>Lost update</td><td>Two writes to same item; one overwritten silently</td></tr>
+      <tr><td>Dirty read</td><td>Reading uncommitted change of another transaction</td></tr>
+      <tr><td>Unrepeatable read</td><td>Same query gives different answers within one transaction</td></tr>
+      <tr><td>Phantom read</td><td>New rows appear in a re-executed range query</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Common solutions:</strong> two-phase locking (2PL), timestamp ordering, optimistic concurrency control.</p>
+</section>
+
+<!-- ============================== TOPIC 10 — DATABASE SECURITY ============================== -->
+<section id="t10">
+  <h2 class="topic"><span class="num">10</span> Database Security <span class="unit">UNIT 4</span></h2>
+  <p class="lead">Database security protects DBMS data from unauthorised access, malicious threats, and corruption. The classic goal is the <strong>CIA triad</strong>: <em>Confidentiality, Integrity, Availability</em>.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">Defense-in-depth architecture</div>
+    <svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrsec" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1a2233"/>
+        </marker>
+      </defs>
+      <!-- Threats on left -->
+      <g font-size="11">
+        <rect x="20" y="20" width="120" height="30" rx="5" fill="#fdecec" stroke="#b42318"/>
+        <text x="80" y="40" text-anchor="middle" fill="#b42318" font-weight="700">SQL Injection</text>
+        <rect x="20" y="60" width="120" height="30" rx="5" fill="#fdecec" stroke="#b42318"/>
+        <text x="80" y="80" text-anchor="middle" fill="#b42318" font-weight="700">Brute force</text>
+        <rect x="20" y="100" width="120" height="30" rx="5" fill="#fdecec" stroke="#b42318"/>
+        <text x="80" y="120" text-anchor="middle" fill="#b42318" font-weight="700">Privilege abuse</text>
+        <rect x="20" y="140" width="120" height="30" rx="5" fill="#fdecec" stroke="#b42318"/>
+        <text x="80" y="160" text-anchor="middle" fill="#b42318" font-weight="700">Misconfig</text>
+      </g>
+
+      <!-- Arrows -->
+      <line x1="140" y1="35" x2="195" y2="95" stroke="#b42318" stroke-width="1.5" marker-end="url(#arrsec)"/>
+      <line x1="140" y1="75" x2="195" y2="100" stroke="#b42318" stroke-width="1.5" marker-end="url(#arrsec)"/>
+      <line x1="140" y1="115" x2="195" y2="105" stroke="#b42318" stroke-width="1.5" marker-end="url(#arrsec)"/>
+      <line x1="140" y1="155" x2="195" y2="115" stroke="#b42318" stroke-width="1.5" marker-end="url(#arrsec)"/>
+
+      <!-- App server -->
+      <rect x="195" y="80" width="110" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="250" y="100" text-anchor="middle" font-weight="700" fill="#1f6feb">App Server</text>
+      <text x="250" y="118" text-anchor="middle" font-size="10" fill="#5a6577">+ input validation</text>
+
+      <line x1="305" y1="105" x2="345" y2="105" stroke="#1a2233" stroke-width="2" marker-end="url(#arrsec)"/>
+
+      <!-- DB Firewall -->
+      <rect x="345" y="80" width="120" height="50" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="405" y="100" text-anchor="middle" font-weight="700" fill="#b54708">DB Firewall</text>
+      <text x="405" y="118" text-anchor="middle" font-size="10" fill="#5a6577">policy + filtering</text>
+
+      <line x1="465" y1="105" x2="505" y2="105" stroke="#1a2233" stroke-width="2" marker-end="url(#arrsec)"/>
+
+      <!-- Database -->
+      <rect x="505" y="60" width="100" height="90" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="555" y="92" text-anchor="middle" font-weight="700" fill="#1a7f37">Database</text>
+      <text x="555" y="110" text-anchor="middle" font-size="10" fill="#5a6577">encrypted</text>
+      <text x="555" y="125" text-anchor="middle" font-size="10" fill="#5a6577">at rest</text>
+
+      <!-- Audit log -->
+      <line x1="405" y1="130" x2="405" y2="160" stroke="#1a2233" stroke-width="1.5" stroke-dasharray="3 3" marker-end="url(#arrsec)"/>
+      <rect x="320" y="160" width="170" height="50" rx="8" fill="#fafbfd" stroke="#5a6577" stroke-width="2"/>
+      <text x="405" y="180" text-anchor="middle" font-weight="700" fill="#5a6577">Remote Audit Log</text>
+      <text x="405" y="198" text-anchor="middle" font-size="10" fill="#5a6577">tamper-resistant trail</text>
+
+      <!-- CIA triad -->
+      <text x="660" y="40" text-anchor="middle" font-size="11" font-weight="700" fill="#1f6feb">CIA</text>
+      <text x="660" y="58" text-anchor="middle" font-size="10" fill="#5a6577">Confidentiality</text>
+      <text x="660" y="74" text-anchor="middle" font-size="10" fill="#5a6577">Integrity</text>
+      <text x="660" y="90" text-anchor="middle" font-size="10" fill="#5a6577">Availability</text>
+    </svg>
+  </div>
+
+  <h3>10.1 Common Attack Methods</h3>
+  <table>
+    <thead><tr><th>Attack</th><th>Mechanism</th></tr></thead>
+    <tbody>
+      <tr><td>SQL Injection (SQLi)</td><td>Malicious SQL inserted via user input changes query logic</td></tr>
+      <tr><td>Brute-force / weak auth</td><td>Guessing passwords, default creds, no lockout</td></tr>
+      <tr><td>Privilege abuse</td><td>Insider with too many rights extracts/modifies data</td></tr>
+      <tr><td>Misconfiguration</td><td>Default settings, exposed network ports</td></tr>
+    </tbody>
+  </table>
+
+  <h3>10.2 SQL Injection — How it Works</h3>
+  <div class="box bad">
+    <span class="label">Vulnerable code</span>
+<pre><code><span class="comment">-- App concatenates user input directly into SQL</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username=<span class="string">'$user'</span> <span class="keyword">AND</span> password=<span class="string">'$pass'</span>;</code></pre>
+    Attacker enters username <code>' OR '1'='1 --</code>:
+<pre><code><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> users <span class="keyword">WHERE</span> username=<span class="string">''</span> <span class="keyword">OR</span> <span class="string">'1'</span>=<span class="string">'1'</span> --<span class="string">' AND password='...'</span>;</code></pre>
+    The <code>--</code> comments out the password check, the OR makes WHERE always true → <strong>login bypassed</strong>.
+  </div>
+
+  <h3>10.3 Six Control Methods</h3>
+  <div class="grid-2">
+    <div class="card"><h5>① Strong authentication</h5>MFA, strong passwords, rotation</div>
+    <div class="card"><h5>② Least privilege</h5>Grant only what's needed</div>
+    <div class="card"><h5>③ Hardening &amp; secure config</h5>Disable defaults, close ports</div>
+    <div class="card"><h5>④ Patch promptly</h5>Apply DB engine security updates</div>
+    <div class="card"><h5>⑤ Encryption</h5>TLS in transit + encrypted storage</div>
+    <div class="card"><h5>⑥ Backups</h5>Test restores, store offline</div>
+  </div>
+
+  <h3>10.4 Cloud Database Security</h3>
+  <p>Adds: <strong>shared responsibility</strong> (provider secures infra; you secure data &amp; configs), <strong>IAM-based access</strong> with short-lived credentials, <strong>VPC/private endpoints</strong>, <strong>KMS key management</strong>, automated backups with cross-region replication, and centralised <strong>audit logging</strong> (CloudTrail/CloudWatch).</p>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"CIA — Confidentiality, Integrity, Availability"</strong> — every security control should map to at least one of these three goals.
+  </div>
+</section>
+
+<!-- ============================== TOPIC 11 — DISTRIBUTED DATABASE ============================== -->
+<section id="t11">
+  <h2 class="topic"><span class="num">11</span> Distributed Database System <span class="unit">UNIT 4</span></h2>
+  <p class="lead">A <strong>Distributed Database System (DDBS)</strong> is a collection of physically separated databases connected by a network, but presented to the user as a single logical database. Goal: faster local access, parallel processing, and high availability.</p>
+
+  <div class="diagram">
+    <div class="diagram-title">Distributed Database — three sites, one logical DB</div>
+    <svg viewBox="0 0 720 270" xmlns="http://www.w3.org/2000/svg">
+      <!-- Network cloud -->
+      <ellipse cx="360" cy="130" rx="180" ry="40" fill="#fafbfd" stroke="#5a6577" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="360" y="135" text-anchor="middle" font-size="13" font-style="italic" fill="#5a6577">Network / WAN</text>
+
+      <!-- Site A -->
+      <rect x="60" y="40" width="120" height="60" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="120" y="62" text-anchor="middle" font-weight="700" fill="#1f6feb">Site A</text>
+      <text x="120" y="82" text-anchor="middle" font-size="11" fill="#5a6577">DB-1 (Delhi)</text>
+      <line x1="120" y1="100" x2="280" y2="120" stroke="#1f6feb" stroke-width="2"/>
+
+      <!-- Site B -->
+      <rect x="300" y="40" width="120" height="60" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="360" y="62" text-anchor="middle" font-weight="700" fill="#1f6feb">Site B</text>
+      <text x="360" y="82" text-anchor="middle" font-size="11" fill="#5a6577">DB-2 (Mumbai)</text>
+      <line x1="360" y1="100" x2="360" y2="120" stroke="#1f6feb" stroke-width="2"/>
+
+      <!-- Site C -->
+      <rect x="540" y="40" width="120" height="60" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="600" y="62" text-anchor="middle" font-weight="700" fill="#1f6feb">Site C</text>
+      <text x="600" y="82" text-anchor="middle" font-size="11" fill="#5a6577">DB-3 (Bangalore)</text>
+      <line x1="600" y1="100" x2="440" y2="120" stroke="#1f6feb" stroke-width="2"/>
+
+      <!-- Users -->
+      <rect x="240" y="200" width="240" height="50" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="360" y="220" text-anchor="middle" font-weight="700" fill="#1a7f37">USERS see ONE LOGICAL DATABASE</text>
+      <text x="360" y="238" text-anchor="middle" font-size="11" fill="#5a6577">(transparency provided by DDBS)</text>
+      <line x1="360" y1="170" x2="360" y2="200" stroke="#1a7f37" stroke-width="2"/>
+    </svg>
+  </div>
+
+  <h3>11.1 Five Types of DDBS</h3>
+  <table>
+    <thead><tr><th>Type</th><th>Description</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Homogeneous</td><td>Same DBMS &amp; schema at every site</td><td>Bank with Oracle DB at every branch</td></tr>
+      <tr><td>Heterogeneous</td><td>Different DBMSs / schemas; needs middleware</td><td>MySQL + MongoDB + PostgreSQL via integration layer</td></tr>
+      <tr><td>Client-Server</td><td>Central server, lightweight clients</td><td>Web app talking to PostgreSQL</td></tr>
+      <tr><td>Peer-to-Peer</td><td>All nodes equal, no central server</td><td>Blockchain (Ethereum)</td></tr>
+      <tr><td>Cloud-Based (DBaaS)</td><td>Managed, multi-region, auto-scaling</td><td>Google Spanner, DynamoDB, Cosmos DB</td></tr>
+    </tbody>
+  </table>
+
+  <h3>11.2 Fragmentation — split tables across sites</h3>
+  <div class="diagram">
+    <div class="diagram-title">Horizontal vs Vertical fragmentation</div>
+    <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
+      <!-- HORIZONTAL -->
+      <text x="180" y="22" text-anchor="middle" font-weight="700" fill="#1f6feb">Horizontal (split rows)</text>
+
+      <rect x="60" y="40" width="240" height="40" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="180" y="64" text-anchor="middle" font-size="12">CUSTOMER (full table)</text>
+
+      <line x1="180" y1="80" x2="120" y2="100" stroke="#1f6feb" stroke-width="1.5"/>
+      <line x1="180" y1="80" x2="240" y2="100" stroke="#1f6feb" stroke-width="1.5"/>
+
+      <rect x="60" y="100" width="120" height="50" rx="6" fill="white" stroke="#1f6feb" stroke-width="2"/>
+      <text x="120" y="120" text-anchor="middle" font-size="11" font-weight="700">CUSTOMER_NORTH</text>
+      <text x="120" y="138" text-anchor="middle" font-size="11" fill="#5a6577">rows where region=N</text>
+
+      <rect x="180" y="100" width="120" height="50" rx="6" fill="white" stroke="#1f6feb" stroke-width="2"/>
+      <text x="240" y="120" text-anchor="middle" font-size="11" font-weight="700">CUSTOMER_SOUTH</text>
+      <text x="240" y="138" text-anchor="middle" font-size="11" fill="#5a6577">rows where region=S</text>
+
+      <text x="180" y="180" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">Reconstruct via UNION</text>
+
+      <!-- separator -->
+      <line x1="360" y1="30" x2="360" y2="240" stroke="#e3e7ee" stroke-width="2" stroke-dasharray="4 4"/>
+
+      <!-- VERTICAL -->
+      <text x="540" y="22" text-anchor="middle" font-weight="700" fill="#1a7f37">Vertical (split columns)</text>
+
+      <rect x="420" y="40" width="240" height="40" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="540" y="64" text-anchor="middle" font-size="12">EMPLOYEE (id, name, salary, addr)</text>
+
+      <line x1="540" y1="80" x2="480" y2="100" stroke="#1a7f37" stroke-width="1.5"/>
+      <line x1="540" y1="80" x2="600" y2="100" stroke="#1a7f37" stroke-width="1.5"/>
+
+      <rect x="420" y="100" width="120" height="50" rx="6" fill="white" stroke="#1a7f37" stroke-width="2"/>
+      <text x="480" y="120" text-anchor="middle" font-size="11" font-weight="700">EMP_HR</text>
+      <text x="480" y="138" text-anchor="middle" font-size="11" fill="#5a6577">id, name, addr</text>
+
+      <rect x="540" y="100" width="120" height="50" rx="6" fill="white" stroke="#1a7f37" stroke-width="2"/>
+      <text x="600" y="120" text-anchor="middle" font-size="11" font-weight="700">EMP_PAY</text>
+      <text x="600" y="138" text-anchor="middle" font-size="11" fill="#5a6577">id, salary</text>
+
+      <text x="540" y="180" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">Each fragment keeps key for JOIN</text>
+      <text x="540" y="198" text-anchor="middle" font-size="11" fill="#5a6577" font-style="italic">Reconstruct via NATURAL JOIN</text>
+    </svg>
+  </div>
+
+  <h3>11.3 Other Key Concepts</h3>
+  <h4>Replication</h4>
+  <p><strong>Full replication</strong> — every site has the entire database. High availability and read performance, but every update must propagate everywhere or data becomes inconsistent.</p>
+
+  <h4>Concurrency Control</h4>
+  <p>Distributed transactions need locking, timestamps, or 2-Phase Commit (2PC) to coordinate across sites.</p>
+
+  <h4>Semantic Heterogeneity</h4>
+  <p>Same column name, different meaning/units (e.g. salary in $ vs ₹). Must be resolved during integration.</p>
+
+  <h3>11.4 Advantages vs Disadvantages</h3>
+  <div class="grid-2">
+    <div class="card"><h5>Advantages</h5>
+      Faster local queries · Parallel processing · High availability · Easy horizontal scaling · Local autonomy.
+    </div>
+    <div class="card"><h5>Disadvantages</h5>
+      Complex management · Security &amp; deadlock harder · Network failures cause inconsistency · Higher operational cost.
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"R-F-C-S"</strong> — four design challenges: <em>R</em>eplication, <em>F</em>ragmentation, <em>C</em>oncurrency, <em>S</em>emantic heterogeneity.
+  </div>
+
+  <div class="quiz">
+    <h4>Quick Check — Topic 11</h4>
+    <div class="q">Q1. Difference between homogeneous &amp; heterogeneous DDBS? <button class="reveal">Show</button></div>
+    <div class="answer">Homogeneous: every site uses the same DBMS, OS and schema. Heterogeneous: sites differ in DBMS, schema or model and need translation middleware to interoperate.</div>
+    <div class="q">Q2. Difference between horizontal and vertical fragmentation? <button class="reveal">Show</button></div>
+    <div class="answer">Horizontal splits rows (by predicate); vertical splits columns (each fragment must keep a common candidate key for lossless join).</div>
+    <div class="q">Q3. Why is full replication problematic for writes? <button class="reveal">Show</button></div>
+    <div class="answer">Every update must be applied at every site or data becomes inconsistent — high overhead and complex concurrency control.</div>
+  </div>
+</section>
+
+<!-- ============================== TOPIC 12 — SESSIONAL EXAM Q&A ============================== -->
+<section id="t12" style="border-top:4px solid var(--bad); margin-top:60px; padding-top:20px;">
+  <h2 class="topic" style="border-bottom-color: var(--bad);">
+    <span class="num" style="background:var(--bad);">★</span>
+    Sessional Exam Q&amp;A — VERY IMPORTANT
+    <span class="unit" style="background:var(--bad-soft); color:var(--bad);">EXAM READY</span>
+  </h2>
+  <p class="lead">Six high-priority questions for the sessional exam, each with a full ready-to-write answer (definitions, classification, examples, diagrams, comparison tables). Read top-to-bottom on the morning of the exam.</p>
+
+  <div class="box bad">
+    <span class="label">How to use</span>
+    Each Q answer is structured as: <strong>Definition → Types/Classification → Syntax/Notation → Example → Comparison/Summary</strong>. This is the standard scoring template — write your answer in the same order in the exam to grab full marks.
+  </div>
+
+  <!-- ====================== Q1 — SQL DATA TYPES & DML ====================== -->
+  <h3 style="margin-top:42px;">Q1. Explain SQL Data Types and Basic SQL Queries (SELECT, INSERT, UPDATE, DELETE)</h3>
+
+  <div class="box def">
+    <span class="label">Definition — SQL</span>
+    SQL (Structured Query Language) is the standard language to define, manipulate, query and control data in a relational DBMS. It has four sub-languages: <strong>DDL</strong> (CREATE, ALTER, DROP), <strong>DML</strong> (SELECT, INSERT, UPDATE, DELETE), <strong>DCL</strong> (GRANT, REVOKE), <strong>TCL</strong> (COMMIT, ROLLBACK). The four "basic queries" asked here are all DML.
+  </div>
+
+  <h4>(a) SQL Data Types</h4>
+  <p>A <strong>data type</strong> defines the kind of value a column can hold and how much space it uses. SQL data types fall into five families:</p>
+
+  <table>
+    <thead><tr><th>Family</th><th>Type</th><th>Description / Range</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="5"><strong>Numeric</strong></td><td><code>INT / INTEGER</code></td><td>Whole number, 4 bytes (±2.1 billion)</td><td><code>age INT</code></td></tr>
+      <tr><td><code>SMALLINT</code></td><td>2 bytes (±32,767)</td><td><code>qty SMALLINT</code></td></tr>
+      <tr><td><code>BIGINT</code></td><td>8 bytes, very large integers</td><td><code>views BIGINT</code></td></tr>
+      <tr><td><code>DECIMAL(p,s) / NUMERIC</code></td><td>Exact fixed-point, <em>p</em> digits with <em>s</em> after the decimal</td><td><code>price DECIMAL(8,2)</code></td></tr>
+      <tr><td><code>FLOAT / REAL / DOUBLE</code></td><td>Approximate floating-point</td><td><code>weight FLOAT</code></td></tr>
+
+      <tr><td rowspan="3"><strong>Character / String</strong></td><td><code>CHAR(n)</code></td><td>Fixed length, padded with spaces</td><td><code>code CHAR(5)</code></td></tr>
+      <tr><td><code>VARCHAR(n)</code></td><td>Variable length up to <em>n</em> chars</td><td><code>name VARCHAR(50)</code></td></tr>
+      <tr><td><code>TEXT</code></td><td>Long text, up to ~65 KB</td><td><code>article TEXT</code></td></tr>
+
+      <tr><td rowspan="4"><strong>Date / Time</strong></td><td><code>DATE</code></td><td>YYYY-MM-DD</td><td><code>dob DATE</code></td></tr>
+      <tr><td><code>TIME</code></td><td>HH:MM:SS</td><td><code>start TIME</code></td></tr>
+      <tr><td><code>DATETIME</code></td><td>Date + time</td><td><code>created DATETIME</code></td></tr>
+      <tr><td><code>TIMESTAMP</code></td><td>UTC, auto-updated on insert/update</td><td><code>updated TIMESTAMP</code></td></tr>
+
+      <tr><td><strong>Boolean</strong></td><td><code>BOOLEAN / BOOL</code></td><td>TRUE / FALSE / NULL</td><td><code>active BOOLEAN</code></td></tr>
+
+      <tr><td rowspan="2"><strong>Binary / Special</strong></td><td><code>BLOB</code></td><td>Binary Large Object — image, file</td><td><code>photo BLOB</code></td></tr>
+      <tr><td><code>JSON</code></td><td>Structured JSON document</td><td><code>meta JSON</code></td></tr>
+    </tbody>
+  </table>
+
+  <div class="box tip">
+    <span class="label">Quick tip</span>
+    <strong>CHAR vs VARCHAR:</strong> CHAR(10) always stores 10 bytes (space-padded); VARCHAR(10) stores only the actual length + 1-2 bytes overhead. Use CHAR for fixed codes (country code "IN"), VARCHAR for names.
+  </div>
+
+  <h4>(b) Basic SQL Queries — DML</h4>
+
+  <p><strong>Sample STUDENT table</strong> used in all four examples below:</p>
+  <table style="font-size:13px;">
+    <thead><tr><th>Roll</th><th>Name</th><th>Age</th><th>Marks</th><th>City</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Aman</td><td>20</td><td>78</td><td>Delhi</td></tr>
+      <tr><td>2</td><td>Atul</td><td>18</td><td>65</td><td>Mumbai</td></tr>
+      <tr><td>3</td><td>Baljeet</td><td>19</td><td>82</td><td>Delhi</td></tr>
+      <tr><td>4</td><td>Harsh</td><td>20</td><td>55</td><td>Pune</td></tr>
+    </tbody>
+  </table>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:18px;">① SELECT — retrieve rows</h5>
+  <div class="box def">
+    <span class="label">Syntax</span>
+<pre><code><span class="keyword">SELECT</span> column1, column2, …
+<span class="keyword">FROM</span> table_name
+[<span class="keyword">WHERE</span> condition]
+[<span class="keyword">GROUP BY</span> col]
+[<span class="keyword">HAVING</span> cond]
+[<span class="keyword">ORDER BY</span> col [ASC|DESC]];</code></pre>
+  </div>
+  <div class="box eg">
+    <span class="label">Examples</span>
+<pre><code><span class="comment">-- All columns of all students</span>
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> STUDENT;
+
+<span class="comment">-- Names of students from Delhi who scored more than 70</span>
+<span class="keyword">SELECT</span> Name, Marks
+<span class="keyword">FROM</span> STUDENT
+<span class="keyword">WHERE</span> City = <span class="string">'Delhi'</span> <span class="keyword">AND</span> Marks &gt; 70
+<span class="keyword">ORDER BY</span> Marks <span class="keyword">DESC</span>;</code></pre>
+    Returns: Baljeet (82), Aman (78).
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:18px;">② INSERT — add new rows</h5>
+  <div class="box def">
+    <span class="label">Syntax</span>
+<pre><code><span class="keyword">INSERT INTO</span> table_name (col1, col2, …)
+<span class="keyword">VALUES</span> (val1, val2, …);</code></pre>
+  </div>
+  <div class="box eg">
+    <span class="label">Examples</span>
+<pre><code><span class="comment">-- Single row</span>
+<span class="keyword">INSERT INTO</span> STUDENT (Roll, Name, Age, Marks, City)
+<span class="keyword">VALUES</span> (5, <span class="string">'Prateek'</span>, 21, 90, <span class="string">'Jaipur'</span>);
+
+<span class="comment">-- Multiple rows in one statement</span>
+<span class="keyword">INSERT INTO</span> STUDENT <span class="keyword">VALUES</span>
+  (6, <span class="string">'Rohit'</span>, 22, 70, <span class="string">'Delhi'</span>),
+  (7, <span class="string">'Anita'</span>, 20, 88, <span class="string">'Mumbai'</span>);</code></pre>
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:18px;">③ UPDATE — modify existing rows</h5>
+  <div class="box def">
+    <span class="label">Syntax</span>
+<pre><code><span class="keyword">UPDATE</span> table_name
+<span class="keyword">SET</span> col1 = val1, col2 = val2, …
+[<span class="keyword">WHERE</span> condition];</code></pre>
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+<pre><code><span class="comment">-- Add 5 marks to every Delhi student</span>
+<span class="keyword">UPDATE</span> STUDENT
+<span class="keyword">SET</span> Marks = Marks + 5
+<span class="keyword">WHERE</span> City = <span class="string">'Delhi'</span>;</code></pre>
+  </div>
+  <div class="box bad">
+    <span class="label">Pitfall</span>
+    Forgetting <code>WHERE</code> updates <strong>every row</strong> in the table. Always test with SELECT first.
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:18px;">④ DELETE — remove rows</h5>
+  <div class="box def">
+    <span class="label">Syntax</span>
+<pre><code><span class="keyword">DELETE FROM</span> table_name
+[<span class="keyword">WHERE</span> condition];</code></pre>
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+<pre><code><span class="comment">-- Remove students who scored below 60</span>
+<span class="keyword">DELETE FROM</span> STUDENT
+<span class="keyword">WHERE</span> Marks &lt; 60;
+
+<span class="comment">-- Delete all rows but keep table structure</span>
+<span class="keyword">DELETE FROM</span> STUDENT;</code></pre>
+  </div>
+
+  <table>
+    <thead><tr><th>Command</th><th>Purpose</th><th>Affects</th><th>Rollback?</th></tr></thead>
+    <tbody>
+      <tr><td>SELECT</td><td>Read data</td><td>Returns rows (no change)</td><td>—</td></tr>
+      <tr><td>INSERT</td><td>Add new rows</td><td>Adds tuples</td><td>Yes</td></tr>
+      <tr><td>UPDATE</td><td>Modify existing rows</td><td>Changes attribute values</td><td>Yes</td></tr>
+      <tr><td>DELETE</td><td>Remove rows</td><td>Removes tuples (schema kept)</td><td>Yes</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"S-I-U-D — See, Insert, Update, Delete"</strong> — the four DML verbs. SELECT reads, the other three change data and need COMMIT to persist.
+  </div>
+
+  <hr>
+
+  <!-- ====================== Q2 — FUNCTIONAL DEPENDENCIES ====================== -->
+  <h3 style="margin-top:42px;">Q2. Explain Functional Dependencies and Their Types</h3>
+
+  <div class="box def">
+    <span class="label">Definition</span>
+    A <strong>Functional Dependency (FD)</strong>, written <code>X → Y</code>, exists in a relation R when for any two tuples that have the same value of X, they must also have the same value of Y. Read as: <em>"X functionally determines Y"</em> or <em>"Y is functionally dependent on X"</em>.
+    <ul style="margin-top:8px;">
+      <li><strong>X</strong> = determinant (Left-Hand Side, LHS)</li>
+      <li><strong>Y</strong> = dependent (Right-Hand Side, RHS)</li>
+    </ul>
+    Formally: ∀ t<sub>1</sub>, t<sub>2</sub> ∈ R, if t<sub>1</sub>[X] = t<sub>2</sub>[X] then t<sub>1</sub>[Y] = t<sub>2</sub>[Y].
+  </div>
+
+  <p><strong>Sample STUDENT relation:</strong></p>
+  <table style="font-size:13px;">
+    <thead><tr><th>Roll_No</th><th>Name</th><th>Branch</th><th>HOD</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Akshay</td><td>CSE</td><td>Mr X</td></tr>
+      <tr><td>2</td><td>Bhavik</td><td>ECE</td><td>Mr Y</td></tr>
+      <tr><td>3</td><td>Chirag</td><td>CSE</td><td>Mr X</td></tr>
+    </tbody>
+  </table>
+  <p>Here <code>Roll_No → Name</code>, <code>Roll_No → Branch</code>, and <code>Branch → HOD</code> all hold.</p>
+
+  <h4>Types of Functional Dependencies</h4>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:14px;">① Trivial FD</h5>
+  <div class="box def">
+    X → Y is <strong>trivial</strong> if Y ⊆ X (RHS is a subset of LHS). Always true, gives no useful information.
+    <p style="margin-top:6px;"><em>Example:</em> {Roll_No, Name} → {Name}, or A → A.</p>
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:14px;">② Non-Trivial FD</h5>
+  <div class="box def">
+    X → Y where Y ⊄ X — the RHS is <em>not</em> a subset of the LHS. This is the useful kind that drives normalization.
+    <p style="margin-top:6px;"><em>Example:</em> Roll_No → Name (Name is independent of Roll_No).</p>
+    <p><em>Sub-case — Completely Non-Trivial:</em> X ∩ Y = ∅ (no overlap at all).</p>
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:14px;">③ Multi-Valued Dependency (X →→ Y)</h5>
+  <div class="box def">
+    X →→ Y holds when one X-value is associated with a <em>set</em> of Y-values, independent of the remaining attributes. Causes 4NF violation.
+    <p style="margin-top:6px;"><em>Example:</em> In <code>STUDENT(Roll, Course, Hobby)</code>, Roll →→ Course and Roll →→ Hobby — courses and hobbies are independent.</p>
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:14px;">④ Transitive FD</h5>
+  <div class="box def">
+    If X → Y and Y → Z then X → Z transitively (via the middle attribute Y). Causes 3NF violation.
+    <p style="margin-top:6px;"><em>Example:</em> Roll_No → Branch and Branch → HOD ⇒ Roll_No → HOD.</p>
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:14px;">⑤ Fully Functional Dependency</h5>
+  <div class="box def">
+    X → Y is <strong>fully functional</strong> if removing any attribute from X breaks the dependency — Y depends on the <em>entire</em> X, not part of it.
+    <p style="margin-top:6px;"><em>Example:</em> {EmpID, ProjID} → Hours_worked is fully functional (need both to know hours).</p>
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:14px;">⑥ Partial Dependency</h5>
+  <div class="box def">
+    A non-prime attribute depends on a <em>part</em> of a composite candidate key. Causes 2NF violation.
+    <p style="margin-top:6px;"><em>Example:</em> In <code>R(EmpID, ProjID, EmpName)</code> with key {EmpID, ProjID}: EmpName depends only on EmpID (not on ProjID) → partial.</p>
+  </div>
+
+  <h4>Armstrong's Axioms (Inference Rules)</h4>
+  <div class="box tip">
+    <span class="label">RAT — three primary rules</span>
+    <strong>R</strong>eflexivity: if Y ⊆ X then X → Y<br>
+    <strong>A</strong>ugmentation: if X → Y then XZ → YZ<br>
+    <strong>T</strong>ransitivity: if X → Y and Y → Z then X → Z<br>
+    <em>Derived rules:</em> Union (X→Y, X→Z ⇒ X→YZ), Decomposition (X→YZ ⇒ X→Y &amp; X→Z), Pseudo-transitivity (X→Y, WY→Z ⇒ WX→Z).
+  </div>
+
+  <table>
+    <thead><tr><th>Type</th><th>Condition</th><th>Causes Violation Of</th></tr></thead>
+    <tbody>
+      <tr><td>Trivial</td><td>Y ⊆ X</td><td>—</td></tr>
+      <tr><td>Non-Trivial</td><td>Y ⊄ X</td><td>—</td></tr>
+      <tr><td>Multi-Valued</td><td>X →→ Y</td><td>4NF</td></tr>
+      <tr><td>Transitive</td><td>X→Y, Y→Z ⇒ X→Z</td><td>3NF</td></tr>
+      <tr><td>Partial</td><td>Non-prime depends on part of key</td><td>2NF</td></tr>
+      <tr><td>Fully Functional</td><td>Cannot remove any attr from X</td><td>Required for 2NF</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <!-- ====================== Q3 — NORMALIZATION ====================== -->
+  <h3 style="margin-top:42px;">Q3. Explain Normalization and Its Types with Examples</h3>
+
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Normalization</strong> is the systematic process of decomposing relations to (a) eliminate redundancy, (b) remove insertion/update/deletion anomalies, and (c) preserve information through lossless joins. Proposed by E. F. Codd (1970). Each normal form imposes a stricter rule.
+  </div>
+
+  <h4>Goals of Normalization</h4>
+  <ul>
+    <li>Eliminate redundant data storage</li>
+    <li>Avoid insert, update, delete anomalies</li>
+    <li>Ensure data dependencies make sense (only related data in a table)</li>
+    <li>Make the schema easier to maintain and extend</li>
+  </ul>
+
+  <p>The shared starting table for the examples below is the un-normalized:</p>
+  <table style="font-size:13px;">
+    <thead><tr><th>StuID</th><th>Name</th><th>Courses</th><th>HOD</th><th>HOD_Phone</th></tr></thead>
+    <tbody>
+      <tr><td>101</td><td>Aman</td><td>DBMS, OS</td><td>Mr X</td><td>9876</td></tr>
+      <tr><td>102</td><td>Atul</td><td>CN</td><td>Mr X</td><td>9876</td></tr>
+    </tbody>
+  </table>
+
+  <h4>① First Normal Form (1NF) — Atomicity</h4>
+  <div class="box def">
+    <strong>Rule:</strong> Every column must hold only <em>atomic</em> (single, indivisible) values — no repeating groups, no comma-separated lists, no nested structures.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — fix the multi-valued <code>Courses</code> column</span>
+    <table style="font-size:13px;">
+      <thead><tr><th>StuID</th><th>Name</th><th>Course</th><th>HOD</th><th>HOD_Phone</th></tr></thead>
+      <tbody>
+        <tr><td>101</td><td>Aman</td><td>DBMS</td><td>Mr X</td><td>9876</td></tr>
+        <tr><td>101</td><td>Aman</td><td>OS</td><td>Mr X</td><td>9876</td></tr>
+        <tr><td>102</td><td>Atul</td><td>CN</td><td>Mr X</td><td>9876</td></tr>
+      </tbody>
+    </table>
+    Now every cell is atomic — table is in 1NF.
+  </div>
+
+  <h4>② Second Normal Form (2NF) — No Partial Dependency</h4>
+  <div class="box def">
+    <strong>Rule:</strong> 1NF + every <em>non-prime</em> attribute must be <em>fully</em> functionally dependent on the <em>entire</em> candidate key (not on part of it).
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+    Composite key = {StuID, Course}. But Name depends only on StuID, and HOD/HOD_Phone depend only on Course's branch — these are partial dependencies. <strong>Decompose:</strong>
+<pre><code>STUDENT(StuID, Name)
+ENROLL(StuID, Course)
+COURSE_HOD(Course, HOD, HOD_Phone)</code></pre>
+    Now every non-prime attribute depends on the full key of its table.
+  </div>
+
+  <h4>③ Third Normal Form (3NF) — No Transitive Dependency</h4>
+  <div class="box def">
+    <strong>Rule:</strong> 2NF + for every non-trivial FD X → Y, <em>either</em> X is a super-key, <em>or</em> Y is a prime attribute (part of some candidate key).
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+    In <code>COURSE_HOD(Course, HOD, HOD_Phone)</code>: Course → HOD and HOD → HOD_Phone, so Course → HOD_Phone <em>transitively</em>. <strong>Decompose:</strong>
+<pre><code>COURSE_HOD(Course, HOD)
+HOD_INFO(HOD, HOD_Phone)</code></pre>
+  </div>
+
+  <h4>④ Boyce-Codd Normal Form (BCNF)</h4>
+  <div class="box def">
+    <strong>Rule:</strong> 3NF + for <em>every</em> non-trivial FD X → Y, X must be a super-key (the "Y-is-prime" loophole of 3NF is closed).
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+    <code>EmpProj(EmpID, ProjID, ProjLeader)</code> with FD <code>ProjLeader → ProjID</code>. ProjLeader is not a super-key but ProjID is a prime attribute → 3NF passes, BCNF fails. <strong>Fix:</strong>
+<pre><code>EMP_PROJ(EmpID, ProjID)
+PROJ_LEAD(ProjLeader, ProjID)</code></pre>
+  </div>
+
+  <h4>⑤ Fourth Normal Form (4NF) — No Multi-Valued Dependency</h4>
+  <div class="box def">
+    <strong>Rule:</strong> BCNF + no non-trivial multi-valued dependency. If X →→ Y holds, X must be a super-key.
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+    <code>STUDENT(Roll, Course, Hobby)</code> — a student has many courses AND many hobbies, independently. The cross-product creates spurious tuples. <strong>Decompose:</strong>
+<pre><code>STU_COURSE(Roll, Course)
+STU_HOBBY(Roll, Hobby)</code></pre>
+  </div>
+
+  <h4>⑥ Fifth Normal Form (5NF / PJNF) — Project-Join Normal Form</h4>
+  <div class="box def">
+    <strong>Rule:</strong> 4NF + no non-trivial join dependency. The relation cannot be losslessly decomposed into smaller projections except by projecting on a super-key. Eliminates "spurious tuples" that appear when only 2-way joins are tried but the data really needs a 3-way decomposition.
+  </div>
+
+  <h4>Summary Cheat-Sheet</h4>
+  <table>
+    <thead><tr><th>NF</th><th>Removes</th><th>Test</th></tr></thead>
+    <tbody>
+      <tr><td>1NF</td><td>Multi-valued / composite columns</td><td>All cells atomic?</td></tr>
+      <tr><td>2NF</td><td>Partial dependency</td><td>Every non-prime fully depends on whole key?</td></tr>
+      <tr><td>3NF</td><td>Transitive dependency</td><td>For X→Y: X super-key OR Y prime?</td></tr>
+      <tr><td>BCNF</td><td>Non-superkey LHS in any FD</td><td>For X→Y: X super-key (no exceptions)?</td></tr>
+      <tr><td>4NF</td><td>Multi-valued dependency (→→)</td><td>For X→→Y: X super-key?</td></tr>
+      <tr><td>5NF</td><td>Join dependency</td><td>Can decomposition reconstruct losslessly?</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"Atom · Part · Trans · Super · Multi · Join"</strong> — 1NF kills non-atoms, 2NF kills Partial, 3NF kills Transitive, BCNF wants Super-key, 4NF kills Multi-valued, 5NF kills Join dep.
+  </div>
+
+  <hr>
+
+  <!-- ====================== Q4 — AGGREGATE & GROUPING ====================== -->
+  <h3 style="margin-top:42px;">Q4. Explain Aggregate Functions and Grouping in Relational Algebra</h3>
+
+  <div class="box def">
+    <span class="label">Definition — Aggregate function</span>
+    An <strong>aggregate function</strong> takes a collection (multiset) of values and reduces them to a single summary value. It is used in relational algebra and SQL to compute totals, averages, counts, etc., over a set of tuples. Common aggregates: <code>SUM, AVG, COUNT, MIN, MAX</code>.
+  </div>
+
+  <h4>Standard Aggregate Functions</h4>
+  <table>
+    <thead><tr><th>Function</th><th>Returns</th><th>Works on</th></tr></thead>
+    <tbody>
+      <tr><td><code>SUM(A)</code></td><td>Sum of all values of A</td><td>Numeric only</td></tr>
+      <tr><td><code>AVG(A)</code></td><td>Arithmetic mean of A</td><td>Numeric only</td></tr>
+      <tr><td><code>MIN(A)</code></td><td>Smallest value in A</td><td>Any orderable type</td></tr>
+      <tr><td><code>MAX(A)</code></td><td>Largest value in A</td><td>Any orderable type</td></tr>
+      <tr><td><code>COUNT(A)</code></td><td>Number of (non-NULL) values in A</td><td>Any type</td></tr>
+      <tr><td><code>COUNT(*)</code></td><td>Number of tuples</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h4>The Grouping Operator (𝒢 / G)</h4>
+  <div class="box def">
+    <span class="label">Notation</span>
+    <code>&lt;grouping_attrs&gt; 𝒢 &lt;aggregate_list&gt; (R)</code>
+    <p style="margin-top:8px;">Or in plain text: <code>G&lt;sub&gt;groupBy&lt;/sub&gt; F(R)</code> — partition R by the grouping attributes, then apply each aggregate function in F to every group.</p>
+  </div>
+
+  <p><strong>Sample EMPLOYEE relation:</strong></p>
+  <table style="font-size:13px;">
+    <thead><tr><th>EmpID</th><th>Name</th><th>Dept</th><th>Salary</th></tr></thead>
+    <tbody>
+      <tr><td>E1</td><td>Aman</td><td>CSE</td><td>30000</td></tr>
+      <tr><td>E2</td><td>Atul</td><td>CSE</td><td>40000</td></tr>
+      <tr><td>E3</td><td>Baljeet</td><td>ECE</td><td>35000</td></tr>
+      <tr><td>E4</td><td>Harsh</td><td>ECE</td><td>50000</td></tr>
+      <tr><td>E5</td><td>Pranav</td><td>MECH</td><td>28000</td></tr>
+    </tbody>
+  </table>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:18px;">Without grouping — global aggregate</h5>
+  <div class="box eg">
+    <span class="label">Example 1 — total salary across the company</span>
+<pre><code>𝒢<sub>SUM(Salary)</sub> (EMPLOYEE)
+                    → { 183000 }</code></pre>
+    <span class="label">Example 2 — average salary &amp; count</span>
+<pre><code>𝒢<sub>AVG(Salary), COUNT(*)</sub> (EMPLOYEE)
+                    → { (36600, 5) }</code></pre>
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px; margin-top:18px;">With grouping — per-group aggregate</h5>
+  <div class="box eg">
+    <span class="label">Example 3 — sum of salary per department</span>
+<pre><code>Dept 𝒢<sub>SUM(Salary)</sub> (EMPLOYEE)</code></pre>
+    Result:
+    <table style="font-size:13px; margin-top:6px;">
+      <thead><tr><th>Dept</th><th>SUM(Salary)</th></tr></thead>
+      <tbody>
+        <tr><td>CSE</td><td>70000</td></tr>
+        <tr><td>ECE</td><td>85000</td></tr>
+        <tr><td>MECH</td><td>28000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box eg">
+    <span class="label">Example 4 — multiple aggregates with rename</span>
+<pre><code>Dept 𝒢<sub>COUNT(*) AS Cnt, MAX(Salary) AS HighestSal</sub> (EMPLOYEE)</code></pre>
+    <table style="font-size:13px; margin-top:6px;">
+      <thead><tr><th>Dept</th><th>Cnt</th><th>HighestSal</th></tr></thead>
+      <tbody>
+        <tr><td>CSE</td><td>2</td><td>40000</td></tr>
+        <tr><td>ECE</td><td>2</td><td>50000</td></tr>
+        <tr><td>MECH</td><td>1</td><td>28000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4>Equivalent SQL form</h4>
+  <div class="box eg">
+<pre><code><span class="comment">-- Same as Dept 𝒢 SUM(Salary) (EMPLOYEE)</span>
+<span class="keyword">SELECT</span> Dept, <span class="keyword">SUM</span>(Salary)
+<span class="keyword">FROM</span> EMPLOYEE
+<span class="keyword">GROUP BY</span> Dept;
+
+<span class="comment">-- With a filter on groups (HAVING)</span>
+<span class="keyword">SELECT</span> Dept, <span class="keyword">SUM</span>(Salary) <span class="keyword">AS</span> Total
+<span class="keyword">FROM</span> EMPLOYEE
+<span class="keyword">GROUP BY</span> Dept
+<span class="keyword">HAVING</span> <span class="keyword">SUM</span>(Salary) &gt; 50000;</code></pre>
+  </div>
+
+  <div class="box tip">
+    <span class="label">Important properties</span>
+    <ul style="margin:0;">
+      <li>Aggregate operator <strong>eliminates duplicates internally</strong> when DISTINCT is specified, e.g. <code>𝒢<sub>COUNT-DISTINCT(Dept)</sub>(R)</code>.</li>
+      <li>NULL values are <strong>ignored</strong> by SUM/AVG/MIN/MAX/COUNT(col), but counted by COUNT(*).</li>
+      <li>The output has one tuple <em>per distinct combination</em> of grouping attributes.</li>
+      <li>Without grouping attributes, the entire relation is treated as one big group → exactly one output tuple.</li>
+    </ul>
+  </div>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"Group on the LEFT of 𝒢, Aggregates on the RIGHT"</strong> — <code>Dept 𝒢<sub>SUM(Sal)</sub>(EMP)</code>: partition by Dept (left), summarize Sal (right).
+  </div>
+
+  <hr>
+
+  <!-- ====================== Q5 — TRC vs DRC ====================== -->
+  <h3 style="margin-top:42px;">Q5. Differentiate between Tuple Relational Calculus and Domain Relational Calculus</h3>
+
+  <div class="box def">
+    <span class="label">Definition — Relational Calculus</span>
+    A <strong>declarative (non-procedural)</strong> query language that describes <em>what</em> data is required, not <em>how</em> to obtain it. Two forms based on what the variable ranges over:
+    <ul style="margin-top:6px;">
+      <li><strong>TRC (Tuple Relational Calculus)</strong> — variables range over <em>tuples</em> (whole rows).</li>
+      <li><strong>DRC (Domain Relational Calculus)</strong> — variables range over <em>attribute domains</em> (single column values).</li>
+    </ul>
+  </div>
+
+  <h4>Tuple Relational Calculus (TRC)</h4>
+  <div class="box def">
+    <span class="label">Syntax</span>
+    <code>{ t | P(t) }</code> — return all tuples <code>t</code> for which predicate P is true. <code>t</code> is a <em>tuple variable</em>; <code>t.A</code> accesses attribute A of t.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — find names of students with marks &gt; 70</span>
+<pre><code>{ t.Name | t ∈ STUDENT ∧ t.Marks &gt; 70 }</code></pre>
+  </div>
+
+  <h4>Domain Relational Calculus (DRC)</h4>
+  <div class="box def">
+    <span class="label">Syntax</span>
+    <code>{ ⟨x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>⟩ | P(x<sub>1</sub>, x<sub>2</sub>, …, x<sub>n</sub>) }</code> — each <code>x<sub>i</sub></code> ranges over the <em>domain</em> of one attribute. The output is a tuple of those values.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — same query in DRC</span>
+<pre><code>{ ⟨n⟩ | ∃ r, m, c (⟨r, n, m, c⟩ ∈ STUDENT ∧ m &gt; 70) }</code></pre>
+    Here r, n, m, c are domain variables for Roll, Name, Marks, City respectively.
+  </div>
+
+  <h4>Comparison Table</h4>
+  <table>
+    <thead><tr><th>Aspect</th><th>Tuple Relational Calculus (TRC)</th><th>Domain Relational Calculus (DRC)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Variable</strong></td><td>Ranges over <em>tuples</em> (entire rows)</td><td>Ranges over <em>attribute domains</em> (column values)</td></tr>
+      <tr><td><strong>General form</strong></td><td><code>{ t | P(t) }</code></td><td><code>{ ⟨x<sub>1</sub>,…,x<sub>n</sub>⟩ | P(…) }</code></td></tr>
+      <tr><td><strong>Attribute access</strong></td><td>Dot notation: <code>t.A</code></td><td>Direct domain variable: <code>x<sub>i</sub></code></td></tr>
+      <tr><td><strong>Number of variables</strong></td><td>One variable per relation</td><td>One variable per <em>attribute</em> (more variables)</td></tr>
+      <tr><td><strong>Output specification</strong></td><td>Output tuple as a whole</td><td>Output an explicit tuple of domain values</td></tr>
+      <tr><td><strong>Style</strong></td><td>Declarative, row-oriented</td><td>Declarative, column-oriented</td></tr>
+      <tr><td><strong>Quantifiers used</strong></td><td>∃ (exists), ∀ (for all)</td><td>∃ (exists), ∀ (for all)</td></tr>
+      <tr><td><strong>Closeness to SQL</strong></td><td>Closer to SQL — SQL is essentially TRC-style</td><td>Closer to QBE (Query-By-Example)</td></tr>
+      <tr><td><strong>Verbosity</strong></td><td>Compact (single tuple variable)</td><td>More verbose (one variable per column)</td></tr>
+      <tr><td><strong>Safety</strong></td><td>Must be a <em>safe expression</em> (finite output)</td><td>Same — must be safe</td></tr>
+      <tr><td><strong>Example</strong></td><td><code>{ t | t ∈ EMP ∧ t.Salary &gt; 50000 }</code></td><td><code>{ ⟨i, n, s⟩ | ⟨i, n, s⟩ ∈ EMP ∧ s &gt; 50000 }</code></td></tr>
+    </tbody>
+  </table>
+
+  <div class="box tip">
+    <span class="label">Common ground</span>
+    Both TRC and DRC are <strong>equivalent in expressive power</strong> — any query expressible in one is also expressible in the other, and both are equivalent to relational algebra (Codd's theorem). Both are <em>non-procedural</em>: you describe the answer, not the steps.
+  </div>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"TRC = Take Rows; DRC = Take Domains"</strong>
+  </div>
+
+  <hr>
+
+  <!-- ====================== Q6 — CARTESIAN & BINARY OPERATIONS ====================== -->
+  <h3 style="margin-top:42px;">Q6. Describe Cartesian Product and Binary Relational Operations with Suitable Examples</h3>
+
+  <div class="box def">
+    <span class="label">Definition — Binary operation</span>
+    A <strong>binary relational operation</strong> takes <em>two relations</em> as input and returns a single relation. The five fundamental binary operations of relational algebra are:
+    <ol style="margin-top:6px;">
+      <li>Union (∪)</li>
+      <li>Set Difference (−)</li>
+      <li>Intersection (∩)</li>
+      <li>Cartesian Product (×)</li>
+      <li>Join (⋈) — Theta, Equi, Natural, Outer</li>
+    </ol>
+    The first three require <strong>union-compatibility</strong> (same arity, same attribute domains). Cartesian product and join do not.
+  </div>
+
+  <p><strong>Sample relations used throughout:</strong></p>
+  <div class="grid-2">
+    <div class="card"><h5>R(A, B)</h5>
+      <table style="margin:0;font-size:13px;"><thead><tr><th>A</th><th>B</th></tr></thead><tbody>
+        <tr><td>a1</td><td>1</td></tr>
+        <tr><td>a2</td><td>2</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card"><h5>S(C, D)</h5>
+      <table style="margin:0;font-size:13px;"><thead><tr><th>C</th><th>D</th></tr></thead><tbody>
+        <tr><td>c1</td><td>10</td></tr>
+        <tr><td>c2</td><td>20</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+
+  <h4>① Cartesian Product (R × S) — pair every row with every row</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <code>R × S</code> is the relation whose tuples are <em>every</em> combination of a tuple from R with a tuple from S. If R has <em>m</em> tuples and <em>r</em> attributes, and S has <em>n</em> tuples and <em>s</em> attributes, then R × S has <strong>m·n tuples</strong> and <strong>r + s attributes</strong>.
+    <p style="margin-top:6px;"><em>Schema:</em> attributes(R × S) = attributes(R) ∪ attributes(S) (rename if names clash).</p>
+  </div>
+
+  <div class="box eg">
+    <span class="label">Example — R(A,B) × S(C,D)</span>
+    Output has 2 × 2 = 4 rows, 4 columns:
+    <table style="font-size:13px; margin-top:6px;">
+      <thead><tr><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+      <tbody>
+        <tr><td>a1</td><td>1</td><td>c1</td><td>10</td></tr>
+        <tr><td>a1</td><td>1</td><td>c2</td><td>20</td></tr>
+        <tr><td>a2</td><td>2</td><td>c1</td><td>10</td></tr>
+        <tr><td>a2</td><td>2</td><td>c2</td><td>20</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box tip">
+    <span class="label">Why it matters</span>
+    Cartesian product is the <strong>foundation of all join operations</strong>. Theta join, Equi join, and Natural join are all defined as <code>σ<sub>condition</sub>(R × S)</code> — a Cartesian product followed by a selection.
+  </div>
+
+  <h4>② Union (R ∪ S) — combine rows</h4>
+  <div class="box def">
+    <code>R ∪ S</code> = all tuples that are in R, in S, or in both. Duplicates are eliminated. <strong>Both relations must be union-compatible</strong>.
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+    Let <code>STUDENT(name) = {Aman, Atul}</code> and <code>EMPLOYEE(name) = {Atul, Baljeet}</code>. Then <code>STUDENT ∪ EMPLOYEE = {Aman, Atul, Baljeet}</code>.
+  </div>
+
+  <h4>③ Set Difference (R − S) — rows in R but not in S</h4>
+  <div class="box def">
+    <code>R − S</code> = tuples that are in R but not in S. Requires union-compatibility. Note: <code>R − S ≠ S − R</code> (not commutative).
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+    With the same tables: <code>STUDENT − EMPLOYEE = {Aman}</code> (Atul is in both, so removed; Aman is only in STUDENT).
+  </div>
+
+  <h4>④ Intersection (R ∩ S) — common rows</h4>
+  <div class="box def">
+    <code>R ∩ S</code> = tuples that appear in <em>both</em> R and S. Derived: <code>R ∩ S = R − (R − S)</code>. Requires union-compatibility.
+  </div>
+  <div class="box eg">
+    <span class="label">Example</span>
+    <code>STUDENT ∩ EMPLOYEE = {Atul}</code>.
+  </div>
+
+  <h4>⑤ Join Operations (⋈) — combine matching rows from two relations</h4>
+
+  <h5 style="color:var(--brand); font-size:15px;">Theta Join (⋈<sub>θ</sub>)</h5>
+  <div class="box def">
+    <code>R ⋈<sub>θ</sub> S = σ<sub>θ</sub>(R × S)</code>. Combines rows that satisfy a general condition θ which may use <code>=, ≠, &lt;, &gt;, ≤, ≥</code>.
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px;">Equi Join</h5>
+  <div class="box def">
+    A theta join where θ is restricted to <strong>equality</strong> (<code>=</code>) only. The most common join in practice.
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px;">Natural Join (⋈)</h5>
+  <div class="box def">
+    Equi join on <em>all attributes with the same name</em>, keeping only one copy of each common attribute. No condition is written explicitly.
+  </div>
+  <div class="box eg">
+    <span class="label">Example — Natural Join</span>
+    <code>EMPLOYEE(EmpID, Name, DeptID) ⋈ DEPT(DeptID, DeptName)</code> joins on DeptID. Output: <code>(EmpID, Name, DeptID, DeptName)</code> — DeptID kept only once.
+  </div>
+
+  <h5 style="color:var(--brand); font-size:15px;">Outer Joins</h5>
+  <div class="box def">
+    Preserve unmatched tuples by padding with NULLs:
+    <ul style="margin-top:6px;">
+      <li><strong>Left Outer (⟕)</strong> — keeps every tuple from R; pads R-only with NULL on S side.</li>
+      <li><strong>Right Outer (⟖)</strong> — keeps every tuple from S.</li>
+      <li><strong>Full Outer (⟗)</strong> — keeps every tuple from both sides.</li>
+    </ul>
+  </div>
+
+  <h4>Summary — All Binary Relational Operations</h4>
+  <table>
+    <thead><tr><th>Operation</th><th>Symbol</th><th>Requirement</th><th>Output size</th></tr></thead>
+    <tbody>
+      <tr><td>Union</td><td>R ∪ S</td><td>Union-compatible</td><td>≤ |R| + |S|</td></tr>
+      <tr><td>Intersection</td><td>R ∩ S</td><td>Union-compatible</td><td>≤ min(|R|, |S|)</td></tr>
+      <tr><td>Set Difference</td><td>R − S</td><td>Union-compatible</td><td>≤ |R|</td></tr>
+      <tr><td>Cartesian Product</td><td>R × S</td><td>None</td><td>|R| × |S|</td></tr>
+      <tr><td>Theta Join</td><td>R ⋈<sub>θ</sub> S</td><td>None</td><td>≤ |R| × |S|</td></tr>
+      <tr><td>Equi Join</td><td>R ⋈<sub>A=B</sub> S</td><td>Comparable attrs</td><td>Depends on matches</td></tr>
+      <tr><td>Natural Join</td><td>R ⋈ S</td><td>Common attribute names</td><td>Depends on matches</td></tr>
+      <tr><td>Outer Join</td><td>⟕ ⟖ ⟗</td><td>Common/comparable attrs</td><td>≥ inner-join size</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic">
+    <strong>Memory hook</strong>
+    <strong style="color:var(--ink);font-size:14px;">"Cartesian is the FATHER of joins"</strong> — every join is built as σ<sub>condition</sub>(R × S). If two relations have <em>m</em> and <em>n</em> rows, the Cartesian product has <strong>m × n</strong> rows.
+  </div>
+
+  <div class="quiz">
+    <h4>Quick Check — Sessional Exam Q&amp;A</h4>
+    <div class="q">Q1. What is the size of R × S if |R| = 5 and |S| = 4? <button class="reveal">Show</button></div>
+    <div class="answer">5 × 4 = <strong>20 tuples</strong>. The arity (number of columns) is arity(R) + arity(S).</div>
+    <div class="q">Q2. Which operations require union-compatibility? <button class="reveal">Show</button></div>
+    <div class="answer">Union (∪), Intersection (∩), and Set Difference (−). They need same arity and matching attribute domains.</div>
+    <div class="q">Q3. Why does 3NF allow a transitive-like FD when 3NF is supposed to ban transitive dependencies? <button class="reveal">Show</button></div>
+    <div class="answer">3NF allows X → Y if Y is a <em>prime</em> attribute (part of some candidate key). BCNF removes this exception.</div>
+    <div class="q">Q4. Convert this TRC to DRC: <code>{ t | t ∈ EMP ∧ t.Sal &gt; 50000 }</code>. <button class="reveal">Show</button></div>
+    <div class="answer"><code>{ ⟨i, n, s⟩ | ⟨i, n, s⟩ ∈ EMP ∧ s &gt; 50000 }</code> — replace the tuple variable with one domain variable per attribute.</div>
+    <div class="q">Q5. Write a relational-algebra expression for "average salary per department". <button class="reveal">Show</button></div>
+    <div class="answer"><code>Dept 𝒢<sub>AVG(Salary)</sub> (EMPLOYEE)</code></div>
+    <div class="q">Q6. What is the difference between DELETE and DROP in SQL? <button class="reveal">Show</button></div>
+    <div class="answer">DELETE removes <em>rows</em> (DML, can be rolled back, table structure stays). DROP removes the <em>entire table/structure</em> (DDL, auto-committed in many systems).</div>
+  </div>
+</section>
+
+<!-- ============================== TOPIC 12 — SESSIONAL EXAM BOOSTER ============================== -->
+<section id="sessional-booster" style="border-top:4px solid var(--brand); margin-top:60px; padding-top:20px;">
+  <h2 class="topic"><span class="num">12</span> Sessional Exam Booster <span class="unit">30 MARKS</span></h2>
+  <p class="lead">Targeted revision pack for the <strong>30-mark sessional</strong>: Section A — 6 × 1-mark short answers (6m); Section B — 3 × 8-mark long answers (24m), each splittable as 4+4. Ready-to-write definitions, structured 4-mark mini answers, and full 8-mark model answers covering every unit in this guide.</p>
+
+  <div class="box bad">
+    <span class="label">Pattern recap</span>
+    <strong>Sec A (6 × 1m)</strong> — one-line definitions, full forms, true/false-style facts. <strong>Sec B (3 × 8m)</strong> — definition + detailed explanation + example/diagram + comparison/uses. Each 8-mark may split as 4 + 4.
+  </div>
+
+  <!-- ====================== A. 1-MARK QUICK ANSWERS ====================== -->
+  <h3>A. 1-Mark Quick Answers <span class="pill">Section A</span></h3>
+  <p>Memorise these one-liners — they are the highest scoring-per-second part of the paper.</p>
+
+  <table>
+    <thead><tr><th style="width:38%;">Question</th><th>One-line answer</th></tr></thead>
+    <tbody>
+      <tr><td>Define DBMS.</td><td>Software system that stores, manages and retrieves related data while enforcing integrity, security and concurrency.</td></tr>
+      <tr><td>Full form of SQL.</td><td><strong>Structured Query Language</strong> — standard language for relational databases.</td></tr>
+      <tr><td>What is a relation?</td><td>A two-dimensional table with rows (tuples) and columns (attributes), defined over a schema.</td></tr>
+      <tr><td>Define primary key.</td><td>A minimal set of attributes that uniquely identifies every tuple in a relation; cannot be NULL.</td></tr>
+      <tr><td>Define foreign key.</td><td>An attribute (or set) in one relation that refers to the primary key of another relation, enforcing referential integrity.</td></tr>
+      <tr><td>What is a candidate key?</td><td>A minimal super-key — uniquely identifies a tuple and has no redundant attribute.</td></tr>
+      <tr><td>What is a super-key?</td><td>Any set of attributes whose values uniquely identify each tuple (need not be minimal).</td></tr>
+      <tr><td>Selection operator symbol.</td><td><strong>σ</strong> (sigma) — picks rows satisfying a predicate.</td></tr>
+      <tr><td>Projection operator symbol.</td><td><strong>π</strong> (pi) — picks columns; eliminates duplicates.</td></tr>
+      <tr><td>Cartesian product symbol.</td><td><strong>×</strong> — pairs every row of R with every row of S; output |R|·|S|.</td></tr>
+      <tr><td>Difference: TRC vs DRC.</td><td>TRC uses tuple variables (whole row); DRC uses one domain variable per attribute.</td></tr>
+      <tr><td>What is a functional dependency?</td><td><code>X → Y</code> — given the same X-value, Y-value is uniquely determined.</td></tr>
+      <tr><td>Define trivial FD.</td><td>An FD <code>X → Y</code> where Y ⊆ X (always holds).</td></tr>
+      <tr><td>What is 1NF?</td><td>A relation is in 1NF if every attribute holds an atomic (indivisible) value — no repeating groups.</td></tr>
+      <tr><td>What is BCNF?</td><td>A 3NF relation in which, for every FD <code>X → Y</code>, X is a super-key.</td></tr>
+      <tr><td>Define an anomaly.</td><td>An unwanted side-effect (insert / update / delete) caused by data redundancy in an un-normalised table.</td></tr>
+      <tr><td>What is a view in SQL?</td><td>A virtual, named table derived from a query; stores no data of its own.</td></tr>
+      <tr><td>Full form of ACID.</td><td><strong>A</strong>tomicity, <strong>C</strong>onsistency, <strong>I</strong>solation, <strong>D</strong>urability.</td></tr>
+      <tr><td>What is a transaction?</td><td>A logical unit of work, executed entirely or not at all (all-or-nothing).</td></tr>
+      <tr><td>What is a deadlock?</td><td>A state where two or more transactions wait forever for locks held by each other.</td></tr>
+      <tr><td>What is a schedule?</td><td>An interleaved sequence of operations of two or more concurrent transactions.</td></tr>
+      <tr><td>What is 2-Phase Locking (2PL)?</td><td>Protocol with a growing phase (only acquires locks) and a shrinking phase (only releases locks).</td></tr>
+      <tr><td>Define query optimisation.</td><td>Selecting the most efficient evaluation plan among many equivalent plans for a given query.</td></tr>
+      <tr><td>What is an index?</td><td>An auxiliary data structure (e.g., B+ tree) that speeds up search by mapping key values to row locations.</td></tr>
+      <tr><td>Difference: DELETE vs DROP.</td><td>DELETE removes <em>rows</em> (DML, rollback-able); DROP removes the entire <em>table/structure</em> (DDL).</td></tr>
+      <tr><td>Full form of DDB.</td><td><strong>Distributed Database</strong> — single logical DB whose data is spread across multiple physical sites.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ====================== B. 4-MARK MINI ANSWERS ====================== -->
+  <h3>B. 4-Mark Mini Answers <span class="pill amber">8m = 4 + 4 split</span></h3>
+  <p>Each block is a self-contained 4-mark answer (definition + 3-4 bullet points + tiny example). Pair any two and you have an 8-mark answer.</p>
+
+  <div class="grid-2">
+
+    <div class="card">
+      <h5>M1. Basic Operations of Relational Algebra</h5>
+      <div class="box def" style="margin:8px 0;">Procedural query language with 6 basic ops on relations.</div>
+      <ul style="margin:6px 0 0 18px;">
+        <li><strong>σ</strong> Select — rows by predicate.</li>
+        <li><strong>π</strong> Project — columns (deduped).</li>
+        <li><strong>∪, −</strong> Union, Set difference (need union-compatibility).</li>
+        <li><strong>×</strong> Cartesian, <strong>ρ</strong> Rename.</li>
+      </ul>
+      <p style="margin:6px 0 0;"><em>Eg.</em> <code>π<sub>NAME</sub>(σ<sub>AGE&gt;20</sub>(STUDENT))</code></p>
+    </div>
+
+    <div class="card">
+      <h5>M2. TRC vs DRC</h5>
+      <div class="box def" style="margin:8px 0;">Both are non-procedural relational calculi.</div>
+      <ul style="margin:6px 0 0 18px;">
+        <li><strong>TRC</strong> — variables range over whole tuples: <code>{t | t∈EMP ∧ t.Sal&gt;5000}</code>.</li>
+        <li><strong>DRC</strong> — one variable per attribute: <code>{⟨i,n,s⟩ | ⟨i,n,s⟩∈EMP ∧ s&gt;5000}</code>.</li>
+        <li>Both are <em>declarative</em> (what, not how).</li>
+        <li>Equivalent in expressive power to safe relational algebra.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M3. Types of Functional Dependencies</h5>
+      <div class="box def" style="margin:8px 0;">FD <code>X → Y</code>: same X gives same Y.</div>
+      <ul style="margin:6px 0 0 18px;">
+        <li><strong>Trivial</strong> — Y ⊆ X (e.g., AB → A).</li>
+        <li><strong>Non-trivial</strong> — Y ⊄ X (e.g., RollNo → Name).</li>
+        <li><strong>Fully functional</strong> — no proper subset of X determines Y.</li>
+        <li><strong>Transitive</strong> — X→Y, Y→Z ⇒ X→Z (banned in 3NF).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M4. Insert / Update / Delete Anomalies</h5>
+      <div class="box def" style="margin:8px 0;">Side-effects of redundancy in un-normalised tables.</div>
+      <ul style="margin:6px 0 0 18px;">
+        <li><strong>Insert</strong> — cannot add a dept until at least one employee is hired.</li>
+        <li><strong>Update</strong> — change dept name, must update every employee row.</li>
+        <li><strong>Delete</strong> — deleting last employee deletes the dept itself.</li>
+      </ul>
+      <p style="margin:6px 0 0;"><em>Cure:</em> decompose to 3NF / BCNF.</p>
+    </div>
+
+    <div class="card">
+      <h5>M5. 1NF vs 2NF vs 3NF</h5>
+      <ul style="margin:6px 0 0 18px;">
+        <li><strong>1NF</strong> — atomic values only; no repeating groups.</li>
+        <li><strong>2NF</strong> — 1NF + no partial dependency on a composite key.</li>
+        <li><strong>3NF</strong> — 2NF + no transitive dependency on the primary key.</li>
+        <li><strong>BCNF</strong> — for every FD <code>X → Y</code>, X is a super-key.</li>
+      </ul>
+      <p style="margin:6px 0 0;"><em>Mnemonic:</em> "1-Atomic, 2-Whole-key, 3-Nothing-but-key".</p>
+    </div>
+
+    <div class="card">
+      <h5>M6. Closure of an Attribute Set (X<sup>+</sup>)</h5>
+      <div class="box def" style="margin:8px 0;">Set of all attributes functionally determined by X using a given FD set F.</div>
+      <ol style="margin:6px 0 0 18px;">
+        <li>Start with X<sup>+</sup> = X.</li>
+        <li>For each FD A→B in F, if A ⊆ X<sup>+</sup>, add B.</li>
+        <li>Repeat until no change.</li>
+      </ol>
+      <p style="margin:6px 0 0;"><em>Use:</em> if X<sup>+</sup> = all attributes, X is a super-key.</p>
+    </div>
+
+    <div class="card">
+      <h5>M7. Views — Definition &amp; Use</h5>
+      <div class="box def" style="margin:8px 0;">Virtual table derived from a stored query; no physical data of its own.</div>
+      <ul style="margin:6px 0 0 18px;">
+        <li>Hides sensitive columns (security).</li>
+        <li>Simplifies complex joins.</li>
+        <li>Provides logical data independence.</li>
+      </ul>
+      <pre style="margin:6px 0 0;font-size:12px;"><code><span class="keyword">CREATE VIEW</span> v_emp <span class="keyword">AS
+SELECT</span> ename, dept <span class="keyword">FROM</span> EMP;</code></pre>
+    </div>
+
+    <div class="card">
+      <h5>M8. Steps of Query Processing</h5>
+      <ol style="margin:6px 0 0 18px;">
+        <li><strong>Parsing &amp; translation</strong> — SQL → relational algebra tree.</li>
+        <li><strong>Optimisation</strong> — choose cheapest equivalent plan (cost-based).</li>
+        <li><strong>Code generation</strong> — produce executable plan.</li>
+        <li><strong>Execution</strong> — run on the storage engine; return result.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h5>M9. ACID Properties</h5>
+      <ul style="margin:6px 0 0 18px;">
+        <li><strong>A</strong>tomicity — all-or-nothing.</li>
+        <li><strong>C</strong>onsistency — DB moves between valid states.</li>
+        <li><strong>I</strong>solation — concurrent T's don't interfere.</li>
+        <li><strong>D</strong>urability — committed changes survive crash.</li>
+      </ul>
+      <p style="margin:6px 0 0;"><em>Eg.</em> Bank transfer: debit + credit both happen, or neither.</p>
+    </div>
+
+    <div class="card">
+      <h5>M10. Two-Phase Locking (2PL)</h5>
+      <div class="box def" style="margin:8px 0;">Protocol that guarantees conflict-serialisable schedules.</div>
+      <ul style="margin:6px 0 0 18px;">
+        <li><strong>Growing phase</strong> — only acquires locks.</li>
+        <li><strong>Shrinking phase</strong> — only releases locks.</li>
+        <li>Once a lock is released, no new lock can be taken.</li>
+        <li><strong>Strict 2PL</strong> holds X-locks until commit/abort — avoids cascading rollback.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M11. DBMS Security Mechanisms</h5>
+      <ul style="margin:6px 0 0 18px;">
+        <li><strong>Authentication</strong> — login + password / certificate.</li>
+        <li><strong>Authorisation</strong> — GRANT / REVOKE on objects.</li>
+        <li><strong>Views</strong> — hide sensitive columns/rows.</li>
+        <li><strong>Encryption &amp; auditing</strong> — protect at rest + trace activity.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>M12. Advantages of Distributed DB</h5>
+      <ul style="margin:6px 0 0 18px;">
+        <li><strong>Reliability</strong> — replication ⇒ no single point of failure.</li>
+        <li><strong>Local autonomy</strong> — each site manages its own data.</li>
+        <li><strong>Performance</strong> — query data near the user, parallel execution.</li>
+        <li><strong>Scalability</strong> — add sites instead of resizing one server.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- ====================== C. 8-MARK FULL ANSWERS ====================== -->
+  <h3>C. 8-Mark Full Answers <span class="pill green">Section B</span></h3>
+  <p>Six fully scored model answers — each follows the standard <em>definition → detailed explanation → example/diagram → uses/comparison</em> template.</p>
+
+  <!-- ===== Q1. Relational Algebra ===== -->
+  <h4>Q1. Explain the operations of Relational Algebra with examples.</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    Relational Algebra (E. F. Codd, 1970) is a <strong>procedural query language</strong> in which each operator takes one or two relations and returns a new relation. It is the theoretical basis of SQL.
+  </div>
+  <p><strong>Detailed explanation —</strong> there are <strong>6 basic</strong> operators and several <strong>derived</strong> operators built from them.</p>
+  <table>
+    <thead><tr><th>Op</th><th>Symbol</th><th>Purpose</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Select</td><td>σ</td><td>Rows by predicate</td><td><code>σ<sub>AGE=20</sub>(STUDENT)</code></td></tr>
+      <tr><td>Project</td><td>π</td><td>Pick columns (dedup)</td><td><code>π<sub>NAME</sub>(STUDENT)</code></td></tr>
+      <tr><td>Union</td><td>∪</td><td>Combine rows (R, S union-compatible)</td><td><code>STUDENT ∪ EMP</code></td></tr>
+      <tr><td>Set Diff</td><td>−</td><td>Rows in R not in S</td><td><code>STUDENT − EMP</code></td></tr>
+      <tr><td>Cartesian</td><td>×</td><td>Pair every row with every row</td><td><code>R × S</code> ⇒ |R|·|S| rows</td></tr>
+      <tr><td>Rename</td><td>ρ</td><td>Rename relation/attributes</td><td><code>ρ<sub>S(a,b)</sub>(R)</code></td></tr>
+      <tr><td>Join</td><td>⋈</td><td>σ on R × S (theta / equi / natural)</td><td><code>EMP ⋈<sub>did=did</sub> DEPT</code></td></tr>
+      <tr><td>Intersection</td><td>∩</td><td>Rows in both</td><td><code>R ∩ S = R − (R − S)</code></td></tr>
+      <tr><td>Division</td><td>÷</td><td>"For all" queries</td><td><code>STUDIES ÷ COURSES</code></td></tr>
+    </tbody>
+  </table>
+  <div class="box eg">
+    <span class="label">Example query</span>
+    "Names of students aged 20" → <code>π<sub>NAME</sub>(σ<sub>AGE=20</sub>(STUDENT))</code>.
+  </div>
+  <p><strong>Uses:</strong> SQL queries are internally translated into a relational algebra tree, then optimised — so RA is the foundation of query optimisation.</p>
+
+  <!-- ===== Q2. Normalisation with diagram ===== -->
+  <h4>Q2. Explain Normalisation. Discuss 1NF, 2NF, 3NF and BCNF with examples.</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Normalisation</strong> is the step-wise process of decomposing a relation to remove redundancy and update / insert / delete anomalies, while preserving information and (ideally) all functional dependencies.
+  </div>
+
+  <div class="diagram">
+    <div class="diagram-title">Normal Forms — Progression</div>
+    <svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrNF" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <polygon points="0 0, 8 4, 0 8" fill="#1f6feb"/>
+        </marker>
+      </defs>
+      <!-- 1NF box -->
+      <rect x="20" y="60" width="120" height="60" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="80" y="85" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="15">1NF</text>
+      <text x="80" y="105" text-anchor="middle" font-size="11" fill="#1a2233">Atomic values</text>
+      <!-- 2NF -->
+      <rect x="170" y="60" width="120" height="60" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="230" y="85" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="15">2NF</text>
+      <text x="230" y="105" text-anchor="middle" font-size="11" fill="#1a2233">No partial FD</text>
+      <!-- 3NF -->
+      <rect x="320" y="60" width="120" height="60" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="380" y="85" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="15">3NF</text>
+      <text x="380" y="105" text-anchor="middle" font-size="11" fill="#1a2233">No transitive FD</text>
+      <!-- BCNF -->
+      <rect x="470" y="60" width="120" height="60" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="530" y="85" text-anchor="middle" font-weight="700" fill="#b54708" font-size="15">BCNF</text>
+      <text x="530" y="105" text-anchor="middle" font-size="11" fill="#1a2233">LHS = super-key</text>
+      <!-- 4NF -->
+      <rect x="610" y="60" width="100" height="60" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="660" y="85" text-anchor="middle" font-weight="700" fill="#1a7f37" font-size="15">4NF / 5NF</text>
+      <text x="660" y="105" text-anchor="middle" font-size="11" fill="#1a2233">No MVD / JD</text>
+
+      <!-- arrows -->
+      <line x1="142" y1="90" x2="168" y2="90" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrNF)"/>
+      <line x1="292" y1="90" x2="318" y2="90" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrNF)"/>
+      <line x1="442" y1="90" x2="468" y2="90" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrNF)"/>
+      <line x1="592" y1="90" x2="608" y2="90" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrNF)"/>
+
+      <text x="360" y="40" text-anchor="middle" font-weight="700" fill="#1a2233" font-size="14">Each higher NF ⊆ previous NF — stricter as we move right</text>
+      <text x="360" y="170" text-anchor="middle" font-size="12" fill="#5a6577">Goal: minimise redundancy without losing information</text>
+    </svg>
+    <div class="caption">A relation in BCNF is automatically in 3NF, 2NF and 1NF.</div>
+  </div>
+
+  <table>
+    <thead><tr><th>NF</th><th>Rule</th><th>Removes</th><th>Tiny example</th></tr></thead>
+    <tbody>
+      <tr><td>1NF</td><td>All values atomic, no repeating groups.</td><td>Multi-valued cells</td><td>Split <code>Phone='9999, 8888'</code> into two rows.</td></tr>
+      <tr><td>2NF</td><td>1NF + no partial dependency on composite key.</td><td>Partial FDs</td><td>(<u>SID, CID</u>, SName) — SID→SName is partial; split off STUDENT(SID, SName).</td></tr>
+      <tr><td>3NF</td><td>2NF + no transitive dependency on PK.</td><td>Transitive FDs</td><td>(<u>SID</u>, Dept, HOD): Dept→HOD is transitive; split off DEPT(Dept, HOD).</td></tr>
+      <tr><td>BCNF</td><td>For every FD X→Y, X is a super-key.</td><td>Anomalies left after 3NF</td><td>(<u>S, T</u>, C): T→C violates BCNF; decompose to (T,C) and (S,T).</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Advantages:</strong> minimum redundancy, no update anomalies, smaller storage; <strong>Trade-off:</strong> more joins at query time.</p>
+
+  <!-- ===== Q3. ACID + Transaction states with diagram ===== -->
+  <h4>Q3. Explain ACID Properties and the Transaction State Diagram.</h4>
+  <div class="box def">
+    <span class="label">Definition — Transaction</span>
+    A <strong>transaction</strong> is a logical unit of work consisting of one or more DB operations executed as a single, indivisible step. Reliability of a DBMS is guaranteed by enforcing the <strong>ACID</strong> properties on every transaction.
+  </div>
+
+  <table>
+    <thead><tr><th>Property</th><th>Meaning</th><th>Enforced by</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A</strong>tomicity</td><td>All operations of T happen, or none.</td><td>Recovery manager (UNDO log).</td></tr>
+      <tr><td><strong>C</strong>onsistency</td><td>T moves DB from one valid state to another.</td><td>Integrity constraints.</td></tr>
+      <tr><td><strong>I</strong>solation</td><td>Concurrent T's appear serial.</td><td>Concurrency-control protocols (2PL, timestamps).</td></tr>
+      <tr><td><strong>D</strong>urability</td><td>Committed changes survive crash.</td><td>Write-ahead log + force-write at commit.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="diagram">
+    <div class="diagram-title">Transaction State Diagram</div>
+    <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrTx" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <polygon points="0 0, 8 4, 0 8" fill="#1f6feb"/>
+        </marker>
+      </defs>
+      <!-- Active -->
+      <ellipse cx="120" cy="140" rx="70" ry="34" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="120" y="135" text-anchor="middle" font-weight="700" fill="#1f6feb" font-size="14">ACTIVE</text>
+      <text x="120" y="152" text-anchor="middle" font-size="11" fill="#1a2233">execute reads/writes</text>
+      <!-- Partially committed -->
+      <ellipse cx="320" cy="80" rx="80" ry="34" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="320" y="76" text-anchor="middle" font-weight="700" fill="#b54708" font-size="13">PARTIALLY</text>
+      <text x="320" y="92" text-anchor="middle" font-weight="700" fill="#b54708" font-size="13">COMMITTED</text>
+      <!-- Committed -->
+      <ellipse cx="540" cy="80" rx="70" ry="34" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="540" y="76" text-anchor="middle" font-weight="700" fill="#1a7f37" font-size="14">COMMITTED</text>
+      <text x="540" y="92" text-anchor="middle" font-size="11" fill="#1a2233">durable</text>
+      <!-- Failed -->
+      <ellipse cx="320" cy="220" rx="70" ry="34" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="320" y="225" text-anchor="middle" font-weight="700" fill="#b42318" font-size="14">FAILED</text>
+      <!-- Aborted -->
+      <ellipse cx="540" cy="220" rx="70" ry="34" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="540" y="225" text-anchor="middle" font-weight="700" fill="#b42318" font-size="14">ABORTED</text>
+
+      <!-- arrows -->
+      <line x1="180" y1="120" x2="245" y2="92" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrTx)"/>
+      <text x="200" y="100" font-size="10" fill="#5a6577">finish</text>
+      <line x1="400" y1="80" x2="468" y2="80" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrTx)"/>
+      <text x="430" y="72" font-size="10" fill="#5a6577">commit</text>
+      <line x1="180" y1="160" x2="252" y2="200" stroke="#b42318" stroke-width="2" marker-end="url(#arrTx)"/>
+      <text x="200" y="200" font-size="10" fill="#b42318">error</text>
+      <line x1="320" y1="114" x2="320" y2="184" stroke="#b42318" stroke-width="2" marker-end="url(#arrTx)"/>
+      <text x="328" y="155" font-size="10" fill="#b42318">fail before commit</text>
+      <line x1="390" y1="220" x2="468" y2="220" stroke="#b42318" stroke-width="2" marker-end="url(#arrTx)"/>
+      <text x="412" y="212" font-size="10" fill="#b42318">rollback</text>
+    </svg>
+    <div class="caption">Active → Partially Committed → Committed (success path). Active/Partial → Failed → Aborted (failure path).</div>
+  </div>
+
+  <p><strong>Example —</strong> Bank transfer of ₹500 from A to B: debit A, credit B. Atomicity ensures both succeed or neither; Durability ensures the new balances survive a power-cut after commit.</p>
+
+  <!-- ===== Q4. Concurrency, schedules, 2PL ===== -->
+  <h4>Q4. What is Concurrency Control? Explain conflict-serialisability and 2-Phase Locking.</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Concurrency control</strong> is the DBMS activity that coordinates simultaneous transactions so that the resulting schedule is equivalent to some serial schedule (i.e., is <em>serialisable</em>) and the database stays consistent.
+  </div>
+  <p><strong>Schedule</strong> — an interleaving of operations of two or more T's. <strong>Serial</strong> if all of one T finishes before another starts; <strong>Serialisable</strong> if equivalent in effect to a serial schedule.</p>
+
+  <h5 style="color:var(--brand);">Conflict-serialisability</h5>
+  <p>Two operations conflict if they belong to <em>different</em> T's, access the <em>same</em> data item, and at least one is a <em>write</em>. A schedule S is conflict-serialisable if it can be transformed into a serial schedule by swapping non-conflicting adjacent operations. Detected by drawing a <strong>precedence graph</strong> — schedule is serialisable iff the graph is acyclic.</p>
+
+  <h5 style="color:var(--brand);">Two-Phase Locking (2PL)</h5>
+  <table>
+    <thead><tr><th>Phase</th><th>Activity</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Growing</strong></td><td>T may acquire any lock (S or X), but cannot release any.</td></tr>
+      <tr><td><strong>Shrinking</strong></td><td>T may release locks but cannot acquire new ones.</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Variants —</strong> <em>Strict 2PL</em> (X-locks held till commit, no cascading abort), <em>Rigorous 2PL</em> (all locks held till commit). 2PL guarantees conflict-serialisability but may cause <strong>deadlock</strong>, handled by <em>wait-die / wound-wait</em> or <em>deadlock detection</em>.</p>
+
+  <div class="box eg">
+    <span class="label">Tiny worked schedule</span>
+    T1: <code>R(A) W(A)</code>; T2: <code>R(A) W(A)</code>. Without locking, lost-update may occur. Under 2PL, T1 takes X-lock(A), T2 waits, then commits → equivalent to serial T1; T2.
+  </div>
+
+  <!-- ===== Q5. Query Processing & Optimisation ===== -->
+  <h4>Q5. Explain the steps of Query Processing and the role of the Query Optimiser.</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Query processing</strong> is the sequence of activities involved in extracting data from the database in response to an SQL query. <strong>Query optimisation</strong> is the step that selects the most efficient evaluation plan from many equivalent ones.
+  </div>
+
+  <table>
+    <thead><tr><th>Step</th><th>Activity</th><th>Output</th></tr></thead>
+    <tbody>
+      <tr><td>1. Parsing &amp; Translation</td><td>Lexical / syntax / semantic check; convert SQL to relational algebra.</td><td>Relational algebra tree</td></tr>
+      <tr><td>2. Optimisation</td><td>Generate equivalent plans, estimate cost, pick cheapest.</td><td>Optimal plan</td></tr>
+      <tr><td>3. Code generation</td><td>Produce executable code / iterators.</td><td>Execution plan</td></tr>
+      <tr><td>4. Execution</td><td>Run on storage engine, return tuples.</td><td>Query result</td></tr>
+    </tbody>
+  </table>
+
+  <h5 style="color:var(--brand);">Optimisation techniques</h5>
+  <ul>
+    <li><strong>Heuristic / rule-based</strong> — push σ and π as early as possible; avoid Cartesian product.</li>
+    <li><strong>Cost-based</strong> — use statistics (table size, index, selectivity) to choose join order &amp; algorithm (nested-loop, sort-merge, hash join).</li>
+    <li><strong>Equivalence rules</strong> — commutativity / associativity of join &amp; union.</li>
+  </ul>
+  <div class="box eg">
+    <span class="label">Example</span>
+    <code>SELECT name FROM EMP, DEPT WHERE EMP.did=DEPT.did AND DEPT.loc='DEL'</code> — push <code>σ<sub>loc='DEL'</sub></code> on DEPT first to shrink the join input, then join with EMP.
+  </div>
+
+  <!-- ===== Q6. Distributed DB ===== -->
+  <h4>Q6. What is a Distributed Database System? Explain its architecture and advantages.</h4>
+  <div class="box def">
+    <span class="label">Definition</span>
+    A <strong>Distributed Database (DDB)</strong> is a single logical database whose data is physically stored at multiple sites connected by a network. A <strong>Distributed DBMS</strong> manages the DDB and makes the distribution transparent to users.
+  </div>
+
+  <h5 style="color:var(--brand);">Architecture / data organisation</h5>
+  <ul>
+    <li><strong>Fragmentation</strong> — split a relation into <em>horizontal</em> (rows), <em>vertical</em> (columns), or <em>mixed</em> fragments.</li>
+    <li><strong>Replication</strong> — store copies of the same fragment at multiple sites for reliability.</li>
+    <li><strong>Allocation</strong> — decide which fragment lives where, based on access patterns.</li>
+    <li><strong>Distribution transparency</strong> — location, replication and fragmentation are hidden from the user.</li>
+  </ul>
+
+  <table>
+    <thead><tr><th>Type</th><th>Sites run</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Homogeneous DDB</td><td>Same DBMS software at every site.</td><td>All sites use Oracle.</td></tr>
+      <tr><td>Heterogeneous DDB</td><td>Different DBMS / data models at different sites.</td><td>Oracle at HQ, MySQL at branch.</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Advantages —</strong> reliability (replication), local autonomy, better performance (data near user, parallel execution), modular growth. <strong>Disadvantages —</strong> complex design, costly software, harder concurrency &amp; recovery, security exposure across the network.</p>
+
+  <!-- ===== Q7. Views + DCL (security) ===== -->
+  <h4>Q7. Explain Views in SQL and their role in Database Security (with GRANT/REVOKE).</h4>
+  <div class="box def">
+    <span class="label">Definition — View</span>
+    A <strong>view</strong> is a virtual, named relation defined by an SQL query. It stores no data of its own — every reference is re-computed from the underlying base tables.
+  </div>
+
+  <pre><code><span class="comment">-- create a view that hides salary</span>
+<span class="keyword">CREATE VIEW</span> v_emp <span class="keyword">AS
+SELECT</span> empid, ename, dept <span class="keyword">FROM</span> EMP;
+
+<span class="comment">-- grant read-only access on the view to a clerk</span>
+<span class="keyword">GRANT SELECT ON</span> v_emp <span class="keyword">TO</span> clerk;
+<span class="keyword">REVOKE SELECT ON</span> v_emp <span class="keyword">FROM</span> clerk;</code></pre>
+
+  <h5 style="color:var(--brand);">Uses of Views</h5>
+  <ul>
+    <li><strong>Security</strong> — show only allowed columns/rows to a user (e.g., hide salary).</li>
+    <li><strong>Simplicity</strong> — encapsulate complex joins behind one name.</li>
+    <li><strong>Logical data independence</strong> — schema changes hidden behind the view.</li>
+    <li><strong>Customisation</strong> — different users see different shapes of data.</li>
+  </ul>
+
+  <h5 style="color:var(--brand);">Database Security mechanisms (DCL)</h5>
+  <table>
+    <thead><tr><th>Mechanism</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>Authentication</td><td>Verify user identity (login + password).</td></tr>
+      <tr><td>Authorisation (GRANT/REVOKE)</td><td>Decide which user can do what on which object.</td></tr>
+      <tr><td>Views</td><td>Hide sensitive columns/rows.</td></tr>
+      <tr><td>Encryption</td><td>Protect data at rest and in transit.</td></tr>
+      <tr><td>Auditing</td><td>Log who accessed/changed what, and when.</td></tr>
+    </tbody>
+  </table>
+  <div class="box eg">
+    <span class="label">Example</span>
+    HR runs <code>SELECT * FROM EMP</code> (sees salary). A clerk only has access to <code>v_emp</code> → cannot see salary even though it's the same underlying data.
+  </div>
+
+  <!-- ====================== D. UNIT MAPPING ====================== -->
+  <h3>D. Likely Q-by-Unit Mapping</h3>
+  <p>Use this table to decide what to revise hardest the night before — it shows where each marks-tier typically comes from in the syllabus.</p>
+
+  <table>
+    <thead><tr><th>Marks tier</th><th>Most likely Unit / Topic</th><th>Examples to expect</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1-mark (Sec A)</strong></td><td>Definitions across <em>all</em> units (3 &amp; 4)</td><td>Define DBMS, full-form ACID/SQL, symbol of σ/π/×, what is 1NF, what is a view, define deadlock.</td></tr>
+      <tr><td rowspan="2"><strong>4-mark half (8m split)</strong></td><td>Unit 3 — Algebra / Calculus</td><td>6 basic ops of RA; TRC vs DRC; write π/σ for a query.</td></tr>
+      <tr><td>Unit 4 — FDs, NF, Closure, Views</td><td>Types of FDs; 1NF→3NF rules; closure of attributes; view definition + uses.</td></tr>
+      <tr><td rowspan="3"><strong>8-mark (Sec B)</strong></td><td>Unit 4 — Normalisation</td><td>Explain 1NF/2NF/3NF/BCNF with examples + diagram.</td></tr>
+      <tr><td>Unit 4 — Concurrency &amp; Recovery</td><td>ACID + transaction state diagram; 2PL + serialisability; deadlock handling.</td></tr>
+      <tr><td>Unit 4 — Query Processing / Distributed DB / Security</td><td>Steps of query processing &amp; optimisation; DDB architecture &amp; advantages; views + GRANT/REVOKE for security.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic">
+    <strong>Last-night strategy</strong>
+    Memorise the <strong>1-mark table</strong> cold — that is 6 marks guaranteed. Then pick <strong>any 3</strong> of the 8-mark answers (Q2 Normalisation, Q3 ACID + diagram, Q4 Concurrency / 2PL are the safest bets) and rehearse the structure: <em>Definition → table/diagram → example → uses</em>. That is a comfortable 24 + 6 = <strong>30/30</strong>.
+  </div>
+
+  <div class="quiz">
+    <h4>Self-test — Sessional Booster</h4>
+    <div class="q">Q1. What is the symbol and SQL equivalent of the Selection (σ) operator? <button class="reveal">Show</button></div>
+    <div class="answer">Symbol <strong>σ</strong>; SQL equivalent is the <code>WHERE</code> clause.</div>
+    <div class="q">Q2. Which normal form removes <em>transitive</em> dependencies? <button class="reveal">Show</button></div>
+    <div class="answer"><strong>3NF</strong> — a relation is in 3NF if it is in 2NF and has no transitive dependency of a non-prime attribute on the primary key.</div>
+    <div class="q">Q3. Name the two phases of 2PL. <button class="reveal">Show</button></div>
+    <div class="answer"><strong>Growing</strong> phase (only acquires locks) and <strong>Shrinking</strong> phase (only releases locks).</div>
+    <div class="q">Q4. Why are views used for security? <button class="reveal">Show</button></div>
+    <div class="answer">A view exposes only chosen columns / rows of the base table. By granting access on the view (not the base table), sensitive data such as salary stays hidden from the user.</div>
+    <div class="q">Q5. List any two advantages of a Distributed Database. <button class="reveal">Show</button></div>
+    <div class="answer">Reliability (replication eliminates a single point of failure); better performance (data is stored near the user, allowing parallel and local query execution).</div>
+  </div>
+</section>
+
+  </main>
+</div>
+
+<script>
+  // Quiz reveal
+  document.querySelectorAll('.quiz button.reveal').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const ans = btn.closest('.q').nextElementSibling;
+      if (ans && ans.classList.contains('answer')) {
+        ans.classList.toggle('show');
+        btn.textContent = ans.classList.contains('show') ? 'Hide' : 'Show';
+      }
+    });
+  });
+
+  // Active-section sidebar highlight
+  const sections = document.querySelectorAll('main section[id]');
+  const links = document.querySelectorAll('aside ol li a');
+  const linkMap = {};
+  links.forEach(a => { linkMap[a.getAttribute('href').slice(1)] = a; });
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(a => a.classList.remove('active'));
+        if (linkMap[e.target.id]) linkMap[e.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  if (navToggle && navList) {
+    navToggle.addEventListener('click', () => {
+      const open = navList.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', open);
+    });
+    navList.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navList.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+</script>
+
+<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
+</body>
+</html>

@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#1e3a8a" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="BCA Prep" />
+<meta name="description" content="BCA-IV 2nd Sessional preparation hub — 7 subjects, exam dashboard, offline-ready." />
+<link rel="manifest" href="manifest.json" />
+<link rel="apple-touch-icon" href="icon-192.svg" />
+<title>BCA Exam Prep · 2nd Sessional</title>
+<style>
+  :root {
+    --bg: #f5f7fb;
+    --panel: #ffffff;
+    --ink: #1a2233;
+    --muted: #5a6577;
+    --brand: #1e3a8a;
+    --brand-2: #b45309;
+    --brand-soft: #dbeafe;
+    --good: #15803d;
+    --good-soft: #dcfce7;
+    --warn: #b45309;
+    --warn-soft: #fef3c7;
+    --bad: #b91c1c;
+    --bad-soft: #fee2e2;
+    --line: #e3e7ee;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 6px 16px rgba(0,0,0,.06);
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bot: env(safe-area-inset-bottom, 0px);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.6;
+    padding-top: var(--safe-top); padding-bottom: var(--safe-bot);
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 18px 60px; }
+
+  /* ===== Top App Bar ===== */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--brand); color: white;
+    padding: calc(14px + var(--safe-top)) 20px 14px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .topbar .logo {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: linear-gradient(135deg, #f59e0b, #b45309);
+    display: grid; place-items: center; font-weight: 800;
+    font-size: 16px; color: white;
+  }
+  .topbar h1 { margin: 0; font-size: 17px; letter-spacing: -.2px; }
+  .topbar .sub { font-size: 11px; opacity: .85; margin-top: 1px; }
+
+  /* ===== Hero ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+    color: white; padding: 28px 22px 32px; border-radius: 16px;
+    margin-top: 18px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px;
+    background: rgba(255,255,255,.08); border-radius: 50%;
+  }
+  .hero h2 { margin: 0 0 6px; font-size: 22px; letter-spacing: -.3px; }
+  .hero .lead { font-size: 14px; opacity: .92; margin: 0; }
+  .hero .stats {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;
+    margin-top: 18px; position: relative; z-index: 1;
+  }
+  .hero .stat {
+    background: rgba(255,255,255,.16); padding: 10px 8px; border-radius: 10px;
+    text-align: center; backdrop-filter: blur(6px);
+  }
+  .hero .stat .num { font-size: 22px; font-weight: 800; line-height: 1; }
+  .hero .stat .lbl { font-size: 10px; opacity: .9; text-transform: uppercase; letter-spacing: .05em; margin-top: 4px; }
+
+  /* ===== Section heading ===== */
+  h3 {
+    margin: 32px 0 12px; font-size: 17px; color: var(--ink);
+    display: flex; align-items: center; gap: 10px;
+  }
+  h3 .icon { font-size: 22px; }
+  h3 .count {
+    margin-left: auto; font-size: 12px; color: var(--muted);
+    background: var(--panel); padding: 3px 10px; border-radius: 100px;
+    border: 1px solid var(--line); font-weight: 600;
+  }
+
+  /* ===== Cards ===== */
+  .card-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  @media (min-width: 720px) { .card-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .subj-card {
+    background: var(--panel); border-radius: 14px; padding: 16px 14px;
+    text-decoration: none; color: var(--ink); display: block;
+    box-shadow: var(--shadow); border: 1px solid var(--line);
+    transition: transform .15s, box-shadow .15s;
+    position: relative; overflow: hidden;
+  }
+  .subj-card:active { transform: scale(.97); }
+  .subj-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--brand);
+  }
+  .subj-card.dbms::before  { background: #0d9488; }
+  .subj-card.wc::before    { background: #2563eb; }
+  .subj-card.loc::before   { background: #7c3aed; }
+  .subj-card.dsur::before  { background: #f59e0b; }
+  .subj-card.ctrc::before  { background: #db2777; }
+  .subj-card.probstats::before { background: #059669; }
+  .subj-card.iks::before   { background: #b45309; }
+
+  .subj-card .emoji { font-size: 28px; line-height: 1; margin-bottom: 8px; display: block; }
+  .subj-card .name { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 4px; line-height: 1.2; }
+  .subj-card .full { font-size: 11px; color: var(--muted); margin-bottom: 10px; line-height: 1.3; }
+  .subj-card .when {
+    display: inline-block; background: var(--brand-soft); color: var(--brand);
+    padding: 3px 9px; border-radius: 100px; font-size: 11px; font-weight: 700;
+  }
+  .subj-card .when.urgent { background: var(--bad-soft); color: var(--bad); }
+  .subj-card .when.soon   { background: var(--warn-soft); color: var(--warn); }
+  .subj-card .when.later  { background: var(--good-soft); color: var(--good); }
+  .subj-card .when.done   { background: #f3f4f6; color: var(--muted); }
+
+  /* ===== Big action button ===== */
+  .big-btn {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--panel); border-radius: 14px; padding: 16px 18px;
+    text-decoration: none; color: var(--ink); margin: 12px 0;
+    box-shadow: var(--shadow); border: 1px solid var(--line);
+    transition: transform .15s;
+  }
+  .big-btn:active { transform: scale(.98); }
+  .big-btn .ico {
+    width: 46px; height: 46px; border-radius: 12px;
+    background: var(--brand-soft); color: var(--brand);
+    display: grid; place-items: center; font-size: 24px; flex-shrink: 0;
+  }
+  .big-btn.amber .ico { background: var(--warn-soft); color: var(--warn); }
+  .big-btn.green .ico { background: var(--good-soft); color: var(--good); }
+  .big-btn .body { flex: 1; min-width: 0; }
+  .big-btn .body .ttl { font-size: 15px; font-weight: 700; }
+  .big-btn .body .desc { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+  .big-btn .arrow { color: var(--muted); font-size: 22px; }
+
+  /* ===== Tip box ===== */
+  .tip {
+    background: var(--warn-soft); border-left: 4px solid var(--warn);
+    border-radius: 8px; padding: 12px 14px; margin: 14px 0; font-size: 13px;
+  }
+  .tip strong { color: var(--warn); }
+
+  /* ===== Install prompt ===== */
+  #installBox {
+    display: none; background: var(--brand); color: white;
+    padding: 14px 16px; border-radius: 12px; margin: 14px 0;
+    box-shadow: var(--shadow); align-items: center; gap: 12px;
+  }
+  #installBox.show { display: flex; }
+  #installBox .ico { font-size: 26px; }
+  #installBox .body { flex: 1; }
+  #installBox .ttl { font-weight: 700; font-size: 14px; }
+  #installBox .desc { font-size: 11px; opacity: .9; margin-top: 2px; }
+  #installBtn {
+    background: white; color: var(--brand); border: none;
+    padding: 8px 14px; border-radius: 100px; font-weight: 700;
+    font-size: 13px; cursor: pointer;
+  }
+  #installBtn:active { transform: scale(.95); }
+
+  /* ===== Footer ===== */
+  footer {
+    text-align: center; color: var(--muted); font-size: 12px;
+    margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line);
+  }
+  footer .offline-status {
+    display: inline-block; padding: 3px 10px; border-radius: 100px;
+    background: var(--good-soft); color: var(--good); font-weight: 600;
+    margin-top: 6px;
+  }
+  footer .offline-status.no { background: var(--bad-soft); color: var(--bad); }
+
+  /* ============================================================ */
+  /* ===== ENHANCED MOBILE RESPONSIVENESS (320 / 480 / 768) ====== */
+  /* ============================================================ */
+  html, body { overflow-x: hidden; max-width: 100%; }
+  * { min-width: 0; }
+  img, svg, video, iframe { max-width: 100%; height: auto; }
+
+  /* Tablet polish */
+  @media (max-width: 720px) {
+    .wrap { padding: 0 16px 50px; }
+    .hero { padding: 24px 18px 28px; }
+    .hero h2 { font-size: 20px; }
+    .hero .lead { font-size: 13.5px; }
+    .topbar h1 { font-size: 16px; }
+    h3 { font-size: 16px; margin-top: 28px; }
+    .big-btn { padding: 14px 16px; gap: 12px; }
+    .big-btn .ico { width: 42px; height: 42px; font-size: 22px; }
+    .big-btn .body .ttl { font-size: 14px; }
+    .big-btn .body .desc { font-size: 11.5px; }
+    .subj-card { padding: 14px 12px; min-height: 44px; }
+  }
+
+  /* Standard phones (≤480px) */
+  @media (max-width: 480px) {
+    .wrap { padding: 0 12px 40px; }
+    .topbar { padding: calc(12px + var(--safe-top)) 14px 12px; }
+    .topbar h1 { font-size: 15px; }
+    .topbar .sub { font-size: 10.5px; }
+    .topbar .logo { width: 32px; height: 32px; font-size: 14px; }
+    .hero { padding: 22px 16px 24px; border-radius: 14px; margin-top: 14px; }
+    .hero h2 { font-size: 18px; }
+    .hero .lead { font-size: 12.5px; }
+    .hero .stats { gap: 6px; margin-top: 14px; }
+    .hero .stat { padding: 8px 6px; }
+    .hero .stat .num { font-size: 18px; }
+    .hero .stat .lbl { font-size: 9px; }
+    h3 { font-size: 15px; margin-top: 24px; }
+    h3 .icon { font-size: 18px; }
+    h3 .count { font-size: 11px; padding: 2px 8px; }
+    .subj-card .emoji { font-size: 24px; }
+    .subj-card .name { font-size: 14px; }
+    .subj-card .full { font-size: 10.5px; }
+    .subj-card .when { font-size: 10.5px; padding: 3px 8px; }
+    .big-btn { padding: 12px 14px; }
+    .big-btn .ico { width: 38px; height: 38px; font-size: 20px; border-radius: 10px; }
+    .tip { font-size: 12.5px; padding: 11px 13px; }
+  }
+
+  /* Tiny phones (≤360px) — single-column cards */
+  @media (max-width: 360px) {
+    .wrap { padding: 0 10px 32px; }
+    .card-grid { grid-template-columns: 1fr; gap: 10px; }
+    .hero { padding: 20px 14px 22px; }
+    .hero h2 { font-size: 17px; }
+    .hero .stats { grid-template-columns: 1fr 1fr; }
+    .hero .stat:last-child { grid-column: span 2; }
+    .topbar h1 { font-size: 14.5px; }
+    .subj-card { padding: 14px; }
+    #installBox { padding: 12px 14px; gap: 10px; }
+    #installBox .ttl { font-size: 13px; }
+    #installBox .desc { font-size: 10.5px; }
+    #installBtn { padding: 8px 12px; font-size: 12px; }
+  }
+
+  /* Touch-friendly tap targets */
+  @media (hover: none) and (pointer: coarse) {
+    a, button { -webkit-tap-highlight-color: rgba(0,0,0,.05); }
+    .subj-card, .big-btn { min-height: 44px; }
+  }
+  /* Prevent iOS zoom on focus (text-input controls only) */
+  input, textarea, select { font-size: 16px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">B</div>
+  <div>
+    <h1>BCA Exam Prep</h1>
+    <div class="sub">2nd Sessional · May 5–9</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <h2>Ready for the sessional 🎓</h2>
+    <p class="lead">7 subjects · 4 exam days · 30-mark format · Read anywhere, even offline.</p>
+    <div class="stats">
+      <div class="stat"><div class="num" id="daysLeft">—</div><div class="lbl">Days to first exam</div></div>
+      <div class="stat"><div class="num">7</div><div class="lbl">Subjects ready</div></div>
+      <div class="stat"><div class="num">30</div><div class="lbl">Marks per paper</div></div>
+    </div>
+  </div>
+
+  <!-- Install banner (auto-shows on supported browsers) -->
+  <div id="installBox">
+    <div class="ico">📲</div>
+    <div class="body">
+      <div class="ttl">Install on phone</div>
+      <div class="desc">Add to home screen for offline reading</div>
+    </div>
+    <button id="installBtn">Install</button>
+  </div>
+
+  <!-- ===== Quick actions ===== -->
+  <h3><span class="icon">⚡</span> Start here</h3>
+
+  <a href="#subjects" class="big-btn">
+    <div class="ico">📚</div>
+    <div class="body">
+      <div class="ttl">Open a Study Guide</div>
+      <div class="desc">All 7 subject guides with sessional booster Q&amp;A banks</div>
+    </div>
+    <div class="arrow">›</div>
+  </a>
+
+  <!-- ===== Subjects ===== -->
+  <h3 id="subjects"><span class="icon">📚</span> Subjects <span class="count">7 guides</span></h3>
+
+  <div class="card-grid">
+    <a href="dbms-study-guide.html" class="subj-card dbms">
+      <span class="emoji">📊</span>
+      <div class="name">DBMS</div>
+      <div class="full">Database Management Systems</div>
+      <div class="when urgent" data-exam="2026-05-05">May 5 · 9:30 AM</div>
+    </a>
+
+    <a href="wc-study-guide.html" class="subj-card wc">
+      <span class="emoji">📡</span>
+      <div class="name">WC</div>
+      <div class="full">Wireless Communication · Units III &amp; IV</div>
+      <div class="when urgent" data-exam="2026-05-05">May 5 · 2 PM</div>
+    </a>
+
+    <a href="loc-study-guide.html" class="subj-card loc">
+      <span class="emoji">🔌</span>
+      <div class="name">LOC</div>
+      <div class="full">Logic &amp; Organisation of Computer</div>
+      <div class="when soon" data-exam="2026-05-06">May 6 · 9:30 AM</div>
+    </a>
+
+    <a href="r-datascience-study-guide.html" class="subj-card dsur">
+      <span class="emoji">📈</span>
+      <div class="name">DSUR</div>
+      <div class="full">Data Science Using R</div>
+      <div class="when soon" data-exam="2026-05-07">May 7 · 9:30 AM</div>
+    </a>
+
+    <a href="ctrc-study-guide.html" class="subj-card ctrc">
+      <span class="emoji">💬</span>
+      <div class="name">CTRC</div>
+      <div class="full">Critical Thinking &amp; Rhetorical Communication</div>
+      <div class="when soon" data-exam="2026-05-07">May 7 · 2 PM</div>
+    </a>
+
+    <a href="probstats-study-guide.html" class="subj-card probstats">
+      <span class="emoji">🎲</span>
+      <div class="name">Prob &amp; Stats</div>
+      <div class="full">Probability &amp; Statistics</div>
+      <div class="when later" data-exam="2026-05-09">May 9 · 9:30 AM</div>
+    </a>
+
+    <a href="iks-study-guide.html" class="subj-card iks">
+      <span class="emoji">🕉️</span>
+      <div class="name">IKS</div>
+      <div class="full">Indian Knowledge System · Units III–VI</div>
+      <div class="when later" data-exam="2026-05-09">May 9 · 2 PM</div>
+    </a>
+  </div>
+
+  <div class="tip">
+    <strong>📱 Tip:</strong> Tap "Install" above (or browser menu → "Add to Home Screen") to use this like an app — full screen, offline, no chrome bars.
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    BCA-IV · 2nd Sessional Prep · Updated May 3, 2026<br>
+    <span class="offline-status" id="offlineStatus">⚡ Checking offline status…</span>
+  </footer>
+
+</div>
+
+<script>
+  // === Live countdown to first exam ===
+  (function updateDaysLeft() {
+    const firstExam = new Date('2026-05-05T09:30:00');
+    const now = new Date();
+    const diff = Math.ceil((firstExam - now) / (1000 * 60 * 60 * 24));
+    const el = document.getElementById('daysLeft');
+    if (!el) return;
+    if (diff <= 0) el.textContent = 'NOW';
+    else el.textContent = diff;
+  })();
+
+  // === Color-code each card based on how soon ===
+  (function colorCards() {
+    const today = new Date(); today.setHours(0,0,0,0);
+    document.querySelectorAll('[data-exam]').forEach(el => {
+      const exam = new Date(el.dataset.exam);
+      const days = Math.ceil((exam - today) / (1000*60*60*24));
+      el.classList.remove('urgent','soon','later','done');
+      if (days < 0) el.classList.add('done');
+      else if (days <= 1) el.classList.add('urgent');
+      else if (days <= 3) el.classList.add('soon');
+      else el.classList.add('later');
+    });
+  })();
+
+  // === PWA install prompt ===
+  let deferredPrompt = null;
+  const installBox = document.getElementById('installBox');
+  const installBtn = document.getElementById('installBtn');
+
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBox?.classList.add('show');
+  });
+
+  installBtn?.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === 'accepted') installBox?.classList.remove('show');
+    deferredPrompt = null;
+  });
+
+  window.addEventListener('appinstalled', () => {
+    installBox?.classList.remove('show');
+  });
+
+  // === Service worker registration (offline support) ===
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(() => updateOfflineStatus(true))
+        .catch(() => updateOfflineStatus(false));
+    });
+  } else {
+    updateOfflineStatus(false);
+  }
+
+  function updateOfflineStatus(supported) {
+    const el = document.getElementById('offlineStatus');
+    if (!el) return;
+    if (supported) {
+      el.textContent = '✅ Offline mode ready';
+      el.classList.remove('no');
+    } else {
+      el.textContent = '⚠️ Offline not supported (try Chrome/Edge)';
+      el.classList.add('no');
+    }
+  }
+</script>
+
+</body>
+</html>

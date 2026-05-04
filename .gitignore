@@ -1,0 +1,40 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Editors / IDEs
+.vscode/
+.idea/
+.vs/
+*.swp
+*.swo
+*~
+
+# Claude Code workspace
+.claude/
+
+# Personal reference / source material (PYQs, syllabi, scans)
+reference/
+
+# Logs and temp
+*.log
+*.tmp
+*.bak
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# Node tooling (in case it gets added later)
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# Service-worker generated artifacts (none right now, but reserved)
+workbox-*.js
+sw.js.map
