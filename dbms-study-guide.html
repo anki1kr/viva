@@ -1375,6 +1375,68 @@ SQL form:
     </div>
   </div>
 
+  <div class="walkthrough" style="margin-top:18px;">
+    <div class="badge">REAL-LIFE EXAMPLE — 1NF STEP BY STEP</div>
+    <p style="margin-bottom:14px;font-size:14px;"><strong>Scenario:</strong> A college stores each student's enrolled courses in one cell, comma-separated.</p>
+
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Problem Table (NOT in 1NF)</strong> — "Courses" column holds multiple values in one cell.
+        <div style="overflow-x:auto;margin-top:8px;">
+          <table style="font-size:13px;">
+            <thead><tr>
+              <th style="background:#0d3b7a;">StudentID</th>
+              <th style="background:#0d3b7a;">StudentName</th>
+              <th style="background:#b42318;">Courses (Multi-valued!)</th>
+              <th style="background:#b42318;">Phones (Multi-valued!)</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>S101</td><td>Ankit Sharma</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">DBMS, OS, CN</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">9876543210, 9123456789</td></tr>
+              <tr><td>S102</td><td>Priya Gupta</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">DBMS, Maths</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">8888888888</td></tr>
+              <tr><td>S103</td><td>Ravi Kumar</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">OS, CN, Maths, Java</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">7777777777, 6666666666</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="box bad" style="margin-top:8px;"><span class="label">Pitfall</span>Cannot query "who takes DBMS?" without string parsing. Violates atomicity.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>After 1NF</strong> — one value per cell; one row per course. Composite PK = (StudentID, CourseID).
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Student_Enrollment</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">StudentID 🔑</th><th style="background:#0d3b7a;">CourseID 🔑</th><th>StudentName</th></tr></thead>
+              <tbody>
+                <tr><td>S101</td><td>DBMS</td><td style="background:#f0fdf4;color:#1a7f37;">Ankit Sharma</td></tr>
+                <tr><td>S101</td><td>OS</td><td style="background:#f0fdf4;color:#1a7f37;">Ankit Sharma</td></tr>
+                <tr><td>S102</td><td>DBMS</td><td style="background:#f0fdf4;color:#1a7f37;">Priya Gupta</td></tr>
+                <tr><td>S103</td><td>OS</td><td style="background:#f0fdf4;color:#1a7f37;">Ravi Kumar</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Student_Phone</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">StudentID 🔑</th><th style="background:#0d3b7a;">Phone 🔑</th></tr></thead>
+              <tbody>
+                <tr><td>S101</td><td style="background:#f0fdf4;color:#1a7f37;">9876543210</td></tr>
+                <tr><td>S101</td><td style="background:#f0fdf4;color:#1a7f37;">9123456789</td></tr>
+                <tr><td>S102</td><td style="background:#f0fdf4;color:#1a7f37;">8888888888</td></tr>
+                <tr><td>S103</td><td style="background:#f0fdf4;color:#1a7f37;">7777777777</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="box tip" style="margin-top:8px;"><span class="label">Note</span>StudentName still depends only on StudentID (not the full key) — a partial dependency that 2NF will fix.</div>
+      </div>
+    </div>
+  </div>
+
   <h3>5.2 Second Normal Form (2NF) — No Partial Dependency</h3>
   <div class="box def">
     <span class="label">Rule</span>
@@ -1394,6 +1456,105 @@ ProjectDetail(ProjectID, ProjectName)
 EmployeeProject(EmpCode, ProjectID)</code></pre>
   </div>
 
+  <div class="walkthrough" style="margin-top:18px;">
+    <div class="badge">REAL-LIFE EXAMPLE — 2NF STEP BY STEP</div>
+    <p style="margin-bottom:14px;font-size:14px;"><strong>Scenario:</strong> An e-commerce site stores order details. PK = <strong>(OrderID, ProductID)</strong>.</p>
+
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Problem Table (1NF but NOT 2NF)</strong> — ProductName depends only on ProductID; CustomerName depends only on OrderID.
+        <div style="overflow-x:auto;margin-top:8px;">
+          <table style="font-size:13px;">
+            <thead><tr>
+              <th style="background:#0d3b7a;">OrderID 🔑</th>
+              <th style="background:#0d3b7a;">ProductID 🔑</th>
+              <th style="background:#b42318;">ProductName (partial on ProductID)</th>
+              <th style="background:#b42318;">CustomerName (partial on OrderID)</th>
+              <th>Quantity</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>O001</td><td>P10</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">iPhone 15</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Ankit</td><td>2</td></tr>
+              <tr><td>O001</td><td>P20</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">AirPods</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Ankit</td><td>1</td></tr>
+              <tr><td>O002</td><td>P10</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">iPhone 15</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Priya</td><td>1</td></tr>
+              <tr><td>O003</td><td>P30</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">MacBook</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Ravi</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="diagram" style="margin-top:10px;">
+          <div class="diagram-title">Partial Dependency Diagram</div>
+          <svg viewBox="0 0 720 140" font-family="'Segoe UI',sans-serif" font-size="13" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrN2a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0,10 5,0 10" fill="#b42318"/></marker>
+              <marker id="arrN2b" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0,10 5,0 10" fill="#b42318"/></marker>
+              <marker id="arrN2c" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0,10 5,0 10" fill="#1a7f37"/></marker>
+            </defs>
+            <rect x="10" y="10" width="120" height="36" rx="8" fill="#fff0f0" stroke="#b42318" stroke-width="2"/>
+            <text x="70" y="33" text-anchor="middle" font-weight="700" fill="#b42318" text-decoration="underline">OrderID</text>
+            <rect x="10" y="60" width="120" height="36" rx="8" fill="#fff0f0" stroke="#b42318" stroke-width="2"/>
+            <text x="70" y="83" text-anchor="middle" font-weight="700" fill="#b42318" text-decoration="underline">ProductID</text>
+            <rect x="540" y="10" width="150" height="36" rx="8" fill="#fff0f0" stroke="#b42318" stroke-width="2"/>
+            <text x="615" y="33" text-anchor="middle" fill="#b42318">CustomerName</text>
+            <rect x="540" y="54" width="150" height="36" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+            <text x="615" y="77" text-anchor="middle" fill="#1a7f37">Quantity</text>
+            <rect x="540" y="98" width="150" height="36" rx="8" fill="#fff0f0" stroke="#b42318" stroke-width="2"/>
+            <text x="615" y="121" text-anchor="middle" fill="#b42318">ProductName</text>
+            <line x1="130" y1="26" x2="535" y2="25" stroke="#b42318" stroke-width="2" marker-end="url(#arrN2a)"/>
+            <text x="330" y="18" text-anchor="middle" fill="#b42318" font-size="11">Partial ✗</text>
+            <line x1="130" y1="48" x2="535" y2="68" stroke="#1a7f37" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrN2c)"/>
+            <text x="330" y="66" text-anchor="middle" fill="#1a7f37" font-size="11">FULL dependency ✓</text>
+            <line x1="130" y1="76" x2="535" y2="112" stroke="#b42318" stroke-width="2" marker-end="url(#arrN2b)"/>
+            <text x="330" y="108" text-anchor="middle" fill="#b42318" font-size="11">Partial ✗</text>
+          </svg>
+        </div>
+        <div class="box bad" style="margin-top:6px;"><span class="label">Pitfall</span>Renaming "iPhone 15" requires updating every O001, O002 row — miss one, data is inconsistent.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>After 2NF</strong> — decompose into 3 tables; partial dependencies eliminated.
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px;">
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Orders</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">OrderID 🔑</th><th>CustomerName</th></tr></thead>
+              <tbody>
+                <tr><td>O001</td><td style="background:#f0fdf4;color:#1a7f37;">Ankit</td></tr>
+                <tr><td>O002</td><td style="background:#f0fdf4;color:#1a7f37;">Priya</td></tr>
+                <tr><td>O003</td><td style="background:#f0fdf4;color:#1a7f37;">Ravi</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Products</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">ProductID 🔑</th><th>ProductName</th></tr></thead>
+              <tbody>
+                <tr><td>P10</td><td style="background:#f0fdf4;color:#1a7f37;">iPhone 15</td></tr>
+                <tr><td>P20</td><td style="background:#f0fdf4;color:#1a7f37;">AirPods</td></tr>
+                <tr><td>P30</td><td style="background:#f0fdf4;color:#1a7f37;">MacBook</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Order_Items</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">OrderID 🔑</th><th style="background:#0d3b7a;">ProductID 🔑</th><th>Qty</th></tr></thead>
+              <tbody>
+                <tr><td>O001</td><td>P10</td><td style="background:#f0fdf4;color:#1a7f37;">2</td></tr>
+                <tr><td>O001</td><td>P20</td><td style="background:#f0fdf4;color:#1a7f37;">1</td></tr>
+                <tr><td>O002</td><td>P10</td><td style="background:#f0fdf4;color:#1a7f37;">1</td></tr>
+                <tr><td>O003</td><td>P30</td><td style="background:#f0fdf4;color:#1a7f37;">1</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <h3>5.3 Third Normal Form (3NF) — No Transitive Dependency</h3>
   <div class="box def">
     <span class="label">Rule</span>
@@ -1405,6 +1566,90 @@ EmployeeProject(EmpCode, ProjectID)</code></pre>
     <code>EmpDetail(EmpCode, EmpName, Zipcode, City)</code>:
     <code>EmpCode → Zipcode</code> and <code>Zipcode → City</code> ⇒ <code>EmpCode → City</code> transitively.
     <strong>Fix:</strong> split into <code>EmpDetail(EmpCode, EmpName, Zipcode)</code> and <code>Location(Zipcode, City)</code>.
+  </div>
+
+  <div class="walkthrough" style="margin-top:18px;">
+    <div class="badge">REAL-LIFE EXAMPLE — 3NF STEP BY STEP</div>
+    <p style="margin-bottom:14px;font-size:14px;"><strong>Scenario:</strong> Hospital HR stores employees and department info together. PK = EmpID (single — no partial dep, so it's already 2NF).</p>
+
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Problem Table (2NF but NOT 3NF)</strong> — DeptName and DeptCity depend on DeptID, not directly on EmpID.
+        <div style="overflow-x:auto;margin-top:8px;">
+          <table style="font-size:13px;">
+            <thead><tr>
+              <th style="background:#0d3b7a;">EmpID 🔑</th><th>EmpName</th><th>DeptID</th>
+              <th style="background:#b42318;">DeptName (→ DeptID → EmpID)</th>
+              <th style="background:#b42318;">DeptCity (→ DeptID → EmpID)</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>E01</td><td>Ankit</td><td>D1</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Cardiology</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Delhi</td></tr>
+              <tr><td>E02</td><td>Priya</td><td>D1</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Cardiology</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Delhi</td></tr>
+              <tr><td>E03</td><td>Ravi</td><td>D2</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Radiology</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Mumbai</td></tr>
+              <tr><td>E04</td><td>Sneha</td><td>D2</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Radiology</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Mumbai</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="diagram" style="margin-top:10px;">
+          <div class="diagram-title">Transitive Dependency: EmpID → DeptID → DeptName / DeptCity</div>
+          <svg viewBox="0 0 680 100" font-family="'Segoe UI',sans-serif" font-size="13" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrN3a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0,10 5,0 10" fill="#1a7f37"/></marker>
+              <marker id="arrN3b" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0,10 5,0 10" fill="#b42318"/></marker>
+              <marker id="arrN3c" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0,10 5,0 10" fill="#b42318"/></marker>
+            </defs>
+            <rect x="10" y="30" width="100" height="36" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+            <text x="60" y="53" text-anchor="middle" font-weight="700" fill="#1a7f37" text-decoration="underline">EmpID</text>
+            <rect x="200" y="30" width="100" height="36" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="1.5"/>
+            <text x="250" y="53" text-anchor="middle" fill="#b54708">DeptID</text>
+            <rect x="420" y="10" width="120" height="34" rx="8" fill="#fff0f0" stroke="#b42318" stroke-width="2"/>
+            <text x="480" y="32" text-anchor="middle" fill="#b42318">DeptName</text>
+            <rect x="420" y="54" width="120" height="34" rx="8" fill="#fff0f0" stroke="#b42318" stroke-width="2"/>
+            <text x="480" y="76" text-anchor="middle" fill="#b42318">DeptCity</text>
+            <line x1="110" y1="48" x2="195" y2="48" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrN3a)"/>
+            <line x1="300" y1="42" x2="415" y2="25" stroke="#b42318" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrN3b)"/>
+            <line x1="300" y1="54" x2="415" y2="68" stroke="#b42318" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrN3c)"/>
+            <text x="140" y="43" fill="#1a7f37" font-size="11">direct ✓</text>
+            <text x="340" y="20" fill="#b42318" font-size="11">transitive ✗</text>
+            <text x="340" y="82" fill="#b42318" font-size="11">transitive ✗</text>
+          </svg>
+        </div>
+        <div class="box bad" style="margin-top:6px;"><span class="label">Pitfall</span>If Cardiology moves to Agra, you must update E01 AND E02 — miss one, data is inconsistent.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>After 3NF</strong> — extract the Department table; DeptID becomes a FK.
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Employee</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">EmpID 🔑</th><th>EmpName</th><th>DeptID (FK)</th></tr></thead>
+              <tbody>
+                <tr><td>E01</td><td>Ankit</td><td style="background:#f0fdf4;color:#1a7f37;">D1</td></tr>
+                <tr><td>E02</td><td>Priya</td><td style="background:#f0fdf4;color:#1a7f37;">D1</td></tr>
+                <tr><td>E03</td><td>Ravi</td><td style="background:#f0fdf4;color:#1a7f37;">D2</td></tr>
+                <tr><td>E04</td><td>Sneha</td><td style="background:#f0fdf4;color:#1a7f37;">D2</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Department</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">DeptID 🔑</th><th>DeptName</th><th>DeptCity</th></tr></thead>
+              <tbody>
+                <tr><td>D1</td><td style="background:#f0fdf4;color:#1a7f37;">Cardiology</td><td style="background:#f0fdf4;color:#1a7f37;">Delhi</td></tr>
+                <tr><td>D2</td><td style="background:#f0fdf4;color:#1a7f37;">Radiology</td><td style="background:#f0fdf4;color:#1a7f37;">Mumbai</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="box tip" style="margin-top:8px;"><span class="label">Result</span>Update city in ONE row in Department. Zero inconsistency possible.</div>
+      </div>
+    </div>
   </div>
 
   <h3>5.4 Boyce-Codd Normal Form (BCNF)</h3>
@@ -1419,6 +1664,87 @@ EmployeeProject(EmpCode, ProjectID)</code></pre>
     <strong>Decompose:</strong> <code>EmpProject(EmpCode, ProjectID)</code> and <code>ProjectLead(ProjectLeader, ProjectID)</code>.
   </div>
 
+  <div class="walkthrough" style="margin-top:18px;">
+    <div class="badge">REAL-LIFE EXAMPLE — BCNF STEP BY STEP</div>
+    <p style="margin-bottom:14px;font-size:14px;"><strong>Scenario:</strong> College scheduling. Each professor teaches only one course. A student can enroll in a course with a specific professor. PK = (StudentID, Course).</p>
+
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Problem Table (3NF but NOT BCNF)</strong> — Professor → Course, but Professor is NOT a super key.
+        <div style="overflow-x:auto;margin-top:8px;">
+          <table style="font-size:13px;">
+            <thead><tr>
+              <th style="background:#0d3b7a;">StudentID 🔑</th>
+              <th style="background:#0d3b7a;">Course 🔑</th>
+              <th style="background:#b54708;">Professor (determines Course — not a super key!)</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>S101</td><td>DBMS</td><td style="background:#fffbeb;color:#92400e;font-weight:600;">Dr. Sharma</td></tr>
+              <tr><td>S102</td><td>DBMS</td><td style="background:#fffbeb;color:#92400e;font-weight:600;">Dr. Sharma</td></tr>
+              <tr><td>S101</td><td>OS</td><td style="background:#fffbeb;color:#92400e;font-weight:600;">Dr. Mehta</td></tr>
+              <tr><td>S103</td><td>OS</td><td style="background:#fffbeb;color:#92400e;font-weight:600;">Dr. Singh</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="diagram" style="margin-top:10px;">
+          <div class="diagram-title">BCNF Violation: Professor → Course, but Professor is not a super key</div>
+          <svg viewBox="0 0 680 110" font-family="'Segoe UI',sans-serif" font-size="13" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrNBa" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0,10 5,0 10" fill="#1f6feb"/></marker>
+              <marker id="arrNBb" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0,10 5,0 10" fill="#b42318"/></marker>
+            </defs>
+            <rect x="10" y="10" width="200" height="38" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+            <text x="110" y="27" text-anchor="middle" font-weight="700" fill="#0d3b7a" text-decoration="underline" font-size="12">(StudentID, Course)</text>
+            <text x="110" y="42" text-anchor="middle" fill="#5a6577" font-size="11">Candidate Key 1 → Professor ✓</text>
+            <rect x="10" y="62" width="200" height="38" rx="8" fill="#fff0f0" stroke="#b42318" stroke-width="2"/>
+            <text x="110" y="79" text-anchor="middle" font-weight="700" fill="#b42318" text-decoration="underline">Professor</text>
+            <text x="110" y="94" text-anchor="middle" fill="#b42318" font-size="11">NOT a super key → BCNF violation ✗</text>
+            <rect x="460" y="25" width="110" height="38" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+            <text x="515" y="49" text-anchor="middle" fill="#b54708">Course</text>
+            <line x1="210" y1="26" x2="455" y2="40" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrNBa)"/>
+            <text x="330" y="24" text-anchor="middle" fill="#1f6feb" font-size="11">OK ✓</text>
+            <line x1="210" y1="80" x2="455" y2="52" stroke="#b42318" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrNBb)"/>
+            <text x="330" y="80" text-anchor="middle" fill="#b42318" font-size="11">Violation ✗</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>After BCNF</strong> — separate the Professor → Course dependency into its own table.
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Student_Professor</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">StudentID 🔑</th><th style="background:#0d3b7a;">Professor 🔑</th></tr></thead>
+              <tbody>
+                <tr><td>S101</td><td style="background:#f0fdf4;color:#1a7f37;">Dr. Sharma</td></tr>
+                <tr><td>S102</td><td style="background:#f0fdf4;color:#1a7f37;">Dr. Sharma</td></tr>
+                <tr><td>S101</td><td style="background:#f0fdf4;color:#1a7f37;">Dr. Mehta</td></tr>
+                <tr><td>S103</td><td style="background:#f0fdf4;color:#1a7f37;">Dr. Singh</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Professor_Course</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">Professor 🔑</th><th>Course</th></tr></thead>
+              <tbody>
+                <tr><td>Dr. Sharma</td><td style="background:#f0fdf4;color:#1a7f37;">DBMS</td></tr>
+                <tr><td>Dr. Mehta</td><td style="background:#f0fdf4;color:#1a7f37;">OS</td></tr>
+                <tr><td>Dr. Singh</td><td style="background:#f0fdf4;color:#1a7f37;">OS</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="box tip" style="margin-top:8px;"><span class="label">Trade-off</span>BCNF decomposition may not always preserve all functional dependencies — accepted cost for eliminating non-superkey determinants.</div>
+      </div>
+    </div>
+  </div>
+
   <h3>5.5 Fourth Normal Form (4NF) — No Multi-Valued Dependency</h3>
   <div class="box def">
     <span class="label">Rule</span>
@@ -1431,10 +1757,185 @@ EmployeeProject(EmpCode, ProjectID)</code></pre>
     <strong>Fix:</strong> split into <code>CourseOpted(s_id, course)</code> and <code>Hobbies(s_id, hobby)</code>.
   </div>
 
+  <div class="walkthrough" style="margin-top:18px;">
+    <div class="badge">REAL-LIFE EXAMPLE — 4NF STEP BY STEP</div>
+    <p style="margin-bottom:14px;font-size:14px;"><strong>Scenario:</strong> HR system — an employee has multiple skills (Java, Python…) AND multiple hobbies (Cricket, Chess…). These are completely independent of each other.</p>
+
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Problem Table (BCNF but NOT 4NF)</strong> — every skill is paired with every hobby (cross-product explosion).
+        <div style="overflow-x:auto;margin-top:8px;">
+          <table style="font-size:13px;">
+            <thead><tr>
+              <th style="background:#0d3b7a;">EmpID 🔑</th>
+              <th style="background:#b42318;">Skill (multi-valued)</th>
+              <th style="background:#b42318;">Hobby (independent multi-valued)</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>E01</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Java</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Cricket</td></tr>
+              <tr><td>E01</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Java</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Chess</td></tr>
+              <tr><td>E01</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Python</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Cricket</td></tr>
+              <tr><td>E01</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Python</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Chess</td></tr>
+              <tr><td>E02</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">SQL</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Painting</td></tr>
+              <tr><td>E02</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">C++</td><td style="background:#fff0f0;color:#b42318;font-weight:600;">Painting</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="box bad" style="margin-top:8px;"><span class="label">Pitfall</span>Ankit knows 2 skills × 2 hobbies = 4 rows. Add a new skill "Go" → must add 2 more rows (one per hobby). Spurious cross-product!</div>
+        <div class="diagram" style="margin-top:10px;">
+          <div class="diagram-title">Multi-Valued Dependency: EmpID ↠ Skill and EmpID ↠ Hobby (independent)</div>
+          <svg viewBox="0 0 580 100" font-family="'Segoe UI',sans-serif" font-size="13" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrN4a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0,10 5,0 10" fill="#7c3aed"/></marker>
+              <marker id="arrN4b" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0,10 5,0 10" fill="#7c3aed"/></marker>
+            </defs>
+            <rect x="10" y="32" width="110" height="36" rx="8" fill="#f3e8ff" stroke="#7c3aed" stroke-width="2"/>
+            <text x="65" y="55" text-anchor="middle" font-weight="700" fill="#7c3aed" text-decoration="underline">EmpID</text>
+            <rect x="250" y="10" width="110" height="36" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="1.5"/>
+            <text x="305" y="33" text-anchor="middle" fill="#1a7f37">Skill</text>
+            <rect x="250" y="56" width="110" height="36" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+            <text x="305" y="79" text-anchor="middle" fill="#1f6feb">Hobby</text>
+            <line x1="120" y1="46" x2="245" y2="26" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrN4a)"/>
+            <line x1="120" y1="54" x2="245" y2="68" stroke="#7c3aed" stroke-width="2.5" marker-end="url(#arrN4b)"/>
+            <text x="178" y="20" fill="#7c3aed" font-size="11">EmpID ↠ Skill</text>
+            <text x="178" y="88" fill="#7c3aed" font-size="11">EmpID ↠ Hobby</text>
+            <text x="420" y="52" fill="#b42318" font-size="12" font-weight="600">Independent → 4NF violation ✗</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>After 4NF</strong> — separate the two independent multi-valued facts.
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px;">
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Employee_Skills</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">EmpID 🔑</th><th style="background:#0d3b7a;">Skill 🔑</th></tr></thead>
+              <tbody>
+                <tr><td>E01</td><td style="background:#f0fdf4;color:#1a7f37;">Java</td></tr>
+                <tr><td>E01</td><td style="background:#f0fdf4;color:#1a7f37;">Python</td></tr>
+                <tr><td>E02</td><td style="background:#f0fdf4;color:#1a7f37;">SQL</td></tr>
+                <tr><td>E02</td><td style="background:#f0fdf4;color:#1a7f37;">C++</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Employee_Hobbies</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">EmpID 🔑</th><th style="background:#0d3b7a;">Hobby 🔑</th></tr></thead>
+              <tbody>
+                <tr><td>E01</td><td style="background:#f0fdf4;color:#1a7f37;">Cricket</td></tr>
+                <tr><td>E01</td><td style="background:#f0fdf4;color:#1a7f37;">Chess</td></tr>
+                <tr><td>E02</td><td style="background:#f0fdf4;color:#1a7f37;">Painting</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="box tip" style="margin-top:8px;"><span class="label">Result</span>8 rows → 4 + 3. Adding a skill for E01 = 1 row only. No spurious cross-product combinations.</div>
+      </div>
+    </div>
+  </div>
+
   <h3>5.6 Fifth Normal Form (5NF / PJNF)</h3>
   <div class="box def">
     <span class="label">Rule</span>
     4NF + no join dependency — the relation cannot be losslessly decomposed except trivially. Eliminates "spurious tuples" that appear when only 2-way joins are used.
+  </div>
+
+  <div class="walkthrough" style="margin-top:18px;">
+    <div class="badge">REAL-LIFE EXAMPLE — 5NF STEP BY STEP</div>
+    <p style="margin-bottom:14px;font-size:14px;"><strong>Scenario:</strong> A supplier supplies certain parts. Projects use certain parts. A supplier supplies parts to specific projects — all three are cyclically related.</p>
+
+    <div class="step">
+      <div class="step-n">1</div>
+      <div class="step-body">
+        <strong>Problem Table (4NF but NOT 5NF)</strong> — three-way relationship hidden inside one table creates a join dependency.
+        <div style="overflow-x:auto;margin-top:8px;">
+          <table style="font-size:13px;">
+            <thead><tr>
+              <th style="background:#0d3b7a;">Supplier 🔑</th>
+              <th style="background:#0d3b7a;">Part 🔑</th>
+              <th style="background:#0d3b7a;">Project 🔑</th>
+            </tr></thead>
+            <tbody>
+              <tr><td style="background:#fffbeb;color:#92400e;">Tata Steel</td><td style="background:#fffbeb;color:#92400e;">Bolt</td><td style="background:#fffbeb;color:#92400e;">Bridge</td></tr>
+              <tr><td style="background:#fffbeb;color:#92400e;">Tata Steel</td><td style="background:#fffbeb;color:#92400e;">Bolt</td><td style="background:#fffbeb;color:#92400e;">Highway</td></tr>
+              <tr><td style="background:#fffbeb;color:#92400e;">Tata Steel</td><td style="background:#fffbeb;color:#92400e;">Nut</td><td style="background:#fffbeb;color:#92400e;">Bridge</td></tr>
+              <tr><td style="background:#fffbeb;color:#92400e;">Infosys</td><td style="background:#fffbeb;color:#92400e;">Cable</td><td style="background:#fffbeb;color:#92400e;">Highway</td></tr>
+              <tr><td style="background:#fffbeb;color:#92400e;">Infosys</td><td style="background:#fffbeb;color:#92400e;">Cable</td><td style="background:#fffbeb;color:#92400e;">Tower</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="box bad" style="margin-top:8px;"><span class="label">Pitfall</span>If (Tata Steel, Bolt), (Bolt, Bridge), and (Tata Steel, Bridge) all exist — then (Tata Steel, Bolt, Bridge) MUST exist too. This cyclic constraint means the table has a non-trivial join dependency → 5NF violation.</div>
+        <div class="diagram" style="margin-top:10px;">
+          <div class="diagram-title">Three-way cyclic relationship — decompose into 3 binary tables</div>
+          <svg viewBox="0 0 580 140" font-family="'Segoe UI',sans-serif" font-size="13" xmlns="http://www.w3.org/2000/svg">
+            <rect x="200" y="10" width="130" height="36" rx="8" fill="#fdf2f8" stroke="#be185d" stroke-width="2"/>
+            <text x="265" y="33" text-anchor="middle" font-weight="700" fill="#be185d">Supplier</text>
+            <rect x="20" y="96" width="130" height="36" rx="8" fill="#fdf2f8" stroke="#be185d" stroke-width="2"/>
+            <text x="85" y="119" text-anchor="middle" font-weight="700" fill="#be185d">Part</text>
+            <rect x="380" y="96" width="130" height="36" rx="8" fill="#fdf2f8" stroke="#be185d" stroke-width="2"/>
+            <text x="445" y="119" text-anchor="middle" font-weight="700" fill="#be185d">Project</text>
+            <line x1="200" y1="25" x2="150" y2="96" stroke="#be185d" stroke-width="2"/>
+            <line x1="330" y1="25" x2="380" y2="96" stroke="#be185d" stroke-width="2"/>
+            <line x1="150" y1="114" x2="380" y2="114" stroke="#be185d" stroke-width="2"/>
+            <text x="120" y="60" fill="#be185d" font-size="11">Supplier–Part</text>
+            <text x="330" y="60" fill="#be185d" font-size="11">Supplier–Project</text>
+            <text x="265" y="132" text-anchor="middle" fill="#be185d" font-size="11">Part–Project</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-n">2</div>
+      <div class="step-body">
+        <strong>After 5NF</strong> — three binary tables; original reconstructed by natural join.
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:8px;">
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Supplier_Part</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">Supplier 🔑</th><th style="background:#0d3b7a;">Part 🔑</th></tr></thead>
+              <tbody>
+                <tr><td>Tata Steel</td><td style="background:#f0fdf4;color:#1a7f37;">Bolt</td></tr>
+                <tr><td>Tata Steel</td><td style="background:#f0fdf4;color:#1a7f37;">Nut</td></tr>
+                <tr><td>Infosys</td><td style="background:#f0fdf4;color:#1a7f37;">Cable</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Supplier_Project</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">Supplier 🔑</th><th style="background:#0d3b7a;">Project 🔑</th></tr></thead>
+              <tbody>
+                <tr><td>Tata Steel</td><td style="background:#f0fdf4;color:#1a7f37;">Bridge</td></tr>
+                <tr><td>Tata Steel</td><td style="background:#f0fdf4;color:#1a7f37;">Highway</td></tr>
+                <tr><td>Infosys</td><td style="background:#f0fdf4;color:#1a7f37;">Highway</td></tr>
+                <tr><td>Infosys</td><td style="background:#f0fdf4;color:#1a7f37;">Tower</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <p style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px;">Part_Project</p>
+            <table style="font-size:12px;">
+              <thead><tr><th style="background:#0d3b7a;">Part 🔑</th><th style="background:#0d3b7a;">Project 🔑</th></tr></thead>
+              <tbody>
+                <tr><td>Bolt</td><td style="background:#f0fdf4;color:#1a7f37;">Bridge</td></tr>
+                <tr><td>Bolt</td><td style="background:#f0fdf4;color:#1a7f37;">Highway</td></tr>
+                <tr><td>Nut</td><td style="background:#f0fdf4;color:#1a7f37;">Bridge</td></tr>
+                <tr><td>Cable</td><td style="background:#f0fdf4;color:#1a7f37;">Highway</td></tr>
+                <tr><td>Cable</td><td style="background:#f0fdf4;color:#1a7f37;">Tower</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="box tip" style="margin-top:8px;"><span class="label">Result</span>Original table = Supplier_Part ⋈ Supplier_Project ⋈ Part_Project. No spurious tuples. 5NF is rarely enforced in practice — mainly theoretical for complex multi-way relations.</div>
+      </div>
+    </div>
   </div>
 
   <h3>5.7 Summary Cheat-Sheet</h3>

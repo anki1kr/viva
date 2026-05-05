@@ -18,6 +18,9 @@ $RECYCLE.BIN/
 # Personal reference / source material (PYQs, syllabi, scans)
 reference/
 
+# Local draft guide
+normalization-guide.html
+
 # Logs and temp
 *.log
 *.tmp
