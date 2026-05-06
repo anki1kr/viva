@@ -917,40 +917,55 @@ footer.end p{
   </div>
 
   <div class="topic">
-    <h3>1.4 Data Distributions</h3>
+    <h3>1.4 Data Distributions <span class="tag fav">syllabus</span></h3>
     <ul>
-      <li><b>Normal</b> — bell curve · mean = median</li>
-      <li><b>Skewed left/right</b> — tail direction</li>
-      <li><b>Uniform</b> — flat</li>
-      <li><b>Bimodal</b> — two peaks</li>
+      <li><b>Normal</b> — bell curve · continuous · mean = median (e.g. height)</li>
+      <li><b>Binomial</b> — discrete · n trials · success/fail (e.g. coin flips)</li>
+      <li><b>Poisson</b> — discrete · count of rare events in fixed time (e.g. calls/hr)</li>
+      <li><b>Uniform</b> — flat · all values equally likely (e.g. dice)</li>
     </ul>
     <figure class="diagram-fig">
-    <svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg">
-      <text x="240" y="20" text-anchor="middle" class="svg-text title">Common Distributions</text>
+    <svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg">
+      <text x="240" y="20" text-anchor="middle" class="svg-text title">Four Common Distributions</text>
       <!-- Normal -->
       <g transform="translate(20,40)">
         <path d="M0,100 Q60,5 100,100" fill="rgba(124,45,18,.2)" stroke="#7c2d12" stroke-width="2"/>
         <line x1="50" y1="100" x2="50" y2="35" stroke="#1a1209" stroke-width="1.5" stroke-dasharray="3,3"/>
         <text x="50" y="120" text-anchor="middle" class="svg-text mono">µ</text>
-        <text x="50" y="140" text-anchor="middle" class="svg-text label">NORMAL</text>
+        <text x="50" y="140" text-anchor="middle" class="svg-text label" fill="#7c2d12">NORMAL</text>
+        <text x="50" y="155" text-anchor="middle" class="svg-text mono" fill="#6b5d47">continuous</text>
       </g>
-      <!-- Right skewed -->
+      <!-- Binomial (discrete bars) -->
       <g transform="translate(140,40)">
-        <path d="M0,100 Q25,20 45,40 Q70,80 100,100" fill="rgba(161,98,7,.2)" stroke="#a16207" stroke-width="2"/>
-        <text x="50" y="140" text-anchor="middle" class="svg-text label">RIGHT-SKEW</text>
+        <line x1="0" y1="100" x2="100" y2="100" stroke="#1a1209" stroke-width="1.5"/>
+        <rect x="8"  y="85" width="12" height="15" fill="rgba(161,98,7,.55)" stroke="#a16207" stroke-width="1.5"/>
+        <rect x="24" y="65" width="12" height="35" fill="rgba(161,98,7,.7)"  stroke="#a16207" stroke-width="1.5"/>
+        <rect x="40" y="40" width="12" height="60" fill="rgba(161,98,7,.85)" stroke="#a16207" stroke-width="1.5"/>
+        <rect x="56" y="55" width="12" height="45" fill="rgba(161,98,7,.7)"  stroke="#a16207" stroke-width="1.5"/>
+        <rect x="72" y="80" width="12" height="20" fill="rgba(161,98,7,.55)" stroke="#a16207" stroke-width="1.5"/>
+        <text x="50" y="140" text-anchor="middle" class="svg-text label" fill="#a16207">BINOMIAL</text>
+        <text x="50" y="155" text-anchor="middle" class="svg-text mono" fill="#6b5d47">discrete · n,p</text>
+      </g>
+      <!-- Poisson (discrete, right-tail) -->
+      <g transform="translate(260,40)">
+        <line x1="0" y1="100" x2="100" y2="100" stroke="#1a1209" stroke-width="1.5"/>
+        <rect x="6"  y="55" width="11" height="45" fill="rgba(54,83,20,.85)" stroke="#365314" stroke-width="1.5"/>
+        <rect x="20" y="40" width="11" height="60" fill="rgba(54,83,20,.85)" stroke="#365314" stroke-width="1.5"/>
+        <rect x="34" y="50" width="11" height="50" fill="rgba(54,83,20,.7)"  stroke="#365314" stroke-width="1.5"/>
+        <rect x="48" y="68" width="11" height="32" fill="rgba(54,83,20,.7)"  stroke="#365314" stroke-width="1.5"/>
+        <rect x="62" y="80" width="11" height="20" fill="rgba(54,83,20,.55)" stroke="#365314" stroke-width="1.5"/>
+        <rect x="76" y="90" width="11" height="10" fill="rgba(54,83,20,.55)" stroke="#365314" stroke-width="1.5"/>
+        <text x="50" y="140" text-anchor="middle" class="svg-text label" fill="#365314">POISSON</text>
+        <text x="50" y="155" text-anchor="middle" class="svg-text mono" fill="#6b5d47">discrete · λ</text>
       </g>
       <!-- Uniform -->
-      <g transform="translate(260,40)">
-        <rect x="10" y="40" width="80" height="60" fill="rgba(54,83,20,.2)" stroke="#365314" stroke-width="2"/>
-        <text x="50" y="140" text-anchor="middle" class="svg-text label">UNIFORM</text>
-      </g>
-      <!-- Bimodal -->
       <g transform="translate(380,40)">
-        <path d="M0,100 Q15,30 30,60 Q50,100 70,60 Q85,30 100,100" fill="rgba(159,18,57,.2)" stroke="#9f1239" stroke-width="2"/>
-        <text x="50" y="140" text-anchor="middle" class="svg-text label">BIMODAL</text>
+        <rect x="10" y="50" width="80" height="50" fill="rgba(159,18,57,.2)" stroke="#9f1239" stroke-width="2"/>
+        <text x="50" y="140" text-anchor="middle" class="svg-text label" fill="#9f1239">UNIFORM</text>
+        <text x="50" y="155" text-anchor="middle" class="svg-text mono" fill="#6b5d47">all equal</text>
       </g>
     </svg>
-    <figcaption><b>Fig 1.4</b> · Sketch one for the 1-marker</figcaption>
+    <figcaption><b>Fig 1.4</b> · 4 distributions named in syllabus — Normal · Binomial · Poisson · Uniform</figcaption>
     </figure>
   </div>
 
@@ -1006,24 +1021,24 @@ footer.end p{
       </g>
       <!-- ETL -->
       <g>
-        <rect x="200" y="100" width="120" height="44" rx="8" fill="#fff8e7" stroke="#a16207" stroke-width="2"/>
+        <rect x="180" y="100" width="160" height="48" rx="8" fill="#fff8e7" stroke="#a16207" stroke-width="2"/>
         <text x="260" y="120" text-anchor="middle" class="svg-text" font-weight="700">ETL</text>
-        <text x="260" y="136" text-anchor="middle" class="svg-text mono">extract·transform·load</text>
+        <text x="260" y="138" text-anchor="middle" class="svg-text mono" style="font-size:9px">extract · transform · load</text>
         <text x="260" y="200" text-anchor="middle" class="svg-text label">Pipeline</text>
       </g>
       <!-- Warehouse -->
       <g>
-        <rect x="400" y="80" width="140" height="80" rx="8" fill="#ecf5dc" stroke="#365314" stroke-width="2"/>
-        <text x="470" y="108" text-anchor="middle" class="svg-text" font-weight="700">Data Warehouse</text>
-        <text x="470" y="128" text-anchor="middle" class="svg-text mono">Star schema</text>
-        <text x="470" y="146" text-anchor="middle" class="svg-text mono">Historical · TBs</text>
-        <text x="470" y="200" text-anchor="middle" class="svg-text label">OLAP · analyst</text>
+        <rect x="380" y="80" width="160" height="80" rx="8" fill="#ecf5dc" stroke="#365314" stroke-width="2"/>
+        <text x="460" y="108" text-anchor="middle" class="svg-text" font-weight="700">Data Warehouse</text>
+        <text x="460" y="128" text-anchor="middle" class="svg-text mono">Star schema</text>
+        <text x="460" y="146" text-anchor="middle" class="svg-text mono">Historical · TBs</text>
+        <text x="460" y="200" text-anchor="middle" class="svg-text label">OLAP · analyst</text>
       </g>
       <!-- Arrows -->
-      <line x1="124" y1="72" x2="196" y2="115" stroke="#7c2d12" stroke-width="2" marker-end="url(#arr2)"/>
-      <line x1="124" y1="117" x2="196" y2="120" stroke="#7c2d12" stroke-width="2" marker-end="url(#arr2)"/>
-      <line x1="124" y1="162" x2="196" y2="128" stroke="#7c2d12" stroke-width="2" marker-end="url(#arr2)"/>
-      <line x1="324" y1="120" x2="396" y2="120" stroke="#7c2d12" stroke-width="2" marker-end="url(#arr2)"/>
+      <line x1="124" y1="72" x2="176" y2="115" stroke="#7c2d12" stroke-width="2" marker-end="url(#arr2)"/>
+      <line x1="124" y1="117" x2="176" y2="124" stroke="#7c2d12" stroke-width="2" marker-end="url(#arr2)"/>
+      <line x1="124" y1="162" x2="176" y2="132" stroke="#7c2d12" stroke-width="2" marker-end="url(#arr2)"/>
+      <line x1="344" y1="124" x2="376" y2="120" stroke="#7c2d12" stroke-width="2" marker-end="url(#arr2)"/>
     </svg>
     <figcaption><b>Fig 1.7</b> · Many DBs feed one warehouse via ETL</figcaption>
     </figure>
@@ -1049,20 +1064,18 @@ footer.end p{
     <figure class="diagram-fig">
     <svg viewBox="0 0 480 240" xmlns="http://www.w3.org/2000/svg">
       <text x="240" y="22" text-anchor="middle" class="svg-text title">Cloud Service Pyramid</text>
-      <!-- Pyramid -->
+      <!-- SaaS top -->
       <polygon points="240,50 320,100 160,100" fill="#fde6d6" stroke="#7c2d12" stroke-width="2"/>
-      <text x="240" y="82" text-anchor="middle" class="svg-text" font-weight="700">SaaS</text>
+      <text x="240" y="80" text-anchor="middle" class="svg-text" font-weight="700">SaaS</text>
+      <text x="240" y="93" text-anchor="middle" class="svg-text mono" style="font-size:9px">apps · Gmail</text>
+      <!-- PaaS middle -->
       <polygon points="320,100 380,150 100,150 160,100" fill="#fff8e7" stroke="#a16207" stroke-width="2"/>
-      <text x="240" y="130" text-anchor="middle" class="svg-text" font-weight="700">PaaS</text>
+      <text x="240" y="125" text-anchor="middle" class="svg-text" font-weight="700">PaaS</text>
+      <text x="240" y="142" text-anchor="middle" class="svg-text mono" style="font-size:9px">platform · Heroku</text>
+      <!-- IaaS base -->
       <polygon points="380,150 440,200 40,200 100,150" fill="#ecf5dc" stroke="#365314" stroke-width="2"/>
-      <text x="240" y="180" text-anchor="middle" class="svg-text" font-weight="700">IaaS</text>
-      <!-- Side labels -->
-      <text x="450" y="82" class="svg-text mono" fill="#7c2d12">Gmail</text>
-      <text x="450" y="130" class="svg-text mono" fill="#a16207">Heroku</text>
-      <text x="450" y="180" class="svg-text mono" fill="#365314">AWS EC2</text>
-      <text x="22" y="82"  class="svg-text mono" text-anchor="end">apps</text>
-      <text x="22" y="130" class="svg-text mono" text-anchor="end">platform</text>
-      <text x="22" y="180" class="svg-text mono" text-anchor="end">infra</text>
+      <text x="240" y="175" text-anchor="middle" class="svg-text" font-weight="700">IaaS</text>
+      <text x="240" y="192" text-anchor="middle" class="svg-text mono" style="font-size:9px">infrastructure · AWS EC2</text>
       <text x="240" y="225" text-anchor="middle" class="svg-text label">deployment: public · private · hybrid · community</text>
     </svg>
     <figcaption><b>Fig 1.9</b> · IaaS → PaaS → SaaS abstraction stack</figcaption>
