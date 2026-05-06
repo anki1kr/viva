@@ -131,6 +131,24 @@
   .subj-card .when.soon   { background: var(--warn-soft); color: var(--warn); }
   .subj-card .when.later  { background: var(--good-soft); color: var(--good); }
   .subj-card .when.done   { background: #f3f4f6; color: var(--muted); }
+  .subj-card .when.now    {
+    background: #fef2f2; color: var(--bad);
+    animation: livePulse 1.4s ease-in-out infinite;
+  }
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.65; transform: scale(0.95); }
+  }
+  .subj-card.hidden { display: none; }
+  .all-done {
+    grid-column: 1 / -1;
+    background: var(--good-soft); color: var(--good);
+    padding: 28px 22px; border-radius: 14px; text-align: center;
+    font-weight: 700; font-size: 16px; line-height: 1.6;
+    border: 1px solid #bbf7d0;
+  }
+  .all-done .big { font-size: 32px; display: block; margin-bottom: 6px; }
+  .all-done .sub { font-size: 13px; font-weight: 500; color: var(--ink); margin-top: 4px; }
 
   /* ===== Big action button ===== */
   .big-btn {
@@ -308,56 +326,56 @@
   </a>
 
   <!-- ===== Subjects ===== -->
-  <h3 id="subjects"><span class="icon">📚</span> Subjects <span class="count">7 guides</span></h3>
+  <h3 id="subjects"><span class="icon">📚</span> Subjects <span class="count" id="subjCount">7 guides</span></h3>
 
   <div class="card-grid">
     <a href="dbms-study-guide.html" class="subj-card dbms">
       <span class="emoji">📊</span>
       <div class="name">DBMS</div>
       <div class="full">Database Management Systems</div>
-      <div class="when urgent" data-exam="2026-05-05">May 5 · 9:30 AM</div>
+      <div class="when" data-exam="2026-05-05T09:30:00" data-exam-end="2026-05-05T11:00:00">May 5 · 9:30 AM</div>
     </a>
 
     <a href="wc-study-guide.html" class="subj-card wc">
       <span class="emoji">📡</span>
       <div class="name">WC</div>
       <div class="full">Wireless Communication · Units III &amp; IV</div>
-      <div class="when urgent" data-exam="2026-05-05">May 5 · 2 PM</div>
+      <div class="when" data-exam="2026-05-05T14:00:00" data-exam-end="2026-05-05T15:30:00">May 5 · 2 PM</div>
     </a>
 
     <a href="loc-study-guide.html" class="subj-card loc">
       <span class="emoji">🔌</span>
       <div class="name">LOC</div>
       <div class="full">Logic &amp; Organisation of Computer</div>
-      <div class="when soon" data-exam="2026-05-06">May 6 · 9:30 AM</div>
+      <div class="when soon" data-exam="2026-05-06T14:00:00" data-exam-end="2026-05-06T15:30:00">May 6 · 2 PM</div>
     </a>
 
     <a href="r-datascience-study-guide.html" class="subj-card dsur">
       <span class="emoji">📈</span>
       <div class="name">DSUR</div>
       <div class="full">Data Science Using R</div>
-      <div class="when soon" data-exam="2026-05-07">May 7 · 9:30 AM</div>
+      <div class="when soon" data-exam="2026-05-07T09:30:00" data-exam-end="2026-05-07T11:00:00">May 7 · 9:30 AM</div>
     </a>
 
     <a href="ctrc-study-guide.html" class="subj-card ctrc">
       <span class="emoji">💬</span>
       <div class="name">CTRC</div>
       <div class="full">Critical Thinking &amp; Rhetorical Communication</div>
-      <div class="when soon" data-exam="2026-05-07">May 7 · 2 PM</div>
+      <div class="when soon" data-exam="2026-05-07T14:00:00" data-exam-end="2026-05-07T15:30:00">May 7 · 2 PM</div>
     </a>
 
     <a href="probstats-study-guide.html" class="subj-card probstats">
       <span class="emoji">🎲</span>
       <div class="name">Prob &amp; Stats</div>
       <div class="full">Probability &amp; Statistics</div>
-      <div class="when later" data-exam="2026-05-09">May 9 · 9:30 AM</div>
+      <div class="when later" data-exam="2026-05-09T09:30:00" data-exam-end="2026-05-09T11:00:00">May 9 · 9:30 AM</div>
     </a>
 
     <a href="iks-study-guide.html" class="subj-card iks">
       <span class="emoji">🕉️</span>
       <div class="name">IKS</div>
       <div class="full">Indian Knowledge System · Units III–VI</div>
-      <div class="when later" data-exam="2026-05-09">May 9 · 2 PM</div>
+      <div class="when later" data-exam="2026-05-09T14:00:00" data-exam-end="2026-05-09T15:30:00">May 9 · 2 PM</div>
     </a>
   </div>
 
@@ -374,29 +392,116 @@
 </div>
 
 <script>
-  // === Live countdown to first exam ===
-  (function updateDaysLeft() {
-    const firstExam = new Date('2026-05-05T09:30:00');
-    const now = new Date();
-    const diff = Math.ceil((firstExam - now) / (1000 * 60 * 60 * 24));
-    const el = document.getElementById('daysLeft');
-    if (!el) return;
-    if (diff <= 0) el.textContent = 'NOW';
-    else el.textContent = diff;
-  })();
+  // === Live exam ticker — countdown + auto-hide past exams ===
+  (function setupExamTicker() {
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const pad = n => n.toString().padStart(2,'0');
 
-  // === Color-code each card based on how soon ===
-  (function colorCards() {
-    const today = new Date(); today.setHours(0,0,0,0);
-    document.querySelectorAll('[data-exam]').forEach(el => {
-      const exam = new Date(el.dataset.exam);
-      const days = Math.ceil((exam - today) / (1000*60*60*24));
-      el.classList.remove('urgent','soon','later','done');
-      if (days < 0) el.classList.add('done');
-      else if (days <= 1) el.classList.add('urgent');
-      else if (days <= 3) el.classList.add('soon');
-      else el.classList.add('later');
-    });
+    function fmtDate(d) {
+      const h = d.getHours(), m = d.getMinutes();
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const h12 = ((h + 11) % 12) + 1;
+      return `${MONTHS[d.getMonth()]} ${d.getDate()} · ${h12}:${pad(m)} ${ampm}`;
+    }
+
+    function tick() {
+      const now = new Date();
+      const cards = document.querySelectorAll('.subj-card');
+      let nextDiff = Infinity, anyVisible = false, anyLive = false;
+
+      cards.forEach(card => {
+        const whenEl = card.querySelector('.when');
+        if (!whenEl || !whenEl.dataset.exam) return;
+        const exam    = new Date(whenEl.dataset.exam);
+        const examEnd = new Date(whenEl.dataset.examEnd);
+        const diff    = exam - now;
+
+        whenEl.classList.remove('urgent','soon','later','done','now');
+        card.classList.remove('hidden');
+
+        // Auto-hide once exam is over
+        if (now >= examEnd) {
+          card.classList.add('hidden');
+          return;
+        }
+        anyVisible = true;
+
+        // Exam in progress
+        if (diff <= 0) {
+          whenEl.textContent = '🔴 LIVE NOW';
+          whenEl.classList.add('now');
+          anyLive = true;
+          return;
+        }
+
+        if (diff < nextDiff) nextDiff = diff;
+
+        const totalMin = Math.floor(diff / 60000);
+        const totalHr  = Math.floor(totalMin / 60);
+        const days     = Math.floor(totalHr / 24);
+        const hours    = totalHr % 24;
+        const mins     = totalMin % 60;
+
+        if (totalMin < 60) {
+          whenEl.textContent = `Starts in ${totalMin}m`;
+          whenEl.classList.add('urgent');
+        } else if (totalHr < 24) {
+          whenEl.textContent = `${hours}h ${pad(mins)}m left`;
+          whenEl.classList.add('urgent');
+        } else if (days < 3) {
+          whenEl.textContent = `${fmtDate(exam)} · ${days}d ${hours}h`;
+          whenEl.classList.add('soon');
+        } else {
+          whenEl.textContent = `${fmtDate(exam)} · in ${days}d`;
+          whenEl.classList.add('later');
+        }
+      });
+
+      // All-done celebratory message
+      const grid = document.querySelector('.card-grid');
+      let doneEl = document.getElementById('allDoneMsg');
+      if (!anyVisible) {
+        if (!doneEl && grid) {
+          doneEl = document.createElement('div');
+          doneEl.id = 'allDoneMsg';
+          doneEl.className = 'all-done';
+          doneEl.innerHTML = '<span class="big">🎉</span>All sessional exams done!<div class="sub">Take a well-earned break. Best of luck for the results.</div>';
+          grid.appendChild(doneEl);
+        }
+      } else if (doneEl) {
+        doneEl.remove();
+      }
+
+      // Hero stat — "Days/hours till next exam"
+      const numEl = document.getElementById('daysLeft');
+      const lblEl = numEl?.parentElement?.querySelector('.lbl');
+      if (numEl) {
+        if (!anyVisible) {
+          numEl.textContent = '🎉';
+          if (lblEl) lblEl.textContent = 'All exams done';
+        } else if (anyLive && nextDiff === Infinity) {
+          numEl.textContent = 'NOW';
+          if (lblEl) lblEl.textContent = 'Exam live';
+        } else if (nextDiff !== Infinity) {
+          const tm = Math.floor(nextDiff / 60000);
+          const th = Math.floor(tm / 60);
+          const d  = Math.floor(th / 24);
+          const h  = th % 24;
+          const m  = tm % 60;
+          if (tm < 60)        { numEl.textContent = `${tm}m`;         if (lblEl) lblEl.textContent = 'till next exam'; }
+          else if (th < 24)   { numEl.textContent = `${h}h ${pad(m)}m`; if (lblEl) lblEl.textContent = 'till next exam'; }
+          else                { numEl.textContent = `${d}d ${h}h`;     if (lblEl) lblEl.textContent = 'till next exam'; }
+        }
+      }
+
+      // Update subjects-section count to reflect remaining
+      const visibleCount = document.querySelectorAll('.subj-card:not(.hidden)').length;
+      const countEl = document.querySelector('h3#subjects .count');
+      if (countEl) countEl.textContent = visibleCount === 0 ? 'all done' : `${visibleCount} remaining`;
+    }
+
+    tick();
+    setInterval(tick, 30000); // refresh every 30 seconds
   })();
 
   // === PWA install prompt ===

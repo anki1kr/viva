@@ -239,8 +239,10 @@
     text-transform: uppercase; letter-spacing: .08em;
     margin-bottom: 12px; text-align: center;
   }
-  .formula-block {
-    background: #f5f7fb; padding: 12px 16px;
+  pre.formula-block {
+    background: #f5f7fb !important;
+    color: #1a2233 !important;
+    padding: 12px 16px;
     border-left: 3px solid var(--brand); border-radius: 4px;
     font-family: "Cascadia Code", Consolas, monospace;
     font-size: 13px; line-height: 1.6;
@@ -346,6 +348,8 @@
       <li><a href="#t5">Control Unit — Hardwired vs Microprogrammed</a></li>
       <li><a href="#t6">Pipelining &amp; Pipeline Hazards</a></li>
       <li><a href="#t7">x86 Architecture &amp; Parallel Processors</a></li>
+      <li><a href="#quick-scan">⚡ 18-Topic Speed Scan</a></li>
+      <li><a href="#quick-scan">⚡ 18-Topic Speed Scan</a></li>
       <li><a href="#sessional-booster">Sessional Exam Booster (30 marks)</a></li>
     </ol>
   </aside>
@@ -371,7 +375,7 @@
   <h3>1.1 What is Memory Organisation?</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    <strong>Memory organisation</strong> is the arrangement and management of different storage units in a computer so that the CPU receives data with minimum delay at minimum cost. It covers <em>how memory is structured</em>, <em>how data is addressed</em>, and <em>how the levels cooperate</em>.
+    <strong>Memory organisation</strong> — arrangement of storage units so the CPU receives data with minimum delay at minimum cost.
   </div>
 
   <h4>Key design goals</h4>
@@ -386,16 +390,57 @@
   <h3>1.2 Hierarchical Memory Organisation</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    A <strong>memory hierarchy</strong> is a layered arrangement of storage where each level closer to the CPU is <em>faster, smaller, and costlier per bit</em> than the one below it. The idea exploits the <strong>locality of reference</strong> of programs — what you used recently, you'll likely use again soon.
+    <strong>Memory hierarchy</strong> — layered storage where each level closer to the CPU is <em>faster, smaller, and costlier per bit</em>; exploits locality of reference.
   </div>
 
   <h4>The pyramid (top = fastest)</h4>
   <div class="diagram">
     <div class="diagram-title">Memory Hierarchy Pyramid</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250111112435920586/Memory-Hierarchy-Design.webp"
-         alt="Memory hierarchy pyramid: from top (fast, small, costly) to bottom (slow, large, cheap) — Registers, Cache L1/L2/L3, Main Memory, Secondary Storage, Tertiary/Tape"
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
+    <svg viewBox="0 0 760 470" role="img" aria-label="Memory hierarchy pyramid: Registers, Cache, Main Memory, SSD, HDD, Tape — fast/small/costly at top, slow/large/cheap at bottom." style="max-width:100%; height:auto; display:block; margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="arrMemHier" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+
+      <!-- Layer 1: Registers (top, narrowest) -->
+      <polygon points="330,30 430,30 450,80 310,80" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="380" y="52" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#1a2233">Registers</text>
+      <text x="380" y="70" text-anchor="middle" font-family="monospace" font-size="11" fill="#5a6577">~1 ns &#183; bytes&#8211;KB</text>
+
+      <!-- Layer 2: Cache L1/L2/L3 -->
+      <polygon points="310,82 450,82 470,132 290,132" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="380" y="104" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#1a2233">Cache (L1 / L2 / L3)</text>
+      <text x="380" y="122" text-anchor="middle" font-family="monospace" font-size="11" fill="#5a6577">1&#8211;10 ns &#183; KB&#8211;MB</text>
+
+      <!-- Layer 3: Main Memory / DRAM -->
+      <polygon points="290,134 470,134 490,184 270,184" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="380" y="156" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#1a2233">Main Memory (DRAM)</text>
+      <text x="380" y="174" text-anchor="middle" font-family="monospace" font-size="11" fill="#5a6577">50&#8211;100 ns &#183; GB</text>
+
+      <!-- Layer 4: SSD -->
+      <polygon points="270,186 490,186 515,246 245,246" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="380" y="212" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#1a2233">SSD (NAND Flash)</text>
+      <text x="380" y="232" text-anchor="middle" font-family="monospace" font-size="11" fill="#5a6577">~100 &#181;s &#183; 100 GB&#8211;TB</text>
+
+      <!-- Layer 5: HDD -->
+      <polygon points="245,248 515,248 545,318 215,318" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="380" y="278" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#1a2233">HDD (Magnetic Disk)</text>
+      <text x="380" y="298" text-anchor="middle" font-family="monospace" font-size="11" fill="#5a6577">~10 ms &#183; TB</text>
+
+      <!-- Layer 6: Tape / Tertiary (bottom, widest) -->
+      <polygon points="215,320 545,320 580,400 180,400" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="380" y="352" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#1a2233">Tape / Tertiary Storage</text>
+      <text x="380" y="372" text-anchor="middle" font-family="monospace" font-size="11" fill="#5a6577">seconds &#183; PB</text>
+
+      <!-- Left UP arrow -->
+      <line x1="100" y1="395" x2="100" y2="55" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMemHier)"/>
+      <text x="100" y="425" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#1f6feb">FASTER &#183; COSTLIER &#183; SMALLER</text>
+
+      <!-- Right DOWN arrow -->
+      <line x1="660" y1="55" x2="660" y2="395" stroke="#b42318" stroke-width="2" marker-end="url(#arrMemHier)"/>
+      <text x="660" y="425" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#b42318">SLOWER &#183; CHEAPER &#183; LARGER</text>
+    </svg>
     <div class="caption">Fast, small, costly storage near the CPU; slow, large, cheap storage at the base.</div>
   </div>
 
@@ -419,7 +464,6 @@
 
   <hr>
   <h3>1.3 Locality of Reference — the engine of the hierarchy</h3>
-  <p>The hierarchy works because programs do not access memory uniformly — they cluster:</p>
   <div class="grid-2">
     <div class="card">
       <h5>Temporal Locality</h5>
@@ -469,17 +513,94 @@
   <h3>2.1 Semiconductor Memory Technologies</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    <strong>Semiconductor memory</strong> stores bits in transistor/capacitor circuits etched onto silicon. Because there are no moving parts, access is very fast (nanoseconds), but most types are <em>volatile</em> — data is lost when power is removed.
+    <strong>Semiconductor memory</strong> stores bits in transistor/capacitor circuits on silicon; fast (ns access), most types <em>volatile</em> — data lost on power-off.
   </div>
 
   <h4>Family tree</h4>
   <div class="diagram">
     <div class="diagram-title">Semiconductor Memory Family Tree</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20231229134227/RAM.png"
-         alt="Semiconductor memory family tree: Semiconductor Memory branches into RAM (volatile) and ROM (non-volatile). RAM splits into SRAM and DRAM. ROM splits into MROM, PROM, EPROM, and EEPROM/Flash."
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
-    <div class="caption">Two top-level branches: volatile read/write RAM, and non-volatile ROM family.</div>
+    <svg viewBox="0 0 900 325" xmlns="http://www.w3.org/2000/svg" role="img"
+         aria-label="Semiconductor Memory branches into RAM (volatile) and ROM (non-volatile). RAM splits into SRAM and DRAM. ROM splits into MROM, PROM, EPROM, and EEPROM/Flash.">
+      <defs>
+        <marker id="arrSemiTree" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <polygon points="0 0, 8 4, 0 8" fill="#5a6577"/>
+        </marker>
+      </defs>
+
+      <!-- Root -->
+      <rect x="350" y="20" width="200" height="55" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="450" y="46" text-anchor="middle" fill="#1a2233" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700">Semiconductor Memory</text>
+      <text x="450" y="64" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="11">silicon — no moving parts, ns access</text>
+
+      <!-- Root → RAM/ROM trunk -->
+      <line x1="450" y1="75" x2="450" y2="100" stroke="#5a6577" stroke-width="2"/>
+      <line x1="200" y1="100" x2="700" y2="100" stroke="#5a6577" stroke-width="2"/>
+      <line x1="200" y1="100" x2="200" y2="128" stroke="#5a6577" stroke-width="2" marker-end="url(#arrSemiTree)"/>
+      <line x1="700" y1="100" x2="700" y2="128" stroke="#5a6577" stroke-width="2" marker-end="url(#arrSemiTree)"/>
+      <text x="310" y="95" text-anchor="middle" fill="#1a7f37" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">VOLATILE</text>
+      <text x="595" y="95" text-anchor="middle" fill="#b54708" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">NON-VOLATILE</text>
+
+      <!-- RAM -->
+      <rect x="110" y="130" width="180" height="55" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="200" y="156" text-anchor="middle" fill="#1a2233" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700">RAM</text>
+      <text x="200" y="174" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="11">Random Access — read / write</text>
+
+      <!-- ROM -->
+      <rect x="610" y="130" width="180" height="55" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="700" y="156" text-anchor="middle" fill="#1a2233" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700">ROM</text>
+      <text x="700" y="174" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="11">Read-Only — retains on power loss</text>
+
+      <!-- RAM trunk to children -->
+      <line x1="200" y1="185" x2="200" y2="215" stroke="#5a6577" stroke-width="2"/>
+      <line x1="135" y1="215" x2="265" y2="215" stroke="#5a6577" stroke-width="2"/>
+      <line x1="135" y1="215" x2="135" y2="238" stroke="#5a6577" stroke-width="2" marker-end="url(#arrSemiTree)"/>
+      <line x1="265" y1="215" x2="265" y2="238" stroke="#5a6577" stroke-width="2" marker-end="url(#arrSemiTree)"/>
+
+      <!-- SRAM -->
+      <rect x="80" y="240" width="110" height="60" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="135" y="261" text-anchor="middle" fill="#1a2233" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700">SRAM</text>
+      <text x="135" y="278" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">6T flip-flop</text>
+      <text x="135" y="291" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">→ cache</text>
+
+      <!-- DRAM -->
+      <rect x="210" y="240" width="110" height="60" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="265" y="261" text-anchor="middle" fill="#1a2233" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700">DRAM</text>
+      <text x="265" y="278" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">1T+1C, refresh</text>
+      <text x="265" y="291" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">→ main memory</text>
+
+      <!-- ROM trunk to four children -->
+      <line x1="700" y1="185" x2="700" y2="215" stroke="#5a6577" stroke-width="2"/>
+      <line x1="553" y1="215" x2="847" y2="215" stroke="#5a6577" stroke-width="2"/>
+      <line x1="553" y1="215" x2="553" y2="238" stroke="#5a6577" stroke-width="2" marker-end="url(#arrSemiTree)"/>
+      <line x1="651" y1="215" x2="651" y2="238" stroke="#5a6577" stroke-width="2" marker-end="url(#arrSemiTree)"/>
+      <line x1="749" y1="215" x2="749" y2="238" stroke="#5a6577" stroke-width="2" marker-end="url(#arrSemiTree)"/>
+      <line x1="847" y1="215" x2="847" y2="238" stroke="#5a6577" stroke-width="2" marker-end="url(#arrSemiTree)"/>
+
+      <!-- MROM -->
+      <rect x="508" y="240" width="90" height="60" rx="8" fill="#ffffff" stroke="#b54708" stroke-width="2"/>
+      <text x="553" y="261" text-anchor="middle" fill="#1a2233" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700">MROM</text>
+      <text x="553" y="278" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">Mask-</text>
+      <text x="553" y="291" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">programmed</text>
+
+      <!-- PROM -->
+      <rect x="606" y="240" width="90" height="60" rx="8" fill="#ffffff" stroke="#b54708" stroke-width="2"/>
+      <text x="651" y="261" text-anchor="middle" fill="#1a2233" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700">PROM</text>
+      <text x="651" y="278" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">Fuse-blow,</text>
+      <text x="651" y="291" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">write once</text>
+
+      <!-- EPROM -->
+      <rect x="704" y="240" width="90" height="60" rx="8" fill="#ffffff" stroke="#b54708" stroke-width="2"/>
+      <text x="749" y="261" text-anchor="middle" fill="#1a2233" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700">EPROM</text>
+      <text x="749" y="278" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">UV-erasable,</text>
+      <text x="749" y="291" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">re-writable</text>
+
+      <!-- EEPROM / Flash -->
+      <rect x="802" y="240" width="90" height="60" rx="8" fill="#ffffff" stroke="#b54708" stroke-width="2"/>
+      <text x="847" y="259" text-anchor="middle" fill="#1a2233" font-family="Segoe UI, sans-serif" font-size="12" font-weight="700">EEPROM</text>
+      <text x="847" y="273" text-anchor="middle" fill="#1a2233" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700">/ Flash</text>
+      <text x="847" y="291" text-anchor="middle" fill="#5a6577" font-family="Segoe UI, sans-serif" font-size="10">in-circuit erase</text>
+    </svg>
+    <div class="caption"><strong>RAM</strong> (SRAM, DRAM) is volatile; <strong>ROM</strong> family (MROM → PROM → EPROM → EEPROM/Flash) is non-volatile, in order of increasing rewritability.</div>
   </div>
 
   <h4>SRAM vs DRAM — the headline comparison</h4>
@@ -517,41 +638,125 @@
   <h3>2.2 Memory Interleaving</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    <strong>Memory interleaving</strong> is a technique in which main memory is split into several independent <em>banks (modules)</em> that can be accessed in parallel or in an overlapped fashion. Consecutive memory addresses are spread across different banks so that successive accesses hit different modules and the effective memory bandwidth multiplies.
+    <strong>Memory interleaving</strong> splits main memory into independent <em>banks</em> accessed in parallel or overlapped.
+    Consecutive addresses spread across banks, multiplying effective bandwidth.
   </div>
 
   <h4>Why it works</h4>
-  <p>A DRAM bank takes (say) 100 ns per access and is busy the whole time. If we have 4 banks and consecutive words live in different banks, four accesses can be <em>started</em> back-to-back; the average time per word drops to ~25 ns.</p>
+  <p>With 4 banks, four successive accesses start back-to-back, dropping average time per word to ~25 ns.</p>
 
   <h4>Two flavours</h4>
   <div class="grid-2">
     <div class="card">
       <h5>High-Order Interleaving</h5>
-      <strong>Most-significant</strong> bits of address pick the module; least-significant bits pick the word inside.<br>
-      <em>Result:</em> consecutive words land in the <em>same</em> bank — no parallelism for sequential access. Useful for fault isolation.
+      <ul>
+        <li><strong>MSB</strong> bits select the bank module</li>
+        <li>Consecutive words land in <em>same</em> bank</li>
+        <li>No parallelism; used for fault isolation</li>
+      </ul>
     </div>
     <div class="card">
       <h5>Low-Order Interleaving</h5>
-      <strong>Least-significant</strong> bits pick the module; most-significant bits pick the word inside.<br>
-      <em>Result:</em> consecutive words spread across different banks — <strong>maximum parallelism</strong> for sequential access. This is what CPUs use.
+      <ul>
+        <li><strong>LSB</strong> bits select the bank module</li>
+        <li>Consecutive words spread across all banks</li>
+        <li><strong>Maximum parallelism</strong>; used by CPUs</li>
+      </ul>
     </div>
   </div>
 
-  <h4>Address split — 4 banks, 16 words each (6-bit address)</h4>
-  <pre class="formula-block">Low-order interleaving (4 banks):
-    Address bits:  A A A A   B B
-                   ───────   ───
-                    word     bank-id
-    Word 0  -> bank 0       Word 1 -> bank 1
-    Word 2  -> bank 2       Word 3 -> bank 3
-    Word 4  -> bank 0   <-- consecutive words spread out
+  <div class="diagram">
+    <div class="diagram-title">Address split — 4 banks, 16 words each (6-bit address)</div>
+    <svg viewBox="0 0 880 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:880px;display:block;margin:0 auto;">
+      <defs>
+        <marker id="arrIntlv" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
 
-High-order interleaving:
-    Address bits:  B B   A A A A
-                   ───   ───────
-                   bank   word
-    Word  0..15 -> bank 0
-    Word 16..31 -> bank 1   <-- contiguous chunks per bank</pre>
+      <!-- ===== TOP HALF: Low-order interleaving ===== -->
+      <text x="440" y="22" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1a2233">Low-order interleaving</text>
+
+      <!-- 6-bit address bar: word bits (brand) left, bank-id bits (warn) right -->
+      <rect x="120" y="34" width="320" height="34" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="280" y="48" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f6feb">A A A A</text>
+      <text x="280" y="62" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1f6feb">word  (bits 5&#x2013;2)</text>
+
+      <rect x="440" y="34" width="200" height="34" rx="6" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="540" y="48" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#b54708">B B</text>
+      <text x="540" y="62" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#b54708">bank-id  (bits 1&#x2013;0)</text>
+
+      <text x="80" y="55" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5a6577">6-bit addr</text>
+      <line x1="118" y1="51" x2="100" y2="51" stroke="#5a6577" stroke-width="1.5"/>
+
+      <!-- 4 Bank boxes -->
+      <rect x="60"  y="110" width="140" height="40" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="130" y="134" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1a7f37">Bank 0</text>
+
+      <rect x="230" y="110" width="140" height="40" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="300" y="134" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1a7f37">Bank 1</text>
+
+      <rect x="400" y="110" width="140" height="40" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="470" y="134" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1a7f37">Bank 2</text>
+
+      <rect x="570" y="110" width="140" height="40" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="640" y="134" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1a7f37">Bank 3</text>
+
+      <!-- Word labels and arrows -->
+      <text x="130" y="100" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1a2233">Word 0</text>
+      <line x1="130" y1="102" x2="130" y2="108" stroke="#1f6feb" stroke-width="1.5" marker-end="url(#arrIntlv)"/>
+
+      <text x="300" y="100" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1a2233">Word 1</text>
+      <line x1="300" y1="102" x2="300" y2="108" stroke="#1f6feb" stroke-width="1.5" marker-end="url(#arrIntlv)"/>
+
+      <text x="470" y="100" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1a2233">Word 2</text>
+      <line x1="470" y1="102" x2="470" y2="108" stroke="#1f6feb" stroke-width="1.5" marker-end="url(#arrIntlv)"/>
+
+      <text x="640" y="100" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1a2233">Word 3</text>
+      <line x1="640" y1="102" x2="640" y2="108" stroke="#1f6feb" stroke-width="1.5" marker-end="url(#arrIntlv)"/>
+
+      <text x="130" y="168" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">Word 4 &#x2192; Bank 0 again &#x2026;</text>
+
+      <!-- Good label -->
+      <rect x="100" y="182" width="680" height="28" rx="6" fill="#e6f4ea" stroke="#1a7f37" stroke-width="1.5"/>
+      <text x="440" y="200" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1a7f37">&#x2713;  Consecutive words spread across all banks &#x2192; maximum parallelism  (CPU uses this)</text>
+
+      <!-- ===== DIVIDER ===== -->
+      <line x1="40" y1="224" x2="840" y2="224" stroke="#e3e7ee" stroke-width="2" stroke-dasharray="6,4"/>
+
+      <!-- ===== BOTTOM HALF: High-order interleaving ===== -->
+      <text x="440" y="246" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1a2233">High-order interleaving</text>
+
+      <!-- 6-bit address bar: bank bits (warn) left, word bits (brand) right -->
+      <rect x="120" y="258" width="200" height="34" rx="6" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="220" y="272" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#b54708">B B</text>
+      <text x="220" y="286" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#b54708">bank  (bits 5&#x2013;4)</text>
+
+      <rect x="320" y="258" width="320" height="34" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="480" y="272" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f6feb">A A A A</text>
+      <text x="480" y="286" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1f6feb">word  (bits 3&#x2013;0)</text>
+
+      <text x="80" y="279" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#5a6577">6-bit addr</text>
+      <line x1="118" y1="275" x2="100" y2="275" stroke="#5a6577" stroke-width="1.5"/>
+
+      <!-- 2 Bank boxes (neutral) -->
+      <rect x="160" y="328" width="220" height="44" rx="6" fill="#f4f5f7" stroke="#5a6577" stroke-width="2"/>
+      <text x="270" y="346" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1a2233">Bank 0</text>
+      <text x="270" y="364" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">words 0&#x2013;15  (all consecutive)</text>
+
+      <rect x="460" y="328" width="230" height="44" rx="6" fill="#f4f5f7" stroke="#5a6577" stroke-width="2"/>
+      <text x="575" y="346" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1a2233">Bank 1</text>
+      <text x="575" y="364" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">words 16&#x2013;31  (all consecutive)</text>
+
+      <!-- Arrows from addr bar to banks -->
+      <line x1="220" y1="292" x2="270" y2="326" stroke="#b54708" stroke-width="1.5" marker-end="url(#arrIntlv)"/>
+      <line x1="480" y1="292" x2="575" y2="326" stroke="#b54708" stroke-width="1.5" marker-end="url(#arrIntlv)"/>
+
+      <!-- Bad label -->
+      <rect x="100" y="386" width="680" height="28" rx="6" fill="#fdecec" stroke="#b42318" stroke-width="1.5"/>
+      <text x="440" y="404" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#b42318">&#x2717;  Consecutive words stay in the same bank &#x2192; no parallelism for sequential access</text>
+    </svg>
+  </div>
 
   <div class="box eg">
     <span class="label">Example — speed-up</span>
@@ -560,7 +765,8 @@ High-order interleaving:
 
   <div class="box bad">
     <span class="label">Pitfall</span>
-    Interleaving <em>only</em> helps when accesses go to <strong>different</strong> banks. A loop that always hits the same bank (stride = number of banks) gets <em>no</em> speed-up — this is called <em>bank conflict</em>.
+    Interleaving helps <em>only</em> when accesses hit <strong>different</strong> banks.
+    Same-bank access (stride = number of banks) causes a <em>bank conflict</em>.
   </div>
 
   <div class="quiz">
@@ -579,6 +785,33 @@ High-order interleaving:
   </div>
 </section>
 
+<!-- === EXAM TEMPLATES: Topic 2 === -->
+<div class="box tip" style="margin-top:28px;">
+  <span class="label">8-mark scoring template — Semiconductor Memory Technologies</span>
+  <ul>
+    <li><strong>Definition</strong> — "bits stored in transistor/capacitor circuits on silicon; volatile (RAM) or non-volatile (ROM)" — 1 mark</li>
+    <li><strong>Family tree diagram</strong> — root: Semiconductor Memory → RAM (volatile) + ROM (non-volatile); RAM → SRAM + DRAM; ROM → MROM, PROM, EPROM, EEPROM, Flash — 2 marks</li>
+    <li><strong>SRAM vs DRAM comparison table</strong> — cell type, refresh, speed, density, cost, use-case (6 rows) — 2 marks</li>
+    <li><strong>ROM family table</strong> — type, programmed by, re-writable, erase method — 2 marks</li>
+    <li><strong>Mnemonic</strong> — "My Programmer Eats Every Flash" (MROM→PROM→EPROM→EEPROM→Flash) — 1 mark</li>
+  </ul>
+</div>
+
+<div class="box tip" style="margin-top:16px;">
+  <span class="label">8-mark scoring template — Memory Interleaving</span>
+  <ul>
+    <li><strong>Definition</strong> — "splits main memory into N independent banks; consecutive addresses spread across banks to enable parallel access" — 1 mark</li>
+    <li><strong>Why it works</strong> — N banks operate simultaneously; effective bandwidth = N × single-bank rate — 1 mark</li>
+    <li><strong>Low-order vs High-order diagram</strong> — show address split: low-order uses LSBs to select bank (max parallelism, CPU uses this); high-order uses MSBs (consecutive words in one bank = no parallelism) — 3 marks</li>
+    <li><strong>Speed-up example</strong> — 4-bank, cycle=100 ns: sequential 4 words: 4×100=400 ns → interleaved: ≈175 ns; effective bandwidth ≈ 4× — 2 marks</li>
+    <li><strong>Pitfall</strong> — bank conflict: stride = N sends all accesses to one bank — 1 mark</li>
+  </ul>
+  <div class="box eg" style="margin-top:10px;">
+    <span class="label">Quick answer skeleton</span>
+    Def (1) → why/how (1) → low-order address split diagram (2) → high-order diagram (1) → speed-up calculation (2) → bank-conflict pitfall (1) = 8 marks.
+  </div>
+</div>
+
 <!-- ============================== TOPIC 3 ============================== -->
 <section id="t3">
   <h2 class="topic"><span class="num">03</span> Cache Memory — Mapping, Size, Replacement</h2>
@@ -587,7 +820,7 @@ High-order interleaving:
   <h3>3.1 What is Cache Memory?</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    <strong>Cache memory</strong> is a small, very fast SRAM buffer between the CPU and main memory that holds copies of recently used instructions and data. By exploiting locality of reference, it greatly reduces the average memory access time.
+    <strong>Cache memory</strong> — fast SRAM between CPU and RAM; exploits locality to cut average access time.
   </div>
 
   <h4>Hit, Miss, Hit-Ratio</h4>
@@ -602,11 +835,11 @@ High-order interleaving:
   <h3>3.2 Cache Memory Mapping Techniques</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    A <strong>mapping function</strong> decides which cache <em>line</em> a main-memory <em>block</em> can occupy. Three classical schemes exist: <strong>Direct</strong>, <strong>Fully Associative</strong>, and <strong>Set Associative</strong>.
+    <strong>Mapping function</strong> decides which cache <em>line</em> a block occupies: <strong>Direct</strong>, <strong>Fully Associative</strong>, or <strong>Set Associative</strong>.
   </div>
 
   <h4>Standard address split</h4>
-  <p>The CPU's main-memory address is broken into fields that depend on the mapping scheme:</p>
+  <p>Address fields vary by mapping scheme:</p>
   <table>
     <thead><tr><th>Scheme</th><th>Address Split</th></tr></thead>
     <tbody>
@@ -625,40 +858,50 @@ High-order interleaving:
   <div class="grid-2">
     <div class="card">
       <h5>Pros</h5>
-      Simple hardware (one comparator), fastest lookup, lowest cost.
+      <ul>
+        <li>One comparator — simple hardware</li>
+        <li>Fastest lookup, lowest cost</li>
+      </ul>
     </div>
     <div class="card">
       <h5>Cons</h5>
-      <em>Conflict misses</em> — two hot blocks that map to the same line keep evicting each other even if other lines are free.
+      <ul>
+        <li>Conflict misses: hot blocks evict each other</li>
+      </ul>
     </div>
   </div>
 
   <h4>(b) Fully Associative Mapping</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    A block from main memory can sit in <strong>any</strong> cache line. On lookup, the tag of every line is compared in parallel.
+    A block can sit in <strong>any</strong> cache line; all tags compared in parallel on lookup.
   </div>
   <div class="grid-2">
     <div class="card">
       <h5>Pros</h5>
-      No conflict misses; highest hit ratio for a given size.
+      <ul>
+        <li>No conflict misses</li>
+        <li>Highest hit ratio for given size</li>
+      </ul>
     </div>
     <div class="card">
       <h5>Cons</h5>
-      Needs as many comparators as lines — expensive, power-hungry, slower lookup.
+      <ul>
+        <li>Comparator per line — expensive and slow</li>
+      </ul>
     </div>
   </div>
 
   <h4>(c) Set-Associative Mapping</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    The cache is divided into <em>S</em> sets of <em>k</em> lines (called <strong>k-way set associative</strong>). A block maps to <strong>one set</strong> but can occupy any of the <em>k</em> lines inside it. Combines speed of direct with flexibility of associative.
+    <strong>k-way set associative</strong>: <em>S</em> sets of <em>k</em> lines; block maps to one set, occupies any line within it.
     <br><code>set index = (block address) mod (number of sets)</code>
   </div>
 
   <div class="box eg">
     <span class="label">Example</span>
-    Cache: 64 lines, 4-way associative ⇒ 16 sets. Block 100 maps to set <code>100 mod 16 = 4</code>, and may occupy any of the 4 lines in set 4.
+    64 lines, 4-way ⇒ 16 sets; block 100 → set <code>100 mod 16 = 4</code> (any of 4 lines).
   </div>
 
   <h4>Side-by-side</h4>
@@ -745,19 +988,19 @@ High-order interleaving:
   </div>
 
   <ul>
-    <li><strong>Too small:</strong> spatial locality wasted, more tag overhead, frequent misses.</li>
-    <li><strong>Sweet spot:</strong> spatial locality fully exploited, miss penalty manageable.</li>
-    <li><strong>Too large:</strong> fewer total blocks fit in cache ⇒ more conflict + capacity misses; bigger transfer time per miss (<em>cache pollution</em>).</li>
+    <li><strong>Too small:</strong> spatial locality wasted; frequent misses.</li>
+    <li><strong>Sweet spot:</strong> locality exploited; miss penalty manageable.</li>
+    <li><strong>Too large:</strong> fewer blocks fit; causes <em>cache pollution</em>.</li>
   </ul>
 
   <div class="box tip">
     <span class="label">Rule of thumb</span>
-    Block size grows with cache size. A 4 KB cache likes 16–32 B blocks; a 1 MB L2 happily uses 64–128 B blocks.
+    Block size scales with cache size (e.g., 4 KB → 16–32 B; 1 MB L2 → 64–128 B).
   </div>
 
   <hr>
   <h3>3.4 Cache Replacement Algorithms</h3>
-  <p>When the cache (or the chosen set) is full and a new block must come in, an old block is <strong>evicted</strong>. The choice of victim is made by a <em>replacement policy</em>. Direct mapping needs none — there's only one slot. Associative and set-associative caches need one.</p>
+  <p>On a miss into a full cache, a <em>replacement policy</em> picks which block to evict.</p>
 
   <table>
     <thead><tr><th>Algorithm</th><th>Policy</th><th>Pros</th><th>Cons</th></tr></thead>
@@ -807,8 +1050,8 @@ High-order interleaving:
 
   <h4>Write policies — bonus pair</h4>
   <ul>
-    <li><strong>Write-through</strong> — every write goes to cache <em>and</em> main memory. Simple, safe; high traffic.</li>
-    <li><strong>Write-back</strong> — write only to cache; mark line "dirty"; write to memory only on eviction. Less traffic; complex.</li>
+    <li><strong>Write-through</strong> — writes to cache <em>and</em> memory simultaneously; simple, high traffic.</li>
+    <li><strong>Write-back</strong> — writes only to cache; dirty line flushed on eviction; lower traffic.</li>
   </ul>
 
   <div class="quiz">
@@ -838,7 +1081,7 @@ High-order interleaving:
   <h3>4.1 I/O Device Interface</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    The <strong>I/O interface</strong> (also called I/O module or controller) is the hardware that sits between an external device and the system bus. It hides the device's electrical and timing peculiarities so the CPU can treat every device through a uniform set of registers.
+    <strong>I/O interface</strong> (I/O module/controller) — hardware bridge between a device and the system bus, exposing uniform CPU-facing registers.
   </div>
 
   <h4>Why we need an interface</h4>
@@ -852,10 +1095,79 @@ High-order interleaving:
   <h4>Internal structure of an interface</h4>
   <div class="diagram">
     <div class="diagram-title">I/O Interface — Internal Structure</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250911165552577923/iO_iNTERFACE.png"
-         alt="I/O Interface internal structure: System Bus connects to interface containing Data Register, Status Register, Control Register, Address Decoder, and Control Logic, which connects to the Device"
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
+    <svg viewBox="0 0 820 400" role="img" aria-label="I/O interface internal structure: System bus connects to interface containing Data Register, Status Register, Control Register, Address Decoder, and Control Logic, which connects to the I/O device." style="max-width:100%; height:auto; display:block; margin:0 auto;">
+      <defs>
+        <marker id="arrIOIfaceV2" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+
+      <!-- Row 1: System Bus (y=20 to y=90) -->
+      <rect x="40" y="20" width="740" height="70" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="410" y="38" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" fill="#1a2233" text-anchor="middle">SYSTEM BUS</text>
+      <!-- Address Bus sub-rect -->
+      <rect x="55" y="46" width="200" height="32" rx="4" fill="#ffffff" stroke="#1f6feb" stroke-width="1"/>
+      <text x="155" y="67" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233" text-anchor="middle">Address Bus</text>
+      <!-- Data Bus sub-rect -->
+      <rect x="305" y="46" width="210" height="32" rx="4" fill="#ffffff" stroke="#1f6feb" stroke-width="1"/>
+      <text x="410" y="67" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233" text-anchor="middle">Data Bus</text>
+      <!-- Control Bus sub-rect -->
+      <rect x="565" y="46" width="200" height="32" rx="4" fill="#ffffff" stroke="#1f6feb" stroke-width="1"/>
+      <text x="665" y="67" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233" text-anchor="middle">Control Bus</text>
+
+      <!-- Connectors (y=90 to y=130) -->
+      <!-- addr arrows at x=150/160 -->
+      <line x1="150" y1="90" x2="150" y2="126" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrIOIfaceV2)"/>
+      <line x1="161" y1="128" x2="161" y2="92" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrIOIfaceV2)"/>
+      <text x="174" y="113" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">addr ↕</text>
+      <!-- data arrows at x=405/415 -->
+      <line x1="405" y1="90" x2="405" y2="126" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrIOIfaceV2)"/>
+      <line x1="416" y1="128" x2="416" y2="92" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrIOIfaceV2)"/>
+      <text x="429" y="113" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">data ↕</text>
+      <!-- ctrl arrows at x=660/670 -->
+      <line x1="660" y1="90" x2="660" y2="126" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrIOIfaceV2)"/>
+      <line x1="671" y1="128" x2="671" y2="92" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrIOIfaceV2)"/>
+      <text x="684" y="113" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">ctrl ↕</text>
+
+      <!-- Row 2: I/O Interface (y=130 to y=270) -->
+      <rect x="40" y="130" width="740" height="140" rx="8" fill="#fff5e1" stroke="#5a6577" stroke-width="2"/>
+      <text x="410" y="152" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="bold" fill="#1a2233" text-anchor="middle">I/O INTERFACE</text>
+      <!-- DR box: x=52, w=120 -->
+      <rect x="52" y="162" width="120" height="90" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="112" y="194" font-family="monospace" font-size="14" font-weight="bold" fill="#1a2233" text-anchor="middle">DR</text>
+      <text x="112" y="216" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">Data</text>
+      <text x="112" y="230" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">Register</text>
+      <!-- SR box: x=184, w=120 -->
+      <rect x="184" y="162" width="120" height="90" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="244" y="194" font-family="monospace" font-size="14" font-weight="bold" fill="#1a2233" text-anchor="middle">SR</text>
+      <text x="244" y="216" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">Status</text>
+      <text x="244" y="230" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">Register</text>
+      <!-- CR box: x=316, w=120 -->
+      <rect x="316" y="162" width="120" height="90" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="376" y="194" font-family="monospace" font-size="14" font-weight="bold" fill="#1a2233" text-anchor="middle">CR</text>
+      <text x="376" y="216" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">Control</text>
+      <text x="376" y="230" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">Register</text>
+      <!-- Addr Decoder box: x=448, w=140 -->
+      <rect x="448" y="162" width="140" height="90" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="518" y="194" font-family="monospace" font-size="13" font-weight="bold" fill="#1a2233" text-anchor="middle">AD</text>
+      <text x="518" y="216" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">Address</text>
+      <text x="518" y="230" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">Decoder</text>
+      <!-- Control Logic box: x=600, w=168 -->
+      <rect x="600" y="162" width="168" height="90" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="684" y="194" font-family="monospace" font-size="13" font-weight="bold" fill="#1a2233" text-anchor="middle">CL</text>
+      <text x="684" y="216" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">Control</text>
+      <text x="684" y="230" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">Logic</text>
+
+      <!-- Connectors (y=270 to y=320) -->
+      <line x1="405" y1="270" x2="405" y2="316" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrIOIfaceV2)"/>
+      <line x1="416" y1="318" x2="416" y2="272" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrIOIfaceV2)"/>
+      <text x="430" y="298" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">device-side signals</text>
+
+      <!-- Row 3: I/O Device (y=320 to y=380) -->
+      <rect x="220" y="320" width="380" height="58" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="410" y="346" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="bold" fill="#1a2233" text-anchor="middle">I/O DEVICE</text>
+      <text x="410" y="364" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">printer / disk / keyboard / monitor</text>
+    </svg>
     <div class="caption">Standard register layout the CPU uses to talk to any I/O device.</div>
   </div>
 
@@ -884,7 +1196,7 @@ High-order interleaving:
   <h3>4.3 Program-Controlled (Programmed / Polled) I/O</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    The CPU executes a tight loop that <strong>polls</strong> a device's status register until the device is ready, then transfers one word, then loops again. <em>Every</em> data byte travels through a CPU register.
+    CPU <strong>polls</strong> device status register in a tight loop; every byte travels through a CPU register.
   </div>
 
   <pre><code><span class="comment">// Polling loop pseudocode</span>
@@ -896,11 +1208,18 @@ store_to_memory(data);</code></pre>
   <div class="grid-2">
     <div class="card">
       <h5>Pros</h5>
-      Simplest hardware — no extra interrupt logic; deterministic timing.
+      <ul>
+        <li>Simplest hardware — no interrupt logic</li>
+        <li>Deterministic, predictable timing</li>
+      </ul>
     </div>
     <div class="card">
       <h5>Cons</h5>
-      CPU is <strong>100 % busy</strong> waiting; useless for slow devices; cannot multitask while waiting.
+      <ul>
+        <li>CPU is <strong>100% busy</strong> during wait</li>
+        <li>Wastes cycles on slow devices</li>
+        <li>Cannot multitask while polling</li>
+      </ul>
     </div>
   </div>
 
@@ -908,7 +1227,7 @@ store_to_memory(data);</code></pre>
   <h3>4.4 Interrupt-Driven I/O</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    The CPU starts the I/O operation, then continues with other work. When the device is ready, it raises an <strong>interrupt</strong> signal; the CPU finishes its current instruction, saves context, jumps to an <em>Interrupt Service Routine (ISR)</em> that performs the transfer, then returns to the original program.
+    CPU issues I/O, resumes other work; device raises <strong>interrupt</strong> when ready, CPU runs <em>ISR</em>, then returns.
   </div>
 
   <h4>Step-by-step</h4>
@@ -924,10 +1243,67 @@ store_to_memory(data);</code></pre>
 
   <div class="diagram">
     <div class="diagram-title">Interrupt-Driven I/O Timeline</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221111174234/InterruptdrivenIOcycle.png"
-         alt="Interrupt-Driven I/O Timeline: CPU runs other work during device busy phase, then handles ISR on interrupt signal"
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
+    <svg viewBox="0 0 900 320" role="img" aria-label="Interrupt-driven I/O timeline: CPU runs main program, issues start I/O, continues main program while device is busy, then handles ISR on interrupt, returns and resumes main program." font-family='"Segoe UI", sans-serif' style="max-width:100%; display:block; margin:0 auto;">
+      <defs>
+        <marker id="arrIntrIO" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#b42318"/>
+        </marker>
+        <marker id="arrIntrIOTime" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#5a6577"/>
+        </marker>
+      </defs>
+
+      <!-- Lane labels -->
+      <rect x="10" y="80" width="50" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="35" y="111" text-anchor="middle" font-size="12" font-weight="700" fill="#1a2233">CPU</text>
+
+      <rect x="10" y="180" width="50" height="50" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="35" y="211" text-anchor="middle" font-size="12" font-weight="700" fill="#1a2233">DEVICE</text>
+
+      <!-- Lane baselines (light guide lines) -->
+      <line x1="60" y1="105" x2="890" y2="105" stroke="#e3e7ee" stroke-width="1"/>
+      <line x1="60" y1="205" x2="890" y2="205" stroke="#e3e7ee" stroke-width="1"/>
+
+      <!-- CPU step 1: Main Program -->
+      <rect x="60" y="80" width="130" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="125" y="110" text-anchor="middle" font-size="11" fill="#1a2233">Main Program</text>
+
+      <!-- CPU step 2: Issue START I/O -->
+      <rect x="190" y="80" width="100" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="240" y="110" text-anchor="middle" font-size="11" fill="#1a2233">Issue START I/O</text>
+
+      <!-- CPU step 3: Main Program continues -->
+      <rect x="290" y="80" width="200" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="390" y="110" text-anchor="middle" font-size="11" fill="#1a2233">Main Program continues</text>
+
+      <!-- CPU step 4: Save Context (tiny amber) -->
+      <rect x="490" y="80" width="85" height="50" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="532" y="110" text-anchor="middle" font-size="11" fill="#1a2233">Save Context</text>
+
+      <!-- CPU step 5: ISR — transfer data -->
+      <rect x="575" y="80" width="130" height="50" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="640" y="110" text-anchor="middle" font-size="11" fill="#1a2233">ISR — transfer data</text>
+
+      <!-- CPU step 6: IRET -->
+      <rect x="705" y="80" width="45" height="50" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="727" y="110" text-anchor="middle" font-size="11" fill="#1a2233">IRET</text>
+
+      <!-- CPU step 7: Main Program resumes -->
+      <rect x="750" y="80" width="140" height="50" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="820" y="110" text-anchor="middle" font-size="11" fill="#1a2233">Main Program resumes</text>
+
+      <!-- Device lane: Device Busy block (overlaps CPU step 3) -->
+      <rect x="300" y="180" width="190" height="50" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="395" y="210" text-anchor="middle" font-size="11" fill="#1a2233">Device Busy / Doing I/O</text>
+
+      <!-- Interrupt arrow from end of Device Busy up to CPU step3/4 boundary -->
+      <line x1="490" y1="180" x2="490" y2="135" stroke="#b42318" stroke-width="2" marker-end="url(#arrIntrIO)"/>
+      <text x="498" y="160" font-size="11" font-weight="700" fill="#b42318">INT (interrupt request)</text>
+
+      <!-- Time axis -->
+      <line x1="50" y1="270" x2="880" y2="270" stroke="#5a6577" stroke-width="2" marker-end="url(#arrIntrIOTime)"/>
+      <text x="455" y="290" text-anchor="middle" font-size="12" font-style="italic" fill="#5a6577">time →</text>
+    </svg>
     <div class="caption">CPU runs unrelated work during device busy phase; an interrupt diverts it to the ISR only when the device is ready.</div>
   </div>
 
@@ -941,17 +1317,17 @@ store_to_memory(data);</code></pre>
 
   <div class="box tip">
     <span class="label">Maskable vs Non-Maskable</span>
-    <strong>Maskable</strong> interrupts can be disabled by clearing the interrupt-enable flag (CPU may ignore them). <strong>Non-Maskable Interrupts (NMI)</strong> — power failure, hardware faults — cannot be ignored.
+    <strong>Maskable</strong>: disabled via interrupt-enable flag; CPU may ignore them.<br><strong>NMI</strong> (power failure, hardware faults): cannot be ignored.
   </div>
 
   <div class="grid-2">
     <div class="card">
       <h5>Pros</h5>
-      CPU is free during the wait; supports multitasking; responsive.
+      <ul><li>CPU free during device wait</li><li>Supports multitasking</li><li>More responsive than polling</li></ul>
     </div>
     <div class="card">
       <h5>Cons</h5>
-      Each byte/word still passes through CPU; context-switch overhead per interrupt; not viable for high-rate devices like disks.
+      <ul><li>Data still flows through CPU</li><li>Context-switch overhead per interrupt</li><li>Not ideal for high-rate devices</li></ul>
     </div>
   </div>
 
@@ -959,7 +1335,8 @@ store_to_memory(data);</code></pre>
   <h3>4.5 Direct Memory Access (DMA)</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    A <strong>DMA controller</strong> is a dedicated hardware unit that transfers data directly between an I/O device and main memory <strong>without</strong> the CPU touching every word. The CPU just sets up source, destination, and count, then is interrupted only when the entire block is done.
+    <strong>DMA controller</strong> transfers data between I/O device and memory without CPU touching every word.
+    CPU sets source, destination, count; gets one interrupt when the block is done.
   </div>
 
   <h4>DMA controller registers</h4>
@@ -984,17 +1361,75 @@ store_to_memory(data);</code></pre>
   <ol>
     <li>CPU programs the DMA controller (memory address, count, direction).</li>
     <li>Device asserts <strong>DMA Request (DREQ)</strong>.</li>
-    <li>DMA asserts <strong>HOLD</strong> to the CPU; CPU releases the bus and replies <strong>HLDA</strong>.</li>
+    <li>DMA asserts <strong>HOLD</strong>; CPU releases bus, replies <strong>HLDA</strong>.</li>
     <li>DMA places address on address bus, generates RD/WR — data flows directly between device and memory.</li>
-    <li>When count = 0, DMA releases the bus and raises an <strong>interrupt</strong> to inform CPU.</li>
+    <li>Count = 0: DMA releases bus, raises <strong>interrupt</strong> to CPU.</li>
   </ol>
 
   <div class="diagram">
     <div class="diagram-title">DMA Controller Wiring</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250417112714089270/DMA_.webp"
-         alt="DMA Controller: CPU, DMA Controller, and Device interconnected with HOLD/HLDA and DREQ/DACK signals, data flows directly between memory and device"
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
+    <svg viewBox="0 -30 900 450" role="img" aria-label="DMA controller wiring: CPU, DMA controller, memory, and I/O device share the system bus. CPU and DMA exchange HOLD/HLDA. DMA and device exchange DREQ/DACK. Data flows directly between memory and device, bypassing the CPU. DMA raises INT on completion." xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto; display:block; margin:0 auto;">
+      <defs>
+        <marker id="arrDma" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/></marker>
+        <marker id="arrDmaWarn" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0, 10 5, 0 10" fill="#b54708"/></marker>
+        <marker id="arrDmaGood" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0, 10 5, 0 10" fill="#1a7f37"/></marker>
+        <marker id="arrDmaInk" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><polygon points="0 0, 10 5, 0 10" fill="#1a2233"/></marker>
+      </defs>
+
+      <!-- CPU box (brand) -->
+      <rect x="40" y="30" width="180" height="80" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="130" y="65" font-family="'Segoe UI', sans-serif" font-size="18" font-weight="700" fill="#1a2233" text-anchor="middle">CPU</text>
+      <text x="130" y="90" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">programs DMA, then runs</text>
+
+      <!-- DMA Controller (warn / amber) -->
+      <rect x="340" y="20" width="220" height="120" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="450" y="42" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#1a2233" text-anchor="middle">DMA Controller</text>
+      <rect x="354" y="55" width="192" height="22" rx="4" fill="#ffffff" stroke="#b54708" stroke-width="1"/>
+      <text x="450" y="71" font-family="monospace" font-size="11" fill="#1a2233" text-anchor="middle">Address Reg</text>
+      <rect x="354" y="82" width="192" height="22" rx="4" fill="#ffffff" stroke="#b54708" stroke-width="1"/>
+      <text x="450" y="98" font-family="monospace" font-size="11" fill="#1a2233" text-anchor="middle">Word Count Reg</text>
+      <rect x="354" y="109" width="192" height="22" rx="4" fill="#ffffff" stroke="#b54708" stroke-width="1"/>
+      <text x="450" y="125" font-family="monospace" font-size="11" fill="#1a2233" text-anchor="middle">Control Reg</text>
+
+      <!-- I/O Device (good / green) -->
+      <rect x="700" y="30" width="160" height="80" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="780" y="65" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#1a2233" text-anchor="middle">I/O Device</text>
+      <text x="780" y="90" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">disk / NIC / tape</text>
+
+      <!-- CPU <-> DMA signals -->
+      <line x1="220" y1="55" x2="340" y2="55" stroke="#b54708" stroke-width="2" marker-end="url(#arrDmaWarn)"/>
+      <text x="280" y="49" font-family="monospace" font-size="11" fill="#b54708" text-anchor="middle">HOLD</text>
+      <line x1="340" y1="90" x2="220" y2="90" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrDma)"/>
+      <text x="280" y="105" font-family="monospace" font-size="11" fill="#1f6feb" text-anchor="middle">HLDA</text>
+
+      <!-- DMA <-> Device signals -->
+      <line x1="700" y1="55" x2="560" y2="55" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrDmaGood)"/>
+      <text x="630" y="49" font-family="monospace" font-size="11" fill="#1a7f37" text-anchor="middle">DREQ</text>
+      <line x1="560" y1="90" x2="700" y2="90" stroke="#b54708" stroke-width="2" marker-end="url(#arrDmaWarn)"/>
+      <text x="630" y="105" font-family="monospace" font-size="11" fill="#b54708" text-anchor="middle">DACK</text>
+
+      <!-- System Bus -->
+      <rect x="40" y="180" width="820" height="36" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="450" y="203" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="#1a2233" text-anchor="middle">SYSTEM BUS  (Address / Data / Control)</text>
+
+      <!-- Bus connectors: CPU, DMA, Memory tap into bus -->
+      <line x1="130" y1="110" x2="130" y2="180" stroke="#5a6577" stroke-width="2"/>
+      <line x1="450" y1="140" x2="450" y2="180" stroke="#5a6577" stroke-width="2"/>
+      <line x1="130" y1="216" x2="130" y2="260" stroke="#5a6577" stroke-width="2"/>
+
+      <!-- Memory (brand) -->
+      <rect x="40" y="260" width="180" height="70" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="130" y="290" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#1a2233" text-anchor="middle">Memory</text>
+      <text x="130" y="312" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" text-anchor="middle">main RAM</text>
+
+      <!-- Memory <-> Device direct dashed arrow (bypasses CPU) -->
+      <path d="M 220 295 C 450 380, 700 380, 780 330" stroke="#b42318" stroke-width="3" stroke-dasharray="8 5" fill="none" marker-end="url(#arrDmaWarn)"/>
+      <text x="500" y="370" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="700" fill="#b42318" text-anchor="middle">DATA  (direct, bypasses CPU)</text>
+
+      <!-- INT (done) thin arrow from DMA back to CPU -->
+      <path d="M 360 30 C 320 0, 240 0, 200 30" stroke="#1a2233" stroke-width="1.5" fill="none" marker-end="url(#arrDmaInk)"/>
+      <text x="280" y="14" font-family="monospace" font-size="11" fill="#1a2233" text-anchor="middle">INT (done)</text>
+    </svg>
     <div class="caption">DMA arbitrates the bus with HOLD/HLDA, hand-shakes with the device via DREQ/DACK, and moves data straight between memory and device.</div>
   </div>
 
@@ -1033,12 +1468,73 @@ store_to_memory(data);</code></pre>
     <div class="answer"><strong>Cycle stealing</strong> moves one word per bus acquisition then releases the bus, letting CPU run. <strong>Burst</strong> mode transfers the entire block while holding the bus, starving the CPU until done.</div>
 
     <div class="q">Q4. What is an NMI? Why is it useful? <button class="reveal">Reveal</button></div>
-    <div class="answer">A <strong>Non-Maskable Interrupt</strong> cannot be disabled by software. It is reserved for catastrophic events such as power failure or unrecoverable hardware errors that must always be handled.</div>
+    <div class="answer"><strong>Non-Maskable Interrupt</strong>: cannot be disabled; reserved for catastrophic events like power failure or hardware errors.</div>
 
     <div class="q">Q5. Which I/O technique still needs the CPU to move every word but doesn't make it busy-wait? <button class="reveal">Reveal</button></div>
     <div class="answer"><strong>Interrupt-driven I/O</strong> — the CPU is free between interrupts, but each transfer still passes through a CPU register inside the ISR.</div>
   </div>
 </section>
+
+<!-- === EXAM TEMPLATES: Topic 4 === -->
+<div class="box tip" style="margin-top:28px;">
+  <span class="label">8-mark scoring template — I/O Device Interface</span>
+  <ul>
+    <li><strong>Definition</strong> — "hardware bridge between I/O device and system bus; exposes uniform CPU-facing registers" — 1 mark</li>
+    <li><strong>Why needed (4 reasons)</strong> — speed mismatch · data-format mismatch · signal-level mismatch · device variety — 1 mark</li>
+    <li><strong>4 registers</strong> — DR (Data Register), SR (Status Register), CR (Control Register), AD (Address Decoder) + Control Logic — 2 marks</li>
+    <li><strong>I/O interface block diagram</strong> — System Bus on top (Address/Data/Control) → I/O Interface box (DR, SR, CR, AD, CL) → I/O Device below — 2 marks</li>
+    <li><strong>Memory-Mapped vs Port-Mapped I/O table</strong> — address space, instructions, signals, pros, used by — 2 marks</li>
+  </ul>
+  <div class="box eg" style="margin-top:10px;">
+    <span class="label">Quick answer skeleton</span>
+    Def (1) → 4 reasons (1) → 4 registers (2) → block diagram (2) → MMIO vs PMIO table (2) = 8 marks.
+  </div>
+</div>
+
+<div class="box tip" style="margin-top:16px;">
+  <span class="label">8-mark scoring template — Interrupt-Driven I/O</span>
+  <ul>
+    <li><strong>Definition</strong> — "CPU issues I/O command, resumes other work; device raises INT when ready; CPU runs ISR, then returns" — 1 mark</li>
+    <li><strong>7 steps (must list all)</strong> — (1) issue START I/O · (2) CPU runs other program · (3) device asserts INT · (4) CPU saves PC+flags on stack · (5) CPU jumps to ISR via interrupt vector · (6) ISR moves data, clears interrupt, runs IRET · (7) CPU resumes interrupted program — 3 marks</li>
+    <li><strong>Timeline diagram</strong> — CPU lane (Main prog | START | Main prog | Save ctx | ISR | IRET | Resume) + Device lane (Busy) + INT arrow — 2 marks</li>
+    <li><strong>Multiple interrupt handling</strong> — Polling / Vectored / Daisy-chain / PIC (8259) — 1 mark</li>
+    <li><strong>Maskable vs NMI</strong> — maskable: can be disabled; NMI: power failure, cannot be ignored — 1 mark</li>
+  </ul>
+  <div class="box eg" style="margin-top:10px;">
+    <span class="label">Quick answer skeleton</span>
+    Def (1) → 7 steps (3) → timeline diagram (2) → multiple-interrupt handling (1) → NMI (1) = 8 marks.
+  </div>
+</div>
+
+<div class="box tip" style="margin-top:16px;">
+  <span class="label">8-mark scoring template — DMA (Direct Memory Access)</span>
+  <ul>
+    <li><strong>Definition</strong> — "DMA controller transfers data between I/O device and memory WITHOUT CPU touching every word; CPU gets one interrupt when block is done" — 1 mark</li>
+    <li><strong>DMA controller registers</strong> — Memory Address Register · Word Count Register · Control Register · Status Register — 1 mark</li>
+    <li><strong>5-step transfer process</strong> — (1) CPU programs DMA (addr, count, direction) · (2) device asserts DREQ · (3) DMA asserts HOLD; CPU releases bus, asserts HLDA · (4) DMA drives address + RD/WR; data flows device↔memory · (5) count=0 → DMA releases bus + raises INT — 2 marks</li>
+    <li><strong>DMA wiring block diagram</strong> — CPU ↔ DMA (HOLD/HLDA) · DMA ↔ Device (DREQ/DACK) · data path device→memory bypasses CPU — 2 marks</li>
+    <li><strong>3 transfer modes table</strong> — Burst (CPU starved) · Cycle-Stealing (one word/release) · Transparent (CPU idle cycles only) — 2 marks</li>
+  </ul>
+  <div class="box eg" style="margin-top:10px;">
+    <span class="label">Quick answer skeleton</span>
+    Def (1) → 4 DMA registers (1) → 5-step process (2) → wiring diagram with signals (2) → 3 modes table (2) = 8 marks.
+  </div>
+</div>
+
+<div class="box tip" style="margin-top:16px;">
+  <span class="label">8-mark scoring template — Programmed (Polled) I/O</span>
+  <ul>
+    <li><strong>Definition</strong> — "CPU polls device status register in a tight loop; every data byte passes through a CPU register" — 1 mark</li>
+    <li><strong>Polling pseudocode</strong> — while (status_reg.READY == 0) ; then data = data_reg; store_to_memory(data); — 1 mark</li>
+    <li><strong>Pros</strong> — simplest hardware (no interrupt logic) · deterministic timing — 1 mark</li>
+    <li><strong>Cons</strong> — CPU 100% busy during wait · wastes cycles on slow devices · cannot multitask — 2 marks</li>
+    <li><strong>Comparison table</strong> — Programmed vs Interrupt vs DMA: CPU per word, speed, hardware cost, best-for — 3 marks</li>
+  </ul>
+  <div class="box eg" style="margin-top:10px;">
+    <span class="label">Quick answer skeleton</span>
+    Def (1) → pseudocode (1) → pros (1) → cons (2) → 3-way comparison table (3) = 8 marks.
+  </div>
+</div>
 
 <!-- ============================== TOPIC 5 ============================== -->
 <section id="t5">
@@ -1062,27 +1558,64 @@ store_to_memory(data);</code></pre>
   <h3>5.2 Hardwired Control Unit</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    A <strong>hardwired control unit</strong> generates the control signals using <em>fixed combinational and sequential logic</em> — gates, decoders, flip-flops, and counters. Once fabricated, the wiring cannot be changed.
+    A <strong>hardwired control unit</strong> uses <em>fixed combinational/sequential logic</em> to generate control signals; wiring is permanent after fabrication.
   </div>
 
   <h4>Design steps</h4>
-  <ol>
-    <li>List all instructions and their micro-operations (<em>register transfers</em>).</li>
-    <li>Build a <strong>state diagram</strong> of the execution sequence.</li>
-    <li>For each control signal, write a Boolean function:
-      <br><code>signal = f(opcode, state, status flags)</code>
-    </li>
-    <li>Minimise the function (K-map, Q-M).</li>
-    <li>Implement with combinational logic + a state counter.</li>
-  </ol>
+  <ul>
+    <li>List instructions and their micro-operations.</li>
+    <li>Build a <strong>state diagram</strong> of execution sequence.</li>
+    <li>Write Boolean function: <code>signal = f(opcode, state, flags)</code></li>
+    <li>Minimise with K-map / Q-M.</li>
+    <li>Implement: combinational logic + state counter.</li>
+  </ul>
 
   <h4>Block diagram</h4>
   <div class="diagram">
     <div class="diagram-title">Hardwired Control Unit — Block Diagram</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/1-9.jpg"
-         alt="Hardwired Control Unit block diagram: Combinational Logic decodes opcode, flags, and state to generate control signals; a clocked state counter drives sequencing"
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
+    <svg viewBox="0 0 880 420" role="img" aria-label="Hardwired control unit: instruction register, status flags, and clock-driven state counter feed a combinational logic block which generates control signals — memory read/write, register select, ALU op, and bus drivers." style="max-width:100%; display:block; margin:0 auto;">
+      <defs>
+        <marker id="arrHwCu" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+      <rect x="20" y="40" width="230" height="60" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="135" y="65" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="#1a2233">IR (Instruction Register)</text>
+      <text x="135" y="86" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#5a6577">opcode field</text>
+      <rect x="20" y="130" width="230" height="60" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="135" y="155" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="bold" fill="#1a2233">Status Flags</text>
+      <text x="135" y="176" text-anchor="middle" font-family="monospace" font-size="12" fill="#5a6577">Z, C, N, V</text>
+      <rect x="20" y="220" width="230" height="80" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="135" y="245" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" font-weight="bold" fill="#1a2233">Clock + State Counter</text>
+      <text x="135" y="266" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#5a6577">timing signals</text>
+      <text x="135" y="286" text-anchor="middle" font-family="monospace" font-size="12" fill="#1a2233">T0, T1, T2, ...</text>
+      <rect x="20" y="335" width="170" height="65" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="105" y="355" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" font-weight="bold" fill="#1a2233">Clock</text>
+      <polyline points="35,390 50,390 50,372 70,372 70,390 90,390 90,372 110,372 110,390 130,390 130,372 150,372 150,390 170,390" fill="none" stroke="#1f6feb" stroke-width="2"/>
+      <line x1="105" y1="335" x2="105" y2="305" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrHwCu)"/>
+      <rect x="340" y="110" width="240" height="180" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="460" y="180" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="bold" fill="#1a2233">Combinational</text>
+      <text x="460" y="202" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="16" font-weight="bold" fill="#1a2233">Logic Circuit</text>
+      <text x="460" y="232" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#5a6577">(decoder +</text>
+      <text x="460" y="250" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#5a6577">Boolean equations)</text>
+      <line x1="250" y1="70"  x2="340" y2="150" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrHwCu)"/>
+      <line x1="250" y1="160" x2="340" y2="195" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrHwCu)"/>
+      <line x1="250" y1="260" x2="340" y2="245" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrHwCu)"/>
+      <line x1="580" y1="140" x2="660" y2="121" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrHwCu)"/>
+      <line x1="580" y1="180" x2="660" y2="171" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrHwCu)"/>
+      <line x1="580" y1="220" x2="660" y2="221" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrHwCu)"/>
+      <line x1="580" y1="260" x2="660" y2="271" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrHwCu)"/>
+      <path d="M 672 95 Q 662 95 662 110 L 662 285 Q 662 300 672 300" fill="none" stroke="#1a2233" stroke-width="2"/>
+      <text x="775" y="80" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" font-weight="bold" fill="#1a2233">CONTROL SIGNALS</text>
+      <rect x="685" y="105" width="180" height="32" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="775" y="126" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233">Memory R/W</text>
+      <rect x="685" y="155" width="180" height="32" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="775" y="176" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233">Register select / enable</text>
+      <rect x="685" y="205" width="180" height="32" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="775" y="226" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233">ALU op select</text>
+      <rect x="685" y="255" width="180" height="32" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="775" y="276" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233">Bus drivers / latches</text>
+    </svg>
     <div class="caption">Fixed combinational logic decodes opcode + state + flags into control signals; a clocked state counter drives sequencing.</div>
   </div>
 
@@ -1109,7 +1642,7 @@ store_to_memory(data);</code></pre>
   <h3>5.3 Microprogrammed Control Unit</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    A <strong>microprogrammed</strong> control unit stores the control signals as <em>microinstructions</em> in a special memory called the <strong>Control Memory (Control Store / ROM)</strong>. Executing an instruction means stepping through its microprogram — almost like running a tiny program inside the CPU.
+    A <strong>microprogrammed</strong> CU stores control signals as <em>microinstructions</em> in <strong>Control Memory (ROM/PROM)</strong>; executing an instruction steps through its stored microprogram.
   </div>
 
   <h4>Key components</h4>
@@ -1123,17 +1656,98 @@ store_to_memory(data);</code></pre>
   <h4>Block diagram</h4>
   <div class="diagram">
     <div class="diagram-title">Microprogrammed Control Unit</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/2-9.jpg"
-         alt="Microprogrammed Control Unit: CAR addresses Control Memory ROM, fetched microinstruction in CBR is decoded into control signals while sequencer chooses the next address"
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
+    <svg viewBox="0 0 1000 500" role="img" aria-label="Microprogrammed control unit: Control Address Register addresses Control Memory ROM, fetched microinstruction goes into Control Buffer Register, decoder produces control signals, sequencer chooses next CAR using branch field, opcode mapping, and status flags." xmlns="http://www.w3.org/2000/svg" style="max-width:100%; display:block; margin:0 auto;">
+      <defs>
+        <marker id="arrMicroCu" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+
+      <!-- CAR (top-left) -->
+      <rect x="50" y="50" width="160" height="55" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="130" y="75" text-anchor="middle" font-family="monospace" font-size="15" fill="#1a2233" font-weight="bold">CAR / µPC</text>
+      <text x="130" y="95" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">Control Address Reg.</text>
+
+      <!-- Arrow CAR -> Control Memory -->
+      <line x1="210" y1="77" x2="318" y2="77" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+      <text x="264" y="68" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">address</text>
+
+      <!-- Control Memory (central tall box) -->
+      <rect x="320" y="30" width="240" height="160" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="440" y="70" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" fill="#1a2233" font-weight="bold">CONTROL MEMORY</text>
+      <text x="440" y="90" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233">(ROM / PROM)</text>
+      <text x="440" y="115" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">stores microinstructions</text>
+      <text x="440" y="138" text-anchor="middle" font-family="monospace" font-size="11" fill="#5a6577">µI[0], µI[1], … µI[n-1]</text>
+      <text x="440" y="160" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">addressed by CAR</text>
+
+      <!-- Arrow Control Memory -> CBR (down) -->
+      <line x1="440" y1="190" x2="440" y2="238" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+      <text x="487" y="218" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">µinstruction</text>
+
+      <!-- CBR -->
+      <rect x="310" y="240" width="260" height="55" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="440" y="265" text-anchor="middle" font-family="monospace" font-size="15" fill="#1a2233" font-weight="bold">CBR</text>
+      <text x="440" y="284" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">Control Buffer Register</text>
+
+      <!-- Arrow CBR -> Decoder -->
+      <line x1="570" y1="267" x2="638" y2="267" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+
+      <!-- Decoder -->
+      <rect x="640" y="240" width="160" height="55" rx="8" fill="#ffffff" stroke="#5a6577" stroke-width="2"/>
+      <text x="720" y="265" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="#1a2233" font-weight="bold">Decoder</text>
+      <text x="720" y="284" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">field splitter</text>
+
+      <!-- Control signals fan-out (right) -->
+      <line x1="800" y1="252" x2="875" y2="232" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+      <line x1="800" y1="267" x2="875" y2="267" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+      <line x1="800" y1="282" x2="875" y2="302" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+      <text x="882" y="235" font-family="'Segoe UI', sans-serif" font-size="11" fill="#1a2233">C0</text>
+      <text x="882" y="271" font-family="'Segoe UI', sans-serif" font-size="11" fill="#1a2233">C1</text>
+      <text x="882" y="306" font-family="'Segoe UI', sans-serif" font-size="11" fill="#1a2233">Cn</text>
+      <text x="950" y="270" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" transform="rotate(-90 950 270)">control signals</text>
+
+      <!-- Sequencer (bottom-left area, warn/amber) — well separated from CBR -->
+      <rect x="220" y="360" width="200" height="70" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="320" y="388" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" fill="#1a2233" font-weight="bold">Sequencer</text>
+      <text x="320" y="407" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">selects next µaddress</text>
+      <text x="320" y="422" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">(next / branch / map)</text>
+
+      <!-- Mapping ROM -->
+      <rect x="480" y="370" width="160" height="55" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="560" y="395" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="#1a2233" font-weight="bold">Mapping ROM</text>
+      <text x="560" y="414" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">opcode → µaddr</text>
+
+      <!-- Opcode from IR: label at x=730 (clear of Mapping ROM right edge x=640), arrow ends at x=642 -->
+      <line x1="728" y1="397" x2="642" y2="397" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+      <text x="732" y="393" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">Opcode</text>
+      <text x="732" y="409" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">from IR</text>
+
+      <!-- Mapping ROM -> Sequencer (horizontal, left) -->
+      <line x1="480" y1="397" x2="422" y2="397" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+
+      <!-- Branch field: from CBR bottom-left area (x=380,y=295) down to Sequencer top (x=330,y=360) -->
+      <!-- label placed to the RIGHT of the arrow with a 40px gap from both boxes -->
+      <line x1="380" y1="295" x2="340" y2="358" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+      <text x="396" y="335" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">branch field</text>
+
+      <!-- Status flags: arrow from x=115,y=400 to Sequencer left edge (x=220,y=400) -->
+      <!-- Labels at x=20, well LEFT of arrow start — no overlap with loopback line at x=20 (different y) -->
+      <line x1="115" y1="400" x2="218" y2="400" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+      <text x="20" y="396" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">Status flags</text>
+      <text x="20" y="412" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">(Z,N,C,V)</text>
+
+      <!-- Loopback Sequencer -> CAR: LEFT to x=20, UP to y=77, RIGHT to CAR (x=50,y=77) -->
+      <!-- Route exits Sequencer left at (x=220,y=385), goes left to x=20, up to y=77, right to x=48 -->
+      <polyline points="220,385 20,385 20,77 48,77" fill="none" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroCu)"/>
+      <text x="12" y="240" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" transform="rotate(-90 12 240)">next µ-addr</text>
+    </svg>
     <div class="caption">CAR addresses Control Memory; the fetched microinstruction (CBR) is decoded into control signals while the sequencer chooses the next address using flags or branch fields.</div>
   </div>
 
   <h4>Microinstruction formats</h4>
   <ul>
-    <li><strong>Horizontal microinstruction</strong> — one bit per control signal. Wide, fast (no decoding), high parallelism, larger ROM.</li>
-    <li><strong>Vertical microinstruction</strong> — encoded fields (e.g. 3 bits = 1 of 8 ALU ops). Narrow, slower (needs decoder), less parallelism, smaller ROM.</li>
+    <li><strong>Horizontal</strong> — 1 bit per signal; wide, fast, high parallelism.</li>
+    <li><strong>Vertical</strong> — encoded fields; narrow, slower, needs decoder.</li>
   </ul>
 
   <table>
@@ -1151,9 +1765,9 @@ store_to_memory(data);</code></pre>
     <div class="card">
       <h5>Pros</h5>
       <ul style="margin:6px 0 0 18px;padding:0;">
-        <li><strong>Flexible</strong> — modify ROM to add/change instructions</li>
-        <li>Easier to design large CISC ISAs (e.g. x86)</li>
-        <li>Same hardware can implement different ISAs</li>
+        <li><strong>Flexible</strong> — modify ROM for new instructions</li>
+        <li>Suits large CISC ISAs (e.g. x86)</li>
+        <li>Same hardware, multiple ISAs</li>
         <li>Easier to debug</li>
       </ul>
     </div>
@@ -1184,22 +1798,22 @@ store_to_memory(data);</code></pre>
 
   <div class="mnemonic">
     <strong>Memory hook</strong>
-    <strong style="color:var(--ink);font-size:14px;">"Hardwired = Hard &amp; Fast · Micro = Modifiable &amp; Mellow"</strong> — hardwired is faster but inflexible; microprogrammed is slower but easy to change.
+    <strong style="color:var(--ink);font-size:14px;">"Hardwired = Hard &amp; Fast · Micro = Modifiable &amp; Mellow"</strong>
   </div>
 
   <div class="quiz">
     <h4>Quick Quiz — Topic 5</h4>
     <div class="q">Q1. Why is hardwired control faster than microprogrammed? <button class="reveal">Reveal</button></div>
-    <div class="answer">It generates control signals through pure gate delays. Microprogrammed CUs must additionally fetch a microinstruction from control ROM each clock — adding access latency.</div>
+    <div class="answer">Hardwired uses pure gate logic; microprogrammed must fetch a microinstruction from ROM each clock, adding latency.</div>
 
     <div class="q">Q2. Which control style suits CISC and why? <button class="reveal">Reveal</button></div>
-    <div class="answer"><strong>Microprogrammed.</strong> CISC has many complex variable-length instructions; encoding their micro-sequences in ROM is much easier than burning everything into hardwired logic.</div>
+    <div class="answer"><strong>Microprogrammed</strong> — CISC's many complex instructions are easier to encode in ROM than in hardwired gates.</div>
 
     <div class="q">Q3. Compare horizontal vs vertical microinstructions in one line. <button class="reveal">Reveal</button></div>
     <div class="answer"><strong>Horizontal</strong> = one bit per control signal — wide, fast, parallel. <strong>Vertical</strong> = encoded fields — narrow, slower, needs a decoder.</div>
 
     <div class="q">Q4. What does the CAR (Control Address Register) do? <button class="reveal">Reveal</button></div>
-    <div class="answer">It holds the address of the <em>next</em> microinstruction to fetch from control memory — analogous to the program counter, but for microcode.</div>
+    <div class="answer">CAR holds the address of the next microinstruction — the µPC of control memory.</div>
   </div>
 </section>
 
@@ -1211,7 +1825,10 @@ store_to_memory(data);</code></pre>
   <h3>6.1 What is Pipelining?</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    <strong>Pipelining</strong> is a technique where an instruction's execution is split into <em>k</em> stages, and multiple instructions are processed concurrently, each in a different stage. Throughput approaches one instruction per clock cycle (CPI ≈ 1).
+    <ul>
+      <li>Splits each instruction into <em>k</em> stages.</li>
+      <li>Multiple instructions overlap; CPI ≈ 1 at steady state.</li>
+    </ul>
   </div>
 
   <h4>Classical 5-stage RISC pipeline</h4>
@@ -1229,11 +1846,79 @@ store_to_memory(data);</code></pre>
   <h4>Time-space diagram</h4>
   <div class="diagram">
     <div class="diagram-title">5-Stage Pipeline — Time-Space Diagram</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20251110154035499096/pipelined.webp"
-         alt="5-Stage Pipeline time-space diagram: each instruction occupies staggered IF/ID/EX/MEM/WB stages; once full, one instruction completes per cycle"
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
-    <div class="caption">Each instruction enters one cycle later, occupying staggered stages; once the pipeline is full one instruction completes every cycle.</div>
+    <svg viewBox="0 0 900 320" role="img" aria-label="5-stage pipeline time-space diagram: instructions I1 through I4 execute IF, ID, EX, MEM, WB stages in staggered fashion across 8 cycles. After cycle 5, one instruction completes every cycle in steady state." xmlns="http://www.w3.org/2000/svg" style="max-width:100%; display:block; margin:0 auto;">
+      <defs>
+        <marker id="arrPipe" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+      <g font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233" text-anchor="middle">
+        <text x="65" y="44" font-weight="600">Instr \ Cycle</text>
+        <text x="162.5" y="44" font-weight="600">Cycle 1</text>
+        <text x="247.5" y="44" font-weight="600">Cycle 2</text>
+        <text x="332.5" y="44" font-weight="600">Cycle 3</text>
+        <text x="417.5" y="44" font-weight="600">Cycle 4</text>
+        <text x="502.5" y="44" font-weight="600">Cycle 5</text>
+        <text x="587.5" y="44" font-weight="600">Cycle 6</text>
+        <text x="672.5" y="44" font-weight="600">Cycle 7</text>
+        <text x="757.5" y="44" font-weight="600">Cycle 8</text>
+      </g>
+      <g font-family="'Segoe UI', sans-serif" font-size="13" fill="#1a2233" font-weight="700" text-anchor="middle">
+        <text x="65" y="95">I1</text>
+        <text x="65" y="135">I2</text>
+        <text x="65" y="175">I3</text>
+        <text x="65" y="215">I4</text>
+      </g>
+      <g>
+        <rect x="120" y="70" width="85" height="40" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+        <rect x="205" y="70" width="85" height="40" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+        <rect x="290" y="70" width="85" height="40" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+        <rect x="375" y="70" width="85" height="40" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+        <rect x="460" y="70" width="85" height="40" rx="8" fill="#eef0f3" stroke="#5a6577" stroke-width="2"/>
+        <rect x="205" y="110" width="85" height="40" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+        <rect x="290" y="110" width="85" height="40" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+        <rect x="375" y="110" width="85" height="40" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+        <rect x="460" y="110" width="85" height="40" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+        <rect x="545" y="110" width="85" height="40" rx="8" fill="#eef0f3" stroke="#5a6577" stroke-width="2"/>
+        <rect x="290" y="150" width="85" height="40" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+        <rect x="375" y="150" width="85" height="40" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+        <rect x="460" y="150" width="85" height="40" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+        <rect x="545" y="150" width="85" height="40" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+        <rect x="630" y="150" width="85" height="40" rx="8" fill="#eef0f3" stroke="#5a6577" stroke-width="2"/>
+        <rect x="375" y="190" width="85" height="40" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+        <rect x="460" y="190" width="85" height="40" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+        <rect x="545" y="190" width="85" height="40" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+        <rect x="630" y="190" width="85" height="40" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+        <rect x="715" y="190" width="85" height="40" rx="8" fill="#eef0f3" stroke="#5a6577" stroke-width="2"/>
+      </g>
+      <g font-family="monospace" font-size="14" font-weight="700" text-anchor="middle" dominant-baseline="middle">
+        <text x="162.5" y="90" fill="#1f6feb">IF</text>
+        <text x="247.5" y="90" fill="#1a7f37">ID</text>
+        <text x="332.5" y="90" fill="#b54708">EX</text>
+        <text x="417.5" y="90" fill="#b42318">MEM</text>
+        <text x="502.5" y="90" fill="#1a2233">WB</text>
+        <text x="247.5" y="130" fill="#1f6feb">IF</text>
+        <text x="332.5" y="130" fill="#1a7f37">ID</text>
+        <text x="417.5" y="130" fill="#b54708">EX</text>
+        <text x="502.5" y="130" fill="#b42318">MEM</text>
+        <text x="587.5" y="130" fill="#1a2233">WB</text>
+        <text x="332.5" y="170" fill="#1f6feb">IF</text>
+        <text x="417.5" y="170" fill="#1a7f37">ID</text>
+        <text x="502.5" y="170" fill="#b54708">EX</text>
+        <text x="587.5" y="170" fill="#b42318">MEM</text>
+        <text x="672.5" y="170" fill="#1a2233">WB</text>
+        <text x="417.5" y="210" fill="#1f6feb">IF</text>
+        <text x="502.5" y="210" fill="#1a7f37">ID</text>
+        <text x="587.5" y="210" fill="#b54708">EX</text>
+        <text x="672.5" y="210" fill="#b42318">MEM</text>
+        <text x="757.5" y="210" fill="#1a2233">WB</text>
+      </g>
+      <line x1="545" y1="58" x2="545" y2="248" stroke="#1f6feb" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="545" y="262" font-family="'Segoe UI', sans-serif" font-size="11" fill="#1f6feb" text-anchor="middle" font-style="italic">pipeline full</text>
+      <line x1="140" y1="290" x2="780" y2="290" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrPipe)"/>
+      <text x="460" y="283" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233" text-anchor="middle" font-weight="600">After cycle 5, one instruction completes EVERY cycle (steady-state CPI = 1)</text>
+    </svg>
+    <div class="caption">Staggered stages; one instruction completes per cycle once full.</div>
   </div>
 
   <h4>Speed-up &amp; throughput</h4>
@@ -1245,15 +1930,17 @@ store_to_memory(data);</code></pre>
 
   <div class="box eg">
     <span class="label">Example</span>
-    5-stage pipeline, 100 instructions, t = 1 ns.<br>
-    Non-pipelined: 100 × 5 = <strong>500 ns</strong>. Pipelined: 5 + 99 = <strong>104 ns</strong>. Speed-up ≈ <strong>4.81×</strong>.
+    <ul>
+      <li>5-stage, 100 instructions, t = 1 ns.</li>
+      <li>Non-pipelined: <strong>500 ns</strong>; pipelined: <strong>104 ns</strong>; S ≈ <strong>4.81×</strong>.</li>
+    </ul>
   </div>
 
   <hr>
   <h3>6.2 Pipeline Hazards — when the line jams</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    A <strong>pipeline hazard</strong> is any condition that prevents the next instruction from executing in the next clock cycle. Hazards force <em>stalls (bubbles)</em>, reducing throughput.
+    A <strong>pipeline hazard</strong> prevents the next instruction from executing in the next clock cycle, forcing <em>stalls (bubbles)</em> that reduce throughput.
   </div>
 
   <h4>The three families of hazards</h4>
@@ -1294,7 +1981,7 @@ store_to_memory(data);</code></pre>
   <h4>(c) Control (Branch) Hazard</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    Occurs when a branch instruction changes the PC; instructions already fetched into the pipeline behind the branch may be wrong and have to be discarded.
+    Occurs when a branch changes the PC; already-fetched instructions behind the branch may be wrong and must be discarded.
   </div>
   <ul>
     <li><strong>Stall until branch resolved</strong> — simple but slow (2-3 bubble cycles).</li>
@@ -1316,12 +2003,12 @@ store_to_memory(data);</code></pre>
 
   <div class="mnemonic">
     <strong>Memory hook — three hazards</strong>
-    <strong style="color:var(--ink);font-size:14px;">"S D C — Structure, Data, Control"</strong>. For data hazards remember <strong>RAW · WAR · WAW</strong> ("read-after-write" is the only real dependency; the other two arise only with reordering).
+    <strong style="color:var(--ink);font-size:14px;">"S D C — Structure, Data, Control"</strong>. Data sub-types: <strong>RAW · WAR · WAW</strong> (only RAW is a true dependency).
   </div>
 
   <div class="box bad">
     <span class="label">Pitfall</span>
-    Deeper pipelines (e.g. Pentium 4 had 20+ stages) win on clock frequency but pay a much higher cost per branch mis-predict — the entire pipeline must be flushed. Modern designs balance depth with prediction quality.
+    Deeper pipelines win on clock frequency but pay a much higher flush cost per branch mis-predict.
   </div>
 
   <div class="quiz">
@@ -1330,7 +2017,7 @@ store_to_memory(data);</code></pre>
     <div class="answer">S = (50·4) / (4 + 50 − 1) = 200 / 53 ≈ <strong>3.77×</strong>.</div>
 
     <div class="q">Q2. What hazard does the following cause? <code>LW R1, 0(R2); ADD R3, R1, R4</code> <button class="reveal">Reveal</button></div>
-    <div class="answer">A <strong>RAW data hazard</strong> (load-use). The ADD needs R1 before LW's MEM stage finishes — usually requires one bubble even with forwarding.</div>
+    <div class="answer">A <strong>RAW (load-use) hazard</strong> — ADD needs R1 before LW's MEM stage finishes; requires one bubble even with forwarding.</div>
 
     <div class="q">Q3. How does a Harvard architecture eliminate one structural hazard? <button class="reveal">Reveal</button></div>
     <div class="answer">By providing separate instruction and data memories/caches, IF and MEM can both access "memory" in the same cycle without conflict.</div>
@@ -1339,19 +2026,50 @@ store_to_memory(data);</code></pre>
     <div class="answer">The instruction position immediately after a branch that is <em>always executed</em>, regardless of whether the branch is taken — used by some RISC ISAs (e.g. classic MIPS) to hide branch latency.</div>
 
     <div class="q">Q5. Which of WAR / WAW / RAW is a "true" data dependency? <button class="reveal">Reveal</button></div>
-    <div class="answer">Only <strong>RAW (Read After Write)</strong>. WAR and WAW are <em>name dependencies</em> introduced by re-using register names; they can be removed by register renaming.</div>
+    <div class="answer">Only <strong>RAW (Read After Write)</strong> — WAR and WAW are <em>name dependencies</em> removable by register renaming.</div>
   </div>
 </section>
+
+<!-- === EXAM TEMPLATES: Topic 6 === -->
+<div class="box tip" style="margin-top:28px;">
+  <span class="label">8-mark scoring template — Pipelining</span>
+  <ul>
+    <li><strong>Definition</strong> — "overlaps execution of multiple instructions like an assembly line; splits each instruction into k stages; CPI → 1 at steady state" — 1 mark</li>
+    <li><strong>5 stages table</strong> — IF (Fetch) · ID (Decode/Reg read) · EX (ALU / addr calc) · MEM (load/store) · WB (write back) — 1 mark</li>
+    <li><strong>Time-space diagram</strong> — show I1–I4 staggered across 8 cycles; pipeline-full marker at cycle 5; label "1 instruction completes every cycle at steady state" — 3 marks</li>
+    <li><strong>Speed-up formula</strong> — S = (n·k) / (k + n − 1) → k as n → ∞ — 1 mark</li>
+    <li><strong>Numeric example</strong> — k=5, n=100, t=1 ns → non-pipelined: 500 ns; pipelined: 104 ns; S ≈ 4.81× — 2 marks</li>
+  </ul>
+  <div class="box eg" style="margin-top:10px;">
+    <span class="label">Quick answer skeleton</span>
+    Def (1) → 5-stage table (1) → time-space diagram (3) → formula (1) → numeric example (2) = 8 marks.
+  </div>
+</div>
+
+<div class="box tip" style="margin-top:16px;">
+  <span class="label">8-mark scoring template — Pipeline Hazards and Types</span>
+  <ul>
+    <li><strong>Definition</strong> — "condition that prevents the next instruction from executing in the next clock cycle; forces stalls (bubbles) reducing throughput" — 1 mark</li>
+    <li><strong>Structural hazard</strong> — resource conflict (single memory for IF + MEM); cure: duplicate resource / separate I-cache & D-cache (Harvard) / stall — 2 marks</li>
+    <li><strong>Data hazard (RAW / WAR / WAW)</strong> — RAW = true dependency (I1 writes, I2 reads); WAR = anti-dependency; WAW = output dependency; cures: forwarding / stalling / compiler scheduling; only RAW requires a stall — 2 marks</li>
+    <li><strong>Control (branch) hazard</strong> — branch changes PC; already-fetched instructions may be wrong; cures: branch prediction / delayed branch / flush / BTB — 2 marks</li>
+    <li><strong>Summary table</strong> — Hazard | Cause | Cure (3 rows) — 1 mark</li>
+  </ul>
+  <div class="box eg" style="margin-top:10px;">
+    <span class="label">Quick answer skeleton</span>
+    Def (1) → Structural hazard + cure (2) → Data hazard RAW/WAR/WAW + cure (2) → Control hazard + cure (2) → summary table (1) = 8 marks. <strong>Mnemonic:</strong> "SDC — Structure, Data, Control"
+  </div>
+</div>
 
 <!-- ============================== TOPIC 7 ============================== -->
 <section id="t7">
   <h2 class="topic"><span class="num">07</span> x86 Architecture &amp; Parallel Processors</h2>
-  <p class="lead">The <strong>x86</strong> family (Intel 8086 → modern Core / Xeon) is the canonical CISC architecture and the most important real-world ISA. <strong>Parallel processors</strong> push beyond a single CPU — multiple processing elements working together — and are classified by Flynn's famous taxonomy.</p>
+  <p class="lead">x86 = canonical CISC ISA (Intel 8086 → modern Core/Xeon); parallel processors = multiple PEs working simultaneously, classified by Flynn's taxonomy.</p>
 
   <h3>7.1 x86 Architecture — overview</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    <strong>x86</strong> is a family of <strong>CISC</strong> instruction-set architectures originating with the Intel 8086 (1978). It supports variable-length instructions, complex addressing modes, segmented memory, and a rich register set — and is implemented today in chips from Intel and AMD.
+    <strong>x86</strong> = CISC ISA family (Intel 8086, 1978); variable-length instructions, rich addressing modes, segmented memory; Intel and AMD today.
   </div>
 
   <h4>The 8086 register set (foundation of all x86)</h4>
@@ -1365,19 +2083,93 @@ store_to_memory(data);</code></pre>
     </tbody>
   </table>
 
-  <p>Each general register is split into high/low 8-bit halves: <code>AH/AL</code>, <code>BH/BL</code>, <code>CH/CL</code>, <code>DH/DL</code>. Modern x86 extends to 32-bit (<code>EAX</code>), 64-bit (<code>RAX</code>), plus 8 more (<code>R8…R15</code>) and SIMD registers (<code>XMM, YMM, ZMM</code>).</p>
+  <p>Each GP register splits into 8-bit halves (AH/AL…); 32-bit = EAX; 64-bit = RAX + R8–R15 + XMM/YMM/ZMM SIMD.</p>
 
   <h4>Two functional units in the 8086 — overlap of fetch and execute</h4>
   <div class="diagram">
     <div class="diagram-title">8086 — BIU / EU Split</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20220816090623/blockdiagramof8086microprocessor1-300x228.jpg"
-         alt="8086 block diagram showing BIU (Bus Interface Unit) with 6-byte instruction queue and EU (Execution Unit) with ALU and registers"
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
+    <svg viewBox="0 0 940 500" role="img" aria-label="Intel 8086 BIU/EU split: Bus Interface Unit contains segment registers CS DS SS ES, IP, address adder, 6-byte instruction queue, and bus control. Execution Unit contains general registers AX BX CX DX, pointers SP BP SI DI, ALU, flags. BIU prefetches instructions while EU executes." xmlns="http://www.w3.org/2000/svg" style="max-width:100%; height:auto; display:block; margin:0 auto;">
+      <defs>
+        <marker id="arr8086" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+      <rect x="60" y="10" width="180" height="32" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="150" y="31" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="#1a2233" font-weight="600">Address Bus (20)</text>
+      <rect x="260" y="10" width="180" height="32" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="350" y="31" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="#1a2233" font-weight="600">Data Bus (16)</text>
+      <line x1="150" y1="60" x2="150" y2="44" stroke="#1f6feb" stroke-width="2" marker-end="url(#arr8086)"/>
+      <line x1="350" y1="60" x2="350" y2="44" stroke="#1f6feb" stroke-width="2" marker-end="url(#arr8086)"/>
+      <rect x="20" y="60" width="440" height="350" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="240" y="82" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="16" fill="#1a2233" font-weight="700">Bus Interface Unit (BIU)</text>
+      <text x="40" y="108" font-family="'Segoe UI', sans-serif" font-size="12" fill="#5a6577">Segment Registers</text>
+      <rect x="40" y="115" width="90" height="30" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="85" y="135" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">CS</text>
+      <rect x="140" y="115" width="90" height="30" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="185" y="135" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">DS</text>
+      <rect x="240" y="115" width="90" height="30" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="285" y="135" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">SS</text>
+      <rect x="340" y="115" width="90" height="30" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="385" y="135" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">ES</text>
+      <rect x="40" y="160" width="180" height="34" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="130" y="175" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">Instruction Pointer</text>
+      <text x="130" y="189" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">IP</text>
+      <rect x="240" y="160" width="190" height="34" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="335" y="175" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577">Adder</text>
+      <text x="335" y="189" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">Σ = Seg×16 + Offset</text>
+      <text x="40" y="218" font-family="'Segoe UI', sans-serif" font-size="12" fill="#5a6577">Instruction Queue (6 bytes)</text>
+      <rect x="40" y="225" width="60" height="30" rx="6" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="70" y="245" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">B1</text>
+      <rect x="105" y="225" width="60" height="30" rx="6" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="135" y="245" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">B2</text>
+      <rect x="170" y="225" width="60" height="30" rx="6" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="200" y="245" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">B3</text>
+      <rect x="235" y="225" width="60" height="30" rx="6" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="265" y="245" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">B4</text>
+      <rect x="300" y="225" width="60" height="30" rx="6" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="330" y="245" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">B5</text>
+      <rect x="365" y="225" width="60" height="30" rx="6" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="395" y="245" text-anchor="middle" font-family="monospace" font-size="11" fill="#1a2233">B6</text>
+      <rect x="40" y="290" width="390" height="40" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="235" y="315" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="#1a2233" font-weight="600">Bus Control Logic</text>
+      <text x="240" y="360" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" font-style="italic">Fetches instructions and operands from memory</text>
+      <text x="240" y="378" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" font-style="italic">Computes 20-bit physical address (segment × 16 + offset)</text>
+      <rect x="480" y="60" width="440" height="350" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="700" y="82" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="16" fill="#1a2233" font-weight="700">Execution Unit (EU)</text>
+      <text x="500" y="108" font-family="'Segoe UI', sans-serif" font-size="12" fill="#5a6577">General Registers</text>
+      <rect x="500" y="115" width="90" height="30" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="545" y="135" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">AX</text>
+      <rect x="600" y="115" width="90" height="30" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="645" y="135" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">BX</text>
+      <rect x="700" y="115" width="90" height="30" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="745" y="135" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">CX</text>
+      <rect x="800" y="115" width="90" height="30" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="845" y="135" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">DX</text>
+      <text x="500" y="163" font-family="'Segoe UI', sans-serif" font-size="12" fill="#5a6577">Pointer / Index</text>
+      <rect x="500" y="170" width="90" height="30" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="545" y="190" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">SP</text>
+      <rect x="600" y="170" width="90" height="30" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="645" y="190" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">BP</text>
+      <rect x="700" y="170" width="90" height="30" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="745" y="190" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">SI</text>
+      <rect x="800" y="170" width="90" height="30" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="845" y="190" text-anchor="middle" font-family="monospace" font-size="13" fill="#1a2233">DI</text>
+      <rect x="500" y="218" width="390" height="42" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="695" y="244" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" fill="#1a2233" font-weight="700">ALU  (Arithmetic &amp; Logic Unit)</text>
+      <rect x="500" y="275" width="390" height="34" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="695" y="297" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="#1a2233" font-weight="600">Flags Register  (CF ZF SF OF PF AF)</text>
+      <rect x="500" y="324" width="390" height="40" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="695" y="349" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="#1a2233" font-weight="600">Operand &amp; Control Logic</text>
+      <text x="700" y="386" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5a6577" font-style="italic">Decodes &amp; executes — never touches the external bus directly</text>
+      <line x1="425" y1="240" x2="498" y2="239" stroke="#1f6feb" stroke-width="2" marker-end="url(#arr8086)"/>
+      <text x="461" y="232" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" fill="#1f6feb" font-weight="600">Queue → EU</text>
+      <line x1="498" y1="310" x2="432" y2="310" stroke="#1f6feb" stroke-width="2" marker-end="url(#arr8086)"/>
+      <text x="465" y="303" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="10" fill="#1f6feb" font-weight="600">Operands / addresses</text>
+      <text x="470" y="425" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233" font-weight="600">BIU prefetches up to 6 bytes ahead while EU executes</text>
+      <text x="470" y="443" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="12" fill="#1a2233" font-weight="600">← primitive instruction pipelining</text>
+    </svg>
     <div class="caption">BIU prefetches up to 6 bytes ahead while EU decodes and executes — primitive pipelining inside the 8086.</div>
   </div>
-
-  <p>This BIU/EU split is a primitive form of pipelining — the BIU prefetches up to 6 bytes ahead while the EU executes the previous instruction.</p>
 
   <h4>Memory segmentation (real-mode 8086)</h4>
   <div class="box def">
@@ -1408,7 +2200,7 @@ store_to_memory(data);</code></pre>
   <h3>7.2 Parallel Processors</h3>
   <div class="box def">
     <span class="label">Definition</span>
-    A <strong>parallel processor system</strong> uses multiple processing elements simultaneously to solve a problem faster than a single processor could. Parallelism appears at <em>bit</em>, <em>instruction</em>, <em>data</em>, and <em>task</em> level.
+    Multiple PEs working simultaneously; parallelism spans bit, instruction, data, and task levels.
   </div>
 
   <h4>Flynn's Taxonomy — the four classes</h4>
@@ -1491,9 +2283,245 @@ store_to_memory(data);</code></pre>
     <div class="answer">Shared-memory: all processors access one address space (loads/stores); needs cache coherence. Distributed-memory: each processor owns its memory and communicates by explicit message passing — scales further but harder to program.</div>
   </div>
 
+  <!-- === EXAM TEMPLATES: Topic 7 === -->
+  <div class="box tip" style="margin-top:28px;">
+    <span class="label">8-mark scoring template — x86 Architecture</span>
+    <ul>
+      <li><strong>Definition</strong> — "CISC ISA family originating from Intel 8086 (1978); variable-length instructions, rich addressing modes, segmented memory" — 1 mark</li>
+      <li><strong>Register table</strong> — GP registers: AX BX CX DX (arithmetic, base, counter, data); Pointer/Index: SP BP SI DI; Segment: CS DS SS ES; Special: IP, FLAGS — 2 marks</li>
+      <li><strong>BIU / EU split block diagram</strong> — BIU: segment regs + IP + Σ(Seg×16+Offset) + 6-byte instruction queue + bus control logic; EU: GP regs + ALU + Flags + operand logic; BIU prefetches while EU executes — 3 marks</li>
+      <li><strong>Physical address formula</strong> — Physical = (Segment × 16) + Offset; example: CS=1234h, IP=0005h → 12340h + 0005h = 12345h — 1 mark</li>
+      <li><strong>x86 evolution table</strong> — 8086 (16-bit, seg) → 80386 (32-bit, paging) → Pentium (superscalar) → x86-64 (64-bit, 16 GP regs) — 1 mark</li>
+    </ul>
+    <div class="box eg" style="margin-top:10px;">
+      <span class="label">Quick answer skeleton</span>
+      Def (1) → register table (2) → BIU/EU block diagram labelled (3) → physical addr formula + example (1) → evolution table (1) = 8 marks.
+    </div>
+  </div>
+
+  <div class="box tip" style="margin-top:16px;">
+    <span class="label">8-mark scoring template — Parallel Processors</span>
+    <ul>
+      <li><strong>Definition</strong> — "multiple processing elements working simultaneously to increase throughput; classified by data and instruction stream counts" — 1 mark</li>
+      <li><strong>Flynn's taxonomy table</strong> — SISD (1 instr, 1 data — classical CPU) · SIMD (1 instr, many data — GPU, AVX) · MISD (many instr, 1 data — rare, fault-tolerant) · MIMD (many instr, many data — multicore, clusters) — 2 marks</li>
+      <li><strong>MIMD memory model diagram/table</strong> — Shared-memory (all CPUs see one RAM, communicate via load/store, bottleneck: bus + cache coherence MESI) vs Distributed-memory (each CPU has private RAM, communicate by message passing/MPI, scales to thousands) — 2 marks</li>
+      <li><strong>4 levels of parallelism table</strong> — Bit-level · Instruction-level (ILP: pipelining, superscalar) · Data-level (DLP: SIMD, GPU) · Task-level (TLP: threads, processes) — 1 mark</li>
+      <li><strong>Amdahl's Law</strong> — Speed-up = 1 / ((1 − P) + P/N); example: P=0.9, N=10 → S = 1/(0.1+0.09) = 5.26×; serial fraction caps maximum gain — 2 marks</li>
+    </ul>
+    <div class="box eg" style="margin-top:10px;">
+      <span class="label">Quick answer skeleton</span>
+      Def (1) → Flynn table (2) → MIMD types diagram/table (2) → 4 parallelism levels (1) → Amdahl formula + example (2) = 8 marks. <strong>Mnemonic:</strong> "SI+MI × SD+MD"
+    </div>
+  </div>
+
   <div class="box tip" style="margin-top: 50px;">
     <span class="label">Final exam tip</span>
-    For each topic, practise <em>drawing the diagram</em> from memory before re-reading the text — diagrams (memory hierarchy, DMA flow, pipeline time-space, BIU/EU, Flynn matrix) carry most of the marks in LOC sessional papers. Then revisit the quiz; questions you can't answer fluently are exactly what to revise.
+    Draw diagrams from memory first (hierarchy, DMA, pipeline, BIU/EU, Flynn) — they carry most marks. Then revisit only quiz questions you couldn't answer fluently.
+  </div>
+</section>
+
+<!-- ============================== QUICK SCAN 18 ============================== -->
+<section id="quick-scan" style="margin-top:40px;">
+  <h2 class="topic"><span class="num" style="background:#7c3aed;">QS</span> ⚡ 18 Topics — Speed Scan</h2>
+  <p class="lead">Last-hour ready-check: if you can say the definition + name the diagram without looking — move on. Otherwise jump to that topic section.</p>
+
+  <div class="grid-2" style="margin-top:16px;">
+
+    <div class="card">
+      <h5>1. Memory Organisation</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> Arrangement of storage so CPU gets data with min delay + min cost.</li>
+        <li><strong>Goals:</strong> Speed · Capacity · Cost/bit · Reliability.</li>
+        <li><strong>Exam:</strong> Define → 3 goals → EAT formula.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>2. Hierarchical Memory Org.</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> Layered storage — faster/smaller/costlier near CPU; exploits locality.</li>
+        <li><strong>Order:</strong> Reg → Cache → DRAM → SSD → HDD → Tape.</li>
+        <li><strong>Formula:</strong> T<sub>avg</sub> = h·T<sub>1</sub> + (1−h)(T<sub>1</sub>+T<sub>2</sub>).</li>
+        <li><strong>Exam:</strong> Pyramid diagram + comparison table + EAT example.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>3. Semiconductor Memory</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> Bits in transistor/capacitor circuits on silicon.</li>
+        <li><strong>SRAM:</strong> 6T flip-flop · no refresh · fast → cache.</li>
+        <li><strong>DRAM:</strong> 1T+1C · refresh every ms · slow → main memory.</li>
+        <li><strong>ROM family:</strong> MROM→PROM→EPROM→EEPROM→Flash.</li>
+        <li><strong>Exam:</strong> Family tree + SRAM/DRAM table. Mnemonic: "My Programmer Eats Every Flash".</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>4. Memory Interleaving</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> Splits memory into N banks; consecutive addresses across banks → parallel access.</li>
+        <li><strong>Low-order (LSB):</strong> max parallelism — CPU uses this.</li>
+        <li><strong>High-order (MSB):</strong> same bank for sequential → no parallelism.</li>
+        <li><strong>Speed-up:</strong> 4-bank: 4×100 ns → ≈175 ns.</li>
+        <li><strong>Exam:</strong> Def + low/high address split diagram + speed example. Pitfall: bank conflict when stride = N.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>5. Cache Memory</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> Fast SRAM between CPU and RAM; exploits locality to cut T<sub>avg</sub>.</li>
+        <li><strong>Hit / Miss / Hit-ratio</strong> h = hits / total accesses.</li>
+        <li><strong>EAT:</strong> h·T<sub>1</sub> + (1−h)(T<sub>1</sub>+T<sub>2</sub>).</li>
+        <li><strong>Exam:</strong> Def + hit/miss + EAT formula + numeric example. Write-through vs write-back.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>6. Cache Mapping Techniques</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Direct:</strong> line = block mod #lines. 1 comparator. Conflict misses.</li>
+        <li><strong>Fully Assoc:</strong> any line. N comparators. Best hit rate, most expensive.</li>
+        <li><strong>Set-Assoc (k-way):</strong> set = block mod #sets; any of k lines. Best balance.</li>
+        <li><strong>Address split:</strong> TAG|LINE|OFFSET / TAG|OFFSET / TAG|SET|OFFSET.</li>
+        <li><strong>Exam:</strong> All 3 definitions + comparison table (5 rows). Mnemonic: "Direct=One·Fully=Any·Set=Any-in-One".</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>7. Cache Size vs Block Size</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Larger cache:</strong> ↑ hit rate · ↑ cost · ↑ access time.</li>
+        <li><strong>Too-small block:</strong> poor spatial locality → frequent misses.</li>
+        <li><strong>Too-large block:</strong> cache pollution → fewer blocks fit → hit rate falls.</li>
+        <li><strong>Optimum:</strong> 32–128 B (scales with cache size).</li>
+        <li><strong>Exam:</strong> Bell-curve graph + trade-off bullets.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>8. Cache Replacement Algorithms</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>FIFO:</strong> evict longest-resident. Simple, ignores usage.</li>
+        <li><strong>LRU:</strong> evict least-recently-used. Best practical hit rate.</li>
+        <li><strong>LFU:</strong> evict least-frequently-used. Old popular blocks may persist.</li>
+        <li><strong>Random:</strong> trivial hardware, near-LRU in practice.</li>
+        <li><strong>OPT:</strong> theoretical best — needs future knowledge.</li>
+        <li><strong>Exam:</strong> Table + LRU reference-string worked example.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>9. I/O Device Interface</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> Hardware bridge between device and system bus.</li>
+        <li><strong>Why needed:</strong> speed / data-format / signal-level mismatch.</li>
+        <li><strong>4 registers:</strong> DR (data) · SR (status) · CR (control) · AD (addr decoder).</li>
+        <li><strong>MMIO vs Port-mapped:</strong> same addr space vs separate I/O space.</li>
+        <li><strong>Exam:</strong> Def → why needed → 4 registers → block diagram → MMIO table.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>10. Programmed (Polled) I/O</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> CPU polls device status register in tight loop; every byte through CPU.</li>
+        <li><strong>CPU:</strong> 100% occupied during transfer — cannot multitask.</li>
+        <li><strong>Use:</strong> simple/embedded devices only.</li>
+        <li><strong>Exam:</strong> Pseudocode + pros/cons table.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>11. Interrupt-Driven I/O</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> CPU issues I/O, continues other work; device raises INT when ready.</li>
+        <li><strong>7 steps:</strong> START → run → INT → push PC+flags → ISR → IRET → resume.</li>
+        <li><strong>Still:</strong> data flows through CPU per word (inside ISR).</li>
+        <li><strong>Exam:</strong> 7-step list + timeline diagram (CPU lane + Device lane + INT arrow).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>12. DMA (Direct Memory Access)</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> DMA controller moves data device↔memory WITHOUT CPU touching each word.</li>
+        <li><strong>Signals:</strong> HOLD/HLDA (CPU↔DMA) · DREQ/DACK (Device↔DMA).</li>
+        <li><strong>3 modes:</strong> Burst · Cycle-Stealing · Transparent.</li>
+        <li><strong>Exam:</strong> 5-step process + wiring diagram + 3-mode table. Mnemonic: "Polled Burns · Interrupt Borrows · DMA Bypasses".</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>13. Hardwired Control Unit</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> Fixed combinational/sequential logic generates control signals.</li>
+        <li><strong>Design:</strong> IR + Flags + Clock → Combinational Logic → control signals.</li>
+        <li><strong>Boolean:</strong> signal = f(opcode, state, flags).</li>
+        <li><strong>RISC:</strong> fast but inflexible — refab to change.</li>
+        <li><strong>Exam:</strong> Block diagram + design steps + pros/cons vs microprogrammed.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>14. Microprogrammed CU</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> Control signals as microinstructions in ROM; instruction → microprogram.</li>
+        <li><strong>Components:</strong> CAR (µPC) · Control Memory (ROM) · CBR · Sequencer · Mapping ROM.</li>
+        <li><strong>Horizontal:</strong> 1 bit/signal — wide, fast. <strong>Vertical:</strong> encoded — narrow, needs decoder.</li>
+        <li><strong>CISC (x86):</strong> flexible — re-burn ROM for new instructions.</li>
+        <li><strong>Exam:</strong> Block diagram (CAR→CM→CBR→decoder) + H vs V table.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>15. Pipelining</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> Overlaps k-stage execution of multiple instructions simultaneously.</li>
+        <li><strong>5 stages:</strong> IF → ID → EX → MEM → WB.</li>
+        <li><strong>Speed-up:</strong> S = (n·k) / (k+n−1) → k as n→∞.</li>
+        <li><strong>Example:</strong> k=5, n=100 → S ≈ 4.81×.</li>
+        <li><strong>Exam:</strong> Time-space diagram + formula + numeric example.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>16. Pipeline Hazards</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Structural:</strong> Resource clash → duplicate (Harvard) or stall.</li>
+        <li><strong>Data (RAW/WAR/WAW):</strong> Operand not ready → forwarding / stall / scheduling. Only RAW is true dependency.</li>
+        <li><strong>Control (branch):</strong> Wrong fetch → prediction / delayed branch / flush.</li>
+        <li><strong>Exam:</strong> 3-hazard table (hazard|cause|cure) + SDC mnemonic + RAW example.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>17. x86 Architecture</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Def:</strong> CISC ISA (Intel 8086, 1978); variable-length instructions, segmented memory.</li>
+        <li><strong>BIU:</strong> seg regs (CS DS SS ES) · IP · 6-byte instruction queue · address adder.</li>
+        <li><strong>EU:</strong> GP regs (AX BX CX DX) · SP BP SI DI · ALU · Flags.</li>
+        <li><strong>Physical addr:</strong> Segment × 16 + Offset. Example: CS=1234h, IP=5h → 12345h.</li>
+        <li><strong>Exam:</strong> BIU/EU block diagram + register table + address calculation.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h5>18. Parallel Processors</h5>
+      <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.7;">
+        <li><strong>Flynn:</strong> SISD (1 CPU) · SIMD (GPU) · MISD (rare) · MIMD (multicore).</li>
+        <li><strong>MIMD types:</strong> Shared-memory (load/store, cache coherence) vs Distributed (message passing, MPI).</li>
+        <li><strong>Amdahl:</strong> S = 1 / ((1−P) + P/N). P=0.9, N=10 → 5.26×.</li>
+        <li><strong>Exam:</strong> Flynn table + MIMD types + Amdahl formula + interconnect networks.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="mnemonic">
+    <strong>18-topic sweep order (same as exam importance)</strong>
+    Cache Mapping · DMA · Pipelining/Hazards · x86 BIU/EU · Memory Hierarchy · Interrupt I/O · Semiconductor · Interleaving · Parallel/Flynn · CU Hardwired/Micro · Cache Replacement · Cache Size/Block · I/O Interface · Polled I/O · Memory Org · Amdahl · Write policies · Bank conflict
   </div>
 </section>
 
@@ -1503,16 +2531,71 @@ store_to_memory(data);</code></pre>
     <span class="num">08</span> Sessional Exam Booster
     <span class="pill amber" style="font-size:12px; margin-left:auto;">30 MARKS</span>
   </h2>
-  <p class="lead">A focused last-mile pack tuned to the <strong>30-mark sessional pattern</strong>: <em>Section A</em> = 6&nbsp;×&nbsp;1-mark, <em>Section B</em> = 3&nbsp;×&nbsp;8-mark (each may split as 4+4). Use the 1-mark table to drill recall, the 4-mark answers as ready half-question slots, and the 8-mark blocks as full model answers with diagrams.</p>
+  <p class="lead"><strong>30-mark pattern</strong>: Sec A = 6×1-mark · Sec B = 3×8-mark (may split 4+4). Drill §8.1 for recall, §8.2 for 4-mark slots, §8.3 for full 8-mark models.</p>
 
   <div class="box tip">
     <span class="label">How to use this section</span>
-    Self-test on the 1-mark table first (cover the right column). Then write out one 4-mark and one 8-mark answer on paper from memory — that single rehearsal is worth more than re-reading the whole guide.
+    Cover §8.1 right column → self-test. Write one 4-mark + one 8-mark from memory — more effective than re-reading.
+  </div>
+
+  <h3 style="margin-top:24px;">⏱ The 3-Hour Revision Plan <span class="pill amber">today · before exam</span></h3>
+  <p>3 hours, 3 mark-slabs: recall speed → writing rehearsal → diagram muscle memory.</p>
+
+  <table>
+    <thead><tr><th style="width:90px;">Time</th><th>Focus</th><th>What to do (concrete)</th><th>Outcome</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>0:00 – 1:00</strong><br><span class="pill">Hour 1</span></td>
+        <td><strong>Recall drill</strong><br><em>Section A — 1-mark</em></td>
+        <td>(a) Cover the right column of <a href="#sessional-booster">§8.1</a> and self-test all 25 questions. Mark the wrong ones mentally.<br>(b) Recite register full-forms out loud: <code>PC · IR · MAR · MDR · AC · SP · BP · IP</code>.<br>(c) Re-do 3 number-system conversions from <a href="#sessional-booster">§8.2 Q2</a> (one decimal→binary, one binary→hex, one fraction).<br>(d) Recite mnemonic <strong>"PC IR MAR MDR AC"</strong> and <strong>"VINE-DAMP"</strong> until automatic.</td>
+        <td>≥ 5 of 6 marks in Section A locked. ~6 marks.</td>
+      </tr>
+      <tr>
+        <td><strong>1:00 – 2:00</strong><br><span class="pill amber">Hour 2</span></td>
+        <td><strong>4-mark rehearsal</strong><br><em>half-question slots</em></td>
+        <td>Write on rough paper <em>from memory</em> (4 min each, real exam pace):<br>(a) De Morgan's theorems + truth-table proof — §8.2 Q1<br>(b) 2's complement subtraction <code>7−5</code> — §8.2 Q3<br>(c) Half-adder vs Full-adder (table + diagrams) — §8.2 Q5<br>(d) PIO vs Interrupt vs DMA comparison — §8.2 Q10<br>(e) SRAM vs DRAM (table) — §8.2 Q6<br>Then reveal and self-correct.</td>
+        <td>5 ready-to-write 4-mark slots. ~12–16 marks.</td>
+      </tr>
+      <tr>
+        <td><strong>2:00 – 3:00</strong><br><span class="pill green">Hour 3</span></td>
+        <td><strong>8-mark models + diagrams</strong><br><em>Section B set-pieces</em></td>
+        <td>Pick <strong>3 of these 4</strong> (the most likely repeats):<br>• Q1 Von Neumann (def + bus diagram + components + bottleneck)<br>• Q2 Full-adder (truth table + Boolean eqs + 2-HA+OR circuit)<br>• Q4 Memory hierarchy (pyramid + comparison table + locality + EAT formula)<br>• Q7 DMA (def + HOLD/HLDA·DREQ/DACK + block diagram + advantages)<br><br>For each: <strong>sketch the labelled diagram</strong> on rough paper — the diagram alone is worth 2–3 marks. Then jot the 4-step skeleton (definition → diagram → working → use cases).</td>
+        <td>3 × 8 = 24 marks pre-rehearsed.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="grid-2">
+    <div class="card">
+      <h5 style="color:var(--brand);">⏰ Last 15 min — panic checklist</h5>
+      <ul style="margin:6px 0 0 18px;padding:0;font-size:13.5px;line-height:1.7;">
+        <li>Recite <strong>VINE-DAMP</strong> once aloud.</li>
+        <li>HOLD ↔ HLDA · DREQ ↔ DACK (DMA pairs).</li>
+        <li>Pipeline order: <code>IF → ID → EX → MEM → WB</code>.</li>
+        <li>RAW · WAR · WAW — only RAW is true dependency.</li>
+        <li>EAT formula: <code>T<sub>avg</sub> = h·T<sub>1</sub> + (1−h)(T<sub>1</sub>+T<sub>2</sub>)</code>.</li>
+        <li>Universal gates: <strong>NAND, NOR</strong>.</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left:3px solid #b42318;">
+      <h5 style="color:#b42318;">🚫 Don't waste these 3 hours on</h5>
+      <ul style="margin:6px 0 0 18px;padding:0;font-size:13.5px;line-height:1.7;">
+        <li>Re-reading topics 1–7. Use <strong>only</strong> this booster.</li>
+        <li>Memorising every K-map. Exam gives one — apply rules.</li>
+        <li>Rewriting all 12 model answers. Rehearse 3 strong ones.</li>
+        <li>Watching YouTube "easy tricks". Your guide already has them.</li>
+        <li>Phone scrolling. Lock it in another room.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mnemonic">
+    <strong>Mark math — what 3 hours buys you</strong><br>
+    Hour 1 = ~6 marks · Hour 2 = ~14 marks · Hour 3 = ~24 marks ⇒ <strong>~44 of 30 paper marks</strong> covered with overlap. Even with -10 marks of forgetting in pressure, you still clear 25+/30.
   </div>
 
   <hr>
   <h3>8.1 1-Mark Quick Answers <span class="pill">Section A drill</span></h3>
-  <p>Single-line answers — usually fill-in-the-blank, MCQ, or one-word. Convert / recall on sight.</p>
 
   <table>
     <thead><tr><th style="width:55%;">Question</th><th>Answer</th></tr></thead>
@@ -1552,7 +2635,6 @@ store_to_memory(data);</code></pre>
 
   <hr>
   <h3>8.2 4-Mark Mini Answers <span class="pill">half of an 8-mark slot</span></h3>
-  <p>Compact, exam-ready answers. Each one is a <em>definition + 2-3 key points + tiny example</em> — what the examiner expects in 4 minutes of writing.</p>
 
   <h4>Q1. State and prove De Morgan's theorems.</h4>
   <div class="box def">
@@ -1569,7 +2651,6 @@ store_to_memory(data);</code></pre>
         <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
       </tbody>
     </table>
-    Columns 3≡4 and 5≡6 → both laws hold.
   </div>
 
   <h4>Q2. Convert <code>(101.625)<sub>10</sub></code> to binary.</h4>
@@ -1589,7 +2670,6 @@ Read bottom-up → 1100101</pre>
 0.250 × 2 = 0.50 → 0
 0.500 × 2 = 1.00 → 1
 Read top-down → .101</pre>
-    Result: <code>(101.625)<sub>10</sub> = (1100101.101)<sub>2</sub></code>.
   </div>
 
   <h4>Q3. Subtract <code>7 − 5</code> using 2's complement (4-bit).</h4>
@@ -1600,17 +2680,14 @@ Read top-down → .101</pre>
 + 1011   ( -5 in 2's comp )
 ──────
 1 0010   carry-out discarded → 0010 = +2 ✔</pre>
-    The carry-out of 1 is discarded; result <code>0010 = +2<sub>10</sub></code>. Correct.
   </div>
 
   <h4>Q4. Simplify <code>F(A,B,C) = Σm(1,3,5,7)</code> using a K-map.</h4>
   <div class="box eg">
     <span class="label">Answer (4 marks)</span>
-    Plot 1s at minterms 1, 3, 5, 7 (all the cells where C = 1):
     <pre class="formula-block">       BC=00  01  11  10
    A=0:   0    1   1   0
    A=1:   0    1   1   0</pre>
-    The single quad covers the entire C = 1 column → <code>F = C</code>. Reduced from a 4-term SOP to one literal.
   </div>
 
   <h4>Q5. Difference between half-adder and full-adder.</h4>
@@ -1658,7 +2735,6 @@ Read top-down → .101</pre>
   <h4>Q8. Define addressing modes — list any four with example.</h4>
   <div class="box def">
     <span class="label">Answer (4 marks)</span>
-    An <strong>addressing mode</strong> specifies how the operand of an instruction is located.
     <ul>
       <li><strong>Immediate</strong> — operand is in the instruction. <code>MOV R1, #5</code></li>
       <li><strong>Register</strong> — operand is in a CPU register. <code>ADD R1, R2</code></li>
@@ -1671,13 +2747,11 @@ Read top-down → .101</pre>
   <h4>Q9. Explain the instruction cycle (Fetch–Decode–Execute).</h4>
   <div class="box def">
     <span class="label">Answer (4 marks)</span>
-    The CPU repeats three phases per instruction:
     <ol>
       <li><strong>Fetch:</strong> <code>MAR ← PC</code>; read memory; <code>MDR → IR</code>; <code>PC ← PC + 1</code>.</li>
       <li><strong>Decode:</strong> Control Unit interprets opcode in IR and routes operands.</li>
       <li><strong>Execute:</strong> ALU/registers perform the operation; result written back.</li>
     </ol>
-    Some instructions add an <em>indirect</em> phase (resolve operand address) and an <em>interrupt</em> check after execute.
   </div>
 
   <h4>Q10. Differentiate programmed I/O, interrupt-driven I/O, and DMA.</h4>
@@ -1696,7 +2770,6 @@ Read top-down → .101</pre>
   <h4>Q11. Define a flip-flop. List four common types.</h4>
   <div class="box def">
     <span class="label">Answer (4 marks)</span>
-    A <strong>flip-flop</strong> is a 1-bit edge-triggered storage element (sequential circuit) — its output depends on inputs <em>and</em> the previous state. Four common types:
     <ul>
       <li><strong>SR FF:</strong> Set/Reset; invalid state when S = R = 1.</li>
       <li><strong>JK FF:</strong> Like SR but J = K = 1 toggles the output (no invalid state).</li>
@@ -1708,7 +2781,6 @@ Read top-down → .101</pre>
   <h4>Q12. Explain memory hierarchy in brief.</h4>
   <div class="box def">
     <span class="label">Answer (4 marks)</span>
-    Memory hierarchy is a layered storage organisation: as you move <em>away</em> from the CPU, capacity grows and cost/bit drops, but access time increases.
     <ul>
       <li><strong>Registers</strong> (≈ 1 ns, bytes) — inside CPU.</li>
       <li><strong>Cache L1/L2/L3</strong> (1–10 ns, KB–MB) — SRAM.</li>
@@ -1716,25 +2788,97 @@ Read top-down → .101</pre>
       <li><strong>Secondary</strong> (ms, TB) — SSD/HDD.</li>
       <li><strong>Tertiary</strong> (seconds, PB) — tape archives.</li>
     </ul>
-    The hierarchy works because of <em>locality of reference</em>; effectively delivers cache speed at disk capacity.
   </div>
 
   <hr>
   <h3>8.3 8-Mark Full Answers <span class="pill">Section B model answers</span></h3>
-  <p>Each answer follows the marker-friendly pattern: <em>definition → labelled diagram / table → worked example → use cases / advantages</em>. Memorise one per unit and the rest can be derived.</p>
+  <p>Pattern: definition → diagram/table → worked example → use cases. Memorise one per unit.</p>
 
   <h4>Q1. Explain Von Neumann architecture with a labelled diagram.</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    Proposed by John von Neumann (1945), this is the <strong>stored-program architecture</strong>: instructions and data live in the <em>same</em> memory and travel over the <em>same</em> bus to a single CPU. Almost every general-purpose computer today follows this model.
+    <strong>Stored-program model</strong> (von Neumann, 1945): instructions and data share one memory and one bus to a single CPU.
+  </div>
+
+  <div class="box tip">
+    <span class="label">Scoring template — 8 marks</span>
+    <ul>
+      <li><strong>Stored-program model definition</strong> — 1 mark</li>
+      <li><strong>CPU components</strong> (CU + ALU + Registers) — 2 marks</li>
+      <li><strong>Labelled diagram</strong> (CPU ↔ Memory ↔ I/O via shared bus) — 3 marks</li>
+      <li><strong>Registers</strong> (PC · IR · MAR · MDR · AC — name &amp; function) — 1 mark</li>
+      <li><strong>Von Neumann bottleneck</strong> (single bus = CPU stalls) — 1 mark</li>
+    </ul>
   </div>
 
   <div class="diagram">
     <div class="diagram-title">Von Neumann Architecture</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250814172625219026/central_processing_unit.webp"
-         alt="Von Neumann Architecture: CPU (ALU + Control Unit + Registers) connected to Main Memory and I/O over a single shared bus — the stored-program design"
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
+    <svg viewBox="0 0 880 460" role="img" aria-label="Von Neumann architecture: CPU containing Control Unit, ALU, and registers PC IR MAR MDR AC; Main Memory holding both instructions and data in one address space; I/O subsystem; all connected by a single shared system bus carrying address, data, and control. The shared bus is the Von Neumann bottleneck." font-family="'Segoe UI', sans-serif" style="max-width:100%; display:block; margin:0 auto;">
+      <defs>
+        <marker id="arrVN" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+      <rect x="20" y="30" width="430" height="220" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="35" y="52" font-size="14" font-weight="700" fill="#1f6feb">CPU (Central Processing Unit)</text>
+      <rect x="35" y="65" width="195" height="55" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="132" y="90" font-size="13" font-weight="700" text-anchor="middle" fill="#1a2233">Control Unit (CU)</text>
+      <text x="132" y="108" font-size="11" text-anchor="middle" fill="#5a6577">decodes &amp; sequences</text>
+      <rect x="240" y="65" width="195" height="55" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="337" y="90" font-size="13" font-weight="700" text-anchor="middle" fill="#1a2233">Arithmetic Logic Unit (ALU)</text>
+      <text x="337" y="108" font-size="11" text-anchor="middle" fill="#5a6577">add, sub, AND, OR, shift</text>
+      <rect x="35" y="135" width="400" height="100" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="235" y="155" font-size="13" font-weight="700" text-anchor="middle" fill="#1a2233">Registers</text>
+      <rect x="50"  y="170" width="65" height="50" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="82.5" y="192" font-size="13" font-weight="700" text-anchor="middle" fill="#1a2233" font-family="monospace">PC</text>
+      <text x="82.5" y="210" font-size="9" text-anchor="middle" fill="#5a6577">prog ctr</text>
+      <rect x="125" y="170" width="65" height="50" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="157.5" y="192" font-size="13" font-weight="700" text-anchor="middle" fill="#1a2233" font-family="monospace">IR</text>
+      <text x="157.5" y="210" font-size="9" text-anchor="middle" fill="#5a6577">instr reg</text>
+      <rect x="200" y="170" width="65" height="50" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="232.5" y="192" font-size="13" font-weight="700" text-anchor="middle" fill="#1a2233" font-family="monospace">MAR</text>
+      <text x="232.5" y="210" font-size="9" text-anchor="middle" fill="#5a6577">addr reg</text>
+      <rect x="275" y="170" width="65" height="50" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="307.5" y="192" font-size="13" font-weight="700" text-anchor="middle" fill="#1a2233" font-family="monospace">MDR</text>
+      <text x="307.5" y="210" font-size="9" text-anchor="middle" fill="#5a6577">data reg</text>
+      <rect x="350" y="170" width="65" height="50" rx="6" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="382.5" y="192" font-size="13" font-weight="700" text-anchor="middle" fill="#1a2233" font-family="monospace">AC</text>
+      <text x="382.5" y="210" font-size="9" text-anchor="middle" fill="#5a6577">accum</text>
+      <rect x="490" y="30" width="370" height="220" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="505" y="52" font-size="14" font-weight="700" fill="#1a7f37">I/O Subsystem</text>
+      <rect x="510" y="75" width="105" height="70" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="562.5" y="105" font-size="12" font-weight="700" text-anchor="middle" fill="#1a2233">Keyboard</text>
+      <text x="562.5" y="125" font-size="10" text-anchor="middle" fill="#5a6577">input</text>
+      <rect x="627" y="75" width="105" height="70" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="679.5" y="105" font-size="12" font-weight="700" text-anchor="middle" fill="#1a2233">Display</text>
+      <text x="679.5" y="125" font-size="10" text-anchor="middle" fill="#5a6577">output</text>
+      <rect x="744" y="75" width="105" height="70" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2"/>
+      <text x="796.5" y="105" font-size="12" font-weight="700" text-anchor="middle" fill="#1a2233">Disk</text>
+      <text x="796.5" y="125" font-size="10" text-anchor="middle" fill="#5a6577">storage</text>
+      <rect x="510" y="160" width="339" height="75" rx="8" fill="#ffffff" stroke="#1a7f37" stroke-width="2" stroke-dasharray="4 3"/>
+      <text x="679.5" y="185" font-size="12" font-weight="700" text-anchor="middle" fill="#1a2233">I/O Controllers / Interfaces</text>
+      <text x="679.5" y="205" font-size="11" text-anchor="middle" fill="#5a6577">device drivers, DMA, interrupt lines</text>
+      <text x="679.5" y="222" font-size="11" text-anchor="middle" fill="#5a6577">talk to CPU and memory through the shared bus</text>
+      <rect x="20" y="265" width="840" height="55" rx="8" fill="#ffffff" stroke="#1f6feb" stroke-width="2"/>
+      <text x="35" y="284" font-size="13" font-weight="700" fill="#1f6feb">SYSTEM BUS  (single shared path)</text>
+      <rect x="240" y="290" width="180" height="22" rx="4" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="330" y="306" font-size="11" font-weight="700" text-anchor="middle" fill="#1a2233">Address Bus</text>
+      <rect x="430" y="290" width="180" height="22" rx="4" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="520" y="306" font-size="11" font-weight="700" text-anchor="middle" fill="#1a2233">Data Bus</text>
+      <rect x="620" y="290" width="180" height="22" rx="4" fill="#e8f0fe" stroke="#1f6feb" stroke-width="1.5"/>
+      <text x="710" y="306" font-size="11" font-weight="700" text-anchor="middle" fill="#1a2233">Control Bus</text>
+      <line x1="235" y1="250" x2="235" y2="263" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrVN)"/>
+      <line x1="215" y1="265" x2="215" y2="252" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrVN)"/>
+      <line x1="675" y1="250" x2="675" y2="263" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrVN)"/>
+      <line x1="655" y1="265" x2="655" y2="252" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrVN)"/>
+      <rect x="170" y="345" width="540" height="80" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="440" y="372" font-size="15" font-weight="700" text-anchor="middle" fill="#b54708">MAIN MEMORY</text>
+      <text x="440" y="392" font-size="12" text-anchor="middle" fill="#1a2233">instructions + data  (one address space)</text>
+      <text x="440" y="410" font-size="11" text-anchor="middle" fill="#5a6577" font-family="monospace">addr 0x0000 ... 0xFFFF  (stored-program model)</text>
+      <line x1="430" y1="343" x2="430" y2="322" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrVN)"/>
+      <line x1="450" y1="320" x2="450" y2="343" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrVN)"/>
+      <text x="860" y="448" font-size="11" font-weight="700" text-anchor="end" fill="#b42318">&#9888; Von Neumann bottleneck — instructions and data share one bus</text>
+    </svg>
     <div class="caption">CPU (ALU + CU + Registers) talks to a single memory over one shared bus — the classic stored-program design.</div>
   </div>
 
@@ -1750,14 +2894,25 @@ Read top-down → .101</pre>
   <ul>
     <li><strong>+</strong> Simple, flexible — same hardware runs any program (just load different code).</li>
     <li><strong>+</strong> Cheap: only one memory and one bus to design.</li>
-    <li><strong>−</strong> The shared bus creates the <strong>Von Neumann bottleneck</strong> — instruction fetch and data access compete; CPU often idles waiting for memory. Cache and Harvard-style split caches mitigate this.</li>
+    <li><strong>−</strong> <strong>Von Neumann bottleneck</strong> — fetch and data access compete on one bus; cache mitigates this.</li>
   </ul>
 
   <hr>
   <h4>Q2. Design a full-adder — truth table, equations, and circuit.</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    A <strong>full-adder</strong> is a combinational circuit that adds three 1-bit inputs (A, B, C<sub>in</sub>) and produces a 2-bit result: <em>Sum</em> and <em>Carry-out</em>. Cascading <em>n</em> full-adders builds an <em>n</em>-bit ripple-carry adder.
+    Combinational circuit: 3 inputs (A, B, C<sub>in</sub>) → 2 outputs (Sum, C<sub>out</sub>). Cascade <em>n</em> full-adders = ripple-carry adder.
+  </div>
+
+  <div class="box tip">
+    <span class="label">Scoring template — 8 marks</span>
+    <ul>
+      <li><strong>Definition</strong> (3 inputs A B C<sub>in</sub> → Sum C<sub>out</sub>) — 1 mark</li>
+      <li><strong>Truth table</strong> (8 rows, Sum + C<sub>out</sub> columns correct) — 2 marks</li>
+      <li><strong>Boolean equations</strong> (Sum = A⊕B⊕C<sub>in</sub> · C<sub>out</sub> = AB + C<sub>in</sub>(A⊕B)) — 2 marks</li>
+      <li><strong>Circuit diagram</strong> (2 HA + OR gate, labelled) — 2 marks</li>
+      <li><strong>Use case</strong> (cascade → n-bit ripple carry adder) — 1 mark</li>
+    </ul>
   </div>
 
   <h4>Truth table</h4>
@@ -1783,10 +2938,72 @@ C<sub>out</sub>  = A·B + C<sub>in</sub>·(A ⊕ B)
   <h4>Circuit (built from two half-adders + OR)</h4>
   <div class="diagram">
     <div class="diagram-title">Full-Adder Circuit (2 half-adders + OR)</div>
-    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20250405122421803770/frame_16.webp"
-         alt="Full-adder circuit diagram: inputs A, B, and Cin feed two half-adders; the two AND outputs combine via OR to produce Cout, while XOR2 produces Sum"
-         loading="lazy"
-         style="max-width:100%; border-radius:6px; display:block; margin:0 auto;" />
+    <svg viewBox="0 0 900 360" role="img" aria-label="Full-adder circuit: inputs A, B, and Cin; Half-Adder 1 produces Sum1 = A xor B and Carry1 = A and B from inputs A and B; Half-Adder 2 takes Sum1 and Cin to produce final Sum = A xor B xor Cin and Carry2 = Sum1 and Cin; final OR gate combines Carry1 and Carry2 into Cout." style="max-width:100%; display:block; margin:0 auto;">
+      <defs>
+        <marker id="arrFA" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+      </defs>
+
+      <!-- Input labels -->
+      <text x="20" y="74" font-family="monospace" font-size="14" font-weight="bold" fill="#1a2233">A</text>
+      <text x="20" y="114" font-family="monospace" font-size="14" font-weight="bold" fill="#1a2233">B</text>
+      <text x="20" y="244" font-family="monospace" font-size="14" font-weight="bold" fill="#1a2233">Cin</text>
+
+      <!-- Input wires to HA1 -->
+      <line x1="40" y1="70" x2="220" y2="70" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrFA)"/>
+      <line x1="40" y1="110" x2="220" y2="110" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrFA)"/>
+
+      <!-- Half-Adder 1 box -->
+      <rect x="230" y="40" width="220" height="100" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="340" y="65" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="bold" fill="#1a2233">Half-Adder 1</text>
+      <text x="340" y="93" text-anchor="middle" font-family="monospace" font-size="12" fill="#1a2233">Sum1 = A &#8853; B</text>
+      <text x="340" y="115" text-anchor="middle" font-family="monospace" font-size="12" fill="#1a2233">Carry1 = A &#183; B</text>
+
+      <!-- Sum1 wire from HA1 to HA2 (top input) -->
+      <line x1="450" y1="80" x2="540" y2="80" stroke="#1f6feb" stroke-width="2"/>
+      <line x1="540" y1="80" x2="540" y2="170" stroke="#1f6feb" stroke-width="2"/>
+      <line x1="540" y1="170" x2="560" y2="170" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrFA)"/>
+      <text x="460" y="74" font-family="monospace" font-size="11" fill="#5a6577">Sum1</text>
+
+      <!-- Carry1 wire from HA1 down to OR gate -->
+      <line x1="450" y1="120" x2="510" y2="120" stroke="#1f6feb" stroke-width="2"/>
+      <line x1="510" y1="120" x2="510" y2="290" stroke="#1f6feb" stroke-width="2"/>
+      <line x1="510" y1="290" x2="760" y2="290" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrFA)"/>
+      <text x="460" y="138" font-family="monospace" font-size="11" fill="#5a6577">Carry1</text>
+
+      <!-- Cin wire to HA2 (bottom input) -->
+      <line x1="40" y1="240" x2="540" y2="240" stroke="#1f6feb" stroke-width="2"/>
+      <line x1="540" y1="240" x2="560" y2="240" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrFA)"/>
+
+      <!-- Half-Adder 2 box -->
+      <rect x="570" y="140" width="220" height="100" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="680" y="165" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="15" font-weight="bold" fill="#1a2233">Half-Adder 2</text>
+      <text x="680" y="193" text-anchor="middle" font-family="monospace" font-size="12" fill="#1a2233">Sum = Sum1 &#8853; Cin</text>
+      <text x="680" y="215" text-anchor="middle" font-family="monospace" font-size="12" fill="#1a2233">Carry2 = Sum1 &#183; Cin</text>
+
+      <!-- SUM output -->
+      <line x1="790" y1="170" x2="860" y2="170" stroke="#1a7f37" stroke-width="2.5" marker-end="url(#arrFA)"/>
+      <text x="860" y="162" text-anchor="end" font-family="monospace" font-size="14" font-weight="bold" fill="#1a7f37">SUM</text>
+
+      <!-- Carry2 wire from HA2 down to OR gate -->
+      <line x1="790" y1="220" x2="740" y2="220" stroke="#1f6feb" stroke-width="2"/>
+      <line x1="740" y1="220" x2="740" y2="270" stroke="#1f6feb" stroke-width="2"/>
+      <line x1="740" y1="270" x2="760" y2="270" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrFA)"/>
+      <text x="700" y="238" font-family="monospace" font-size="11" fill="#5a6577">Carry2</text>
+
+      <!-- OR gate D-shape -->
+      <path d="M 760 260 Q 780 260 800 280 Q 780 300 760 300 Q 770 280 760 260 Z"
+            fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="775" y="285" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="11" font-weight="bold" fill="#b54708">OR</text>
+
+      <!-- Cout output -->
+      <line x1="800" y1="280" x2="860" y2="280" stroke="#b54708" stroke-width="2.5" marker-end="url(#arrFA)"/>
+      <text x="860" y="272" text-anchor="end" font-family="monospace" font-size="14" font-weight="bold" fill="#b54708">Cout</text>
+
+      <!-- Footer expression -->
+      <text x="450" y="335" text-anchor="middle" font-family="monospace" font-size="11" fill="#5a6577">Cout = A&#183;B + (A &#8853; B)&#183;Cin</text>
+    </svg>
     <div class="caption">First half-adder produces partial sum and partial carry; second XOR adds C<sub>in</sub>; OR merges the two carry sources.</div>
   </div>
 
@@ -1801,7 +3018,17 @@ C<sub>out</sub>  = A·B + C<sub>in</sub>·(A ⊕ B)
   <h4>Q3. Explain logic gates with symbol, truth table, and Boolean expression.</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    A <strong>logic gate</strong> is the basic combinational element implementing a Boolean function on one or more binary inputs. Three classes: <em>basic</em> (AND/OR/NOT), <em>universal</em> (NAND/NOR — any circuit can be built from either alone), and <em>derived</em> (XOR/XNOR).
+    Basic combinational element for Boolean functions. Classes: basic (AND/OR/NOT), universal (NAND/NOR), derived (XOR/XNOR).
+  </div>
+
+  <div class="box tip">
+    <span class="label">Scoring template — 8 marks</span>
+    <ul>
+      <li><strong>Definition + gate classification</strong> (basic / universal / derived) — 1 mark</li>
+      <li><strong>Truth tables</strong> for AND, OR, NOT, NAND, NOR, XOR (all correct) — 3 marks</li>
+      <li><strong>Universal gates explanation</strong> (NAND/NOR implement all Boolean functions) — 2 marks</li>
+      <li><strong>NAND-only implementation</strong> of NOT, AND, OR — 2 marks</li>
+    </ul>
   </div>
 
   <table>
@@ -1821,7 +3048,7 @@ C<sub>out</sub>  = A·B + C<sub>in</sub>·(A ⊕ B)
   <pre class="formula-block">NOT  : A'   =  A NAND A
 AND  : A·B  =  (A NAND B) NAND (A NAND B)
 OR   : A+B  =  (A NAND A) NAND (B NAND B)</pre>
-  Every Boolean function reduces to a network of identical NAND gates → cheaper VLSI fabrication.
+  Any function = NAND-only network → single gate type → cheaper VLSI.
 
   <h4>Use cases</h4>
   <ul>
@@ -1834,10 +3061,21 @@ OR   : A+B  =  (A NAND A) NAND (B NAND B)</pre>
   <h4>Q4. Explain memory hierarchy in detail with diagram.</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    A <strong>memory hierarchy</strong> is a layered storage organisation in which each level closer to the CPU is faster, smaller, and costlier per bit. It exploits <em>locality of reference</em> to deliver near-cache speed at near-disk capacity for the price of mostly-disk hardware.
+    Layered storage: closer to CPU = faster, smaller, costlier/bit. Exploits locality to give cache speed at disk price.
   </div>
 
-  <p>(See the labelled pyramid diagram in <a href="#t1">Section 1.2</a>.) The same five-level pyramid is the canonical answer here.</p>
+  <div class="box tip">
+    <span class="label">Scoring template — 8 marks</span>
+    <ul>
+      <li><strong>Definition + purpose</strong> (why hierarchy, three constraints: speed/size/cost) — 1 mark</li>
+      <li><strong>Pyramid diagram</strong> (6 levels labelled Register→Tape) — 3 marks</li>
+      <li><strong>Comparison table</strong> (level / tech / size / access time / volatile) — 2 marks</li>
+      <li><strong>Locality of reference</strong> (temporal + spatial) — 1 mark</li>
+      <li><strong>EAT formula + numeric example</strong> — 1 mark</li>
+    </ul>
+  </div>
+
+  <p>(Canonical pyramid diagram: <a href="#t1">Section 1.2</a>.)</p>
 
   <h4>Level-by-level explanation</h4>
   <table>
@@ -1873,7 +3111,19 @@ T<sub>avg</sub> = 0.9·10 + 0.1·(10+100) = 9 + 11 = 20 ns</pre>
   <h4>Q5. Explain the instruction cycle in detail.</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    The <strong>instruction cycle</strong> is the sequence of CPU steps to retrieve, decode, and execute one machine instruction. It runs continuously, starting again as soon as the previous instruction finishes — this is the <em>fetch–execute loop</em>.
+    Repeating CPU loop: fetch → decode → execute one instruction, then repeat — the <strong>fetch–execute loop</strong>.
+  </div>
+
+  <div class="box tip">
+    <span class="label">Scoring template — 8 marks</span>
+    <ul>
+      <li><strong>Definition of fetch–decode–execute loop</strong> — 1 mark</li>
+      <li><strong>Fetch micro-ops</strong> (MAR←PC · MDR←M[MAR] · IR←MDR · PC++) — 2 marks</li>
+      <li><strong>Decode phase</strong> (CU interprets opcode) — 1 mark</li>
+      <li><strong>Execute phase</strong> (operand fetch + ALU + AC) — 2 marks</li>
+      <li><strong>Interrupt check step</strong> — 1 mark</li>
+      <li><strong>Flow diagram or RTL notation</strong> — 1 mark</li>
+    </ul>
   </div>
 
   <h4>Phases</h4>
@@ -1896,16 +3146,23 @@ Execute  : R1 ← R1 + MDR
 Interrupt: none → loop back to Fetch</pre>
 
   <h4>Pipelining note</h4>
-  <p>Modern CPUs overlap the phases — while instruction <em>i</em> executes, instruction <em>i+1</em> is decoded and instruction <em>i+2</em> is fetched. Ideal CPI drops from 5 to ≈ 1 cycle per instruction.</p>
-
-  <h4>Use case</h4>
-  <p>Every program ever run is an unrolling of this loop. Understanding it is essential for analysing pipeline hazards, interrupt latency, and addressing-mode cost.</p>
+  <p>Overlapping phases cuts ideal CPI from 5 → ≈ 1 (i executes, i+1 decodes, i+2 fetches).</p>
 
   <hr>
   <h4>Q6. Compare hardwired vs microprogrammed control units.</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    The <strong>Control Unit (CU)</strong> generates the timing and control signals that drive the rest of the CPU. It can be implemented two ways: <em>hardwired</em> (a fixed sequential circuit) or <em>microprogrammed</em> (a tiny program in a control ROM that emits signals).
+    Generates timing/control signals; two implementations: <em>hardwired</em> (fixed circuit) or <em>microprogrammed</em> (control ROM).
+  </div>
+
+  <div class="box tip">
+    <span class="label">Scoring template — 8 marks</span>
+    <ul>
+      <li><strong>Definition of Control Unit</strong> (generates timing/control signals) — 1 mark</li>
+      <li><strong>Hardwired CU</strong> (gates + FFs, fast, rigid — block diagram or bullet list) — 2 marks</li>
+      <li><strong>Microprogrammed CU</strong> (control ROM + CAR + CBR + mapping logic — flow) — 3 marks</li>
+      <li><strong>Comparison table</strong> (speed / flexibility / cost / used in) — 2 marks</li>
+    </ul>
   </div>
 
   <table>
@@ -1920,18 +3177,81 @@ Interrupt: none → loop back to Fetch</pre>
     </tbody>
   </table>
 
-  <h4>Microprogrammed CU — block flow</h4>
-  <pre class="formula-block">Opcode in IR ──► Mapping logic ──► Control Address Register (CAR)
-                                          │
-                                          ▼
-                           Control Memory (control ROM)
-                                          │
-                                          ▼
-                       Control Buffer Register (CBR) ─► control signals
-                                          │
-                                          ▼
-                              Next-address generator
-                                  (sequence next μ-instruction)</pre>
+  <div class="diagram">
+    <div class="diagram-title">Microprogrammed CU — Signal Flow</div>
+    <svg viewBox="0 0 700 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;display:block;margin:0 auto;">
+      <defs>
+        <marker id="arrMicroFlow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+        <marker id="arrMicroFlowGood" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1a7f37"/>
+        </marker>
+        <marker id="arrMicroFlowLoop" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#b54708"/>
+        </marker>
+      </defs>
+
+      <!-- Node 1: Opcode in IR (warn) -->
+      <rect x="225" y="20" width="250" height="44" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="350" y="37" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1a2233" font-weight="bold">Opcode in IR</text>
+      <text x="350" y="55" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">(Instruction Register)</text>
+
+      <!-- Arrow 1→2 -->
+      <line x1="350" y1="64" x2="350" y2="88" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroFlow)"/>
+
+      <!-- Node 2: Mapping Logic (neutral) -->
+      <rect x="225" y="90" width="250" height="44" rx="8" fill="#f0f2f5" stroke="#5a6577" stroke-width="2"/>
+      <text x="350" y="107" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1a2233" font-weight="bold">Mapping Logic</text>
+      <text x="350" y="125" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">(opcode → starting μ-address)</text>
+
+      <!-- Arrow 2→3 -->
+      <line x1="350" y1="134" x2="350" y2="158" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroFlow)"/>
+
+      <!-- Node 3: CAR (brand) -->
+      <rect x="215" y="160" width="270" height="44" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="350" y="177" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1a2233" font-weight="bold">Control Address Register (CAR)</text>
+      <text x="350" y="195" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">(holds address of current μ-instruction)</text>
+
+      <!-- Arrow 3→4 -->
+      <line x1="350" y1="204" x2="350" y2="228" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroFlow)"/>
+
+      <!-- Node 4: Control Memory / ROM (brand, wider) -->
+      <rect x="195" y="230" width="310" height="44" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="350" y="247" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1a2233" font-weight="bold">Control Memory (ROM)</text>
+      <text x="350" y="265" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">(stores all microinstructions)</text>
+
+      <!-- Arrow 4→5 -->
+      <line x1="350" y1="274" x2="350" y2="298" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroFlow)"/>
+
+      <!-- Node 5: CBR (brand) -->
+      <rect x="205" y="300" width="290" height="44" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="350" y="317" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1a2233" font-weight="bold">Control Buffer Register (CBR)</text>
+      <text x="350" y="335" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">(latches current μ-instruction)</text>
+
+      <!-- Horizontal arrow from CBR → control signals box (right side) -->
+      <line x1="495" y1="322" x2="568" y2="322" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrMicroFlowGood)"/>
+      <rect x="570" y="300" width="110" height="44" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="625" y="317" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1a2233" font-weight="bold">control</text>
+      <text x="625" y="333" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1a2233" font-weight="bold">signals →</text>
+
+      <!-- Arrow 5→6 -->
+      <line x1="350" y1="344" x2="350" y2="368" stroke="#1f6feb" stroke-width="2" marker-end="url(#arrMicroFlow)"/>
+
+      <!-- Node 6: Next-address Generator (neutral) -->
+      <rect x="195" y="370" width="310" height="54" rx="8" fill="#f0f2f5" stroke="#5a6577" stroke-width="2"/>
+      <text x="350" y="390" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#1a2233" font-weight="bold">Next-address Generator</text>
+      <text x="350" y="407" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">sequences next μ-instruction</text>
+      <text x="350" y="420" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">(increment / branch / condition)</text>
+
+      <!-- Loop arrow: Node 6 → Node 3 (CAR) on the left side -->
+      <!-- Path goes: left of node6 → left margin → up to CAR y level → right into CAR -->
+      <path d="M195,397 L140,397 L140,182 L215,182"
+            fill="none" stroke="#b54708" stroke-width="2" stroke-dasharray="6,3"
+            marker-end="url(#arrMicroFlowLoop)"/>
+      <text x="110" y="295" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#b54708" font-weight="bold" transform="rotate(-90,110,295)">next μ-addr</text>
+    </svg>
+  </div>
 
   <h4>Use cases</h4>
   <ul>
@@ -1943,36 +3263,104 @@ Interrupt: none → loop back to Fetch</pre>
   <h4>Q7. Explain DMA — definition, working, and block diagram.</h4>
   <div class="box def">
     <span class="label">Definition</span>
-    <strong>Direct Memory Access (DMA)</strong> is an I/O technique in which a dedicated <em>DMA controller</em> transfers blocks of data directly between an I/O device and main memory <em>without</em> involving the CPU for each word. The CPU initiates the transfer and is interrupted only when it completes.
+    Dedicated controller moves data blocks device ↔ memory without per-word CPU involvement. CPU initiates, gets one IRQ on completion.
+  </div>
+
+  <div class="box tip">
+    <span class="label">Scoring template — 8 marks</span>
+    <ul>
+      <li><strong>Definition</strong> (dedicated controller, no per-word CPU involvement) — 1 mark</li>
+      <li><strong>HOLD/HLDA and DREQ/DACK signal pairs</strong> (bus arbitration) — 2 marks</li>
+      <li><strong>Block diagram</strong> (CPU · DMA · Memory · I/O Device labelled) — 2 marks</li>
+      <li><strong>5-step transfer sequence</strong> (load → start → DREQ → move → IRQ) — 2 marks</li>
+      <li><strong>Modes</strong> (burst / cycle-steal) + advantages — 1 mark</li>
+    </ul>
   </div>
 
   <h4>Steps in a DMA transfer</h4>
   <ol>
-    <li>CPU programs the DMA controller with: source address, destination address, byte count, and direction (read/write).</li>
-    <li>CPU issues a <em>start</em> command and continues other work.</li>
-    <li>I/O device requests bus → DMA controller takes the bus (cycle-stealing or burst mode).</li>
-    <li>DMA controller transfers one word per memory cycle, decrementing the counter.</li>
-    <li>When counter = 0, controller raises an <strong>interrupt</strong> to signal completion.</li>
+    <li>CPU loads DMA with: src addr, dst addr, byte count, direction.</li>
+    <li>CPU issues start → resumes other work.</li>
+    <li>Device signals DREQ → DMA seizes bus (burst or cycle-steal).</li>
+    <li>DMA moves one word/cycle, decrements counter.</li>
+    <li>Counter = 0 → DMA raises IRQ to CPU.</li>
   </ol>
 
-  <h4>Block diagram (text view)</h4>
-  <pre class="formula-block">             ┌──────────┐                           ┌──────────┐
-   CPU ◄────►│ System   │◄────── address / data ───►│  Main    │
-             │  Bus     │                           │ Memory   │
-             └────┬─────┘                           └──────────┘
-                  │                                       ▲
-                  │ bus request / grant                   │
-                  ▼                                       │
-            ┌──────────┐    data path during transfer     │
-            │   DMA    │──────────────────────────────────┘
-            │Controller│
-            └────┬─────┘
-                 │ DREQ / DACK / IRQ
-                 ▼
-            ┌──────────┐
-            │  Disk /  │
-            │   NIC    │
-            └──────────┘</pre>
+  <div class="diagram">
+    <div class="diagram-title">DMA Controller — Block Diagram</div>
+    <svg viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;display:block;margin:0 auto;">
+      <defs>
+        <marker id="arrDmaBlk" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1f6feb"/>
+        </marker>
+        <marker id="arrDmaBlkL" markerWidth="10" markerHeight="10" refX="1" refY="5" orient="auto">
+          <polygon points="10 0, 0 5, 10 10" fill="#1f6feb"/>
+        </marker>
+        <marker id="arrDmaBlkD" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#5a6577"/>
+        </marker>
+        <marker id="arrDmaBlkG" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+          <polygon points="0 0, 10 5, 0 10" fill="#1a7f37"/>
+        </marker>
+      </defs>
+
+      <!-- TOP ROW -->
+      <!-- CPU (warn) -->
+      <rect x="40" y="55" width="110" height="54" rx="8" fill="#fff5e1" stroke="#b54708" stroke-width="2"/>
+      <text x="95" y="87" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1a2233">CPU</text>
+
+      <!-- System Bus (neutral, dashed) -->
+      <rect x="200" y="55" width="310" height="54" rx="8" fill="#f4f6f8" stroke="#5a6577" stroke-width="2" stroke-dasharray="6 3"/>
+      <text x="355" y="79" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1a2233">System Bus</text>
+      <text x="355" y="97" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">(shared address / data bus)</text>
+
+      <!-- Main Memory (good) -->
+      <rect x="570" y="55" width="140" height="54" rx="8" fill="#e6f4ea" stroke="#1a7f37" stroke-width="2"/>
+      <text x="640" y="79" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1a2233">Main</text>
+      <text x="640" y="97" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1a2233">Memory</text>
+
+      <!-- MIDDLE ROW -->
+      <!-- DMA Controller (brand) -->
+      <rect x="265" y="210" width="155" height="60" rx="8" fill="#e8f0fe" stroke="#1f6feb" stroke-width="2"/>
+      <text x="342" y="236" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1a2233">DMA</text>
+      <text x="342" y="254" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1a2233">Controller</text>
+
+      <!-- BOTTOM ROW -->
+      <!-- Disk / NIC (bad) -->
+      <rect x="265" y="355" width="155" height="50" rx="8" fill="#fdecec" stroke="#b42318" stroke-width="2"/>
+      <text x="342" y="378" text-anchor="middle" font-family="sans-serif" font-size="13" font-weight="600" fill="#1a2233">Disk / NIC</text>
+      <text x="342" y="396" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">(I/O Device)</text>
+
+      <!-- ARROWS -->
+      <!-- CPU <-> System Bus -->
+      <line x1="152" y1="82" x2="198" y2="82" stroke="#1f6feb" stroke-width="2"
+            marker-start="url(#arrDmaBlkL)" marker-end="url(#arrDmaBlk)"/>
+      <text x="175" y="74" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">data/ctrl</text>
+
+      <!-- System Bus <-> Main Memory -->
+      <line x1="511" y1="82" x2="568" y2="82" stroke="#1f6feb" stroke-width="2"
+            marker-start="url(#arrDmaBlkL)" marker-end="url(#arrDmaBlk)"/>
+      <text x="540" y="74" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#5a6577">address / data</text>
+
+      <!-- System Bus -> DMA Controller (down) -->
+      <line x1="355" y1="109" x2="355" y2="208" stroke="#5a6577" stroke-width="2"
+            marker-end="url(#arrDmaBlkD)"/>
+      <text x="368" y="160" text-anchor="start" font-family="sans-serif" font-size="11" fill="#5a6577">bus request /</text>
+      <text x="368" y="174" text-anchor="start" font-family="sans-serif" font-size="11" fill="#5a6577">grant</text>
+
+      <!-- DMA Controller -> Main Memory (diagonal curve, green) -->
+      <path d="M 420 230 Q 555 160 570 108" stroke="#1a7f37" stroke-width="2" fill="none"
+            marker-end="url(#arrDmaBlkG)"/>
+      <text x="516" y="166" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1a7f37">data path</text>
+      <text x="516" y="180" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#1a7f37">during transfer</text>
+
+      <!-- DMA Controller -> Disk/NIC (down) -->
+      <line x1="342" y1="270" x2="342" y2="353" stroke="#5a6577" stroke-width="2"
+            marker-end="url(#arrDmaBlkD)"/>
+      <text x="355" y="313" text-anchor="start" font-family="sans-serif" font-size="11" fill="#5a6577">DREQ / DACK /</text>
+      <text x="355" y="327" text-anchor="start" font-family="sans-serif" font-size="11" fill="#5a6577">IRQ</text>
+    </svg>
+  </div>
 
   <h4>Modes</h4>
   <ul>
@@ -1989,8 +3377,143 @@ Interrupt: none → loop back to Fetch</pre>
   </ul>
 
   <hr>
+  <h4>Q8. Explain cache memory mapping techniques with diagrams.</h4>
+  <div class="box tip">
+    <span class="label">Scoring template — 8 marks</span>
+    <ul>
+      <li><strong>Cache memory definition + need</strong> — 1 mark</li>
+      <li><strong>Direct mapping</strong> (formula, diagram, pros/cons) — 2 marks</li>
+      <li><strong>Fully associative mapping</strong> (any block → any line, CAM) — 2 marks</li>
+      <li><strong>Set-associative mapping</strong> (k-way, compromise) — 2 marks</li>
+      <li><strong>Comparison table</strong> — 1 mark</li>
+    </ul>
+  </div>
+
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Cache mapping</strong> — the rule that determines which cache line(s) a main-memory block may occupy.
+  </div>
+
+  <h4>(a) Direct Mapping</h4>
+  <ul>
+    <li>Each main-memory block maps to <strong>exactly one</strong> cache line.</li>
+    <li>Line number = Block number <code>mod</code> (Total cache lines).</li>
+    <li>Address split: <code>| Tag | Line index | Block offset |</code></li>
+    <li><strong>Pro:</strong> Fast, simple hardware. <strong>Con:</strong> High conflict-miss rate (two blocks mapping to the same line evict each other).</li>
+  </ul>
+  <pre class="formula-block">Cache line = Block address  mod  N
+  (N = number of cache lines)
+
+  Example: 8 cache lines, block 5 → line 5 mod 8 = 5
+           block 13 → line 13 mod 8 = 5  (conflict!)</pre>
+
+  <h4>(b) Fully Associative Mapping</h4>
+  <ul>
+    <li>A memory block may go into <strong>any</strong> cache line.</li>
+    <li>Address split: <code>| Tag | Block offset |</code> (no line-index field).</li>
+    <li>Requires <strong>Content-Addressable Memory (CAM)</strong> to search all tags in parallel.</li>
+    <li><strong>Pro:</strong> No conflict misses. <strong>Con:</strong> Expensive hardware; slow for large caches.</li>
+  </ul>
+
+  <h4>(c) Set-Associative Mapping (k-way)</h4>
+  <ul>
+    <li>Cache divided into <em>sets</em>; each set holds <em>k</em> lines (k-way).</li>
+    <li>Block maps to <strong>one set</strong> (like direct), but within that set can go into <strong>any of the k lines</strong> (like fully associative).</li>
+    <li>Address split: <code>| Tag | Set index | Block offset |</code></li>
+    <li>2-way and 4-way are most common in real CPUs.</li>
+    <li><strong>Pro:</strong> Balances cost and miss rate. <strong>Con:</strong> Needs replacement policy (LRU/FIFO) within each set.</li>
+  </ul>
+
+  <h4>Comparison table</h4>
+  <table>
+    <thead><tr><th>Feature</th><th>Direct</th><th>Fully Associative</th><th>Set-Associative (k-way)</th></tr></thead>
+    <tbody>
+      <tr><td>Placement</td><td>One fixed line</td><td>Any line</td><td>Any line in the mapped set</td></tr>
+      <tr><td>Hardware</td><td>Simple (comparator)</td><td>Complex (CAM)</td><td>Moderate</td></tr>
+      <tr><td>Conflict misses</td><td>High</td><td>None</td><td>Low</td></tr>
+      <tr><td>Replacement needed?</td><td>No (only one choice)</td><td>Yes</td><td>Yes (within set)</td></tr>
+      <tr><td>Used in</td><td>Simple / embedded</td><td>TLB, small caches</td><td>Modern L1/L2/L3</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic">
+    <strong>Memory hook — 3 mapping types</strong>
+    <strong style="color:var(--ink);font-size:14px;">"D F S — Direct, Flexible (fully associative), Smart (set-associative)"</strong>
+    Direct = one slot; Fully = any slot; Set = pick the set, then any slot inside.
+  </div>
+
+  <div class="box eg">
+    <span class="label">Example</span>
+    Cache: 64 lines, 4-way set-associative → 16 sets. A block at address 100: set = 100 mod 16 = 4. Block goes into set 4 (one of 4 available lines chosen by LRU).
+  </div>
+
+  <hr>
+  <h4>Q9. Explain pipelining — definition, speed-up, and hazards.</h4>
+  <div class="box tip">
+    <span class="label">Scoring template — 8 marks</span>
+    <ul>
+      <li><strong>Definition</strong> (overlapped instruction execution, assembly-line analogy) — 1 mark</li>
+      <li><strong>5-stage pipeline table</strong> (IF · ID · EX · MEM · WB) — 2 marks</li>
+      <li><strong>Speed-up formula + calculation</strong> — 2 marks</li>
+      <li><strong>Three hazards</strong> (structural / data / control with one-line cure each) — 2 marks</li>
+      <li><strong>Time-space diagram</strong> (sketch 4 instructions × 5 cycles, staggered) — 1 mark</li>
+    </ul>
+  </div>
+
+  <div class="box def">
+    <span class="label">Definition</span>
+    <strong>Pipelining</strong> — splits each instruction into <em>k</em> stages executed by dedicated hardware; multiple instructions overlap so throughput ≈ 1 instruction/cycle at steady state.
+  </div>
+
+  <h4>Classical 5-stage pipeline</h4>
+  <table>
+    <thead><tr><th>Stage</th><th>Short</th><th>Work done</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>IF</strong></td><td>Fetch instruction from memory; PC ← PC + 4</td></tr>
+      <tr><td>2</td><td><strong>ID</strong></td><td>Decode opcode; read register operands</td></tr>
+      <tr><td>3</td><td><strong>EX</strong></td><td>ALU executes; address calculation</td></tr>
+      <tr><td>4</td><td><strong>MEM</strong></td><td>LOAD/STORE accesses data memory</td></tr>
+      <tr><td>5</td><td><strong>WB</strong></td><td>Write result to register file</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Speed-up formula</h4>
+  <pre class="formula-block">Without pipeline: Time = n × k  (n instructions, k stages)
+With pipeline:    Time = k + (n − 1)  (fill + drain)
+
+Speed-up S = n × k / (k + n − 1)
+  → As n → ∞,  S → k  (ideal speed-up = number of stages)
+
+Example: k = 5 stages, n = 100 instructions
+  S = (100 × 5) / (5 + 99) = 500 / 104 ≈ 4.8×</pre>
+
+  <h4>Pipeline hazards — three types</h4>
+  <table>
+    <thead><tr><th>Hazard</th><th>Cause</th><th>Cure</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Structural</strong></td><td>Two stages compete for same resource</td><td>Separate I-cache &amp; D-cache; or stall</td></tr>
+      <tr><td><strong>Data (RAW/WAR/WAW)</strong></td><td>Instruction needs result not yet written</td><td>Forwarding / bypassing; stall; compiler reordering</td></tr>
+      <tr><td><strong>Control (Branch)</strong></td><td>Branch changes PC; wrong instructions fetched</td><td>Branch prediction; delayed branch; flush</td></tr>
+    </tbody>
+  </table>
+
+  <div class="mnemonic">
+    <strong>Memory hook — pipeline</strong>
+    <strong style="color:var(--ink);font-size:14px;">"IF ID EX MEM WB" → "I Do Everything Most Wonderfully"</strong>
+    Speed-up formula: S = nk / (k + n − 1). For large n, S ≈ k (number of stages).
+  </div>
+
+  <div class="box eg">
+    <span class="label">Worked example — 4 marks</span>
+    A 4-stage pipeline executes 50 instructions.<br>
+    Non-pipelined: 50 × 4 = 200 cycles.<br>
+    Pipelined: 4 + 49 = 53 cycles.<br>
+    Speed-up = 200 / 53 ≈ <strong>3.77×</strong>.
+  </div>
+
+  <hr>
   <h3>8.4 Likely Q-by-Unit Mapping</h3>
-  <p>Where to spend revision time per syllabus unit. Based on the existing 7-section guide.</p>
+  <p>Revision priority by syllabus unit.</p>
 
   <table>
     <thead>
@@ -2132,3 +3655,5 @@ Interrupt: none → loop back to Fetch</pre>
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
 </body>
 </html>
+
+
