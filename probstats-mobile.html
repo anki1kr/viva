@@ -3,16 +3,41 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#1f6feb" />
+<meta name="theme-color" content="#7c2d12" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="format-detection" content="telephone=no" />
-<title>Probability &amp; Statistics — Study Guide</title>
+<title>ProbStats · Sessional 2 · May 9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Spectral:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f7f9fc;
-    --panel: #ffffff;
-    --ink: #1a2233;
+    --paper:#f7f1e1;
+    --paper-soft:#fffaef;
+    --paper-deep:#ebe2cc;
+    --ink:#1a1209;
+    --ink-soft:#3d2f1c;
+    --muted:#6b5d47;
+    --rule:#d9cfb6;
+    --auburn:#7c2d12;
+    --auburn-soft:#fde6d6;
+    --gold:#a16207;
+    --gold-soft:#fff8e7;
+    --highlighter:#fde047;
+    --highlight-pink:#fbcfe8;
+    --highlight-mint:#bbf7d0;
+    --forest:#365314;
+    --forest-soft:#ecf5dc;
+    --crimson:#9f1239;
+    --crimson-soft:#fee2e2;
+    --shadow: 0 1px 0 rgba(26,18,9,.05), 0 8px 24px -10px rgba(26,18,9,.18);
+    /* legacy aliases used by inline class names */
+    --bg: var(--paper);
+    --panel: var(--paper-soft);
+    --brand: var(--auburn);
+    --brand-soft: var(--auburn-soft);
+    --brand-dark: #5a1f0c;
     --muted: #5a6577;
     --brand: #1f6feb;
     --brand-soft: #e8f0fe;
@@ -336,35 +361,614 @@
     aside, .nav-toggle { display: none; }
     main { padding: 0; }
     .layout { grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
+     PAPER-JOURNAL THEME OVERRIDE  (matches r-datascience-mobile)
+     Mobile-first: base ≤480px, then ≥600px upscales.
+     ============================================================ */
+  *{ -webkit-tap-highlight-color: transparent; }
+  html, body{ background: var(--paper) !important; }
+  body{
+    font-family:"Spectral", Georgia, serif !important;
+    font-size:15.5px;
+    line-height:1.6;
+    color:var(--ink) !important;
+    background:
+      radial-gradient(ellipse at top left, rgba(252,235,200,.6), transparent 60%),
+      radial-gradient(ellipse at bottom right, rgba(241,224,193,.5), transparent 70%),
+      var(--paper) !important;
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  body::before{
+    content:""; position:fixed; inset:0;
+    background-image: repeating-linear-gradient(0deg, rgba(124,45,18,.012) 0 1px, transparent 1px 28px);
+    pointer-events:none; z-index:0;
+  }
+
+  /* Kill legacy two-column layout */
+  .layout{ display:block !important; grid-template-columns:none !important; min-height:auto !important; }
+  aside.legacy-killed{ display:none !important; }
+
+  /* Topbar */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(247,241,225,.96);
+    backdrop-filter: blur(8px);
+    border-bottom:1.5px solid var(--ink);
+  }
+  .topbar .title{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px 14px 4px;
+  }
+  .topbar .title b{
+    font-family:"Fraunces", serif;
+    font-variation-settings:"opsz" 96;
+    font-weight:600; font-size:16px;
+    color:var(--auburn); letter-spacing:-.01em;
+  }
+  .topbar .title small{
+    font-family:"JetBrains Mono", monospace;
+    font-size:10px; letter-spacing:.18em;
+    color:var(--muted); text-transform:uppercase;
+  }
+  nav.chips{
+    display:flex; gap:6px;
+    padding:6px 12px 10px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  nav.chips::-webkit-scrollbar{ display:none; }
+  nav.chips a{
+    flex-shrink:0;
+    padding:6px 11px;
+    font-family:"JetBrains Mono", monospace;
+    font-size:10.5px; font-weight:500;
+    letter-spacing:.08em;
+    color:var(--ink);
+    background:var(--paper-soft);
+    border:1.5px solid var(--ink);
+    border-radius:0;
+    text-decoration:none;
+    white-space:nowrap;
+    text-transform:uppercase;
+  }
+  nav.chips a.hot{ background:var(--highlighter); }
+  nav.chips a.active, nav.chips a:hover{ background:var(--auburn); color:var(--paper); }
+
+  /* Main wrap (replaces grid main) */
+  main{
+    position:relative; z-index:1;
+    max-width:720px !important;
+    margin:0 auto !important;
+    padding:14px 12px 80px !important;
+    background: transparent !important;
+  }
+
+  /* Cover (replaces .hero) */
+  main > .hero{
+    margin: 0 0 28px;
+    padding: 22px 18px 20px;
+    background:
+      radial-gradient(circle at 15% 18%, rgba(253,224,71,.45), transparent 40%),
+      radial-gradient(circle at 90% 80%, rgba(251,207,232,.35), transparent 45%),
+      var(--paper-soft) !important;
+    border:1.5px solid var(--ink) !important;
+    box-shadow: 4px 4px 0 var(--ink) !important;
+    border-radius:4px !important;
+    color: var(--ink) !important;
+    position:relative;
+  }
+  main > .hero::after{
+    content:"Sessional 02 · 2026";
+    position:absolute; top:14px; right:14px;
+    border:1.5px solid var(--auburn);
+    color:var(--auburn);
+    padding:3px 9px;
+    font-family:"JetBrains Mono", monospace;
+    font-size:9.5px; letter-spacing:.18em;
+    transform: rotate(4deg);
+    background:rgba(255,250,239,.7);
+  }
+  main > .hero h1{
+    font-family:"Fraunces", serif !important;
+    font-variation-settings:"opsz" 144, "SOFT" 50;
+    font-weight:600 !important;
+    font-size: clamp(32px, 9vw, 72px) !important;
+    line-height:.92 !important;
+    letter-spacing:-.02em !important;
+    color:var(--ink) !important;
+    margin:24px 0 6px !important;
+  }
+  main > .hero p{
+    font-family:"Caveat", cursive !important;
+    font-size:22px !important;
+    color:var(--auburn) !important;
+    line-height:1.2;
+    margin: 12px 0 4px !important;
+    transform: rotate(-1deg);
+    display:inline-block;
+  }
+  main > .hero p strong{ color:var(--auburn); }
+
+  /* Legend */
+  .legend{
+    display:flex; flex-wrap:wrap; gap:6px;
+    margin: 18px 0 22px !important;
+    padding:0 !important;
+  }
+  .legend .pill, .legend span{
+    font-family:"JetBrains Mono", monospace;
+    font-size:10px; letter-spacing:.16em;
+    text-transform:uppercase;
+    padding:4px 9px;
+    background:var(--paper-soft);
+    color:var(--ink);
+    border:1.5px solid var(--ink);
+    border-radius:0;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .legend .pill.green{ background:var(--forest-soft); border-color:var(--forest); color:var(--forest); }
+  .legend .pill.amber{ background:var(--gold-soft); border-color:var(--gold); color:var(--gold); }
+  .legend .pill.red{ background:var(--crimson-soft); border-color:var(--crimson); color:var(--crimson); }
+  .legend .pill.purple{ background:var(--auburn-soft); border-color:var(--auburn); color:var(--auburn); }
+
+  /* Section blocks */
+  section{ margin: 0 0 36px !important; scroll-margin-top: 110px; }
+  h2.topic{
+    display:block !important;
+    position:relative;
+    padding:18px 0 14px !important;
+    border-bottom:2px solid var(--ink) !important;
+    margin: 0 0 18px !important;
+    font-family:"Fraunces", serif !important;
+    font-variation-settings:"opsz" 96, "SOFT" 30;
+    font-weight:500 !important;
+    font-size: clamp(24px, 7vw, 46px) !important;
+    line-height:1.05 !important;
+    letter-spacing:-.02em !important;
+    color: var(--ink) !important;
+    background: transparent !important;
+  }
+  h2.topic .num{
+    font-family:"Fraunces", serif !important;
+    font-style:italic !important;
+    font-weight:300 !important;
+    color:var(--auburn) !important;
+    background: transparent !important;
+    border:none !important;
+    box-shadow:none !important;
+    font-size:.55em !important;
+    vertical-align: 0.3em !important;
+    margin-right:.4em !important;
+    padding:0 !important;
+  }
+  h2.topic .unit{
+    display:inline-block;
+    font-family:"JetBrains Mono", monospace !important;
+    font-size:10px !important;
+    letter-spacing:.22em !important;
+    color: var(--ink) !important;
+    background: var(--highlighter) !important;
+    border:1.5px solid var(--ink) !important;
+    box-shadow: 2px 2px 0 var(--ink);
+    padding: 3px 8px !important;
+    text-transform:uppercase !important;
+    transform: rotate(-1deg);
+    margin-left:8px !important;
+    vertical-align: middle;
+  }
+  h2.topic::before{
+    content:"Topic";
+    display:block;
+    font-family:"JetBrains Mono", monospace;
+    font-size:10.5px; letter-spacing:.28em;
+    color:var(--auburn);
+    text-transform:uppercase;
+    margin-bottom:6px;
+    font-weight:500;
+  }
+  section[id^="t1"] h2.topic::before{ content:"Foundation"; }
+  section[id="t8"] h2.topic::before, section[id="t7"] h2.topic::before{ content:"Statistics"; }
+  section[id="sessional-booster"] h2.topic::before{ content:"Booster"; }
+  section[id="pyq-may-2025"] h2.topic::before{ content:"Past paper"; }
+
+  h3{
+    font-family:"Fraunces", serif !important;
+    font-variation-settings:"opsz" 60;
+    font-weight:600 !important;
+    font-size:18px !important;
+    line-height:1.3 !important;
+    margin: 22px 0 8px !important;
+    color: var(--ink) !important;
+    letter-spacing:-.005em;
+  }
+  h4{
+    font-family:"JetBrains Mono", monospace !important;
+    font-size:10.5px !important;
+    letter-spacing:.2em !important;
+    color:var(--muted) !important;
+    text-transform:uppercase !important;
+    font-weight:600 !important;
+    margin: 16px 0 6px !important;
+  }
+  p, ul, ol{ margin:8px 0; }
+  ul, ol{ padding-left:22px; }
+  li{ margin:4px 0; }
+  li::marker{ color:var(--auburn); }
+  p.lead{
+    font-family:"Spectral", serif !important;
+    font-style:italic;
+    font-size: 15px;
+    color: var(--ink-soft) !important;
+    background: transparent !important;
+    border:none !important;
+    padding:0 !important;
+    margin: 0 0 14px !important;
+  }
+  strong{ color:var(--ink); font-weight:700; }
+  em{ color:var(--ink-soft); font-style:italic; }
+  a{ color:var(--auburn); }
+  code{
+    font-family:"JetBrains Mono", monospace !important;
+    font-size:.86em;
+    background:var(--paper-deep) !important;
+    color:var(--ink) !important;
+    padding:1px 6px;
+    border-radius:3px;
+    border:1px solid var(--rule);
+  }
+  mark{
+    background: linear-gradient(180deg, transparent 55%, var(--highlighter) 55%) !important;
+    padding:0 1px;
+    color: var(--ink);
+  }
+
+  /* Boxes — remap legacy variants */
+  .box{
+    margin:12px 0 !important;
+    padding: 11px 13px 11px 14px !important;
+    border-radius:4px !important;
+    background: var(--paper-soft) !important;
+    border: none !important;
+    border-left: 4px solid var(--auburn) !important;
+    color: var(--ink) !important;
+    font-size:14px;
+    box-shadow: none !important;
+  }
+  .box.def{ background: var(--gold-soft) !important; border-left-color: var(--gold) !important; }
+  .box.eg{ background: var(--forest-soft) !important; border-left-color: var(--forest) !important; }
+  .box.tip{ background: var(--auburn-soft) !important; border-left-color: var(--auburn) !important; }
+  .box.bad{ background: var(--crimson-soft) !important; border-left-color: var(--crimson) !important; }
+  .box .label{
+    display:block;
+    font-family:"JetBrains Mono", monospace !important;
+    font-size:9.5px !important;
+    letter-spacing:.2em !important;
+    text-transform:uppercase !important;
+    font-weight:700 !important;
+    margin-bottom:6px;
+    color:var(--auburn) !important;
+    background: transparent !important;
+    padding:0 !important;
+  }
+  .box.def .label{ color: var(--gold) !important; }
+  .box.eg .label{ color: var(--forest) !important; }
+  .box.tip .label{ color: var(--auburn) !important; }
+  .box.bad .label{ color: var(--crimson) !important; }
+  .box .marks{
+    float:right;
+    background: var(--ink);
+    color: var(--highlighter);
+    font-family:"JetBrains Mono", monospace;
+    font-size:9.5px;
+    letter-spacing:.18em;
+    padding: 2px 7px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Inline simple/walkthrough chips */
+  .simple, .walkthrough{
+    display:inline-block !important;
+    font-family:"JetBrains Mono", monospace !important;
+    font-size:9.5px !important;
+    letter-spacing:.2em !important;
+    text-transform:uppercase !important;
+    padding:3px 8px !important;
+    margin: 2px 4px 2px 0 !important;
+    border:1.5px solid var(--ink) !important;
+    background: var(--highlight-mint) !important;
+    color: var(--ink) !important;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .walkthrough{ background: var(--highlighter) !important; }
+
+  /* Mnemonic block — turn into TLDR-card */
+  .mnemonic{
+    margin: 18px 0 !important;
+    padding: 16px 16px !important;
+    background: var(--ink) !important;
+    color: var(--paper) !important;
+    border: none !important;
+    border-radius: 4px !important;
+    box-shadow: 4px 4px 0 var(--auburn) !important;
+    font-family:"Spectral", serif !important;
+    font-size: 14.5px;
+  }
+  .mnemonic strong{
+    color: var(--highlighter) !important;
+    font-family:"JetBrains Mono", monospace;
+    font-size: 11px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    display:block;
+    margin-bottom: 8px;
+  }
+  .mnemonic strong[style]{
+    font-family: "Spectral", serif !important;
+    font-size: 14.5px !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+    color: var(--paper) !important;
+    display:block;
+    margin-top: 6px;
+    margin-bottom: 0 !important;
+  }
+  .mnemonic strong[style] b{ color: var(--highlighter); }
+
+  /* Formula block — keep dark, accent auburn */
+  pre.formula-block, .formula-block{
+    font-family:"JetBrains Mono", monospace !important;
+    font-size: 11.5px !important;
+    line-height: 1.55;
+    background:#1a1209 !important;
+    color: #f7f1e1 !important;
+    padding: 10px 12px !important;
+    border-radius: 4px !important;
+    overflow-x:auto;
+    margin: 10px -2px !important;
+    border-left: 3px solid var(--auburn) !important;
+    border:none;
+    border-left: 3px solid var(--auburn) !important;
+    white-space:pre;
+    -webkit-overflow-scrolling: touch;
+  }
+  .formula-block .lbl{ color:#fde68a; font-weight:500; }
+
+  /* Tables */
+  .table-wrap{ margin:14px -4px; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  table{
+    width:100%; min-width:100%;
+    border-collapse:collapse;
+    font-size:12.5px;
+    background:var(--paper-soft) !important;
+    border:1.5px solid var(--ink) !important;
+    margin: 12px 0;
+  }
+  th, td{
+    padding:6px 8px !important;
+    text-align:left;
+    border-bottom:1px solid var(--rule) !important;
+    vertical-align:top;
+    line-height:1.4;
+    color: var(--ink);
+  }
+  th{
+    font-family:"Fraunces", serif !important;
+    font-weight:600 !important;
+    font-size: 12.5px !important;
+    background: var(--ink) !important;
+    color: var(--paper) !important;
+    border-bottom: 1.5px solid var(--ink) !important;
+  }
+  tbody tr:nth-child(odd){ background: rgba(235,226,204,.35); }
+  td:first-child{ font-weight:600; color:var(--ink); }
+
+  /* Diagrams */
+  .diagram{
+    margin:14px -2px !important;
+    padding:10px 6px 8px !important;
+    background:#fffefb !important;
+    border:1.5px solid var(--ink) !important;
+    border-radius:4px !important;
+    text-align:center;
+    box-shadow: none !important;
+  }
+  .diagram-title{
+    font-family:"JetBrains Mono", monospace !important;
+    font-size:10px !important;
+    letter-spacing:.18em !important;
+    color:var(--muted) !important;
+    text-transform:uppercase;
+    margin-top: 0 !important;
+    margin-bottom: 6px !important;
+    padding:0 8px;
+    text-align: center;
+    font-weight: 600;
+    border:none !important;
+    background: transparent !important;
+  }
+  .diagram svg{ width:100%; height:auto; max-width:100%; display:block; margin:0 auto; }
+
+  /* Quiz */
+  .quiz{
+    margin: 18px 0 !important;
+    padding: 14px 14px !important;
+    background: var(--paper-soft) !important;
+    border: 1.5px solid var(--ink) !important;
+    border-radius: 4px !important;
+    box-shadow: 3px 3px 0 var(--auburn) !important;
+  }
+  .quiz h4{ margin-top:0 !important; }
+  .quiz .q{
+    font-family:"Fraunces", serif;
+    font-weight:600;
+    font-size: 15px;
+    margin: 10px 0 4px;
+    color: var(--ink);
+  }
+  .quiz button.reveal{
+    margin-left: 6px;
+    padding: 4px 10px;
+    font-family:"JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    background: var(--ink) !important;
+    color: var(--highlighter) !important;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .quiz .answer{
+    display:none;
+    font-family:"Caveat", cursive;
+    font-size: 19px;
+    color: var(--forest);
+    margin: 4px 0 8px 4px;
+    padding-left: 10px;
+    border-left: 2px solid var(--auburn);
+  }
+  .quiz .answer.show{ display:block; }
+  .quiz .answer::before{ content:"→ "; color: var(--auburn); }
+
+  /* Hide legacy nav-toggle button (we use chips) */
+  .nav-toggle{ display:none !important; }
+
+  /* Floating up button */
+  .up{
+    position:fixed;
+    bottom:18px; right:18px;
+    width:42px; height:42px;
+    background:var(--ink);
+    color:var(--highlighter);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    text-decoration:none;
+    font-size:18px; font-weight:700;
+    box-shadow: 3px 3px 0 var(--auburn);
+    z-index:40;
+  }
+
+  /* Footer */
+  footer.end{
+    margin: 56px 0 0;
+    padding: 26px 22px;
+    text-align:center;
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:4px;
+  }
+  footer.end h3{
+    font-family:"Fraunces", serif !important;
+    font-variation-settings:"opsz" 144, "SOFT" 100;
+    font-weight: 300 !important;
+    font-style: italic;
+    font-size: 26px !important;
+    margin: 0 0 6px !important;
+    color: var(--paper) !important;
+  }
+  footer.end h3 b{ color: var(--highlighter); font-style:normal; font-weight:700; }
+  footer.end p{
+    font-family:"Caveat", cursive;
+    font-size: 20px;
+    margin: 6px 0 0;
+    color: var(--highlighter);
+  }
+
+  /* Tablet+ upscales */
+  @media (min-width: 600px){
+    body{ font-size: 17px; line-height: 1.7; }
+    main{ padding: 24px 22px 96px !important; }
+    main > .hero{ padding: 30px 26px 26px; box-shadow: 6px 6px 0 var(--ink) !important; }
+    h2.topic{ font-size: clamp(30px, 6vw, 52px) !important; padding: 24px 0 18px !important; }
+    h3{ font-size: 22px !important; }
+    .box{ font-size: 15.5px; padding: 14px 16px 14px 18px !important; }
+    table{ font-size: 14px; }
+    th, td{ padding: 9px 10px !important; }
+    pre.formula-block, .formula-block{ font-size: 13px !important; padding: 14px 16px !important; }
+  }
+
+  /* Very narrow */
+  @media (max-width: 360px){
+    body{ font-size: 14.5px; }
+    main{ padding: 10px 10px 60px !important; }
+    main > .hero{ padding: 18px 14px 16px; }
+    main > .hero h1{ font-size: 28px !important; }
+    nav.chips a{ font-size: 9.5px; padding: 5px 9px; }
+    table{ font-size: 11.5px; }
+    th, td{ padding: 5px 6px !important; }
+    .topbar .title b{ font-size: 14px; }
+  }
+
+  /* Topic / approach callout — sits at top of each PYQ answer */
+  .topic-tag{
+    display:block;
+    margin: 0 0 10px;
+    padding: 8px 12px;
+    background: var(--paper-deep);
+    border-left: 3px solid var(--auburn);
+    border-radius: 3px;
+    font-family: "Spectral", serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .topic-tag strong{
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--auburn);
+    font-style: normal;
+    margin-right: 4px;
+  }
+  @media (min-width: 600px){ .topic-tag{ font-size: 14px; padding: 10px 14px; } }
+
+  /* Print */
+  @media print{
+    .topbar, .up{ display:none !important; }
+    body::before{ display:none; }
+    main{ max-width: 100% !important; padding: 0 !important; }
+    main > .hero{ box-shadow: none !important; border:1.5pt solid #000; page-break-after: always; }
+    section{ page-break-before: always; }
+    .box, .quiz, .mnemonic, .diagram, table, pre{ page-break-inside: avoid; }
+    a{ color:#000 !important; text-decoration:none; }
   }</style>
 </head>
 <body>
 
-<div class="layout">
-  <aside>
-    <h1>Probability &amp; Stats</h1>
-    <div class="sub">Units I &amp; III — PYQ-loaded interactive notes</div>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      Navigation
-    </button>
-    <ol id="navList">
-      <li><a href="#t1">Probability Foundations</a></li>
-      <li><a href="#t2">Random Variables &amp; Distributions</a></li>
-      <li><a href="#t3">Discrete Distributions</a></li>
-      <li><a href="#t4">Continuous Distributions</a></li>
-      <li><a href="#t5">Data Types &amp; Representation</a></li>
-      <li><a href="#t6">Central Tendency</a></li>
-      <li><a href="#t7">Dispersion &amp; Covariance</a></li>
-      <li><a href="#t8">Skewness</a></li>
-      <li><a href="#sessional-booster">Sessional Exam Booster</a></li>
-    </ol>
-  </aside>
+<!-- ============== STICKY NAV ============== -->
+<div class="topbar">
+  <div class="title">
+    <b>ProbStats · Sessional 2</b>
+    <small>May 9 · 30 M</small>
+  </div>
+  <nav class="chips">
+    <a href="#t1">U1 · Prob</a>
+    <a href="#t2">U1 · RV</a>
+    <a href="#t3">U1 · Discrete</a>
+    <a href="#t4">U1 · Continuous</a>
+    <a href="#t5">U3 · Data</a>
+    <a href="#t6">U3 · Mean</a>
+    <a href="#t7">U3 · SD</a>
+    <a href="#t8">U3 · Skew</a>
+    <a href="#sessional-booster" class="hot">⚡ Booster</a>
+    <a href="#pyq-may-2025" class="hot">⭐ PYQ Solved</a>
+    <a href="#backup-qs" class="hot">🛟 Backup Qs</a>
+  </nav>
+</div>
 
-  <main>
+<main>
     <div class="hero">
-      <h1>Probability &amp; Statistics</h1>
-      <p>BCA-DS-23-204 (Sem IV) — definitions, formulas, SVG diagrams, and <strong>fully-worked May 2025 PYQ</strong> for every topic.</p>
+      <h1>Probability<br>&amp; Statistics</h1>
+      <p>BCA-DS-23-204 · Sessional 02 · May 9 · 30 marks · Units I &amp; III</p>
     </div>
 
     <div class="legend">
@@ -1871,62 +2475,171 @@ or, when mode is ill-defined:  Sk = 3 (Mean − Median) / SD</div>
     <strong>Use case.</strong> Income, response times, exam difficulty analysis, defect counts — every right-skewed real-world variable. A non-zero Sk warns against assuming normality before applying parametric tests.
   </div>
 
-  <!-- =================== UNIT MAPPING TABLE =================== -->
-  <h3>9.4 Likely Q-by-Unit Mapping</h3>
-  <p>Past patterns suggest one Section B question per unit area. Use this map to ration revision time.</p>
+  <!-- =================== ALL DISTRIBUTIONS — MASTER FORMULA SHEET =================== -->
+  <h3>9.4 All Distributions — Master Formula Sheet</h3>
+  <p>Every probability distribution in the syllabus, name-wise, with its pmf / pdf, mean, variance, MGF, and use-case. Mug this one table — every Unit I numerical reduces to plugging numbers into the right row.</p>
 
+  <h4>A · Discrete Distributions</h4>
+
+  <!-- ===== Bernoulli ===== -->
+  <div class="box def">
+    <span class="label">1 · Bernoulli(p)</span>
+    <strong>Use case.</strong> A single trial with two outcomes — success (1) with probability p, failure (0) with probability q = 1 − p.
+    <div class="formula-block"><span class="lbl">P(X = x) = pˣ · q^{1 − x},  x ∈ {0, 1}
+Mean μ = p
+Variance σ² = pq
+SD σ = √(pq)
+MGF M(t) = q + p·eᵗ</span></div>
+    <em>Example:</em> a single coin toss with p = 0.5 → Mean = 0.5, Var = 0.25.
+  </div>
+
+  <!-- ===== Binomial ===== -->
+  <div class="box def">
+    <span class="label">2 · Binomial(n, p)</span>
+    <strong>Use case.</strong> n independent Bernoulli trials, fixed n, constant p, count number of successes.
+    <div class="formula-block"><span class="lbl">P(X = k) = C(n, k) · pᵏ · q^{n − k},   k = 0, 1, 2, …, n
+Mean μ = np
+Variance σ² = npq
+SD σ = √(npq)
+MGF M(t) = (q + p·eᵗ)ⁿ
+Skewness = (q − p) / √(npq)</span></div>
+    <em>Conditions:</em> two outcomes per trial · n fixed · trials independent · p constant.
+    <br><em>Example:</em> 5 coin tosses, P(2 heads) = C(5, 2)·(0.5)²·(0.5)³ = 10/32 ≈ 0.3125.
+  </div>
+
+  <!-- ===== Geometric ===== -->
+  <div class="box def">
+    <span class="label">3 · Geometric(p)</span>
+    <strong>Use case.</strong> Number of independent Bernoulli trials needed to get the <em>first</em> success.
+    <div class="formula-block"><span class="lbl">P(X = k) = q^{k − 1} · p,   k = 1, 2, 3, …
+Mean μ = 1/p
+Variance σ² = q/p²
+SD σ = √q / p
+MGF M(t) = (p·eᵗ) / (1 − q·eᵗ),   t &lt; −ln q
+Memoryless: P(X &gt; m + n | X &gt; m) = P(X &gt; n)</span></div>
+    <em>Example:</em> p = 0.2 (defective). Expected trials till first defective = 1/0.2 = 5.
+  </div>
+
+  <!-- ===== Poisson ===== -->
+  <div class="box def">
+    <span class="label">4 · Poisson(λ)</span>
+    <strong>Use case.</strong> Count of <em>rare</em> events in a fixed interval of time / area / volume. Limit of Binomial when n → ∞, p → 0, np = λ.
+    <div class="formula-block"><span class="lbl">P(X = k) = e^{−λ} · λᵏ / k!,   k = 0, 1, 2, …
+Mean μ = λ
+Variance σ² = λ
+SD σ = √λ
+MGF M(t) = exp[λ(eᵗ − 1)]
+Skewness = 1/√λ</span></div>
+    <em>Conditions:</em> n large · p small · np = λ moderate · events independent.
+    <br><em>Example:</em> λ = 2 calls/min, P(3 calls) = e⁻²·8/6 ≈ 0.180.
+  </div>
+
+  <!-- ===== Discrete Uniform ===== -->
+  <div class="box def">
+    <span class="label">5 · Discrete Uniform on {1, 2, …, n}</span>
+    <strong>Use case.</strong> Equally-likely discrete outcomes — fair die, lottery digit, random index.
+    <div class="formula-block"><span class="lbl">P(X = k) = 1/n,   k = 1, 2, …, n
+Mean μ = (n + 1)/2
+Variance σ² = (n² − 1)/12
+SD σ = √[(n² − 1)/12]</span></div>
+    <em>Example:</em> Fair die (n = 6) → Mean = 3.5, Var = 35/12 ≈ 2.917.
+  </div>
+
+  <h4>B · Continuous Distributions</h4>
+
+  <!-- ===== Continuous Uniform ===== -->
+  <div class="box def">
+    <span class="label">6 · Uniform(a, b) — Continuous</span>
+    <strong>Use case.</strong> Any value in [a, b] is equally likely — bus arrival time, random number in an interval.
+    <div class="formula-block"><span class="lbl">f(x) = 1 / (b − a),   a ≤ x ≤ b   (else 0)
+F(x) = (x − a) / (b − a)
+P(c ≤ X ≤ d) = (d − c) / (b − a)
+Mean μ = (a + b)/2
+Variance σ² = (b − a)² / 12
+SD σ = (b − a) / √12
+MGF M(t) = (e^{bt} − e^{at}) / [t(b − a)],   t ≠ 0;  M(0) = 1</span></div>
+    <em>Example:</em> X ~ Uniform(0, 30) → Mean = 15, Var = 75, SD ≈ 8.66.
+  </div>
+
+  <!-- ===== Exponential ===== -->
+  <div class="box def">
+    <span class="label">7 · Exponential(λ)</span>
+    <strong>Use case.</strong> Waiting time / lifetime / time-between-events when events occur at constant rate λ. Memoryless.
+    <div class="formula-block"><span class="lbl">f(x) = λ · e^{−λx},   x ≥ 0   (else 0)
+F(x) = 1 − e^{−λx}
+P(X &gt; t) = e^{−λt}
+Mean μ = 1/λ
+Variance σ² = 1/λ²
+SD σ = 1/λ
+MGF M(t) = λ / (λ − t),   t &lt; λ
+Memoryless: P(X &gt; s + t | X &gt; s) = P(X &gt; t)</span></div>
+    <em>Example:</em> Mean lifetime 800 h → λ = 1/800. P(X &gt; 1000) = e⁻¹·²⁵ ≈ 0.287.
+  </div>
+
+  <!-- ===== Normal ===== -->
+  <div class="box def">
+    <span class="label">8 · Normal(μ, σ²)</span>
+    <strong>Use case.</strong> Bell-shaped, symmetric, the most important distribution. Models heights, weights, exam scores, measurement errors, sums of many small effects (CLT).
+    <div class="formula-block"><span class="lbl">f(x) = (1 / σ√(2π)) · exp[−(x − μ)² / (2σ²)],   −∞ &lt; x &lt; ∞
+Mean μ = Median = Mode
+Variance σ²
+SD σ
+MGF M(t) = exp[μ·t + σ²·t² / 2]
+Standardisation:  Z = (X − μ) / σ ~ N(0, 1)
+Empirical rule: 68 % within μ ± σ, 95 % within μ ± 2σ, 99.7 % within μ ± 3σ
+Skewness = 0,   Kurtosis β₂ = 3 (mesokurtic)</span></div>
+    <em>Example:</em> X ~ N(50, 100), σ = 10. P(40 ≤ X ≤ 60) = P(−1 ≤ Z ≤ 1) ≈ 0.6826.
+  </div>
+
+  <!-- ===== Standard Normal ===== -->
+  <div class="box def">
+    <span class="label">9 · Standard Normal Z ~ N(0, 1)</span>
+    <strong>Use case.</strong> Look-up distribution for any Normal problem after standardisation.
+    <div class="formula-block"><span class="lbl">f(z) = (1 / √(2π)) · exp[−z² / 2]
+Mean = 0,  Variance = 1,  SD = 1
+Φ(z) = P(Z ≤ z)  (read from Z-table)
+Symmetry: Φ(−z) = 1 − Φ(z)
+P(a ≤ Z ≤ b) = Φ(b) − Φ(a)
+P(|Z| ≤ z) = 2·Φ(z) − 1</span></div>
+    <em>Standard Z-values to memorise:</em>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>z</th><th>0.5</th><th>1.0</th><th>1.5</th><th>1.96</th><th>2.0</th><th>2.5</th><th>3.0</th></tr></thead>
+      <tbody>
+        <tr><td>Φ(z)</td><td>0.6915</td><td>0.8413</td><td>0.9332</td><td>0.9750</td><td>0.9772</td><td>0.9938</td><td>0.9987</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- ===== Cheat-sheet table ===== -->
+  <h4>C · Quick comparison — all rows on one page</h4>
+  <div class="table-wrap">
   <table>
-    <thead><tr><th>Unit / Area</th><th>Topics</th><th>Most likely 1-mark</th><th>Most likely 8-mark</th></tr></thead>
+    <thead>
+      <tr><th>Distribution</th><th>pmf / pdf</th><th>Mean</th><th>Variance</th><th>MGF</th></tr>
+    </thead>
     <tbody>
-      <tr>
-        <td><strong>Unit I — Probability</strong></td>
-        <td>Sample space, addition / product rules, conditional, Bayes</td>
-        <td>Definitions, range of P, axiom statements</td>
-        <td>Bayes' numerical (machines / disease test); two-dice "divisible by …"</td>
-      </tr>
-      <tr>
-        <td><strong>Unit I — RV &amp; Distributions</strong></td>
-        <td>RV, PMF / PDF, expectation, variance, Bernoulli</td>
-        <td>E(X), Var(X), PMF condition Σp = 1</td>
-        <td>Find E(X), Var(X) of given PMF; verify f(x) is a valid PDF</td>
-      </tr>
-      <tr>
-        <td><strong>Unit II — Discrete</strong></td>
-        <td>Binomial, Poisson</td>
-        <td>Mean / variance values; condition n large p small</td>
-        <td>Binomial coin / die problem; Poisson typos / calls problem</td>
-      </tr>
-      <tr>
-        <td><strong>Unit II — Continuous</strong></td>
-        <td>Normal, standard normal, Z-score</td>
-        <td>Empirical 68-95-99.7; Z formula</td>
-        <td>Normal marks problem with two probability ranges</td>
-      </tr>
-      <tr>
-        <td><strong>Unit III — Central Tendency</strong></td>
-        <td>Mean, median, mode, empirical relation</td>
-        <td>Definitions, position formula, empirical relation</td>
-        <td>Compute all three on raw data and explain when to prefer each</td>
-      </tr>
-      <tr>
-        <td><strong>Unit III — Dispersion</strong></td>
-        <td>Range, MAD, variance, SD, CV</td>
-        <td>Range definition; CV formula</td>
-        <td>Compute SD &amp; CV on grouped / ungrouped data; compare two sets</td>
-      </tr>
-      <tr>
-        <td><strong>Unit IV — Skewness</strong></td>
-        <td>Karl Pearson, Bowley</td>
-        <td>Sk = 0 means …; range of Sk_p / Sk_b</td>
-        <td>Compute Sk on a small data set; interpret sign &amp; magnitude</td>
-      </tr>
+      <tr><td>Bernoulli(p)</td><td>pˣ q^{1−x}</td><td>p</td><td>pq</td><td>q + p·eᵗ</td></tr>
+      <tr><td>Binomial(n, p)</td><td>C(n,k) pᵏ q^{n−k}</td><td>np</td><td>npq</td><td>(q + p·eᵗ)ⁿ</td></tr>
+      <tr><td>Geometric(p)</td><td>q^{k−1} p</td><td>1/p</td><td>q/p²</td><td>p·eᵗ / (1 − q·eᵗ)</td></tr>
+      <tr><td>Poisson(λ)</td><td>e^{−λ} λᵏ / k!</td><td>λ</td><td>λ</td><td>exp[λ(eᵗ − 1)]</td></tr>
+      <tr><td>Discrete Uniform {1..n}</td><td>1/n</td><td>(n+1)/2</td><td>(n²−1)/12</td><td>—</td></tr>
+      <tr><td>Uniform(a, b)</td><td>1/(b−a)</td><td>(a+b)/2</td><td>(b−a)²/12</td><td>(e^{bt}−e^{at})/[t(b−a)]</td></tr>
+      <tr><td>Exponential(λ)</td><td>λ·e^{−λx}</td><td>1/λ</td><td>1/λ²</td><td>λ/(λ−t)</td></tr>
+      <tr><td>Normal(μ, σ²)</td><td>(1/σ√2π)·exp[−(x−μ)²/2σ²]</td><td>μ</td><td>σ²</td><td>exp[μt + σ²t²/2]</td></tr>
+      <tr><td>Standard Normal N(0, 1)</td><td>(1/√2π)·exp[−z²/2]</td><td>0</td><td>1</td><td>exp[t²/2]</td></tr>
     </tbody>
   </table>
+  </div>
 
   <div class="mnemonic">
-    <strong>Last-minute strategy</strong>
-    <strong style="color:var(--ink);font-size:14px;">"Memorise 25 one-liners → write a 4-mark mini for any Section A blank → pick 3 of the 7 model 8-marks for Section B"</strong>
-    <br>If pressed for time: focus on Bayes, Binomial, Normal, and Mean / SD numericals — historically these clear ≥ 70 % of the 24-mark Section B.
+    <strong>Quick-recall mnemonic — "Bernoulli → Binomial → Poisson"</strong>
+    <strong style="color:var(--ink);font-size:14px;">
+      Bernoulli = 1 trial · Binomial = n trials · Geometric = trials till 1st success · Poisson = rare events / time.<br>
+      Uniform = flat slab (continuous a→b) · Exponential = waiting time (memoryless) · Normal = bell curve (everything else).<br>
+      <em>Mean shortcut:</em> if formula has p → Mean involves p (np, 1/p) ; if formula has λ → Mean = λ or 1/λ ; if (a, b) → Mean = midpoint.
+    </strong>
   </div>
 
   <div class="quiz">
@@ -1946,8 +2659,843 @@ or, when mode is ill-defined:  Sk = 3 (Mean − Median) / SD</div>
   </div>
 </section>
 
-  </main>
-</div>
+<!-- ============================== MAY-2025 PYQ — SOLVED PAPER-LEVEL ============================== -->
+<section id="pyq-may-2025">
+  <h2 class="topic"><span class="num">10</span> May-2025 PYQ — Solved (Paper-Level) <span class="unit">UNITS I + III</span></h2>
+  <p class="lead"><strong>All</strong> questions from <strong>BCA-DS-23-204, May 2025</strong> within sessional 2 scope (Units I + III) — solved in <strong>formula → step-by-step → final answer</strong> format. Now includes correlation, regression, parabola fitting &amp; rank correlation. Use as your <em>"perfect answer"</em> reference — replicate the structure verbatim.</p>
+
+  <div class="legend">
+    <span class="pill">Part A · 1.5 M</span>
+    <span class="pill amber">Part B · 7 / 8 M</span>
+  </div>
+
+  <h3>Part A — Short Answers (1.5 marks each)</h3>
+
+  <!-- ============= 1(a) ============= -->
+  <div class="box def">
+    <span class="label">Q 1(a) · Define distribution function for a random variable. <span class="marks">1.5 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Cumulative Distribution Function (CDF) — Unit I, sub-topic 1.4.<br><strong>✍ What to write</strong>One-line definition + 4 standard properties. No numerical needed.</div>
+    <strong>Definition.</strong> The distribution function (also called <em>cumulative distribution function</em>, CDF) of a random variable X is defined as
+    <div class="formula-block"><span class="lbl">F(x) = P(X ≤ x),  for every x ∈ ℝ</span></div>
+    <strong>Properties:</strong>
+    <ul>
+      <li>0 ≤ F(x) ≤ 1</li>
+      <li>F(−∞) = 0, F(+∞) = 1</li>
+      <li>F is non-decreasing and right-continuous</li>
+      <li>P(a &lt; X ≤ b) = F(b) − F(a)</li>
+    </ul>
+  </div>
+
+  <!-- ============= 1(b) ============= -->
+  <div class="box def">
+    <span class="label">Q 1(b) · Conditions under which Poisson distribution is used. <span class="marks">1.5 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Discrete distributions — Poisson(λ), Unit I sub-topic 1.6.<br><strong>✍ What to write</strong>List 5 conditions: large n, small p, np = λ moderate, independent events, rare. Add 1 example.</div>
+    Poisson(λ) models the <strong>number of rare events</strong> occurring in a fixed interval of time, length, area, or volume. Conditions:
+    <ul>
+      <li>The number of trials <strong>n is very large</strong>.</li>
+      <li>The probability of success <strong>p is very small</strong>.</li>
+      <li>The product <strong>np = λ is finite (moderate)</strong>.</li>
+      <li>Events occur <strong>independently</strong> and at a constant average rate λ.</li>
+      <li>Two events cannot occur at exactly the same instant.</li>
+    </ul>
+    <em>Examples:</em> typing errors per page, telephone calls per minute, defective items per lot.
+  </div>
+
+  <!-- ============= 1(c) ============= -->
+  <div class="box def">
+    <span class="label">Q 1(c) · Prove that f(x) = 6x(1 − x), 0 ≤ x ≤ 1, is a probability density function. <span class="marks">1.5 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Continuous random variables — pdf verification, Unit I sub-topic 1.5.<br><strong>✍ Approach</strong>Show two conditions hold: (i) f(x) ≥ 0 on its support  (ii) ∫ f(x) dx over the support = 1.</div>
+    <strong>Conditions for a valid pdf:</strong>
+    <div class="formula-block"><span class="lbl">(i) f(x) ≥ 0 for all x        (ii) ∫_{−∞}^{∞} f(x) dx = 1</span></div>
+    <strong>Step 1 — Non-negativity.</strong> On [0, 1], both x ≥ 0 and (1 − x) ≥ 0, so f(x) = 6x(1 − x) ≥ 0. ✓
+    <br><strong>Step 2 — Total integral.</strong>
+    <div class="formula-block"><span class="lbl">∫₀¹ 6x(1 − x) dx = 6 ∫₀¹ (x − x²) dx = 6 [x²/2 − x³/3]₀¹ = 6 (1/2 − 1/3) = 6 · 1/6 = 1</span></div>
+    Both conditions hold. Hence f(x) is a valid pdf. ∎
+  </div>
+
+  <!-- ============= 1(d) ============= -->
+  <div class="box def">
+    <span class="label">Q 1(d) · Write any three sources of secondary data. <span class="marks">1.5 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Types of data — primary vs secondary, Unit III sub-topic 3.1.<br><strong>✍ What to write</strong>One-line meaning of secondary data + name 3 standard sources with concrete examples (e.g. Census, journals, World Bank).</div>
+    Secondary data is data collected by someone else and reused by the analyst. Three sources:
+    <ul>
+      <li><strong>Government publications</strong> — Census of India, RBI bulletins, NSSO surveys.</li>
+      <li><strong>Research journals &amp; reports</strong> — peer-reviewed articles, university theses.</li>
+      <li><strong>Internet / databases</strong> — World Bank, WHO, UN data portals, Kaggle datasets.</li>
+    </ul>
+    Other valid sources: trade associations, newspapers, company annual reports, NGO reports.
+  </div>
+
+  <!-- ============= 1(e) ============= -->
+  <div class="box def">
+    <span class="label">Q 1(e) · Properties of the joint distribution function. <span class="marks">1.5 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Joint distribution function — Unit I sub-topic 1.4 (extended).<br><strong>✍ What to write</strong>Define F(x, y) = P(X ≤ x, Y ≤ y) then list 6 properties (range, limits, monotonicity, marginals, rectangle formula).</div>
+    For two random variables X and Y, the joint CDF is
+    <div class="formula-block"><span class="lbl">F(x, y) = P(X ≤ x, Y ≤ y)</span></div>
+    <strong>Properties:</strong>
+    <ul>
+      <li>0 ≤ F(x, y) ≤ 1</li>
+      <li>F(−∞, y) = F(x, −∞) = 0</li>
+      <li>F(+∞, +∞) = 1</li>
+      <li>F is non-decreasing and right-continuous in each variable.</li>
+      <li>Marginals: F_X(x) = F(x, +∞), F_Y(y) = F(+∞, y).</li>
+      <li>P(a &lt; X ≤ b, c &lt; Y ≤ d) = F(b, d) − F(a, d) − F(b, c) + F(a, c).</li>
+    </ul>
+  </div>
+
+  <!-- ============= 1(f) ============= -->
+  <div class="box def">
+    <span class="label">Q 1(f) · Define covariance. What is the covariance of two independent variables? <span class="marks">1.5 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Covariance — Unit III sub-topic 3.8.<br><strong>✍ Approach</strong>Write the two equivalent formulas, state what sign means, then prove Cov(X, Y) = 0 when X, Y are independent using E(XY) = E(X)·E(Y).</div>
+    <strong>Definition.</strong>
+    <div class="formula-block"><span class="lbl">Cov(X, Y) = E[(X − μ_X)(Y − μ_Y)] = E(XY) − E(X) · E(Y)</span></div>
+    Covariance measures the <em>direction</em> of linear association between X and Y.
+    <ul>
+      <li>Cov &gt; 0 → X and Y move together</li>
+      <li>Cov &lt; 0 → X and Y move oppositely</li>
+      <li>Cov = 0 → no linear association</li>
+    </ul>
+    <strong>For independent X, Y:</strong> E(XY) = E(X) · E(Y), so
+    <div class="formula-block"><span class="lbl">Cov(X, Y) = E(X)·E(Y) − E(X)·E(Y) = 0</span></div>
+    Hence the covariance of two independent variables is <strong>zero</strong>. (Converse not always true.)
+  </div>
+
+  <!-- ============= 1(g) ============= -->
+  <div class="box def">
+    <span class="label">Q 1(g) · Find the median of: 20, 25, 30, 15, 17, 35, 26, 18, 40, 45, 50. <span class="marks">1.5 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Measures of central tendency — Median (raw data), Unit III sub-topic 3.5.<br><strong>✍ Approach</strong>Sort the data ascending → since n = 11 is odd, pick the value at position (n + 1)/2 = 6.</div>
+    <strong>Formula.</strong> For n odd, after sorting,
+    <div class="formula-block"><span class="lbl">Median = value at position (n + 1)/2</span></div>
+    <strong>Step 1 — sort ascending:</strong> 15, 17, 18, 20, 25, <strong>26</strong>, 30, 35, 40, 45, 50.
+    <br><strong>Step 2 — n = 11 (odd).</strong> Position = (11 + 1)/2 = 6.
+    <br><strong>Step 3 — pick 6th value.</strong> = <strong>26</strong>.
+    <br><strong>∴ Median = 26 units.</strong>
+  </div>
+
+  <!-- ============= 1(h) ============= -->
+  <div class="box def">
+    <span class="label">Q 1(h) · What is a Leptokurtic curve? Write the value of β₂ for it. <span class="marks">1.5 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Kurtosis (peakedness) — extension of Skewness, Unit III sub-topic 3.9.<br><strong>✍ What to write</strong>Define leptokurtic in one line, give the formula β₂ = μ₄/μ₂², then state β₂ &gt; 3 for leptokurtic.</div>
+    <strong>Definition.</strong> A leptokurtic curve is more <em>peaked</em> than the normal curve and has heavier tails. Kurtosis is measured by
+    <div class="formula-block"><span class="lbl">β₂ = μ₄ / μ₂² ,    γ₂ = β₂ − 3</span></div>
+    <table>
+      <thead><tr><th>Curve</th><th>β₂</th><th>γ₂</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Leptokurtic</strong></td><td>β₂ &gt; 3</td><td>positive</td></tr>
+        <tr><td>Mesokurtic (normal)</td><td>β₂ = 3</td><td>0</td></tr>
+        <tr><td>Platykurtic</td><td>β₂ &lt; 3</td><td>negative</td></tr>
+      </tbody>
+    </table>
+    <strong>For a leptokurtic curve, β₂ &gt; 3</strong> (e.g. β₂ = 4).
+  </div>
+
+  <!-- ============= 1(i) ============= -->
+  <div class="box def">
+    <span class="label">Q 1(i) · Three differences between correlation &amp; regression analysis. <span class="marks">1.5 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Correlation vs Regression — Unit III.<br><strong>✍ What to write</strong>3-row table.</div>
+    <table>
+      <thead><tr><th>Aspect</th><th>Correlation</th><th>Regression</th></tr></thead>
+      <tbody>
+        <tr><td>Purpose</td><td>Measures <em>strength &amp; direction</em> of relationship</td><td>Estimates <em>value of one variable</em> from another</td></tr>
+        <tr><td>Symmetry</td><td>Symmetric: r(x,y) = r(y,x)</td><td>Asymmetric: y on x ≠ x on y</td></tr>
+        <tr><td>Output</td><td>Single coefficient r ∈ [−1, +1]</td><td>An equation: y = a + bx</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ============= 1(j) ============= -->
+  <div class="box def">
+    <span class="label">Q 1(j) · Define positive and inverse correlation. <span class="marks">1.5 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Correlation types — Unit III.<br><strong>✍ What to write</strong>One-line each + example.</div>
+    <ul>
+      <li><strong>Positive correlation</strong> — when one variable increases, the other also increases (r &gt; 0). <em>Example:</em> height &amp; weight, study hours &amp; marks.</li>
+      <li><strong>Inverse (negative) correlation</strong> — when one variable increases, the other decreases (r &lt; 0). <em>Example:</em> price &amp; demand, speed &amp; travel time.</li>
+    </ul>
+    Range: r ∈ [−1, +1]. r = +1 perfect positive · r = −1 perfect inverse · r = 0 no linear correlation.
+  </div>
+
+  <h3>Part B — Long Answers (7 / 8 marks each)</h3>
+
+  <!-- ============= 4(a) ============= -->
+  <div class="box tip">
+    <span class="label">Q 4(a) · Two unbiased dice are thrown. Find the expectation of the sum of numbers on them. <span class="marks">7 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Expectation of a discrete random variable, Unit I sub-topic 1.4 / 1.5.<br><strong>✍ Approach</strong>Build the probability table for sum S (values 2 → 12), apply E(S) = Σ s · P(s). Verify using linearity: E(X + Y) = E(X) + E(Y) where each die has E = 3.5.</div>
+    <strong>Formula.</strong>
+    <div class="formula-block"><span class="lbl">E(X) = Σ xᵢ · P(X = xᵢ)        E(X + Y) = E(X) + E(Y)</span></div>
+    <strong>Method 1 — direct probability table.</strong> Let S = sum on the two dice. Sample space has 36 equally-likely outcomes.
+
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>S</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th></tr></thead>
+      <tbody>
+        <tr><td>P(S)</td><td>1/36</td><td>2/36</td><td>3/36</td><td>4/36</td><td>5/36</td><td>6/36</td><td>5/36</td><td>4/36</td><td>3/36</td><td>2/36</td><td>1/36</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <strong>Step — apply formula.</strong>
+    <div class="formula-block"><span class="lbl">E(S) = Σ s · P(s) = (2·1 + 3·2 + 4·3 + 5·4 + 6·5 + 7·6 + 8·5 + 9·4 + 10·3 + 11·2 + 12·1)/36</span></div>
+    Numerator = 2 + 6 + 12 + 20 + 30 + 42 + 40 + 36 + 30 + 22 + 12 = <strong>252</strong>.
+    <br>E(S) = 252 / 36 = <strong>7</strong>.
+
+    <strong>Method 2 — linearity (verification).</strong> For one fair die, E(X) = (1+2+3+4+5+6)/6 = 21/6 = 3.5.
+    <br>E(X + Y) = E(X) + E(Y) = 3.5 + 3.5 = <strong>7</strong>. ✓
+
+    <strong>∴ Expected sum = 7.</strong>
+  </div>
+
+  <!-- ============= 4(b) ============= -->
+  <div class="box tip">
+    <span class="label">Q 4(b) · Joint distribution of (X, Y) given as the table below. (i) Marginal of Y, (ii) Conditional of Y given X = 4, (iii) Are X and Y independent? <span class="marks">8 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Joint pmf, Marginal &amp; Conditional distribution, Independence test — Unit I sub-topic 1.4 / 1.5.<br><strong>✍ Approach</strong>(i) Marginal of Y = sum each column.  (ii) Conditional P(Y | X = 4) = p(4, y) ÷ p_X(4).  (iii) Indep ⇔ p(x, y) = p_X(x) · p_Y(y) for every cell — find one cell that violates and conclude NOT independent.</div>
+
+    <strong>Given joint pmf table (with row / column sums computed):</strong>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>X \\ Y</th><th>1</th><th>3</th><th>9</th><th>p_X(x)</th></tr></thead>
+      <tbody>
+        <tr><td>2</td><td>1/8</td><td>1/24</td><td>1/12</td><td><strong>1/4</strong></td></tr>
+        <tr><td>4</td><td>1/4</td><td>1/4</td><td>0</td><td><strong>1/2</strong></td></tr>
+        <tr><td>6</td><td>1/8</td><td>1/24</td><td>1/12</td><td><strong>1/4</strong></td></tr>
+        <tr><td><strong>p_Y(y)</strong></td><td><strong>1/2</strong></td><td><strong>1/3</strong></td><td><strong>1/6</strong></td><td>1</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <strong>Formulas.</strong>
+    <div class="formula-block"><span class="lbl">p_Y(y) = Σₓ p(x, y)        p(y | x) = p(x, y) / p_X(x)        Indep ⇔ p(x, y) = p_X(x) · p_Y(y) ∀ (x, y)</span></div>
+
+    <strong>(i) Marginal distribution of Y.</strong> Sum each Y-column.
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Y</th><th>1</th><th>3</th><th>9</th></tr></thead>
+      <tbody>
+        <tr><td>p_Y(y)</td><td>1/8 + 1/4 + 1/8 = <strong>1/2</strong></td><td>1/24 + 1/4 + 1/24 = <strong>1/3</strong></td><td>1/12 + 0 + 1/12 = <strong>1/6</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    Total = 1/2 + 1/3 + 1/6 = 1. ✓
+
+    <strong>(ii) Conditional distribution of Y given X = 4.</strong> Here p_X(4) = 1/4 + 1/4 + 0 = 1/2.
+    <div class="formula-block"><span class="lbl">P(Y = y | X = 4) = p(4, y) / p_X(4) = p(4, y) / (1/2)</span></div>
+    <ul>
+      <li>P(Y = 1 | X = 4) = (1/4) / (1/2) = <strong>1/2</strong></li>
+      <li>P(Y = 3 | X = 4) = (1/4) / (1/2) = <strong>1/2</strong></li>
+      <li>P(Y = 9 | X = 4) = 0 / (1/2) = <strong>0</strong></li>
+    </ul>
+    Total = 1/2 + 1/2 + 0 = 1. ✓
+
+    <strong>(iii) Independence test.</strong> Check whether p(x, y) = p_X(x) · p_Y(y) for every cell.
+    <br>Take X = 4, Y = 9: p(4, 9) = 0, but p_X(4) · p_Y(9) = (1/2)(1/6) = 1/12 ≠ 0.
+    <br>Since the equality fails for at least one cell, <strong>X and Y are NOT independent.</strong>
+  </div>
+
+  <!-- ============= 5(a) data types ============= -->
+  <div class="box tip">
+    <span class="label">Q 5(a) · Define data and its types. How do we classify and represent it? Explain with examples. <span class="marks">8 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Foundation of Descriptive Statistics — Unit III sub-topics 3.1–3.3.<br><strong>✍ Approach</strong>Cover 4 angles in order: (i) Define data, (ii) Types by source &amp; nature, (iii) Classification (geographical / chronological / qualitative / quantitative), (iv) Representation methods (textual, tabular, diagrammatic, graphical) + 1 small frequency table example.</div>
+
+    <strong>Data.</strong> Any collection of facts, figures, or observations recorded for analysis.
+
+    <strong>Types of data.</strong>
+    <ul>
+      <li><strong>By source:</strong>
+        <ul>
+          <li><strong>Primary</strong> — collected first-hand by the investigator (surveys, experiments, interviews). Accurate, costly, time-consuming.</li>
+          <li><strong>Secondary</strong> — already collected by others and reused (govt reports, journals, databases). Cheap, may be outdated.</li>
+        </ul>
+      </li>
+      <li><strong>By nature:</strong>
+        <ul>
+          <li><strong>Qualitative / categorical</strong> — non-numeric (gender, blood group, brand).</li>
+          <li><strong>Quantitative / numeric</strong> — measurable. Subdivided into <em>discrete</em> (countable: number of children) and <em>continuous</em> (height, weight, temperature).</li>
+        </ul>
+      </li>
+    </ul>
+
+    <strong>Classification of data.</strong>
+    <ul>
+      <li><strong>Geographical</strong> (by location)</li>
+      <li><strong>Chronological</strong> (by time — time-series)</li>
+      <li><strong>Qualitative</strong> (by attribute — male/female)</li>
+      <li><strong>Quantitative</strong> (by magnitude — frequency distribution by class intervals)</li>
+    </ul>
+
+    <strong>Representation of data.</strong>
+    <ul>
+      <li><strong>Textual</strong> — written paragraphs.</li>
+      <li><strong>Tabular</strong> — frequency distribution tables.</li>
+      <li><strong>Diagrammatic</strong> — bar diagram, pie chart, pictogram.</li>
+      <li><strong>Graphical</strong> — histogram, frequency polygon, ogive (cumulative frequency curve).</li>
+    </ul>
+
+    <strong>Frequency distribution example.</strong> Marks of 10 students: 12, 15, 18, 22, 25, 27, 28, 30, 33, 35.
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Class interval</th><th>Tally</th><th>Frequency f</th></tr></thead>
+      <tbody>
+        <tr><td>10 — 19</td><td>|||</td><td>3</td></tr>
+        <tr><td>20 — 29</td><td>||||</td><td>4</td></tr>
+        <tr><td>30 — 39</td><td>|||</td><td>3</td></tr>
+        <tr><td><strong>Total</strong></td><td>—</td><td><strong>10</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    Such a table can be represented by a histogram (bars) or ogive (cumulative-frequency curve).
+  </div>
+
+  <!-- ============= 5(a) Normal ============= -->
+  <div class="box tip">
+    <span class="label">Q 5(a) · A sample of 100 dry battery cells: mean μ = 12 hours, σ = 3 hours. Assuming normal distribution, find the % of cells with life (i) more than 15 h, (ii) less than 6 h, (iii) between 10 and 14 h. <span class="marks">8 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Normal distribution &amp; Z-score — Unit I sub-topic 1.7 (continuous distributions).<br><strong>✍ Approach</strong>Convert each X-value to Z = (X − μ)/σ. Use standard-normal table values Φ(1) = 0.8413, Φ(2) = 0.9772, Φ(0.67) ≈ 0.7475. For "more than" use 1 − Φ; for "less than" use direct Φ; for an interval, subtract two Φ values.</div>
+
+    <strong>Formula.</strong>
+    <div class="formula-block"><span class="lbl">Z = (X − μ) / σ ,    P(Z &lt; z) = Φ(z) from standard-normal table</span></div>
+    Standard table values used: Φ(1) = 0.8413, Φ(2) = 0.9772, Φ(0.6667) ≈ 0.7475.
+
+    <strong>(i) P(X &gt; 15).</strong>
+    <br>Z = (15 − 12)/3 = <strong>1</strong>.
+    <br>P(X &gt; 15) = P(Z &gt; 1) = 1 − Φ(1) = 1 − 0.8413 = <strong>0.1587</strong>.
+    <br>⇒ 15.87 % of cells, ≈ <strong>16 cells</strong> out of 100.
+
+    <strong>(ii) P(X &lt; 6).</strong>
+    <br>Z = (6 − 12)/3 = <strong>−2</strong>.
+    <br>P(X &lt; 6) = P(Z &lt; −2) = 1 − Φ(2) = 1 − 0.9772 = <strong>0.0228</strong>.
+    <br>⇒ 2.28 %, ≈ <strong>2 cells</strong>.
+
+    <strong>(iii) P(10 ≤ X ≤ 14).</strong>
+    <br>Z₁ = (10 − 12)/3 = −0.6667. Z₂ = (14 − 12)/3 = 0.6667.
+    <br>P = Φ(0.6667) − Φ(−0.6667) = 2 · Φ(0.6667) − 1 = 2(0.7475) − 1 = <strong>0.4950</strong>.
+    <br>⇒ 49.5 %, ≈ <strong>50 cells</strong>.
+
+    <strong>Summary table.</strong>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Range</th><th>Z</th><th>Probability</th><th>Cells out of 100</th></tr></thead>
+      <tbody>
+        <tr><td>X &gt; 15 h</td><td>Z &gt; 1</td><td>0.1587</td><td>≈ 16</td></tr>
+        <tr><td>X &lt; 6 h</td><td>Z &lt; −2</td><td>0.0228</td><td>≈ 2</td></tr>
+        <tr><td>10 ≤ X ≤ 14 h</td><td>−0.67 ≤ Z ≤ 0.67</td><td>0.4950</td><td>≈ 50</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- ============= 5(b) MGF ============= -->
+  <div class="box tip">
+    <span class="label">Q 5(b) · Show that the moment generating function of a random variable X having pdf f(x) = 1/3 for −1 &lt; x &lt; 2 (else 0) is M_X(t) = (e^{2t} − e^{−t}) / (3t) for t ≠ 0, and = 1 at t = 0. <span class="marks">7 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Moment Generating Function for a Continuous RV (Uniform on (−1, 2)) — Unit I sub-topic 1.5 (extended).<br><strong>✍ Approach</strong>Plug f(x) into M_X(t) = ∫ e^{tx} f(x) dx. Integrate from −1 to 2. Handle t = 0 separately because direct expression becomes 0/0; use M_X(0) = E(1) = 1.</div>
+
+    <strong>Formula.</strong>
+    <div class="formula-block"><span class="lbl">M_X(t) = E(e^{tX}) = ∫_{−∞}^{∞} e^{tx} · f(x) dx</span></div>
+
+    <strong>Step 1 — set up the integral.</strong> f(x) = 1/3 only on (−1, 2):
+    <div class="formula-block"><span class="lbl">M_X(t) = ∫_{−1}^{2} e^{tx} · (1/3) dx = (1/3) ∫_{−1}^{2} e^{tx} dx</span></div>
+
+    <strong>Step 2 — integrate (assuming t ≠ 0).</strong>
+    <div class="formula-block"><span class="lbl">∫_{−1}^{2} e^{tx} dx = [e^{tx}/t]_{−1}^{2} = (e^{2t} − e^{−t}) / t</span></div>
+
+    <strong>Step 3 — combine.</strong>
+    <div class="formula-block"><span class="lbl">M_X(t) = (1/3) · (e^{2t} − e^{−t}) / t = (e^{2t} − e^{−t}) / (3t),  for t ≠ 0</span></div>
+
+    <strong>Step 4 — value at t = 0.</strong> Direct expression is 0/0; use either the definition or L'Hôpital.
+    <ul>
+      <li><em>By definition:</em> M_X(0) = E(e^{0·X}) = E(1) = <strong>1</strong>.</li>
+      <li><em>By L'Hôpital:</em> lim<sub>t→0</sub> (e^{2t} − e^{−t})/(3t) = lim<sub>t→0</sub> (2e^{2t} + e^{−t})/3 = (2 + 1)/3 = <strong>1</strong>.</li>
+    </ul>
+
+    <strong>∴ M_X(t) = (e^{2t} − e^{−t}) / (3t), t ≠ 0;   M_X(0) = 1.</strong> ∎
+  </div>
+
+  <!-- ============= 6(a) combined mean ============= -->
+  <div class="box tip">
+    <span class="label">Q 6(a) · A cooperative bank has two branches employing 50 and 70 workers. Average salaries are Rs 3000 and Rs 3500 per month. Calculate the mean salary of all employees. <span class="marks">7 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Combined / Pooled Mean — Unit III sub-topic 3.4.<br><strong>✍ Approach</strong>Use weighted average. Numerator = n₁ x̄₁ + n₂ x̄₂ ; Denominator = n₁ + n₂. (Note: simple average of 3000 and 3500 is wrong because the branches have different sizes.)</div>
+
+    <strong>Formula (combined / pooled mean).</strong>
+    <div class="formula-block"><span class="lbl">x̄_{12} = (n₁ x̄₁ + n₂ x̄₂) / (n₁ + n₂)</span></div>
+
+    <strong>Given.</strong> n₁ = 50, x̄₁ = 3000;   n₂ = 70, x̄₂ = 3500.
+
+    <strong>Step 1 — numerator.</strong>
+    <br>n₁ x̄₁ = 50 × 3000 = 1,50,000.
+    <br>n₂ x̄₂ = 70 × 3500 = 2,45,000.
+    <br>Sum = 3,95,000.
+
+    <strong>Step 2 — denominator.</strong> n₁ + n₂ = 50 + 70 = 120.
+
+    <strong>Step 3 — divide.</strong>
+    <div class="formula-block"><span class="lbl">x̄_{12} = 3,95,000 / 120 = 3291.67</span></div>
+
+    <strong>∴ Combined mean salary ≈ Rs 3291.67 per month.</strong>
+  </div>
+
+  <!-- ============= 6(b) skewness ============= -->
+  <div class="box tip">
+    <span class="label">Q 6(b) · Compute the coefficient of skewness from: 25, 15, 23, 40, 27, 25, 23, 25, 20. <span class="marks">8 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Karl Pearson coefficient of skewness — Unit III sub-topic 3.9.<br><strong>✍ Approach</strong>Compute three things in order: (1) Mean x̄ = Σx / n, (2) Mode = most frequent value, (3) SD σ = √(Σ(x − x̄)² / n). Then plug into Sk_p = (Mean − Mode) / SD. Sign tells direction of skew.</div>
+
+    <strong>Formula (Karl Pearson).</strong>
+    <div class="formula-block"><span class="lbl">Sk_p = (Mean − Mode) / SD ;     SD σ = √(Σ(xᵢ − x̄)² / n)</span></div>
+
+    <strong>Step 1 — Mean.</strong>
+    <br>Σx = 25 + 15 + 23 + 40 + 27 + 25 + 23 + 25 + 20 = 223.   n = 9.
+    <br>x̄ = 223 / 9 = <strong>24.78</strong>.
+
+    <strong>Step 2 — Mode.</strong> Frequency table:
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Value</th><th>15</th><th>20</th><th>23</th><th>25</th><th>27</th><th>40</th></tr></thead>
+      <tbody>
+        <tr><td>Frequency</td><td>1</td><td>1</td><td>2</td><td>3</td><td>1</td><td>1</td></tr>
+      </tbody>
+    </table>
+    </div>
+    Most frequent = 25 (occurs 3 times). <strong>Mode = 25.</strong>
+
+    <strong>Step 3 — SD.</strong> Compute deviations dᵢ = xᵢ − 24.78 and dᵢ².
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>xᵢ</th><th>dᵢ = xᵢ − 24.78</th><th>dᵢ²</th></tr></thead>
+      <tbody>
+        <tr><td>25</td><td>0.22</td><td>0.0484</td></tr>
+        <tr><td>15</td><td>−9.78</td><td>95.6484</td></tr>
+        <tr><td>23</td><td>−1.78</td><td>3.1684</td></tr>
+        <tr><td>40</td><td>15.22</td><td>231.6484</td></tr>
+        <tr><td>27</td><td>2.22</td><td>4.9284</td></tr>
+        <tr><td>25</td><td>0.22</td><td>0.0484</td></tr>
+        <tr><td>23</td><td>−1.78</td><td>3.1684</td></tr>
+        <tr><td>25</td><td>0.22</td><td>0.0484</td></tr>
+        <tr><td>20</td><td>−4.78</td><td>22.8484</td></tr>
+        <tr><td><strong>Σ</strong></td><td>≈ 0</td><td><strong>361.5556</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    σ² = 361.5556 / 9 = 40.1728.   σ = √40.1728 ≈ <strong>6.34</strong>.
+
+    <strong>Step 4 — apply Pearson formula.</strong>
+    <div class="formula-block"><span class="lbl">Sk_p = (24.78 − 25) / 6.34 = −0.22 / 6.34 ≈ −0.0347</span></div>
+
+    <strong>Interpretation.</strong> Sk_p ≈ −0.03. Magnitude is very small, so the distribution is <strong>almost symmetric, with a slight negative (left) skew</strong>.
+  </div>
+
+  <!-- ============= 7(a) defective ============= -->
+  <div class="box tip">
+    <span class="label">Q 7(a) · In a lot of 200 articles, 10 are defective. In a random sample of 20, find the probability of (i) no defective, (ii) one defective, (iii) at least one defective. <span class="marks">8 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Binomial distribution applied to defective-item sampling — Unit I sub-topic 1.6.<br><strong>✍ Approach</strong>Compute p = defective fraction = 10/200 = 0.05. Then n = sample size = 20. Use P(X = k) = C(n, k) p^k q^{n−k}. For "at least one", use the trick P(X ≥ 1) = 1 − P(X = 0).</div>
+
+    <strong>Formula (Binomial approximation).</strong> p = 10/200 = 0.05, q = 0.95, n = 20.
+    <div class="formula-block"><span class="lbl">P(X = k) = C(n, k) · pᵏ · q^{n−k} ,   k = 0, 1, 2, …, n</span></div>
+
+    <strong>(i) P(no defective) = P(X = 0).</strong>
+    <br>= C(20, 0) · (0.05)⁰ · (0.95)²⁰
+    <br>= 1 · 1 · (0.95)²⁰
+    <br>(0.95)²⁰ = e^{20 · ln 0.95} = e^{20 · (−0.05129)} = e^{−1.0258} ≈ <strong>0.3585</strong>.
+
+    <strong>(ii) P(one defective) = P(X = 1).</strong>
+    <br>= C(20, 1) · (0.05)¹ · (0.95)¹⁹
+    <br>= 20 · 0.05 · (0.95)¹⁹
+    <br>(0.95)¹⁹ = (0.95)²⁰ / 0.95 = 0.3585 / 0.95 ≈ 0.3774.
+    <br>= 20 · 0.05 · 0.3774 = 1 · 0.3774 ≈ <strong>0.3774</strong>.
+
+    <strong>(iii) P(at least one defective) = P(X ≥ 1).</strong>
+    <div class="formula-block"><span class="lbl">P(X ≥ 1) = 1 − P(X = 0) = 1 − 0.3585 = 0.6415</span></div>
+
+    <strong>Summary.</strong>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Event</th><th>Probability</th></tr></thead>
+      <tbody>
+        <tr><td>No defective</td><td><strong>0.3585</strong></td></tr>
+        <tr><td>Exactly one defective</td><td><strong>0.3774</strong></td></tr>
+        <tr><td>At least one defective</td><td><strong>0.6415</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- ============= 7(b) divisible by 2 or 3 ============= -->
+  <div class="box tip">
+    <span class="label">Q 7(b) · Two dice are thrown together. Find the probability that the sum is divisible by 2 or 3. <span class="marks">7 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Probability addition rule (with overlap) — Unit I sub-topic 1.2.<br><strong>✍ Approach</strong>Total outcomes = 36. Event A = sum divisible by 2, Event B = sum divisible by 3. Count outcomes for A, B and A∩B (= divisible by 6). Apply P(A ∪ B) = P(A) + P(B) − P(A ∩ B).</div>
+
+    <strong>Formula (addition rule with overlap).</strong>
+    <div class="formula-block"><span class="lbl">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</span></div>
+    Total outcomes = 6 × 6 = 36. Possible sums: 2, 3, …, 12.
+
+    <strong>Step 1 — Event A: sum divisible by 2 (even sum).</strong> Even sums = {2, 4, 6, 8, 10, 12}.
+    <br>Counts: 1 + 3 + 5 + 5 + 3 + 1 = <strong>18</strong>.
+    <br>P(A) = 18 / 36 = 1/2.
+
+    <strong>Step 2 — Event B: sum divisible by 3.</strong> Sums = {3, 6, 9, 12}.
+    <br>Counts: 2 + 5 + 4 + 1 = <strong>12</strong>.
+    <br>P(B) = 12 / 36 = 1/3.
+
+    <strong>Step 3 — A ∩ B: sum divisible by both 2 and 3, i.e. by 6.</strong> Sums = {6, 12}.
+    <br>Counts: 5 + 1 = <strong>6</strong>.
+    <br>P(A ∩ B) = 6 / 36 = 1/6.
+
+    <strong>Step 4 — apply addition rule.</strong>
+    <div class="formula-block"><span class="lbl">P(A ∪ B) = 1/2 + 1/3 − 1/6 = 3/6 + 2/6 − 1/6 = 4/6 = 2/3</span></div>
+
+    <strong>∴ Required probability = 2/3 ≈ 0.6667.</strong>
+  </div>
+
+  <!-- ============= 5(b) joint distribution ============= -->
+  <div class="box tip">
+    <span class="label">Q 5(b) · Joint probability distribution of X &amp; Y is given. Find (i) marginal of Y (ii) conditional of Y given X=4 (iii) Are X &amp; Y independent? <span class="marks">8 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Joint, marginal &amp; conditional distributions — Unit I sub-topic 1.4.<br><strong>✍ Approach</strong>(i) marginal P(Y=y) = Σ_x P(X=x, Y=y) — sum each column. (ii) conditional P(Y|X=4) = P(X=4, Y=y) / P(X=4). (iii) independent iff P(X=x, Y=y) = P(X) · P(Y) for all (x,y).</div>
+
+    <strong>Given joint distribution table.</strong>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>X \ Y</th><th>1</th><th>3</th><th>9</th><th><strong>P(X)</strong></th></tr></thead>
+      <tbody>
+        <tr><td>2</td><td>1/8</td><td>1/24</td><td>1/12</td><td><strong>1/8 + 1/24 + 1/12 = 6/24 = 1/4</strong></td></tr>
+        <tr><td>4</td><td>1/4</td><td>1/4</td><td>0</td><td><strong>1/4 + 1/4 + 0 = 1/2</strong></td></tr>
+        <tr><td>6</td><td>1/8</td><td>1/24</td><td>1/12</td><td><strong>1/8 + 1/24 + 1/12 = 1/4</strong></td></tr>
+        <tr><td><strong>P(Y)</strong></td><td><strong>1/2</strong></td><td><strong>1/3</strong></td><td><strong>1/6</strong></td><td><strong>1</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <strong>(i) Marginal distribution of Y</strong> (sum each column):
+    <div class="formula-block"><span class="lbl">P(Y=1) = 1/8 + 1/4 + 1/8 = 1/2
+P(Y=3) = 1/24 + 1/4 + 1/24 = 1/3
+P(Y=9) = 1/12 + 0 + 1/12 = 1/6</span></div>
+
+    <strong>(ii) Conditional distribution of Y given X = 4.</strong>
+    <div class="formula-block"><span class="lbl">P(Y=y | X=4) = P(X=4, Y=y) / P(X=4)</span></div>
+    P(X=4) = 1/2.
+    <br>P(Y=1 | X=4) = (1/4) / (1/2) = <strong>1/2</strong>
+    <br>P(Y=3 | X=4) = (1/4) / (1/2) = <strong>1/2</strong>
+    <br>P(Y=9 | X=4) = 0 / (1/2) = <strong>0</strong>
+
+    <strong>(iii) Are X &amp; Y independent?</strong>
+    <br>Check: P(X=4, Y=1) = 1/4 vs P(X=4) · P(Y=1) = 1/2 · 1/2 = 1/4 ✓
+    <br>But: P(X=4, Y=9) = 0 vs P(X=4) · P(Y=9) = 1/2 · 1/6 = 1/12 ✗
+    <br>Since the equality fails for at least one (x,y), <strong>X and Y are NOT independent</strong>.
+  </div>
+
+  <!-- ============= 6(c) regression equations ============= -->
+  <div class="box tip">
+    <span class="label">Q 6(c) · Obtain two regression equations using method of least squares: x = 2, 4, 6, 8, 10 · y = 5, 7, 9, 8, 11. <span class="marks">7 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Linear regression · least squares — Unit III.<br><strong>✍ Approach</strong>Compute means, then slopes b_yx and b_xy via covariance &amp; variances. Two lines: y on x &amp; x on y.</div>
+
+    <strong>Formula.</strong>
+    <div class="formula-block"><span class="lbl">b_yx = Σxy − n·x̄·ȳ / (Σx² − n·x̄²)        y − ȳ = b_yx · (x − x̄)
+b_xy = Σxy − n·x̄·ȳ / (Σy² − n·ȳ²)        x − x̄ = b_xy · (y − ȳ)</span></div>
+
+    <strong>Step 1 — sums.</strong>
+    <div class="formula-block"><span class="lbl">n = 5
+Σx = 2+4+6+8+10 = 30        x̄ = 6
+Σy = 5+7+9+8+11 = 40         ȳ = 8
+Σxy = 2·5 + 4·7 + 6·9 + 8·8 + 10·11 = 10+28+54+64+110 = 266
+Σx² = 4+16+36+64+100 = 220
+Σy² = 25+49+81+64+121 = 340</span></div>
+
+    <strong>Step 2 — slopes.</strong>
+    <br>n·x̄·ȳ = 5·6·8 = 240 · n·x̄² = 5·36 = 180 · n·ȳ² = 5·64 = 320.
+    <div class="formula-block"><span class="lbl">b_yx = (266 − 240) / (220 − 180) = 26 / 40 = 0.65
+b_xy = (266 − 240) / (340 − 320) = 26 / 20 = 1.30</span></div>
+
+    <strong>Step 3 — regression equations.</strong>
+    <div class="formula-block"><span class="lbl">y on x:   y − 8 = 0.65 (x − 6)   →   y = 0.65 x + 4.10
+x on y:   x − 6 = 1.30 (y − 8)   →   x = 1.30 y − 4.40</span></div>
+
+    <strong>Bonus — correlation coefficient.</strong>
+    <br>r = √(b_yx · b_xy) = √(0.65 · 1.30) = √0.845 ≈ <strong>0.919</strong>. Strong positive correlation.
+  </div>
+
+  <!-- ============= 7(c) parabola fitting (least squares) ============= -->
+  <div class="box tip">
+    <span class="label">Q 7(a) · Fit a second-degree parabola y = a + bx + cx² to the given data. <span class="marks">8 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Curve fitting · least squares · second-degree polynomial — Unit III.<br><strong>✍ Approach</strong>Use 3 normal equations: Σy = na + bΣx + cΣx² · Σxy = aΣx + bΣx² + cΣx³ · Σx²y = aΣx² + bΣx³ + cΣx⁴. Best practice: shift x to centre (let u = x − x̄) so Σu = Σu³ = 0.</div>
+
+    <strong>Given data:</strong> x = 1929–1937, y = 352, 356, 357, 358, 300, 361, 361, 360, 359 (n = 9).
+
+    <strong>Step 1 — shift origin.</strong> Let u = x − 1933 → u = −4, −3, −2, −1, 0, 1, 2, 3, 4.
+    <br>Then Σu = 0 · Σu² = 60 · Σu³ = 0 · Σu⁴ = 708.
+
+    <strong>Step 2 — compute sums.</strong>
+    <div class="formula-block"><span class="lbl">Σy = 352+356+357+358+300+361+361+360+359 = 3164
+Σuy = (−4)(352)+(−3)(356)+(−2)(357)+(−1)(358)+0(300)+1(361)+2(361)+3(360)+4(359)
+    = −1408 −1068 −714 −358 +0 +361 +722 +1080 +1436 = 51
+Σu²y = 16(352)+9(356)+4(357)+1(358)+0(300)+1(361)+4(361)+9(360)+16(359)
+     = 5632+3204+1428+358+0+361+1444+3240+5744 = 21411</span></div>
+
+    <strong>Step 3 — normal equations (with shifted u).</strong>
+    <div class="formula-block"><span class="lbl">Σy   = 9a + 0b + 60c          → 3164  = 9a + 60c       …(1)
+Σuy  = 0a + 60b + 0c         → 51    = 60b              → b = 0.85
+Σu²y = 60a + 0b + 708c        → 21411 = 60a + 708c       …(2)</span></div>
+
+    <strong>Step 4 — solve (1) &amp; (2).</strong>
+    <br>From (1): 9a + 60c = 3164 → a = (3164 − 60c)/9.
+    <br>Sub in (2): 60·(3164 − 60c)/9 + 708c = 21411
+    <br>(189840 − 3600c)/9 + 708c = 21411
+    <br>21093.3 − 400c + 708c = 21411
+    <br>308c = 317.7 → c ≈ 1.03
+    <br>a = (3164 − 60·1.03)/9 = (3164 − 61.8)/9 ≈ <strong>344.7</strong>
+
+    <strong>Final parabola (in u):</strong>
+    <div class="formula-block"><span class="lbl">y = 344.7 + 0.85 u + 1.03 u²    where u = x − 1933</span></div>
+
+    Substituting back u = x − 1933 gives the parabola in original x.
+  </div>
+
+  <!-- ============= 7(b) rank correlation ============= -->
+  <div class="box tip">
+    <span class="label">Q 7(b) · Calculate the coefficient of rank correlation between x &amp; y. <span class="marks">7 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Spearman's rank correlation coefficient — Unit III.<br><strong>✍ Approach</strong>Rank x and y separately. Compute d = R_x − R_y for each pair, then d². Apply formula ρ = 1 − [6 Σd² / (n(n²−1))]. n = 10 here.</div>
+
+    <strong>Formula (Spearman's ρ).</strong>
+    <div class="formula-block"><span class="lbl">ρ = 1 − [ 6 · Σd² / (n · (n² − 1)) ]</span></div>
+
+    <strong>Given:</strong> x = 78, 89, 97, 69, 59, 79, 68, 57 · y = 125, 137, 156, 112, 107, 136, 123, 108 (n = 8).
+
+    <strong>Step 1 — assign ranks (highest = rank 1).</strong>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>x</th><th>R_x</th><th>y</th><th>R_y</th><th>d = R_x − R_y</th><th>d²</th></tr></thead>
+      <tbody>
+        <tr><td>78</td><td>4</td><td>125</td><td>4</td><td>0</td><td>0</td></tr>
+        <tr><td>89</td><td>2</td><td>137</td><td>2</td><td>0</td><td>0</td></tr>
+        <tr><td>97</td><td>1</td><td>156</td><td>1</td><td>0</td><td>0</td></tr>
+        <tr><td>69</td><td>5</td><td>112</td><td>6</td><td>−1</td><td>1</td></tr>
+        <tr><td>59</td><td>7</td><td>107</td><td>8</td><td>−1</td><td>1</td></tr>
+        <tr><td>79</td><td>3</td><td>136</td><td>3</td><td>0</td><td>0</td></tr>
+        <tr><td>68</td><td>6</td><td>123</td><td>5</td><td>+1</td><td>1</td></tr>
+        <tr><td>57</td><td>8</td><td>108</td><td>7</td><td>+1</td><td>1</td></tr>
+      </tbody>
+    </table>
+    </div>
+    Σd² = 0+0+0+1+1+0+1+1 = <strong>4</strong>.
+
+    <strong>Step 2 — apply formula.</strong>
+    <div class="formula-block"><span class="lbl">ρ = 1 − [ 6 · 4 / (8 · (64 − 1)) ]
+  = 1 − [ 24 / (8 · 63) ]
+  = 1 − [ 24 / 504 ]
+  = 1 − 0.0476
+  = 0.9524</span></div>
+
+    <strong>∴ Coefficient of rank correlation ρ ≈ 0.95</strong> — strong positive correlation between x and y.
+  </div>
+
+  <!-- ============= summary box ============= -->
+  <div class="mnemonic">
+    <strong>Paper-level answer template (memorise the shape)</strong>
+    <strong style="color:var(--ink);font-size:14px;">
+      1. State the formula in a boxed line.<br>
+      2. List the given data.<br>
+      3. Show every intermediate calculation (no skipped lines).<br>
+      4. Boldface the final numeric answer + write the unit.<br>
+      5. Add a one-line interpretation when the question is contextual (e.g. % of cells, slight skewness).
+    </strong>
+  </div>
+</section>
+
+<!-- ============================== BACKUP / OTHER LIKELY SESSIONAL QUESTIONS ============================== -->
+<section id="backup-qs">
+  <h2 class="topic"><span class="num">11</span> Backup Questions — Other Likely Sessional Picks <span class="unit">UNITS I + III</span></h2>
+  <p class="lead">Five extra paper-format problems covering syllabus topics <strong>not</strong> exhausted by May-2025 PYQ — Geometric, Uniform, Exponential, Grouped frequency distribution, and Coefficient-of-Variation comparison. Same formula → step-by-step → boxed answer shape so a beginner can copy verbatim.</p>
+
+  <!-- ============= Backup 1 — Geometric ============= -->
+  <div class="box tip">
+    <span class="label">B1 · A pen factory has 5 % defectives. A QC inspector picks pens one by one until the first defective is found. What is the probability the first defective appears on the 4th pen? Also find the expected number of pens inspected.<span class="marks">7 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Geometric distribution — Unit I sub-topic 1.6 (discrete distributions).<br><strong>✍ Approach</strong>Geometric models "trials until first success". P(X = k) = q^{k−1} · p. Identify p (success / defective probability), then plug k = 4. For expected count, E(X) = 1/p.</div>
+
+    <strong>Formula (Geometric distribution).</strong>
+    <div class="formula-block"><span class="lbl">P(X = k) = q^{k−1} · p ,    k = 1, 2, 3, …  ;     E(X) = 1/p ,    Var(X) = q/p²</span></div>
+
+    <strong>Given.</strong> p = 0.05 (defective), q = 0.95 (non-defective).
+
+    <strong>Step 1 — P(first defective on 4th pen).</strong>
+    <br>P(X = 4) = q³ · p = (0.95)³ · 0.05
+    <br>(0.95)³ = 0.857375
+    <br>P(X = 4) = 0.857375 × 0.05 = <strong>0.04287</strong>.
+
+    <strong>Step 2 — Expected number of pens inspected.</strong>
+    <br>E(X) = 1/p = 1/0.05 = <strong>20 pens</strong>.
+
+    <strong>∴ P(X = 4) ≈ 0.0429 ; E(X) = 20.</strong>
+  </div>
+
+  <!-- ============= Backup 2 — Uniform ============= -->
+  <div class="box tip">
+    <span class="label">B2 · A bus arrives at the stop at any time uniformly between 9:00 and 9:30. Find (i) probability you wait less than 10 min, (ii) mean and variance of the waiting time.<span class="marks">7 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Continuous Uniform distribution on [a, b] — Unit I sub-topic 1.7.<br><strong>✍ Approach</strong>Wait time X ~ Uniform(0, 30) where 0 = 9:00 and 30 = 9:30. Probability of any sub-interval = (length of sub-interval) / (b − a). Mean = (a + b)/2, Var = (b − a)² / 12 are direct formulas.</div>
+
+    <strong>Formula (Uniform distribution on [a, b]).</strong>
+    <div class="formula-block"><span class="lbl">f(x) = 1 / (b − a) ,    P(c ≤ X ≤ d) = (d − c) / (b − a) ,    Mean = (a + b)/2 ,    Var = (b − a)² / 12</span></div>
+
+    <strong>Given.</strong> a = 0 min, b = 30 min. Wait time X ~ Uniform(0, 30).
+
+    <strong>Step 1 — P(X &lt; 10).</strong>
+    <br>P(0 ≤ X &lt; 10) = (10 − 0) / (30 − 0) = 10 / 30 = <strong>1/3 ≈ 0.333</strong>.
+
+    <strong>Step 2 — Mean.</strong>
+    <br>E(X) = (0 + 30)/2 = <strong>15 min</strong>.
+
+    <strong>Step 3 — Variance.</strong>
+    <br>Var(X) = (30 − 0)² / 12 = 900 / 12 = <strong>75 min²</strong>.
+    <br>SD = √75 ≈ <strong>8.66 min</strong>.
+
+    <strong>∴ P(wait &lt; 10) = 1/3 ; mean = 15 min ; variance = 75 min².</strong>
+  </div>
+
+  <!-- ============= Backup 3 — Exponential ============= -->
+  <div class="box tip">
+    <span class="label">B3 · The lifetime of a CFL bulb (in hours) follows Exponential distribution with mean 800 hours. Find (i) P(bulb lasts more than 1000 h), (ii) P(bulb fails within 500 h).<span class="marks">7 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Exponential distribution — Unit I sub-topic 1.7 (lifetime / waiting-time problems).<br><strong>✍ Approach</strong>First convert "mean = 800" into rate λ via λ = 1/mean. Then P(X &gt; t) = e^{−λt} for "more than", and P(X ≤ t) = 1 − e^{−λt} for "within / less than". Compute the exponent first, then the e-value.</div>
+
+    <strong>Formula (Exponential distribution).</strong>
+    <div class="formula-block"><span class="lbl">f(x) = λ · e^{−λx} , x ≥ 0    ;    Mean = 1/λ    ;    P(X &gt; t) = e^{−λt}    ;    P(X ≤ t) = 1 − e^{−λt}</span></div>
+
+    <strong>Given.</strong> Mean = 1/λ = 800 ⇒ λ = 1/800 = 0.00125.
+
+    <strong>Step 1 — P(X &gt; 1000).</strong>
+    <br>= e^{−λ · 1000} = e^{−1000/800} = e^{−1.25}
+    <br>e^{−1.25} ≈ 0.2865.
+    <br>P(X &gt; 1000) ≈ <strong>0.2865</strong> (28.65 %).
+
+    <strong>Step 2 — P(X ≤ 500).</strong>
+    <br>= 1 − e^{−λ · 500} = 1 − e^{−500/800} = 1 − e^{−0.625}
+    <br>e^{−0.625} ≈ 0.5353.
+    <br>P(X ≤ 500) = 1 − 0.5353 = <strong>0.4647</strong> (46.47 %).
+
+    <strong>∴ ≈ 28.65 % bulbs last more than 1000 h ; ≈ 46.47 % fail within 500 h.</strong>
+  </div>
+
+  <!-- ============= Backup 4 — Grouped frequency: mean, median, mode ============= -->
+  <div class="box tip">
+    <span class="label">B4 · The marks of 50 students are given as a grouped frequency distribution. Compute Mean, Median, and Mode.<span class="marks">8 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Mean / Median / Mode for grouped frequency distribution — Unit III sub-topics 3.4, 3.5, 3.6.<br><strong>✍ Approach</strong>Build one table with columns: midpoint xᵢ, frequency f, fᵢ·xᵢ, cumulative freq cf. Mean = Σf·x / N. For median, find class containing N/2-th observation and apply L + [(N/2 − cf)/f]·h. For mode, find class with highest f and apply L + [(f₁ − f₀)/(2f₁ − f₀ − f₂)]·h. Verify with empirical relation Mode ≈ 3·Median − 2·Mean.</div>
+
+    <strong>Given table.</strong>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Class (marks)</th><th>0–10</th><th>10–20</th><th>20–30</th><th>30–40</th><th>40–50</th><th>50–60</th></tr></thead>
+      <tbody>
+        <tr><td>Frequency f</td><td>5</td><td>8</td><td>15</td><td>12</td><td>7</td><td>3</td></tr>
+      </tbody>
+    </table>
+    </div>
+    Total N = Σf = 5 + 8 + 15 + 12 + 7 + 3 = 50.
+
+    <strong>Formulas.</strong>
+    <div class="formula-block"><span class="lbl">Mean    x̄ = Σ fᵢ xᵢ / N        (xᵢ = class midpoint)
+Median  M  = L + [(N/2 − cf) / f] · h
+Mode    Mo = L + [(f₁ − f₀) / (2f₁ − f₀ − f₂)] · h</span></div>
+
+    <strong>Step 1 — Mean.</strong> Build the f·x column.
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Class</th><th>Midpoint xᵢ</th><th>Frequency f</th><th>fᵢ · xᵢ</th><th>Cum freq cf</th></tr></thead>
+      <tbody>
+        <tr><td>0–10</td><td>5</td><td>5</td><td>25</td><td>5</td></tr>
+        <tr><td>10–20</td><td>15</td><td>8</td><td>120</td><td>13</td></tr>
+        <tr><td>20–30</td><td>25</td><td>15</td><td>375</td><td>28</td></tr>
+        <tr><td>30–40</td><td>35</td><td>12</td><td>420</td><td>40</td></tr>
+        <tr><td>40–50</td><td>45</td><td>7</td><td>315</td><td>47</td></tr>
+        <tr><td>50–60</td><td>55</td><td>3</td><td>165</td><td>50</td></tr>
+        <tr><td><strong>Σ</strong></td><td>—</td><td><strong>50</strong></td><td><strong>1420</strong></td><td>—</td></tr>
+      </tbody>
+    </table>
+    </div>
+    x̄ = 1420 / 50 = <strong>28.40 marks</strong>.
+
+    <strong>Step 2 — Median.</strong> N/2 = 25. Cumulative frequency just exceeding 25 is 28 → median class = <strong>20–30</strong>.
+    <br>L = 20, cf (before) = 13, f = 15, h = 10.
+    <br>M = 20 + [(25 − 13) / 15] · 10 = 20 + (12 / 15) · 10 = 20 + 8 = <strong>28</strong>.
+
+    <strong>Step 3 — Mode.</strong> Largest f = 15 → modal class = <strong>20–30</strong>.
+    <br>L = 20, f₁ = 15, f₀ = 8, f₂ = 12, h = 10.
+    <br>Mo = 20 + [(15 − 8) / (2·15 − 8 − 12)] · 10
+    <br>= 20 + [7 / (30 − 20)] · 10
+    <br>= 20 + (7/10) · 10
+    <br>= 20 + 7 = <strong>27</strong>.
+
+    <strong>Step 4 — empirical check.</strong> Mode ≈ 3·Median − 2·Mean ⇒ 3(28) − 2(28.40) = 84 − 56.80 = 27.20 ≈ 27. ✓
+
+    <strong>∴ Mean = 28.40,  Median = 28,  Mode = 27.</strong> (Slight positive skew since Mean &gt; Median &gt; Mode.)
+  </div>
+
+  <!-- ============= Backup 5 — CV comparison ============= -->
+  <div class="box tip">
+    <span class="label">B5 · The runs scored by two batsmen in 5 innings are: A: 30, 50, 60, 40, 70. B: 10, 90, 50, 40, 60. Which batsman is more consistent?<span class="marks">8 M</span></span>
+    <div class="topic-tag"><strong>📚 Topic</strong>Coefficient of Variation (CV) for comparing consistency — Unit III sub-topic 3.7.<br><strong>✍ Approach</strong>For each batsman, compute mean x̄, then variance σ² = Σ(x − x̄)²/n, then SD σ = √σ², then CV = (σ/x̄)·100 %. Compare the two CVs — the smaller CV indicates more consistent performance (less variability relative to the mean).</div>
+
+    <strong>Formula (Coefficient of Variation).</strong>
+    <div class="formula-block"><span class="lbl">x̄ = Σxᵢ / n ,    σ = √(Σ(xᵢ − x̄)² / n) ,    CV = (σ / x̄) × 100 %  ;    smaller CV ⇒ more consistent</span></div>
+
+    <strong>Batsman A.</strong>
+    <br>Σx = 30 + 50 + 60 + 40 + 70 = 250.   x̄_A = 250/5 = <strong>50</strong>.
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>xᵢ</th><th>xᵢ − 50</th><th>(xᵢ − 50)²</th></tr></thead>
+      <tbody>
+        <tr><td>30</td><td>−20</td><td>400</td></tr>
+        <tr><td>50</td><td>0</td><td>0</td></tr>
+        <tr><td>60</td><td>10</td><td>100</td></tr>
+        <tr><td>40</td><td>−10</td><td>100</td></tr>
+        <tr><td>70</td><td>20</td><td>400</td></tr>
+        <tr><td><strong>Σ</strong></td><td>0</td><td><strong>1000</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    σ_A² = 1000 / 5 = 200.  σ_A = √200 ≈ <strong>14.14</strong>.
+    <br>CV_A = (14.14 / 50) × 100 = <strong>28.28 %</strong>.
+
+    <strong>Batsman B.</strong>
+    <br>Σx = 10 + 90 + 50 + 40 + 60 = 250.   x̄_B = 250/5 = <strong>50</strong>.
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>xᵢ</th><th>xᵢ − 50</th><th>(xᵢ − 50)²</th></tr></thead>
+      <tbody>
+        <tr><td>10</td><td>−40</td><td>1600</td></tr>
+        <tr><td>90</td><td>40</td><td>1600</td></tr>
+        <tr><td>50</td><td>0</td><td>0</td></tr>
+        <tr><td>40</td><td>−10</td><td>100</td></tr>
+        <tr><td>60</td><td>10</td><td>100</td></tr>
+        <tr><td><strong>Σ</strong></td><td>0</td><td><strong>3400</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    σ_B² = 3400 / 5 = 680.  σ_B = √680 ≈ <strong>26.08</strong>.
+    <br>CV_B = (26.08 / 50) × 100 = <strong>52.15 %</strong>.
+
+    <strong>Comparison.</strong>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Batsman</th><th>Mean</th><th>SD</th><th>CV</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>50</td><td>14.14</td><td><strong>28.28 %</strong></td></tr>
+        <tr><td>B</td><td>50</td><td>26.08</td><td>52.15 %</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <strong>∴ Batsman A has a lower CV → more consistent than Batsman B.</strong>
+  </div>
+
+  <!-- summary -->
+  <div class="mnemonic">
+    <strong>Why these 5 are "backup picks"</strong>
+    <strong style="color:var(--ink);font-size:14px;">
+      Geometric / Uniform / Exponential are syllabus distributions but NOT in the May-2025 paper — high probability the prof rotates one of them in.<br>
+      Grouped-data Mean/Median/Mode and CV-comparison are textbook 8-mark staples — they appeared in older sessionals.<br>
+      All 5 follow the same shape: <em>formula → step → boxed answer</em>. If the actual paper looks unfamiliar, plug new numbers into one of these templates.
+    </strong>
+  </div>
+</section>
+
+  <footer class="end">
+    <h3>Score <b>30 / 30</b> · stay calm, write the formula first</h3>
+    <p>scribbled with care · May 2026 sessional</p>
+  </footer>
+</main>
+
+<a href="#" class="up" aria-label="Back to top">↑</a>
 
 <script>
   // Quiz reveal
@@ -1961,35 +3509,23 @@ or, when mode is ill-defined:  Sk = 3 (Mean − Median) / SD</div>
     });
   });
 
-  // Active-section sidebar highlight
+  // Active chip highlight on scroll
   const sections = document.querySelectorAll('main section[id]');
-  const links = document.querySelectorAll('aside ol li a');
+  const chipLinks = document.querySelectorAll('nav.chips a');
   const linkMap = {};
-  links.forEach(a => { linkMap[a.getAttribute('href').slice(1)] = a; });
+  chipLinks.forEach(a => { linkMap[a.getAttribute('href').slice(1)] = a; });
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
-        links.forEach(a => a.classList.remove('active'));
-        if (linkMap[e.target.id]) linkMap[e.target.id].classList.add('active');
+        chipLinks.forEach(a => a.classList.remove('active'));
+        if (linkMap[e.target.id]) {
+          linkMap[e.target.id].classList.add('active');
+          linkMap[e.target.id].scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
+        }
       }
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
   sections.forEach(s => observer.observe(s));
-  // Mobile nav toggle
-  const navToggle = document.getElementById('navToggle');
-  const navList = document.getElementById('navList');
-  if (navToggle && navList) {
-    navToggle.addEventListener('click', () => {
-      const open = navList.classList.toggle('nav-open');
-      navToggle.setAttribute('aria-expanded', open);
-    });
-    navList.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navList.classList.remove('nav-open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
 </script>
 
 <script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}</script>
