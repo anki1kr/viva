@@ -1,0 +1,1957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#166534" />
+<title>Data Science Using R · Viva Guide · BCA(DS) IV Sem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Spectral:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7f1e1;
+  --paper-soft:#fffaef;
+  --paper-deep:#ebe2cc;
+  --ink:#1a1209;
+  --ink-soft:#3d2f1c;
+  --muted:#6b5d47;
+  --rule:#d9cfb6;
+  --brand:#166534;
+  --brand-soft:#dcfce7;
+  --brand-deep:#14532d;
+  --brand-mid:#16a34a;
+  --highlighter:#fde047;
+  --highlight-mint:#bbf7d0;
+  --gold:#a16207;
+  --shadow: 0 1px 0 rgba(26,18,9,.05), 0 8px 24px -10px rgba(26,18,9,.18);
+}
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  font-family:"Spectral", Georgia, serif;
+  font-size:15.5px;
+  line-height:1.65;
+  color:var(--ink);
+  background:
+    radial-gradient(ellipse at top left, rgba(220,252,231,.55), transparent 55%),
+    radial-gradient(ellipse at bottom right, rgba(187,247,208,.35), transparent 65%),
+    var(--paper);
+  background-attachment:fixed;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  word-wrap:break-word;
+  overflow-wrap:break-word;
+}
+body::before{
+  content:""; position:fixed; inset:0;
+  background-image:repeating-linear-gradient(0deg, rgba(22,101,52,.01) 0 1px, transparent 1px 28px);
+  pointer-events:none; z-index:0;
+}
+
+/* ---- TOPBAR ---- */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(247,241,225,.97);
+  backdrop-filter:blur(10px);
+  border-bottom:1.5px solid var(--ink);
+}
+.title{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:10px 16px 4px;
+  gap:8px;
+}
+.title b{
+  font-family:"Fraunces", serif;
+  font-variation-settings:"opsz" 96;
+  font-weight:600;
+  font-size:16px;
+  color:var(--brand-deep);
+  letter-spacing:-.01em;
+  white-space:nowrap;
+}
+.title small{
+  font-family:"JetBrains Mono", monospace;
+  font-size:10px;
+  letter-spacing:.16em;
+  color:var(--muted);
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+nav.chips{
+  display:flex; gap:6px;
+  padding:6px 12px 10px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+nav.chips::-webkit-scrollbar{ display:none; }
+nav.chips a{
+  flex-shrink:0;
+  padding:6px 14px;
+  font-family:"JetBrains Mono", monospace;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.08em;
+  color:var(--ink);
+  background:var(--paper-soft);
+  border:1.5px solid var(--ink);
+  border-radius:0;
+  text-decoration:none;
+  white-space:nowrap;
+  text-transform:uppercase;
+  transition:background .15s, color .15s;
+}
+nav.chips a:hover{ background:var(--brand); color:var(--paper); border-color:var(--brand-deep); }
+nav.chips a.active{ background:var(--brand); color:var(--paper); border-color:var(--brand-deep); }
+
+/* ---- LAYOUT ---- */
+.wrap{
+  position:relative; z-index:1;
+  max-width:740px;
+  margin:0 auto;
+  padding:16px 12px 100px;
+}
+@media(min-width:600px){
+  .wrap{ padding:26px 22px 120px; }
+  body{ font-size:17px; line-height:1.7; }
+}
+
+/* ---- COVER ---- */
+.cover{
+  margin:0 0 36px;
+  padding:24px 20px 22px;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(187,247,208,.55), transparent 40%),
+    radial-gradient(circle at 88% 78%, rgba(220,252,231,.4), transparent 45%),
+    var(--paper-soft);
+  border:1.5px solid var(--ink);
+  box-shadow:4px 4px 0 var(--ink);
+  border-radius:4px;
+  position:relative;
+}
+@media(min-width:600px){
+  .cover{ margin:0 -6px 52px; padding:36px 30px 30px; box-shadow:6px 6px 0 var(--ink); }
+}
+.cover .stamp{
+  position:absolute; top:18px; right:20px;
+  border:1.5px solid var(--brand);
+  color:var(--brand-deep);
+  padding:4px 10px;
+  font-family:"JetBrains Mono", monospace;
+  font-size:10px;
+  letter-spacing:.16em;
+  transform:rotate(3deg);
+  background:rgba(220,252,231,.6);
+  text-transform:uppercase;
+}
+.cover .meta-line{
+  font-family:"JetBrains Mono", monospace;
+  font-size:11px;
+  letter-spacing:.22em;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+.cover h1{
+  font-family:"Fraunces", serif;
+  font-variation-settings:"opsz" 144, "SOFT" 40;
+  font-weight:700;
+  font-size:clamp(32px, 9vw, 72px);
+  line-height:.93;
+  letter-spacing:-.025em;
+  margin:0 0 4px;
+  color:var(--ink);
+}
+.cover h1 em{
+  font-style:italic;
+  font-weight:300;
+  color:var(--brand);
+  display:block;
+  font-size:.68em;
+  margin-top:6px;
+}
+.cover .sub{
+  font-family:"Caveat", cursive;
+  font-size:24px;
+  color:var(--brand-deep);
+  margin:14px 0 20px;
+  line-height:1.2;
+  transform:rotate(-1deg);
+  display:inline-block;
+}
+.cover .grid-meta{
+  display:grid; grid-template-columns:repeat(2, 1fr); gap:12px 18px;
+  border-top:1.5px solid var(--ink);
+  padding-top:16px;
+  margin-top:8px;
+  font-family:"JetBrains Mono", monospace;
+  font-size:11px;
+  letter-spacing:.05em;
+}
+.cover .grid-meta b{
+  display:block; color:var(--muted);
+  font-weight:500; margin-bottom:2px;
+  font-size:9.5px; letter-spacing:.18em;
+  text-transform:uppercase;
+}
+.cover .grid-meta span{ color:var(--ink); font-weight:600; }
+
+/* ---- SECTION HEADS ---- */
+.sec-head{
+  position:relative;
+  padding:20px 0 14px;
+  border-bottom:2px solid var(--ink);
+  margin-bottom:22px;
+  scroll-margin-top:90px;
+}
+.sec-head .kicker{
+  font-family:"JetBrains Mono", monospace;
+  font-size:11px;
+  letter-spacing:.26em;
+  color:var(--brand);
+  text-transform:uppercase;
+  margin-bottom:6px;
+}
+.sec-head h2{
+  font-family:"Fraunces", serif;
+  font-variation-settings:"opsz" 96, "SOFT" 20;
+  font-weight:600;
+  font-size:clamp(28px, 7vw, 52px);
+  line-height:1;
+  letter-spacing:-.02em;
+  margin:0 0 10px;
+  color:var(--ink);
+}
+.sec-head .lede{
+  font-family:"Spectral", serif;
+  font-style:italic;
+  font-size:15px;
+  color:var(--muted);
+  margin:0;
+}
+
+/* ---- EXPERIMENT CARD ---- */
+.exp-card{
+  margin:0 0 32px;
+  border:1.5px solid var(--ink);
+  border-radius:4px;
+  overflow:hidden;
+  box-shadow:3px 3px 0 var(--ink);
+  background:var(--paper-soft);
+}
+@media(min-width:600px){
+  .exp-card{ margin:0 0 40px; box-shadow:5px 5px 0 var(--ink); }
+}
+.exp-header{
+  display:flex; align-items:center; gap:12px;
+  padding:14px 16px 12px;
+  background:
+    linear-gradient(135deg, rgba(220,252,231,.6) 0%, transparent 60%),
+    var(--paper-deep);
+  border-bottom:1.5px solid var(--ink);
+}
+.exp-num{
+  font-family:"JetBrains Mono", monospace;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.2em;
+  color:var(--paper);
+  background:var(--brand);
+  padding:4px 10px;
+  border-radius:2px;
+  flex-shrink:0;
+  text-transform:uppercase;
+}
+.exp-title{
+  font-family:"Fraunces", serif;
+  font-variation-settings:"opsz" 60;
+  font-weight:600;
+  font-size:17px;
+  line-height:1.25;
+  margin:0;
+  color:var(--ink);
+}
+@media(min-width:600px){ .exp-title{ font-size:20px; } }
+.exp-tags{
+  display:flex; gap:5px; flex-wrap:wrap;
+  margin-top:4px;
+}
+.exp-tag{
+  font-family:"JetBrains Mono", monospace;
+  font-size:9.5px;
+  letter-spacing:.12em;
+  color:var(--brand-deep);
+  background:var(--brand-soft);
+  border:1px solid var(--brand-mid);
+  padding:2px 7px;
+  border-radius:2px;
+  text-transform:uppercase;
+}
+.exp-body{ padding:14px 16px; }
+@media(min-width:600px){ .exp-body{ padding:18px 20px; } }
+.aim-line{
+  font-family:"JetBrains Mono", monospace;
+  font-size:10.5px;
+  letter-spacing:.14em;
+  color:var(--muted);
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+.aim-text{
+  font-family:"Spectral", serif;
+  font-style:italic;
+  font-size:14.5px;
+  color:var(--ink-soft);
+  margin:0 0 14px;
+  border-left:3px solid var(--brand-mid);
+  padding-left:10px;
+}
+@media(min-width:600px){ .aim-text{ font-size:16px; } }
+
+/* ---- CODE BLOCK ---- */
+.code-wrap{
+  position:relative;
+  margin:0 0 16px;
+}
+.code-label{
+  font-family:"JetBrains Mono", monospace;
+  font-size:9.5px;
+  letter-spacing:.22em;
+  color:var(--brand-mid);
+  text-transform:uppercase;
+  margin-bottom:4px;
+}
+pre.r-code{
+  font-family:"JetBrains Mono", monospace;
+  font-size:11.5px;
+  line-height:1.55;
+  background:#1a1209;
+  color:#f7f1e1;
+  padding:14px 14px 14px 14px;
+  border-radius:4px;
+  overflow-x:auto;
+  margin:0;
+  border-left:3px solid var(--brand);
+  position:relative;
+  white-space:pre;
+  -webkit-overflow-scrolling:touch;
+}
+@media(min-width:600px){ pre.r-code{ font-size:13px; padding:16px 18px; } }
+pre.r-code code{ background:transparent; border:none; color:inherit; padding:0; font-size:inherit; }
+
+/* Syntax highlighting */
+.cmt{ color:#6b8f71; font-style:italic; }
+.kw{ color:#4ade80; }
+.str{ color:#fb923c; }
+.num{ color:#60a5fa; }
+.fn{ color:#a3e635; }
+
+/* Copy button */
+.copy-btn{
+  position:absolute;
+  top:8px; right:8px;
+  font-family:"JetBrains Mono", monospace;
+  font-size:9px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  background:rgba(247,241,225,.12);
+  border:1px solid rgba(217,207,182,.25);
+  padding:4px 9px;
+  cursor:pointer;
+  border-radius:2px;
+  transition:all .15s;
+  z-index:2;
+}
+.copy-btn:hover{ background:var(--brand); color:var(--paper); border-color:var(--brand); }
+.copy-btn.copied{ background:var(--brand-mid); color:var(--paper); border-color:var(--brand-mid); }
+
+/* ---- KEY CONCEPTS ---- */
+.concepts-head{
+  font-family:"JetBrains Mono", monospace;
+  font-size:10px;
+  letter-spacing:.22em;
+  color:var(--brand-deep);
+  text-transform:uppercase;
+  font-weight:700;
+  margin:16px 0 8px;
+}
+.concept-list{
+  display:flex; flex-direction:column; gap:6px;
+  margin:0 0 18px;
+}
+.concept-item{
+  display:flex; gap:8px; align-items:flex-start;
+  font-size:13.5px;
+  background:var(--brand-soft);
+  border:1px solid rgba(22,101,52,.2);
+  border-radius:3px;
+  padding:7px 10px;
+}
+@media(min-width:600px){ .concept-item{ font-size:14.5px; } }
+.concept-item::before{
+  content:"→";
+  color:var(--brand);
+  font-family:"JetBrains Mono", monospace;
+  font-size:12px;
+  flex-shrink:0;
+  margin-top:1px;
+}
+
+/* ---- VIVA Q&A ---- */
+.qa-head{
+  font-family:"JetBrains Mono", monospace;
+  font-size:10px;
+  letter-spacing:.22em;
+  color:var(--brand-deep);
+  text-transform:uppercase;
+  font-weight:700;
+  margin:16px 0 10px;
+  display:flex; align-items:center; gap:8px;
+}
+.qa-head::after{
+  content:""; flex:1; height:1px;
+  background:linear-gradient(90deg, var(--brand-mid), transparent);
+}
+.qa-list{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:10px; }
+.qa-item{
+  border-left:3px solid var(--brand-mid);
+  padding:8px 12px;
+  background:var(--paper-soft);
+  border-radius:0 3px 3px 0;
+}
+.qa-q{
+  font-family:"Spectral", serif;
+  font-weight:700;
+  font-size:14px;
+  color:var(--ink);
+  margin:0 0 4px;
+}
+@media(min-width:600px){ .qa-q{ font-size:15.5px; } }
+.qa-a{
+  font-family:"Spectral", serif;
+  font-size:13.5px;
+  color:var(--ink-soft);
+  margin:0;
+  line-height:1.6;
+}
+@media(min-width:600px){ .qa-a{ font-size:15px; } }
+
+/* ---- THEORY SECTION ---- */
+.theory-unit{
+  margin:0 0 36px;
+  scroll-margin-top:90px;
+}
+.unit-title{
+  font-family:"Fraunces", serif;
+  font-variation-settings:"opsz" 72;
+  font-weight:600;
+  font-size:clamp(20px, 5vw, 30px);
+  margin:0 0 16px;
+  padding-bottom:10px;
+  border-bottom:1.5px solid var(--rule);
+  color:var(--ink);
+  display:flex; align-items:baseline; gap:10px;
+}
+.unit-title .unit-num{
+  font-family:"JetBrains Mono", monospace;
+  font-size:11px;
+  letter-spacing:.18em;
+  color:var(--brand);
+  text-transform:uppercase;
+  font-weight:500;
+  flex-shrink:0;
+}
+.theory-qa-list{ display:flex; flex-direction:column; gap:12px; }
+.theory-qa-item{
+  border:1px solid var(--rule);
+  border-left:4px solid var(--brand-mid);
+  border-radius:0 4px 4px 0;
+  padding:12px 14px;
+  background:var(--paper-soft);
+}
+.theory-qa-item .tq{
+  font-family:"Spectral", serif;
+  font-weight:700;
+  font-size:14.5px;
+  color:var(--ink);
+  margin:0 0 6px;
+}
+@media(min-width:600px){ .theory-qa-item .tq{ font-size:16px; } }
+.theory-qa-item .ta{
+  font-family:"Spectral", serif;
+  font-size:13.5px;
+  color:var(--ink-soft);
+  margin:0;
+  line-height:1.65;
+}
+@media(min-width:600px){ .theory-qa-item .ta{ font-size:15px; } }
+code.inline{
+  font-family:"JetBrains Mono", monospace;
+  font-size:.84em;
+  background:var(--paper-deep);
+  color:var(--brand-deep);
+  padding:1px 6px;
+  border-radius:3px;
+  border:1px solid var(--rule);
+}
+
+/* ---- FOOTER ---- */
+footer{
+  text-align:center;
+  padding:24px 16px;
+  font-family:"JetBrains Mono", monospace;
+  font-size:10.5px;
+  letter-spacing:.18em;
+  color:var(--muted);
+  text-transform:uppercase;
+  border-top:1.5px solid var(--ink);
+  margin-top:24px;
+}
+footer span{ color:var(--brand); }
+
+/* ---- BACK TO TOP ---- */
+#btt{
+  position:fixed; bottom:24px; right:16px; z-index:40;
+  width:42px; height:42px;
+  background:var(--ink);
+  color:var(--paper);
+  border:none;
+  border-radius:0;
+  cursor:pointer;
+  font-family:"JetBrains Mono", monospace;
+  font-size:16px;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:3px 3px 0 var(--brand);
+  opacity:0; pointer-events:none;
+  transition:opacity .2s;
+}
+#btt.show{ opacity:1; pointer-events:auto; }
+#btt:hover{ background:var(--brand); box-shadow:3px 3px 0 var(--ink); }
+
+/* ---- DIVIDER ---- */
+.section-gap{ margin:48px 0 32px; border:none; border-top:2px solid var(--ink); }
+
+/* Bullet Q&A answers for easy exam writing */
+.qa-bullets {
+  list-style: disc;
+  margin: 5px 0 2px 20px;
+  line-height: 1.75;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.qa-bullets li { padding: 1px 0; }
+.qa-bullets strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="title">
+    <b>BCD-204-V &middot; Data Science Using R</b>
+    <small>BCA(DS) IV Sem</small>
+  </div>
+  <nav class="chips">
+    <a href="#lab">&#x1F9EA; Lab Guide</a>
+    <a href="#theory">&#x1F4DA; Theory Q&amp;A</a>
+  </nav>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="wrap">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="stamp">Viva Prep</div>
+    <div class="meta-line">BCD-204-V &amp; BCD-206-V &middot; BCA(DS) IV Semester</div>
+    <h1>Data Science<em>Using R</em></h1>
+    <div class="sub">Viva Exam Preparation Guide</div>
+    <div class="grid-meta">
+      <div><b>Theory</b><span>BCD-204-V</span></div>
+      <div><b>Lab</b><span>BCD-206-V</span></div>
+      <div><b>Experiments</b><span>12 Practicals</span></div>
+      <div><b>Theory Units</b><span>4 Units · 32 Q&amp;A</span></div>
+    </div>
+  </div>
+
+  <!-- ===================== LAB SECTION ===================== -->
+  <section id="lab">
+    <div class="sec-head">
+      <div class="kicker">BCD-206-V &middot; Practical</div>
+      <h2>&#x1F9EA; Lab Guide</h2>
+      <p class="lede">All 12 R experiments with code, key concepts &amp; viva questions</p>
+    </div>
+
+    <!-- EXP 1 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 01</span>
+        <div>
+          <p class="exp-title">User Input, Display Values, R Version</p>
+          <div class="exp-tags"><span class="exp-tag">Input</span><span class="exp-tag">Output</span><span class="exp-tag">readline</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Take user input (name and age), display the values, and print the R version.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code><span class="cmt"># Take input from user</span>
+name <span class="kw">&lt;-</span> <span class="fn">readline</span>(<span class="fn">prompt</span> <span class="kw">=</span> <span class="str">"Enter your name: "</span>)
+age  <span class="kw">&lt;-</span> <span class="fn">readline</span>(<span class="fn">prompt</span> <span class="kw">=</span> <span class="str">"Enter your age: "</span>)
+
+<span class="cmt"># Display the values</span>
+<span class="fn">cat</span>(<span class="str">"Name:"</span>, name, <span class="str">"\n"</span>)
+<span class="fn">cat</span>(<span class="str">"Age:"</span>, age, <span class="str">"\n"</span>)
+
+<span class="cmt"># Print installed R version</span>
+<span class="fn">cat</span>(<span class="str">"R Version:"</span>, R.version<span class="kw">$</span>version.string, <span class="str">"\n"</span>)</code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">readline()</code> reads console input as character — takes a <code class="inline">prompt</code> argument shown to the user</div>
+          <div class="concept-item"><code class="inline">cat()</code> prints without quotes and supports <code class="inline">\n</code> for newlines; <code class="inline">print()</code> shows the object with type info</div>
+          <div class="concept-item"><code class="inline">R.version$version.string</code> gets the full installed R version string</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What is <code class="inline">readline()</code> in R?</p>
+            <ul class="qa-bullets">
+              <li>Reads a line of input from the console</li>
+              <li>Takes a <code class="inline">prompt</code> argument — text shown to user</li>
+              <li>Always returns input as a <strong>character string</strong></li>
+              <li>Example: <code class="inline">name &lt;- readline("Enter name: ")</code></li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: What is the difference between <code class="inline">cat()</code> and <code class="inline">print()</code>?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">cat()</code>: prints without quotes, supports <code class="inline">\n</code> for newlines</li>
+              <li><code class="inline">print()</code>: shows the object with type info, adds quotes for strings</li>
+              <li>Use <code class="inline">cat()</code> for formatted output</li>
+              <li>Use <code class="inline">print()</code> to inspect objects</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: How do you check the R version?</p>
+            <ul class="qa-bullets">
+              <li>Use <code class="inline">R.version$version.string</code> for version string</li>
+              <li>Or type <code class="inline">R.version</code> for complete details</li>
+              <li>Or <code class="inline">version</code> gives a list of all version info</li>
+              <li>Example output: "R version 4.3.1 (2023-06-16)"</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: What is the difference between <code class="inline">&lt;-</code> and <code class="inline">=</code> in R?</p>
+            <ul class="qa-bullets">
+              <li>Both assign values to variables</li>
+              <li><code class="inline">&lt;-</code> is the traditional R assignment operator (preferred style)</li>
+              <li><code class="inline">=</code> is used mainly inside function arguments</li>
+              <li>Example: <code class="inline">mean(x = c(1,2,3))</code> vs <code class="inline">x &lt;- c(1,2,3)</code> outside functions</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: What does <code class="inline">\n</code> mean in <code class="inline">cat()</code>?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">\n</code> is the newline escape character</li>
+              <li>Moves cursor to next line (like pressing Enter)</li>
+              <li><code class="inline">\t</code> is tab, <code class="inline">\\</code> is a backslash</li>
+              <li>Example: <code class="inline">cat("Line1\nLine2\n")</code> prints on two separate lines</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 2 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 02</span>
+        <div>
+          <p class="exp-title">Sequence, Mean, Sum</p>
+          <div class="exp-tags"><span class="exp-tag">seq</span><span class="exp-tag">mean</span><span class="exp-tag">sum</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Create sequence from 20 to 50, find mean of 20–60, find sum of 51–91.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code><span class="cmt"># Sequence from 20 to 50</span>
+s1 <span class="kw">&lt;-</span> <span class="fn">seq</span>(<span class="num">20</span>, <span class="num">50</span>)
+<span class="fn">cat</span>(<span class="str">"Sequence 20-50:\n"</span>); <span class="fn">print</span>(s1)
+
+<span class="cmt"># Mean of 20 to 60</span>
+<span class="fn">cat</span>(<span class="str">"Mean of 20-60:"</span>, <span class="fn">mean</span>(<span class="fn">seq</span>(<span class="num">20</span>, <span class="num">60</span>)), <span class="str">"\n"</span>)
+
+<span class="cmt"># Sum of 51 to 91</span>
+<span class="fn">cat</span>(<span class="str">"Sum of 51-91:"</span>, <span class="fn">sum</span>(<span class="fn">seq</span>(<span class="num">51</span>, <span class="num">91</span>)), <span class="str">"\n"</span>)</code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">seq(from, to)</code> generates an integer sequence between two values</div>
+          <div class="concept-item"><code class="inline">mean()</code> calculates arithmetic mean; <code class="inline">sum()</code> adds all elements in a vector</div>
+          <div class="concept-item"><code class="inline">length()</code> returns the number of elements in a vector</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What is the <code class="inline">seq()</code> function?</p>
+            <ul class="qa-bullets">
+              <li>Generates a regular sequence of numbers</li>
+              <li><code class="inline">seq(from, to)</code> gives integer sequence</li>
+              <li>Optional: <code class="inline">by=</code> controls step size (e.g., <code class="inline">seq(1,10,by=2)</code> gives 1,3,5,7,9)</li>
+              <li>Example: <code class="inline">seq(20,50)</code> gives 20,21,22,...50</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: What is the difference between <code class="inline">seq()</code> and <code class="inline">seq_len()</code>?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">seq(a, b)</code>: generates from a to b</li>
+              <li><code class="inline">seq_len(n)</code>: generates 1 to n (faster for simple 1:n sequences)</li>
+              <li><code class="inline">seq_along(x)</code>: generates indices 1 to length(x)</li>
+              <li>Example: <code class="inline">seq_along(c('a','b','c'))</code> gives 1 2 3</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: How do you find mean in R?</p>
+            <ul class="qa-bullets">
+              <li>Use <code class="inline">mean()</code> function</li>
+              <li>Example: <code class="inline">mean(c(10,20,30))</code> gives 20</li>
+              <li>For a range: <code class="inline">mean(seq(20,60))</code> gives mean of 20 to 60</li>
+              <li>NA values: use <code class="inline">mean(x, na.rm=TRUE)</code> to ignore missing values</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: What does <code class="inline">sum()</code> do?</p>
+            <ul class="qa-bullets">
+              <li>Adds all values in a vector</li>
+              <li>Example: <code class="inline">sum(1:10)</code> = 55</li>
+              <li>Works on numeric vectors</li>
+              <li><code class="inline">cumsum(x)</code> gives running total (cumulative sum)</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: What is the formula for arithmetic mean?</p>
+            <ul class="qa-bullets">
+              <li>Mean = Sum of all values / Count of values</li>
+              <li>Mean of 20 to 60 = (20+21+...+60) / 41 = 40</li>
+              <li>In R: <code class="inline">sum(seq(20,60)) / length(seq(20,60))</code></li>
+              <li>Equivalent to <code class="inline">mean(seq(20,60))</code></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 3 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 03</span>
+        <div>
+          <p class="exp-title">Vector with Random Integers</p>
+          <div class="exp-tags"><span class="exp-tag">Vector</span><span class="exp-tag">sample</span><span class="exp-tag">random</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Create a vector with 10 random integer values between -50 and +50.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code><span class="cmt"># sample() picks n random values from a range</span>
+<span class="cmt"># replace=FALSE means no repetition</span>
+vec <span class="kw">&lt;-</span> <span class="fn">sample</span>(<span class="kw">-</span><span class="num">50</span><span class="kw">:</span><span class="num">50</span>, size <span class="kw">=</span> <span class="num">10</span>, replace <span class="kw">=</span> <span class="kw">FALSE</span>)
+
+<span class="fn">cat</span>(<span class="str">"10 random integers between -50 and +50:\n"</span>)
+<span class="fn">print</span>(vec)
+<span class="fn">cat</span>(<span class="str">"Length:"</span>, <span class="fn">length</span>(vec), <span class="str">"\n"</span>)</code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">sample(x, size, replace)</code> picks random samples from a pool</div>
+          <div class="concept-item"><code class="inline">replace=FALSE</code> means no repeats; <code class="inline">replace=TRUE</code> allows same element multiple times</div>
+          <div class="concept-item"><code class="inline">-50:50</code> is shorthand for <code class="inline">seq(-50, 50)</code> — a vector is an ordered collection of same-type elements</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What is a vector in R?</p>
+            <ul class="qa-bullets">
+              <li>Most basic data structure in R</li>
+              <li>Ordered collection of elements of the <strong>SAME type</strong></li>
+              <li>Created with <code class="inline">c()</code> function</li>
+              <li>Example: <code class="inline">c(10, 20, 30)</code> is numeric vector; <code class="inline">c("a","b","c")</code> is character vector</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: What is <code class="inline">sample()</code> in R?</p>
+            <ul class="qa-bullets">
+              <li>Randomly selects elements from a vector or range</li>
+              <li>Parameters: <code class="inline">x</code> (pool to pick from), <code class="inline">size</code> (how many), <code class="inline">replace</code> (repeat or not)</li>
+              <li>Example: <code class="inline">sample(1:100, 5)</code> picks 5 random numbers from 1 to 100</li>
+              <li><code class="inline">replace=FALSE</code>: no repetition; <code class="inline">replace=TRUE</code>: can repeat</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: Difference between <code class="inline">replace=TRUE</code> and <code class="inline">replace=FALSE</code>?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">replace=FALSE</code> (default): each element can only be picked ONCE</li>
+              <li><code class="inline">replace=TRUE</code>: same element can be picked MULTIPLE times</li>
+              <li>Use FALSE for lottery-style selection</li>
+              <li>Use TRUE for bootstrap sampling</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: What does <code class="inline">-50:50</code> mean in R?</p>
+            <ul class="qa-bullets">
+              <li>Creates integer sequence from -50 to 50</li>
+              <li>Shorthand for <code class="inline">seq(-50, 50, by=1)</code></li>
+              <li>Total 101 values: -50,-49,...,0,...,49,50</li>
+              <li>The <code class="inline">:</code> operator is the fastest way to create simple integer sequences</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: How do you set a seed for reproducible random numbers?</p>
+            <ul class="qa-bullets">
+              <li>Use <code class="inline">set.seed(number)</code> before <code class="inline">sample()</code></li>
+              <li>Example: <code class="inline">set.seed(42); sample(1:10, 5)</code> gives SAME result every run</li>
+              <li>Important for reproducible research and debugging</li>
+              <li>Any integer can be used as the seed</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 4 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 04</span>
+        <div>
+          <p class="exp-title">Factors of a Number</p>
+          <div class="exp-tags"><span class="exp-tag">Loop</span><span class="exp-tag">Modulo</span><span class="exp-tag">for</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Find all factors of a given number using a for loop and the modulo operator.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>n <span class="kw">&lt;-</span> <span class="fn">as.integer</span>(<span class="fn">readline</span>(<span class="fn">prompt</span> <span class="kw">=</span> <span class="str">"Enter a number: "</span>))
+
+<span class="fn">cat</span>(<span class="str">"Factors of"</span>, n, <span class="str">":"</span>)
+<span class="kw">for</span> (i <span class="kw">in</span> <span class="num">1</span><span class="kw">:</span>n) {
+  <span class="kw">if</span> (n <span class="kw">%%</span> i <span class="kw">==</span> <span class="num">0</span>) {    <span class="cmt"># %% is modulo — remainder after division</span>
+    <span class="fn">cat</span>(i, <span class="str">""</span>)
+  }
+}
+<span class="fn">cat</span>(<span class="str">"\n"</span>)</code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">%%</code> is the modulo operator — returns remainder after division; if <code class="inline">n %% i == 0</code>, then i is a factor</div>
+          <div class="concept-item"><code class="inline">for (i in 1:n) { ... }</code> is R's for loop syntax — iterates i from 1 to n</div>
+          <div class="concept-item"><code class="inline">c(vector, value)</code> appends a new value to a vector; <code class="inline">as.integer()</code> converts character input to integer</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What is the modulo operator in R?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">%%</code> returns the remainder after integer division</li>
+              <li>Example: <code class="inline">10 %% 3 = 1</code> (10 divided by 3 leaves remainder 1)</li>
+              <li>If <code class="inline">n %% i == 0</code>, then i is a factor of n</li>
+              <li>Also used to check even/odd: <code class="inline">n %% 2 == 0</code> means even</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: How do you write a for loop in R?</p>
+            <ul class="qa-bullets">
+              <li>Syntax: <code class="inline">for (variable in sequence) { body }</code></li>
+              <li>Example: <code class="inline">for (i in 1:5) { print(i) }</code></li>
+              <li>The loop variable takes each value from the sequence</li>
+              <li>Use <code class="inline">break</code> to exit early, <code class="inline">next</code> to skip current iteration</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: What is a prime number?</p>
+            <ul class="qa-bullets">
+              <li>A number with exactly 2 factors: 1 and itself</li>
+              <li>Examples: 2, 3, 5, 7, 11, 13, 17, 19</li>
+              <li>1 is NOT a prime number</li>
+              <li>Check: if <code class="inline">length(factors) == 2</code> then prime</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: How do you append to a vector in R?</p>
+            <ul class="qa-bullets">
+              <li>Use <code class="inline">c(existing, new_value)</code></li>
+              <li>Example: <code class="inline">v &lt;- c(v, 5)</code> adds 5 to vector v</li>
+              <li>R creates a NEW vector each time (immutable style)</li>
+              <li>For large loops, <code class="inline">append()</code> function is more efficient</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: What does <code class="inline">as.integer()</code> do?</p>
+            <ul class="qa-bullets">
+              <li>Converts a value to integer data type</li>
+              <li><code class="inline">readline()</code> always returns a character string</li>
+              <li><code class="inline">as.integer("25")</code> converts string "25" to number 25</li>
+              <li>Needed for arithmetic operations on user input</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 5 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 05</span>
+        <div>
+          <p class="exp-title">Maximum and Minimum of Vector</p>
+          <div class="exp-tags"><span class="exp-tag">max</span><span class="exp-tag">min</span><span class="exp-tag">sort</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Find maximum and minimum value of a given vector.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>vec <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">23</span>, <span class="num">45</span>, <span class="num">12</span>, <span class="num">67</span>, <span class="num">8</span>, <span class="num">34</span>, <span class="num">56</span>)
+<span class="fn">cat</span>(<span class="str">"Vector:"</span>, vec, <span class="str">"\n"</span>)
+<span class="fn">cat</span>(<span class="str">"Maximum:"</span>, <span class="fn">max</span>(vec), <span class="str">"\n"</span>)
+<span class="fn">cat</span>(<span class="str">"Minimum:"</span>, <span class="fn">min</span>(vec), <span class="str">"\n"</span>)
+<span class="fn">cat</span>(<span class="str">"Position of max:"</span>, <span class="fn">which.max</span>(vec), <span class="str">"\n"</span>)
+<span class="fn">cat</span>(<span class="str">"Position of min:"</span>, <span class="fn">which.min</span>(vec), <span class="str">"\n"</span>)</code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">max()</code> / <code class="inline">min()</code> return the largest / smallest value in a vector</div>
+          <div class="concept-item"><code class="inline">which.max()</code> / <code class="inline">which.min()</code> return the INDEX (position) of max/min, not the value itself</div>
+          <div class="concept-item"><code class="inline">range(v)</code> returns <code class="inline">c(min, max)</code>; <code class="inline">sort(v)</code> arranges in ascending order (use <code class="inline">decreasing=TRUE</code> for descending)</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What is the difference between <code class="inline">max()</code> and <code class="inline">which.max()</code>?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">max(v)</code>: returns the <strong>maximum value</strong> in vector</li>
+              <li><code class="inline">which.max(v)</code>: returns the <strong>index (position)</strong> of the maximum value</li>
+              <li>Example: <code class="inline">max(c(3,1,9,5))</code> = 9; <code class="inline">which.max(c(3,1,9,5))</code> = 3</li>
+              <li>Similarly: <code class="inline">min()</code> and <code class="inline">which.min()</code></li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: What does <code class="inline">range()</code> return?</p>
+            <ul class="qa-bullets">
+              <li>Returns a vector of two values: <code class="inline">c(minimum, maximum)</code></li>
+              <li>Example: <code class="inline">range(c(3,8,1,5))</code> gives <code class="inline">1 8</code></li>
+              <li>Equivalent to <code class="inline">c(min(x), max(x))</code></li>
+              <li>Useful to quickly see the spread of data</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: How do you sort a vector in R?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">sort(vec)</code>: returns sorted vector in ascending order</li>
+              <li><code class="inline">sort(vec, decreasing=TRUE)</code>: descending order</li>
+              <li>Original vector is NOT modified (immutable)</li>
+              <li><code class="inline">rev(vec)</code> reverses the vector order</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: What is the difference between <code class="inline">sort()</code> and <code class="inline">order()</code>?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">sort(v)</code>: returns the <strong>sorted values</strong></li>
+              <li><code class="inline">order(v)</code>: returns the <strong>indices</strong> that would sort the vector</li>
+              <li>Example: <code class="inline">order(c(30,10,20))</code> gives <code class="inline">2 3 1</code></li>
+              <li>Use <code class="inline">order()</code> to sort data frames by a column</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: Can <code class="inline">max()</code> work on character vectors?</p>
+            <ul class="qa-bullets">
+              <li>Yes! For character vectors, <code class="inline">max()</code> returns the last value alphabetically (lexicographic order)</li>
+              <li>Example: <code class="inline">max(c("banana","apple","cherry"))</code> gives "cherry"</li>
+              <li>Similarly <code class="inline">min()</code> gives "apple"</li>
+              <li>Comparison is case-sensitive by default</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 6 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 06</span>
+        <div>
+          <p class="exp-title">Convert Matrix to 1D Array</p>
+          <div class="exp-tags"><span class="exp-tag">matrix</span><span class="exp-tag">as.vector</span><span class="exp-tag">dim</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Create a matrix and convert it to a 1-dimensional array.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code><span class="cmt"># Create a 3x3 matrix (fills column by column)</span>
+mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(<span class="num">1</span><span class="kw">:</span><span class="num">9</span>, nrow <span class="kw">=</span> <span class="num">3</span>, ncol <span class="kw">=</span> <span class="num">3</span>)
+<span class="fn">cat</span>(<span class="str">"Original Matrix:\n"</span>); <span class="fn">print</span>(mat)
+
+<span class="cmt"># Convert to 1D array using as.vector()</span>
+arr <span class="kw">&lt;-</span> <span class="fn">as.vector</span>(mat)
+<span class="fn">cat</span>(<span class="str">"1D Array:"</span>, arr, <span class="str">"\n"</span>)</code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">matrix()</code> creates a 2D matrix, filling elements column-by-column by default</div>
+          <div class="concept-item"><code class="inline">as.vector()</code> flattens a matrix to 1D, reading elements column by column (column-major order)</div>
+          <div class="concept-item"><code class="inline">dim()</code> returns <code class="inline">c(rows, cols)</code>; <code class="inline">nrow()</code> and <code class="inline">ncol()</code> get dimensions separately</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What is a matrix in R?</p>
+            <ul class="qa-bullets">
+              <li>A 2-dimensional data structure with rows and columns</li>
+              <li>ALL elements must be the SAME type</li>
+              <li>Created with <code class="inline">matrix(data, nrow, ncol)</code></li>
+              <li>Dimensions accessed with <code class="inline">dim()</code>, <code class="inline">nrow()</code>, <code class="inline">ncol()</code></li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: How does <code class="inline">matrix()</code> fill elements by default?</p>
+            <ul class="qa-bullets">
+              <li>By <strong>column</strong> by default (column-major order)</li>
+              <li><code class="inline">matrix(1:9, nrow=3)</code>: column 1 gets 1,2,3; column 2 gets 4,5,6; column 3 gets 7,8,9</li>
+              <li>Use <code class="inline">byrow=TRUE</code> to fill row by row instead</li>
+              <li>Follows Fortran convention (column-major)</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: How do you fill a matrix by row?</p>
+            <ul class="qa-bullets">
+              <li>Add parameter <code class="inline">byrow=TRUE</code> to <code class="inline">matrix()</code></li>
+              <li>Example: <code class="inline">matrix(1:9, nrow=3, byrow=TRUE)</code> fills each row left to right</li>
+              <li>Default is <code class="inline">byrow=FALSE</code> (fills by column)</li>
+              <li>Use when your data is logically arranged in rows</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: What does <code class="inline">as.vector()</code> do to a matrix?</p>
+            <ul class="qa-bullets">
+              <li>Converts matrix to a 1D vector</li>
+              <li>Elements are read column by column (left to right)</li>
+              <li>Example: 3x3 matrix → 9-element vector</li>
+              <li>Equivalent to using <code class="inline">c(mat)</code> — both give same result</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: What is the difference between a matrix and an array in R?</p>
+            <ul class="qa-bullets">
+              <li>Matrix: always exactly 2D (rows × columns)</li>
+              <li>Array: can be n-dimensional (2D, 3D, 4D, ...)</li>
+              <li>A matrix IS a 2D array</li>
+              <li>Use array for higher dimensions: <code class="inline">array(data, dim=c(r,c,l))</code></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 7 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 07</span>
+        <div>
+          <p class="exp-title">Array of Two 3×3 Matrices</p>
+          <div class="exp-tags"><span class="exp-tag">array</span><span class="exp-tag">3D</span><span class="exp-tag">dim</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Create an array of two 3×3 matrices from two given vectors.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>vec1 <span class="kw">&lt;-</span> <span class="num">1</span><span class="kw">:</span><span class="num">9</span>    <span class="cmt"># first 3x3 matrix data</span>
+vec2 <span class="kw">&lt;-</span> <span class="num">10</span><span class="kw">:</span><span class="num">18</span>  <span class="cmt"># second 3x3 matrix data</span>
+
+<span class="cmt"># dim = c(rows, cols, layers)</span>
+arr <span class="kw">&lt;-</span> <span class="fn">array</span>(<span class="fn">c</span>(vec1, vec2), dim <span class="kw">=</span> <span class="fn">c</span>(<span class="num">3</span>, <span class="num">3</span>, <span class="num">2</span>))
+
+<span class="fn">cat</span>(<span class="str">"Matrix 1:\n"</span>); <span class="fn">print</span>(arr[,,<span class="num">1</span>])
+<span class="fn">cat</span>(<span class="str">"Matrix 2:\n"</span>); <span class="fn">print</span>(arr[,,<span class="num">2</span>])</code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">array(data, dim=c(r,c,layers))</code> creates a multi-dimensional array</div>
+          <div class="concept-item"><code class="inline">dim=c(3,3,2)</code> means 3 rows, 3 cols, 2 layers — total elements = 3×3×2 = 18</div>
+          <div class="concept-item">Access individual layers with <code class="inline">arr[,,layer_number]</code> — blank means "all" for that dimension</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What is an array in R?</p>
+            <ul class="qa-bullets">
+              <li>Multi-dimensional data structure</li>
+              <li>All elements must be the same type</li>
+              <li>Created with <code class="inline">array(data, dim=c(...))</code></li>
+              <li>More general than matrix (which is just 2D array)</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: How is an array different from a matrix?</p>
+            <ul class="qa-bullets">
+              <li>Matrix: exactly 2 dimensions only</li>
+              <li>Array: 2 or MORE dimensions</li>
+              <li>A matrix is a special case of array</li>
+              <li>Arrays are used when data has 3+ dimensions (like layers of matrices)</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: What does <code class="inline">dim=c(3,3,2)</code> mean?</p>
+            <ul class="qa-bullets">
+              <li>3 rows, 3 columns, 2 layers</li>
+              <li>Like 2 pages of a 3×3 grid</li>
+              <li>Total elements = 3×3×2 = 18</li>
+              <li>Must equal length of data vector</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: How do you access the 2nd matrix in a 3D array?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">arr[, , 2]</code> — all rows, all columns, layer 2</li>
+              <li>Empty index means "all" for that dimension</li>
+              <li><code class="inline">arr[1, 2, 1]</code> = element at row 1, col 2, layer 1</li>
+              <li>Think of it like: arr[row, col, layer]</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: How does array fill elements?</p>
+            <ul class="qa-bullets">
+              <li>Fills in column-major order (column by column)</li>
+              <li>Then fills next layer in same way</li>
+              <li>Example: <code class="inline">array(1:18, dim=c(3,3,2))</code> — first 9 fill layer 1, next 9 fill layer 2</li>
+              <li>Same order as matrix filling</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 8 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 08</span>
+        <div>
+          <p class="exp-title">3D Array Using dim()</p>
+          <div class="exp-tags"><span class="exp-tag">dim</span><span class="exp-tag">array</span><span class="exp-tag">reshape</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Create a 3-dimensional array of 24 elements using the dim() function.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code><span class="cmt"># Create vector of 24 elements</span>
+data <span class="kw">&lt;-</span> <span class="num">1</span><span class="kw">:</span><span class="num">24</span>
+
+<span class="cmt"># Assign dimensions to reshape into 3D array</span>
+<span class="fn">dim</span>(data) <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>)  <span class="cmt"># 2 rows, 3 cols, 4 layers</span>
+
+<span class="fn">cat</span>(<span class="str">"3D Array (2x3x4):\n"</span>)
+<span class="fn">print</span>(data)
+<span class="fn">cat</span>(<span class="str">"Dimensions:"</span>, <span class="fn">dim</span>(data), <span class="str">"\n"</span>)  <span class="cmt"># 2 3 4</span></code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">dim(x) &lt;- c(r,c,l)</code> can SET dimensions on a vector, converting it to an array in place</div>
+          <div class="concept-item"><code class="inline">dim(x)</code> also GETS the dimensions of an existing array or matrix</div>
+          <div class="concept-item">2×3×4 = 24 — dimensions must multiply to match the vector length exactly</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What does <code class="inline">dim()</code> do in R?</p>
+            <ul class="qa-bullets">
+              <li>Two uses: GET dimensions with <code class="inline">dim(x)</code></li>
+              <li>SET dimensions with <code class="inline">dim(x) &lt;- c(r,c,l)</code></li>
+              <li>Getting: <code class="inline">dim(matrix(1:9,3,3))</code> returns <code class="inline">3 3</code></li>
+              <li>Setting: <code class="inline">dim(x) &lt;- c(2,3,4)</code> reshapes x into 3D array</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: Why must dimensions multiply to match vector length?</p>
+            <ul class="qa-bullets">
+              <li>Array just reshapes existing data — no new elements created</li>
+              <li>2×3×4 = 24, so data must have exactly 24 elements</li>
+              <li>If lengths don't match, R gives an error</li>
+              <li>Think of it as folding a 1D vector into an n-D shape</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: What is the difference between using <code class="inline">dim()</code> vs <code class="inline">array()</code>?</p>
+            <ul class="qa-bullets">
+              <li>Both achieve the same result</li>
+              <li><code class="inline">dim(x) &lt;- c(r,c,l)</code>: modifies existing vector IN PLACE</li>
+              <li><code class="inline">array(data, dim=c(r,c,l))</code>: creates a NEW array object</li>
+              <li>Both follow column-major fill order</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: How do you get the number of dimensions in R?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">length(dim(x))</code> gives the number of dimensions</li>
+              <li>A vector: <code class="inline">dim()</code> returns NULL (no dimension)</li>
+              <li>Matrix: <code class="inline">length(dim(m))</code> = 2</li>
+              <li>3D array: <code class="inline">length(dim(a))</code> = 3</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: What happens when you assign <code class="inline">dim()</code> to a regular vector?</p>
+            <ul class="qa-bullets">
+              <li>Vector becomes an array/matrix</li>
+              <li>Elements rearranged into given shape (column-major order)</li>
+              <li>The actual data doesn't change, just the shape</li>
+              <li>Example: a 24-element vector becomes a 2×3×4 array</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 9 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 09</span>
+        <div>
+          <p class="exp-title">Statistical Summary of Data Frame</p>
+          <div class="exp-tags"><span class="exp-tag">data.frame</span><span class="exp-tag">summary</span><span class="exp-tag">str</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Get statistical summary and nature of data in a given data frame.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code><span class="cmt"># Create sample data frame</span>
+df <span class="kw">&lt;-</span> <span class="fn">data.frame</span>(
+  Name  <span class="kw">=</span> <span class="fn">c</span>(<span class="str">"Alice"</span>, <span class="str">"Bob"</span>, <span class="str">"Carol"</span>, <span class="str">"Dave"</span>),
+  Age   <span class="kw">=</span> <span class="fn">c</span>(<span class="num">20</span>, <span class="num">21</span>, <span class="num">19</span>, <span class="num">22</span>),
+  Marks <span class="kw">=</span> <span class="fn">c</span>(<span class="num">85</span>, <span class="num">72</span>, <span class="num">90</span>, <span class="num">68</span>)
+)
+
+<span class="fn">print</span>(<span class="fn">summary</span>(df))  <span class="cmt"># min, max, mean, median, quartiles</span>
+<span class="fn">str</span>(df)             <span class="cmt"># structure: column types and sample values</span></code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">data.frame()</code> creates tabular data where each column can have a different type</div>
+          <div class="concept-item"><code class="inline">summary()</code> gives min, 1st quartile, median, mean, 3rd quartile, max for numeric columns</div>
+          <div class="concept-item"><code class="inline">str()</code> shows structure: class, number of rows/cols, column names with data types and sample values</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What is a data frame in R?</p>
+            <ul class="qa-bullets">
+              <li>2D table where each column can have a <strong>different data type</strong></li>
+              <li>Like a spreadsheet — rows are observations, columns are variables</li>
+              <li>Most common data structure for data analysis in R</li>
+              <li>Created with <code class="inline">data.frame()</code> function</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: What does <code class="inline">summary()</code> show?</p>
+            <ul class="qa-bullets">
+              <li>For <strong>numeric</strong> columns: min, 1st quartile, median, mean, 3rd quartile, max</li>
+              <li>For <strong>character/factor</strong> columns: count of each unique value</li>
+              <li>Shows all columns at once</li>
+              <li>Very useful for quick data exploration</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: What does <code class="inline">str()</code> show?</p>
+            <ul class="qa-bullets">
+              <li>Structure of the object</li>
+              <li>Class type (data.frame, matrix, etc.)</li>
+              <li>Number of observations (rows) and variables (columns)</li>
+              <li>Column names, data types, and first few sample values</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: What is the difference between a data frame and a matrix?</p>
+            <ul class="qa-bullets">
+              <li>Matrix: ALL elements same type (all numeric, or all character)</li>
+              <li>Data frame: each column can have DIFFERENT type (mix of numeric, character, factor)</li>
+              <li>Data frames are more flexible for real-world data</li>
+              <li>Matrices are faster for mathematical operations</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: What is <code class="inline">stringsAsFactors</code>?</p>
+            <ul class="qa-bullets">
+              <li>Old R (before 4.0): character columns auto-converted to factors</li>
+              <li><code class="inline">stringsAsFactors=FALSE</code>: keeps character columns as strings</li>
+              <li>R 4.0+: default changed to FALSE (no auto-conversion)</li>
+              <li>Factors are useful for categorical data with fixed levels</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 10 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 10</span>
+        <div>
+          <p class="exp-title">Extract First Two Rows from Data Frame</p>
+          <div class="exp-tags"><span class="exp-tag">head</span><span class="exp-tag">tail</span><span class="exp-tag">indexing</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Extract the first two rows from a given data frame.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>df <span class="kw">&lt;-</span> <span class="fn">data.frame</span>(
+  Name  <span class="kw">=</span> <span class="fn">c</span>(<span class="str">"Alice"</span>, <span class="str">"Bob"</span>, <span class="str">"Carol"</span>, <span class="str">"Dave"</span>, <span class="str">"Eve"</span>),
+  Age   <span class="kw">=</span> <span class="fn">c</span>(<span class="num">20</span>, <span class="num">21</span>, <span class="num">19</span>, <span class="num">22</span>, <span class="num">20</span>),
+  Score <span class="kw">=</span> <span class="fn">c</span>(<span class="num">85</span>, <span class="num">72</span>, <span class="num">90</span>, <span class="num">68</span>, <span class="num">78</span>)
+)
+
+<span class="cmt"># head(df, n) returns first n rows</span>
+<span class="fn">print</span>(<span class="fn">head</span>(df, <span class="num">2</span>))</code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">head(df, n)</code> returns first n rows; <code class="inline">tail(df, n)</code> returns last n rows (default 6)</div>
+          <div class="concept-item"><code class="inline">df[rows, cols]</code> is the indexing syntax — leaving blank selects all of that dimension</div>
+          <div class="concept-item"><code class="inline">1:2</code> means rows 1 and 2; <code class="inline">df[1:2, ]</code> selects rows 1–2 and all columns</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What is <code class="inline">head()</code> in R?</p>
+            <ul class="qa-bullets">
+              <li>Returns the first n rows of a data frame or elements of a vector</li>
+              <li>Default: 6 rows/elements</li>
+              <li><code class="inline">head(df, 2)</code> returns first 2 rows</li>
+              <li>Useful to quickly preview large datasets</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: What is <code class="inline">tail()</code> in R?</p>
+            <ul class="qa-bullets">
+              <li>Returns the LAST n rows (default 6)</li>
+              <li>Opposite of <code class="inline">head()</code></li>
+              <li><code class="inline">tail(df, 3)</code> returns last 3 rows</li>
+              <li>Also works on vectors: <code class="inline">tail(c(1:10), 3)</code> gives 8 9 10</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: How does data frame indexing work?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">df[row, col]</code> — specific element</li>
+              <li><code class="inline">df[1, ]</code> — row 1, all columns</li>
+              <li><code class="inline">df[ ,2]</code> — all rows, column 2</li>
+              <li>Blank index means "select all" for that dimension</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: How do you select a column from a data frame?</p>
+            <ul class="qa-bullets">
+              <li>Three ways: <code class="inline">df$ColumnName</code> (by name, most common)</li>
+              <li><code class="inline">df[["ColumnName"]]</code> (double bracket, returns vector)</li>
+              <li><code class="inline">df[ ,column_number]</code> (by position)</li>
+              <li><code class="inline">df["ColumnName"]</code> (single bracket, returns data frame)</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: How do you filter rows based on a condition?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">df[df$Age &gt; 20, ]</code> — rows where Age &gt; 20</li>
+              <li><code class="inline">subset(df, Age &gt; 20)</code> — same result, cleaner syntax</li>
+              <li><code class="inline">df[df$Name == "Alice", ]</code> — filter by character value</li>
+              <li>Can combine: <code class="inline">df[df$Age &gt; 20 &amp; df$Score &gt; 80, ]</code></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 11 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 11</span>
+        <div>
+          <p class="exp-title">Create Matrix from Vector</p>
+          <div class="exp-tags"><span class="exp-tag">matrix</span><span class="exp-tag">nrow</span><span class="exp-tag">byrow</span><span class="exp-tag">dimnames</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Create a matrix taking a given vector of numbers as input and display the matrix.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>vec <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>, <span class="num">7</span>, <span class="num">8</span>, <span class="num">9</span>)
+
+<span class="cmt"># Create 3x3 matrix from vector</span>
+mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span class="kw">=</span> <span class="num">3</span>, ncol <span class="kw">=</span> <span class="num">3</span>)
+<span class="fn">cat</span>(<span class="str">"Matrix:\n"</span>)
+<span class="fn">print</span>(mat)</code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">matrix(data, nrow, ncol)</code> creates a 2D matrix from a vector</div>
+          <div class="concept-item"><code class="inline">byrow=TRUE</code> fills the matrix row by row; default is column by column</div>
+          <div class="concept-item"><code class="inline">dimnames=list(rowNames, colNames)</code> adds labels to rows and columns</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: What parameters does <code class="inline">matrix()</code> take?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">matrix(data, nrow, ncol, byrow, dimnames)</code></li>
+              <li><code class="inline">data</code>: input vector</li>
+              <li><code class="inline">nrow</code>/<code class="inline">ncol</code>: number of rows/columns</li>
+              <li><code class="inline">byrow</code>: fill by row if TRUE (default FALSE = fill by column)</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: If you provide nrow but not ncol, what happens?</p>
+            <ul class="qa-bullets">
+              <li>R automatically calculates <code class="inline">ncol</code> based on data length</li>
+              <li>Example: <code class="inline">matrix(1:12, nrow=3)</code> — 12 elements, 3 rows → ncol=4</li>
+              <li>Number of elements must be divisible</li>
+              <li>R gives warning if elements don't fill evenly (recycles)</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: What is <code class="inline">byrow=TRUE</code>?</p>
+            <ul class="qa-bullets">
+              <li>By default (byrow=FALSE): matrix fills <strong>column by column</strong></li>
+              <li>byrow=TRUE: matrix fills <strong>row by row</strong> (left to right)</li>
+              <li><code class="inline">matrix(1:9, nrow=3, byrow=TRUE)</code>: row 1 gets 1,2,3; row 2 gets 4,5,6</li>
+              <li>Choose based on how your data is logically organized</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: What is <code class="inline">dimnames</code>?</p>
+            <ul class="qa-bullets">
+              <li>Assigns labels to rows and columns</li>
+              <li>Format: <code class="inline">dimnames = list(row_names_vector, col_names_vector)</code></li>
+              <li>Example: <code class="inline">dimnames=list(c("R1","R2","R3"), c("C1","C2","C3"))</code></li>
+              <li>Accessed with <code class="inline">rownames(mat)</code> and <code class="inline">colnames(mat)</code></li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: How do you transpose a matrix?</p>
+            <ul class="qa-bullets">
+              <li>Using <code class="inline">t()</code> function</li>
+              <li>Swaps rows and columns</li>
+              <li>A 3×4 matrix becomes 4×3 after <code class="inline">t(mat)</code></li>
+              <li>Example: <code class="inline">t(matrix(1:6, nrow=2, ncol=3))</code> gives 3×2 matrix</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- EXP 12 -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <span class="exp-num">Exp 12</span>
+        <div>
+          <p class="exp-title">Matrix Indexing</p>
+          <div class="exp-tags"><span class="exp-tag">indexing</span><span class="exp-tag">matrix</span><span class="exp-tag">submatrix</span></div>
+        </div>
+      </div>
+      <div class="exp-body">
+        <div class="aim-line">Aim</div>
+        <p class="aim-text">Access element at 3rd column and 2nd row, only the 3rd row, only the 4th column.</p>
+        <div class="code-wrap">
+          <div class="code-label">R Code</div>
+          <pre class="r-code"><button class="copy-btn" onclick="copyCode(this)">Copy</button><code>mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(<span class="num">1</span><span class="kw">:</span><span class="num">16</span>, nrow <span class="kw">=</span> <span class="num">4</span>, ncol <span class="kw">=</span> <span class="num">4</span>)
+<span class="fn">cat</span>(<span class="str">"Matrix:\n"</span>); <span class="fn">print</span>(mat)
+
+<span class="cmt"># Element at row 2, column 3</span>
+<span class="fn">cat</span>(<span class="str">"Element [row2, col3]:"</span>, mat[<span class="num">2</span>, <span class="num">3</span>], <span class="str">"\n"</span>)
+
+<span class="cmt"># Only 3rd row (all columns)</span>
+<span class="fn">cat</span>(<span class="str">"3rd row:"</span>, mat[<span class="num">3</span>, ], <span class="str">"\n"</span>)
+
+<span class="cmt"># Only 4th column (all rows)</span>
+<span class="fn">cat</span>(<span class="str">"4th column:"</span>, mat[, <span class="num">4</span>], <span class="str">"\n"</span>)</code></pre>
+        </div>
+        <div class="concepts-head">Key Concepts</div>
+        <div class="concept-list">
+          <div class="concept-item"><code class="inline">mat[row, col]</code> for a single element; blank means "select all" for that dimension</div>
+          <div class="concept-item"><code class="inline">mat[3, ]</code> selects entire row 3; <code class="inline">mat[ ,4]</code> selects entire column 4</div>
+          <div class="concept-item">Use ranges like <code class="inline">mat[1:2, 2:3]</code> to extract a sub-matrix; negative index like <code class="inline">mat[-2, ]</code> excludes that row</div>
+        </div>
+        <div class="qa-head">Viva Q&amp;A</div>
+        <ul class="qa-list">
+          <li class="qa-item">
+            <p class="qa-q">Q1: How do you access a single element from a matrix?</p>
+            <ul class="qa-bullets">
+              <li>Use <code class="inline">mat[row, col]</code></li>
+              <li>Example: <code class="inline">mat[2, 3]</code> gets element at 2nd row, 3rd column</li>
+              <li>Both row and column indices must be specified</li>
+              <li>Negative index EXCLUDES: <code class="inline">mat[-2, -3]</code> removes row 2 and col 3</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q2: How do you select an entire row?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">mat[row_number, ]</code> — leave column index BLANK</li>
+              <li>Empty index means "all" for that dimension</li>
+              <li>Example: <code class="inline">mat[3, ]</code> selects entire 3rd row as a vector</li>
+              <li>Multiple rows: <code class="inline">mat[c(1,3), ]</code> selects rows 1 and 3</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q3: How do you select an entire column?</p>
+            <ul class="qa-bullets">
+              <li><code class="inline">mat[ ,col_number]</code> — leave row index BLANK</li>
+              <li>Example: <code class="inline">mat[ ,4]</code> selects entire 4th column as a vector</li>
+              <li>Multiple columns: <code class="inline">mat[ ,c(2,4)]</code> selects columns 2 and 4</li>
+              <li>Result is a vector (loses matrix structure unless drop=FALSE)</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q4: How do you select a sub-matrix?</p>
+            <ul class="qa-bullets">
+              <li>Use ranges for both row and column</li>
+              <li>Example: <code class="inline">mat[1:2, 2:3]</code> gives a 2×2 sub-matrix</li>
+              <li>Rows 1-2 and columns 2-3</li>
+              <li>Can also use named rows/cols if dimnames are set</li>
+            </ul>
+          </li>
+          <li class="qa-item">
+            <p class="qa-q">Q5: What does <code class="inline">mat[-2, ]</code> do?</p>
+            <ul class="qa-bullets">
+              <li>Negative index EXCLUDES that row/column</li>
+              <li><code class="inline">mat[-2, ]</code>: all rows EXCEPT row 2</li>
+              <li><code class="inline">mat[ ,-3]</code>: all columns EXCEPT column 3</li>
+              <li><code class="inline">mat[-c(1,3), ]</code>: excludes rows 1 and 3</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== THEORY SECTION ===================== -->
+  <hr class="section-gap">
+
+  <section id="theory">
+    <div class="sec-head">
+      <div class="kicker">BCD-204-V &middot; Theory</div>
+      <h2>&#x1F4DA; Theory Viva Q&amp;A</h2>
+      <p class="lede">4 units &middot; 32 questions and answers for your theory viva</p>
+    </div>
+
+    <!-- UNIT I -->
+    <div class="theory-unit">
+      <div class="unit-title">
+        <span class="unit-num">Unit I</span>
+        Introduction to Data Science
+      </div>
+      <div class="theory-qa-list">
+        <div class="theory-qa-item">
+          <p class="tq">Q1: What is Data Science?</p>
+          <ul class="qa-bullets">
+            <li>Interdisciplinary field combining statistics, computer science, and domain expertise</li>
+            <li>Extracts knowledge and insights from structured and unstructured data</li>
+            <li>Involves: data collection, cleaning, analysis, visualization, interpretation</li>
+            <li>Used in healthcare, finance, e-commerce, social media, etc.</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q2: What is Data Mining?</p>
+          <ul class="qa-bullets">
+            <li>Process of discovering patterns, correlations, anomalies from large datasets</li>
+            <li>Uses statistical and ML techniques</li>
+            <li>Examples: finding shopping patterns, detecting fraud, predicting customer churn</li>
+            <li>Part of the KDD (Knowledge Discovery in Databases) process</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q3: What is the difference between a Database and a Data Warehouse?</p>
+          <ul class="qa-bullets">
+            <li>Database: stores CURRENT operational data (OLTP — transactions)</li>
+            <li>Data Warehouse: stores HISTORICAL aggregated data (OLAP — analysis)</li>
+            <li>Database: frequently updated; Warehouse: updated in batches</li>
+            <li>Database: optimized for speed; Warehouse: optimized for analysis</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q4: What is Machine Learning? What are its types?</p>
+          <ul class="qa-bullets">
+            <li>Supervised: trains on labeled data (input + correct output)</li>
+            <li>Unsupervised: finds patterns in unlabeled data (no correct answers)</li>
+            <li>Reinforcement: learns through trial and error with rewards</li>
+            <li>Example: Email spam = supervised; Customer grouping = unsupervised</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q5: What is the difference between Supervised and Unsupervised Learning?</p>
+          <ul class="qa-bullets">
+            <li>Supervised: model learns from labeled examples</li>
+            <li>Examples: Classification (spam/not spam), Regression (price prediction)</li>
+            <li>Unsupervised: model finds hidden patterns without labels</li>
+            <li>Examples: Clustering (customer segments), Dimensionality reduction</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q6: What is the Data Processing Chain?</p>
+          <ul class="qa-bullets">
+            <li>Collection → Cleaning (handle missing/wrong data) → Transformation (normalize, encode)</li>
+            <li>Analysis (statistics, ML models) → Visualization → Insights/Decisions</li>
+            <li>Each step is critical: "garbage in, garbage out"</li>
+            <li>Data cleaning typically takes 60-80% of the time</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q7: What is Cloud Computing in Data Science?</p>
+          <ul class="qa-bullets">
+            <li>Remote servers store and process large datasets</li>
+            <li>No need for expensive on-premise hardware</li>
+            <li>Examples: AWS S3 (storage), Google BigQuery (analysis), Azure ML</li>
+            <li>Enables scalability — pay for what you use</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q8: What is Artificial Intelligence? How does it relate to Data Science?</p>
+          <ul class="qa-bullets">
+            <li>AI: broad field of making machines perform human-like tasks</li>
+            <li>Data Science: provides data and insights to power AI systems</li>
+            <li>Machine Learning is the bridge — it's a subset of AI and a tool of Data Science</li>
+            <li>Data Science fuels AI; AI applies the insights</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNIT II -->
+    <div class="theory-unit">
+      <div class="unit-title">
+        <span class="unit-num">Unit II</span>
+        Introduction to R
+      </div>
+      <div class="theory-qa-list">
+        <div class="theory-qa-item">
+          <p class="tq">Q1: What is R?</p>
+          <ul class="qa-bullets">
+            <li>Free, open-source programming language for statistical computing</li>
+            <li>Developed by Ross Ihaka and Robert Gentleman (New Zealand)</li>
+            <li>Very popular in data science, statistics, and bioinformatics</li>
+            <li>CRAN repository has 18,000+ packages for R</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q2: What are the main data types in R?</p>
+          <ul class="qa-bullets">
+            <li>Numeric: <code class="inline">3.14</code> (decimal numbers)</li>
+            <li>Integer: <code class="inline">3L</code> (whole numbers, L suffix)</li>
+            <li>Character: <code class="inline">"hello"</code> (text strings)</li>
+            <li>Logical: <code class="inline">TRUE</code>/<code class="inline">FALSE</code> | Complex: <code class="inline">2+3i</code> | Check type with <code class="inline">class()</code> or <code class="inline">typeof()</code></li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q3: What is a Vector in R?</p>
+          <ul class="qa-bullets">
+            <li>Fundamental data structure in R</li>
+            <li>Ordered collection of elements of the <strong>SAME type</strong> (atomic)</li>
+            <li>Created with <code class="inline">c()</code> function</li>
+            <li>Example: <code class="inline">c(1,2,3)</code> is numeric vector; all elements auto-coerced to same type</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q4: What is a List in R?</p>
+          <ul class="qa-bullets">
+            <li>Ordered collection of elements of <strong>DIFFERENT types</strong></li>
+            <li>Can contain vectors, data frames, numbers, strings, even other lists</li>
+            <li>Created with <code class="inline">list()</code> function</li>
+            <li>More flexible than vector — like a container of containers</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q5: What is a Factor in R?</p>
+          <ul class="qa-bullets">
+            <li>Categorical variable with a fixed set of possible values (called <strong>levels</strong>)</li>
+            <li>Used for categorical data like gender, city, grade</li>
+            <li>Created with <code class="inline">factor()</code></li>
+            <li>Internally stored as integers with labels — memory efficient</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q6: What are special values in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">NA</code>: missing/unknown value</li>
+            <li><code class="inline">NULL</code>: empty/absent object (no value at all)</li>
+            <li><code class="inline">NaN</code>: Not a Number (e.g., <code class="inline">0/0</code>)</li>
+            <li><code class="inline">Inf</code>/<code class="inline">-Inf</code>: positive/negative infinity | Check with <code class="inline">is.na()</code>, <code class="inline">is.null()</code>, <code class="inline">is.nan()</code>, <code class="inline">is.infinite()</code></li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q7: What is a Data Frame?</p>
+          <ul class="qa-bullets">
+            <li>2D table where each column can have a different type</li>
+            <li>Like a spreadsheet or SQL table</li>
+            <li>Each column is a vector of the same length</li>
+            <li>Most common structure for data analysis — real-world datasets use data frames</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q8: What is an IDE for R?</p>
+          <ul class="qa-bullets">
+            <li>RStudio: most popular IDE, provides console + script editor + environment viewer + plot panel</li>
+            <li>VS Code with R extension: also widely used</li>
+            <li>Jupyter Notebook: supports R kernel for interactive analysis</li>
+            <li>RStudio Cloud: web-based, no installation needed</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNIT III -->
+    <div class="theory-unit">
+      <div class="unit-title">
+        <span class="unit-num">Unit III</span>
+        Programming using R
+      </div>
+      <div class="theory-qa-list">
+        <div class="theory-qa-item">
+          <p class="tq">Q1: What are the types of loops in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">for</code>: iterates over each element of a sequence</li>
+            <li><code class="inline">while</code>: runs while a condition is TRUE</li>
+            <li><code class="inline">repeat</code>: infinite loop until <code class="inline">break</code> statement</li>
+            <li>Apply family (<code class="inline">lapply</code>, <code class="inline">sapply</code>, <code class="inline">tapply</code>): functional alternatives to loops</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q2: What is the difference between <code class="inline">lapply()</code> and <code class="inline">sapply()</code>?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">lapply()</code>: always returns a <strong>LIST</strong></li>
+            <li><code class="inline">sapply()</code>: tries to <strong>SIMPLIFY</strong> result to vector/matrix</li>
+            <li>Example: <code class="inline">sapply(1:5, function(x) x^2)</code> returns numeric vector</li>
+            <li>Use <code class="inline">lapply</code> when you want consistent list output</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q3: What are conditional statements in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">if (condition) { } else { }</code>: basic conditional</li>
+            <li><code class="inline">ifelse(condition, true_val, false_val)</code>: vectorized (works on entire vector at once)</li>
+            <li><code class="inline">switch(expr, case1=result1, case2=result2)</code>: multi-way branching</li>
+            <li>Use <code class="inline">ifelse()</code> instead of <code class="inline">if-else</code> inside data frame operations</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q4: What are S3 and S4 Classes in R?</p>
+          <ul class="qa-bullets">
+            <li>S3: informal OOP system; class assigned with <code class="inline">class()</code> attribute</li>
+            <li>S4: formal, stricter OOP; defined with <code class="inline">setClass()</code>, accessed with <code class="inline">slot()</code></li>
+            <li>S3 is simpler and more common in base R</li>
+            <li>S4 is used in Bioconductor and formal packages</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q5: How do you create a function in R?</p>
+          <ul class="qa-bullets">
+            <li>Syntax: <code class="inline">myFunc &lt;- function(param1, param2) { body; return(result) }</code></li>
+            <li>Return is optional — R returns the last expression automatically</li>
+            <li>Functions are objects and can be passed to other functions</li>
+            <li>Example: <code class="inline">square &lt;- function(x) x^2</code> then <code class="inline">square(5)</code> gives 25</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q6: What is the <code class="inline">switch()</code> statement?</p>
+          <ul class="qa-bullets">
+            <li>Used for multi-way selection based on a value</li>
+            <li>Cleaner alternative to multiple if-else</li>
+            <li>Example: <code class="inline">switch(day, "Mon"="Monday", "Tue"="Tuesday", "Unknown")</code></li>
+            <li>Default (unnamed last argument) returned if no match</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q7: How do you create a list in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">myList &lt;- list(name="Alice", age=20, scores=c(85,90,78))</code></li>
+            <li>Elements can be different types</li>
+            <li>Access: <code class="inline">myList$name</code>, <code class="inline">myList[["name"]]</code>, <code class="inline">myList[[1]]</code></li>
+            <li><code class="inline">names(myList)</code> shows element names</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q8: What is the difference between <code class="inline">[ ]</code> and <code class="inline">[[ ]]</code> for list access?</p>
+          <ul class="qa-bullets">
+            <li>Single <code class="inline">[ ]</code>: returns a <strong>sub-list</strong> (still a list object)</li>
+            <li>Double <code class="inline">[[ ]]</code>: extracts the <strong>actual element</strong> (its native type)</li>
+            <li>Example: <code class="inline">myList["age"]</code> returns a list; <code class="inline">myList[["age"]]</code> returns the number</li>
+            <li>Always use <code class="inline">[[]]</code> when you want the actual value</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNIT IV -->
+    <div class="theory-unit">
+      <div class="unit-title">
+        <span class="unit-num">Unit IV</span>
+        Data Handling, Mathematical &amp; Statistical Concepts
+      </div>
+      <div class="theory-qa-list">
+        <div class="theory-qa-item">
+          <p class="tq">Q1: How do you read a CSV file in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">read.csv("filename.csv")</code>: reads CSV with header row</li>
+            <li><code class="inline">read.table("file.txt", header=TRUE, sep="\t")</code>: general delimited files</li>
+            <li><code class="inline">readr::read_csv()</code>: faster, part of tidyverse</li>
+            <li>Result is a data frame object</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q2: How do you save/load R data?</p>
+          <ul class="qa-bullets">
+            <li>Save: <code class="inline">save(obj, file="data.RData")</code> or <code class="inline">saveRDS(obj, "data.rds")</code></li>
+            <li>Load: <code class="inline">load("data.RData")</code> restores object with original name</li>
+            <li><code class="inline">readRDS("data.rds")</code>: loads and can assign new name</li>
+            <li>RDS format preferred for single objects</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q3: What is ggplot2?</p>
+          <ul class="qa-bullets">
+            <li>Powerful R package for data visualization</li>
+            <li>Based on "Grammar of Graphics" — builds plots layer by layer</li>
+            <li>Part of the tidyverse collection</li>
+            <li>Basic structure: <code class="inline">ggplot(data, aes(x,y)) + geom_point()</code> + other layers</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q4: What types of plots can R create?</p>
+          <ul class="qa-bullets">
+            <li>Base R: <code class="inline">plot()</code> (scatter), <code class="inline">hist()</code> (histogram), <code class="inline">boxplot()</code> (box), <code class="inline">barplot()</code> (bar)</li>
+            <li>ggplot2: <code class="inline">geom_point()</code>, <code class="inline">geom_line()</code>, <code class="inline">geom_bar()</code>, <code class="inline">geom_histogram()</code>, <code class="inline">geom_boxplot()</code></li>
+            <li>ggplot2 produces publication-quality graphics</li>
+            <li>Choose chart type based on data type (categorical vs continuous)</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q5: What is Hypothesis Testing?</p>
+          <ul class="qa-bullets">
+            <li>Statistical method to test an assumption about a population</li>
+            <li>Two hypotheses: H₀ (null — status quo) and H₁ (alternative — what we want to prove)</li>
+            <li>If p-value &lt; significance level (0.05): reject H₀</li>
+            <li>Examples: t-test, chi-square test, ANOVA</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q6: How do you find correlation in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">cor(x, y)</code>: Pearson correlation coefficient</li>
+            <li><code class="inline">cor(x, y, method="spearman")</code>: Spearman rank correlation</li>
+            <li>Range: -1 (perfect negative) to +1 (perfect positive)</li>
+            <li><code class="inline">cor.test(x, y)</code>: also gives p-value for significance</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q7: What is ODBC in R?</p>
+          <ul class="qa-bullets">
+            <li>Open Database Connectivity — standard interface to connect to databases</li>
+            <li><code class="inline">RODBC</code> package: older R package for ODBC connections</li>
+            <li>Modern approach: <code class="inline">odbc</code> + <code class="inline">DBI</code> packages</li>
+            <li>Used to import data from MySQL, SQL Server, Oracle into R</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q8: What is the difference between Base R graphics and ggplot2?</p>
+          <ul class="qa-bullets">
+            <li>Base R: simpler syntax, built-in, fast for quick plots</li>
+            <li>ggplot2: layered approach, highly customizable, aesthetically superior</li>
+            <li>Base R: <code class="inline">hist(data)</code> — one line</li>
+            <li>ggplot2: <code class="inline">ggplot(df, aes(x=col)) + geom_histogram()</code> — more verbose but more control</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <span>BCD-204-V</span> &middot; <span>BCD-206-V</span> &nbsp;|&nbsp; BCA(DS) IV Semester &nbsp;&middot;&nbsp; Data Science Using R
+  </footer>
+
+</main>
+
+<!-- BACK TO TOP -->
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">&#8679;</button>
+
+<script>
+// Back to top visibility
+const btt = document.getElementById('btt');
+window.addEventListener('scroll', () => {
+  btt.classList.toggle('show', window.scrollY > 300);
+}, { passive: true });
+
+// Copy to clipboard
+function copyCode(btn) {
+  const pre = btn.closest('pre');
+  const code = pre.querySelector('code');
+  // Get plain text (strip HTML tags)
+  const text = code.innerText || code.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.classList.remove('copied');
+    }, 1800);
+  }).catch(() => {
+    // Fallback for older browsers
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1800);
+  });
+}
+
+// Active chip highlight on scroll
+const sections = document.querySelectorAll('#lab, #theory');
+const chips = document.querySelectorAll('nav.chips a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      chips.forEach(c => c.classList.remove('active'));
+      const id = entry.target.getAttribute('id');
+      const activeChip = document.querySelector(`nav.chips a[href="#${id}"]`);
+      if (activeChip) activeChip.classList.add('active');
+    }
+  });
+}, { threshold: 0.15, rootMargin: '-80px 0px -60% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

@@ -1,0 +1,2179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probability &amp; Statistics Viva Guide · BCD-202-V · BCA(DS) IV Sem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Spectral:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+/* ── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --paper: #f7f1e1;
+  --ink: #1a1209;
+  --muted: #6b5d47;
+  --rule: #d9cfb6;
+  --brand: #9f1239;
+  --brand-soft: #fee2e2;
+  --brand-deep: #881337;
+  --code-bg: #1a1209;
+  --code-fg: #e8dcc8;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --shadow: 0 1px 4px rgba(26,18,9,.10), 0 4px 16px rgba(26,18,9,.06);
+  --shadow-card: 0 2px 8px rgba(26,18,9,.08), 0 8px 24px rgba(26,18,9,.05);
+}
+
+/* ── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Spectral', Georgia, serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.7;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ── Paper Grid Overlay ────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse at 60% 10%, rgba(159,18,57,.04) 0%, transparent 70%),
+    radial-gradient(ellipse at 10% 80%, rgba(180,140,60,.05) 0%, transparent 60%),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 27px,
+      rgba(217,207,182,.45) 27px,
+      rgba(217,207,182,.45) 28px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+body > * { position: relative; z-index: 1; }
+
+/* ── Typography ────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
+h2 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+h3 { font-size: clamp(1.05rem, 2.5vw, 1.3rem); }
+
+code, pre { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+
+.caveat { font-family: 'Caveat', cursive; font-size: 1.1rem; }
+
+/* ── Sticky Topbar ─────────────────────────────────────────── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(247,241,225,.96);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1.5px solid var(--rule);
+  padding: 0 1rem;
+  box-shadow: 0 2px 12px rgba(26,18,9,.08);
+}
+
+.topbar-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  padding: .65rem 0;
+}
+
+.topbar-meta {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+.topbar-badge {
+  background: var(--brand);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  font-weight: 500;
+  padding: .15rem .5rem;
+  border-radius: 4px;
+  letter-spacing: .03em;
+  white-space: nowrap;
+}
+
+.topbar-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.chip-nav {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  background: var(--brand-soft);
+  color: var(--brand);
+  border: 1.5px solid rgba(159,18,57,.2);
+  padding: .25rem .75rem;
+  border-radius: 20px;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s, color .15s, border-color .15s;
+  white-space: nowrap;
+}
+.chip:hover { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+/* ── Layout Container ──────────────────────────────────────── */
+.page { max-width: 900px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+/* ── Section Header ────────────────────────────────────────── */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: .75rem;
+  border-bottom: 2px solid var(--brand);
+}
+
+.section-header h2 { color: var(--brand); }
+
+.section-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .75rem;
+  color: var(--muted);
+  background: var(--brand-soft);
+  padding: .15rem .5rem;
+  border-radius: 4px;
+}
+
+/* ── Experiment Card ───────────────────────────────────────── */
+.exp-card {
+  background: #fff;
+  border: 1.5px solid var(--rule);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.exp-header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .85rem 1.1rem;
+  cursor: pointer;
+  background: linear-gradient(to right, var(--brand-soft), transparent);
+  border-bottom: 1px solid var(--rule);
+  transition: background .15s;
+  user-select: none;
+  flex-wrap: wrap;
+}
+.exp-header:hover { background: linear-gradient(to right, #fecaca, #fff1f140); }
+
+.exp-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .75rem;
+  font-weight: 500;
+  background: var(--brand);
+  color: #fff;
+  padding: .15rem .5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.exp-title-wrap { flex: 1; min-width: 0; }
+
+.exp-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.exp-aim {
+  font-size: .82rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: .1rem;
+}
+
+.tag-list { display: flex; gap: .35rem; flex-wrap: wrap; flex-shrink: 0; }
+
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  font-weight: 500;
+  padding: .1rem .45rem;
+  border-radius: 4px;
+  background: rgba(159,18,57,.08);
+  color: var(--brand);
+  border: 1px solid rgba(159,18,57,.15);
+}
+
+.exp-toggle {
+  font-size: 1rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+
+.exp-card.collapsed .exp-toggle { transform: rotate(-90deg); }
+
+.exp-body {
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.exp-card.collapsed .exp-body { display: none; }
+
+/* ── Code Block ────────────────────────────────────────────── */
+.code-wrap {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--code-bg);
+}
+
+.code-lang {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: rgba(232,220,200,.5);
+  padding: .4rem .75rem .1rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+pre {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  padding: .6rem 1rem 1rem;
+  overflow-x: auto;
+  font-size: .8rem;
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+/* Syntax highlight classes for Excel formulas */
+.kw  { color: #fca5a5; font-weight: 500; }         /* Excel function names — crimson-light */
+.str { color: #fdba74; }                             /* string/text values — amber */
+.num { color: #93c5fd; }                             /* numbers — sky blue */
+.cmt { color: #78716c; font-style: italic; }         /* comments — gray italic */
+.op  { color: #f9a8d4; }                             /* operators — pink */
+
+.copy-btn {
+  position: absolute;
+  top: .4rem;
+  right: .5rem;
+  background: rgba(255,255,255,.1);
+  color: rgba(232,220,200,.7);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 4px;
+  padding: .2rem .55rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  z-index: 2;
+}
+.copy-btn:hover { background: rgba(255,255,255,.2); color: #fff; }
+.copy-btn.copied { background: #166534; color: #bbf7d0; border-color: #166534; }
+
+/* ── Key Concepts ──────────────────────────────────────────── */
+.concepts-block {
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius);
+  padding: .75rem 1rem;
+}
+
+.concepts-label {
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  color: var(--brand);
+  margin-bottom: .4rem;
+  display: block;
+}
+
+.concept-list { list-style: none; display: flex; flex-direction: column; gap: .35rem; }
+
+.concept-list li {
+  font-size: .88rem;
+  padding-left: 1.1rem;
+  position: relative;
+  color: #7f1d1d;
+}
+.concept-list li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--brand);
+  font-size: .7rem;
+  top: .2rem;
+}
+
+.concept-list strong { color: var(--brand-deep); }
+
+/* ── Viva Q&A (in experiment) ──────────────────────────────── */
+.viva-block {
+  background: rgba(159,18,57,.03);
+  border: 1px solid rgba(159,18,57,.12);
+  border-radius: var(--radius);
+  padding: .75rem 1rem;
+}
+
+.viva-label {
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  color: var(--brand);
+  margin-bottom: .6rem;
+  display: block;
+}
+
+.qa-list { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+
+.qa-item { font-size: .88rem; }
+
+.qa-q {
+  font-weight: 600;
+  color: var(--brand-deep);
+  display: block;
+  margin-bottom: .15rem;
+}
+
+.qa-a {
+  color: #374151;
+  padding-left: .85rem;
+  border-left: 2px solid var(--rule);
+  display: block;
+}
+
+.qa-bullets {
+  list-style: disc;
+  margin: 4px 0 2px 18px;
+  line-height: 1.75;
+  font-size: 13.5px;
+  color: #374151;
+}
+
+/* ── Skewness Visual Legend ────────────────────────────────── */
+.skew-legend {
+  background: #fff5f5;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius);
+  padding: .85rem 1rem;
+}
+
+.skew-legend-title {
+  font-family: 'Caveat', cursive;
+  font-size: 1rem;
+  color: var(--brand);
+  margin-bottom: .75rem;
+  display: block;
+}
+
+.skew-diagrams {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.skew-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  flex: 1;
+  min-width: 90px;
+}
+
+.skew-item svg { width: 90px; height: 55px; }
+
+.skew-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .68rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.skew-label strong { color: var(--brand); display: block; }
+
+/* ── Theory Section ────────────────────────────────────────── */
+.theory-section { margin-top: 3rem; }
+
+.unit-card {
+  background: #fff;
+  border: 1.5px solid var(--rule);
+  border-radius: var(--radius-lg);
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.unit-header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .85rem 1.1rem;
+  background: linear-gradient(to right, rgba(159,18,57,.06), transparent);
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  user-select: none;
+}
+.unit-header:hover { background: linear-gradient(to right, rgba(159,18,57,.1), transparent); }
+
+.unit-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem;
+  font-weight: 500;
+  background: rgba(159,18,57,.1);
+  color: var(--brand);
+  padding: .15rem .5rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.unit-title { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; }
+
+.unit-toggle { font-size: 1rem; color: var(--muted); flex-shrink: 0; transition: transform .2s; margin-left: auto; }
+.unit-card.collapsed .unit-toggle { transform: rotate(-90deg); }
+
+.unit-body { padding: 1.1rem; }
+.unit-card.collapsed .unit-body { display: none; }
+
+.theory-qa-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+
+.theory-qa-item { border-bottom: 1px solid var(--rule); padding-bottom: .85rem; }
+.theory-qa-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.theory-q {
+  font-weight: 600;
+  font-size: .92rem;
+  color: var(--ink);
+  margin-bottom: .3rem;
+  display: flex;
+  gap: .5rem;
+}
+
+.theory-q-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .75rem;
+  color: var(--muted);
+  background: var(--brand-soft);
+  padding: .05rem .4rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: .08rem;
+}
+
+.theory-a {
+  font-size: .9rem;
+  color: #374151;
+  padding-left: 1.1rem;
+  border-left: 2.5px solid var(--brand-soft);
+  line-height: 1.65;
+}
+
+/* ── Back to Top ───────────────────────────────────────────── */
+#back-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.25rem;
+  background: var(--brand);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(159,18,57,.35);
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .2s, transform .2s, background .15s;
+  pointer-events: none;
+}
+#back-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+#back-top:hover { background: var(--brand-deep); }
+
+/* ── Footer ────────────────────────────────────────────────── */
+footer {
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  letter-spacing: .04em;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .topbar-meta { gap: .35rem; }
+  .topbar-title { font-size: .9rem; }
+  pre { font-size: .74rem; }
+  .skew-diagrams { gap: .5rem; }
+  .skew-item svg { width: 75px; height: 46px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Sticky Topbar ──────────────────────────────────────── -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-meta">
+      <span class="topbar-badge">BCD-202-V</span>
+      <span class="topbar-title">Probability &amp; Statistics</span>
+    </div>
+    <nav class="chip-nav" aria-label="Page sections">
+      <a class="chip" href="#lab">🧪 Lab Guide</a>
+      <a class="chip" href="#theory">📚 Theory Q&amp;A</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- ════════════════════════════════════════════
+       SECTION 1 · LAB GUIDE
+  ═════════════════════════════════════════════ -->
+  <section id="lab">
+    <div class="section-header">
+      <h2>🧪 Lab Guide</h2>
+      <span class="section-sub">BCG-212-V · Excel Experiments</span>
+    </div>
+
+    <!-- ── Exp 1: Excel Basics ───────────────────── -->
+    <article class="exp-card" id="exp1">
+      <div class="exp-header" onclick="toggleCard(this)">
+        <span class="exp-num">Exp 01</span>
+        <div class="exp-title-wrap">
+          <div class="exp-title">Excel Basics</div>
+          <div class="exp-aim">Aim: Learn basic Excel functions — opening/saving, data entry, arithmetic, formulas.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Excel</span>
+          <span class="tag">Basics</span>
+        </div>
+        <span class="exp-toggle">▾</span>
+      </div>
+      <div class="exp-body">
+        <div class="code-wrap">
+          <div class="code-lang">Excel · Steps</div>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>BASIC EXCEL OPERATIONS
+=======================
+
+Opening Excel:  Start → Microsoft Excel → New Blank Workbook
+Saving:         Ctrl+S → Choose location → Enter filename → Save as .xlsx
+
+DATA ENTRY:
+→ Click any cell (e.g., A1) and type the value
+→ Press Enter to go to next row, Tab to go to next column
+→ To enter a series: type first 2 values → select both → drag Fill Handle
+
+ARITHMETIC OPERATIONS IN CELLS:
+→ All formulas start with <span class="op">=</span> (equals sign)
+  <span class="op">=</span>A1 <span class="op">+</span> B1     → Addition
+  <span class="op">=</span>A1 <span class="op">-</span> B1     → Subtraction
+  <span class="op">=</span>A1 <span class="op">*</span> B1     → Multiplication
+  <span class="op">=</span>A1 <span class="op">/</span> B1     → Division
+  <span class="op">=</span>A1 <span class="op">^</span> <span class="num">2</span>      → Power (A1 squared)
+
+COMMON BUILT-IN FORMULAS:
+  <span class="op">=</span><span class="kw">SUM</span>(A1:A10)      → Sum of cells A1 to A10
+  <span class="op">=</span><span class="kw">AVERAGE</span>(A1:A10)  → Mean of cells A1 to A10
+  <span class="op">=</span><span class="kw">MAX</span>(A1:A10)      → Maximum value
+  <span class="op">=</span><span class="kw">MIN</span>(A1:A10)      → Minimum value
+  <span class="op">=</span><span class="kw">COUNT</span>(A1:A10)    → Count of numbers
+  <span class="op">=</span><span class="kw">COUNTA</span>(A1:A10)   → Count of non-empty cells
+
+FORMATTING:
+→ Select cells → Home tab → Font, Alignment, Number format
+→ Ctrl+B = Bold, Ctrl+I = Italic, Ctrl+U = Underline</code></pre>
+        </div>
+
+        <div class="concepts-block">
+          <span class="concepts-label">📌 Key Concepts</span>
+          <ul class="concept-list">
+            <li><strong>Cell Reference</strong> — A1 notation = Column letter + Row number. Used in all formulas.</li>
+            <li><strong>Formula</strong> — Always starts with <code>=</code> (equals sign). Without it, Excel treats input as plain text.</li>
+            <li><strong>Range</strong> — A1:A10 means all cells from A1 to A10 (10 cells).</li>
+            <li><strong>Fill Handle</strong> — Small square at bottom-right of selected cell; drag to auto-fill series or copy formula.</li>
+          </ul>
+        </div>
+
+        <div class="viva-block">
+          <span class="viva-label">💬 Viva Q&amp;A</span>
+          <ul class="qa-list">
+            <li class="qa-item">
+              <span class="qa-q">Q1. What is a cell reference in Excel?</span>
+              <ul class="qa-bullets">
+                <li>Address of a cell in <strong>Column-Row</strong> format (e.g., A1, B3, C10)</li>
+                <li>Column = letter (A, B, C…); Row = number (1, 2, 3…)</li>
+                <li>Used in formulas to point to a cell's value</li>
+                <li>Example: <code>=A1+B1</code> adds values of cells A1 and B1</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q2. What are the types of cell references?</span>
+              <ul class="qa-bullets">
+                <li><strong>Relative (A1):</strong> changes when formula is copied to another cell</li>
+                <li><strong>Absolute ($A$1):</strong> stays fixed even when formula is copied</li>
+                <li><strong>Mixed ($A1 or A$1):</strong> one part fixed, one part changes</li>
+                <li>Use F4 key to toggle between reference types</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q3. What is the Fill Handle in Excel?</span>
+              <ul class="qa-bullets">
+                <li>Small green square at the <strong>bottom-right corner</strong> of a selected cell</li>
+                <li>Drag it down/right to auto-fill a series or copy formulas</li>
+                <li>Also auto-continues patterns like Mon, Tue, Wed… or Jan, Feb…</li>
+                <li>Double-click Fill Handle to auto-fill down to the last data row</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q4. What is the difference between a workbook and a worksheet?</span>
+              <ul class="qa-bullets">
+                <li><strong>Workbook:</strong> the entire Excel file (.xlsx)</li>
+                <li><strong>Worksheet:</strong> a single sheet tab within the workbook</li>
+                <li>One workbook can have multiple worksheets (Sheet1, Sheet2…)</li>
+                <li>Analogy: Workbook = notebook; Worksheet = one page</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q5. What keyboard shortcut saves an Excel file?</span>
+              <ul class="qa-bullets">
+                <li><strong>Ctrl+S:</strong> saves the current file</li>
+                <li><strong>F12:</strong> opens "Save As" dialog</li>
+                <li><strong>Ctrl+Z:</strong> undo last action</li>
+                <li><strong>Ctrl+Home:</strong> jump to cell A1</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Exp 2: Random Numbers ──────────────────── -->
+    <article class="exp-card" id="exp2">
+      <div class="exp-header" onclick="toggleCard(this)">
+        <span class="exp-num">Exp 02</span>
+        <div class="exp-title-wrap">
+          <div class="exp-title">Random Numbers in Excel</div>
+          <div class="exp-aim">Aim: Write a program to generate random numbers in Excel.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">RAND</span>
+          <span class="tag">RANDBETWEEN</span>
+        </div>
+        <span class="exp-toggle">▾</span>
+      </div>
+      <div class="exp-body">
+        <div class="code-wrap">
+          <div class="code-lang">Excel · Formulas</div>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>GENERATING RANDOM NUMBERS IN EXCEL
+=====================================
+
+<span class="num">1</span>. <span class="kw">RAND</span>() — Random Decimal between <span class="num">0</span> and <span class="num">1</span>
+   Formula: <span class="op">=</span><span class="kw">RAND</span>()
+   Example Output: <span class="num">0.73451829</span>
+   <span class="cmt">Note: Changes every time you press F9 or recalculate</span>
+
+<span class="num">2</span>. <span class="kw">RANDBETWEEN</span>(low, high) — Random Integer in a range
+   Formula: <span class="op">=</span><span class="kw">RANDBETWEEN</span>(<span class="num">1</span>, <span class="num">100</span>)
+   Example Output: <span class="num">47</span> <span class="cmt">(any integer from 1 to 100)</span>
+
+<span class="num">3</span>. Generate 10 random integers between 50 and 100:
+   → Click A1 → type: <span class="op">=</span><span class="kw">RANDBETWEEN</span>(<span class="num">50</span>, <span class="num">100</span>) → Press Enter
+   → Click A1 again → drag Fill Handle down to A10
+   → Result: 10 different random numbers in A1:A10
+
+<span class="num">4</span>. Make random numbers STATIC (so they don't change):
+   → Select cells with RAND/RANDBETWEEN formulas
+   → Ctrl+C (Copy)
+   → Right-click → Paste Special → <span class="str">Values</span> (not formulas)
+   → Now the values are fixed numbers, not formulas
+
+<span class="num">5</span>. Random decimal between any range (e.g., 5.0 to 10.0):
+   <span class="op">=</span><span class="kw">RAND</span>() <span class="op">*</span> (<span class="num">10</span> <span class="op">-</span> <span class="num">5</span>) <span class="op">+</span> <span class="num">5</span>
+   General formula: <span class="op">=</span><span class="kw">RAND</span>() <span class="op">*</span> (max <span class="op">-</span> min) <span class="op">+</span> min</code></pre>
+        </div>
+
+        <div class="concepts-block">
+          <span class="concepts-label">📌 Key Concepts</span>
+          <ul class="concept-list">
+            <li><strong>RAND()</strong> — Generates uniform random decimal in [0, 1). Recalculates on every worksheet change.</li>
+            <li><strong>RANDBETWEEN(a,b)</strong> — Generates a random integer in the range [a, b], both endpoints inclusive.</li>
+            <li><strong>Paste Special → Values</strong> — Converts a formula cell to its current static value, stopping recalculation.</li>
+          </ul>
+        </div>
+
+        <div class="viva-block">
+          <span class="viva-label">💬 Viva Q&amp;A</span>
+          <ul class="qa-list">
+            <li class="qa-item">
+              <span class="qa-q">Q1. What does RAND() return?</span>
+              <ul class="qa-bullets">
+                <li>Random decimal number between <strong>0 (inclusive)</strong> and <strong>1 (exclusive)</strong></li>
+                <li>Recalculates every time the worksheet changes (press F9 to force recalculate)</li>
+                <li>Follows a uniform distribution — all values equally likely</li>
+                <li>Example: could give 0.73451, 0.12839, etc.</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q2. What is the difference between RAND() and RANDBETWEEN()?</span>
+              <ul class="qa-bullets">
+                <li><strong>RAND():</strong> returns a decimal between 0 and 1 (e.g., 0.7345)</li>
+                <li><strong>RANDBETWEEN(a, b):</strong> returns a random INTEGER between a and b inclusive</li>
+                <li>Example: <code>=RANDBETWEEN(1, 100)</code> gives 47, 83, 12, etc.</li>
+                <li>Use RANDBETWEEN for whole numbers; RAND for decimals</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q3. How do you stop random numbers from changing?</span>
+              <ul class="qa-bullets">
+                <li>Select cells with RAND/RANDBETWEEN formulas</li>
+                <li>Press <strong>Ctrl+C</strong> (copy)</li>
+                <li>Right-click → Paste Special → <strong>Values</strong></li>
+                <li>This replaces formulas with their current static values (numbers, not formulas)</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q4. What is a uniform distribution?</span>
+              <ul class="qa-bullets">
+                <li>Every value in the range is equally likely to occur</li>
+                <li>RAND() follows <strong>continuous uniform distribution</strong> over [0, 1)</li>
+                <li>RANDBETWEEN follows <strong>discrete uniform distribution</strong> (only integers)</li>
+                <li>Real example: rolling a fair die — each face (1–6) equally likely</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q5. How do you generate random decimals between 10 and 20?</span>
+              <ul class="qa-bullets">
+                <li>Formula: <code>=RAND()*(20-10)+10</code> or <code>=10+RAND()*10</code></li>
+                <li>General formula: <code>=RAND()*(max-min)+min</code></li>
+                <li>Example for 5.0–10.0: <code>=RAND()*5+5</code></li>
+                <li>Result is a decimal, not integer — use RANDBETWEEN for integers</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Exp 3: Frequency Tables & Histograms ─── -->
+    <article class="exp-card" id="exp3">
+      <div class="exp-header" onclick="toggleCard(this)">
+        <span class="exp-num">Exp 03</span>
+        <div class="exp-title-wrap">
+          <div class="exp-title">Frequency Tables and Histograms</div>
+          <div class="exp-aim">Aim: Create frequency tables and histograms in Excel.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">FREQUENCY</span>
+          <span class="tag">Histogram</span>
+        </div>
+        <span class="exp-toggle">▾</span>
+      </div>
+      <div class="exp-body">
+        <div class="code-wrap">
+          <div class="code-lang">Excel · Steps</div>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>FREQUENCY TABLE AND HISTOGRAM
+================================
+
+STEP 1: Enter raw data in column A (e.g., A1:A20)
+  Sample data: <span class="num">45,62,78,55,89,71,65,43,77,82</span>,
+               <span class="num">58,93,67,74,88,51,79,64,86,70</span>
+
+STEP 2: Define class intervals (bins) in column C
+  C1: <span class="num">40</span>   C2: <span class="num">50</span>   C3: <span class="num">60</span>   C4: <span class="num">70</span>   C5: <span class="num">80</span>   C6: <span class="num">90</span>   C7: <span class="num">100</span>
+  <span class="cmt">(upper boundaries of each class)</span>
+
+STEP 3: Enter FREQUENCY formula in D1:D7
+  → Select D1:D7 (all cells for frequency)
+  → Type: <span class="op">=</span><span class="kw">FREQUENCY</span>(A1:A20, C1:C7)
+  → Press Ctrl+Shift+Enter <span class="cmt">(Array formula!)</span>
+  → Result: count of values in each bin
+
+STEP 4: Create Frequency Table
+  | Class Interval | Frequency |
+  | 41–50          |    <span class="num">2</span>      |
+  | 51–60          |    <span class="num">3</span>      |
+  | 61–70          |    <span class="num">5</span>      |
+  | 71–80          |    <span class="num">6</span>      |
+  | 81–90          |    <span class="num">3</span>      |
+  | 91–100         |    <span class="num">1</span>      |
+
+STEP 5: Create Histogram
+  → Select frequency data
+  → Insert tab → Charts → Bar/Column Chart
+  → Remove gaps: Right-click bars → Format Data Series → Gap Width = <span class="num">0</span>%
+  → Add labels, title, axis titles</code></pre>
+        </div>
+
+        <div class="concepts-block">
+          <span class="concepts-label">📌 Key Concepts</span>
+          <ul class="concept-list">
+            <li><strong>FREQUENCY(data, bins)</strong> — Array formula (Ctrl+Shift+Enter). Counts how many values fall into each bin.</li>
+            <li><strong>Class Interval</strong> — A range of values grouped together, e.g., 41–50, 51–60. Width is usually equal.</li>
+            <li><strong>Frequency</strong> — Count of data values that fall within each class interval.</li>
+            <li><strong>Histogram</strong> — Bar chart with no gaps between bars, showing the frequency distribution of continuous data.</li>
+          </ul>
+        </div>
+
+        <div class="viva-block">
+          <span class="viva-label">💬 Viva Q&amp;A</span>
+          <ul class="qa-list">
+            <li class="qa-item">
+              <span class="qa-q">Q1. What is a frequency distribution?</span>
+              <ul class="qa-bullets">
+                <li>Table showing how often each value or range occurs in a dataset</li>
+                <li>Organizes raw data into <strong>class intervals</strong> with their counts</li>
+                <li>Reveals the pattern, shape, and spread of data</li>
+                <li>Example: marks of 50 students grouped as 40–50, 51–60, 61–70, etc.</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q2. What is a histogram?</span>
+              <ul class="qa-bullets">
+                <li>A bar chart showing frequency distribution of <strong>continuous data</strong></li>
+                <li>Bars touch each other — NO gap between bars</li>
+                <li>X-axis = class intervals; Y-axis = frequency (count)</li>
+                <li>Create in Excel: Insert → Charts → Column chart → Set Gap Width to 0%</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q3. What is the difference between a histogram and a bar chart?</span>
+              <ul class="qa-bullets">
+                <li><strong>Histogram:</strong> continuous data, bars touch, shows frequency distribution</li>
+                <li><strong>Bar chart:</strong> categorical data, bars have gaps, shows comparison</li>
+                <li>Histogram X-axis is numeric; bar chart X-axis can be categories</li>
+                <li>Example: histogram = marks distribution; bar chart = students per department</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q4. What is FREQUENCY() in Excel?</span>
+              <ul class="qa-bullets">
+                <li>Array formula that counts how many values fall in each bin (class interval)</li>
+                <li>Syntax: <code>=FREQUENCY(data_array, bins_array)</code></li>
+                <li>Must be entered with <strong>Ctrl+Shift+Enter</strong> (array formula)</li>
+                <li>Returns one extra value (count above the last bin)</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q5. What is a class interval?</span>
+              <ul class="qa-bullets">
+                <li>A range of values grouped together (also called a bin or class)</li>
+                <li>Class width is usually equal across all classes</li>
+                <li>Example (width=10, starting 40): 41–50, 51–60, 61–70, 71–80, 81–90</li>
+                <li>Narrow intervals = more detail but less smooth; wide = smoother but less detail</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Exp 4: Measures of Central Tendency ─── -->
+    <article class="exp-card" id="exp4">
+      <div class="exp-header" onclick="toggleCard(this)">
+        <span class="exp-num">Exp 04</span>
+        <div class="exp-title-wrap">
+          <div class="exp-title">Measures of Central Tendency</div>
+          <div class="exp-aim">Aim: Calculate Mean, Mode, and Median using Excel.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Mean</span>
+          <span class="tag">Median</span>
+          <span class="tag">Mode</span>
+        </div>
+        <span class="exp-toggle">▾</span>
+      </div>
+      <div class="exp-body">
+        <div class="code-wrap">
+          <div class="code-lang">Excel · Formulas</div>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>MEASURES OF CENTRAL TENDENCY
+================================
+Sample Data in A1:A10: <span class="num">5, 8, 12, 8, 15, 9, 8, 11, 14, 10</span>
+
+MEAN (Average):
+  Formula: <span class="op">=</span><span class="kw">AVERAGE</span>(A1:A10)
+  Manual:  <span class="op">=</span><span class="kw">SUM</span>(A1:A10) <span class="op">/</span> <span class="kw">COUNT</span>(A1:A10)
+  Result:  <span class="num">10</span>  <span class="cmt">(sum=100, count=10, mean=100/10=10)</span>
+
+MEDIAN (Middle value when sorted):
+  Formula: <span class="op">=</span><span class="kw">MEDIAN</span>(A1:A10)
+  Sorted: <span class="num">5,8,8,8,9,10,11,12,14,15</span>
+  Result:  <span class="num">9.5</span>  <span class="cmt">(average of 9 and 10, the two middle values)</span>
+
+MODE (Most frequent value):
+  Formula (old):  <span class="op">=</span><span class="kw">MODE</span>(A1:A10)         <span class="cmt">→ single mode</span>
+  Formula (new):  <span class="op">=</span><span class="kw">MODE.SNGL</span>(A1:A10)   <span class="cmt">→ single mode</span>
+                  <span class="op">=</span><span class="kw">MODE.MULT</span>(A1:A10)   <span class="cmt">→ multiple modes (array formula)</span>
+  Result:  <span class="num">8</span>  <span class="cmt">(appears 3 times, most frequent)</span>
+
+CONDITIONAL AVERAGE (AVERAGEIF):
+  <span class="op">=</span><span class="kw">AVERAGEIF</span>(B1:B10, <span class="str">"IT"</span>, A1:A10)
+  <span class="cmt">→ Average of A values where corresponding B value = "IT"</span>
+
+WEIGHTED AVERAGE:
+  <span class="op">=</span><span class="kw">SUMPRODUCT</span>(A1:A5, B1:B5) <span class="op">/</span> <span class="kw">SUM</span>(B1:B5)
+  <span class="cmt">→ A = values, B = weights</span></code></pre>
+        </div>
+
+        <div class="concepts-block">
+          <span class="concepts-label">📌 Key Concepts</span>
+          <ul class="concept-list">
+            <li><strong>Mean</strong> — Sum divided by count. Affected by outliers (extreme values).</li>
+            <li><strong>Median</strong> — Middle value when data is sorted. Not affected by outliers; preferred for skewed data.</li>
+            <li><strong>Mode</strong> — Most frequent value. Can be bimodal (2 modes) or multimodal (&gt;2 modes).</li>
+          </ul>
+        </div>
+
+        <div class="viva-block">
+          <span class="viva-label">💬 Viva Q&amp;A</span>
+          <ul class="qa-list">
+            <li class="qa-item">
+              <span class="qa-q">Q1. What is mean? What is its disadvantage?</span>
+              <ul class="qa-bullets">
+                <li>Mean = Sum of all values / Count of values</li>
+                <li>Excel formula: <code>=AVERAGE(range)</code></li>
+                <li><strong>Disadvantage:</strong> heavily affected by outliers (extreme values)</li>
+                <li>Example: one billionaire in a group makes the average salary misleadingly high</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q2. What is median? When is it preferred over mean?</span>
+              <ul class="qa-bullets">
+                <li>Middle value when data is sorted in ascending order</li>
+                <li>For even count: average of the two middle values</li>
+                <li><strong>Preferred when:</strong> data has outliers or is skewed</li>
+                <li>Example: median house price is more representative than mean (few expensive houses distort mean)</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q3. What is mode? Can data have multiple modes?</span>
+              <ul class="qa-bullets">
+                <li>Value that appears <strong>most frequently</strong> in the dataset</li>
+                <li>Excel: <code>=MODE(range)</code> or <code>=MODE.SNGL(range)</code></li>
+                <li>Yes, data can have multiple modes: <strong>bimodal</strong> (2 modes), <strong>multimodal</strong> (&gt;2 modes)</li>
+                <li>Data with no repeating values has <strong>no mode</strong></li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q4. What is the relationship between mean, median, and mode for a normal distribution?</span>
+              <ul class="qa-bullets">
+                <li>For a perfectly symmetric (normal) distribution: <strong>Mean = Median = Mode</strong></li>
+                <li>All three coincide at the center (peak) of the bell curve</li>
+                <li>Right skew: Mean &gt; Median &gt; Mode</li>
+                <li>Left skew: Mean &lt; Median &lt; Mode</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q5. What is the AVERAGEIF function?</span>
+              <ul class="qa-bullets">
+                <li>Calculates average only for cells that meet a condition</li>
+                <li>Syntax: <code>=AVERAGEIF(criteria_range, criteria, avg_range)</code></li>
+                <li>Example: <code>=AVERAGEIF(B1:B10, "IT", A1:A10)</code> — average of A where B="IT"</li>
+                <li>Similar to SQL's <code>SELECT AVG(salary) WHERE dept='IT'</code></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Exp 5: Measures of Variation ──────────── -->
+    <article class="exp-card" id="exp5">
+      <div class="exp-header" onclick="toggleCard(this)">
+        <span class="exp-num">Exp 05</span>
+        <div class="exp-title-wrap">
+          <div class="exp-title">Measures of Variation</div>
+          <div class="exp-aim">Aim: Calculate Standard Deviation, Variance, and Covariance using Excel.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">StdDev</span>
+          <span class="tag">Variance</span>
+          <span class="tag">Covariance</span>
+        </div>
+        <span class="exp-toggle">▾</span>
+      </div>
+      <div class="exp-body">
+        <div class="code-wrap">
+          <div class="code-lang">Excel · Formulas</div>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>MEASURES OF VARIATION
+========================
+Data in A1:A8: <span class="num">10, 14, 18, 22, 26, 30, 34, 38</span>
+
+STANDARD DEVIATION:
+  Population SD:  <span class="op">=</span><span class="kw">STDEV.P</span>(A1:A8)   <span class="cmt">→ use when data = entire population</span>
+  Sample SD:      <span class="op">=</span><span class="kw">STDEV.S</span>(A1:A8)   <span class="cmt">→ use when data = a sample (most common)</span>
+  Old formula:    <span class="op">=</span><span class="kw">STDEV</span>(A1:A8)     <span class="cmt">→ same as STDEV.S</span>
+  Result: STDEV.S ≈ <span class="num">9.52</span>
+
+VARIANCE:
+  Population:   <span class="op">=</span><span class="kw">VAR.P</span>(A1:A8)
+  Sample:       <span class="op">=</span><span class="kw">VAR.S</span>(A1:A8)     <span class="cmt">(most common)</span>
+  Old formula:  <span class="op">=</span><span class="kw">VAR</span>(A1:A8)       <span class="cmt">→ same as VAR.S</span>
+  <span class="cmt">Note: Variance = (Standard Deviation)²</span>
+  Result: VAR.S ≈ <span class="num">90.67</span>
+
+COVARIANCE (two variables — A and B columns):
+  Data B in B1:B8: <span class="num">2, 5, 7, 9, 11, 14, 16, 18</span>
+  Population Cov:  <span class="op">=</span><span class="kw">COVARIANCE.P</span>(A1:A8, B1:B8)
+  Sample Cov:      <span class="op">=</span><span class="kw">COVARIANCE.S</span>(A1:A8, B1:B8)
+  Old formula:     <span class="op">=</span><span class="kw">COVAR</span>(A1:A8, B1:B8)   <span class="cmt">→ population covariance</span>
+
+  If result is POSITIVE → variables move in same direction
+  If result is NEGATIVE → variables move in opposite directions</code></pre>
+        </div>
+
+        <div class="concepts-block">
+          <span class="concepts-label">📌 Key Concepts</span>
+          <ul class="concept-list">
+            <li><strong>Standard Deviation</strong> — Average distance of data values from the mean. Low SD = clustered, High SD = spread.</li>
+            <li><strong>Variance</strong> — Equal to SD². Average of squared differences from mean. Units are squared.</li>
+            <li><strong>Population vs Sample</strong> — Population uses N (all data); Sample uses N-1 (Bessel's correction for accuracy).</li>
+            <li><strong>Covariance</strong> — Measures how two variables change together. Not standardized (depends on data scale).</li>
+          </ul>
+        </div>
+
+        <div class="viva-block">
+          <span class="viva-label">💬 Viva Q&amp;A</span>
+          <ul class="qa-list">
+            <li class="qa-item">
+              <span class="qa-q">Q1. What is standard deviation?</span>
+              <ul class="qa-bullets">
+                <li>Measures how <strong>spread out</strong> data values are around the mean</li>
+                <li>Low SD = values clustered near mean; High SD = values spread widely</li>
+                <li>Excel: <code>=STDEV.S(range)</code> for sample; <code>=STDEV.P(range)</code> for population</li>
+                <li>Same units as the original data (unlike variance which is squared)</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q2. What is the difference between population and sample standard deviation?</span>
+              <ul class="qa-bullets">
+                <li><strong>Population SD (σ):</strong> divide by N — use when you have ALL data</li>
+                <li><strong>Sample SD (s):</strong> divide by N−1 (Bessel's correction) — use when data is a sample</li>
+                <li>N−1 corrects for underestimation when estimating from a sample</li>
+                <li>Excel: <code>=STDEV.P()</code> for population; <code>=STDEV.S()</code> for sample (most common)</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q3. What is variance?</span>
+              <ul class="qa-bullets">
+                <li>Variance = (Standard Deviation)² = SD²</li>
+                <li>Average of squared differences from the mean</li>
+                <li>Units are <strong>squared</strong> (harder to interpret than SD)</li>
+                <li>Excel: <code>=VAR.S(range)</code> for sample; <code>=VAR.P(range)</code> for population</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q4. What is covariance?</span>
+              <ul class="qa-bullets">
+                <li>Measures how <strong>two variables change together</strong></li>
+                <li>Positive: both increase/decrease together (direct relationship)</li>
+                <li>Negative: one increases while the other decreases (inverse relationship)</li>
+                <li>Excel: <code>=COVARIANCE.S(array1, array2)</code></li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q5. What is the limitation of covariance?</span>
+              <ul class="qa-bullets">
+                <li>Covariance is <strong>not standardized</strong> — value depends on scale of variables</li>
+                <li>Hard to compare covariance across different datasets</li>
+                <li>Solution: <strong>Correlation</strong> = Cov(X,Y) / (SD₁ × SD₂) — always between −1 and +1</li>
+                <li>Correlation is the standardized version of covariance</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Exp 6: Skewness ────────────────────────── -->
+    <article class="exp-card" id="exp6">
+      <div class="exp-header" onclick="toggleCard(this)">
+        <span class="exp-num">Exp 06</span>
+        <div class="exp-title-wrap">
+          <div class="exp-title">Skewness</div>
+          <div class="exp-aim">Aim: Calculate skewness in data using Excel.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Skewness</span>
+          <span class="tag">Symmetry</span>
+        </div>
+        <span class="exp-toggle">▾</span>
+      </div>
+      <div class="exp-body">
+        <div class="code-wrap">
+          <div class="code-lang">Excel · Formulas</div>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>MEASURING SKEWNESS IN DATA
+============================
+
+SKEWNESS FORMULA IN EXCEL:
+  <span class="op">=</span><span class="kw">SKEW</span>(data_range)
+  Example: <span class="op">=</span><span class="kw">SKEW</span>(A1:A20)
+
+UNDERSTANDING SKEWNESS VALUES:
+  Skewness ≈ <span class="num">0</span>   → Symmetric (Normal distribution)
+                   Mean ≈ Median ≈ Mode
+
+  Skewness <span class="op">&gt;</span> <span class="num">0</span>   → Positively Skewed (Right-skewed)
+                   Tail extends to the RIGHT
+                   Mean <span class="op">&gt;</span> Median <span class="op">&gt;</span> Mode
+                   <span class="cmt">Example: Income distribution (few very high earners)</span>
+
+  Skewness <span class="op">&lt;</span> <span class="num">0</span>   → Negatively Skewed (Left-skewed)
+                   Tail extends to the LEFT
+                   Mean <span class="op">&lt;</span> Median <span class="op">&lt;</span> Mode
+                   <span class="cmt">Example: Age at retirement (most people retire later)</span>
+
+EXAMPLE DATASETS:
+  Symmetric:    <span class="num">10, 11, 12, 13, 14, 14, 13, 12, 11, 10</span>
+  <span class="op">=</span><span class="kw">SKEW</span>(above) ≈ <span class="num">0</span>
+
+  Right-skewed: <span class="num">5, 6, 7, 7, 8, 8, 8, 9, 15, 25</span>
+  <span class="op">=</span><span class="kw">SKEW</span>(above) <span class="op">&gt;</span> <span class="num">0</span> (positive)
+
+  Left-skewed:  <span class="num">5, 15, 20, 21, 22, 22, 22, 23, 24, 25</span>
+  <span class="op">=</span><span class="kw">SKEW</span>(above) <span class="op">&lt;</span> <span class="num">0</span> (negative)
+
+INTERPRETATION:
+  |Skewness| <span class="op">&lt;</span> <span class="num">0.5</span>   → Approximately symmetric
+  <span class="num">0.5</span> ≤ |Skew| <span class="op">&lt;</span> <span class="num">1</span>  → Moderately skewed
+  |Skewness| ≥ <span class="num">1</span>    → Highly skewed</code></pre>
+        </div>
+
+        <!-- Skewness Visual Legend -->
+        <div class="skew-legend">
+          <span class="skew-legend-title">📐 Skewness Visual Guide</span>
+          <div class="skew-diagrams">
+            <div class="skew-item">
+              <svg viewBox="0 0 90 55" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Negative skew — left tail">
+                <path d="M8,48 Q12,48 18,30 Q28,5 45,8 Q58,10 68,28 Q74,38 78,48" stroke="#9f1239" stroke-width="2" fill="none"/>
+                <line x1="8" y1="48" x2="82" y2="48" stroke="#d9cfb6" stroke-width="1"/>
+                <line x1="28" y1="48" x2="28" y2="14" stroke="#9f1239" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>
+                <text x="25" y="52" font-family="JetBrains Mono,monospace" font-size="5.5" fill="#6b5d47">Mo Md M</text>
+              </svg>
+              <div class="skew-label"><strong>Negative Skew</strong>Left tail longer<br>Mean &lt; Median &lt; Mode</div>
+            </div>
+            <div class="skew-item">
+              <svg viewBox="0 0 90 55" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Symmetric — normal distribution">
+                <path d="M8,48 Q20,48 32,18 Q41,4 45,4 Q49,4 58,18 Q70,48 82,48" stroke="#9f1239" stroke-width="2" fill="none"/>
+                <line x1="8" y1="48" x2="82" y2="48" stroke="#d9cfb6" stroke-width="1"/>
+                <line x1="45" y1="48" x2="45" y2="6" stroke="#9f1239" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>
+                <text x="36" y="52" font-family="JetBrains Mono,monospace" font-size="5.5" fill="#6b5d47">Mo=Md=M</text>
+              </svg>
+              <div class="skew-label"><strong>Symmetric (0)</strong>Bell curve<br>Mean = Median = Mode</div>
+            </div>
+            <div class="skew-item">
+              <svg viewBox="0 0 90 55" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Positive skew — right tail">
+                <path d="M12,48 Q16,48 22,28 Q32,10 45,8 Q58,6 62,24 Q68,38 78,48 Q84,48 85,48" stroke="#9f1239" stroke-width="2" fill="none"/>
+                <line x1="8" y1="48" x2="82" y2="48" stroke="#d9cfb6" stroke-width="1"/>
+                <line x1="52" y1="48" x2="52" y2="14" stroke="#9f1239" stroke-width="1" stroke-dasharray="3,2" opacity=".6"/>
+                <text x="27" y="52" font-family="JetBrains Mono,monospace" font-size="5.5" fill="#6b5d47">Mo Md M</text>
+              </svg>
+              <div class="skew-label"><strong>Positive Skew</strong>Right tail longer<br>Mean &gt; Median &gt; Mode</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="concepts-block">
+          <span class="concepts-label">📌 Key Concepts</span>
+          <ul class="concept-list">
+            <li><strong>Skewness</strong> — Measures asymmetry of a distribution. Zero = symmetric, positive = right tail, negative = left tail.</li>
+            <li><strong>Positive Skew (Right)</strong> — Long right tail. Mean &gt; Median &gt; Mode. Example: income distribution.</li>
+            <li><strong>Negative Skew (Left)</strong> — Long left tail. Mean &lt; Median &lt; Mode. Example: age at retirement.</li>
+          </ul>
+        </div>
+
+        <div class="viva-block">
+          <span class="viva-label">💬 Viva Q&amp;A</span>
+          <ul class="qa-list">
+            <li class="qa-item">
+              <span class="qa-q">Q1. What is skewness?</span>
+              <ul class="qa-bullets">
+                <li>Measures the <strong>asymmetry</strong> of a probability distribution</li>
+                <li>Indicates direction (left or right) and degree of the tail</li>
+                <li>Excel formula: <code>=SKEW(range)</code></li>
+                <li>Symmetric distribution has skewness = 0</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q2. What is positive (right) skewness?</span>
+              <ul class="qa-bullets">
+                <li>Tail extends to the <strong>RIGHT</strong> side</li>
+                <li>Most data concentrated on the left (lower values)</li>
+                <li>Order: <strong>Mean &gt; Median &gt; Mode</strong></li>
+                <li>Real example: income distribution — most earn less, few earn very high</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q3. What is negative (left) skewness?</span>
+              <ul class="qa-bullets">
+                <li>Tail extends to the <strong>LEFT</strong> side</li>
+                <li>Most data concentrated on the right (higher values)</li>
+                <li>Order: <strong>Mean &lt; Median &lt; Mode</strong></li>
+                <li>Real example: age at retirement — most retire late, few retire very early</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q4. What is the relationship between mean, median, and mode in skewed data?</span>
+              <ul class="qa-bullets">
+                <li><strong>Right skew:</strong> Mean &gt; Median &gt; Mode (tail pulls mean right)</li>
+                <li><strong>Left skew:</strong> Mean &lt; Median &lt; Mode (tail pulls mean left)</li>
+                <li><strong>Symmetric:</strong> Mean = Median = Mode</li>
+                <li>Skewness moves the mean toward the tail</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q5. What is kurtosis? How is it different from skewness?</span>
+              <ul class="qa-bullets">
+                <li><strong>Skewness:</strong> measures left-right asymmetry of distribution</li>
+                <li><strong>Kurtosis:</strong> measures <em>peakedness</em> (how tall/flat the distribution is)</li>
+                <li>Leptokurtic (&gt;3): sharp peak with heavy tails; Platykurtic (&lt;3): flat; Mesokurtic (=3): normal</li>
+                <li>Excel: <code>=KURT(range)</code> for kurtosis</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Exp 7: Linear Regression ───────────────── -->
+    <article class="exp-card" id="exp7">
+      <div class="exp-header" onclick="toggleCard(this)">
+        <span class="exp-num">Exp 07</span>
+        <div class="exp-title-wrap">
+          <div class="exp-title">Linear Regression</div>
+          <div class="exp-aim">Aim: Implement linear regression using Excel.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Regression</span>
+          <span class="tag">SLOPE</span>
+          <span class="tag">INTERCEPT</span>
+        </div>
+        <span class="exp-toggle">▾</span>
+      </div>
+      <div class="exp-body">
+        <div class="code-wrap">
+          <div class="code-lang">Excel · Formulas</div>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>LINEAR REGRESSION IN EXCEL
+=============================
+Data: X (hours studied), Y (marks obtained)
+X: <span class="num">1, 2, 3, 4, 5, 6, 7, 8, 9, 10</span>  (in A1:A10)
+Y: <span class="num">40,45,50,60,65,70,75,82,87,95</span>  (in B1:B10)
+
+REGRESSION LINE: Y = a + bX
+  where: b = slope,  a = intercept
+
+STEP 1: Calculate Slope (b)
+  <span class="op">=</span><span class="kw">SLOPE</span>(B1:B10, A1:A10)
+  <span class="cmt">Note: SLOPE(y_values, x_values) — Y comes first!</span>
+  Result ≈ <span class="num">6.21</span> <span class="cmt">(marks increase by ~6.21 for each hour of study)</span>
+
+STEP 2: Calculate Intercept (a)
+  <span class="op">=</span><span class="kw">INTERCEPT</span>(B1:B10, A1:A10)
+  <span class="cmt">Note: INTERCEPT(y_values, x_values) — Y comes first!</span>
+  Result ≈ <span class="num">33.73</span> <span class="cmt">(expected marks with 0 hours of study)</span>
+
+STEP 3: Regression Equation
+  Y = <span class="num">33.73</span> + <span class="num">6.21</span>X
+
+STEP 4: Predict using FORECAST
+  <span class="op">=</span><span class="kw">FORECAST</span>(<span class="num">11</span>, B1:B10, A1:A10)
+  <span class="cmt">→ Predicts Y when X = 11 (marks for 11 hours study)</span>
+  Result ≈ <span class="num">102</span> (predicted marks)
+
+STEP 5: Draw Regression Line on Chart
+  → Select X and Y data → Insert → Scatter Chart
+  → Right-click any data point → Add Trendline
+  → Select Linear → Check <span class="str">"Display Equation on chart"</span>
+  → The trendline is the regression line!
+
+STEP 6: R-squared (Coefficient of Determination)
+  <span class="op">=</span><span class="kw">RSQ</span>(B1:B10, A1:A10)
+  Result close to <span class="num">1</span> = good fit. Close to <span class="num">0</span> = poor fit.</code></pre>
+        </div>
+
+        <div class="concepts-block">
+          <span class="concepts-label">📌 Key Concepts</span>
+          <ul class="concept-list">
+            <li><strong>Regression Line Y=a+bX</strong> — Best fit line through data points. Minimizes squared errors.</li>
+            <li><strong>Slope b</strong> — Change in Y for each unit increase in X. Positive = positive relationship.</li>
+            <li><strong>Intercept a</strong> — Value of Y when X = 0. Where the line crosses the Y-axis.</li>
+            <li><strong>R-squared (0–1)</strong> — Measures goodness of fit. R²=0.85 means 85% of Y variation is explained by X.</li>
+          </ul>
+        </div>
+
+        <div class="viva-block">
+          <span class="viva-label">💬 Viva Q&amp;A</span>
+          <ul class="qa-list">
+            <li class="qa-item">
+              <span class="qa-q">Q1. What is linear regression?</span>
+              <ul class="qa-bullets">
+                <li>Statistical method that models relationship between Y (dependent) and X (independent)</li>
+                <li>Uses a straight line: <strong>Y = a + bX</strong></li>
+                <li>Predicts Y values for given X values</li>
+                <li>Example: predicting marks (Y) from hours studied (X)</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q2. What does the slope (b) represent?</span>
+              <ul class="qa-bullets">
+                <li>Rate of change: how much Y changes for each <strong>unit increase in X</strong></li>
+                <li>Positive slope = Y increases as X increases</li>
+                <li>Negative slope = Y decreases as X increases (inverse)</li>
+                <li>Excel: <code>=SLOPE(y_values, x_values)</code> — Y range first!</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q3. What does the intercept (a) represent?</span>
+              <ul class="qa-bullets">
+                <li>Value of Y when X = 0</li>
+                <li>Point where regression line crosses the Y-axis</li>
+                <li>Excel: <code>=INTERCEPT(y_values, x_values)</code></li>
+                <li>Example: marks scored with 0 hours of study = 33.73</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q4. What is R-squared (coefficient of determination)?</span>
+              <ul class="qa-bullets">
+                <li>Ranges from 0 to 1; measures how well regression line fits the data</li>
+                <li><strong>R²=1:</strong> perfect fit; <strong>R²=0:</strong> no predictive power</li>
+                <li>R²=0.85 means <strong>85% of Y variation is explained by X</strong></li>
+                <li>Excel: <code>=RSQ(y_values, x_values)</code></li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q5. What is the method of least squares?</span>
+              <ul class="qa-bullets">
+                <li>Finds the best-fit line by <strong>minimizing the sum of squared residuals</strong></li>
+                <li>Residual = difference between actual Y and predicted Ŷ</li>
+                <li>Minimizes Σ(yi − ŷi)² to find optimal slope and intercept</li>
+                <li>Gives the unique best-fit line for any dataset</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Exp 8: Correlation Coefficients ────────── -->
+    <article class="exp-card" id="exp8">
+      <div class="exp-header" onclick="toggleCard(this)">
+        <span class="exp-num">Exp 08</span>
+        <div class="exp-title-wrap">
+          <div class="exp-title">Correlation Coefficients</div>
+          <div class="exp-aim">Aim: Calculate correlation coefficients between two variables using Excel.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Correlation</span>
+          <span class="tag">CORREL</span>
+        </div>
+        <span class="exp-toggle">▾</span>
+      </div>
+      <div class="exp-body">
+        <div class="code-wrap">
+          <div class="code-lang">Excel · Formulas</div>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>CORRELATION COEFFICIENT IN EXCEL
+==================================
+X (Temperature):    <span class="num">30, 32, 35, 33, 38, 40, 37, 42, 39, 36</span>
+Y (Ice cream sales):<span class="num">100,110,135,115,155,175,145,190,160,140</span>
+X in A1:A10, Y in B1:B10
+
+PEARSON CORRELATION:
+  <span class="op">=</span><span class="kw">CORREL</span>(A1:A10, B1:B10)
+  Result: ≈ <span class="num">0.99</span> <span class="cmt">(very strong positive correlation)</span>
+
+  Alternative: <span class="op">=</span><span class="kw">PEARSON</span>(A1:A10, B1:B10)  <span class="cmt">→ same result</span>
+
+INTERPRETATION OF r:
+  r = <span class="num">+1.0</span>    → Perfect positive correlation
+  <span class="num">0.8</span> to <span class="num">1.0</span>  → Very strong positive
+  <span class="num">0.6</span> to <span class="num">0.8</span>  → Strong positive
+  <span class="num">0.4</span> to <span class="num">0.6</span>  → Moderate positive
+  <span class="num">0.2</span> to <span class="num">0.4</span>  → Weak positive
+  r =  <span class="num">0.0</span>    → No linear correlation
+  <span class="num">-0.2</span> to <span class="num">0.0</span> → Weak negative
+  r = <span class="num">-1.0</span>    → Perfect negative correlation
+
+SPEARMAN RANK CORRELATION:
+  <span class="cmt">(Used when data is not normally distributed or is ordinal)</span>
+  Step 1: Rank X values in column C → <span class="op">=</span><span class="kw">RANK</span>(A1, $A$1:$A$10)
+  Step 2: Rank Y values in column D → <span class="op">=</span><span class="kw">RANK</span>(B1, $B$1:$B$10)
+  Step 3: Calc correlation on ranks  → <span class="op">=</span><span class="kw">CORREL</span>(C1:C10, D1:D10)
+
+SCATTER PLOT (Visual Correlation):
+  → Select X and Y → Insert → Scatter Chart
+  → Points going up-right   = positive correlation
+  → Points going down-right = negative correlation
+  → Scattered randomly      = no correlation</code></pre>
+        </div>
+
+        <div class="concepts-block">
+          <span class="concepts-label">📌 Key Concepts</span>
+          <ul class="concept-list">
+            <li><strong>Pearson Correlation (r)</strong> — Measures linear relationship between two variables. Range: -1 to +1.</li>
+            <li><strong>CORREL()</strong> — Excel formula to calculate Pearson r. Arguments: (array1, array2).</li>
+            <li><strong>Spearman Rank Correlation</strong> — Non-parametric method; uses ranks instead of raw values. For ordinal or non-normal data.</li>
+            <li><strong>Scatter Plot</strong> — Visual tool to assess correlation: upward trend = positive, downward = negative, random = none.</li>
+          </ul>
+        </div>
+
+        <div class="viva-block">
+          <span class="viva-label">💬 Viva Q&amp;A</span>
+          <ul class="qa-list">
+            <li class="qa-item">
+              <span class="qa-q">Q1. What is correlation?</span>
+              <ul class="qa-bullets">
+                <li>Statistical measure showing <strong>strength and direction</strong> of linear relationship between 2 variables</li>
+                <li>Ranges from <strong>−1 to +1</strong></li>
+                <li>Excel: <code>=CORREL(array1, array2)</code></li>
+                <li>Example: temperature and ice cream sales have strong positive correlation</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q2. What is the range of the correlation coefficient?</span>
+              <ul class="qa-bullets">
+                <li>Always between <strong>−1 and +1</strong></li>
+                <li>r = +1: perfect positive; r = −1: perfect negative; r = 0: no linear relationship</li>
+                <li>0.8–1.0: very strong; 0.6–0.8: strong; 0.4–0.6: moderate</li>
+                <li>Negative r means inverse relationship (one goes up, other goes down)</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q3. What is the difference between correlation and regression?</span>
+              <ul class="qa-bullets">
+                <li><strong>Correlation:</strong> measures strength of relationship (single number r)</li>
+                <li><strong>Regression:</strong> creates prediction equation Y = a + bX</li>
+                <li>Regression implies direction (X → Y); correlation is symmetric</li>
+                <li>Use regression to predict; use correlation to measure association</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q4. What is Spearman rank correlation?</span>
+              <ul class="qa-bullets">
+                <li>Non-parametric correlation based on <strong>ranks</strong> instead of actual values</li>
+                <li>Used when data is ordinal or NOT normally distributed</li>
+                <li>Steps in Excel: Rank X, Rank Y, then CORREL on the ranks</li>
+                <li>Formula: r_s = 1 − (6Σd²) / (n(n²−1)) where d = difference in ranks</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q5. Does correlation imply causation?</span>
+              <ul class="qa-bullets">
+                <li><strong>NO!</strong> Correlation only shows variables are related — NOT that one causes the other</li>
+                <li>Classic example: ice cream sales and drowning both increase in summer (common cause: heat)</li>
+                <li>Another: shoe size and reading ability in children (common cause: age/growth)</li>
+                <li>Need controlled experiments (not correlation) to establish causation</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Exp 9: Case Study — Employee Dataset ─── -->
+    <article class="exp-card" id="exp9">
+      <div class="exp-header" onclick="toggleCard(this)">
+        <span class="exp-num">Exp 09</span>
+        <div class="exp-title-wrap">
+          <div class="exp-title">Case Study: Employee Dataset</div>
+          <div class="exp-aim">Aim: Perform statistical analysis on an employee dataset.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Case Study</span>
+          <span class="tag">Analysis</span>
+        </div>
+        <span class="exp-toggle">▾</span>
+      </div>
+      <div class="exp-body">
+        <div class="code-wrap">
+          <div class="code-lang">Excel · Dataset &amp; Formulas</div>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>CASE STUDY: EMPLOYEE DATASET
+================================
+
+SAMPLE DATA (Create in Excel):
+EmpID | Name    | Dept  | Salary | Age | Experience
+  <span class="num">1</span>   | Alice   | <span class="str">IT</span>    | <span class="num">85000</span>  | <span class="num">28</span>  | <span class="num">5</span>
+  <span class="num">2</span>   | Bob     | <span class="str">HR</span>    | <span class="num">62000</span>  | <span class="num">35</span>  | <span class="num">10</span>
+  <span class="num">3</span>   | Carol   | <span class="str">IT</span>    | <span class="num">92000</span>  | <span class="num">32</span>  | <span class="num">8</span>
+  <span class="num">4</span>   | Dave    | <span class="str">Fin</span>   | <span class="num">75000</span>  | <span class="num">40</span>  | <span class="num">15</span>
+  <span class="num">5</span>   | Eve     | <span class="str">HR</span>    | <span class="num">58000</span>  | <span class="num">25</span>  | <span class="num">2</span>
+  <span class="num">6</span>   | Frank   | <span class="str">IT</span>    | <span class="num">78000</span>  | <span class="num">30</span>  | <span class="num">6</span>
+  <span class="num">7</span>   | Grace   | <span class="str">Fin</span>   | <span class="num">88000</span>  | <span class="num">45</span>  | <span class="num">20</span>
+  <span class="num">8</span>   | Henry   | <span class="str">HR</span>    | <span class="num">65000</span>  | <span class="num">38</span>  | <span class="num">12</span>
+
+ANALYSIS:
+<span class="num">1</span>. Average salary:        <span class="op">=</span><span class="kw">AVERAGE</span>(D2:D9)              → <span class="num">75375</span>
+<span class="num">2</span>. Max salary:            <span class="op">=</span><span class="kw">MAX</span>(D2:D9)                  → <span class="num">92000</span>
+<span class="num">3</span>. Min salary:            <span class="op">=</span><span class="kw">MIN</span>(D2:D9)                  → <span class="num">58000</span>
+<span class="num">4</span>. Salary std deviation:  <span class="op">=</span><span class="kw">STDEV.S</span>(D2:D9)              → ≈<span class="num">12955</span>
+<span class="num">5</span>. Average by dept (IT):  <span class="op">=</span><span class="kw">AVERAGEIF</span>(C2:C9,<span class="str">"IT"</span>,D2:D9) → IT avg
+<span class="num">6</span>. Count in IT dept:      <span class="op">=</span><span class="kw">COUNTIF</span>(C2:C9,<span class="str">"IT"</span>)          → <span class="num">3</span>
+<span class="num">7</span>. Median salary:         <span class="op">=</span><span class="kw">MEDIAN</span>(D2:D9)               → <span class="num">76500</span>
+<span class="num">8</span>. Correlation (Sal-Exp): <span class="op">=</span><span class="kw">CORREL</span>(D2:D9,F2:F9)         → positive r
+<span class="num">9</span>. Regression (Sal from Exp):
+   Slope:    <span class="op">=</span><span class="kw">SLOPE</span>(D2:D9, F2:F9)
+   Intercept:<span class="op">=</span><span class="kw">INTERCEPT</span>(D2:D9, F2:F9)
+<span class="num">10</span>. Create bar chart comparing dept average salaries
+    → Pivot Table: Row=Dept, Value=Avg Salary → Insert Chart</code></pre>
+        </div>
+
+        <div class="concepts-block">
+          <span class="concepts-label">📌 Key Concepts</span>
+          <ul class="concept-list">
+            <li><strong>COUNTIF(range, criteria)</strong> — Counts cells that match a condition. E.g., count employees in IT.</li>
+            <li><strong>AVERAGEIF(crit_range, criteria, avg_range)</strong> — Average of values where a condition is met.</li>
+            <li><strong>Pivot Table</strong> — Excel feature to dynamically summarize data by categories (like GROUP BY in SQL).</li>
+            <li><strong>SUMIF()</strong> — Sums cells that meet a specified condition.</li>
+          </ul>
+        </div>
+
+        <div class="viva-block">
+          <span class="viva-label">💬 Viva Q&amp;A</span>
+          <ul class="qa-list">
+            <li class="qa-item">
+              <span class="qa-q">Q1. What is COUNTIF in Excel?</span>
+              <ul class="qa-bullets">
+                <li>Counts cells that meet a <strong>single condition</strong></li>
+                <li>Syntax: <code>=COUNTIF(range, criteria)</code></li>
+                <li>Example: <code>=COUNTIF(C2:C9, "IT")</code> — counts IT department employees</li>
+                <li>Use COUNTIFS for multiple conditions</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q2. What is AVERAGEIF in Excel?</span>
+              <ul class="qa-bullets">
+                <li>Calculates average of cells that meet a condition</li>
+                <li>Syntax: <code>=AVERAGEIF(criteria_range, criteria, avg_range)</code></li>
+                <li>Example: <code>=AVERAGEIF(C2:C9, "IT", D2:D9)</code> — avg salary for IT dept only</li>
+                <li>Similar to SQL: <code>SELECT AVG(salary) WHERE dept='IT'</code></li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q3. What is a Pivot Table?</span>
+              <ul class="qa-bullets">
+                <li>Excel feature that <strong>summarizes large datasets dynamically</strong></li>
+                <li>Allows grouping, counting, averaging by categories — no formulas needed</li>
+                <li>Create: Insert → Pivot Table → drag fields to Rows/Values</li>
+                <li>Equivalent to SQL GROUP BY — shows totals/averages per category</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q4. What insights can we get from an employee dataset?</span>
+              <ul class="qa-bullets">
+                <li>Average and total salary per department</li>
+                <li>Highest/lowest paid employee (MAX/MIN)</li>
+                <li>Salary vs experience correlation (CORREL)</li>
+                <li>Department-wise headcount (COUNTIF) and age distribution (histogram)</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q5. What does positive correlation between salary and experience mean?</span>
+              <ul class="qa-bullets">
+                <li>As years of experience <strong>increase</strong>, salary also <strong>increases</strong></li>
+                <li>Shows a direct (positive) relationship between the two variables</li>
+                <li>r close to +1 confirms strong positive correlation</li>
+                <li>Real insight: experienced employees are compensated more — expected in most industries</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── Exp 10: Case Study — Medical Dataset ─── -->
+    <article class="exp-card" id="exp10">
+      <div class="exp-header" onclick="toggleCard(this)">
+        <span class="exp-num">Exp 10</span>
+        <div class="exp-title-wrap">
+          <div class="exp-title">Case Study: Medical Dataset</div>
+          <div class="exp-aim">Aim: Perform statistical analysis on a medical/health dataset.</div>
+        </div>
+        <div class="tag-list">
+          <span class="tag">Case Study</span>
+          <span class="tag">Medical</span>
+        </div>
+        <span class="exp-toggle">▾</span>
+      </div>
+      <div class="exp-body">
+        <div class="code-wrap">
+          <div class="code-lang">Excel · Dataset &amp; Formulas</div>
+          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+          <pre><code>CASE STUDY: MEDICAL DATASET
+==============================
+
+SAMPLE DATA (Create in Excel):
+PatID | Age | BP   | Glucose | BMI  | Diabetic
+  <span class="num">1</span>   | <span class="num">45</span>  | <span class="num">140</span>  | <span class="num">150</span>     | <span class="num">28.5</span> | <span class="str">Yes</span>
+  <span class="num">2</span>   | <span class="num">32</span>  | <span class="num">120</span>  | <span class="num">95</span>      | <span class="num">22.1</span> | <span class="str">No</span>
+  <span class="num">3</span>   | <span class="num">55</span>  | <span class="num">155</span>  | <span class="num">180</span>     | <span class="num">31.2</span> | <span class="str">Yes</span>
+  <span class="num">4</span>   | <span class="num">28</span>  | <span class="num">115</span>  | <span class="num">88</span>      | <span class="num">20.5</span> | <span class="str">No</span>
+  <span class="num">5</span>   | <span class="num">62</span>  | <span class="num">165</span>  | <span class="num">210</span>     | <span class="num">33.8</span> | <span class="str">Yes</span>
+  <span class="num">6</span>   | <span class="num">38</span>  | <span class="num">130</span>  | <span class="num">110</span>     | <span class="num">25.4</span> | <span class="str">No</span>
+  <span class="num">7</span>   | <span class="num">50</span>  | <span class="num">148</span>  | <span class="num">165</span>     | <span class="num">29.7</span> | <span class="str">Yes</span>
+  <span class="num">8</span>   | <span class="num">41</span>  | <span class="num">125</span>  | <span class="num">100</span>     | <span class="num">23.6</span> | <span class="str">No</span>
+  <span class="num">9</span>   | <span class="num">58</span>  | <span class="num">158</span>  | <span class="num">190</span>     | <span class="num">32.1</span> | <span class="str">Yes</span>
+ <span class="num">10</span>   | <span class="num">35</span>  | <span class="num">118</span>  | <span class="num">92</span>      | <span class="num">21.8</span> | <span class="str">No</span>
+
+ANALYSIS:
+<span class="num">1</span>. Count diabetic:        <span class="op">=</span><span class="kw">COUNTIF</span>(F2:F11,<span class="str">"Yes"</span>)               → <span class="num">5</span>
+<span class="num">2</span>. Avg glucose (all):     <span class="op">=</span><span class="kw">AVERAGE</span>(D2:D11)                    → <span class="num">138</span>
+<span class="num">3</span>. Avg glucose (diabetic):<span class="op">=</span><span class="kw">AVERAGEIF</span>(F2:F11,<span class="str">"Yes"</span>,D2:D11)     → <span class="num">179</span>
+<span class="num">4</span>. Avg glucose (non-diab):<span class="op">=</span><span class="kw">AVERAGEIF</span>(F2:F11,<span class="str">"No"</span>, D2:D11)      → <span class="num">97</span>
+<span class="num">5</span>. BP vs Age correlation: <span class="op">=</span><span class="kw">CORREL</span>(B2:B11,C2:C11)              → r ≈ <span class="num">0.99</span>
+<span class="num">6</span>. BMI Mean:              <span class="op">=</span><span class="kw">AVERAGE</span>(E2:E11)                    → <span class="num">26.97</span>
+<span class="num">7</span>. BMI Std Dev:           <span class="op">=</span><span class="kw">STDEV.S</span>(E2:E11)                    → <span class="num">4.55</span>
+<span class="num">8</span>. Max BP:                <span class="op">=</span><span class="kw">MAX</span>(C2:C11)                         → <span class="num">165</span>
+<span class="num">9</span>. % diabetic:            <span class="op">=</span><span class="kw">COUNTIF</span>(F2:F11,<span class="str">"Yes"</span>)<span class="op">/</span><span class="kw">COUNT</span>(F2:F11)  → <span class="num">50</span>%
+<span class="num">10</span>. Glucose Skewness:      <span class="op">=</span><span class="kw">SKEW</span>(D2:D11)    → right-skewed (positive)
+
+VISUALIZATION:
+→ Bar chart: Diabetic vs Non-diabetic count
+→ Scatter: Age vs Blood Pressure (positive correlation)
+→ Histogram: Glucose distribution</code></pre>
+        </div>
+
+        <div class="concepts-block">
+          <span class="concepts-label">📌 Key Concepts</span>
+          <ul class="concept-list">
+            <li><strong>Medical Data Analysis</strong> — Reveals disease patterns and risk factors using statistical comparisons between groups.</li>
+            <li><strong>Group Comparison</strong> — AVERAGEIF compares diabetic vs non-diabetic glucose; large difference confirms disease marker.</li>
+            <li><strong>Correlation in Healthcare</strong> — Strong Age–BP correlation (r≈0.99) identifies age as a risk factor for hypertension.</li>
+            <li><strong>Data Visualization</strong> — Charts communicate patterns faster than raw numbers; essential for clinical decision support.</li>
+          </ul>
+        </div>
+
+        <div class="viva-block">
+          <span class="viva-label">💬 Viva Q&amp;A</span>
+          <ul class="qa-list">
+            <li class="qa-item">
+              <span class="qa-q">Q1. Why is data analysis important in the medical field?</span>
+              <ul class="qa-bullets">
+                <li>Find patterns in patient data and identify disease risk factors</li>
+                <li>Predict health outcomes and compare treatment effectiveness</li>
+                <li>Support evidence-based clinical decisions</li>
+                <li>Example: comparing glucose levels in diabetic vs non-diabetic patients</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q2. What does correlation between age and blood pressure tell us?</span>
+              <ul class="qa-bullets">
+                <li>Positive correlation (r ≈ 0.99) — as age increases, BP increases strongly</li>
+                <li>Age is a significant <strong>risk factor</strong> for hypertension</li>
+                <li>Very high r means near-perfect linear relationship</li>
+                <li>Medical use: older patients should be monitored more closely for high BP</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q3. What is BMI? What does it indicate?</span>
+              <ul class="qa-bullets">
+                <li><strong>BMI</strong> = weight(kg) / height(m)² — Body Mass Index</li>
+                <li>BMI &lt;18.5: underweight; 18.5–24.9: normal; 25–29.9: overweight; ≥30: obese</li>
+                <li>High BMI is linked to higher diabetes and heart disease risk</li>
+                <li>Simple screening tool — does not distinguish muscle vs fat mass</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q4. What is the significance of comparing glucose in diabetic vs non-diabetic groups?</span>
+              <ul class="qa-bullets">
+                <li>Diabetic avg glucose = 179; Non-diabetic avg = 97 — large difference</li>
+                <li>Confirms elevated blood glucose is a <strong>key indicator of diabetes</strong></li>
+                <li>AVERAGEIF used to calculate group averages</li>
+                <li>Large difference between groups means glucose is clinically meaningful</li>
+              </ul>
+            </li>
+            <li class="qa-item">
+              <span class="qa-q">Q5. What is data visualization? Why is it important?</span>
+              <ul class="qa-bullets">
+                <li>Representing data graphically using charts, graphs, and plots</li>
+                <li>Humans understand visual patterns faster than raw numbers</li>
+                <li>Types: bar chart (comparison), histogram (distribution), scatter plot (correlation)</li>
+                <li>In medicine: charts communicate disease patterns to non-technical audiences</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+  </section><!-- /lab -->
+
+  <!-- ════════════════════════════════════════════
+       SECTION 2 · THEORY Q&A
+  ═════════════════════════════════════════════ -->
+  <section id="theory" class="theory-section">
+    <div class="section-header">
+      <h2>📚 Theory Viva Q&amp;A</h2>
+      <span class="section-sub">BCD-202-V · 4 Units</span>
+    </div>
+
+    <!-- Unit I -->
+    <div class="unit-card" id="unit1">
+      <div class="unit-header" onclick="toggleUnit(this)">
+        <span class="unit-badge">Unit I</span>
+        <span class="unit-title">Random Variables and Distribution Functions</span>
+        <span class="unit-toggle">▾</span>
+      </div>
+      <div class="unit-body">
+        <ul class="theory-qa-list">
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q1</span>What is probability? What are its types?</div>
+            <ul class="qa-bullets">
+              <li>Measures the likelihood of an event: P(A) = favorable outcomes / total outcomes</li>
+              <li><strong>Classical:</strong> all outcomes equally likely (e.g., coin flip, dice)</li>
+              <li><strong>Statistical (Empirical):</strong> based on observed frequency from experiments</li>
+              <li><strong>Axiomatic:</strong> based on set theory; Kolmogorov's axioms (P ≥ 0, P(S)=1, additive)</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q2</span>What is a random variable?</div>
+            <ul class="qa-bullets">
+              <li>A variable whose value is determined by the outcome of a <strong>random experiment</strong></li>
+              <li>Assigns a numerical value to each outcome of a sample space</li>
+              <li>Can take different values with different probabilities</li>
+              <li>Example: X = number of heads when tossing 3 coins (X can be 0, 1, 2, or 3)</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q3</span>What is the difference between discrete and continuous random variables?</div>
+            <ul class="qa-bullets">
+              <li><strong>Discrete:</strong> takes countable values (0, 1, 2, …); uses summation (Σ)</li>
+              <li><strong>Continuous:</strong> takes any value in a range; uses integration (∫)</li>
+              <li>Discrete example: number of heads in 10 coin flips</li>
+              <li>Continuous example: height, temperature, weight</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q4</span>What is PMF (Probability Mass Function)?</div>
+            <ul class="qa-bullets">
+              <li>For <strong>DISCRETE</strong> random variables — gives P(X = x) for each value</li>
+              <li>Properties: P(X=x) ≥ 0 for all x; sum of all probabilities = 1</li>
+              <li>Example: P(X=3) = probability of getting exactly 3 heads in 5 flips</li>
+              <li>PMF is a function, not a curve (works on specific points)</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q5</span>What is PDF (Probability Density Function)?</div>
+            <ul class="qa-bullets">
+              <li>For <strong>CONTINUOUS</strong> random variables</li>
+              <li>P(X = exact value) = 0; only range probabilities make sense</li>
+              <li>Area under curve between two points = probability</li>
+              <li>∫f(x)dx = 1 over entire range; example: normal distribution bell curve</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q6</span>What is Binomial distribution?</div>
+            <ul class="qa-bullets">
+              <li>Models number of <strong>successes in n independent Bernoulli trials</strong></li>
+              <li>Each trial has probability p of success, (1−p) of failure</li>
+              <li>Formula: P(X=k) = C(n,k) × p^k × (1−p)^(n−k)</li>
+              <li>Mean = np; Variance = np(1−p). Example: heads in 10 coin flips</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q7</span>What is Poisson distribution? When is it used?</div>
+            <ul class="qa-bullets">
+              <li>Models number of events in a <strong>fixed time or space interval</strong></li>
+              <li>Formula: P(X=k) = (λ^k × e^−λ) / k!; Mean = Variance = λ</li>
+              <li>Used for rare, independent events</li>
+              <li>Examples: calls to helpdesk/hour, accidents/day, defects per item</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q8</span>What is Normal distribution? What are its properties?</div>
+            <ul class="qa-bullets">
+              <li>Bell-shaped, symmetric continuous distribution (Gaussian)</li>
+              <li>Mean = Median = Mode; total area under curve = 1</li>
+              <li><strong>68-95-99.7 rule:</strong> 68% within 1σ, 95% within 2σ, 99.7% within 3σ</li>
+              <li>Fully specified by μ (mean) and σ (standard deviation)</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Unit II -->
+    <div class="unit-card" id="unit2">
+      <div class="unit-header" onclick="toggleUnit(this)">
+        <span class="unit-badge">Unit II</span>
+        <span class="unit-title">Moments and Moment Generating Functions</span>
+        <span class="unit-toggle">▾</span>
+      </div>
+      <div class="unit-body">
+        <ul class="theory-qa-list">
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q1</span>What is expectation (expected value)?</div>
+            <ul class="qa-bullets">
+              <li>Long-run average value of a random variable; also called population mean (μ)</li>
+              <li>Discrete: E(X) = Σ[x · P(X=x)]</li>
+              <li>Continuous: E(X) = ∫x · f(x)dx</li>
+              <li>"Center of gravity" of the distribution</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q2</span>What is variance of a random variable?</div>
+            <ul class="qa-bullets">
+              <li>Measures <strong>spread</strong> around the mean</li>
+              <li>Formula: Var(X) = E(X²) − [E(X)]² = E[(X−μ)²]</li>
+              <li>Standard Deviation = √Variance</li>
+              <li>Larger variance = values more spread from the mean</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q3</span>What are moments of a random variable?</div>
+            <ul class="qa-bullets">
+              <li><strong>Raw moment (about origin):</strong> μ'r = E(X^r)</li>
+              <li><strong>Central moment (about mean):</strong> μr = E[(X−μ)^r]</li>
+              <li>1st central moment = 0; 2nd = variance; 3rd → skewness; 4th → kurtosis</li>
+              <li>Moments describe the shape of a distribution</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q4</span>What is the Moment Generating Function (MGF)?</div>
+            <ul class="qa-bullets">
+              <li>M_X(t) = E(e^tX) — a function of t</li>
+              <li>r-th moment = r-th derivative of MGF evaluated at t=0</li>
+              <li>MGF <strong>uniquely identifies</strong> a probability distribution</li>
+              <li>Makes calculating moments easier than direct integration</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q5</span>What is joint probability distribution?</div>
+            <ul class="qa-bullets">
+              <li>Probability distribution for <strong>two or more</strong> random variables together</li>
+              <li>P(X=x, Y=y) = probability of both events simultaneously</li>
+              <li>Used to study relationships and dependence between variables</li>
+              <li>Can be displayed as a joint probability table</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q6</span>What is marginal distribution?</div>
+            <ul class="qa-bullets">
+              <li>Distribution of ONE variable obtained from a joint distribution</li>
+              <li>Discrete: P(X=x) = Σ_y P(X=x, Y=y) — sum over all Y values</li>
+              <li>Continuous: integrate the joint PDF over the other variable</li>
+              <li>Represents one variable's distribution "ignoring" the other</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q7</span>What is independence of random variables?</div>
+            <ul class="qa-bullets">
+              <li>X and Y are independent if P(X=x, Y=y) = P(X=x) × P(Y=y) for all x, y</li>
+              <li>Knowing X's value gives <strong>no information</strong> about Y</li>
+              <li>Covariance of independent variables = 0</li>
+              <li>Independence is stronger than zero correlation</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q8</span>What is conditional distribution?</div>
+            <ul class="qa-bullets">
+              <li>P(Y=y | X=x) — distribution of Y given X has taken value x</li>
+              <li>Formula: P(Y=y | X=x) = P(X=x, Y=y) / P(X=x)</li>
+              <li>Used in Bayesian reasoning and dependency analysis</li>
+              <li>Example: probability of disease given a positive test result</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Unit III -->
+    <div class="unit-card" id="unit3">
+      <div class="unit-header" onclick="toggleUnit(this)">
+        <span class="unit-badge">Unit III</span>
+        <span class="unit-title">Descriptive Statistics</span>
+        <span class="unit-toggle">▾</span>
+      </div>
+      <div class="unit-body">
+        <ul class="theory-qa-list">
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q1</span>What is data? What are the types?</div>
+            <ul class="qa-bullets">
+              <li>Data = raw facts or observations</li>
+              <li><strong>Primary:</strong> collected directly (surveys, experiments)</li>
+              <li><strong>Secondary:</strong> collected by others (census, published reports)</li>
+              <li>Also: Qualitative (categorical) vs Quantitative (numerical)</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q2</span>What is a frequency distribution?</div>
+            <ul class="qa-bullets">
+              <li>Table showing how data is distributed across class intervals</li>
+              <li>Contains class intervals and their frequencies (counts)</li>
+              <li>Summarizes raw data and reveals pattern and shape</li>
+              <li>Forms the basis for histograms and further statistical analysis</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q3</span>What are the measures of central tendency?</div>
+            <ul class="qa-bullets">
+              <li><strong>Mean:</strong> arithmetic average — use for symmetric data</li>
+              <li><strong>Median:</strong> middle value when sorted — use for skewed data</li>
+              <li><strong>Mode:</strong> most frequent — use for categorical data</li>
+              <li>All three equal for a normal (symmetric) distribution</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q4</span>What is standard deviation? How is it interpreted?</div>
+            <ul class="qa-bullets">
+              <li>Average distance of data points from the mean</li>
+              <li>Small SD = data clustered near mean; Large SD = widely spread</li>
+              <li>Formula: σ = √[Σ(xi−x̄)² / N]</li>
+              <li>Same unit as the data (unlike variance which is squared)</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q5</span>What is covariance?</div>
+            <ul class="qa-bullets">
+              <li>Measures how <strong>two variables change together</strong></li>
+              <li>Positive: both increase together; Negative: one increases as other decreases</li>
+              <li>Formula: Cov(X,Y) = E[(X−μx)(Y−μy)]</li>
+              <li>Magnitude depends on data scale (not standardized like correlation)</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q6</span>What is skewness?</div>
+            <ul class="qa-bullets">
+              <li>Measure of <strong>asymmetry</strong> of a distribution</li>
+              <li>Positive skew: right tail longer; Mean &gt; Median &gt; Mode</li>
+              <li>Negative skew: left tail longer; Mean &lt; Median &lt; Mode</li>
+              <li>Skewness = 0 for a perfectly symmetric distribution</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q7</span>What is kurtosis?</div>
+            <ul class="qa-bullets">
+              <li>Measures <strong>peakedness</strong> of a distribution compared to normal</li>
+              <li><strong>Leptokurtic</strong> (&gt;3): tall, sharp peak with heavy tails</li>
+              <li><strong>Platykurtic</strong> (&lt;3): flat, broad peak with thin tails</li>
+              <li><strong>Mesokurtic</strong> (=3): normal distribution shape</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q8</span>What is the difference between primary and secondary data?</div>
+            <ul class="qa-bullets">
+              <li><strong>Primary:</strong> collected directly for specific purpose (surveys, experiments)</li>
+              <li>Advantages: specific, reliable, up-to-date</li>
+              <li><strong>Secondary:</strong> already collected by others (books, internet, reports)</li>
+              <li>Advantages: cheaper and faster; disadvantage: may be outdated or less relevant</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Unit IV -->
+    <div class="unit-card" id="unit4">
+      <div class="unit-header" onclick="toggleUnit(this)">
+        <span class="unit-badge">Unit IV</span>
+        <span class="unit-title">Correlation and Curve Fitting</span>
+        <span class="unit-toggle">▾</span>
+      </div>
+      <div class="unit-body">
+        <ul class="theory-qa-list">
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q1</span>What is correlation? What are its types?</div>
+            <ul class="qa-bullets">
+              <li>Measures <strong>strength and direction</strong> of linear relationship between 2 variables; range −1 to +1</li>
+              <li><strong>Positive:</strong> both variables increase together</li>
+              <li><strong>Negative:</strong> one increases as other decreases</li>
+              <li><strong>Zero:</strong> no linear relationship between variables</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q2</span>What is Spearman's rank correlation?</div>
+            <ul class="qa-bullets">
+              <li>Non-parametric correlation based on <strong>ranks</strong> instead of actual values</li>
+              <li>Used when data is ordinal or not normally distributed</li>
+              <li>Formula: r_s = 1 − (6Σd²) / (n(n²−1)); d = rank difference for each pair</li>
+              <li>Example: ranking students by marks and by attendance, then correlating ranks</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q3</span>What is the difference between correlation and regression?</div>
+            <ul class="qa-bullets">
+              <li><strong>Correlation:</strong> single number (r) showing strength of relationship; symmetric</li>
+              <li><strong>Regression:</strong> prediction equation Y = a + bX; implies direction X → Y</li>
+              <li>Correlation: "how related?" Regression: "predict Y from X"</li>
+              <li>Both share same r but regression goes further to create a model</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q4</span>What is curve fitting?</div>
+            <ul class="qa-bullets">
+              <li>Finding best-fitting mathematical curve for a set of data points</li>
+              <li><strong>Linear:</strong> Y = a + bX (straight line)</li>
+              <li><strong>Parabola:</strong> Y = a + bX + cX²; <strong>Exponential:</strong> Y = ab^x</li>
+              <li>Minimizes error (residuals) between the curve and actual data points</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q5</span>What is the method of least squares?</div>
+            <ul class="qa-bullets">
+              <li>Mathematical technique to find best-fit curve</li>
+              <li>Minimizes Σ(yi − ŷi)² — sum of squared residuals</li>
+              <li>Residual = actual Y − predicted Ŷ</li>
+              <li>Gives the unique optimal slope and intercept for a dataset</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q6</span>What is a regression line? What are the two regression lines?</div>
+            <ul class="qa-bullets">
+              <li>Best-fit straight line Y = a + bX through data points</li>
+              <li><strong>Y on X:</strong> minimizes vertical errors — predicts Y from X</li>
+              <li><strong>X on Y:</strong> minimizes horizontal errors — predicts X from Y</li>
+              <li>Both lines always pass through the point (x̄, ȳ) — mean of both variables</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q7</span>What is the coefficient of determination (R²)?</div>
+            <ul class="qa-bullets">
+              <li>R² = r² for simple linear regression; ranges from 0 to 1</li>
+              <li>Proportion of variance in Y <strong>explained by X</strong></li>
+              <li>R²=1: perfect prediction; R²=0: X has no predictive power</li>
+              <li>Example: R²=0.85 means 85% of Y variation is explained by X</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q8</span>What is an exponential curve? When is it used?</div>
+            <ul class="qa-bullets">
+              <li>Equation: Y = ab^x — grows or decays exponentially</li>
+              <li>Used when data shows rapid growth or decay</li>
+              <li>Examples: bacterial growth, radioactive decay, compound interest, population growth</li>
+              <li>Linearized by taking log: log Y = log a + x·log b → fit straight line to transformed data</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </section><!-- /theory -->
+
+</main>
+
+<!-- ── Footer ──────────────────────────────────── -->
+<footer>
+  BCD-202-V · BCG-212-V &nbsp;|&nbsp; BCA(DS) IV Semester &nbsp;·&nbsp; Probability &amp; Statistics
+</footer>
+
+<!-- ── Back to Top ─────────────────────────────── -->
+<button id="back-top" aria-label="Back to top" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ── Toggle experiment cards ─────────────────── */
+function toggleCard(header) {
+  const card = header.closest('.exp-card');
+  card.classList.toggle('collapsed');
+}
+
+/* ── Toggle theory unit cards ────────────────── */
+function toggleUnit(header) {
+  const card = header.closest('.unit-card');
+  card.classList.toggle('collapsed');
+}
+
+/* ── Copy code blocks ────────────────────────── */
+function copyCode(btn) {
+  const pre = btn.closest('.code-wrap').querySelector('pre');
+  const text = pre.innerText || pre.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1800);
+  }).catch(() => {
+    /* Fallback for older browsers */
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1800);
+  });
+}
+
+/* ── Back to Top visibility ──────────────────── */
+const backTop = document.getElementById('back-top');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 400) {
+    backTop.classList.add('visible');
+  } else {
+    backTop.classList.remove('visible');
+  }
+}, { passive: true });
+
+/* ── Smooth scroll for chip links ────────────── */
+document.querySelectorAll('.chip[href^="#"]').forEach(chip => {
+  chip.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(chip.getAttribute('href'));
+    if (target) {
+      const offset = document.querySelector('.topbar').offsetHeight + 16;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
