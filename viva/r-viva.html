@@ -1555,7 +1555,7 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
     <div class="sec-head">
       <div class="kicker">BCD-204-V &middot; Theory</div>
       <h2>&#x1F4DA; Theory Viva Q&amp;A</h2>
-      <p class="lede">4 units &middot; 32 questions and answers for your theory viva</p>
+      <p class="lede">4 units &middot; 48 questions and answers for your theory viva</p>
     </div>
 
     <!-- UNIT I -->
@@ -1635,6 +1635,42 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Data Science: provides data and insights to power AI systems</li>
             <li>Machine Learning is the bridge — it's a subset of AI and a tool of Data Science</li>
             <li>Data Science fuels AI; AI applies the insights</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q9: What is the difference between Data Science, Data Analytics, and Data Engineering?</p>
+          <ul class="qa-bullets">
+            <li>Data Science: builds predictive models and discovers insights from data (ML, statistics)</li>
+            <li>Data Analytics: analyses existing data to answer specific business questions (SQL, Excel, dashboards)</li>
+            <li>Data Engineering: builds and maintains data pipelines and infrastructure (ETL, databases)</li>
+            <li>Data Engineers prepare data → Data Scientists model it → Data Analysts interpret it</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q10: What is EDA (Exploratory Data Analysis)?</p>
+          <ul class="qa-bullets">
+            <li>Initial analysis of data to summarize its main characteristics — often visually</li>
+            <li>Goals: detect outliers, find patterns, check assumptions, understand distributions</li>
+            <li>Techniques: histograms, box plots, scatter plots, correlation matrices, summary statistics</li>
+            <li>In R: <code class="inline">summary()</code>, <code class="inline">str()</code>, <code class="inline">hist()</code>, <code class="inline">pairs()</code> are common EDA tools</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q11: What is the CRISP-DM model?</p>
+          <ul class="qa-bullets">
+            <li>Cross-Industry Standard Process for Data Mining — 6-phase lifecycle</li>
+            <li>Business Understanding → Data Understanding → Data Preparation → Modelling → Evaluation → Deployment</li>
+            <li>Iterative process — can go back to earlier phases</li>
+            <li>Most widely used data science project framework in industry</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q12: What is Overfitting vs Underfitting?</p>
+          <ul class="qa-bullets">
+            <li>Overfitting: model learns training data too well including noise — poor performance on new data</li>
+            <li>Underfitting: model too simple — fails to capture the pattern even in training data</li>
+            <li>Goal: find the sweet spot (Bias-Variance tradeoff)</li>
+            <li>Solutions: regularization, cross-validation, more data (overfitting); complex model, more features (underfitting)</li>
           </ul>
         </div>
       </div>
@@ -1719,6 +1755,42 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>RStudio Cloud: web-based, no installation needed</li>
           </ul>
         </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q9: What is a Matrix in R? How is it created?</p>
+          <ul class="qa-bullets">
+            <li>2D array where all elements are of the <strong>SAME type</strong></li>
+            <li>Created with <code class="inline">matrix(data, nrow, ncol, byrow)</code></li>
+            <li>Example: <code class="inline">matrix(1:6, nrow=2, ncol=3)</code> creates 2×3 matrix</li>
+            <li>Access: <code class="inline">m[row, col]</code> — row first, column second</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q10: What is the difference between a Matrix and a Data Frame?</p>
+          <ul class="qa-bullets">
+            <li>Matrix: all elements must be the same type; mathematical operations supported</li>
+            <li>Data Frame: each column can be different type; ideal for real-world datasets</li>
+            <li>Matrix operations: matrix multiplication, transpose; Data Frame: merge, filter, aggregate</li>
+            <li>Use matrix for numerical computation; use data frame for data analysis</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q11: How does R handle missing values (NA)?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">NA</code> propagates: <code class="inline">NA + 5 = NA</code>, <code class="inline">mean(c(1,NA,3)) = NA</code></li>
+            <li>To ignore NAs: <code class="inline">mean(x, na.rm=TRUE)</code></li>
+            <li>Check for NA: <code class="inline">is.na(x)</code> returns logical vector</li>
+            <li>Remove rows with NA: <code class="inline">na.omit(df)</code> or <code class="inline">complete.cases(df)</code></li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q12: What is the difference between <code class="inline">==</code> and <code class="inline">identical()</code> in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">==</code>: element-wise comparison, returns logical vector, treats NA specially</li>
+            <li><code class="inline">identical()</code>: checks if two objects are exactly the same (type + value + attributes)</li>
+            <li><code class="inline">NA == NA</code> returns <code class="inline">NA</code>; <code class="inline">identical(NA, NA)</code> returns <code class="inline">TRUE</code></li>
+            <li>Use <code class="inline">identical()</code> for strict equality checks in functions/tests</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -1801,6 +1873,42 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Always use <code class="inline">[[]]</code> when you want the actual value</li>
           </ul>
         </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q9: What is <code class="inline">tryCatch()</code> in R? How is error handling done?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">tryCatch(expr, error=function(e){...}, warning=function(w){...})</code></li>
+            <li>Allows code to continue even when an error occurs</li>
+            <li>Example: <code class="inline">tryCatch(log(-1), warning=function(w) "got a warning")</code></li>
+            <li>Similar to try-catch in Java/Python — prevents program crash</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q10: What is <code class="inline">vapply()</code> vs <code class="inline">sapply()</code>?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">sapply()</code>: tries to simplify output but return type can be unpredictable</li>
+            <li><code class="inline">vapply()</code>: safer — you specify the expected return type explicitly</li>
+            <li>Example: <code class="inline">vapply(list, fun, FUN.VALUE=numeric(1))</code> always returns numeric vector</li>
+            <li>Use <code class="inline">vapply()</code> in production code for safer, predictable output</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q11: What is a closure in R?</p>
+          <ul class="qa-bullets">
+            <li>A function that "closes over" (remembers) variables from its enclosing environment</li>
+            <li>The inner function has access to the outer function's variables even after it returns</li>
+            <li>Example: <code class="inline">counter &lt;- function() { n&lt;-0; function() { n&lt;&lt;-n+1; n } }</code></li>
+            <li>Used to create function factories, stateful functions, and generators</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q12: What are <code class="inline">next</code> and <code class="inline">break</code> in R loops?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">break</code>: exits the loop immediately</li>
+            <li><code class="inline">next</code>: skips the current iteration and goes to the next</li>
+            <li>Similar to <code class="inline">break</code>/<code class="inline">continue</code> in other languages</li>
+            <li>Example: <code class="inline">for(i in 1:10){ if(i==5) break; print(i) }</code> prints 1 to 4</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -1881,6 +1989,42 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>ggplot2: layered approach, highly customizable, aesthetically superior</li>
             <li>Base R: <code class="inline">hist(data)</code> — one line</li>
             <li>ggplot2: <code class="inline">ggplot(df, aes(x=col)) + geom_histogram()</code> — more verbose but more control</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q9: What is <code class="inline">dplyr</code> and its 5 key verbs?</p>
+          <ul class="qa-bullets">
+            <li>dplyr: core tidyverse package for data manipulation</li>
+            <li><code class="inline">filter()</code>: select rows by condition</li>
+            <li><code class="inline">select()</code>: choose columns</li>
+            <li><code class="inline">mutate()</code>: create/modify columns | <code class="inline">arrange()</code>: sort rows | <code class="inline">summarise()</code>: aggregate data (often with <code class="inline">group_by()</code>)</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q10: What is the pipe operator <code class="inline">%&gt;%</code> in R?</p>
+          <ul class="qa-bullets">
+            <li>Passes the left-hand side as the first argument of the right-hand side function</li>
+            <li><code class="inline">x %&gt;% f()</code> is equivalent to <code class="inline">f(x)</code></li>
+            <li>Makes code readable left-to-right: <code class="inline">df %&gt;% filter(age&gt;18) %&gt;% select(name)</code></li>
+            <li>From <code class="inline">magrittr</code> package; R 4.1+ has native pipe <code class="inline">|&gt;</code></li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q11: How do you perform a t-test in R?</p>
+          <ul class="qa-bullets">
+            <li>One-sample: <code class="inline">t.test(x, mu=value)</code> — tests if mean equals value</li>
+            <li>Two-sample: <code class="inline">t.test(x, y)</code> — tests if two group means are equal</li>
+            <li>Paired: <code class="inline">t.test(before, after, paired=TRUE)</code></li>
+            <li>Output: t-statistic, degrees of freedom, p-value, confidence interval</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q12: What is <code class="inline">lm()</code> in R?</p>
+          <ul class="qa-bullets">
+            <li>Fits a linear regression model: <code class="inline">lm(y ~ x, data=df)</code></li>
+            <li><code class="inline">summary(model)</code>: shows coefficients, R², p-values, residuals</li>
+            <li><code class="inline">predict(model, newdata)</code>: predicts values for new data</li>
+            <li>Formula syntax: <code class="inline">y ~ x1 + x2</code> for multiple regression</li>
           </ul>
         </div>
       </div>

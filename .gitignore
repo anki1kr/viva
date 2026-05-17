@@ -43,3 +43,6 @@ build/
 # Service-worker generated artifacts (none right now, but reserved)
 workbox-*.js
 sw.js.map
+
+syllabus_p1.png
+syllabus_p2.png

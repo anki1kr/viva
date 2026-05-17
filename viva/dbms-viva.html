@@ -1687,6 +1687,81 @@ footer {
               <li>Acts as superuser of the entire database system</li>
             </ul>
           </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q9</span>What is DDL, DML, DCL, and TCL?</div>
+            <ul class="qa-bullets">
+              <li><strong>DDL</strong> (Data Definition Language): CREATE, ALTER, DROP, TRUNCATE — defines structure</li>
+              <li><strong>DML</strong> (Data Manipulation Language): SELECT, INSERT, UPDATE, DELETE — manipulates data</li>
+              <li><strong>DCL</strong> (Data Control Language): GRANT, REVOKE — controls permissions</li>
+              <li><strong>TCL</strong> (Transaction Control Language): COMMIT, ROLLBACK, SAVEPOINT — manages transactions</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q10</span>What is a Transaction in DBMS?</div>
+            <ul class="qa-bullets">
+              <li>A logical unit of work consisting of one or more SQL operations</li>
+              <li>Must satisfy ACID properties: Atomicity, Consistency, Isolation, Durability</li>
+              <li>Starts with BEGIN; ends with COMMIT (success) or ROLLBACK (failure)</li>
+              <li><strong>Example:</strong> Bank transfer — debit one account AND credit another is one transaction</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q11</span>What are the components/functions of DBMS?</div>
+            <ul class="qa-bullets">
+              <li>Query Processor: parses and optimizes SQL queries</li>
+              <li>Storage Manager: manages data on disk, buffer pools</li>
+              <li>Transaction Manager: ensures ACID compliance</li>
+              <li>Authorization Manager: handles security and access control</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q12</span>What is the difference between Data, Information, and Knowledge?</div>
+            <ul class="qa-bullets">
+              <li><strong>Data:</strong> raw, unprocessed facts (e.g., "25", "Delhi")</li>
+              <li><strong>Information:</strong> processed data with context and meaning (e.g., "Age: 25, City: Delhi")</li>
+              <li><strong>Knowledge:</strong> information understood and applied (e.g., "Young adult in Delhi — target segment")</li>
+              <li><strong>Record:</strong> a collection of related fields (one row in a table)</li>
+              <li><strong>File:</strong> a collection of related records (old flat-file concept, replaced by DBMS)</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q13</span>How is a Database different from an Information Retrieval (IR) system?</div>
+            <ul class="qa-bullets">
+              <li><strong>Database:</strong> stores structured data; queries use SQL with exact matches; schema is fixed</li>
+              <li><strong>IR System:</strong> stores unstructured text (documents); queries are keyword-based; results are ranked by relevance</li>
+              <li>DB: Google Sheets / Oracle. IR: Google Search / Elasticsearch</li>
+              <li>DB uses relational algebra; IR uses TF-IDF, inverted indexes</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q14</span>What are the categories of Data Models?</div>
+            <ul class="qa-bullets">
+              <li><strong>Conceptual (High-level):</strong> ER model — close to user view, describes entities and relationships</li>
+              <li><strong>Representational (Logical):</strong> Relational, Hierarchical, Network — implementation model</li>
+              <li><strong>Physical (Low-level):</strong> describes how data is stored on disk (files, indexes, blocks)</li>
+              <li>Most DBMS use the Relational model as the representational layer</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q15</span>What are the different DBMS Architectures?</div>
+            <ul class="qa-bullets">
+              <li><strong>Centralized:</strong> single server handles everything — simple but single point of failure</li>
+              <li><strong>Two-tier (Client-Server):</strong> client sends SQL; server processes and returns results (e.g., desktop app + MySQL)</li>
+              <li><strong>Three-tier:</strong> client → application server → database server; business logic in middle tier (e.g., web apps)</li>
+              <li><strong>n-tier:</strong> further splits into microservices, caches, load balancers, etc.</li>
+              <li><strong>Fat Client:</strong> client holds business logic; thin server only stores data</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q16</span>How are DBMS classified?</div>
+            <ul class="qa-bullets">
+              <li><strong>By Data Model:</strong> Relational (MySQL, Oracle), NoSQL (MongoDB), Object-Oriented (db4o), Graph (Neo4j)</li>
+              <li><strong>By Number of Users:</strong> Single-user vs Multi-user</li>
+              <li><strong>By Site Distribution:</strong> Centralized vs Distributed</li>
+              <li><strong>By Access:</strong> Read-only (data warehouses) vs Read-write (OLTP systems)</li>
+              <li><strong>By Cost/License:</strong> Commercial (Oracle, SQL Server) vs Open-source (MySQL, PostgreSQL)</li>
+            </ul>
+          </li>
         </ol>
       </div>
     </div>
@@ -1772,6 +1847,74 @@ footer {
               <li><strong>Example:</strong> Some employees may not manage any department (partial)</li>
             </ul>
           </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q9</span>How do you convert an ER diagram to relational tables?</div>
+            <ul class="qa-bullets">
+              <li>Each <strong>entity type</strong> → one table; key attribute becomes primary key</li>
+              <li><strong>1:1 relationship</strong> → merge into one table or add FK in either table</li>
+              <li><strong>1:N relationship</strong> → add FK of "1" side into "N" side's table</li>
+              <li><strong>M:N relationship</strong> → create a separate junction table with FKs of both entities</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q10</span>What are Generalization, Specialization, and Aggregation?</div>
+            <ul class="qa-bullets">
+              <li><strong>Specialization:</strong> top-down — split entity into sub-entities (e.g., Employee → Manager, Engineer)</li>
+              <li><strong>Generalization:</strong> bottom-up — merge common properties into super-entity</li>
+              <li><strong>Aggregation:</strong> treat a relationship set as an entity to form relationships with another entity</li>
+              <li>These are Extended ER (EER) features</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q11</span>What is a ternary relationship?</div>
+            <ul class="qa-bullets">
+              <li>A relationship that involves exactly three entity types simultaneously</li>
+              <li><strong>Example:</strong> Doctor prescribes Medicine to Patient — all three involved at once</li>
+              <li>Represented as a diamond connected to three rectangles in ER diagram</li>
+              <li>Cannot be decomposed into binary relationships without losing information</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q12</span>What is the terminology used in the Relational Data Model?</div>
+            <ul class="qa-bullets">
+              <li><strong>Relation:</strong> a table with rows and columns (e.g., STUDENT table)</li>
+              <li><strong>Tuple:</strong> a single row in a relation (one student record)</li>
+              <li><strong>Attribute:</strong> a column in the relation (Name, RollNo, Marks)</li>
+              <li><strong>Domain:</strong> set of permissible values for an attribute (e.g., Marks ∈ [0, 100])</li>
+              <li><strong>Degree:</strong> number of attributes in a relation</li>
+              <li><strong>Cardinality:</strong> number of tuples in a relation</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q13</span>What are the properties of a Relation?</div>
+            <ul class="qa-bullets">
+              <li>Every row is unique — no two identical tuples</li>
+              <li>Attribute values are atomic (indivisible) — satisfies 1NF</li>
+              <li>Order of rows does not matter</li>
+              <li>Order of columns does not matter (accessed by attribute name, not position)</li>
+              <li>Each attribute has a distinct name within the relation</li>
+              <li>Each cell contains exactly one value from the attribute's domain</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q14</span>What are Integrity Constraints in DBMS?</div>
+            <ul class="qa-bullets">
+              <li><strong>Domain Constraint:</strong> value of each attribute must be from its defined domain (e.g., Age > 0)</li>
+              <li><strong>Key Constraint:</strong> primary key must be unique and not null</li>
+              <li><strong>Entity Integrity:</strong> no part of a primary key can be NULL</li>
+              <li><strong>Referential Integrity:</strong> a foreign key must match an existing primary key (or be NULL)</li>
+              <li>Together they ensure data is accurate, consistent, and valid at all times</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q15</span>What are Hierarchical and Network Data Models?</div>
+            <ul class="qa-bullets">
+              <li><strong>Hierarchical Model:</strong> data organized as a tree; each child has exactly one parent (1:N only); navigated via parent-child pointers; IBM IMS is a classic example</li>
+              <li><strong>Network Model:</strong> data organized as a graph; a child can have multiple parents (M:N possible); CODASYL standard; navigated via named sets (links)</li>
+              <li>Both are pre-relational models — hard to query ad hoc; require navigation code</li>
+              <li>Relational model replaced them by offering flexible SQL queries without pointer navigation</li>
+            </ul>
+          </li>
         </ol>
       </div>
     </div>
@@ -1855,6 +1998,63 @@ footer {
               <li><strong>Non-procedural (SQL, Relational Calculus):</strong> tells WHAT result is needed</li>
               <li>SQL is technically non-procedural (declarative)</li>
               <li>The query optimizer decides HOW to execute the query</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q9</span>What are the JOIN types in relational algebra?</div>
+            <ul class="qa-bullets">
+              <li><strong>Natural Join (⋈):</strong> joins on common attributes, removes duplicate columns</li>
+              <li><strong>Equi-Join:</strong> join with equality condition; keeps both join columns</li>
+              <li><strong>Theta Join (θ-join):</strong> join on any condition (=, &lt;, &gt;, ≤, ≥, ≠)</li>
+              <li><strong>Outer Join:</strong> includes non-matching tuples (Left, Right, Full) with NULLs</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q10</span>What is the RENAME (ρ) and DIVISION (÷) operation?</div>
+            <ul class="qa-bullets">
+              <li><strong>RENAME (ρ):</strong> gives a new name to a relation or its attributes; ρ(S, R) renames relation R as S</li>
+              <li><strong>DIVISION (÷):</strong> R ÷ S gives tuples in R that are paired with ALL tuples in S</li>
+              <li>Division answers "which X is associated with ALL Y?" queries</li>
+              <li><strong>Example:</strong> Students who took ALL courses = Enrollment ÷ Courses</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q11</span>What are Set Operations in Relational Algebra?</div>
+            <ul class="qa-bullets">
+              <li><strong>UNION (∪):</strong> R ∪ S — all tuples from R or S (duplicates removed); relations must be union-compatible</li>
+              <li><strong>INTERSECTION (∩):</strong> R ∩ S — tuples present in both R and S</li>
+              <li><strong>DIFFERENCE (−):</strong> R − S — tuples in R but not in S</li>
+              <li><strong>Union-compatible:</strong> same number of attributes and corresponding domains must match</li>
+              <li>These are derived from set theory and are fundamental to combining query results</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q12</span>What are Generalized Projection and Aggregate Functions in RA?</div>
+            <ul class="qa-bullets">
+              <li><strong>Generalized Projection:</strong> extends π to allow arithmetic expressions in the attribute list; e.g., π(Name, Salary×1.1) to compute a raise</li>
+              <li><strong>Aggregate Functions:</strong> SUM, COUNT, AVG, MAX, MIN applied to groups of tuples</li>
+              <li>Notation: <em>G₁,G₂ 𝒢 AGG(A)</em> (G = group-by attributes, AGG = aggregate)</li>
+              <li>Basic RA doesn't support aggregation — extended RA adds it for practical queries</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q13</span>What is Domain Relational Calculus (DRC)?</div>
+            <ul class="qa-bullets">
+              <li>Non-procedural query language using domain variables that range over attribute domains (not whole tuples)</li>
+              <li>Notation: {⟨x₁, x₂, …, xₙ⟩ | P(x₁, x₂, …, xₙ)} where P is a predicate</li>
+              <li><strong>vs TRC:</strong> Tuple Relational Calculus uses tuple variables (t); DRC uses individual domain (column-level) variables</li>
+              <li>Both TRC and DRC are equivalent in power to relational algebra (Codd's theorem)</li>
+              <li>QBE (Query By Example) is based on DRC</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q14</span>How is a sequence of relational algebra operations written?</div>
+            <ul class="qa-bullets">
+              <li>Operations are composed — output of one becomes input of the next</li>
+              <li><strong>Inline (nested):</strong> π<sub>Name</sub>(σ<sub>Dept='CS'</sub>(EMPLOYEE))</li>
+              <li><strong>Step-by-step with assignment (←):</strong> Temp ← σ<sub>Dept='CS'</sub>(EMPLOYEE); Result ← π<sub>Name</sub>(Temp)</li>
+              <li>The assignment notation forms a relational algebra expression tree (query plan)</li>
+              <li>Query optimizers rewrite this tree to reduce intermediate result sizes</li>
             </ul>
           </li>
         </ol>
@@ -1958,6 +2158,108 @@ footer {
               <li>Does NOT store data physically — it's a saved query</li>
               <li>Advantages: simplifies complex queries, provides security (hide columns), logical data independence</li>
               <li>Syntax: <code>CREATE VIEW v_name AS SELECT ...</code></li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q11</span>What is 4NF? What is a Multi-Valued Dependency?</div>
+            <ul class="qa-bullets">
+              <li><strong>Multi-Valued Dependency (MVD):</strong> X →→ Y means for each X, the set of Y values is independent of other attributes</li>
+              <li><strong>4NF:</strong> a table is in 4NF if for every non-trivial MVD X →→ Y, X is a superkey</li>
+              <li>Handles cases where two independent multi-valued facts are in the same table</li>
+              <li><strong>Example:</strong> Employee-Skill-Language — skills and languages are independent multi-valued attributes</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q12</span>What is Concurrency Control? What is a Deadlock?</div>
+            <ul class="qa-bullets">
+              <li><strong>Concurrency Control:</strong> mechanism to ensure correct results when multiple transactions run simultaneously</li>
+              <li>Techniques: locking (shared/exclusive locks), timestamps, optimistic control</li>
+              <li><strong>Deadlock:</strong> two transactions each waiting for a lock held by the other — circular wait</li>
+              <li>Resolved by: deadlock detection + rollback one transaction, or timeout, or deadlock prevention</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q13</span>What is Closure of FDs and Armstrong's Axioms?</div>
+            <ul class="qa-bullets">
+              <li><strong>Closure of FD set (F⁺):</strong> all functional dependencies logically implied by F</li>
+              <li><strong>Closure of attribute set (X⁺):</strong> all attributes functionally determined by X under F</li>
+              <li><strong>Armstrong's Axioms (sound &amp; complete):</strong></li>
+              <li>① <strong>Reflexivity:</strong> if Y ⊆ X then X → Y</li>
+              <li>② <strong>Augmentation:</strong> if X → Y then XZ → YZ</li>
+              <li>③ <strong>Transitivity:</strong> if X → Y and Y → Z then X → Z</li>
+              <li>Derived rules: Union, Decomposition, Pseudotransitivity</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q14</span>What are SQL Data Types?</div>
+            <ul class="qa-bullets">
+              <li><strong>Numeric:</strong> INT, SMALLINT, BIGINT, DECIMAL(p,s), FLOAT, REAL</li>
+              <li><strong>Character:</strong> CHAR(n) — fixed length; VARCHAR(n) — variable length; TEXT</li>
+              <li><strong>Date/Time:</strong> DATE, TIME, DATETIME, TIMESTAMP</li>
+              <li><strong>Boolean:</strong> TRUE / FALSE (or 1/0 in MySQL)</li>
+              <li><strong>Binary:</strong> BLOB, BINARY(n) for images/files</li>
+              <li>Choosing the right type saves storage and prevents invalid data entry</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q15</span>What are the steps in Query Processing?</div>
+            <ul class="qa-bullets">
+              <li>① <strong>Parsing &amp; Translation:</strong> SQL → internal relational algebra expression; syntax check</li>
+              <li>② <strong>Optimization:</strong> query optimizer generates multiple equivalent execution plans; chooses lowest-cost one</li>
+              <li>③ <strong>Execution:</strong> query execution engine runs the chosen plan against the database</li>
+              <li>Cost is estimated using statistics (number of tuples, index availability, block size)</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q16</span>What is Query Optimization? What are its strategies?</div>
+            <ul class="qa-bullets">
+              <li>Process of finding the most efficient execution plan for a SQL query</li>
+              <li><strong>Heuristic (Rule-based):</strong> apply σ early (reduce tuples), apply π early (reduce columns), join smallest relations first</li>
+              <li><strong>Cost-based:</strong> estimate I/O cost for each plan using statistics; choose minimum cost plan</li>
+              <li><strong>Query tree (expression tree):</strong> algebraic representation; optimizer restructures the tree</li>
+              <li>Indexes (B-tree, Hash) dramatically reduce cost for selection and join operations</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q17</span>What is Database Recovery? What are Undo and Redo?</div>
+            <ul class="qa-bullets">
+              <li><strong>Recovery:</strong> restoring the database to a consistent state after a failure (crash, media failure)</li>
+              <li><strong>Write-Ahead Logging (WAL):</strong> log record written to stable storage BEFORE the actual data change</li>
+              <li><strong>Undo:</strong> roll back incomplete (uncommitted) transactions — as if they never happened</li>
+              <li><strong>Redo:</strong> re-apply committed transactions whose changes didn't make it to disk before crash</li>
+              <li><strong>Checkpoint:</strong> periodic snapshot; limits how far back recovery must scan the log</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q18</span>What is Database Security?</div>
+            <ul class="qa-bullets">
+              <li>Protecting the database against unauthorized access, misuse, or malicious attacks</li>
+              <li><strong>Authentication:</strong> verify user identity (username/password, OS auth)</li>
+              <li><strong>Authorization / Access Control:</strong> GRANT and REVOKE privileges (SELECT, INSERT, UPDATE, DELETE)</li>
+              <li><strong>Views:</strong> expose only specific rows/columns to restricted users</li>
+              <li><strong>Encryption:</strong> encrypt stored data and network communication (TLS)</li>
+              <li><strong>Audit Trail:</strong> log all data access and modifications for forensic analysis</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q19</span>What is a Distributed DBMS?</div>
+            <ul class="qa-bullets">
+              <li>A DBMS where data is physically stored across multiple sites (nodes) connected by a network</li>
+              <li>Appears to the user as a single logical database (location transparency)</li>
+              <li><strong>Fragmentation:</strong> Horizontal (rows split across sites) or Vertical (columns split)</li>
+              <li><strong>Replication:</strong> copies of data kept at multiple sites for availability and performance</li>
+              <li><strong>Challenge:</strong> distributed transactions require 2-Phase Commit (2PC) to maintain atomicity</li>
+              <li><strong>Examples:</strong> Google Spanner, CockroachDB, Apache Cassandra</li>
+            </ul>
+          </li>
+          <li class="theory-qa-item">
+            <div class="theory-q"><span class="theory-q-num">Q20</span>What is 5NF (Project-Join Normal Form)?</div>
+            <ul class="qa-bullets">
+              <li>A relation is in 5NF if every join dependency is implied by its candidate keys</li>
+              <li>Deals with <strong>lossless-join decomposition</strong> — decomposing a relation and rejoining produces the original</li>
+              <li><strong>Join Dependency (JD):</strong> R = R₁ ⋈ R₂ ⋈ … ⋈ Rₙ — the relation can be reconstructed from its projections</li>
+              <li>5NF eliminates redundancy caused by multi-way join dependencies that 4NF doesn't handle</li>
+              <li>Also called PJNF (Project-Join Normal Form); very rarely violated in practice</li>
             </ul>
           </li>
         </ol>

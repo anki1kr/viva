@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#7c2d12" />
-<title>ProbStats · Sessional 2 · May 9</title>
+<title>ProbStats · Viva Guide · All Units</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Spectral:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
@@ -630,17 +630,18 @@ footer.end p{
 <!-- ====== TOPBAR ====== -->
 <div class="topbar">
   <div class="title">
-    <b>ProbStats · Sessional 2</b>
-    <small>May 9 · 30 M</small>
+    <b>ProbStats · Viva Guide</b>
+    <small>All 4 Units</small>
   </div>
   <nav class="chips">
-    <a href="#syllabus" class="hot">📌 Syllabus</a>
     <a href="#tldr" class="hot">⚡ TL;DR</a>
     <a href="#u1">U1 · Probability</a>
+    <a href="#u2">U2 · Expectation</a>
     <a href="#u3">U3 · Stats</a>
-    <a href="#pyq" class="hot">⭐ May-25 PYQ</a>
+    <a href="#u4">U4 · Correlation</a>
+    <a href="#lab">🔬 Lab</a>
+    <a href="#pyq" class="hot">⭐ PYQ</a>
     <a href="#impq" class="hot">⭐ Imp Qs</a>
-    <a href="#plan" class="hot">📅 Plan</a>
   </nav>
 </div>
 
@@ -648,28 +649,18 @@ footer.end p{
 
 <!-- ====== COVER ====== -->
 <div class="cover">
-  <span class="stamp">Sessional 02 · 2026</span>
+  <span class="stamp">Viva Prep · 2026</span>
   <div class="meta-line">BCA(DS) IV · BCA-DS-23-204</div>
   <h1>Probability<br><em>&amp; Statistics</em></h1>
-  <div class="sub">teacher's notes · 1:1 transcribed ✦</div>
+  <div class="sub">full syllabus · all 4 units ✦</div>
   <div class="grid-meta">
-    <div><b>Exam</b><span>May 9 · 9:30 AM</span></div>
-    <div><b>Duration</b><span>90 minutes</span></div>
-    <div><b>Total marks</b><span>30</span></div>
+    <div><b>Units</b><span>I · II · III · IV</span></div>
     <div><b>Code</b><span>BCA-DS-23-204</span></div>
-    <div><b>Scope</b><span>Unit I + Unit III only</span></div>
-    <div><b>Prof. style</b><span>numerical-heavy mixed</span></div>
+    <div><b>Unit I</b><span>Probability &amp; Distributions</span></div>
+    <div><b>Unit II</b><span>Mathematical Expectation</span></div>
+    <div><b>Unit III</b><span>Descriptive Statistics</span></div>
+    <div><b>Unit IV</b><span>Correlation &amp; Regression</span></div>
   </div>
-</div>
-
-<!-- ====== TEACHER SYLLABUS ====== -->
-<div class="howto solid" id="syllabus">
-  <h4>📌 Teacher's actual sessional 2 syllabus</h4>
-  <ul>
-    <li><b>Unit 1</b> → Probability laws (sum / product / joint) · Conditional · Bayes · Random variables · pmf / pdf · CDF · Binomial · Poisson · Continuous RV · Normal · Exponential</li>
-    <li><b>Unit 3</b> → Primary &amp; secondary data · Frequency distribution · Mean / Median / Mode (raw + grouped) · Standard deviation &amp; variance · Skewness</li>
-    <li><b>Source</b> → handwritten notes uploaded 18 Mar – 29 Apr 2026 (every formula and worked example below is verbatim from those notes)</li>
-  </ul>
 </div>
 
 <!-- ====== TLDR ====== -->
@@ -691,10 +682,13 @@ footer.end p{
   <h3>Contents</h3>
   <ol>
     <li><a href="#u1">Unit 1 · Probability &amp; Distributions</a><span class="d">12 t</span></li>
+    <li><a href="#u2">Unit 2 · Mathematical Expectation</a><span class="d">10 t</span></li>
     <li><a href="#u3">Unit 3 · Descriptive Statistics</a><span class="d">6 t</span></li>
+    <li><a href="#u4">Unit 4 · Correlation &amp; Regression</a><span class="d">10 t</span></li>
+    <li><a href="#lab">R Lab Experiments</a><span class="d">9 exp</span></li>
     <li><a href="#pyq">May-2025 PYQ — Solved ⭐</a><span class="d">17 Q</span></li>
     <li><a href="#impq">Important Worked Questions ⭐</a><span class="d">21 Q</span></li>
-    <li><a href="#plan">30-mark strategy &amp; revision plan</a><span class="d">3 t</span></li>
+    <li><a href="#plan">Revision plan</a><span class="d">3 t</span></li>
   </ol>
 </div>
 
@@ -1286,6 +1280,212 @@ Variance: Var(X) = 1/λ²</div>
 
 </section>
 
+<!-- ====== UNIT 2 ====== -->
+<section class="unit" id="u2">
+  <div class="unit-head">
+    <div class="kicker">Unit 2</div>
+    <h2><span class="num">02</span>Mathematical Expectation</h2>
+    <p class="lede">E[X], Variance, MGF, Chebyshev — formulas, conditions, and viva-likely numericals.</p>
+  </div>
+
+  <!-- 2.1 E[X] -->
+  <div class="topic" id="t-ex">
+    <h3>2.1 Mathematical Expectation — E[X] <span class="tag fav">always asked</span></h3>
+
+    <div class="box def">
+      <span class="label">Definition</span>
+      The <strong>expected value</strong> (mean) of a random variable X is
+      <div class="formula"><b>E[X] = Σ x · P(X = x)</b>       (discrete)
+
+<b>E[X] = ∫₋∞^∞ x · f(x) dx</b>   (continuous)</div>
+    </div>
+
+    <div class="box why">
+      <span class="label">Properties of E[X]</span>
+      <ul style="margin:0;">
+        <li><b>E[c] = c</b></li>
+        <li><b>E[aX + b] = a·E[X] + b</b></li>
+        <li><b>E[X + Y] = E[X] + E[Y]</b> (always)</li>
+        <li><b>E[X · Y] = E[X] · E[Y]</b> only if X, Y <em>independent</em></li>
+        <li><b>E[X²] = Σ x² · P(X = x)</b></li>
+      </ul>
+    </div>
+
+    <div class="qcard">
+      <p class="qhead">Q · Find E[X] and E[2X+3] <span class="marks">4 M</span></p>
+      <p class="qbody">P(X=1)=0.2, P(X=2)=0.5, P(X=3)=0.3. Find E[X] and E[2X+3].</p>
+      <p class="step"><b class="k">E[X]</b>= 1×0.2 + 2×0.5 + 3×0.3 = 0.2 + 1.0 + 0.9 = <b>2.1</b>.</p>
+      <p class="step"><b class="k">E[2X+3]</b>= 2·E[X] + 3 = 2×2.1 + 3 = 4.2 + 3.</p>
+      <p class="ans">E[X] = 2.1 &nbsp;·&nbsp; E[2X+3] = 7.2</p>
+    </div>
+  </div>
+
+  <!-- 2.2 Variance -->
+  <div class="topic" id="t-var2">
+    <h3>2.2 Variance &amp; Standard Deviation</h3>
+
+    <div class="box def">
+      <span class="label">Variance Formula</span>
+      <div class="formula"><b>Var(X) = E[X²] − (E[X])²</b>
+
+Standard Deviation:  <b>σ = √Var(X)</b></div>
+    </div>
+
+    <div class="box why">
+      <span class="label">Properties of Variance</span>
+      <ul style="margin:0;">
+        <li><b>Var(c) = 0</b></li>
+        <li><b>Var(aX + b) = a²·Var(X)</b></li>
+        <li><b>Var(X + Y) = Var(X) + Var(Y)</b> if X, Y independent</li>
+      </ul>
+    </div>
+
+    <div class="qcard">
+      <p class="qhead">Q · Find Var(X) <span class="marks">5 M</span></p>
+      <p class="qbody">X takes values 1, 2, 3 with P = 1/6, 1/2, 1/3. Find Var(X).</p>
+      <p class="step"><b class="k">E[X]</b>= 1·(1/6) + 2·(1/2) + 3·(1/3) = 1/6 + 3/6 + 6/6 · ½ ... = <b>13/6</b>.</p>
+      <p class="step"><b class="k">E[X²]</b>= 1·(1/6) + 4·(1/2) + 9·(1/3) = 1/6 + 12/6 + 18/6 = <b>31/6</b>.</p>
+      <p class="step"><b class="k">Var</b>= 31/6 − (13/6)² = 186/36 − 169/36.</p>
+      <p class="ans">Var(X) = 17/36 ≈ 0.472</p>
+    </div>
+  </div>
+
+  <!-- 2.3 MGF -->
+  <div class="topic" id="t-mgf">
+    <h3>2.3 Moment Generating Function (MGF)</h3>
+
+    <div class="box def">
+      <span class="label">Definition</span>
+      <div class="formula"><b>M_X(t) = E[e^(tX)]</b>
+
+Discrete:    M_X(t) = Σ e^(tx) · P(X = x)
+Continuous:  M_X(t) = ∫ e^(tx) · f(x) dx
+
+<b>r-th moment:  E[Xʳ] = M_X^(r)(0)</b></div>
+    </div>
+
+    <div class="box tip">
+      <span class="label">Viva Tip</span>
+      MGF uniquely determines a distribution. If two RVs have same MGF → same distribution.
+    </div>
+  </div>
+
+  <!-- 2.4 Chebyshev -->
+  <div class="topic" id="t-cheb">
+    <h3>2.4 Chebyshev's Inequality <span class="tag">definition Q</span></h3>
+
+    <div class="box def">
+      <span class="label">Statement</span>
+      For any RV X with mean μ and variance σ², for any k &gt; 0:
+      <div class="formula"><b>P(|X − μ| ≥ k·σ) ≤ 1/k²</b>
+
+Equivalently:  <b>P(|X − μ| &lt; k·σ) ≥ 1 − 1/k²</b>
+
+k=2 → at least 75% within 2σ
+k=3 → at least 88.9% within 3σ</div>
+    </div>
+
+    <div class="qcard">
+      <p class="qhead">Q · Chebyshev bound <span class="marks">3 M</span></p>
+      <p class="qbody">X has mean 50 and SD 10. Find minimum P(30 &lt; X &lt; 70).</p>
+      <p class="step">Range = μ ± 2σ, so k = 2.</p>
+      <p class="step">P(|X − 50| &lt; 20) ≥ 1 − 1/4.</p>
+      <p class="ans">Minimum P = 3/4 = 0.75</p>
+    </div>
+  </div>
+
+  <!-- 2.5 Binomial — E & Var -->
+  <div class="topic" id="t-bin2">
+    <h3>2.5 Binomial — Mean &amp; Variance <span class="tag hot">always asked</span></h3>
+
+    <div class="box def">
+      <span class="label">Conditions + Formulas</span>
+      <ul style="margin:0 0 8px;">
+        <li>Fixed n trials, each gives success (p) or failure (q = 1−p)</li>
+        <li>Trials are <strong>independent</strong>, p is constant</li>
+      </ul>
+      <div class="formula"><b>P(X = x) = ⁿCₓ · pˣ · q^(n−x)</b>
+
+Mean:     <b>E[X] = np</b>
+Variance: <b>Var(X) = npq</b>
+SD:       <b>σ = √(npq)</b></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qhead">Q · Find n, p, q given mean and variance <span class="marks">5 M</span></p>
+      <p class="qbody">For a binomial distribution, mean = 4 and variance = 3. Find n, p, q.</p>
+      <p class="step"><b class="k">step 1</b>np = 4, npq = 3.</p>
+      <p class="step"><b class="k">step 2</b>npq/np = q = 3/4 → p = 1/4.</p>
+      <p class="step"><b class="k">step 3</b>n × (1/4) = 4 → n = 16.</p>
+      <p class="ans">n = 16 · p = 1/4 · q = 3/4</p>
+    </div>
+  </div>
+
+  <!-- 2.6 Poisson -->
+  <div class="topic" id="t-pois2">
+    <h3>2.6 Poisson — Mean = Variance = λ <span class="tag hot">trick Q</span></h3>
+
+    <div class="box def">
+      <span class="label">When to use Poisson</span>
+      n is very large, p is very small, λ = np is finite.
+      <div class="formula"><b>P(X = x) = e^(−λ) · λˣ / x!</b>
+
+<b>Mean = Variance = λ</b></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qhead">Q · Bank customers — P(none) and P(≥1) <span class="marks">5 M</span></p>
+      <p class="qbody">On average 3 customers arrive per minute. Find P(no customer) and P(at least one). (e^−3 = 0.0498)</p>
+      <p class="step">λ = 3.</p>
+      <p class="step">P(X=0) = e^(−3) = 0.0498.</p>
+      <p class="step">P(X≥1) = 1 − 0.0498.</p>
+      <p class="ans">P(0) = 0.0498 &nbsp;·&nbsp; P(≥1) = 0.9502</p>
+    </div>
+  </div>
+
+  <!-- 2.7 Normal -->
+  <div class="topic" id="t-norm2">
+    <h3>2.7 Normal Distribution — Z-score &amp; Table <span class="tag hot">8M numerical</span></h3>
+
+    <div class="box def">
+      <span class="label">Standard Normal</span>
+      <div class="formula">X ~ N(μ, σ²)
+
+<b>Z = (X − μ) / σ  ~  N(0, 1)</b>
+
+<b>P(X &lt; a) = Φ(z)  where z = (a−μ)/σ</b>
+
+68-95-99.7 Rule:
+  68.27% data within μ ± σ
+  95.45% data within μ ± 2σ
+  99.73% data within μ ± 3σ</div>
+    </div>
+
+    <div class="qcard">
+      <p class="qhead">Q · Heights normally distributed <span class="marks">7 M</span></p>
+      <p class="qbody">Heights: μ=170 cm, σ=10 cm. Find P(160 &lt; X &lt; 185). [Φ(1)=0.8413, Φ(1.5)=0.9332]</p>
+      <p class="step"><b class="k">Z values</b>Z₁=(160−170)/10=−1 ; Z₂=(185−170)/10=1.5.</p>
+      <p class="step">P = Φ(1.5) − Φ(−1) = 0.9332 − (1−0.8413) = 0.9332 − 0.1587.</p>
+      <p class="ans">P(160 &lt; X &lt; 185) = 0.7745</p>
+    </div>
+  </div>
+
+  <!-- 2.8 Viva Q&A bank -->
+  <div class="topic" id="t-u2q">
+    <h3>2.8 Unit 2 — Quick Viva Q&amp;A <span class="tag fav">revision</span></h3>
+
+    <div class="box tip"><span class="label">Q — What is E[X]?</span>Weighted average of X values: E[X] = Σ x·P(x). For continuous: ∫ x·f(x)dx.</div>
+    <div class="box tip"><span class="label">Q — Difference: E[X] vs Var(X)?</span>E[X] = centre/mean. Var(X) = E[X²]−(E[X])² = spread around mean.</div>
+    <div class="box tip"><span class="label">Q — When is Poisson used instead of Binomial?</span>n very large, p very small, λ=np finite. Ex: defects per metre, calls per hour.</div>
+    <div class="box tip"><span class="label">Q — For Binomial: Mean = Variance?</span>No. Mean=np, Variance=npq (npq &lt; np since q&lt;1). Only Poisson has Mean=Variance.</div>
+    <div class="box tip"><span class="label">Q — State Chebyshev's Inequality.</span>P(|X−μ| ≥ kσ) ≤ 1/k². At least (1−1/k²) lies within kσ of mean.</div>
+    <div class="box tip"><span class="label">Q — What is Standard Normal?</span>Normal with μ=0, σ=1. Any X standardised as Z=(X−μ)/σ.</div>
+    <div class="box tip"><span class="label">Q — Memoryless property?</span>Exponential: P(X&gt;s+t | X&gt;s)=P(X&gt;t). Future wait doesn't depend on past.</div>
+    <div class="box tip"><span class="label">Q — What is MGF?</span>M_X(t)=E[e^tX]. Differentiate r times at t=0 to get r-th moment. Uniquely determines distribution.</div>
+  </div>
+
+</section>
+
 <!-- ====== UNIT 3 ====== -->
 <section class="unit" id="u3">
   <div class="unit-head">
@@ -1620,6 +1820,400 @@ If mode is unstable, use the empirical formula:
    = <b>−0.146</b></div>
       <p class="ans">Sk ≈ −0.146  (slightly left-skewed)</p>
     </div>
+  </div>
+
+</section>
+
+<!-- ====== UNIT 4 ====== -->
+<section class="unit" id="u4">
+  <div class="unit-head">
+    <div class="kicker">Unit 4</div>
+    <h2><span class="num">04</span>Correlation &amp; Regression</h2>
+    <p class="lede">Karl Pearson, Spearman, two regression lines, least squares — formula sheet + numericals.</p>
+  </div>
+
+  <!-- 4.1 Correlation -->
+  <div class="topic" id="t-corr">
+    <h3>4.1 Correlation — Definition &amp; Types <span class="tag fav">definition Q</span></h3>
+
+    <div class="box def">
+      <span class="label">Definition</span>
+      Correlation measures the <strong>degree of linear relationship</strong> between two variables X and Y.
+      <ul style="margin:8px 0 0;">
+        <li><b>Positive</b> — X ↑ as Y ↑ (e.g. height &amp; weight)</li>
+        <li><b>Negative</b> — X ↑ as Y ↓ (e.g. price &amp; demand)</li>
+        <li><b>Zero</b> — no linear relationship</li>
+      </ul>
+    </div>
+
+    <div class="box warn">
+      <span class="label">Correlation ≠ Causation</span>
+      A high correlation between X and Y does not mean X causes Y.
+    </div>
+  </div>
+
+  <!-- 4.2 Karl Pearson -->
+  <div class="topic" id="t-pearson">
+    <h3>4.2 Karl Pearson's Correlation Coefficient <span class="tag hot">8M numerical</span></h3>
+
+    <div class="box def">
+      <span class="label">Formula</span>
+      <div class="formula"><b>r = Σ(xᵢ−x̄)(yᵢ−ȳ) / √[Σ(xᵢ−x̄)² · Σ(yᵢ−ȳ)²]</b>
+
+Shortcut (when deviations dx = x−A, dy = y−B):
+<b>r = [n·Σdx·dy − Σdx·Σdy] / √{[n·Σdx² − (Σdx)²][n·Σdy² − (Σdy)²]}</b>
+
+Range: <b>−1 ≤ r ≤ 1</b>
+  r = +1 → perfect positive
+  r = −1 → perfect negative
+  r = 0  → no linear correlation</div>
+    </div>
+
+    <div class="box why">
+      <span class="label">Properties of r</span>
+      <ul style="margin:0;">
+        <li>Unit-free (dimensionless)</li>
+        <li>Symmetric: r(X,Y) = r(Y,X)</li>
+        <li>Unaffected by change of origin or scale</li>
+        <li>−1 ≤ r ≤ 1 always</li>
+      </ul>
+    </div>
+
+    <div class="qcard">
+      <p class="qhead">Q · Calculate r from given data <span class="marks">8 M</span></p>
+      <p class="qbody">Find Karl Pearson's r for: X = {2, 4, 5, 6, 8} and Y = {3, 5, 7, 8, 10}.</p>
+      <p class="step"><b class="k">step 1</b>n=5. x̄ = (2+4+5+6+8)/5 = 25/5 = 5. ȳ = (3+5+7+8+10)/5 = 33/5 = 6.6.</p>
+      <p class="step"><b class="k">step 2</b>Compute (xᵢ−x̄) and (yᵢ−ȳ):</p>
+      <div class="table-wrap">
+      <table>
+        <thead><tr><th>xᵢ</th><th>yᵢ</th><th>xᵢ−x̄</th><th>yᵢ−ȳ</th><th>(x−x̄)(y−ȳ)</th><th>(x−x̄)²</th><th>(y−ȳ)²</th></tr></thead>
+        <tbody>
+          <tr><td>2</td><td>3</td><td>−3</td><td>−3.6</td><td>10.8</td><td>9</td><td>12.96</td></tr>
+          <tr><td>4</td><td>5</td><td>−1</td><td>−1.6</td><td>1.6</td><td>1</td><td>2.56</td></tr>
+          <tr><td>5</td><td>7</td><td>0</td><td>0.4</td><td>0</td><td>0</td><td>0.16</td></tr>
+          <tr><td>6</td><td>8</td><td>1</td><td>1.4</td><td>1.4</td><td>1</td><td>1.96</td></tr>
+          <tr><td>8</td><td>10</td><td>3</td><td>3.4</td><td>10.2</td><td>9</td><td>11.56</td></tr>
+          <tr><td></td><td></td><td></td><td></td><td><b>24</b></td><td><b>20</b></td><td><b>29.2</b></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p class="step"><b class="k">step 3</b>r = 24 / √(20 × 29.2) = 24 / √584 = 24 / 24.17.</p>
+      <p class="ans">r ≈ 0.993 (strong positive correlation)</p>
+    </div>
+  </div>
+
+  <!-- 4.3 Spearman -->
+  <div class="topic" id="t-spear">
+    <h3>4.3 Spearman's Rank Correlation <span class="tag">when data is ranked</span></h3>
+
+    <div class="box def">
+      <span class="label">Formula</span>
+      <div class="formula"><b>rₛ = 1 − 6·Σd² / [n(n²−1)]</b>
+
+where d = rank of X − rank of Y for each pair
+Range: <b>−1 ≤ rₛ ≤ 1</b></div>
+    </div>
+
+    <div class="box why">
+      <span class="label">When to use Spearman?</span>
+      <ul style="margin:0;">
+        <li>Data is qualitative/ordinal (ranks)</li>
+        <li>Non-linear relationship but monotonic</li>
+        <li>Outliers present (Spearman is more robust)</li>
+      </ul>
+    </div>
+
+    <div class="qcard">
+      <p class="qhead">Q · Rank correlation for 5 students <span class="marks">7 M</span></p>
+      <p class="qbody">Ranks in Maths (X) and Science (Y): X={1,2,3,4,5}, Y={2,4,1,5,3}. Find Spearman's rₛ.</p>
+      <p class="step"><b class="k">d values</b>d = X−Y: −1, −2, +2, −1, +2.</p>
+      <p class="step"><b class="k">d²</b>: 1, 4, 4, 1, 4. Σd² = 14.</p>
+      <p class="step">rₛ = 1 − 6×14 / [5(25−1)] = 1 − 84/120 = 1 − 0.7.</p>
+      <p class="ans">rₛ = 0.3 (weak positive correlation)</p>
+    </div>
+  </div>
+
+  <!-- 4.4 Regression -->
+  <div class="topic" id="t-regr">
+    <h3>4.4 Regression — Two Lines <span class="tag hot">lines of best fit</span></h3>
+
+    <div class="box def">
+      <span class="label">Two Regression Lines</span>
+      <div class="formula">Line of Y on X (to predict Y):
+  <b>y − ȳ = byx · (x − x̄)</b>
+  <b>byx = r · (σy / σx)</b>
+
+Line of X on Y (to predict X):
+  <b>x − x̄ = bxy · (y − ȳ)</b>
+  <b>bxy = r · (σx / σy)</b>
+
+Key relation:  <b>r² = byx · bxy</b>  so  <b>r = ±√(byx · bxy)</b></div>
+    </div>
+
+    <div class="box warn">
+      <span class="label">When do both lines coincide?</span>
+      When r = ±1 (perfect correlation). Both lines become one when all points lie on a straight line.
+    </div>
+
+    <div class="box why">
+      <span class="label">Least Squares Principle</span>
+      Regression line minimises the sum of <em>squared vertical distances</em> (residuals) from the line.
+      <div class="formula">Normal equations for Y = a + bX:
+  <b>Σy  = na + b·Σx</b>
+  <b>Σxy = a·Σx + b·Σx²</b></div>
+    </div>
+
+    <div class="qcard">
+      <p class="qhead">Q · Find regression equations and predict Y <span class="marks">8 M</span></p>
+      <p class="qbody">From data: x̄=5, ȳ=4, σx=2, σy=1.5, r=0.8. Write both regression equations and find Y when X=7.</p>
+      <p class="step"><b class="k">byx</b>= r·(σy/σx) = 0.8 × (1.5/2) = 0.8 × 0.75 = 0.6.</p>
+      <p class="step"><b class="k">bxy</b>= r·(σx/σy) = 0.8 × (2/1.5) = 0.8 × 1.333 = 1.067.</p>
+      <p class="step"><b class="k">Line Y on X</b>y − 4 = 0.6(x − 5) → y = 0.6x + 1.</p>
+      <p class="step"><b class="k">Line X on Y</b>x − 5 = 1.067(y − 4) → x = 1.067y + 0.732.</p>
+      <p class="step"><b class="k">Predict Y at X=7</b>y = 0.6×7 + 1 = 4.2 + 1.</p>
+      <p class="ans">Y = 5.2 when X = 7</p>
+    </div>
+  </div>
+
+  <!-- 4.5 Coefficient of Determination -->
+  <div class="topic" id="t-r2">
+    <h3>4.5 Coefficient of Determination — r²</h3>
+
+    <div class="box def">
+      <span class="label">r² meaning</span>
+      r² = proportion of variation in Y explained by X.
+      <div class="formula"><b>r² = byx × bxy</b>
+
+r² = 1  → X explains 100% of variation in Y
+r² = 0  → X explains none of Y's variation</div>
+    </div>
+
+    <div class="box tip"><span class="label">Viva Tip</span>r² is always between 0 and 1. r can be negative but r² cannot.</div>
+  </div>
+
+  <!-- 4.6 Unit 4 Viva Q&A bank -->
+  <div class="topic" id="t-u4q">
+    <h3>4.6 Unit 4 — Quick Viva Q&amp;A <span class="tag fav">revision</span></h3>
+
+    <div class="box tip"><span class="label">Q — Difference: Correlation vs Regression?</span>Correlation: measures degree of relationship (−1 to +1, no direction). Regression: gives equation to predict one variable from another (has direction).</div>
+    <div class="box tip"><span class="label">Q — What is byx?</span>Regression coefficient of Y on X. byx = r·(σy/σx). Tells how much Y changes per unit change in X.</div>
+    <div class="box tip"><span class="label">Q — Relation between r, byx, bxy?</span>r² = byx × bxy, so r = ±√(byx·bxy). Sign of r = sign of both regression coefficients.</div>
+    <div class="box tip"><span class="label">Q — Can byx and bxy have opposite signs?</span>No. Both must have the same sign as r. If one is positive, both must be positive.</div>
+    <div class="box tip"><span class="label">Q — When do the two regression lines coincide?</span>When r = ±1 (perfect correlation). They intersect at the point (x̄, ȳ) always.</div>
+    <div class="box tip"><span class="label">Q — What is the Least Squares method?</span>Fitting a line that minimises Σ(actual y − predicted y)². Gives the best-fit regression line.</div>
+    <div class="box tip"><span class="label">Q — Range of Spearman's rₛ?</span>−1 ≤ rₛ ≤ 1. rₛ=+1 → perfect agreement in ranks; rₛ=−1 → perfect disagreement.</div>
+    <div class="box tip"><span class="label">Q — What is the Coefficient of Determination?</span>r² — proportion of variation in Y explained by X. r²=0.81 means X explains 81% of Y's variation.</div>
+  </div>
+
+</section>
+
+<!-- ====== LAB EXPERIMENTS ====== -->
+<section class="unit" id="lab">
+  <div class="unit-head">
+    <div class="kicker">Lab</div>
+    <h2><span class="num">🔬</span>R Lab Experiments</h2>
+    <p class="lede">Probability &amp; Statistics practicals in R — objective, code, and viva questions for each experiment.</p>
+  </div>
+
+  <!-- Exp 01 -->
+  <div class="topic" id="exp01">
+    <h3>Exp 01 — Mean, Median, Mode in R <span class="tag fav">basic stats</span></h3>
+    <div class="box def">
+      <span class="label">Objective</span>
+      Write an R program to calculate mean, median, and mode of a given dataset.
+    </div>
+    <div class="formula">x &lt;- c(4, 7, 2, 9, 4, 6, 4, 8)
+
+mean(x)     # Arithmetic Mean
+median(x)   # Median
+# R has no built-in mode — use:
+getMode &lt;- function(v){
+  uniqv &lt;- unique(v)
+  uniqv[which.max(tabulate(match(v, uniqv)))]
+}
+getMode(x)  # Mode</div>
+    <div class="box tip"><span class="label">Viva Q1</span>What does <code>mean()</code> return for a vector? Arithmetic mean of all elements.</div>
+    <div class="box tip"><span class="label">Viva Q2</span>Why is there no built-in mode() in R? R's mode() returns data type, not statistical mode. Must write custom function.</div>
+    <div class="box tip"><span class="label">Viva Q3</span>What does <code>median()</code> return for even-length vector? Average of two middle values.</div>
+  </div>
+
+  <!-- Exp 02 -->
+  <div class="topic" id="exp02">
+    <h3>Exp 02 — Variance, SD, Skewness in R</h3>
+    <div class="box def">
+      <span class="label">Objective</span>
+      Calculate variance, standard deviation, and skewness of a dataset in R.
+    </div>
+    <div class="formula">x &lt;- c(10, 20, 30, 40, 50)
+
+var(x)     # Variance (sample, divides by n−1)
+sd(x)      # Standard Deviation
+
+# Skewness (requires moments package or manual):
+library(moments)
+skewness(x)</div>
+    <div class="box tip"><span class="label">Viva Q1</span>Does R's <code>var()</code> use n or n−1? n−1 (sample variance, Bessel's correction).</div>
+    <div class="box tip"><span class="label">Viva Q2</span>What does positive skewness indicate? Distribution has a long right tail; mean &gt; median &gt; mode.</div>
+    <div class="box tip"><span class="label">Viva Q3</span>What is the relationship between sd() and var()? sd() = sqrt(var()).</div>
+  </div>
+
+  <!-- Exp 03 -->
+  <div class="topic" id="exp03">
+    <h3>Exp 03 — Binomial Distribution in R <span class="tag hot">distribution Q</span></h3>
+    <div class="box def">
+      <span class="label">Objective</span>
+      Use R functions to compute Binomial probabilities and plot the distribution.
+    </div>
+    <div class="formula">n &lt;- 10 ; p &lt;- 0.5
+
+dbinom(3, n, p)     # P(X = 3)
+pbinom(3, n, p)     # P(X ≤ 3)  [CDF]
+qbinom(0.5, n, p)   # Median (50th percentile)
+rbinom(20, n, p)    # 20 random samples
+
+# Plot PMF
+x &lt;- 0:n
+barplot(dbinom(x, n, p), names.arg=x,
+        main="Binomial PMF", col="steelblue")</div>
+    <div class="box tip"><span class="label">Viva Q1</span>What do d, p, q, r prefixes mean in R distribution functions? d=density/PMF, p=CDF, q=quantile, r=random sample.</div>
+    <div class="box tip"><span class="label">Viva Q2</span>What is dbinom(0, 10, 0.5)? P(X=0) = (1/2)^10 ≈ 0.00098.</div>
+    <div class="box tip"><span class="label">Viva Q3</span>How to find P(X ≥ 5) in R? 1 − pbinom(4, n, p) or pbinom(4, n, p, lower.tail=FALSE).</div>
+  </div>
+
+  <!-- Exp 04 -->
+  <div class="topic" id="exp04">
+    <h3>Exp 04 — Poisson Distribution in R</h3>
+    <div class="box def">
+      <span class="label">Objective</span>
+      Calculate Poisson probabilities and simulate Poisson random variables in R.
+    </div>
+    <div class="formula">lambda &lt;- 3
+
+dpois(0, lambda)   # P(X = 0) = e^(−3)
+ppois(2, lambda)   # P(X ≤ 2)
+rpois(10, lambda)  # 10 random Poisson values
+
+# Verify Mean = Variance
+x &lt;- rpois(1000, lambda)
+mean(x) ; var(x)   # Both ≈ 3</div>
+    <div class="box tip"><span class="label">Viva Q1</span>For Poisson, mean and variance are equal. How to verify in R? Generate large sample with rpois(), then compare mean() and var().</div>
+    <div class="box tip"><span class="label">Viva Q2</span>What is the parameter of Poisson distribution? λ (lambda) = average rate of occurrence.</div>
+    <div class="box tip"><span class="label">Viva Q3</span>When is Binomial approximated by Poisson? When n &gt; 50 and p &lt; 0.1 (np = λ is moderate).</div>
+  </div>
+
+  <!-- Exp 05 -->
+  <div class="topic" id="exp05">
+    <h3>Exp 05 — Normal Distribution &amp; Z-score in R <span class="tag hot">must know</span></h3>
+    <div class="box def">
+      <span class="label">Objective</span>
+      Calculate probabilities using normal distribution and plot the bell curve in R.
+    </div>
+    <div class="formula">mu &lt;- 170 ; sigma &lt;- 10
+
+# P(X &lt; 185)
+pnorm(185, mean=mu, sd=sigma)
+
+# P(160 &lt; X &lt; 185)
+pnorm(185, mu, sigma) - pnorm(160, mu, sigma)
+
+# Z-score
+z &lt;- (185 - mu) / sigma   # = 1.5
+
+# Standard normal: mu=0, sd=1
+pnorm(1.5)   # Φ(1.5) = 0.9332</div>
+    <div class="box tip"><span class="label">Viva Q1</span>What does pnorm(1.5) return? P(Z ≤ 1.5) = Φ(1.5) ≈ 0.9332 for standard normal.</div>
+    <div class="box tip"><span class="label">Viva Q2</span>How to find the 95th percentile of N(50, 100)? qnorm(0.95, mean=50, sd=10).</div>
+    <div class="box tip"><span class="label">Viva Q3</span>What is dnorm()? PDF value at a point, not a probability (for continuous RV).</div>
+  </div>
+
+  <!-- Exp 06 -->
+  <div class="topic" id="exp06">
+    <h3>Exp 06 — Correlation in R <span class="tag hot">Unit 4 lab</span></h3>
+    <div class="box def">
+      <span class="label">Objective</span>
+      Find Karl Pearson's and Spearman's correlation coefficient in R.
+    </div>
+    <div class="formula">x &lt;- c(2, 4, 5, 6, 8)
+y &lt;- c(3, 5, 7, 8, 10)
+
+# Karl Pearson's r
+cor(x, y)                        # default: pearson
+
+# Spearman's rank correlation
+cor(x, y, method="spearman")
+
+# Scatter plot
+plot(x, y, main="Scatter Plot",
+     xlab="X", ylab="Y", pch=19)
+abline(lm(y~x), col="red")</div>
+    <div class="box tip"><span class="label">Viva Q1</span>What does cor(x, y) return by default? Pearson's correlation coefficient r.</div>
+    <div class="box tip"><span class="label">Viva Q2</span>How to get Spearman's in R? cor(x, y, method="spearman").</div>
+    <div class="box tip"><span class="label">Viva Q3</span>What does abline(lm(y~x)) do? Draws the least-squares regression line on the scatter plot.</div>
+  </div>
+
+  <!-- Exp 07 -->
+  <div class="topic" id="exp07">
+    <h3>Exp 07 — Regression Analysis in R <span class="tag hot">lm() is key</span></h3>
+    <div class="box def">
+      <span class="label">Objective</span>
+      Fit a simple linear regression model in R and interpret the output.
+    </div>
+    <div class="formula">x &lt;- c(1, 2, 3, 4, 5)
+y &lt;- c(2, 4, 5, 4, 5)
+
+model &lt;- lm(y ~ x)     # y = a + b*x
+summary(model)          # Coefficients, R², p-value
+
+# Predict Y at X=6
+predict(model, newdata=data.frame(x=6))
+
+# Plot with regression line
+plot(x, y)
+abline(model, col="blue")</div>
+    <div class="box tip"><span class="label">Viva Q1</span>What does lm(y ~ x) do? Fits a linear regression model: y = intercept + slope × x.</div>
+    <div class="box tip"><span class="label">Viva Q2</span>What is R² in summary(model)? Coefficient of determination — proportion of variance in Y explained by X.</div>
+    <div class="box tip"><span class="label">Viva Q3</span>How to predict Y for new X using lm? predict(model, newdata=data.frame(x=new_value)).</div>
+  </div>
+
+  <!-- Exp 08 -->
+  <div class="topic" id="exp08">
+    <h3>Exp 08 — Hypothesis Testing: t-test in R</h3>
+    <div class="box def">
+      <span class="label">Objective</span>
+      Perform one-sample and two-sample t-tests in R to test hypotheses.
+    </div>
+    <div class="formula">x &lt;- c(62, 65, 70, 68, 72, 60, 75, 66)
+
+# One-sample t-test: H₀: μ = 65
+t.test(x, mu=65)
+
+# Two-sample t-test
+y &lt;- c(70, 68, 75, 72, 80)
+t.test(x, y)   # H₀: μ₁ = μ₂</div>
+    <div class="box tip"><span class="label">Viva Q1</span>What is a hypothesis test? Statistical test to decide whether to reject the null hypothesis H₀ based on sample data.</div>
+    <div class="box tip"><span class="label">Viva Q2</span>What is p-value in t.test() output? Probability of observing the data (or more extreme) if H₀ is true. Reject H₀ if p &lt; 0.05.</div>
+    <div class="box tip"><span class="label">Viva Q3</span>What is the null hypothesis in one-sample t-test? H₀: population mean = specified value (mu).</div>
+  </div>
+
+  <!-- Exp 09 -->
+  <div class="topic" id="exp09">
+    <h3>Exp 09 — Data Visualization in R (hist, boxplot)</h3>
+    <div class="box def">
+      <span class="label">Objective</span>
+      Create histograms, boxplots, and frequency charts in R.
+    </div>
+    <div class="formula">x &lt;- c(12, 15, 18, 20, 22, 25, 15, 18, 20, 17)
+
+hist(x, main="Histogram", xlab="Values",
+     col="lightblue", breaks=5)
+
+boxplot(x, main="Boxplot", col="orange")
+
+# Summary statistics
+summary(x)   # Min, Q1, Median, Mean, Q3, Max</div>
+    <div class="box tip"><span class="label">Viva Q1</span>What does a boxplot show? Min, Q1 (25th), Median (50th), Q3 (75th), Max — and outliers as points.</div>
+    <div class="box tip"><span class="label">Viva Q2</span>What is IQR? Interquartile Range = Q3 − Q1. Measures spread of middle 50% of data.</div>
+    <div class="box tip"><span class="label">Viva Q3</span>What does summary() return in R? Six-number summary: Min, 1st Qu, Median, Mean, 3rd Qu, Max.</div>
   </div>
 
 </section>
