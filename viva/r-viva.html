@@ -1565,6 +1565,25 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
         Introduction to Data Science
       </div>
       <div class="theory-qa-list">
+        <div class="box" style="margin-bottom:1.4rem">
+          <strong style="display:block;margin-bottom:.6rem;font-size:1rem">Unit I — Syllabus Quick Overview</strong>
+          <ul style="margin:0;padding-left:1.2rem;line-height:2">
+            <li><strong>Data Science:</strong> Interdisciplinary field — stats + CS + domain knowledge to extract insights from data</li>
+            <li><strong>Data types:</strong> Structured (tables/CSV), Unstructured (text/images/video), Semi-structured (JSON/XML)</li>
+            <li><strong>Variables:</strong> Nominal (labels), Ordinal (ranked), Interval (no true zero), Ratio (true zero)</li>
+            <li><strong>Data Analytics:</strong> Focuses on answering specific business questions using existing data</li>
+            <li><strong>Data Processing Chain:</strong> Collect → Clean → Transform → Analyze → Visualize → Interpret</li>
+            <li><strong>Data Distributions:</strong> Normal (bell curve), Skewed (left/right), Uniform (flat), Binomial (discrete)</li>
+            <li><strong>Paths to Data Science:</strong> Data Analyst → Data Scientist → ML Engineer → Data Engineer → Architect</li>
+            <li><strong>Data Mining:</strong> Discovering patterns in large datasets using statistics &amp; ML (part of KDD)</li>
+            <li><strong>Data Warehouse:</strong> Stores historical data for analytics (OLAP); Database stores current data (OLTP)</li>
+            <li><strong>Cloud in DS:</strong> AWS/GCP/Azure provide scalable compute, storage, ML services for data workflows</li>
+            <li><strong>AI vs ML vs DS:</strong> AI is the broad goal; ML is a technique to achieve it; DS uses both for insights</li>
+            <li><strong>Supervised Learning:</strong> Labelled data → Classification / Regression (e.g., spam filter, house prices)</li>
+            <li><strong>Unsupervised Learning:</strong> No labels → Clustering / Association (e.g., customer segmentation)</li>
+            <li><strong>Real-world apps:</strong> Healthcare (diagnosis), Finance (fraud), E-commerce (recommendations), Social media</li>
+          </ul>
+        </div>
         <div class="theory-qa-item">
           <p class="tq">Q1: What is Data Science?</p>
           <ul class="qa-bullets">
@@ -1673,6 +1692,46 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Solutions: regularization, cross-validation, more data (overfitting); complex model, more features (underfitting)</li>
           </ul>
         </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q13: What are Data Distributions?</p>
+          <ul class="qa-bullets">
+            <li><strong>Normal Distribution:</strong> symmetric bell curve around mean μ; most natural phenomena follow this</li>
+            <li><strong>Skewed Distribution:</strong> Right-skewed (tail to right, mean > median); Left-skewed (tail to left)</li>
+            <li><strong>Uniform Distribution:</strong> all outcomes equally likely; flat histogram (e.g., rolling a fair die)</li>
+            <li><strong>Binomial Distribution:</strong> counts successes in n independent trials; discrete; shape depends on p</li>
+            <li><strong>Purpose:</strong> understanding distribution shape guides choice of statistical tests and ML models</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q14: What are the career paths / roles in Data Science?</p>
+          <ul class="qa-bullets">
+            <li><strong>Data Analyst:</strong> cleans and analyzes data; creates dashboards and reports; uses SQL, Excel, Power BI</li>
+            <li><strong>Data Scientist:</strong> builds predictive models; uses Python/R, ML algorithms, statistics</li>
+            <li><strong>ML Engineer:</strong> deploys and scales ML models in production; focuses on engineering, not research</li>
+            <li><strong>Data Engineer:</strong> builds data pipelines, ETL processes, data warehouses; uses Spark, Kafka, SQL</li>
+            <li><strong>Data Architect:</strong> designs the overall data infrastructure and strategy for an organization</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q15: What are the real-world applications of Data Science?</p>
+          <ul class="qa-bullets">
+            <li><strong>Healthcare:</strong> disease diagnosis, drug discovery, patient outcome prediction</li>
+            <li><strong>Finance:</strong> fraud detection, credit scoring, algorithmic trading, risk assessment</li>
+            <li><strong>E-commerce:</strong> product recommendation systems, demand forecasting, dynamic pricing</li>
+            <li><strong>Social Media:</strong> content personalization, sentiment analysis, targeted advertising</li>
+            <li><strong>Transport:</strong> route optimization (Google Maps), self-driving cars, traffic prediction</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q16: What is a Variable in Data Science? What are its types?</p>
+          <ul class="qa-bullets">
+            <li>A variable is any characteristic, number, or quantity that can be measured or counted</li>
+            <li><strong>Nominal:</strong> categories with no order (e.g., Gender: Male/Female, Colors)</li>
+            <li><strong>Ordinal:</strong> categories with a meaningful order but unequal intervals (e.g., Rank: 1st, 2nd, 3rd)</li>
+            <li><strong>Interval:</strong> ordered, equal intervals, no true zero (e.g., Temperature in °C, IQ scores)</li>
+            <li><strong>Ratio:</strong> ordered, equal intervals, true zero exists (e.g., Height, Weight, Age)</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -1683,6 +1742,25 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
         Introduction to R
       </div>
       <div class="theory-qa-list">
+        <div class="box" style="margin-bottom:1.4rem">
+          <strong style="display:block;margin-bottom:.6rem;font-size:1rem">Unit II — Syllabus Quick Overview</strong>
+          <ul style="margin:0;padding-left:1.2rem;line-height:2">
+            <li><strong>What is R:</strong> Free, open-source language for statistical computing; created by Ihaka &amp; Gentleman (1993)</li>
+            <li><strong>History:</strong> Based on S language (Bell Labs); R 1.0 released 2000; CRAN launched same year</li>
+            <li><strong>Installing R:</strong> Download from cran.r-project.org; use RStudio as IDE; install packages with <code class="inline">install.packages()</code></li>
+            <li><strong>CRAN:</strong> Comprehensive R Archive Network — 18,000+ packages for all domains</li>
+            <li><strong>IDE:</strong> RStudio (most popular); VSCode with R extension; Jupyter Notebooks</li>
+            <li><strong>First program:</strong> <code class="inline">print("Hello World")</code> or <code class="inline">cat("Hello\n")</code></li>
+            <li><strong>Help in R:</strong> <code class="inline">?mean</code>, <code class="inline">help("mean")</code>, <code class="inline">??keyword</code> for search</li>
+            <li><strong>Special values:</strong> <code class="inline">NA</code> (missing), <code class="inline">NULL</code> (empty), <code class="inline">NaN</code> (not a number), <code class="inline">Inf</code> (infinity)</li>
+            <li><strong>Objects:</strong> Everything in R is an object; assigned with <code class="inline">&lt;-</code> or <code class="inline">=</code></li>
+            <li><strong>Vectors:</strong> Basic 1D structure; all elements same type; created with <code class="inline">c()</code></li>
+            <li><strong>Matrices &amp; Arrays:</strong> Matrix = 2D; Array = n-dimensional; created with <code class="inline">matrix()</code> / <code class="inline">array()</code></li>
+            <li><strong>Factors:</strong> Categorical variable with levels; <code class="inline">factor(c("M","F","M"))</code></li>
+            <li><strong>List:</strong> Collection of elements of different types; <code class="inline">list(name="Rex", age=20)</code></li>
+            <li><strong>Data Frame:</strong> Table where each column is a vector; <code class="inline">data.frame()</code>; most used structure</li>
+          </ul>
+        </div>
         <div class="theory-qa-item">
           <p class="tq">Q1: What is R?</p>
           <ul class="qa-bullets">
@@ -1791,6 +1869,46 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Use <code class="inline">identical()</code> for strict equality checks in functions/tests</li>
           </ul>
         </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q13: What is the History of R? Who created it?</p>
+          <ul class="qa-bullets">
+            <li>R was created by <strong>Ross Ihaka</strong> and <strong>Robert Gentleman</strong> at the University of Auckland, New Zealand</li>
+            <li>Named "R" after their first initials; developed as a free implementation of the <strong>S language</strong> (Bell Labs, 1970s)</li>
+            <li>First public version released in <strong>1993</strong>; R 1.0.0 released on <strong>February 29, 2000</strong></li>
+            <li>CRAN (Comprehensive R Archive Network) launched to host packages; now has 18,000+ packages</li>
+            <li>Governed by the R Foundation for Statistical Computing (Vienna, Austria)</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q14: How do you install R and packages? What is CRAN?</p>
+          <ul class="qa-bullets">
+            <li><strong>Install R:</strong> Download from <em>cran.r-project.org</em>; run the installer; then install RStudio IDE</li>
+            <li><strong>CRAN:</strong> Comprehensive R Archive Network — official repository for R packages; thousands of maintained packages</li>
+            <li><strong>Install a package:</strong> <code class="inline">install.packages("ggplot2")</code> — downloads and installs from CRAN</li>
+            <li><strong>Load a package:</strong> <code class="inline">library(ggplot2)</code> — makes the package available in the session</li>
+            <li><strong>Check installed:</strong> <code class="inline">installed.packages()</code>; <strong>Update:</strong> <code class="inline">update.packages()</code></li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q15: What are Arrays in R? How do they differ from matrices?</p>
+          <ul class="qa-bullets">
+            <li><strong>Array:</strong> Multi-dimensional data structure; all elements must be of the same type</li>
+            <li>Created with: <code class="inline">array(data, dim=c(rows, cols, layers))</code></li>
+            <li><strong>Matrix:</strong> Special case of an array with exactly 2 dimensions (rows × columns)</li>
+            <li><strong>Array:</strong> Can have 3 or more dimensions (e.g., dim=c(2,3,4) = 2 rows, 3 cols, 4 layers)</li>
+            <li>Access element: <code class="inline">arr[row, col, layer]</code></li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q16: How do you get Help in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">?mean</code> or <code class="inline">help("mean")</code>: opens documentation for the exact function</li>
+            <li><code class="inline">??keyword</code> or <code class="inline">help.search("keyword")</code>: searches all docs for the keyword</li>
+            <li><code class="inline">args(lm)</code>: shows the arguments of a function without full docs</li>
+            <li><code class="inline">example(plot)</code>: runs the built-in examples for a function</li>
+            <li>Online: <em>rdocumentation.org</em>, Stack Overflow, CRAN package vignettes</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -1801,6 +1919,25 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
         Programming using R
       </div>
       <div class="theory-qa-list">
+        <div class="box" style="margin-bottom:1.4rem">
+          <strong style="display:block;margin-bottom:.6rem;font-size:1rem">Unit III — Syllabus Quick Overview</strong>
+          <ul style="margin:0;padding-left:1.2rem;line-height:2">
+            <li><strong>Function creation:</strong> <code class="inline">f &lt;- function(x, y=1) { x + y }</code>; default args supported</li>
+            <li><strong>Scripts:</strong> .R files run top-to-bottom; <code class="inline">source("file.R")</code> executes a script from console</li>
+            <li><strong>Logical operators:</strong> <code class="inline">&amp;</code> (AND, vectorized), <code class="inline">|</code> (OR, vectorized), <code class="inline">!</code> (NOT), <code class="inline">&amp;&amp;</code>/<code class="inline">||</code> (scalar, short-circuit)</li>
+            <li><strong>Conditional:</strong> <code class="inline">if(cond){} else if(){} else{}</code>; also <code class="inline">ifelse(cond, yes, no)</code> for vectors</li>
+            <li><strong>Loops:</strong> <code class="inline">for</code>, <code class="inline">while</code>, <code class="inline">repeat</code>; controlled with <code class="inline">next</code> (skip) and <code class="inline">break</code> (exit)</li>
+            <li><strong>switch():</strong> <code class="inline">switch(x, "a"="Alpha", "b"="Beta")</code> — alternative to if-else chains</li>
+            <li><strong>Creating a list:</strong> <code class="inline">lst &lt;- list(name="Rex", age=20)</code>; access with <code class="inline">lst$name</code> or <code class="inline">lst[["name"]]</code></li>
+            <li><strong>Common list ops:</strong> <code class="inline">length()</code>, <code class="inline">names()</code>, <code class="inline">append()</code>, <code class="inline">modifyList()</code></li>
+            <li><strong>Recursive list:</strong> List containing other lists; create with nested <code class="inline">list()</code> calls</li>
+            <li><strong>Data Frame ops:</strong> <code class="inline">subset()</code>, <code class="inline">merge()</code>, <code class="inline">rbind()</code>, <code class="inline">cbind()</code>, <code class="inline">na.omit()</code></li>
+            <li><strong>lapply/sapply:</strong> Apply a function to each list/vector element; sapply simplifies result to vector</li>
+            <li><strong>S3 Classes:</strong> Informal OOP; add class attribute; define generics with <code class="inline">UseMethod()</code></li>
+            <li><strong>S4 Classes:</strong> Formal OOP; <code class="inline">setClass()</code>, <code class="inline">setGeneric()</code>, <code class="inline">setMethod()</code>; strict type checking</li>
+            <li><strong>Reference Classes (R5):</strong> Mutable OOP similar to Java/Python; fields &amp; methods defined together; <code class="inline">$new()</code></li>
+          </ul>
+        </div>
         <div class="theory-qa-item">
           <p class="tq">Q1: What are the types of loops in R?</p>
           <ul class="qa-bullets">
@@ -1909,6 +2046,46 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Example: <code class="inline">for(i in 1:10){ if(i==5) break; print(i) }</code> prints 1 to 4</li>
           </ul>
         </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q13: What are Logical Operators in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">&amp;</code> / <code class="inline">|</code>: element-wise AND / OR — compare entire vectors, return logical vector</li>
+            <li><code class="inline">&amp;&amp;</code> / <code class="inline">||</code>: scalar AND / OR — short-circuit, only compares first element; used in <code class="inline">if()</code></li>
+            <li><code class="inline">!</code>: NOT — negates a logical value; <code class="inline">!TRUE</code> → <code class="inline">FALSE</code></li>
+            <li><code class="inline">xor(x, y)</code>: TRUE only when exactly one of x, y is TRUE (exclusive OR)</li>
+            <li><code class="inline">any()</code> / <code class="inline">all()</code>: returns TRUE if any/all elements of a logical vector are TRUE</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q14: What is a Recursive List and common List operations in R?</p>
+          <ul class="qa-bullets">
+            <li><strong>Recursive list:</strong> A list that contains other lists as elements — any depth of nesting is allowed</li>
+            <li>Example: <code class="inline">student &lt;- list(name="Rex", scores=list(math=90, sci=85))</code></li>
+            <li>Access nested: <code class="inline">student$scores$math</code> or <code class="inline">student[["scores"]][["math"]]</code></li>
+            <li><strong>Common ops:</strong> <code class="inline">length(lst)</code>, <code class="inline">names(lst)</code>, <code class="inline">append(lst, list(new=val))</code>, <code class="inline">lst$key &lt;- NULL</code> (delete)</li>
+            <li><code class="inline">unlist(lst)</code>: flattens a list into a named vector</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q15: What are Reference Classes (R5) in R?</p>
+          <ul class="qa-bullets">
+            <li>The most OOP-like system in R — similar to Java or Python classes</li>
+            <li>Created with <code class="inline">setRefClass()</code>; instances created with <code class="inline">ClassName$new()</code></li>
+            <li><strong>Key difference from S3/S4:</strong> Reference class objects are <strong>mutable</strong> — methods modify the object in place using <code class="inline">&lt;&lt;-</code></li>
+            <li>Fields (attributes) and methods are defined together inside <code class="inline">setRefClass()</code></li>
+            <li>Example: <code class="inline">Counter &lt;- setRefClass("Counter", fields=list(n="numeric"), methods=list(inc=function(){n&lt;&lt;-n+1}))</code></li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q16: What is an R Script? How does it differ from console?</p>
+          <ul class="qa-bullets">
+            <li><strong>R Script:</strong> A plain text file with <code class="inline">.R</code> extension containing R code; runs top to bottom</li>
+            <li>Run from RStudio: click "Run" or <code class="inline">Ctrl+Enter</code> (line by line) or <code class="inline">Ctrl+Shift+Enter</code> (whole file)</li>
+            <li>Run from command line: <code class="inline">Rscript myfile.R</code></li>
+            <li><strong>Console:</strong> Interactive — code runs immediately one line at a time; history not automatically saved</li>
+            <li>Scripts are preferred for reproducibility — same result every time; share with others; version-control with git</li>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -1919,6 +2096,25 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
         Data Handling, Mathematical &amp; Statistical Concepts
       </div>
       <div class="theory-qa-list">
+        <div class="box" style="margin-bottom:1.4rem">
+          <strong style="display:block;margin-bottom:.6rem;font-size:1rem">Unit IV — Syllabus Quick Overview</strong>
+          <ul style="margin:0;padding-left:1.2rem;line-height:2">
+            <li><strong>Save/Load R data:</strong> <code class="inline">save(obj, file="data.RData")</code> / <code class="inline">load("data.RData")</code>; or <code class="inline">saveRDS()</code> / <code class="inline">readRDS()</code></li>
+            <li><strong>CSV import:</strong> <code class="inline">read.csv("file.csv")</code>; CSV export: <code class="inline">write.csv(df, "out.csv", row.names=FALSE)</code></li>
+            <li><strong>ODBC:</strong> Open Database Connectivity; connect R to external databases using <code class="inline">RODBC</code> or <code class="inline">odbc</code> package</li>
+            <li><strong>Debugging:</strong> <code class="inline">debug(fn)</code>, <code class="inline">browser()</code> (pause inside fn), <code class="inline">traceback()</code> (show call stack after error)</li>
+            <li><strong>Base Graphics:</strong> <code class="inline">plot()</code>, <code class="inline">hist()</code>, <code class="inline">boxplot()</code>, <code class="inline">barplot()</code> — built-in, no package needed</li>
+            <li><strong>ggplot2:</strong> Grammar of Graphics; <code class="inline">ggplot(df, aes(x,y)) + geom_point()</code>; layered approach</li>
+            <li><strong>Max/Min:</strong> <code class="inline">max(x)</code>, <code class="inline">min(x)</code>, <code class="inline">range(x)</code>; for data frame column: <code class="inline">max(df$col)</code></li>
+            <li><strong>Frequency distribution:</strong> <code class="inline">table(x)</code> — counts; <code class="inline">prop.table(table(x))</code> — proportions; <code class="inline">hist()</code> — visual</li>
+            <li><strong>Central tendency:</strong> <code class="inline">mean(x)</code>, <code class="inline">median(x)</code>; mode = most frequent (no built-in; use <code class="inline">table()</code>)</li>
+            <li><strong>Hypothesis testing:</strong> One-sample: <code class="inline">t.test(x, mu=50)</code>; Two-sample: <code class="inline">t.test(x, y)</code>; p-value &lt; 0.05 → reject H₀</li>
+            <li><strong>Correlation:</strong> <code class="inline">cor(x, y)</code> → Pearson r; <code class="inline">cor(x, y, method="spearman")</code></li>
+            <li><strong>Regression:</strong> <code class="inline">lm(y ~ x, data=df)</code>; <code class="inline">summary(model)</code> for R², coefficients, p-values</li>
+            <li><strong>Normal distribution:</strong> <code class="inline">dnorm()</code>, <code class="inline">pnorm()</code>, <code class="inline">qnorm()</code>, <code class="inline">rnorm()</code></li>
+            <li><strong>Other distributions:</strong> Binomial (<code class="inline">dbinom</code>), Poisson (<code class="inline">dpois</code>), t (<code class="inline">dt</code>), chi-sq (<code class="inline">dchisq</code>), F (<code class="inline">df</code>)</li>
+          </ul>
+        </div>
         <div class="theory-qa-item">
           <p class="tq">Q1: How do you read a CSV file in R?</p>
           <ul class="qa-bullets">
@@ -2025,6 +2221,47 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li><code class="inline">summary(model)</code>: shows coefficients, R², p-values, residuals</li>
             <li><code class="inline">predict(model, newdata)</code>: predicts values for new data</li>
             <li>Formula syntax: <code class="inline">y ~ x1 + x2</code> for multiple regression</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q13: What are Debugging Techniques in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">traceback()</code>: shows the call stack after an error — tells you where it crashed</li>
+            <li><code class="inline">debug(fn)</code>: marks a function for debugging; next call enters line-by-line debug mode; <code class="inline">undebug(fn)</code> to remove</li>
+            <li><code class="inline">browser()</code>: inserts a breakpoint inside a function; execution pauses there; type <code class="inline">n</code> (next), <code class="inline">c</code> (continue), <code class="inline">Q</code> (quit)</li>
+            <li><code class="inline">message("val:", x)</code>: prints diagnostic info to console without stopping execution</li>
+            <li><code class="inline">tryCatch()</code>: catches errors and warnings programmatically without crashing the script</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q14: What are Measures of Central Tendency in R?</p>
+          <ul class="qa-bullets">
+            <li><strong>Mean:</strong> <code class="inline">mean(x)</code> — arithmetic average; sensitive to outliers</li>
+            <li><strong>Median:</strong> <code class="inline">median(x)</code> — middle value when sorted; robust to outliers</li>
+            <li><strong>Mode:</strong> Most frequent value; R has no built-in <code class="inline">mode()</code> for this (it returns data type); use <code class="inline">names(sort(table(x), decreasing=TRUE)[1])</code></li>
+            <li><strong>When to use:</strong> Symmetric data → mean; Skewed data → median; Categorical data → mode</li>
+            <li>Also useful: <code class="inline">summary(x)</code> gives min, Q1, median, mean, Q3, max in one call</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q15: What is Frequency Distribution in R?</p>
+          <ul class="qa-bullets">
+            <li><strong>Frequency table:</strong> <code class="inline">table(x)</code> — counts occurrences of each unique value</li>
+            <li><strong>Relative frequency:</strong> <code class="inline">prop.table(table(x))</code> — proportions summing to 1</li>
+            <li><strong>Histogram:</strong> <code class="inline">hist(x)</code> — visual frequency distribution for continuous data; <code class="inline">breaks</code> arg controls bins</li>
+            <li><strong>Cumulative:</strong> <code class="inline">cumsum(table(x))</code> — cumulative frequencies</li>
+            <li>For two variables: <code class="inline">table(x, y)</code> creates a cross-tabulation (contingency table)</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q16: What are the main Statistical Distributions in R?</p>
+          <ul class="qa-bullets">
+            <li>R provides 4 functions per distribution: <code class="inline">d</code>(density), <code class="inline">p</code>(CDF), <code class="inline">q</code>(quantile), <code class="inline">r</code>(random)</li>
+            <li><strong>Normal:</strong> <code class="inline">dnorm(x, mean, sd)</code>, <code class="inline">pnorm()</code>, <code class="inline">qnorm()</code>, <code class="inline">rnorm(n)</code></li>
+            <li><strong>Binomial:</strong> <code class="inline">dbinom(x, size, prob)</code> — discrete; n trials, probability p</li>
+            <li><strong>Poisson:</strong> <code class="inline">dpois(x, lambda)</code> — counts of rare events; mean = variance = λ</li>
+            <li><strong>t-distribution:</strong> <code class="inline">dt(x, df)</code> — used for small sample hypothesis testing</li>
+            <li><strong>Chi-square:</strong> <code class="inline">dchisq(x, df)</code> — used for goodness-of-fit and independence tests</li>
           </ul>
         </div>
       </div>

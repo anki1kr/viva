@@ -44,5 +44,4 @@ build/
 workbox-*.js
 sw.js.map
 
-syllabus_p1.png
-syllabus_p2.png
+ruvector.db
