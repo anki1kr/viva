@@ -543,6 +543,123 @@ footer span{ color:var(--brand); }
 }
 .qa-bullets li { padding: 1px 0; }
 .qa-bullets strong { color: var(--ink); }
+
+/* BOXES — concept callouts */
+.box{
+  margin:12px 0;
+  padding:11px 13px 11px 14px;
+  border-radius:4px;
+  background:var(--paper-soft);
+  border-left:4px solid var(--brand);
+  font-size:14px;
+}
+@media(min-width:600px){ .box{ font-size:15.5px; padding:14px 16px 14px 18px; margin:14px 0; } }
+.box.def{ border-left-color:var(--gold); background:rgba(161,98,7,.07); }
+.box.why{ border-left-color:var(--brand); background:rgba(22,101,52,.06); }
+.box.tip{ border-left-color:var(--brand-mid); background:rgba(22,163,74,.06); }
+.box.prof{
+  border-left-color:var(--ink);
+  background:#fff;
+  border:1px solid var(--ink);
+  border-left-width:4px;
+  font-style:italic;
+}
+.box .label{
+  font-family:"JetBrains Mono", monospace;
+  font-size:9.5px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  display:block;
+  margin-bottom:6px;
+  color:var(--brand);
+  font-style:normal;
+  font-weight:700;
+}
+.box.def .label{ color:var(--gold); }
+.box.why .label{ color:var(--brand-deep); }
+.box.tip .label{ color:var(--brand-mid); }
+.box.prof .label{ color:var(--ink); }
+
+/* topic heading within theory unit */
+.topic-head{
+  font-family:"Fraunces", serif;
+  font-size:17px;
+  font-weight:600;
+  color:var(--ink);
+  margin:26px 0 6px;
+  padding-bottom:5px;
+  border-bottom:1px solid var(--rule);
+}
+@media(min-width:600px){ .topic-head{ font-size:19px; } }
+
+/* ---- SVG DIAGRAM FIGURES ---- */
+.diagram-fig{
+  margin:14px 0;padding:10px 8px 8px;
+  background:var(--paper-soft);border:1.5px solid var(--ink);border-radius:4px;
+  text-align:center;position:relative;
+}
+.diagram-fig svg{width:100%;height:auto;max-width:100%;display:block;margin:0 auto;}
+@media(min-width:600px){.diagram-fig{margin:18px 0;padding:14px 10px 10px;}.diagram-fig svg{max-width:660px;}}
+.diagram-fig figcaption{
+  font-family:"JetBrains Mono",monospace;font-size:9.5px;letter-spacing:.14em;
+  color:var(--muted);text-transform:uppercase;margin-top:6px;padding:0 6px;line-height:1.4;
+}
+.diagram-fig figcaption b{color:var(--brand);font-weight:700;}
+.svg-text{font-family:"Spectral",Georgia,serif;font-size:13px;font-weight:500;}
+.svg-text.mono{font-family:"JetBrains Mono",monospace;font-size:11px;}
+.svg-text.title{font-family:"Fraunces",serif;font-size:14px;font-weight:600;}
+.svg-text.label{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;}
+.svg-text:not([fill]){fill:#1a1209;}
+.svg-text.label:not([fill]){fill:#6b5d47;}
+
+/* ---- DIAGRAMS ---- */
+.diag-flow{display:flex;flex-wrap:wrap;align-items:flex-start;gap:4px;margin:10px 0 6px;}
+.diag-node{display:flex;flex-direction:column;align-items:center;}
+.diag-b{
+  padding:7px 13px;border:2px solid var(--ink);border-radius:3px;
+  background:var(--paper-soft);font-family:"JetBrains Mono",monospace;
+  font-size:10px;font-weight:700;letter-spacing:.06em;text-align:center;
+  white-space:nowrap;line-height:1.3;
+}
+.diag-b.dk{background:var(--ink);color:var(--paper);}
+.diag-b.gr{background:var(--brand-soft);border-color:var(--brand);color:var(--brand-deep);}
+.diag-b.gd{background:rgba(161,98,7,.12);border-color:var(--gold);color:var(--gold);}
+.diag-sub{
+  font-family:"JetBrains Mono",monospace;font-size:8px;letter-spacing:.08em;
+  color:var(--muted);text-transform:uppercase;text-align:center;
+  margin-top:3px;max-width:90px;line-height:1.3;
+}
+.diag-arr{font-size:16px;color:var(--brand);padding-top:8px;flex-shrink:0;font-weight:700;}
+.diag-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0;}
+@media(max-width:440px){.diag-2col{grid-template-columns:1fr;}}
+.diag-col{border:1.5px solid var(--ink);border-radius:3px;padding:10px 12px;background:var(--paper-soft);}
+.diag-col .dchead{
+  font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;display:block;margin-bottom:8px;
+  padding-bottom:5px;border-bottom:1.5px solid var(--rule);
+}
+.diag-col.green .dchead{color:var(--brand-deep);}
+.diag-col.gold .dchead{color:var(--gold);}
+.diag-stack{display:flex;flex-direction:column;gap:2px;margin:6px 0;}
+.diag-layer{
+  padding:7px 12px;border:1.5px solid var(--rule);border-radius:2px;
+  font-family:"JetBrains Mono",monospace;font-size:10px;
+  display:flex;gap:8px;align-items:center;
+}
+.diag-layer .dl{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);flex-shrink:0;min-width:70px;}
+.diag-4{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;}
+.diag-card{border:1.5px solid var(--ink);border-radius:3px;padding:10px 11px;background:var(--paper-soft);}
+.diag-card .dk{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;display:block;margin-bottom:5px;}
+.diag-step{display:flex;flex-direction:column;align-items:center;gap:2px;margin:8px 0;}
+.diag-step-box{
+  width:100%;max-width:320px;padding:7px 14px;border:1.5px solid var(--ink);border-radius:3px;
+  background:var(--paper-soft);font-family:"JetBrains Mono",monospace;font-size:10px;font-weight:600;
+  text-align:center;letter-spacing:.04em;
+}
+.diag-step-box.dk{background:var(--ink);color:var(--paper);}
+.diag-step-box.gr{background:var(--brand-soft);border-color:var(--brand);color:var(--brand-deep);}
+.diag-step-box.gd{background:rgba(161,98,7,.1);border-color:var(--gold);color:var(--gold);}
+.diag-step-arr{font-size:20px;color:var(--brand);line-height:1;}
 </style>
 </head>
 <body>
@@ -556,6 +673,10 @@ footer span{ color:var(--brand); }
   <nav class="chips">
     <a href="#lab">&#x1F9EA; Lab Guide</a>
     <a href="#theory">&#x1F4DA; Theory Q&amp;A</a>
+    <a href="#u1">U1 &middot; Data Sci</a>
+    <a href="#u2">U2 &middot; Intro R</a>
+    <a href="#u3">U3 &middot; Prog R</a>
+    <a href="#u4">U4 &middot; Stats</a>
   </nav>
 </header>
 
@@ -1559,7 +1680,7 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
     </div>
 
     <!-- UNIT I -->
-    <div class="theory-unit">
+    <div class="theory-unit" id="u1">
       <div class="unit-title">
         <span class="unit-num">Unit I</span>
         Introduction to Data Science
@@ -1584,6 +1705,84 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li><strong>Real-world apps:</strong> Healthcare (diagnosis), Finance (fraud), E-commerce (recommendations), Social media</li>
           </ul>
         </div>
+        <!-- UNIT I — TOPIC DEEP DIVES -->
+        <p class="topic-head">Data Types &amp; Variables</p>
+        <div class="box def">
+          <span class="label">Concept</span>
+          <strong>Data types:</strong> Structured (rows/columns — CSV, tables), Unstructured (images, text, video), Semi-structured (JSON, XML).<br>
+          <strong>Variable scales:</strong> Nominal (labels, no order — gender), Ordinal (ordered but unequal gaps — rank), Interval (equal gaps, no true zero — temperature °C), Ratio (equal gaps + true zero — height, weight).<br>
+          <em style="color:var(--muted);font-size:.92em">Why it matters: scale type decides which statistical test is valid. Nominal → chi-square; Interval/Ratio → t-test/ANOVA.</em><br>
+          <em style="color:var(--muted);font-size:.92em">Connects to: R data types (Unit II) · statistical distributions (Unit IV)</em>
+        </div>
+
+        <p class="topic-head">Data Processing Chain</p>
+        <div class="box why">
+          <span class="label">Pipeline — draw this in exam</span>
+          <strong>Cleaning = 60–80% of effort.</strong> "Garbage in, garbage out."<br>
+          <em style="color:var(--muted);font-size:.92em">R: <code class="inline">read.csv()</code>→collect · <code class="inline">na.omit()</code>→clean · <code class="inline">scale()</code>→transform · <code class="inline">lm()</code>→analyze · <code class="inline">ggplot2</code>→visualize</em>
+        </div>
+        <figure class="diagram-fig">
+<p style="font-family:'Fraunces',serif;font-size:14px;font-weight:700;margin:0 0 8px;color:var(--ink)">6-Stage Data Pipeline</p>
+<div class="diag-flow" style="justify-content:center">
+  <div class="diag-node"><div class="diag-b gr">Collect</div><div class="diag-sub">csv · db · api</div></div>
+  <div class="diag-arr">›</div>
+  <div class="diag-node"><div class="diag-b gr">Clean</div><div class="diag-sub">na.omit()</div></div>
+  <div class="diag-arr">›</div>
+  <div class="diag-node"><div class="diag-b gd">Process</div><div class="diag-sub">scale()</div></div>
+  <div class="diag-arr" style="color:var(--gold)">›</div>
+  <div class="diag-node"><div class="diag-b gd">Analyse</div><div class="diag-sub">lm() / ml</div></div>
+  <div class="diag-arr" style="color:var(--gold)">›</div>
+  <div class="diag-node"><div class="diag-b dk">Visualise</div><div class="diag-sub">ggplot2</div></div>
+  <div class="diag-arr">›</div>
+  <div class="diag-node"><div class="diag-b dk">Decide</div><div class="diag-sub">insights</div></div>
+</div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:8.5px;color:var(--muted);text-align:center;margin-top:6px;text-transform:uppercase;letter-spacing:.1em">Data Prep (green) = 60–80% effort  ·  Analysis (gold)  ·  Delivery (dark)</div>
+<figcaption><b>Fig 1.1</b> · Cleaning = 60–80% of real-world data science work</figcaption>
+</figure>
+
+        <p class="topic-head">Advices for New Data Scientists</p>
+        <div class="box tip">
+          <span class="label">Career Tip</span>
+          <ul style="margin:4px 0 0 18px;line-height:1.9">
+            <li>Master <strong>one language first</strong> (R or Python) before jumping to frameworks</li>
+            <li><strong>Understand the business problem</strong> before touching data — wrong question = useless answer</li>
+            <li><strong>Document everything</strong>: use RMarkdown / notebooks; version control with git from day 1</li>
+            <li><strong>Practice EDA on every dataset</strong>: run <code class="inline">summary()</code>, <code class="inline">str()</code>, <code class="inline">hist()</code> before any modelling</li>
+            <li>Data cleaning is not boring — it is where the real understanding happens</li>
+          </ul>
+        </div>
+        <figure class="diagram-fig">
+<p style="font-family:'Fraunces',serif;font-size:14px;font-weight:700;margin:0 0 8px;color:var(--ink)">Machine Learning — 3 Types</p>
+<div class="diag-2col">
+  <div class="diag-col green">
+    <span class="dchead">Supervised</span>
+    <div class="diag-flow" style="margin:0 0 6px">
+      <div class="diag-node"><div class="diag-b gr" style="font-size:9px">Labeled Data</div></div>
+      <div class="diag-arr" style="padding-top:0">›</div>
+      <div class="diag-node"><div class="diag-b dk" style="font-size:9px;background:var(--brand);border-color:var(--brand)">Model</div></div>
+      <div class="diag-arr" style="padding-top:0">›</div>
+      <div class="diag-node"><div class="diag-b dk" style="font-size:9px">Prediction</div></div>
+    </div>
+    <div style="font-family:'Spectral',serif;font-size:12px;font-weight:600;color:var(--brand-deep);margin-bottom:3px">Classification · Regression</div>
+    <div class="diag-sub" style="max-width:100%;text-align:left;font-size:9px;line-height:1.9">Spam filter · House price<br>R: lm() · glm() · knn()<br><b>Input:</b> labeled (x + y pairs)</div>
+  </div>
+  <div class="diag-col gold">
+    <span class="dchead">Unsupervised</span>
+    <div class="diag-flow" style="margin:0 0 6px">
+      <div class="diag-node"><div class="diag-b gd" style="font-size:9px">No Labels</div></div>
+      <div class="diag-arr" style="padding-top:0;color:var(--gold)">›</div>
+      <div class="diag-node"><div class="diag-b gd" style="font-size:9px;background:var(--gold);color:white;border-color:var(--gold)">Algorithm</div></div>
+      <div class="diag-arr" style="padding-top:0;color:var(--gold)">›</div>
+      <div class="diag-node"><div class="diag-b dk" style="font-size:9px;background:#92400e;border-color:#92400e">Clusters</div></div>
+    </div>
+    <div style="font-family:'Spectral',serif;font-size:12px;font-weight:600;color:var(--gold);margin-bottom:3px">Clustering · Association</div>
+    <div class="diag-sub" style="max-width:100%;text-align:left;font-size:9px;line-height:1.9">Customer segments · Anomaly<br>R: kmeans() · hclust()<br><b>Input:</b> no labels needed</div>
+  </div>
+</div>
+<div style="border:1.5px solid #6b5d47;border-radius:3px;padding:5px 12px;background:#f7f1e1;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:9px;text-align:center;color:#3b2f20"><b style="color:#6b5d47">REINFORCEMENT:</b> Agent → Action → Reward → Policy &nbsp;·&nbsp; e.g. AlphaGo, Robotics (trial &amp; error)</div>
+<figcaption><b>Fig 1.2</b> · Supervised needs labels; Unsupervised finds patterns without labels</figcaption>
+</figure>
+
         <div class="theory-qa-item">
           <p class="tq">Q1: What is Data Science?</p>
           <ul class="qa-bullets">
@@ -1610,6 +1809,14 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Database: frequently updated; Warehouse: updated in batches</li>
             <li>Database: optimized for speed; Warehouse: optimized for analysis</li>
           </ul>
+          <div class="diag-2col" style="margin:6px 0 4px">
+  <div class="diag-col green"><span class="dchead">Database (OLTP)</span>
+    <div class="diag-sub" style="max-width:100%;text-align:left;font-size:9.5px;line-height:2">Current data · Fast transactions<br>Frequent small updates<br>e.g. MySQL, PostgreSQL</div>
+  </div>
+  <div class="diag-col gold"><span class="dchead">Data Warehouse (OLAP)</span>
+    <div class="diag-sub" style="max-width:100%;text-align:left;font-size:9.5px;line-height:2">Historical data · Complex queries<br>Batch updates (ETL)<br>e.g. BigQuery, Redshift</div>
+  </div>
+</div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q4: What is Machine Learning? What are its types?</p>
@@ -1664,6 +1871,13 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Data Engineering: builds and maintains data pipelines and infrastructure (ETL, databases)</li>
             <li>Data Engineers prepare data → Data Scientists model it → Data Analysts interpret it</li>
           </ul>
+          <div class="diag-flow" style="margin:6px 0 4px;justify-content:center">
+  <div class="diag-node"><div class="diag-b gr">Data Eng</div><div class="diag-sub">Build pipelines<br>ETL, databases</div></div>
+  <div class="diag-arr">›</div>
+  <div class="diag-node"><div class="diag-b dk">Data Sci</div><div class="diag-sub">ML models<br>predictions</div></div>
+  <div class="diag-arr">›</div>
+  <div class="diag-node"><div class="diag-b gd">Data Analyst</div><div class="diag-sub">Interpret<br>dashboards</div></div>
+</div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q10: What is EDA (Exploratory Data Analysis)?</p>
@@ -1682,6 +1896,19 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Iterative process — can go back to earlier phases</li>
             <li>Most widely used data science project framework in industry</li>
           </ul>
+          <div class="diag-flow" style="margin:6px 0 4px;justify-content:center;flex-wrap:wrap">
+  <div class="diag-node"><div class="diag-b gr">Business<br>Understanding</div></div>
+  <div class="diag-arr">›</div>
+  <div class="diag-node"><div class="diag-b gr">Data<br>Understanding</div></div>
+  <div class="diag-arr">›</div>
+  <div class="diag-node"><div class="diag-b gd">Data<br>Preparation</div></div>
+  <div class="diag-arr" style="color:var(--gold)">›</div>
+  <div class="diag-node"><div class="diag-b gd">Modelling</div></div>
+  <div class="diag-arr" style="color:var(--gold)">›</div>
+  <div class="diag-node"><div class="diag-b dk">Evaluation</div></div>
+  <div class="diag-arr">›</div>
+  <div class="diag-node"><div class="diag-b dk">Deployment</div></div>
+</div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q12: What is Overfitting vs Underfitting?</p>
@@ -1732,11 +1959,21 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li><strong>Ratio:</strong> ordered, equal intervals, true zero exists (e.g., Height, Weight, Age)</li>
           </ul>
         </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q17: What advice would you give to a new data scientist?</p>
+          <ul class="qa-bullets">
+            <li>Master one tool completely — R or Python — before learning others</li>
+            <li>Always understand the business or research question before writing any code</li>
+            <li>Invest heavily in data cleaning — messy data = wrong conclusions</li>
+            <li>Learn statistics basics: distributions, hypothesis tests, confidence intervals</li>
+            <li>Build a portfolio: work on real datasets (Kaggle, government open data) and document your projects</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <!-- UNIT II -->
-    <div class="theory-unit">
+    <div class="theory-unit" id="u2">
       <div class="unit-title">
         <span class="unit-num">Unit II</span>
         Introduction to R
@@ -1761,6 +1998,48 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li><strong>Data Frame:</strong> Table where each column is a vector; <code class="inline">data.frame()</code>; most used structure</li>
           </ul>
         </div>
+        <!-- UNIT II — TOPIC DEEP DIVES -->
+        <p class="topic-head">R Objects &amp; Assignment</p>
+        <div class="box def">
+          <span class="label">Concept</span>
+          <strong>Everything in R is an object.</strong> Vectors, functions, data frames, even models — all objects stored in memory with a name.<br>
+          <strong>Assignment operators:</strong> <code class="inline">&lt;-</code> (preferred convention), <code class="inline">=</code> (also works), <code class="inline">-&gt;</code> (right-assign, rarely used).<br>
+          <strong>Inspect objects:</strong> <code class="inline">class(x)</code> — what kind of object; <code class="inline">typeof(x)</code> — internal storage type; <code class="inline">str(x)</code> — full structure.<br>
+          <em style="color:var(--muted);font-size:.92em">Connects to: all data structures (Q3–Q9) · type coercion below</em>
+        </div>
+
+        <p class="topic-head">Type Coercion</p>
+        <div class="box why">
+          <span class="label">Important — silent source of bugs</span>
+          <strong>Hierarchy (least → most permissive) — memorize this:</strong>
+          <div class="diag-flow" style="justify-content:center;margin:6px 0 8px;gap:2px">
+  <div class="diag-node"><div class="diag-b gr" style="font-size:9px;padding:5px 8px">logical</div><div class="diag-sub">TRUE</div></div>
+  <div class="diag-arr" style="padding-top:4px;font-size:12px">›</div>
+  <div class="diag-node"><div class="diag-b gr" style="font-size:9px;padding:5px 8px">integer</div><div class="diag-sub">1L</div></div>
+  <div class="diag-arr" style="padding-top:4px;font-size:12px">›</div>
+  <div class="diag-node"><div class="diag-b gd" style="font-size:9px;padding:5px 8px">double</div><div class="diag-sub">1.0</div></div>
+  <div class="diag-arr" style="padding-top:4px;font-size:12px;color:var(--gold)">›</div>
+  <div class="diag-node"><div class="diag-b gd" style="font-size:9px;padding:5px 8px">complex</div><div class="diag-sub">1+0i</div></div>
+  <div class="diag-arr" style="padding-top:4px;font-size:12px;color:var(--gold)">›</div>
+  <div class="diag-node"><div class="diag-b dk" style="font-size:9px;padding:5px 8px">character</div><div class="diag-sub">"TRUE"</div></div>
+</div>
+<div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--muted);text-align:center;margin-bottom:6px">c(TRUE, 1L, 2.5, "hi") → all become <b style="color:var(--ink)">character</b> · most permissive type wins</div>
+          <strong>Explicit coercion:</strong> <code class="inline">as.numeric()</code>, <code class="inline">as.character()</code>, <code class="inline">as.logical()</code>, <code class="inline">as.integer()</code><br>
+          <em style="color:var(--muted);font-size:.92em">Why it matters: CSV import often gives numbers as character — always run <code class="inline">str(df)</code> and fix with <code class="inline">as.numeric(df$col)</code></em>
+        </div>
+
+        <p class="topic-head">Why Use R?</p>
+        <div class="box tip">
+          <span class="label">Context</span>
+          <ul style="margin:4px 0 0 18px;line-height:1.9">
+            <li><strong>Purpose-built for statistics</strong> — not adapted from a general-purpose language</li>
+            <li><strong>CRAN:</strong> 18,000+ packages — specialized tools for every domain (biology, finance, NLP)</li>
+            <li><strong>Best-in-class visualization:</strong> ggplot2 produces publication-quality graphics</li>
+            <li><strong>Reproducibility:</strong> RMarkdown integrates code + output + narrative into one document</li>
+            <li><strong>Free and open-source</strong> — widely used in academia and research</li>
+          </ul>
+        </div>
+
         <div class="theory-qa-item">
           <p class="tq">Q1: What is R?</p>
           <ul class="qa-bullets">
@@ -1778,6 +2057,12 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Character: <code class="inline">"hello"</code> (text strings)</li>
             <li>Logical: <code class="inline">TRUE</code>/<code class="inline">FALSE</code> | Complex: <code class="inline">2+3i</code> | Check type with <code class="inline">class()</code> or <code class="inline">typeof()</code></li>
           </ul>
+          <div class="diag-4" style="margin:6px 0 4px">
+  <div class="diag-card" style="border-color:var(--brand);background:#dcfce7"><span class="dk" style="color:var(--brand-deep)">numeric</span><code style="font-size:12px;font-weight:700;color:var(--brand-deep)">3.14, -2.5</code><div class="diag-sub" style="max-width:100%">class() → "numeric"</div></div>
+  <div class="diag-card" style="border-color:var(--brand)"><span class="dk" style="color:var(--brand-deep)">integer</span><code style="font-size:12px;font-weight:700">3L, 100L</code><div class="diag-sub" style="max-width:100%">L suffix required</div></div>
+  <div class="diag-card" style="border-color:var(--gold);background:rgba(161,98,7,.08)"><span class="dk" style="color:var(--gold)">character</span><code style="font-size:12px;font-weight:700;color:#92400e">"hello"</code><div class="diag-sub" style="max-width:100%">nchar(), paste()</div></div>
+  <div class="diag-card" style="border-color:#6b5d47;background:#f7f1e1"><span class="dk" style="color:#6b5d47">logical</span><code style="font-size:12px;font-weight:700;color:#3b2f20">TRUE / FALSE</code><div class="diag-sub" style="max-width:100%">is.logical()</div></div>
+</div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q3: What is a Vector in R?</p>
@@ -1801,10 +2086,13 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
           <p class="tq">Q5: What is a Factor in R?</p>
           <ul class="qa-bullets">
             <li>Categorical variable with a fixed set of possible values (called <strong>levels</strong>)</li>
-            <li>Used for categorical data like gender, city, grade</li>
-            <li>Created with <code class="inline">factor()</code></li>
-            <li>Internally stored as integers with labels — memory efficient</li>
+            <li>Used for categorical data like gender, city, grade; memory-efficient (stored as integers + labels)</li>
+            <li>Created with <code class="inline">factor(x, levels=c(...))</code></li>
           </ul>
+          <div class="diag-2col" style="margin:6px 0 4px">
+            <div class="diag-col green"><span class="dchead">Visible (labels)</span><code style="font-size:12px;font-weight:700">M, F, F, M, F</code><div class="diag-sub" style="max-width:100%;margin-top:4px">what user sees</div></div>
+            <div class="diag-col gold"><span class="dchead">Stored (integers)</span><code style="font-size:12px;font-weight:700">2, 1, 1, 2, 1</code><div class="diag-sub" style="max-width:100%;margin-top:4px">levels: F=1, M=2</div></div>
+          </div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q6: What are special values in R?</p>
@@ -1814,6 +2102,12 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li><code class="inline">NaN</code>: Not a Number (e.g., <code class="inline">0/0</code>)</li>
             <li><code class="inline">Inf</code>/<code class="inline">-Inf</code>: positive/negative infinity | Check with <code class="inline">is.na()</code>, <code class="inline">is.null()</code>, <code class="inline">is.nan()</code>, <code class="inline">is.infinite()</code></li>
           </ul>
+          <div class="diag-flow" style="margin:6px 0 4px;justify-content:center">
+  <div class="diag-node"><div class="diag-b gr">NA</div><div class="diag-sub">missing<br>is.na()</div></div>
+  <div class="diag-node" style="margin-left:6px"><div class="diag-b gd">NULL</div><div class="diag-sub">absent<br>is.null()</div></div>
+  <div class="diag-node" style="margin-left:6px"><div class="diag-b dk">NaN</div><div class="diag-sub">0/0<br>is.nan()</div></div>
+  <div class="diag-node" style="margin-left:6px"><div class="diag-b dk">Inf</div><div class="diag-sub">1/0<br>is.infinite()</div></div>
+</div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q7: What is a Data Frame?</p>
@@ -1845,11 +2139,19 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
         <div class="theory-qa-item">
           <p class="tq">Q10: What is the difference between a Matrix and a Data Frame?</p>
           <ul class="qa-bullets">
-            <li>Matrix: all elements must be the same type; mathematical operations supported</li>
-            <li>Data Frame: each column can be different type; ideal for real-world datasets</li>
-            <li>Matrix operations: matrix multiplication, transpose; Data Frame: merge, filter, aggregate</li>
-            <li>Use matrix for numerical computation; use data frame for data analysis</li>
+            <li>Matrix → numerical computation (multiplication, transpose)</li>
+            <li>Data Frame → data analysis (merge, filter, aggregate)</li>
           </ul>
+          <div class="diag-2col" style="margin:6px 0 4px">
+            <div class="diag-col green"><span class="dchead">Matrix</span>
+              <code style="display:block;font-size:11.5px;line-height:1.5">[1, 2, 3]<br>[4, 5, 6]<br>[7, 8, 9]</code>
+              <div class="diag-sub" style="max-width:100%;margin-top:6px">SAME type only<br>matrix(1:9, 3, 3)</div>
+            </div>
+            <div class="diag-col gold"><span class="dchead">Data Frame</span>
+              <code style="display:block;font-size:11.5px;line-height:1.5">name  age  pass<br>"Rex"  20  TRUE<br>"Ana"  19  TRUE</code>
+              <div class="diag-sub" style="max-width:100%;margin-top:6px">MIXED types per col<br>data.frame(...)</div>
+            </div>
+          </div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q11: How does R handle missing values (NA)?</p>
@@ -1906,14 +2208,37 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li><code class="inline">??keyword</code> or <code class="inline">help.search("keyword")</code>: searches all docs for the keyword</li>
             <li><code class="inline">args(lm)</code>: shows the arguments of a function without full docs</li>
             <li><code class="inline">example(plot)</code>: runs the built-in examples for a function</li>
-            <li>Online: <em>rdocumentation.org</em>, Stack Overflow, CRAN package vignettes</li>
           </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q17: What is type coercion in R? What is the coercion hierarchy?</p>
+          <ul class="qa-bullets">
+            <li>Type coercion = automatic conversion of one data type to another when types are mixed</li>
+            <li>Implicit coercion hierarchy (least → most permissive): <strong>logical → integer → double → complex → character</strong></li>
+            <li>Example: <code class="inline">c(TRUE, 2L, 3.5)</code> → numeric vector <code class="inline">c(1, 2, 3.5)</code></li>
+            <li>Explicit coercion: <code class="inline">as.numeric("3.14")</code> → 3.14; <code class="inline">as.logical(0)</code> → FALSE</li>
+            <li>Warning: <code class="inline">as.numeric("hello")</code> → NA (with warning) — always validate after coercion</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q18: What is the difference between <code class="inline">class()</code> and <code class="inline">typeof()</code> in R?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">class()</code>: returns the high-level R object class — what R treats the object as (e.g., "data.frame", "matrix", "factor")</li>
+            <li><code class="inline">typeof()</code>: returns the internal storage type — how R stores it in memory (e.g., "double", "integer", "list")</li>
+            <li>Example: a matrix has <code class="inline">class = "matrix"</code> but <code class="inline">typeof = "double"</code> (if numeric)</li>
+            <li>A factor has <code class="inline">class = "factor"</code> but <code class="inline">typeof = "integer"</code> (stored as integers with labels)</li>
+            <li>Use <code class="inline">class()</code> for everyday type checking; <code class="inline">typeof()</code> when debugging storage behavior</li>
+          </ul>
+          <div class="diag-2col" style="margin:6px 0 4px">
+            <div class="diag-col green"><span class="dchead">class()</span><code style="font-size:11.5px">"data.frame"<br>"matrix"<br>"factor"</code><div class="diag-sub" style="max-width:100%;margin-top:6px">high-level<br>what R treats it as</div></div>
+            <div class="diag-col gold"><span class="dchead">typeof()</span><code style="font-size:11.5px">"double"<br>"integer"<br>"list"</code><div class="diag-sub" style="max-width:100%;margin-top:6px">storage mode<br>how R holds it</div></div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- UNIT III -->
-    <div class="theory-unit">
+    <div class="theory-unit" id="u3">
       <div class="unit-title">
         <span class="unit-num">Unit III</span>
         Programming using R
@@ -1938,23 +2263,103 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li><strong>Reference Classes (R5):</strong> Mutable OOP similar to Java/Python; fields &amp; methods defined together; <code class="inline">$new()</code></li>
           </ul>
         </div>
+        <!-- UNIT III — TOPIC DEEP DIVES -->
+        <p class="topic-head">Function Creation Deep Dive</p>
+        <div class="box def">
+          <span class="label">Concept</span>
+          <strong>Syntax:</strong> <code class="inline">name &lt;- function(param, default=val, ...) { body }</code><br>
+          <strong>Return:</strong> last expression is returned automatically; use <code class="inline">return()</code> for early exit only.<br>
+          <strong>Scope:</strong> functions create their own local environment — inner variables don't leak out.<br>
+          <strong><code class="inline">...</code> (dots):</strong> pass arbitrary extra arguments through to inner functions (e.g., <code class="inline">plot(...)</code>).<br>
+          <code style="display:block;font-family:'JetBrains Mono',monospace;font-size:11.5px;background:rgba(161,98,7,.08);padding:7px 10px;border-radius:3px;margin:6px 0">
+            power &lt;- function(base, exp=2) base^exp<br>
+            power(3)      # 9  (uses default exp=2)<br>
+            power(3, 3)   # 27
+          </code>
+          <em style="color:var(--muted);font-size:.92em">Connects to: closures (Q11) · apply family (Q1, Q2) · S3 generics (Q4)</em>
+        </div>
+
+        <p class="topic-head">Data Frame Operations</p>
+        <div class="box why">
+          <span class="label">Must-Know for Viva</span>
+          <code style="display:block;font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(22,101,52,.08);padding:8px 10px;border-radius:3px;margin:4px 0 8px;line-height:1.8">
+            merge(df1, df2, by="id")          # SQL-style JOIN on common column<br>
+            merge(df1, df2, by="id", all=TRUE) # FULL OUTER JOIN<br>
+            rbind(df1, df2)                    # stack rows (same columns required)<br>
+            cbind(df1, df2)                    # add columns (same row count required)<br>
+            subset(df, age &gt; 18, select=c(name,age))  # filter + select
+          </code>
+          <strong>merge types:</strong> default = inner join; <code class="inline">all.x=TRUE</code> = left join; <code class="inline">all.y=TRUE</code> = right join; <code class="inline">all=TRUE</code> = full outer.<br>
+          <em style="color:var(--muted);font-size:.92em">Connects to: read.csv (Unit IV) · lapply on data frames · ODBC import (Unit IV)</em>
+        </div>
+
+        <p class="topic-head">OOP in R — S3 vs S4 vs R5 Comparison</p>
+        <div class="box tip">
+          <span class="label">Quick Comparison</span>
+          <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px">
+            <tr style="background:rgba(22,163,74,.12)">
+              <th style="text-align:left;padding:4px 8px;border:1px solid var(--rule)">Feature</th>
+              <th style="padding:4px 8px;border:1px solid var(--rule)">S3</th>
+              <th style="padding:4px 8px;border:1px solid var(--rule)">S4</th>
+              <th style="padding:4px 8px;border:1px solid var(--rule)">R5 (Reference)</th>
+            </tr>
+            <tr>
+              <td style="padding:4px 8px;border:1px solid var(--rule)">Formality</td>
+              <td style="padding:4px 8px;border:1px solid var(--rule);text-align:center">Informal</td>
+              <td style="padding:4px 8px;border:1px solid var(--rule);text-align:center">Formal</td>
+              <td style="padding:4px 8px;border:1px solid var(--rule);text-align:center">Formal</td>
+            </tr>
+            <tr style="background:rgba(22,163,74,.05)">
+              <td style="padding:4px 8px;border:1px solid var(--rule)">Define class</td>
+              <td style="padding:4px 8px;border:1px solid var(--rule);text-align:center"><code class="inline">class()</code></td>
+              <td style="padding:4px 8px;border:1px solid var(--rule);text-align:center"><code class="inline">setClass()</code></td>
+              <td style="padding:4px 8px;border:1px solid var(--rule);text-align:center"><code class="inline">setRefClass()</code></td>
+            </tr>
+            <tr>
+              <td style="padding:4px 8px;border:1px solid var(--rule)">Mutable?</td>
+              <td style="padding:4px 8px;border:1px solid var(--rule);text-align:center">No (copy)</td>
+              <td style="padding:4px 8px;border:1px solid var(--rule);text-align:center">No (copy)</td>
+              <td style="padding:4px 8px;border:1px solid var(--rule);text-align:center"><strong>Yes</strong></td>
+            </tr>
+            <tr style="background:rgba(22,163,74,.05)">
+              <td style="padding:4px 8px;border:1px solid var(--rule)">Use when</td>
+              <td style="padding:4px 8px;border:1px solid var(--rule)">Quick scripts</td>
+              <td style="padding:4px 8px;border:1px solid var(--rule)">Packages, strict validation</td>
+              <td style="padding:4px 8px;border:1px solid var(--rule)">Stateful objects (like Java)</td>
+            </tr>
+          </table>
+        </div>
+
         <div class="theory-qa-item">
           <p class="tq">Q1: What are the types of loops in R?</p>
           <ul class="qa-bullets">
-            <li><code class="inline">for</code>: iterates over each element of a sequence</li>
-            <li><code class="inline">while</code>: runs while a condition is TRUE</li>
-            <li><code class="inline">repeat</code>: infinite loop until <code class="inline">break</code> statement</li>
-            <li>Apply family (<code class="inline">lapply</code>, <code class="inline">sapply</code>, <code class="inline">tapply</code>): functional alternatives to loops</li>
+            <li>3 explicit loops + apply family (functional alternative)</li>
+            <li>Control flow: <code class="inline">break</code> exits · <code class="inline">next</code> skips iteration</li>
           </ul>
+          <div class="diag-4" style="margin:6px 0 4px">
+            <div class="diag-card" style="border-color:var(--brand)"><span class="dk" style="color:var(--brand-deep)">for</span><code style="font-size:11px;display:block">for(i in 1:5) {<br>&nbsp;&nbsp;print(i)<br>}</code><div class="diag-sub" style="max-width:100%;margin-top:4px">known iterations</div></div>
+            <div class="diag-card" style="border-color:var(--brand)"><span class="dk" style="color:var(--brand-deep)">while</span><code style="font-size:11px;display:block">while(x &lt; 10) {<br>&nbsp;&nbsp;x &lt;- x+1<br>}</code><div class="diag-sub" style="max-width:100%;margin-top:4px">condition-driven</div></div>
+            <div class="diag-card" style="border-color:var(--gold);background:rgba(161,98,7,.06)"><span class="dk" style="color:var(--gold)">repeat</span><code style="font-size:11px;display:block">repeat {<br>&nbsp;&nbsp;if(x&gt;5) break<br>}</code><div class="diag-sub" style="max-width:100%;margin-top:4px">infinite + break</div></div>
+            <div class="diag-card" style="border-color:#6b5d47;background:#f7f1e1"><span class="dk" style="color:#6b5d47">apply family</span><code style="font-size:11px;display:block">sapply(1:5,<br>&nbsp;&nbsp;function(x) x^2)</code><div class="diag-sub" style="max-width:100%;margin-top:4px">vectorized, faster</div></div>
+          </div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q2: What is the difference between <code class="inline">lapply()</code> and <code class="inline">sapply()</code>?</p>
           <ul class="qa-bullets">
-            <li><code class="inline">lapply()</code>: always returns a <strong>LIST</strong></li>
-            <li><code class="inline">sapply()</code>: tries to <strong>SIMPLIFY</strong> result to vector/matrix</li>
-            <li>Example: <code class="inline">sapply(1:5, function(x) x^2)</code> returns numeric vector</li>
-            <li>Use <code class="inline">lapply</code> when you want consistent list output</li>
+            <li>Same input — different output type</li>
           </ul>
+          <div class="diag-2col" style="margin:6px 0 4px">
+            <div class="diag-col green"><span class="dchead">lapply()</span>
+              <code style="font-size:11px;display:block">lapply(1:3, function(x) x^2)</code>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:6px;padding:5px 7px;background:rgba(22,101,52,.08);border-radius:2px">[[1]] 1<br>[[2]] 4<br>[[3]] 9</div>
+              <div class="diag-sub" style="max-width:100%;margin-top:6px">always returns <b>LIST</b></div>
+            </div>
+            <div class="diag-col gold"><span class="dchead">sapply()</span>
+              <code style="font-size:11px;display:block">sapply(1:3, function(x) x^2)</code>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:6px;padding:5px 7px;background:rgba(161,98,7,.08);border-radius:2px">[1] 1 4 9</div>
+              <div class="diag-sub" style="max-width:100%;margin-top:6px">simplifies to <b>VECTOR</b></div>
+            </div>
+          </div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q3: What are conditional statements in R?</p>
@@ -2004,11 +2409,18 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
         <div class="theory-qa-item">
           <p class="tq">Q8: What is the difference between <code class="inline">[ ]</code> and <code class="inline">[[ ]]</code> for list access?</p>
           <ul class="qa-bullets">
-            <li>Single <code class="inline">[ ]</code>: returns a <strong>sub-list</strong> (still a list object)</li>
-            <li>Double <code class="inline">[[ ]]</code>: extracts the <strong>actual element</strong> (its native type)</li>
-            <li>Example: <code class="inline">myList["age"]</code> returns a list; <code class="inline">myList[["age"]]</code> returns the number</li>
-            <li>Always use <code class="inline">[[]]</code> when you want the actual value</li>
+            <li>Same input <code class="inline">myList &lt;- list(age=20)</code> — different return type</li>
           </ul>
+          <div class="diag-2col" style="margin:6px 0 4px">
+            <div class="diag-col green"><span class="dchead">myList["age"]  →  [ ]</span>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:6px;padding:5px 7px;background:rgba(22,101,52,.08);border-radius:2px">$age<br>[1] 20</div>
+              <div class="diag-sub" style="max-width:100%;margin-top:6px">returns <b>sub-LIST</b><br>class = "list"</div>
+            </div>
+            <div class="diag-col gold"><span class="dchead">myList[["age"]]  →  [[ ]]</span>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:6px;padding:5px 7px;background:rgba(161,98,7,.08);border-radius:2px">[1] 20</div>
+              <div class="diag-sub" style="max-width:100%;margin-top:6px">extracts <b>VALUE</b><br>class = "numeric"</div>
+            </div>
+          </div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q9: What is <code class="inline">tryCatch()</code> in R? How is error handling done?</p>
@@ -2031,11 +2443,15 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
         <div class="theory-qa-item">
           <p class="tq">Q11: What is a closure in R?</p>
           <ul class="qa-bullets">
-            <li>A function that "closes over" (remembers) variables from its enclosing environment</li>
-            <li>The inner function has access to the outer function's variables even after it returns</li>
-            <li>Example: <code class="inline">counter &lt;- function() { n&lt;-0; function() { n&lt;&lt;-n+1; n } }</code></li>
-            <li>Used to create function factories, stateful functions, and generators</li>
+            <li>Inner function "closes over" (remembers) outer function's variables — even after outer returns</li>
+            <li>Used for function factories, stateful functions, generators</li>
           </ul>
+          <div class="diag-stack" style="margin:6px 0 4px">
+            <div class="diag-layer" style="background:rgba(22,101,52,.06);border-color:var(--brand)"><span class="dl">OUTER FN</span><code style="font-size:11px">counter &lt;- function() {</code></div>
+            <div class="diag-layer" style="background:rgba(22,101,52,.04);border-color:var(--brand);margin-left:18px"><span class="dl">↳ STATE</span><code style="font-size:11px">n &lt;- 0   <span style="color:var(--gold)">← remembered</span></code></div>
+            <div class="diag-layer" style="background:rgba(161,98,7,.05);border-color:var(--gold);margin-left:18px"><span class="dl">↳ INNER FN</span><code style="font-size:11px">function() { n &lt;&lt;- n+1; n }</code></div>
+            <div class="diag-layer" style="background:rgba(22,101,52,.06);border-color:var(--brand)"><span class="dl">}</span><code style="font-size:11px">c &lt;- counter(); c() →1; c() →2; c() →3</code></div>
+          </div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q12: What are <code class="inline">next</code> and <code class="inline">break</code> in R loops?</p>
@@ -2049,12 +2465,18 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
         <div class="theory-qa-item">
           <p class="tq">Q13: What are Logical Operators in R?</p>
           <ul class="qa-bullets">
-            <li><code class="inline">&amp;</code> / <code class="inline">|</code>: element-wise AND / OR — compare entire vectors, return logical vector</li>
-            <li><code class="inline">&amp;&amp;</code> / <code class="inline">||</code>: scalar AND / OR — short-circuit, only compares first element; used in <code class="inline">if()</code></li>
-            <li><code class="inline">!</code>: NOT — negates a logical value; <code class="inline">!TRUE</code> → <code class="inline">FALSE</code></li>
-            <li><code class="inline">xor(x, y)</code>: TRUE only when exactly one of x, y is TRUE (exclusive OR)</li>
-            <li><code class="inline">any()</code> / <code class="inline">all()</code>: returns TRUE if any/all elements of a logical vector are TRUE</li>
+            <li><code class="inline">!</code> NOT · <code class="inline">xor()</code> exclusive OR · <code class="inline">any()</code>/<code class="inline">all()</code> vector reductions</li>
           </ul>
+          <div class="diag-2col" style="margin:6px 0 4px">
+            <div class="diag-col green"><span class="dchead">&amp; · | (vectorized)</span>
+              <code style="font-size:11px;display:block;line-height:1.55">c(T,F,T) &amp; c(T,T,F)<br>→ <b>T F F</b><br>c(T,F,T) | c(F,F,T)<br>→ <b>T F T</b></code>
+              <div class="diag-sub" style="max-width:100%;margin-top:6px">element-by-element<br>full vector compared</div>
+            </div>
+            <div class="diag-col gold"><span class="dchead">&amp;&amp; · || (scalar)</span>
+              <code style="font-size:11px;display:block;line-height:1.55">x &gt; 0 &amp;&amp; x &lt; 10<br>→ single TRUE/FALSE<br><br>short-circuits<br>used in if()</code>
+              <div class="diag-sub" style="max-width:100%;margin-top:6px">first element only<br>stops on first FALSE</div>
+            </div>
+          </div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q14: What is a Recursive List and common List operations in R?</p>
@@ -2086,11 +2508,39 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Scripts are preferred for reproducibility — same result every time; share with others; version-control with git</li>
           </ul>
         </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q17: How do you merge two data frames in R? What are the join types?</p>
+          <ul class="qa-bullets">
+            <li>4 join types via <code class="inline">merge()</code> arguments · multi-key: <code class="inline">by=c("name","dept")</code></li>
+          </ul>
+          <div class="diag-4" style="margin:6px 0 4px">
+            <div class="diag-card" style="border-color:var(--brand);background:#dcfce7"><span class="dk" style="color:var(--brand-deep)">INNER (default)</span><code style="font-size:10.5px;display:block">merge(df1, df2, by="id")</code><div class="diag-sub" style="max-width:100%;margin-top:4px">only matching rows</div></div>
+            <div class="diag-card" style="border-color:var(--gold);background:rgba(161,98,7,.08)"><span class="dk" style="color:var(--gold)">LEFT</span><code style="font-size:10.5px;display:block">..., all.x=TRUE</code><div class="diag-sub" style="max-width:100%;margin-top:4px">all df1 + matching df2<br>NAs fill gaps</div></div>
+            <div class="diag-card" style="border-color:var(--gold);background:rgba(161,98,7,.08)"><span class="dk" style="color:var(--gold)">RIGHT</span><code style="font-size:10.5px;display:block">..., all.y=TRUE</code><div class="diag-sub" style="max-width:100%;margin-top:4px">all df2 + matching df1<br>NAs fill gaps</div></div>
+            <div class="diag-card" style="border-color:var(--brand-deep);background:rgba(20,83,45,.08)"><span class="dk" style="color:var(--brand-deep)">FULL OUTER</span><code style="font-size:10.5px;display:block">..., all=TRUE</code><div class="diag-sub" style="max-width:100%;margin-top:4px">all rows from both<br>NAs everywhere unmatched</div></div>
+          </div>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q18: What is the difference between <code class="inline">rbind()</code> and <code class="inline">cbind()</code>?</p>
+          <ul class="qa-bullets">
+            <li>Memory aid: <b>r</b>bind = more <b>r</b>ows · <b>c</b>bind = more <b>c</b>olumns</li>
+          </ul>
+          <div class="diag-2col" style="margin:6px 0 4px">
+            <div class="diag-col green"><span class="dchead">rbind(df1, df2) — stacks ↓</span>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:6px;padding:6px 8px;background:rgba(22,101,52,.08);border-radius:2px;line-height:1.5">name age<br>Rex   20<br>Ana   19<br><span style="color:var(--brand-deep)">─────── ↓ ───────</span><br>Bob   22<br>Eve   21</div>
+              <div class="diag-sub" style="max-width:100%;margin-top:6px">same column names<br>more rows (more data)</div>
+            </div>
+            <div class="diag-col gold"><span class="dchead">cbind(df1, df2) — joins →</span>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:6px;padding:6px 8px;background:rgba(161,98,7,.08);border-radius:2px;line-height:1.5">name age │ city  pass<br>Rex   20 │ Pune  TRUE<br>Ana   19 │ Delhi TRUE<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--gold)">↑ joined →</span></div>
+              <div class="diag-sub" style="max-width:100%;margin-top:6px">same row count<br>more columns (more vars)</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- UNIT IV -->
-    <div class="theory-unit">
+    <div class="theory-unit" id="u4">
       <div class="unit-title">
         <span class="unit-num">Unit IV</span>
         Data Handling, Mathematical &amp; Statistical Concepts
@@ -2115,6 +2565,75 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li><strong>Other distributions:</strong> Binomial (<code class="inline">dbinom</code>), Poisson (<code class="inline">dpois</code>), t (<code class="inline">dt</code>), chi-sq (<code class="inline">dchisq</code>), F (<code class="inline">df</code>)</li>
           </ul>
         </div>
+        <!-- UNIT IV — TOPIC DEEP DIVES -->
+        <p class="topic-head">Measures of Dispersion</p>
+        <div class="box def">
+          <span class="label">Concept + Numerical</span>
+          <strong>How spread out is the data?</strong> Central tendency tells WHERE; dispersion tells HOW WIDE.<br><br>
+          <!-- Dispersion diagram -->
+          <code style="display:block;font-family:'JetBrains Mono',monospace;font-size:11px;background:rgba(161,98,7,.08);padding:10px 12px;border-radius:3px;margin:4px 0 10px;line-height:2">
+            x &lt;- c(2, 4, 4, 4, 5, 5, 7, 9)<br>
+            mean(x)  →  5<br>
+            var(x)   →  4      # avg squared deviation from mean<br>
+            sd(x)    →  2      # √var; same units as data<br>
+            range(x) →  2 9    # min and max<br>
+            IQR(x)   →  2.25   # Q3 − Q1 (robust to outliers)
+          </code>
+          <strong>Rule:</strong> Use sd for symmetric data · Use IQR when outliers exist (skewed data).<br>
+          <em style="color:var(--muted);font-size:.92em">Connects to: Normal distribution (σ = sd) · Hypothesis testing (SE = sd/√n) · Boxplot (IQR)</em>
+        </div>
+
+        <p class="topic-head">ggplot2 — Grammar of Graphics</p>
+        <div class="box why">
+          <span class="label">Layered System — Build step by step</span>
+          <!-- ggplot2 layer diagram -->
+          <div class="diag-stack" style="margin:6px 0 10px">
+  <div class="diag-layer" style="background:var(--ink);color:var(--paper);border-color:var(--ink)"><span class="dl" style="color:rgba(247,241,225,.6)">1 · Data</span><code>ggplot(data,</code></div>
+  <div class="diag-layer" style="background:var(--brand);color:white;border-color:var(--brand)"><span class="dl" style="color:rgba(255,255,255,.7)">2 · Aesthetics</span><code>aes(x=col1, y=col2, color=grp))</code></div>
+  <div class="diag-layer" style="background:var(--brand-mid);color:white;border-color:var(--brand-mid)"><span class="dl" style="color:rgba(255,255,255,.7)">3 · Geometry</span><code>+ geom_point() / geom_bar() / geom_line()</code></div>
+  <div class="diag-layer gr"><span class="dl">4 · Stat</span><code>+ stat_smooth() / stat_count()</code></div>
+  <div class="diag-layer gr"><span class="dl">5 · Facets</span><code>+ facet_wrap(~group) / facet_grid(row~col)</code></div>
+  <div class="diag-layer" style="border-color:#6b5d47;background:#f7f1e1"><span class="dl" style="color:#6b5d47">6 · Coord</span><code style="color:#6b5d47">+ coord_flip()</code></div>
+  <div class="diag-layer" style="border-color:#6b5d47;background:#f7f1e1"><span class="dl" style="color:#6b5d47">7 · Theme</span><code style="color:#6b5d47">+ theme_minimal() + labs(title, x, y)</code></div>
+</div>
+          <strong>Key:</strong> Each <code class="inline">+</code> adds a layer — you can build complexity step by step without rewriting.<br>
+          <em style="color:var(--muted);font-size:.92em">Connects to: Base graphics (Q4) · Frequency distribution (Q15) · Statistical distributions (Q16)</em>
+        </div>
+
+        <p class="topic-head">Statistical Distributions — The 4-Function Pattern</p>
+        <div class="box tip">
+          <span class="label">Memory Aid — d / p / q / r</span>
+          <!-- Distribution function diagram -->
+          <div class="diag-4" style="margin:6px 0 10px">
+  <div class="diag-card" style="border-color:var(--brand);background:#dcfce7">
+    <span class="dk" style="color:var(--brand-deep)">d — density</span>
+    <code style="font-size:14px;font-weight:700;color:var(--brand-deep);display:block;margin:2px 0 4px">dnorm(x)</code>
+    <div style="font-size:10.5px;color:var(--brand-deep);margin-bottom:4px">Height of bell curve at x</div>
+    <code style="font-size:9.5px;color:var(--brand)">dnorm(0) = 0.399  [peak N(0,1)]</code>
+  </div>
+  <div class="diag-card" style="border-color:var(--brand-mid);background:rgba(22,163,74,.08)">
+    <span class="dk" style="color:var(--brand)">p — cdf</span>
+    <code style="font-size:14px;font-weight:700;color:var(--brand-deep);display:block;margin:2px 0 4px">pnorm(x)</code>
+    <div style="font-size:10.5px;color:var(--brand-deep);margin-bottom:4px">P(X ≤ x) — area to LEFT of x</div>
+    <code style="font-size:9.5px;color:var(--brand)">pnorm(1.96) ≈ 0.975</code>
+  </div>
+  <div class="diag-card" style="border-color:var(--gold);background:rgba(161,98,7,.08)">
+    <span class="dk" style="color:var(--gold)">q — quantile</span>
+    <code style="font-size:14px;font-weight:700;color:#92400e;display:block;margin:2px 0 4px">qnorm(p)</code>
+    <div style="font-size:10.5px;color:#92400e;margin-bottom:4px">p → x value (inverse CDF)</div>
+    <code style="font-size:9.5px;color:var(--gold)">qnorm(0.975) ≈ 1.96</code>
+  </div>
+  <div class="diag-card" style="border-color:#6b5d47;background:#f7f1e1">
+    <span class="dk" style="color:#6b5d47">r — random</span>
+    <code style="font-size:14px;font-weight:700;color:#3b2f20;display:block;margin:2px 0 4px">rnorm(n)</code>
+    <div style="font-size:10.5px;color:#3b2f20;margin-bottom:4px">Generate n random values from N(μ,σ)</div>
+    <code style="font-size:9.5px;color:#6b5d47">rnorm(100, mean=50, sd=10)</code>
+  </div>
+</div>
+          Replace <code class="inline">norm</code> with: <code class="inline">binom</code>, <code class="inline">pois</code>, <code class="inline">t</code>, <code class="inline">chisq</code>, <code class="inline">f</code> for other distributions.<br>
+          <em style="color:var(--muted);font-size:.92em">Example: <code class="inline">dbinom(3, size=10, prob=0.5)</code> = probability of exactly 3 heads in 10 coin tosses</em>
+        </div>
+
         <div class="theory-qa-item">
           <p class="tq">Q1: How do you read a CSV file in R?</p>
           <ul class="qa-bullets">
@@ -2160,6 +2679,25 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Examples: t-test, chi-square test, ANOVA</li>
           </ul>
         </div>
+        <figure class="diagram-fig">
+<p style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;margin:0 0 6px;color:var(--ink)">Hypothesis Testing — Decision Flow</p>
+<div class="diag-step">
+  <div class="diag-step-box dk">State H₀ and H₁<br><small style="font-size:8px;opacity:.75">H₀: no effect  ·  H₁: effect exists</small></div>
+  <div class="diag-step-arr">↓</div>
+  <div class="diag-step-box gr">Collect Sample</div>
+  <div class="diag-step-arr">↓</div>
+  <div class="diag-step-box gr">Calculate Test Statistic<br><small style="font-size:8px">t.test() · chisq.test() · aov()</small></div>
+  <div class="diag-step-arr">↓</div>
+  <div class="diag-step-box gd">p &lt; 0.05 ? (significance level α)</div>
+  <div class="diag-step-arr">↓</div>
+  <div style="display:flex;gap:10px;width:100%;max-width:380px">
+    <div class="diag-step-box" style="flex:1;background:#fee2e2;border-color:#dc2626;color:#dc2626;max-width:none">YES → Reject H₀<br><small style="font-size:8px">H₁ supported</small></div>
+    <div class="diag-step-box gr" style="flex:1;max-width:none">NO → Fail to Reject<br><small style="font-size:8px">insufficient evidence</small></div>
+  </div>
+</div>
+<figcaption><b>Fig 4.3</b> · p-value &lt; 0.05 → reject H₀ · "reject H₀" does NOT mean "H₁ is proven true"</figcaption>
+</figure>
+
         <div class="theory-qa-item">
           <p class="tq">Q6: How do you find correlation in R?</p>
           <ul class="qa-bullets">
@@ -2168,6 +2706,13 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
             <li>Range: -1 (perfect negative) to +1 (perfect positive)</li>
             <li><code class="inline">cor.test(x, y)</code>: also gives p-value for significance</li>
           </ul>
+          <div class="diag-flow" style="margin:6px 0 4px;justify-content:center;flex-wrap:wrap">
+  <div class="diag-node"><div class="diag-b dk">r = −1</div><div class="diag-sub">perfect negative<br>inverse</div></div>
+  <div class="diag-arr">←</div>
+  <div class="diag-node"><div class="diag-b gr" style="min-width:60px">r = 0</div><div class="diag-sub">no linear<br>relation</div></div>
+  <div class="diag-arr">→</div>
+  <div class="diag-node"><div class="diag-b dk">r = +1</div><div class="diag-sub">perfect positive<br>direct</div></div>
+</div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q7: What is ODBC in R?</p>
@@ -2236,12 +2781,18 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
         <div class="theory-qa-item">
           <p class="tq">Q14: What are Measures of Central Tendency in R?</p>
           <ul class="qa-bullets">
-            <li><strong>Mean:</strong> <code class="inline">mean(x)</code> — arithmetic average; sensitive to outliers</li>
-            <li><strong>Median:</strong> <code class="inline">median(x)</code> — middle value when sorted; robust to outliers</li>
-            <li><strong>Mode:</strong> Most frequent value; R has no built-in <code class="inline">mode()</code> for this (it returns data type); use <code class="inline">names(sort(table(x), decreasing=TRUE)[1])</code></li>
-            <li><strong>When to use:</strong> Symmetric data → mean; Skewed data → median; Categorical data → mode</li>
-            <li>Also useful: <code class="inline">summary(x)</code> gives min, Q1, median, mean, Q3, max in one call</li>
+            <li>Quick all-in-one: <code class="inline">summary(x)</code> → min, Q1, median, mean, Q3, max</li>
           </ul>
+          <div class="diag-flow" style="margin:6px 0 4px;justify-content:center;gap:6px">
+            <div class="diag-node"><div class="diag-b gr">MEAN</div><div class="diag-sub">mean(x)<br>average<br>sensitive to outliers</div></div>
+            <div class="diag-arr">·</div>
+            <div class="diag-node"><div class="diag-b gd">MEDIAN</div><div class="diag-sub">median(x)<br>middle value<br>robust to outliers</div></div>
+            <div class="diag-arr">·</div>
+            <div class="diag-node"><div class="diag-b dk">MODE</div><div class="diag-sub">most frequent<br>no built-in fn<br>use table() trick</div></div>
+          </div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 10px;background:rgba(22,101,52,.06);border-left:3px solid var(--brand);margin:4px 0;line-height:1.6">
+            <b>When to use:</b> symmetric → mean · skewed → median · categorical → mode
+          </div>
         </div>
         <div class="theory-qa-item">
           <p class="tq">Q15: What is Frequency Distribution in R?</p>
@@ -2256,12 +2807,34 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
         <div class="theory-qa-item">
           <p class="tq">Q16: What are the main Statistical Distributions in R?</p>
           <ul class="qa-bullets">
-            <li>R provides 4 functions per distribution: <code class="inline">d</code>(density), <code class="inline">p</code>(CDF), <code class="inline">q</code>(quantile), <code class="inline">r</code>(random)</li>
-            <li><strong>Normal:</strong> <code class="inline">dnorm(x, mean, sd)</code>, <code class="inline">pnorm()</code>, <code class="inline">qnorm()</code>, <code class="inline">rnorm(n)</code></li>
-            <li><strong>Binomial:</strong> <code class="inline">dbinom(x, size, prob)</code> — discrete; n trials, probability p</li>
-            <li><strong>Poisson:</strong> <code class="inline">dpois(x, lambda)</code> — counts of rare events; mean = variance = λ</li>
-            <li><strong>t-distribution:</strong> <code class="inline">dt(x, df)</code> — used for small sample hypothesis testing</li>
-            <li><strong>Chi-square:</strong> <code class="inline">dchisq(x, df)</code> — used for goodness-of-fit and independence tests</li>
+            <li>Each distribution has 4 functions: <code class="inline">d</code> density · <code class="inline">p</code> CDF · <code class="inline">q</code> quantile · <code class="inline">r</code> random</li>
+          </ul>
+          <div class="diag-4" style="margin:6px 0 4px">
+            <div class="diag-card" style="border-color:var(--brand);background:#dcfce7"><span class="dk" style="color:var(--brand-deep)">Normal</span><code style="font-size:11px;display:block">dnorm(x, mean, sd)</code><div class="diag-sub" style="max-width:100%;margin-top:4px">continuous · bell curve</div></div>
+            <div class="diag-card" style="border-color:var(--brand)"><span class="dk" style="color:var(--brand-deep)">Binomial</span><code style="font-size:11px;display:block">dbinom(x, size, prob)</code><div class="diag-sub" style="max-width:100%;margin-top:4px">discrete · n trials · success/fail</div></div>
+            <div class="diag-card" style="border-color:var(--gold);background:rgba(161,98,7,.06)"><span class="dk" style="color:var(--gold)">Poisson</span><code style="font-size:11px;display:block">dpois(x, lambda)</code><div class="diag-sub" style="max-width:100%;margin-top:4px">rare events · mean=var=λ</div></div>
+            <div class="diag-card" style="border-color:#6b5d47;background:#f7f1e1"><span class="dk" style="color:#6b5d47">t / Chi-sq</span><code style="font-size:11px;display:block">dt(x,df) · dchisq(x,df)</code><div class="diag-sub" style="max-width:100%;margin-top:4px">small samples · GOF tests</div></div>
+          </div>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q17: What are measures of dispersion? Compute variance and SD for <code class="inline">c(2,4,4,4,5,5,7,9)</code>.</p>
+          <ul class="qa-bullets">
+            <li><strong>Measures of dispersion</strong> describe the spread or variability in data</li>
+            <li>For <code class="inline">x &lt;- c(2,4,4,4,5,5,7,9)</code>: mean = 5</li>
+            <li><strong>Variance</strong> <code class="inline">var(x)</code> = average of squared deviations from mean = <strong>4</strong></li>
+            <li><strong>Std Dev</strong> <code class="inline">sd(x)</code> = √4 = <strong>2</strong>; same units as original data, easier to interpret</li>
+            <li><strong>IQR</strong> <code class="inline">IQR(x)</code> = Q3 − Q1 = 5.75 − 3.5 = <strong>2.25</strong>; robust to outliers</li>
+            <li>Use variance/SD for symmetric data; IQR when outliers or skewed data present</li>
+          </ul>
+        </div>
+        <div class="theory-qa-item">
+          <p class="tq">Q18: What is the difference between <code class="inline">dnorm()</code>, <code class="inline">pnorm()</code>, <code class="inline">qnorm()</code>, <code class="inline">rnorm()</code>?</p>
+          <ul class="qa-bullets">
+            <li><code class="inline">dnorm(x)</code>: <strong>density</strong> — height of the normal curve at x; gives probability density (not a probability for continuous)</li>
+            <li><code class="inline">pnorm(x)</code>: <strong>CDF</strong> — probability P(X ≤ x); area under curve to the left of x</li>
+            <li><code class="inline">qnorm(p)</code>: <strong>quantile</strong> — inverse CDF; gives x such that P(X ≤ x) = p; e.g., <code class="inline">qnorm(0.975) ≈ 1.96</code></li>
+            <li><code class="inline">rnorm(n)</code>: <strong>random</strong> — generates n random numbers from the normal distribution</li>
+            <li>Same pattern works for all distributions: <code class="inline">d/p/q/r</code> + distribution name (<code class="inline">binom</code>, <code class="inline">pois</code>, <code class="inline">t</code>, <code class="inline">chisq</code>)</li>
           </ul>
         </div>
       </div>
@@ -2319,7 +2892,7 @@ function copyCode(btn) {
 }
 
 // Active chip highlight on scroll
-const sections = document.querySelectorAll('#lab, #theory');
+const sections = document.querySelectorAll('#lab, #theory, #u1, #u2, #u3, #u4');
 const chips = document.querySelectorAll('nav.chips a');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
