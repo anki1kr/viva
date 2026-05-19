@@ -25,7 +25,7 @@
     --mono:'JetBrains Mono', monospace;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
   body{
     background:var(--paper);
     color:var(--ink);
@@ -33,6 +33,7 @@
     font-size:16px;
     line-height:1.65;
     overflow-x:hidden;
+    width:100%;
   }
   /* Paper grain overlay */
   body::before{
@@ -613,19 +614,239 @@
     border-top:1px solid rgba(244,236,216,.1);
   }
 
-  /* Responsive */
+  /* ============================================================
+     RESPONSIVE — MOBILE FIRST (complete rewrite)
+     Breakpoints: 768px (tablet/phone)  ·  420px (small phone)
+     ============================================================ */
+
   @media (max-width:768px){
-    .hero{padding:50px 20px 60px;}
-    .section, .programs-inner{padding-left:20px; padding-right:20px;}
-    .program-header{padding:24px 20px;}
-    .program-body{padding:24px 20px;}
-    .program-num{font-size:60px;}
-    .program-title-block h2{font-size:24px;}
-    .step{padding:16px; gap:14px;}
-    .step::before{width:40px; height:40px; font-size:18px;}
-    .nav-links{display:none;}
-    table.excel-grid{font-size:11px;}
-    table.excel-grid th, table.excel-grid td{padding:4px 6px;}
+
+    /* --- Global --- */
+    body{ font-size:15px; line-height:1.65; padding-top:60px; }
+
+    /* --- Topbar & nav chips --- */
+    .topbar{ left:0; right:0; }        /* ensure full-width fixed */
+    .title{ padding:7px 12px 3px; gap:6px; flex-wrap:nowrap; }
+    .title b{
+      font-size:13px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      min-width:0;                     /* allows flex shrink */
+    }
+    .title small{ font-size:9.5px; flex-shrink:0; }
+    nav.chips{ padding:4px 10px 7px; gap:5px; }
+    nav.chips a{
+      padding:7px 11px;
+      font-size:10.5px;
+      min-height:34px;
+      display:flex; align-items:center;
+    }
+    /* body padding = topbar title (~30px) + chips bar (~30px) + 2px border */
+    body{ padding-top:62px; }
+
+    /* --- Hero — contain width, hide decorative overflow blob --- */
+    .hero{ padding:32px 14px 44px; max-width:100%; overflow:hidden; }
+    .decoration{ display:none; }   /* removes right:-100px overflow source */
+    .hero h1{
+      font-size:clamp(36px,11vw,64px);
+      letter-spacing:-.03em;
+      margin-bottom:20px;
+    }
+    .hero-tag{ font-size:11px; padding:6px 12px; margin-bottom:20px; }
+    .hero-meta{
+      grid-template-columns:1fr 1fr;
+      gap:16px; margin-top:28px; padding-top:20px;
+    }
+    .meta-item .value{ font-size:18px; }
+
+    /* --- Sections --- */
+    .section{ padding:48px 14px; }
+    .programs{ padding:60px 0; }
+    .programs-inner{ padding:0 14px; }
+    .section-title{ font-size:clamp(28px,7vw,48px); margin-bottom:16px; }
+    .section-sub{ font-size:15px; margin-bottom:28px; }
+    .theory-section .section-sub{ margin-bottom:10px; font-size:12.5px; }
+
+    /* --- Intro grid cards --- */
+    .intro-grid{ grid-template-columns:1fr; gap:14px; }
+    .intro-card{ padding:20px; }
+    .intro-card .num{ font-size:36px; }
+    .intro-card h3{ font-size:17px; }
+
+    /* --- Program cards --- */
+    .program{ margin-top:40px; box-shadow:none; border:1px solid rgba(26,24,20,.15); }
+    .program-header{ padding:18px 16px; gap:14px; flex-wrap:wrap; }
+    .program-num{ font-size:48px; line-height:.9; }
+    .program-title-block h2{ font-size:20px; }
+    .program-body{ padding:18px 14px; }
+    .program-section h3{ font-size:18px; }
+
+    /* --- Steps --- */
+    .steps{ gap:12px; }
+    .step{ padding:14px; gap:12px; }
+    .step::before{ width:36px; height:36px; font-size:17px; flex-shrink:0; }
+    .step-content h4{ font-size:15.5px; }
+    .step-content p{ font-size:13.5px; }
+    .objective-box{ padding:14px 16px; font-size:14px; }
+
+    /* --- Excel mock tables: horizontal scroll --- */
+    .excel-mock{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    table.excel-grid{ font-size:10.5px; min-width:360px; }
+    table.excel-grid th, table.excel-grid td{ padding:3px 5px; }
+    .output-box{ padding:14px 16px; font-size:12px; }
+
+    /* --- Concept & formulas table --- */
+    .concept{ padding:16px; }
+    .formulas-table td, .formulas-table th{ padding:8px 10px; font-size:13px; }
+
+    /* --- TOC --- */
+    .toc{ padding:18px 14px; margin-top:24px; }
+    .toc h3{ font-size:20px; margin-bottom:14px; }
+    .toc-grid{ grid-template-columns:1fr; gap:6px; }
+    .toc-grid a{ padding:10px 12px; font-size:13.5px; gap:10px; }
+    .toc-num{ width:28px; height:28px; font-size:13px; }
+
+    /* --- Theory section — ultra dense mobile --- */
+    .theory-section{ padding:14px 0 18px; }
+    .theory-section .section-num{ margin-bottom:4px; font-size:10px; }
+    .theory-section .section-title{ font-size:clamp(26px,8vw,40px); margin-bottom:6px; }
+    .theory-section .section-sub{ font-size:12.5px; margin-bottom:10px; }
+    .theory-inner{ padding:0 10px; }
+    .theory-unit{
+      overflow:visible;
+      margin-top:10px;
+      box-shadow:none;
+      border:1px solid rgba(26,24,20,.18);
+      border-radius:6px;
+    }
+    /* Compact header */
+    .theory-unit-header{
+      padding:10px 12px;
+      gap:10px;
+      flex-wrap:nowrap;
+      align-items:center;
+      border-radius:6px 6px 0 0;
+    }
+    .unit-roman{
+      font-size:22px;
+      line-height:1;
+      width:38px; height:38px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--accent);
+      color:#fff;
+      border-radius:50%;
+      flex-shrink:0;
+      font-style:normal;
+      font-weight:700;
+    }
+    .unit-title-block{ flex:1; min-width:0; }
+    .unit-title-block h2{ font-size:14px; line-height:1.2; margin-bottom:1px; }
+    .unit-title-block .subtitle{
+      font-size:9px; line-height:1.3;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+    .theory-unit-body{ padding:8px 8px 10px; }
+    .topic-block{ margin-bottom:8px; }
+    .topic-head{ font-size:13px; margin-bottom:8px; padding-bottom:3px; }
+    .topic-head + .vq-item{ margin-top:8px; }
+
+    /* --- Viva Q&A items: tight --- */
+    .vq-item{ padding:8px 10px; margin-bottom:6px; }
+    .vq-q{ font-size:13px; gap:6px; margin-bottom:4px; }
+    .vq-a{ font-size:12px; line-height:1.55; padding-left:0; }
+    .hot-tag, .fav-tag{ font-size:9.5px; padding:1px 7px; }
+
+    /* --- Formula blocks: wrap, tight padding --- */
+    .formula-block{
+      font-size:11px; padding:6px 8px; line-height:1.55; margin:6px 0;
+      white-space:pre-wrap;
+      overflow-wrap:break-word;
+      word-break:break-word;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    /* --- Syllabus notes cards: borderless, no white bg --- */
+    .notes-intro{ font-size:9.5px; padding:2px 8px; margin-bottom:6px; }
+    .notes-card{
+      background:transparent;
+      border:none;
+      border-left:3px solid var(--green-2);
+      border-radius:0;
+      padding:6px 8px 6px 10px;
+      margin-bottom:6px;
+    }
+    .notes-card h4{
+      font-size:13px;
+      gap:7px;
+      flex-wrap:nowrap;
+      align-items:center;
+      margin-bottom:4px;
+      color:var(--ink);
+    }
+    .notes-card h4::before{ content:none; }
+    .notes-card h4 .syl{
+      width:22px; height:22px;
+      padding:0;
+      display:inline-flex; align-items:center; justify-content:center;
+      background:var(--accent); color:#fff;
+      border-radius:50%;
+      font-size:9.5px; font-weight:700;
+      letter-spacing:0;
+      flex-shrink:0;
+    }
+    .notes-card p, .notes-card ul{ font-size:12.5px; line-height:1.55; margin-bottom:4px; }
+    .notes-card ul{ margin:3px 0 5px 12px; }
+    .notes-card ul li{ margin-bottom:1px; }
+    .notes-card .formula-block{ font-size:10.5px; padding:5px 7px; margin:4px 0; }
+    .notes-card .key-pt{ font-size:12px; padding:5px 8px; margin:4px 0; }
+
+    /* --- CSS diagrams: stack 2-col, tighten flow --- */
+    .diag-2col{ grid-template-columns:1fr; gap:8px; }
+    .diag-flow{ flex-wrap:wrap; gap:6px; }
+    .diag-node{ flex-direction:column; align-items:center; }
+    .diag-arr{ transform:rotate(90deg); margin:0 2px; }
+    .diag-b{ font-size:11px; padding:8px 10px; min-width:auto; }
+    .diag-layer{ gap:10px; }
+    .diag-layer .dl{ min-width:50px; font-size:9px; }
+    .diag-col ul{ font-size:12.5px; }
+    .dchead{ padding:8px 12px; font-size:11px; }
+
+    /* --- Footer --- */
+    footer{ padding:36px 14px 24px; }
+    footer .footer-title{ font-size:22px; margin-bottom:10px; }
+    footer p{ font-size:13px; }
+  }
+
+  /* ---- Very small phones (≤420px) ---- */
+  @media (max-width:420px){
+    body{ padding-top:60px; }
+    .title b{ font-size:12px; }
+    .title small{ display:none; }    /* hide "BCA(DS) IV Sem" on tiny screens */
+    .hero{ padding:24px 12px 36px; }
+    .hero h1{ font-size:clamp(32px,10vw,48px); }
+    .hero-meta{ grid-template-columns:1fr 1fr; gap:12px; }
+    .section{ padding:36px 12px; }
+    .programs-inner{ padding:0 12px; }
+    .theory-inner{ padding:0 8px; }
+    .theory-unit-header{ padding:8px 10px; gap:8px; }
+    .unit-roman{ font-size:18px; width:32px; height:32px; }
+    .unit-title-block h2{ font-size:13px; }
+    .theory-unit-body{ padding:6px 6px 8px; }
+    .formula-block{ font-size:10px; padding:5px 7px; }
+    .notes-card{ padding:5px 7px 5px 9px; }
+    .notes-card .formula-block{ font-size:10px; padding:5px 7px; }
+    .notes-card p, .notes-card ul{ font-size:12px; }
+    .vq-a{ font-size:12.5px; }
+    .program-header{ padding:14px 12px; }
+    .program-num{ font-size:40px; }
+    .program-body{ padding:14px 12px; }
+    .toc{ padding:14px 10px; }
   }
 
   /* Quick TOC */
@@ -654,7 +875,7 @@
     text-decoration:none;
     color:var(--ink);
     border-radius:4px;
-    transition:all .2s;
+    transition:background .2s, color .2s;
     font-size:14px;
   }
   .toc-grid a:hover{
@@ -671,7 +892,7 @@
     font-weight:600;
     font-size:14px;
     flex-shrink:0;
-    transition:all .2s;
+    transition:background .2s, color .2s;
   }
 
   /* Decorative */
@@ -723,6 +944,7 @@
     background:var(--ink); color:var(--paper);
     padding:32px 40px;
     display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+    border-radius:8px 8px 0 0;
   }
   .unit-roman{
     font-family:var(--serif); font-style:italic;
@@ -748,6 +970,60 @@
     border-bottom:3px solid var(--green-2);
     display:inline-block;
   }
+  .topic-head + .vq-item{ margin-top:12px; }
+
+  /* Full theory notes (syllabus-mapped) */
+  .notes-intro{
+    display:inline-block;
+    background:var(--green-2); color:#fff;
+    padding:4px 12px; border-radius:20px;
+    font-family:var(--mono); font-size:10.5px;
+    letter-spacing:.12em; text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .notes-card{
+    background:linear-gradient(135deg, #fff 0%, var(--paper-2) 100%);
+    border:1px solid var(--line);
+    border-left:4px solid var(--green-2);
+    border-radius:6px;
+    padding:20px 22px;
+    margin-bottom:16px;
+  }
+  .notes-card h4{
+    font-family:var(--serif);
+    font-size:17px; font-weight:700;
+    color:var(--green-2);
+    margin-bottom:10px;
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  }
+  .notes-card h4 .syl{
+    font-family:var(--mono); font-size:10px;
+    background:var(--accent); color:#fff;
+    padding:2px 8px; border-radius:3px;
+    letter-spacing:.1em; font-weight:600;
+    text-transform:uppercase;
+  }
+  .notes-card p{
+    font-size:14.5px; line-height:1.75;
+    margin-bottom:10px;
+    color:rgba(26,24,20,.88);
+  }
+  .notes-card p:last-child{ margin-bottom:0; }
+  .notes-card ul{
+    margin:8px 0 12px 20px;
+    font-size:14.5px; line-height:1.8;
+  }
+  .notes-card ul li{ margin-bottom:4px; }
+  .notes-card .formula-block{ margin:10px 0; font-size:12.5px; }
+  .notes-card .key-pt{
+    background:#fff8e6;
+    border:1px dashed var(--accent-2);
+    border-radius:4px;
+    padding:8px 12px;
+    margin:10px 0;
+    font-size:13.5px;
+  }
+  .notes-card .key-pt b{ color:var(--accent); }
   .vq-item{
     padding:16px 20px;
     border:1px solid var(--line);
@@ -866,6 +1142,254 @@
     flex:1; transition:height .3s;
   }
   .nav-sep{ color:rgba(26,24,20,.35); padding:0 4px; font-size:14px; }
+
+  /* Late mobile overrides so theory styles win over desktop theory rules below */
+  @media (max-width:768px){
+    .toc-grid{ grid-template-columns:1fr; }
+
+    .theory-section{
+      padding:14px 0 18px;
+    }
+    .theory-inner{
+      padding:0 10px;
+    }
+    .theory-section .section-num{
+      margin-bottom:4px;
+      font-size:10px;
+    }
+    .theory-section .section-title{
+      font-size:clamp(26px,8vw,40px);
+      margin-bottom:6px;
+    }
+    .theory-section .section-sub{
+      font-size:12.5px;
+      margin-bottom:10px;
+      max-width:none;
+      overflow-wrap:anywhere;
+    }
+    .theory-unit{
+      margin-top:10px;
+      box-shadow:none;
+      border:1px solid rgba(26,24,20,.18);
+      border-radius:6px;
+    }
+    .theory-unit-header{
+      padding:10px 12px;
+      gap:10px;
+      flex-wrap:nowrap;
+      align-items:flex-start;
+      border-radius:6px 6px 0 0;
+    }
+    .unit-roman{
+      width:38px;
+      height:38px;
+      font-size:22px;
+      line-height:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:var(--accent);
+      color:#fff;
+      border-radius:50%;
+      font-style:normal;
+      font-weight:700;
+    }
+    .unit-title-block{
+      flex:1;
+      min-width:0;
+    }
+    .unit-title-block h2{
+      font-size:14px;
+      line-height:1.2;
+      margin-bottom:1px;
+      overflow-wrap:anywhere;
+    }
+    .unit-title-block .subtitle{
+      font-size:9px;
+      line-height:1.3;
+      letter-spacing:.08em;
+      white-space:normal;
+      overflow-wrap:anywhere;
+    }
+    .theory-unit-body{
+      padding:8px 8px 10px;
+    }
+    .topic-block{
+      margin-bottom:8px;
+    }
+    .topic-head{
+      font-size:13px;
+      margin-bottom:8px;
+      padding-bottom:3px;
+    }
+    .topic-head + .vq-item{
+      margin-top:8px;
+    }
+    .notes-intro{
+      font-size:9.5px;
+      padding:2px 8px;
+      margin-bottom:6px;
+    }
+    .notes-card{
+      background:transparent;
+      border:none;
+      border-left:3px solid var(--green-2);
+      border-radius:0;
+      padding:6px 8px 6px 10px;
+      margin-bottom:6px;
+      min-width:0;
+    }
+    .notes-card h4{
+      font-size:13px;
+      gap:7px;
+      flex-wrap:wrap;
+      align-items:flex-start;
+      margin-bottom:4px;
+      overflow-wrap:anywhere;
+    }
+    .notes-card h4 .syl{
+      width:22px;
+      height:22px;
+      padding:0;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      font-size:9.5px;
+      font-weight:700;
+      letter-spacing:0;
+      flex-shrink:0;
+    }
+    .notes-card p,
+    .notes-card ul{
+      font-size:12.5px;
+      line-height:1.55;
+      margin-bottom:4px;
+      overflow-wrap:anywhere;
+    }
+    .notes-card ul{
+      margin:3px 0 5px 12px;
+    }
+    .notes-card ul li{
+      margin-bottom:1px;
+    }
+    .notes-card .formula-block{
+      font-size:10.5px;
+      padding:5px 7px;
+      margin:4px 0;
+    }
+    .notes-card .key-pt{
+      font-size:12px;
+      padding:5px 8px;
+      margin:4px 0;
+    }
+    .vq-item{
+      padding:8px 10px;
+      margin-bottom:6px;
+    }
+    .vq-q{
+      font-size:13px;
+      gap:6px;
+      margin-bottom:4px;
+      flex-wrap:wrap;
+      overflow-wrap:anywhere;
+    }
+    .vq-a{
+      font-size:12px;
+      line-height:1.55;
+      padding-left:0;
+      overflow-wrap:anywhere;
+    }
+    .hot-tag,
+    .fav-tag{
+      font-size:9.5px;
+      padding:1px 7px;
+    }
+    .formula-block{
+      font-size:11px;
+      padding:6px 8px;
+      line-height:1.55;
+      margin:6px 0;
+      white-space:pre-wrap;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    .diag-2col{
+      grid-template-columns:1fr;
+      gap:8px;
+    }
+    .diag-flow{
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    .diag-node{
+      flex-direction:column;
+      align-items:center;
+    }
+    .diag-arr{
+      transform:rotate(90deg);
+      margin:0 2px;
+    }
+    .diag-b{
+      min-width:auto;
+      font-size:11px;
+      padding:8px 10px;
+    }
+    .diag-layer{
+      gap:10px;
+      flex-direction:column;
+      align-items:stretch;
+    }
+    .diag-layer .dl{
+      min-width:0;
+      width:auto;
+      text-align:left;
+      font-size:9px;
+    }
+    .diag-col ul{
+      font-size:12.5px;
+    }
+    .dchead{
+      padding:8px 12px;
+      font-size:11px;
+    }
+  }
+
+  @media (max-width:420px){
+    .theory-inner{
+      padding:0 8px;
+    }
+    .theory-unit-header{
+      padding:8px 10px;
+      gap:8px;
+    }
+    .unit-roman{
+      width:32px;
+      height:32px;
+      font-size:18px;
+    }
+    .unit-title-block h2{
+      font-size:13px;
+    }
+    .theory-unit-body{
+      padding:6px 6px 8px;
+    }
+    .notes-card{
+      padding:5px 7px 5px 9px;
+    }
+    .formula-block,
+    .notes-card .formula-block{
+      font-size:10px;
+      padding:5px 7px;
+    }
+    .notes-card p,
+    .notes-card ul,
+    .vq-a{
+      font-size:12px;
+    }
+  }
 </style>
 <style>:is([id*='google_ads_iframe'],[id*='taboola-'],.taboolaHeight,.taboola-placeholder,#top-ad,#credential_picker_container,#credentials-picker-container,#credential_picker_iframe,[id*='google-one-tap-iframe'],#google-one-tap-popup-container,.google-one-tap__module,.google-one-tap-modal-div,#amp_floatingAdDiv,#ez-content-blocker-container) {display:none!important;min-height:0!important;height:0!important;}</style></head>
 <body>
@@ -2060,6 +2584,148 @@
   <div class="theory-unit-body">
 
     <div class="topic-block">
+      <h3 class="topic-head">Full Theory Notes — Unit I</h3>
+      <span class="notes-intro">📘 Syllabus-Mapped Notes</span>
+
+      <div class="notes-card">
+        <h4><span class="syl">§1</span>Introduction to Probability</h4>
+        <p><b>Probability</b> is a numerical measure of the likelihood of an event occurring. For a random experiment with equally likely outcomes:</p>
+        <div class="formula-block">P(A) = (favourable outcomes) / (total outcomes)
+0 ≤ P(A) ≤ 1
+P(sample space S) = 1,   P(∅) = 0</div>
+        <p><b>Key terms:</b></p>
+        <ul>
+          <li><b>Experiment</b> — a process whose outcome is uncertain (e.g. tossing a coin).</li>
+          <li><b>Sample space (S)</b> — set of all possible outcomes.</li>
+          <li><b>Event</b> — any subset of S.</li>
+          <li><b>Mutually exclusive</b> — events that cannot occur together (A ∩ B = ∅).</li>
+          <li><b>Independent</b> — occurrence of one does not affect the other.</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§2</span>Probability Rules — Sum &amp; Product, Joint Probability</h4>
+        <p><b>(a) Sum Rule (Addition Theorem)</b> — used when we want P(A <i>or</i> B).</p>
+        <div class="formula-block">General:        P(A∪B) = P(A) + P(B) − P(A∩B)
+Mutually excl.: P(A∪B) = P(A) + P(B)</div>
+        <p><b>(b) Product Rule (Multiplication Theorem)</b> — used when we want P(A <i>and</i> B).</p>
+        <div class="formula-block">General:       P(A∩B) = P(A) · P(B|A)
+Independent:   P(A∩B) = P(A) · P(B)</div>
+        <p><b>(c) Joint Probability</b> P(A∩B) is the probability of A and B occurring together. For independent events it factors as the product of individual probabilities.</p>
+        <p><b>(d) Conditional Probability:</b></p>
+        <div class="formula-block">P(A|B) = P(A∩B) / P(B),   provided P(B) > 0</div>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§3</span>Random Variables — Discrete &amp; Continuous</h4>
+        <p>A <b>random variable (RV)</b> is a function X : S → ℝ that assigns a real number to every outcome of a random experiment. We classify RVs by the kind of values they take.</p>
+        <ul>
+          <li><b>Discrete RV</b> — takes countable values (finite or countably infinite). E.g. number of heads in 5 tosses, number of defective items.</li>
+          <li><b>Continuous RV</b> — takes any value in an interval of ℝ. E.g. height, weight, time, temperature.</li>
+        </ul>
+        <div class="key-pt"><b>Tip:</b> If values can be listed (0,1,2,…) → discrete. If values fall in a range (e.g. 1.2 cm to 5.4 cm) → continuous.</div>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§4</span>Distribution Function (CDF) &amp; Its Properties</h4>
+        <p>The <b>Cumulative Distribution Function (CDF)</b> of a random variable X is:</p>
+        <div class="formula-block">F(x) = P(X ≤ x),   x ∈ ℝ</div>
+        <p><b>Properties of F(x):</b></p>
+        <ul>
+          <li>0 ≤ F(x) ≤ 1 for all x.</li>
+          <li>F(−∞) = 0 and F(+∞) = 1.</li>
+          <li>F(x) is <b>monotonically non-decreasing</b>: if x₁ &lt; x₂ then F(x₁) ≤ F(x₂).</li>
+          <li>F(x) is <b>right-continuous</b>.</li>
+          <li>P(a &lt; X ≤ b) = F(b) − F(a).</li>
+          <li>For continuous RV: F'(x) = f(x), the PDF.</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§5</span>Probability Mass Function (PMF) &amp; Probability Density Function (PDF)</h4>
+        <p><b>PMF</b> — for a discrete RV X, p(x) = P(X = x).</p>
+        <div class="formula-block">p(x) ≥ 0   for all x
+Σ p(x) = 1   (over all possible values)</div>
+        <p><b>PDF</b> — for a continuous RV X, f(x) is the probability density.</p>
+        <div class="formula-block">f(x) ≥ 0   for all x
+∫ f(x) dx = 1   (over (−∞, ∞))
+P(a ≤ X ≤ b) = ∫ₐᵇ f(x) dx</div>
+        <div class="key-pt"><b>Important:</b> For continuous RV, P(X = c) = 0 for any single point c. Probability only makes sense over an <i>interval</i>.</div>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§6</span>Binomial Distribution</h4>
+        <p>Models the number of <b>successes in n independent Bernoulli trials</b>, each with success probability p.</p>
+        <div class="formula-block">P(X = x) = ⁿCₓ · pˣ · qⁿ⁻ˣ,   x = 0,1,2,…,n
+where q = 1 − p
+Mean   = np
+Variance = npq
+SD     = √(npq)</div>
+        <p><b>Conditions:</b> fixed number of trials n, only two outcomes (success/failure), constant p, trials are independent.</p>
+        <p><b>Examples:</b> number of heads in 10 tosses, number of defective bulbs in a batch.</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§7</span>Geometric Distribution</h4>
+        <p>Models the number of trials until the <b>first success</b> in repeated independent Bernoulli trials.</p>
+        <div class="formula-block">P(X = x) = q^(x−1) · p,   x = 1, 2, 3, …
+Mean     = 1/p
+Variance = q / p²</div>
+        <p><b>Memoryless property:</b> P(X &gt; m + n | X &gt; m) = P(X &gt; n). The past doesn't influence future trials.</p>
+        <p><b>Example:</b> number of dice throws till the first 6 appears.</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§8</span>Poisson Distribution</h4>
+        <p>Models the number of <b>rare events in a fixed interval</b> of time/space when events occur independently at a constant average rate λ.</p>
+        <div class="formula-block">P(X = x) = e⁻λ · λˣ / x!,   x = 0,1,2,…
+Mean     = λ
+Variance = λ        (always equal — characteristic property)</div>
+        <p><b>Conditions:</b> n large, p small, np = λ finite. The Poisson is a limiting case of the Binomial when n → ∞ and p → 0 with np = λ.</p>
+        <p><b>Examples:</b> number of typing mistakes per page, calls received at a switchboard per minute.</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§9</span>Uniform Distribution (Continuous)</h4>
+        <p>All values in [a, b] are <b>equally likely</b>. Density is constant on the interval.</p>
+        <div class="formula-block">f(x) = 1/(b−a),   a ≤ x ≤ b
+       = 0          otherwise
+Mean     = (a + b)/2
+Variance = (b − a)² / 12</div>
+        <p><b>Use:</b> random number generators, when nothing is known about the variable except its range.</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§10</span>Exponential Distribution</h4>
+        <p>Models the <b>waiting time between successive Poisson events</b>.</p>
+        <div class="formula-block">f(x) = λ · e^(−λx),   x ≥ 0
+F(x) = 1 − e^(−λx)
+Mean     = 1/λ
+Variance = 1/λ²</div>
+        <p><b>Memoryless property:</b> P(X &gt; s + t | X &gt; s) = P(X &gt; t).</p>
+        <p><b>Connection:</b> if events follow Poisson(λ), the time between events is Exponential(λ).</p>
+        <p><b>Example:</b> lifetime of an electronic component, time between two customers arriving.</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§11</span>Normal Distribution (Gaussian)</h4>
+        <p>The most important continuous distribution. Bell-shaped, symmetric, completely described by mean μ and standard deviation σ.</p>
+        <div class="formula-block">f(x) = (1 / σ√(2π)) · e^(−(x−μ)² / 2σ²),   −∞ &lt; x &lt; ∞
+Mean = Median = Mode = μ
+Variance = σ²</div>
+        <p><b>Properties:</b></p>
+        <ul>
+          <li>Symmetric about μ — skewness = 0.</li>
+          <li>Mesokurtic — kurtosis = 3.</li>
+          <li>Total area under curve = 1.</li>
+          <li>The <b>68–95–99.7 rule</b>: about 68% of data lies in μ ± σ, 95% in μ ± 2σ, 99.7% in μ ± 3σ.</li>
+          <li><b>Standard Normal Z = (X − μ)/σ</b> has mean 0 and SD 1; used with Z-tables.</li>
+        </ul>
+        <div class="key-pt"><b>Central Limit Theorem:</b> the sum/mean of a large number of independent RVs approaches a Normal distribution, no matter the original distribution. This is why Normal appears everywhere.</div>
+      </div>
+    </div>
+
+    <div class="topic-block">
       <h3 class="topic-head">Probability &amp; Random Variables</h3>
 
       <div class="vq-item">
@@ -2213,6 +2879,133 @@ Mean = λ,  Variance = λ  (always equal)</div>
   <div class="theory-unit-body">
 
     <div class="topic-block">
+      <h3 class="topic-head">Full Theory Notes — Unit II</h3>
+      <span class="notes-intro">📘 Syllabus-Mapped Notes</span>
+
+      <div class="notes-card">
+        <h4><span class="syl">§1</span>Expectation of a Random Variable</h4>
+        <p>The <b>expected value</b> E[X] is the long-run average value of X — its "centre of mass."</p>
+        <div class="formula-block">Discrete:    E[X] = Σ x · P(X = x)
+Continuous:  E[X] = ∫ x · f(x) dx
+General:     E[g(X)] = Σ g(x) p(x)  or  ∫ g(x) f(x) dx</div>
+        <p><b>Properties of expectation:</b></p>
+        <ul>
+          <li>E[c] = c for any constant c.</li>
+          <li>E[aX + b] = a·E[X] + b (linearity).</li>
+          <li>E[X + Y] = E[X] + E[Y] (always — even if dependent).</li>
+          <li>E[XY] = E[X]·E[Y] only if X and Y are independent.</li>
+        </ul>
+        <p><b>Variance</b> measures spread around the mean:</p>
+        <div class="formula-block">Var(X) = E[(X − μ)²] = E[X²] − (E[X])²
+SD(X)  = √Var(X)</div>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§2</span>Moments — Raw &amp; Central</h4>
+        <p>Moments are expected values of powers of X and tell us about the shape of a distribution.</p>
+        <div class="formula-block">rth raw moment    (about origin): μ'ᵣ = E[Xʳ]
+rth central moment (about mean):  μᵣ  = E[(X − μ)ʳ]</div>
+        <p><b>Interpretation:</b></p>
+        <ul>
+          <li>μ'₁ = E[X] = mean.</li>
+          <li>μ₁ = 0 always.</li>
+          <li>μ₂ = Variance — measure of dispersion.</li>
+          <li>μ₃ — used in skewness (asymmetry).</li>
+          <li>μ₄ — used in kurtosis (peakedness).</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§3</span>Probability Generating Function (PGF) &amp; Properties</h4>
+        <p>Defined for <b>non-negative integer-valued discrete RVs</b>. Encodes the entire distribution as a power series.</p>
+        <div class="formula-block">G_X(z) = E[z^X] = Σ P(X = k) · zᵏ,   k = 0,1,2,…</div>
+        <p><b>Properties:</b></p>
+        <ul>
+          <li>G_X(1) = 1 always.</li>
+          <li>G'_X(1) = E[X].</li>
+          <li>G''_X(1) = E[X(X − 1)] → factorial moment.</li>
+          <li>Var(X) = G''_X(1) + G'_X(1) − [G'_X(1)]².</li>
+          <li>For X, Y independent: G_{X+Y}(z) = G_X(z) · G_Y(z).</li>
+          <li>PGF uniquely determines the distribution.</li>
+        </ul>
+        <p><b>Examples:</b> for Binomial(n,p): G(z) = (q + pz)ⁿ. For Poisson(λ): G(z) = e^{λ(z−1)}.</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§4</span>Moment Generating Function (MGF) &amp; Properties</h4>
+        <p>MGF generates all moments of an RV by differentiation.</p>
+        <div class="formula-block">M_X(t) = E[e^(tX)]
+Discrete:    M_X(t) = Σ e^(tx) · p(x)
+Continuous:  M_X(t) = ∫ e^(tx) · f(x) dx</div>
+        <p><b>How to extract moments:</b></p>
+        <div class="formula-block">E[Xʳ] = (d^r / dt^r) M_X(t) |_{t = 0}
+i.e. rth derivative at t = 0 gives the rth raw moment.</div>
+        <p><b>Properties:</b></p>
+        <ul>
+          <li>M_X(0) = 1 always.</li>
+          <li>M_{aX+b}(t) = e^(bt) · M_X(at).</li>
+          <li>For X, Y independent: M_{X+Y}(t) = M_X(t) · M_Y(t).</li>
+          <li><b>Uniqueness:</b> if two RVs have the same MGF (in a neighbourhood of 0), they have the same distribution.</li>
+        </ul>
+        <p><b>Important MGFs:</b></p>
+        <ul>
+          <li>Binomial(n,p): M(t) = (q + p·eᵗ)ⁿ</li>
+          <li>Poisson(λ): M(t) = exp[λ(eᵗ − 1)]</li>
+          <li>Normal(μ, σ²): M(t) = exp[μt + ½σ²t²]</li>
+          <li>Exponential(λ): M(t) = λ / (λ − t),  t &lt; λ</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§5</span>Two-Dimensional Random Variables — Joint Distribution</h4>
+        <p>When two RVs X and Y are studied together, their <b>joint distribution</b> describes their combined behaviour.</p>
+        <div class="formula-block">Discrete:    p(x,y) = P(X = x, Y = y)
+              Σ Σ p(x,y) = 1
+Continuous:  f(x,y) ≥ 0,   ∬ f(x,y) dx dy = 1
+              P((X,Y) ∈ A) = ∬_A f(x,y) dx dy</div>
+        <p>The <b>joint CDF</b> is F(x,y) = P(X ≤ x, Y ≤ y).</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§6</span>Marginal Distributions</h4>
+        <p>The <b>marginal distribution</b> of one variable is obtained by summing/integrating the joint distribution over the other.</p>
+        <div class="formula-block">Discrete:
+  f_X(x) = Σ_y p(x,y)
+  f_Y(y) = Σ_x p(x,y)
+
+Continuous:
+  f_X(x) = ∫ f(x,y) dy
+  f_Y(y) = ∫ f(x,y) dx</div>
+        <p>Each marginal is itself a valid 1D distribution (sums/integrates to 1).</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§7</span>Conditional Distributions</h4>
+        <p>The <b>conditional distribution</b> of X given Y = y describes how X is distributed when Y is fixed.</p>
+        <div class="formula-block">f(x | y) = f(x, y) / f_Y(y),    provided f_Y(y) > 0
+f(y | x) = f(x, y) / f_X(x),    provided f_X(x) > 0</div>
+        <p><b>Conditional expectation:</b></p>
+        <div class="formula-block">E[X | Y = y] = Σ x · f(x|y)   or   ∫ x · f(x|y) dx</div>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§8</span>Independence of Random Variables</h4>
+        <p>Two RVs X and Y are <b>independent</b> iff their joint distribution factorises into the product of their marginals.</p>
+        <div class="formula-block">f(x, y) = f_X(x) · f_Y(y)   for all x, y
+Equivalently: f(x | y) = f_X(x)
+              F(x, y) = F_X(x) · F_Y(y)</div>
+        <p><b>Consequences of independence:</b></p>
+        <ul>
+          <li>E[XY] = E[X] · E[Y].</li>
+          <li>Cov(X, Y) = 0.</li>
+          <li>Var(X + Y) = Var(X) + Var(Y).</li>
+          <li>M_{X+Y}(t) = M_X(t) · M_Y(t).</li>
+        </ul>
+        <div class="key-pt"><b>Warning:</b> Cov(X, Y) = 0 does <i>not</i> imply independence (it only rules out linear association).</div>
+      </div>
+    </div>
+
+    <div class="topic-block">
       <h3 class="topic-head">Expectation &amp; Moments</h3>
 
       <div class="vq-item">
@@ -2349,6 +3142,153 @@ Marginal of Y:  f_Y(y) = Σ_x f(x,y)</div>
     </div>
   </div>
   <div class="theory-unit-body">
+
+    <div class="topic-block">
+      <h3 class="topic-head">Full Theory Notes — Unit III</h3>
+      <span class="notes-intro">📘 Syllabus-Mapped Notes</span>
+
+      <div class="notes-card">
+        <h4><span class="syl">§1</span>Types of Data — Primary &amp; Secondary</h4>
+        <p><b>Primary Data</b> — collected first-hand by the investigator for a specific purpose. Original, fresh and reliable.</p>
+        <ul>
+          <li>Methods: direct observation, interviews, questionnaires, experiments, surveys.</li>
+          <li>Advantage: accurate, purpose-specific.</li>
+          <li>Limitation: time-consuming and costly.</li>
+        </ul>
+        <p><b>Secondary Data</b> — already collected by some other agency / individual, reused for the present study.</p>
+        <ul>
+          <li>Sources: published reports, journals, govt publications, census, websites.</li>
+          <li>Advantage: quick and inexpensive.</li>
+          <li>Limitation: may be outdated or not exactly relevant.</li>
+        </ul>
+        <p><b>Other classifications:</b></p>
+        <ul>
+          <li><b>Qualitative</b> (categorical) vs <b>Quantitative</b> (numeric).</li>
+          <li>Quantitative further: <b>Discrete</b> (counts) vs <b>Continuous</b> (measurements).</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§2</span>Classification &amp; Representation of Data</h4>
+        <p><b>Classification</b> arranges raw data into homogeneous groups for easier analysis. Bases of classification:</p>
+        <ul>
+          <li><b>Geographical</b> — by location (state-wise, city-wise).</li>
+          <li><b>Chronological</b> — by time (year-wise, month-wise).</li>
+          <li><b>Qualitative</b> — by attributes (gender, religion).</li>
+          <li><b>Quantitative</b> — by numerical magnitude (income, marks).</li>
+        </ul>
+        <p><b>Representation of data:</b></p>
+        <ul>
+          <li><b>Tabular</b> — frequency tables, contingency tables.</li>
+          <li><b>Diagrammatic</b> — bar diagrams, pie charts, pictograms.</li>
+          <li><b>Graphical</b> — histogram, frequency polygon, frequency curve, ogive (cumulative frequency curve).</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§3</span>Formation of Frequency Distribution</h4>
+        <p>A <b>frequency distribution</b> groups raw data into class intervals with the count (frequency) of observations in each class.</p>
+        <p><b>Steps:</b></p>
+        <ul>
+          <li>Find <b>Range</b> = (Max − Min).</li>
+          <li>Decide number of classes (typically 5–15).</li>
+          <li>Class width h ≈ Range / Number of classes.</li>
+          <li>Form non-overlapping classes (e.g. 0–10, 10–20, …).</li>
+          <li>Tally each observation into its class.</li>
+          <li>Count tally marks → frequency f.</li>
+        </ul>
+        <p><b>Types:</b></p>
+        <ul>
+          <li><b>Discrete</b> frequency distribution — exact values with frequencies.</li>
+          <li><b>Continuous</b> (grouped) — class intervals with frequencies.</li>
+          <li><b>Cumulative</b> frequency — running total (less-than or more-than).</li>
+          <li><b>Relative</b> frequency — f / N (proportion).</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§4</span>Measures of Central Tendency — Mean, Median, Mode</h4>
+        <p>Central tendency summarises data with a single representative value.</p>
+        <p><b>(a) Arithmetic Mean (x̄)</b></p>
+        <div class="formula-block">Raw data:        x̄ = Σx / n
+Frequency data:  x̄ = Σf·x / Σf
+Grouped data:    x̄ = Σf·m / Σf   (m = mid-value of class)</div>
+        <p><b>(b) Median</b> — middle value of sorted data; not affected by outliers.</p>
+        <div class="formula-block">Ungrouped (n odd):   median = ((n+1)/2)th value
+Ungrouped (n even):  median = avg of (n/2)th and (n/2 + 1)th
+Grouped: median = L + [ (N/2 − F) / f ] · h
+  L = lower limit of median class, F = cf before, f = freq, h = width</div>
+        <p><b>(c) Mode</b> — value(s) with highest frequency.</p>
+        <div class="formula-block">Grouped: mode = L + [ (f₁ − f₀) / (2f₁ − f₀ − f₂) ] · h
+  f₁ = freq of modal class, f₀ = previous, f₂ = next</div>
+        <p><b>Empirical relation</b> (moderately skewed):</p>
+        <div class="formula-block">Mode = 3·Median − 2·Mean</div>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§5</span>Standard Deviation &amp; Variance</h4>
+        <p><b>Standard Deviation (σ)</b> is the most important measure of dispersion — the RMS deviation from the mean.</p>
+        <div class="formula-block">Population:  σ = √[ Σ(xᵢ − μ)² / N ]
+Sample:      s = √[ Σ(xᵢ − x̄)² / (n − 1) ]
+For frequency data:  σ = √[ Σf(x − x̄)² / Σf ]</div>
+        <p><b>Variance</b> = σ² (units squared).</p>
+        <p><b>Properties of SD:</b></p>
+        <ul>
+          <li>SD ≥ 0, with σ = 0 only when all values are equal.</li>
+          <li>SD is unaffected by change of origin (shift), but is scaled by change of scale.</li>
+          <li>Lower SD → data clustered around mean; higher SD → spread out.</li>
+          <li><b>Coefficient of Variation</b> CV = (σ / x̄) × 100 % (dimensionless, useful to compare two data sets).</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§6</span>Covariance</h4>
+        <p><b>Covariance</b> measures the joint variability of two variables X and Y — how they change together.</p>
+        <div class="formula-block">Cov(X, Y) = Σ(xᵢ − x̄)(yᵢ − ȳ) / n
+          = E[XY] − E[X] · E[Y]</div>
+        <p><b>Interpretation:</b></p>
+        <ul>
+          <li>Cov &gt; 0 → X and Y tend to move in the same direction.</li>
+          <li>Cov &lt; 0 → X and Y move in opposite directions.</li>
+          <li>Cov = 0 → no linear relationship (independence ⇒ Cov = 0, but not vice versa).</li>
+        </ul>
+        <div class="key-pt"><b>Limitation:</b> covariance is scale-dependent — its magnitude changes with units. Use the correlation coefficient r = Cov(X,Y) / (σ_x · σ_y) for a unit-free measure.</div>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§7</span>Skewness — Asymmetry of a Distribution</h4>
+        <p><b>Skewness</b> measures the lack of symmetry of a distribution about its mean.</p>
+        <div class="formula-block">Karl Pearson's coeff. (Sk):
+  Sk = (Mean − Mode) / SD
+     = 3(Mean − Median) / SD   (when mode is unstable)
+
+Bowley's coeff. (based on quartiles):
+  Sk_B = (Q₃ + Q₁ − 2·Median) / (Q₃ − Q₁)
+
+Moment-based:
+  β₁ = μ₃² / μ₂³,    γ₁ = μ₃ / σ³</div>
+        <p><b>Types:</b></p>
+        <ul>
+          <li><b>Positive skew (right-skewed)</b> — long tail on right; Mean &gt; Median &gt; Mode (e.g. income).</li>
+          <li><b>Negative skew (left-skewed)</b> — long tail on left; Mode &gt; Median &gt; Mean (e.g. retirement age).</li>
+          <li><b>Symmetric</b> (skewness = 0) — Mean = Median = Mode (Normal distribution).</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§8</span>Kurtosis — Peakedness of a Distribution</h4>
+        <p><b>Kurtosis</b> measures the relative peakedness (and tail heaviness) of a distribution compared to the Normal.</p>
+        <div class="formula-block">β₂ = μ₄ / μ₂² = μ₄ / σ⁴
+γ₂ = β₂ − 3  (excess kurtosis)</div>
+        <p><b>Types:</b></p>
+        <ul>
+          <li><b>Mesokurtic</b> — β₂ = 3, γ₂ = 0. The Normal distribution.</li>
+          <li><b>Leptokurtic</b> — β₂ &gt; 3. Tall, narrow peak with heavy tails (more outliers).</li>
+          <li><b>Platykurtic</b> — β₂ &lt; 3. Flat, broad peak with thin tails.</li>
+        </ul>
+        <div class="key-pt"><b>Memory tip:</b> <i>Lepto</i> = leaping high (tall peak), <i>Platy</i> = flat plate (low peak), <i>Meso</i> = middle (normal).</div>
+      </div>
+    </div>
 
     <div class="topic-block">
       <h3 class="topic-head">Types of Data &amp; Classification</h3>
@@ -2500,6 +3440,147 @@ Sample SD:      s = √[ Σ(xᵢ − x̄)² / (n−1) ]</div>
     </div>
   </div>
   <div class="theory-unit-body">
+
+    <div class="topic-block">
+      <h3 class="topic-head">Full Theory Notes — Unit IV</h3>
+      <span class="notes-intro">📘 Syllabus-Mapped Notes</span>
+
+      <div class="notes-card">
+        <h4><span class="syl">§1</span>Correlation Analysis</h4>
+        <p><b>Correlation</b> measures the <i>degree</i> and <i>direction</i> of linear relationship between two variables X and Y.</p>
+        <p><b>Types of correlation:</b></p>
+        <ul>
+          <li><b>Positive</b> — X and Y move together (height &amp; weight).</li>
+          <li><b>Negative</b> — X increases, Y decreases (price &amp; demand).</li>
+          <li><b>No (zero) correlation</b> — no linear pattern.</li>
+          <li><b>Linear</b> — points roughly on a straight line.</li>
+          <li><b>Non-linear (curvilinear)</b> — pattern follows a curve.</li>
+        </ul>
+        <p><b>Methods:</b> scatter diagram, Karl Pearson's coefficient, Spearman's rank correlation, concurrent deviation method.</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§2</span>Karl Pearson's Coefficient of Correlation (r)</h4>
+        <p>Measures the strength of <b>linear</b> relationship between X and Y.</p>
+        <div class="formula-block">r = Σ(x − x̄)(y − ȳ) / √[ Σ(x − x̄)² · Σ(y − ȳ)² ]
+
+Alternate computational form:
+r = [ nΣxy − Σx·Σy ] / √{ [nΣx² − (Σx)²] · [nΣy² − (Σy)²] }
+
+Also:  r = Cov(X, Y) / (σ_x · σ_y)</div>
+        <p><b>Properties:</b></p>
+        <ul>
+          <li><b>Range:</b> −1 ≤ r ≤ +1.</li>
+          <li>r = +1 → perfect positive correlation; r = −1 → perfect negative.</li>
+          <li>r = 0 → no linear relationship (could still have non-linear).</li>
+          <li>r is symmetric: r(X, Y) = r(Y, X).</li>
+          <li>r is unit-free and unaffected by change of origin and scale.</li>
+          <li>|r| ≥ 0.7 → strong; 0.3–0.7 → moderate; &lt; 0.3 → weak.</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§3</span>Spearman's Rank Correlation</h4>
+        <p>Used when data is <b>ordinal</b>, has outliers, or the relationship is <b>monotonic but not linear</b>. Each observation is replaced by its rank.</p>
+        <div class="formula-block">rₛ = 1 − [ 6·ΣD² ] / [ n(n² − 1) ]
+
+D = difference between ranks of corresponding x and y
+n = number of pairs</div>
+        <p><b>When ranks are tied</b> — assign the average of the ranks that would have been given, and apply the correction factor:</p>
+        <div class="formula-block">rₛ = 1 − [ 6·{ ΣD² + Σ(m³ − m)/12 } ] / [ n(n² − 1) ]
+m = number of items sharing a tied rank in each tie</div>
+        <p>Range: −1 ≤ rₛ ≤ +1. Interpretation same as Pearson's r.</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§4</span>Regression Analysis</h4>
+        <p><b>Regression</b> establishes a mathematical relationship to <b>predict</b> the value of one variable from another. Unlike correlation, it is <b>asymmetric</b>: the regression of Y on X is different from X on Y.</p>
+        <p><b>Two regression lines:</b></p>
+        <div class="formula-block">Y on X (predict Y given X):
+  Y − ȳ = b_yx (X − x̄)
+  b_yx = r · σ_y / σ_x = Σ(x − x̄)(y − ȳ) / Σ(x − x̄)²
+
+X on Y (predict X given Y):
+  X − x̄ = b_xy (Y − ȳ)
+  b_xy = r · σ_x / σ_y = Σ(x − x̄)(y − ȳ) / Σ(y − ȳ)²</div>
+        <p><b>Properties of regression coefficients:</b></p>
+        <ul>
+          <li>b_yx · b_xy = r² → r = ±√(b_yx · b_xy). Sign of r matches sign of the coefficients.</li>
+          <li>Both regression coefficients have the same sign.</li>
+          <li>|b_yx · b_xy| ≤ 1 (since r² ≤ 1).</li>
+          <li>Both regression lines pass through the point (x̄, ȳ).</li>
+          <li>If r = 0, the two lines are perpendicular; if |r| = 1, they coincide.</li>
+        </ul>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§5</span>Curve Fitting &amp; Principle of Least Squares</h4>
+        <p><b>Curve fitting</b> determines the best mathematical function y = f(x) that approximates a set of observed (xᵢ, yᵢ) data.</p>
+        <p><b>Principle of Least Squares:</b> choose the curve that <b>minimises the sum of squared residuals</b> between observed and fitted values.</p>
+        <div class="formula-block">Minimise:  S = Σ (yᵢ − ŷᵢ)²
+         = Σ [ yᵢ − f(xᵢ) ]²
+
+Take ∂S/∂(parameter) = 0 for each parameter → "normal equations".</div>
+        <div class="key-pt"><b>Why squares?</b> Squaring (i) removes signs so positive &amp; negative errors don't cancel, (ii) penalises large errors more, (iii) yields linear normal equations with a unique solution.</div>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§6</span>Fitting a Straight Line  y = a + bx</h4>
+        <p>Differentiating S = Σ(y − a − bx)² with respect to a and b and equating to zero gives the <b>two normal equations</b>:</p>
+        <div class="formula-block">Σy  = n·a + b·Σx
+Σxy = a·Σx + b·Σx²
+
+Solve simultaneously for:
+  b (slope)     = [ nΣxy − Σx·Σy ] / [ nΣx² − (Σx)² ]
+  a (intercept) = ȳ − b·x̄</div>
+        <p>The line y = a + bx is the <b>line of best fit</b>, passing through (x̄, ȳ).</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§7</span>Fitting a Parabola (Second-Degree)  y = a + bx + cx²</h4>
+        <p>Three parameters a, b, c need three normal equations (obtained by partial derivatives of S):</p>
+        <div class="formula-block">Σy   = n·a + b·Σx  + c·Σx²
+Σxy  = a·Σx + b·Σx²  + c·Σx³
+Σx²y = a·Σx² + b·Σx³ + c·Σx⁴
+
+Solve the 3×3 system for a, b, c.</div>
+        <p>Used when scatter shows a parabolic (curved) pattern.</p>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§8</span>Fitting a Power Curve  y = a·xᵇ</h4>
+        <p>The curve is non-linear in x but becomes linear in log–log scale. <b>Linearise</b> first:</p>
+        <div class="formula-block">Take log of both sides:
+  log y = log a + b · log x
+
+Substitute  Y = log y,  X = log x,  A = log a:
+  Y = A + b·X     (straight-line form)
+
+Apply normal equations to (X, Y) data:
+  ΣY  = n·A + b·ΣX
+  ΣXY = A·ΣX + b·ΣX²
+
+Finally:  a = antilog(A).</div>
+      </div>
+
+      <div class="notes-card">
+        <h4><span class="syl">§9</span>Fitting an Exponential Curve  y = a·eᵇˣ</h4>
+        <p>Linearise using natural logarithm:</p>
+        <div class="formula-block">Take ln of both sides:
+  ln y = ln a + b·x
+
+Substitute  Y = ln y,  A = ln a:
+  Y = A + b·x     (straight-line form)
+
+Normal equations:
+  ΣY  = n·A + b·Σx
+  ΣxY = A·Σx + b·Σx²
+
+Solve and recover  a = eᴬ.</div>
+        <p>Note: only the <b>solution for parameters changes</b> — the principle (least squares) is the same as fitting a straight line.</p>
+        <div class="key-pt"><b>Exam tip:</b> as per syllabus — <i>no derivation, numerical problems only</i>. Memorise the normal equations and the linearisation substitutions; then it's just arithmetic.</div>
+      </div>
+    </div>
 
     <div class="topic-block">
       <h3 class="topic-head">Correlation</h3>
