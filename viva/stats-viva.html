@@ -1424,7 +1424,7 @@
 <!-- HERO -->
 <header class="hero">
   <div class="decoration deco-1"></div>
-  <span class="hero-tag">BCA(DS) — III Semester · Lab Manual</span>
+  <span class="hero-tag">BCA(DS) — IV Semester · Lab Manual</span>
   <h1>
     Probability<br>
     &amp; <em>Statistics</em><br>
@@ -2571,6 +2571,124 @@
     <span class="section-num">— 03 / Theory Viva</span>
     <h2 class="section-title">Theory Viva<br><em style="font-weight:400; color:var(--accent);">Questions</em>.</h2>
     <p class="section-sub">BCD-202-V · All 4 units covered · High-probability questions marked 🔥</p>
+
+    <!-- QUICK REVISION -->
+    <div style="margin-bottom:48px;">
+      <span class="notes-intro" style="background:var(--accent); margin-bottom:20px; display:inline-block;">⚡ Quick Revision — Sabhi Topics Ek Nazar Mein</span>
+
+      <!-- UNIT I OVERVIEW -->
+      <div style="margin-bottom:28px;">
+        <h3 class="topic-head" style="margin-bottom:14px;">Unit I — Random Variables &amp; Distributions</h3>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Probability</h4>
+          <p style="font-size:13.5px; margin:0;">Kisi event ke hone ka chance. P(A) = favourable / total. Range 0 to 1. Sum rule: P(A∪B) = P(A)+P(B)−P(A∩B). Product rule: P(A∩B) = P(A)·P(B|A).</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Random Variable (RV)</h4>
+          <p style="font-size:13.5px; margin:0;"><b>Discrete RV</b> — countable values (coin toss, dice). <b>Continuous RV</b> — range mein koi bhi value (height, weight). RV ek function hai jo outcomes ko numbers assign karta hai.</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">PMF / PDF / CDF</h4>
+          <p style="font-size:13.5px; margin:0;"><b>PMF</b> (discrete) — P(X=x), sabka sum = 1. <b>PDF</b> (continuous) — f(x), area under curve = 1. <b>CDF</b> — F(x) = P(X≤x), 0 se 1 tak, non-decreasing. P(a&lt;X≤b) = F(b)−F(a).</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Discrete Distributions</h4>
+          <p style="font-size:13.5px; margin:0;">
+            <b>Binomial</b> — n trials, p success each. P(X=x) = ⁿCₓ·pˣ·(1−p)ⁿ⁻ˣ. Mean = np, Var = np(1−p).<br>
+            <b>Geometric</b> — 1st success tak kitne trials. P(X=x) = (1−p)ˣ⁻¹·p. Memoryless.<br>
+            <b>Poisson</b> — rare events, rate λ. P(X=x) = e⁻λ·λˣ/x!. Mean = Var = λ.
+          </p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Continuous Distributions</h4>
+          <p style="font-size:13.5px; margin:0;">
+            <b>Uniform</b> — sab values equal likely in [a,b]. Mean = (a+b)/2.<br>
+            <b>Exponential</b> — Poisson events ke beech ka wait time. Mean = 1/λ. Memoryless.<br>
+            <b>Normal</b> — bell curve, μ aur σ se define hoti hai. 68–95–99.7 rule. Mean=Median=Mode. Z = (X−μ)/σ.
+          </p>
+        </div>
+      </div>
+
+      <!-- UNIT II OVERVIEW -->
+      <div style="margin-bottom:28px;">
+        <h3 class="topic-head" style="margin-bottom:14px;">Unit II — Moments &amp; MGF</h3>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Expectation (Mean)</h4>
+          <p style="font-size:13.5px; margin:0;">E[X] = long-run average. Discrete: Σx·P(X=x). Continuous: ∫x·f(x)dx. Properties: E[aX+b] = a·E[X]+b. E[X+Y] = E[X]+E[Y] always. Var(X) = E[X²]−(E[X])².</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Moments</h4>
+          <p style="font-size:13.5px; margin:0;"><b>Raw moment</b>: μ'ᵣ = E[Xʳ]. <b>Central moment</b>: μᵣ = E[(X−μ)ʳ]. 1st central = 0, 2nd = Variance, 3rd relates to skewness, 4th to kurtosis.</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">MGF &amp; PGF</h4>
+          <p style="font-size:13.5px; margin:0;"><b>MGF</b>: M_X(t) = E[e^tX]. rth derivative at t=0 deta hai rth moment. Distribution uniquely identify karta hai. Independent ka MGF: M_{X+Y}(t) = M_X(t)·M_Y(t).<br><b>PGF</b>: G_X(z) = E[z^X] — discrete RVs ke liye. G'(1) = E[X].</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">2D Random Variables — Joint / Marginal / Conditional</h4>
+          <p style="font-size:13.5px; margin:0;"><b>Joint</b> f(x,y) — X aur Y dono ek saath. <b>Marginal</b>: f_X(x) = Σ_y f(x,y) (Y sum out). <b>Conditional</b>: f(x|y) = f(x,y)/f_Y(y). Independent if f(x,y) = f_X(x)·f_Y(y). Cov(X,Y) = E[XY]−E[X]·E[Y].</p>
+        </div>
+      </div>
+
+      <!-- UNIT III OVERVIEW -->
+      <div style="margin-bottom:28px;">
+        <h3 class="topic-head" style="margin-bottom:14px;">Unit III — Descriptive Statistics</h3>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Types of Data &amp; Frequency Distribution</h4>
+          <p style="font-size:13.5px; margin:0;"><b>Primary</b> — khud collect kiya (survey, interview). <b>Secondary</b> — kisi aur ka data reuse kiya (census, journals). <b>Frequency Distribution</b>: raw data ko class intervals mein organize karo, har class ki count = frequency.</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Central Tendency — Mean, Median, Mode</h4>
+          <p style="font-size:13.5px; margin:0;"><b>Mean</b> = Σx/n. Outliers se affect. <b>Median</b> = sorted data ka middle. Outliers se safe. <b>Mode</b> = sabse zyada aane wali value. Grouped mein formulas alag. Empirical: Mode = 3·Median − 2·Mean.</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Dispersion — SD, Variance, Covariance</h4>
+          <p style="font-size:13.5px; margin:0;"><b>Variance</b> σ² = Σ(x−μ)²/N. <b>SD</b> σ = √Variance (same units as data). CV = (σ/x̄)×100% comparison ke liye. <b>Covariance</b> = Σ(x−x̄)(y−ȳ)/n — positive means saath badhte, negative means ulta.</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Skewness &amp; Kurtosis</h4>
+          <p style="font-size:13.5px; margin:0;"><b>Skewness</b> = distribution ki symmetry. Positive skew: tail right (Mean&gt;Median&gt;Mode). Negative skew: tail left (Mean&lt;Median&lt;Mode). <b>Kurtosis</b> = peak ka shape. Mesokurtic (normal)=3, Leptokurtic&gt;3, Platykurtic&lt;3.</p>
+        </div>
+      </div>
+
+      <!-- UNIT IV OVERVIEW -->
+      <div style="margin-bottom:8px;">
+        <h3 class="topic-head" style="margin-bottom:14px;">Unit IV — Correlation &amp; Curve Fitting</h3>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Correlation</h4>
+          <p style="font-size:13.5px; margin:0;"><b>Karl Pearson's r</b> = do variables ka linear relationship. −1 ≤ r ≤ +1. r=+1 perfect positive, r=−1 perfect negative, r=0 koi relation nahi. Formula: r = Cov(X,Y)/(σ_x·σ_y).</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Rank Correlation (Spearman)</h4>
+          <p style="font-size:13.5px; margin:0;">Ordinal data ya outliers ke liye use karo. rₛ = 1 − 6·ΣD²/[n(n²−1)]. D = rank difference. −1 to +1. Tied ranks pe average rank assign karo aur correction factor lagao.</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Regression Analysis</h4>
+          <p style="font-size:13.5px; margin:0;">Ek variable se doosra predict karna. Y on X: Y−ȳ = b_yx(X−x̄). X on Y: X−x̄ = b_xy(Y−ȳ). b_yx·b_xy = r². Dono lines (x̄,ȳ) se guzarti hain. Correlation symmetrical, regression asymmetrical.</p>
+        </div>
+
+        <div class="notes-card" style="padding:14px 16px; margin-bottom:8px;">
+          <h4 style="font-size:14px; margin-bottom:6px; color:var(--accent);">Curve Fitting — Least Squares</h4>
+          <p style="font-size:13.5px; margin:0;">Best fit curve dhundh ne ke liye Σ(y−ŷ)² minimize karo. <b>Straight line</b> y=a+bx — 2 normal equations. <b>Parabola</b> y=a+bx+cx² — 3 equations. <b>Power curve</b> y=axᵇ — log leke linear banao. <b>Exponential</b> y=ae^(bx) — log leke solve karo.</p>
+        </div>
+      </div>
+    </div>
 
     <!-- UNIT I -->
 <article class="theory-unit" id="u1">
@@ -3736,25 +3854,40 @@ Solve the 3×3 system for a, b, c.</div>
     💡 <strong>Final Tip:</strong> Sare programs khud Excel mai try karo. Practice se hi confidence aayega. Exam mai jo bhi program puchein, formula aur steps yaad ho jaayenge.
   </p>
   <div class="credit">
-    BCG-212-V · Probability &amp; Statistics Lab · BCA(DS) III Semester · 2 Credits · 50 Marks
+    BCG-212-V · Probability &amp; Statistics Lab · BCA(DS) IV Semester · 2 Credits · 50 Marks
   </div>
 </footer>
 
 
 
 <script>
-const _chips = document.querySelectorAll('nav.chips a');
-const _sections = document.querySelectorAll('#intro,#programs,#p1,#p2,#p3,#p4,#p5,#p6,#p7,#p8,#p9,#p10,#theory,#u1,#u2,#u3,#u4');
-const _obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      _chips.forEach(c => c.classList.remove('active'));
-      const id = e.target.getAttribute('id');
-      const chip = document.querySelector(`nav.chips a[href="#${id}"]`);
-      if(chip){ chip.classList.add('active'); chip.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'}); }
+(function(){
+  const chips = document.querySelectorAll('nav.chips a[href^="#"]');
+  const ids = Array.from(chips).map(c => c.getAttribute('href').slice(1));
+  const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
+  const navH = document.querySelector('.topbar')?.offsetHeight || 70;
+
+  function setActive(id){
+    chips.forEach(c => c.classList.remove('active'));
+    const chip = document.querySelector(`nav.chips a[href="#${id}"]`);
+    if(chip){
+      chip.classList.add('active');
+      chip.scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'});
     }
-  });
-}, { threshold:0.15, rootMargin:'-60px 0px -60% 0px' });
-_sections.forEach(s => _obs.observe(s));
+  }
+
+  function onScroll(){
+    const trigger = window.scrollY + navH + 20;
+    let active = sections[0];
+    for(const s of sections){
+      if(s.getBoundingClientRect().top + window.scrollY <= trigger) active = s;
+      else break;
+    }
+    if(active) setActive(active.id);
+  }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
 </script>
 </body></html>
