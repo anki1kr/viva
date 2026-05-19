@@ -56,51 +56,54 @@
 
   /* ============ TOP NAV ============ */
   .topbar{
-    position:sticky; top:0; z-index:100;
-    background:rgba(244,236,216,.92);
-    backdrop-filter:blur(12px);
-    border-bottom:1px solid var(--line);
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(244,236,216,.97);
+    backdrop-filter:blur(10px);
+    border-bottom:1.5px solid var(--ink);
   }
-  .topbar-inner{
-    max-width:1400px; margin:0 auto;
-    padding:14px 32px;
-    display:flex; align-items:center; justify-content:space-between;
-    gap:24px;
+  body{ padding-top:68px; }
+  .title{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:10px 16px 4px; gap:8px;
   }
-  .brand{
+  .title b{
     font-family:var(--serif);
-    font-weight:800;
-    font-size:22px;
-    letter-spacing:-.02em;
-    display:flex; align-items:center; gap:10px;
-  }
-  .brand-mark{
-    width:36px; height:36px;
-    background:var(--ink);
-    color:var(--paper);
-    border-radius:50%;
-    display:grid; place-items:center;
-    font-size:14px;
-    font-weight:600;
-    transform:rotate(-6deg);
-  }
-  .nav-links{
-    display:flex; gap:6px;
-    flex-wrap:wrap;
-  }
-  .nav-links a{
-    color:var(--ink);
-    text-decoration:none;
-    font-size:13px;
-    font-weight:500;
-    padding:8px 12px;
-    border-radius:20px;
-    transition:all .2s;
+    font-weight:600; font-size:16px;
+    color:var(--ink); letter-spacing:-.01em;
     white-space:nowrap;
   }
-  .nav-links a:hover{
-    background:var(--ink);
-    color:var(--paper);
+  .title small{
+    font-family:var(--mono);
+    font-size:10px; letter-spacing:.16em;
+    color:rgba(26,24,20,.55);
+    text-transform:uppercase; white-space:nowrap;
+  }
+  nav.chips{
+    display:flex; gap:6px;
+    padding:6px 12px 10px;
+    overflow-x:auto; scrollbar-width:none;
+  }
+  nav.chips::-webkit-scrollbar{ display:none; }
+  nav.chips a{
+    flex-shrink:0;
+    padding:6px 14px;
+    font-family:var(--mono);
+    font-size:11px; font-weight:500;
+    letter-spacing:.08em; color:var(--ink);
+    background:var(--paper-2);
+    border:1.5px solid var(--ink);
+    border-radius:0;
+    text-decoration:none; white-space:nowrap;
+    text-transform:uppercase;
+    transition:background .15s, color .15s;
+    cursor:pointer; touch-action:manipulation;
+    -webkit-tap-highlight-color:transparent;
+  }
+  nav.chips a:hover{ background:var(--accent); color:var(--paper); border-color:var(--accent); }
+  nav.chips a.active{ background:var(--accent); color:var(--paper); border-color:var(--accent); }
+  nav.chips a:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+  @media(prefers-reduced-motion:reduce){
+    .hero-tag::before{ animation:none; }
   }
 
   /* ============ HERO ============ */
@@ -868,34 +871,31 @@
 <body>
 
 <!-- TOP NAV -->
-<nav class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">
-      <div class="brand-mark">Σ</div>
-      <span>BCG-212-V</span>
-    </div>
-    <div class="nav-links">
-      <a href="https://mathsfile.netlify.app/#intro">Intro</a>
-      <a href="https://mathsfile.netlify.app/#programs">Programs</a>
-      <a href="https://mathsfile.netlify.app/#p1">P1</a>
-      <a href="https://mathsfile.netlify.app/#p2">P2</a>
-      <a href="https://mathsfile.netlify.app/#p3">P3</a>
-      <a href="https://mathsfile.netlify.app/#p4">P4</a>
-      <a href="https://mathsfile.netlify.app/#p5">P5</a>
-      <a href="https://mathsfile.netlify.app/#p6">P6</a>
-      <a href="https://mathsfile.netlify.app/#p7">P7</a>
-      <a href="https://mathsfile.netlify.app/#p8">P8</a>
-      <a href="https://mathsfile.netlify.app/#p9">P9</a>
-      <a href="https://mathsfile.netlify.app/#p10">P10</a>
-      <span class="nav-sep">|</span>
-      <a href="#theory">Theory</a>
-      <a href="#u1">U1</a>
-      <a href="#u2">U2</a>
-      <a href="#u3">U3</a>
-      <a href="#u4">U4</a>
-    </div>
+<header class="topbar">
+  <div class="title">
+    <b>BCD-202-V &middot; Probability &amp; Statistics</b>
+    <small>BCA(DS) IV Sem</small>
   </div>
-</nav>
+  <nav class="chips">
+    <a href="#intro">Intro</a>
+    <a href="#programs">Lab</a>
+    <a href="#p1">P1</a>
+    <a href="#p2">P2</a>
+    <a href="#p3">P3</a>
+    <a href="#p4">P4</a>
+    <a href="#p5">P5</a>
+    <a href="#p6">P6</a>
+    <a href="#p7">P7</a>
+    <a href="#p8">P8</a>
+    <a href="#p9">P9</a>
+    <a href="#p10">P10</a>
+    <a href="#theory">Theory</a>
+    <a href="#u1">U1 &middot; RV</a>
+    <a href="#u2">U2 &middot; MGF</a>
+    <a href="#u3">U3 &middot; Stats</a>
+    <a href="#u4">U4 &middot; Corr</a>
+  </nav>
+</header>
 
 <!-- HERO -->
 <header class="hero">
@@ -2661,4 +2661,19 @@ Solve the 3×3 system for a, b, c.</div>
 
 
 
+<script>
+const _chips = document.querySelectorAll('nav.chips a');
+const _sections = document.querySelectorAll('#intro,#programs,#p1,#p2,#p3,#p4,#p5,#p6,#p7,#p8,#p9,#p10,#theory,#u1,#u2,#u3,#u4');
+const _obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      _chips.forEach(c => c.classList.remove('active'));
+      const id = e.target.getAttribute('id');
+      const chip = document.querySelector(`nav.chips a[href="#${id}"]`);
+      if(chip){ chip.classList.add('active'); chip.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'}); }
+    }
+  });
+}, { threshold:0.15, rootMargin:'-60px 0px -60% 0px' });
+_sections.forEach(s => _obs.observe(s));
+</script>
 </body></html>
