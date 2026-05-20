@@ -25,8 +25,22 @@
   --highlight-mint:#bbf7d0;
   --gold:#a16207;
   --shadow: 0 1px 0 rgba(26,18,9,.05), 0 8px 24px -10px rgba(26,18,9,.18);
+  /* resolved aliases – were undefined, causing colour/font fallbacks */
+  --accent: var(--brand-mid);      /* green accent #16a34a */
+  --accent-2: var(--gold);         /* amber/gold accent #a16207 */
+  --mono: "JetBrains Mono", monospace;
+  --serif: "Fraunces", serif;
+  --sans: "Spectral", Georgia, serif;
 }
 *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+::selection {
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+}
+::-moz-selection {
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+}
 html{ scroll-behavior:smooth; }
 body{
   margin:0;
@@ -609,6 +623,59 @@ footer span{ color:var(--accent); }
 .diag-step-box.gr{background:var(--brand-soft);border-color:var(--brand);color:var(--brand-deep);}
 .diag-step-box.gd{background:rgba(161,98,7,.1);border-color:var(--gold);color:var(--gold);}
 .diag-step-arr{font-size:20px;color:var(--brand);line-height:1;}
+
+/* ---- MOBILE RESPONSIVENESS (revision section + tables/diagrams) ---- */
+/* Make every table inside content scrollable horizontally on small screens */
+section table{ display:block; max-width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+section table tr{ display:table-row; }
+section table th, section table td{ white-space:normal; }
+
+@media(max-width:600px){
+  body{ font-size:15px; line-height:1.62; }
+  .wrap{ padding:14px 10px 90px; }
+  /* Tighter section headers */
+  .sec-head h2{ font-size:30px; line-height:1.02; }
+  .unit-title{ font-size:19px; flex-wrap:wrap; gap:6px; }
+  .unit-title .unit-num{ font-size:10px; }
+  .topic-head{ font-size:15.5px; margin:18px 0 5px; }
+  /* Tables: even smaller font on mobile + force horizontal scroll on wide tables */
+  section table{ font-size:11px !important; min-width:auto; }
+  section table th, section table td{ padding:4px 6px !important; }
+  /* 4-card and 2-col grids stack on phones */
+  .diag-4{ grid-template-columns:1fr 1fr; gap:6px; }
+  .diag-2col{ grid-template-columns:1fr; }
+  /* Flow diagrams: allow horizontal scrolling instead of cramped wrap */
+  .diag-flow{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:4px; }
+  .diag-flow .diag-node{ flex-shrink:0; }
+  /* Code blocks: smaller font, allow x-scroll */
+  pre.r-code{ font-size:10.5px; padding:10px 12px; line-height:1.5; }
+  .code-wrap pre.r-code{ font-size:10.5px; }
+  /* Boxes use less padding */
+  .box{ padding:9px 11px 9px 13px; font-size:13px; }
+  .box .label{ font-size:9px; }
+  /* QA bullets readable size */
+  .qa-bullets{ font-size:12.5px; margin-left:16px; }
+  .theory-qa-item .tq{ font-size:13.5px; }
+  .theory-qa-item .ta{ font-size:12.5px; }
+  /* Concept items */
+  .concept-item{ font-size:12.5px; padding:6px 8px; }
+  /* Cover meta grid keeps 2 cols on mobile */
+  .cover .grid-meta{ gap:8px 12px; }
+  /* Nav chips: scroll smoothly */
+  nav.chips{ scroll-snap-type:x proximity; }
+  nav.chips a{ scroll-snap-align:start; padding:6px 11px; font-size:10.5px; }
+  /* Sec-head spacing tighter */
+  .sec-head{ padding:14px 0 10px; margin-bottom:16px; }
+}
+
+@media(max-width:380px){
+  /* Very narrow phones: 4-card grid stacks to single column */
+  .diag-4{ grid-template-columns:1fr; }
+  body{ font-size:14.5px; }
+  .unit-title{ font-size:17px; }
+  pre.r-code{ font-size:10px; }
+  section table{ font-size:10.5px !important; }
+}
 </style>
 </head>
 <body>
@@ -620,6 +687,7 @@ footer span{ color:var(--accent); }
     <small>BCA(DS) IV Sem</small>
   </div>
   <nav class="chips">
+    <a href="#revision" style="background:#fde047;border-color:#a16207;color:#3d2f1c">&#x26A1; Fast Revision</a>
     <a href="#lab">&#x1F9EA; Lab Guide</a>
     <a href="#theory">&#x1F4DA; Theory Q&amp;A</a>
     <a href="#u1">U1 &middot; Data Sci</a>
@@ -2791,6 +2859,1441 @@ mat <span class="kw">&lt;-</span> <span class="fn">matrix</span>(vec, nrow <span
 
   </section>
 
+  <!-- ===================== QUICK REVISION HUB ===================== -->
+  <hr class="section-gap">
+
+  <section id="revision">
+    <div class="sec-head">
+      <div class="kicker">Last-Minute &middot; Fast Revision</div>
+      <h2>&#x26A1; Quick Revision Hub</h2>
+      <p class="lede">All 4 units + lab + numericals condensed for tomorrow morning's viva</p>
+    </div>
+
+    <div class="box why" style="margin-bottom:18px">
+      <span class="label">&#x1F552; Viva Tomorrow 9:30 AM &middot; Fast Plan</span>
+      <strong>Read this section twice tonight + once before entering the hall.</strong>
+      <ul style="margin:6px 0 0 18px;line-height:1.85">
+        <li><b>30 min:</b> Block 01 (Rapid-Fire 50 Q&amp;A) &mdash; cover with hand, recite answers</li>
+        <li><b>20 min:</b> Block 02 (Function Bible) + Block 03 (Data Structures table)</li>
+        <li><b>15 min:</b> Block 16 (Most-Likely Viva Qs) &mdash; the high-probability set</li>
+        <li><b>15 min:</b> Numericals (Blocks 09, 10, 11) &mdash; one example each</li>
+        <li><b>10 min:</b> Block 20 (Viva tips) &mdash; body language + recovery moves</li>
+        <li><b>Then sleep.</b> A fresh brain &gt; one more chapter.</li>
+      </ul>
+    </div>
+
+    <!-- ============ BLOCK 01 ============ -->
+    <div class="theory-unit" id="r-rapid">
+      <div class="unit-title"><span class="unit-num">Block 01</span>Rapid-Fire 50 Q&amp;A (5-min Drill)</div>
+      <div class="box tip"><span class="label">5-Minute Drill</span>One-line answers for last-minute revision &mdash; 50 questions across 5 tables (10 each).</div>
+
+      <p class="topic-head">Unit I &mdash; Data Science Basics (10)</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 8px;border:1px solid #d9cfb6;text-align:left">Q</th><th style="padding:5px 8px;border:1px solid #d9cfb6;text-align:left">Answer</th></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">What is Data Science?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>Interdisciplinary field</strong> combining statistics, programming, domain knowledge to extract insights from <strong>structured + unstructured data</strong>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Big Data in one line?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">Datasets too large/complex for traditional tools &mdash; <strong>5 Vs</strong>: Volume, Velocity, Variety, Veracity, Value.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Data vs Information?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>Data</strong> = raw unprocessed facts; <strong>information</strong> = processed, meaningful, context-rich output.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">DS Lifecycle?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>Capture &rarr; Maintain &rarr; Process &rarr; Analyze &rarr; Communicate</strong> (OSEMN).</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Structured vs Unstructured?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>Structured</strong> = rows/cols (SQL); <strong>unstructured</strong> = text/images/video.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">What is EDA?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>Exploratory Data Analysis</strong> &mdash; summary stats + plots before modelling.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Supervised vs Unsupervised?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>Supervised</strong> = labelled data; <strong>unsupervised</strong> = structure in unlabelled data.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Population vs Sample?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">Population = entire group; sample = subset used for inference.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Why R for DS?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>Open-source</strong>, statistics-first, 18k+ CRAN packages, <code class="inline">ggplot2</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">DS main role?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">Convert raw data into <strong>actionable insights</strong>.</td></tr>
+      </table>
+
+      <p class="topic-head">Unit II &mdash; R Basics (10)</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 8px;border:1px solid #d9cfb6;text-align:left">Q</th><th style="padding:5px 8px;border:1px solid #d9cfb6;text-align:left">Answer</th></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Who created R?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>Ross Ihaka</strong> &amp; <strong>Robert Gentleman</strong>, Auckland 1993.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">What is CRAN?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>Comprehensive R Archive Network</strong> &mdash; hosts R + 18k+ packages.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Assignment operator?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">&lt;-</code> preferred; <code class="inline">=</code> inside function args.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">5 atomic types?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">logical, integer, double, character, complex.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Create a vector?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">x &lt;- c(1,2,3)</code> &mdash; same-type elements.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">List vs vector?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">Vector = same type; list = mixed types.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">What does <code class="inline">str()</code> show?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">Internal structure &mdash; type, dim, sample values.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Install + load package?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">install.packages("dplyr"); library(dplyr)</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">What is a factor?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">Categorical &mdash; integer codes + character levels.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">What does <code class="inline">NA</code> mean?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>Not Available</strong>; check with <code class="inline">is.na(x)</code>.</td></tr>
+      </table>
+
+      <p class="topic-head">Unit III &mdash; R Programming (10)</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 8px;border:1px solid #d9cfb6;text-align:left">Q</th><th style="padding:5px 8px;border:1px solid #d9cfb6;text-align:left">Answer</th></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Function syntax?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">f &lt;- function(args){ body; return(val) }</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">if</code> vs <code class="inline">ifelse()</code>?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">if</code> = single logical; <code class="inline">ifelse</code> = vectorised.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">3 apply-family fns?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">apply</code>, <code class="inline">lapply</code>, <code class="inline">sapply</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Recycling rule?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">Shorter vector repeats to match longer one.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Read CSV?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">read.csv("f.csv")</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">[</code>, <code class="inline">[[</code>, <code class="inline">$</code>?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">[</code> = sublist; <code class="inline">[[</code> = single elem; <code class="inline">$</code> = named col.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">break</code> vs <code class="inline">next</code>?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">break</code> = exit loop; <code class="inline">next</code> = skip iteration.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Error handling?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">tryCatch(expr, error=fn)</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Data frame?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">2D table &mdash; columns can have different types.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Merge data frames?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">merge(df1, df2, by="id", all=TRUE)</code>.</td></tr>
+      </table>
+
+      <p class="topic-head">Unit IV &mdash; Statistics in R (10)</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 8px;border:1px solid #d9cfb6;text-align:left">Q</th><th style="padding:5px 8px;border:1px solid #d9cfb6;text-align:left">Answer</th></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Mean &amp; median?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">mean(x)</code>, <code class="inline">median(x)</code>; <code class="inline">na.rm=TRUE</code> for NAs.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Variance &amp; SD?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">var(x)</code>, <code class="inline">sd(x)</code> &mdash; sample (n-1).</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Correlation?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">cor(x, y, method="pearson")</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Linear regression?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">lm(y ~ x, data=df); summary(model)</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">What is R&sup2;?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">% of variance in y explained by x &mdash; 0..1.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">One-sample t-test?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">t.test(x, mu=value)</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">What is p-value?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">P(data | H&#x2080;); reject H&#x2080; if p &lt; 0.05.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Chi-square test?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">chisq.test(table(x, y))</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">ANOVA?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">aov(y ~ group, data=df)</code> &mdash; 3+ group means.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Random normals?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">rnorm(n, mean, sd)</code>; seed: <code class="inline">set.seed(123)</code>.</td></tr>
+      </table>
+
+      <p class="topic-head">Mixed &amp; Lab (10)</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 8px;border:1px solid #d9cfb6;text-align:left">Q</th><th style="padding:5px 8px;border:1px solid #d9cfb6;text-align:left">Answer</th></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Histogram?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">hist(x, breaks=10, col="steelblue")</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">ggplot2 syntax?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">ggplot(df, aes(x,y)) + geom_point()</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Matrix vs array?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">Matrix = 2D; array = N-D.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Get help?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">?fn</code> or <code class="inline">??keyword</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Working dir?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">getwd()</code> / <code class="inline">setwd("path")</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Save objects?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">save(x, file=".RData")</code> + <code class="inline">load()</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">RStudio?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><strong>IDE for R</strong> &mdash; editor + console + env + plots.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">print</code> vs <code class="inline">cat</code>?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">print</code> = with quotes; <code class="inline">cat</code> = plain text.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Remove object?</td><td style="padding:5px 8px;border:1px solid #d9cfb6"><code class="inline">rm(x)</code>; <code class="inline">rm(list=ls())</code>.</td></tr>
+      <tr><td style="padding:5px 8px;border:1px solid #d9cfb6">Why <code class="inline">set.seed()</code>?</td><td style="padding:5px 8px;border:1px solid #d9cfb6">Reproducible random numbers.</td></tr>
+      </table>
+    </div>
+    <!-- /Block 01 -->
+
+    <!-- ============ BLOCK 02 ============ -->
+    <div class="theory-unit" id="r-funcref">
+      <div class="unit-title"><span class="unit-num">Block 02</span>R Function Bible (Master Reference)</div>
+      <div class="box def"><span class="label">Function Bible</span>Quick-reference tables of every R function likely to appear in viva. Memorize function + 1-line purpose.</div>
+
+      <p class="topic-head">1. I/O &amp; Input</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left;width:34%">Function</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Purpose</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">readline()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Read one console line as string</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">cat()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Print without quotes, supports <code class="inline">\n</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">print()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Print object with quotes &amp; indices</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">scan()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Read multiple numeric inputs</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">read.csv()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Read CSV into data frame</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">write.csv()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Export data frame to CSV</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">save()</code> / <code class="inline">load()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Save / restore multiple objects in <code class="inline">.RData</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">saveRDS()</code> / <code class="inline">readRDS()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Save / read single object in <code class="inline">.rds</code></td></tr>
+      </table>
+
+      <p class="topic-head">2. Vector Math</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left;width:34%">Function</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Purpose</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">c()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Combine values into vector</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">seq(from, to, by)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Generate sequence</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">rep(x, times)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Repeat values</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">sum, mean, median</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Total / arithmetic mean / middle</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">var(x), sd(x)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Sample variance &amp; SD (n-1)</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">max, min, range</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Largest / smallest / both</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">length(x)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Number of elements</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">sort(x), rev(x)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Sort ascending / reverse order</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">unique(x), which(x)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Distinct values / indices where TRUE</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">abs, sqrt, exp, log</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Math functions</td></tr>
+      </table>
+
+      <p class="topic-head">3. Type Checking &amp; Coercion</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left;width:34%">Function</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Purpose</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">class(x)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">High-level R class</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">typeof(x)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Internal storage type</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">is.numeric/character/na</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Type-check predicates</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">as.numeric/integer/character</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Explicit type conversion</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">as.factor, as.logical</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Convert to factor / logical</td></tr>
+      </table>
+
+      <p class="topic-head">4. Data Frame / Matrix</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left;width:34%">Function</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Purpose</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">data.frame()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Create tabular structure</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">matrix()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Create 2D matrix</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">array()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">N-dimensional array</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">head, tail, str, summary</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Quick inspection (first/last rows, structure, 5-num summary)</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">nrow, ncol, dim</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Row count / col count / both</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">names, colnames, rownames</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Get/set labels</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">t(m)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Transpose matrix</td></tr>
+      </table>
+
+      <p class="topic-head">5. Subsetting &amp; Filtering</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left;width:34%">Function</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Purpose</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">subset(df, cond)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Filter rows</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">which(cond)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Indices where TRUE</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">df$col, df[[name]], df[,j]</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Column access</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">which.max(x) / which.min(x)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Index of max / min</td></tr>
+      </table>
+
+      <p class="topic-head">6. Apply Family</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left;width:34%">Function</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Purpose</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">apply(m, MARGIN, fn)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Row (1) / col (2) on matrix</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">lapply(x, fn)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Returns LIST</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">sapply(x, fn)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Simplified to vector/matrix</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">vapply, mapply, tapply</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Type-safe / multivariate / group-by</td></tr>
+      </table>
+
+      <p class="topic-head">7. Control Flow</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left;width:34%">Keyword</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Purpose</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">if / else</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Conditional branch</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">ifelse(cond, a, b)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Vectorised if-else</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">for, while, repeat</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Loops</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">break, next</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Exit / skip iteration</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">switch(expr, ...)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Multi-way branch</td></tr>
+      </table>
+
+      <p class="topic-head">8. Strings</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left;width:34%">Function</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Purpose</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">paste(..., sep=" ")</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Concat with separator</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">paste0()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Concat with no separator</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">sprintf(fmt, ...)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">C-style formatting</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">substr, nchar, gsub, sub</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Slice / length / replace</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">toupper, tolower, trimws</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Case / trim whitespace</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">strsplit(x, sep)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Split string to list</td></tr>
+      </table>
+
+      <p class="topic-head">9. Statistics &amp; Distributions</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left;width:34%">Function</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Purpose</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">cor(x,y) / cor.test()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Pearson correlation + test</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">t.test(x, mu=) / t.test(x,y)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">One- &amp; two-sample t-test</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">chisq.test(tbl)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Chi-square independence</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">lm(y~x) / glm(y~x, family=)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Linear / generalised linear regression</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">aov(y~grp) / anova(model)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">ANOVA</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">predict(model, newdata=)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Predict on new data</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">d/p/q/r + norm/binom/pois</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">density/CDF/quantile/random</td></tr>
+      </table>
+
+      <p class="topic-head">10. Plotting &amp; Help</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left;width:34%">Function</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Purpose</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">plot, hist, boxplot, barplot, pie</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Base R charts</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">ggplot(df, aes(x,y)) + geom_*()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">ggplot2 grammar</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">install.packages, library</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Package install / load</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">?fn / help.search("kw")</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Help system</td></tr>
+      </table>
+    </div>
+    <!-- /Block 02 -->
+
+    <!-- ============ BLOCK 03 ============ -->
+    <div class="theory-unit" id="r-structures">
+      <div class="unit-title"><span class="unit-num">Block 03</span>Data Structures Mega-Comparison</div>
+      <div class="box def"><span class="label">The 6 Structures</span>Every R object is built from these six core data structures.</div>
+
+      <div class="diag-4">
+        <div class="diag-card"><span class="dk">Vector</span><code style="font-size:11.5px">c(1,2,3)</code><div class="diag-sub">1D, same type</div></div>
+        <div class="diag-card"><span class="dk">Matrix</span><code style="font-size:11.5px">matrix(1:6,2,3)</code><div class="diag-sub">2D, same type</div></div>
+        <div class="diag-card"><span class="dk">Array</span><code style="font-size:11.5px">array(1:24,c(2,3,4))</code><div class="diag-sub">N-D, same type</div></div>
+        <div class="diag-card"><span class="dk">List</span><code style="font-size:11.5px">list(1,"a",TRUE)</code><div class="diag-sub">1D, mixed types</div></div>
+        <div class="diag-card"><span class="dk">Data Frame</span><code style="font-size:11.5px">data.frame(x=1:3,y="a")</code><div class="diag-sub">2D, mixed cols</div></div>
+        <div class="diag-card"><span class="dk">Factor</span><code style="font-size:11.5px">factor(c("M","F"))</code><div class="diag-sub">Categorical levels</div></div>
+      </div>
+
+      <div class="box why"><span class="label">Rule of Thumb</span><b>Homogeneous</b> (same type): Vector, Matrix, Array. <b>Heterogeneous</b> (mixed types): List, Data Frame. <b>Factor</b>: special integer vector with labelled levels.</div>
+
+      <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin:8px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Feature</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Vector</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Matrix</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Array</th><th style="padding:5px 7px;border:1px solid #d9cfb6">List</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Data Frame</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Factor</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Dim</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6">1D</td><td style="padding:5px 7px;border:1px solid #d9cfb6">2D</td><td style="padding:5px 7px;border:1px solid #d9cfb6">N-D</td><td style="padding:5px 7px;border:1px solid #d9cfb6">1D recursive</td><td style="padding:5px 7px;border:1px solid #d9cfb6">2D table</td><td style="padding:5px 7px;border:1px solid #d9cfb6">1D</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Type</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Atomic</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Atomic</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Atomic</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Any</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Cols=vectors</td><td style="padding:5px 7px;border:1px solid #d9cfb6">int + levels</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Same type?</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Yes</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Yes</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Yes</td><td style="padding:5px 7px;border:1px solid #d9cfb6">No</td><td style="padding:5px 7px;border:1px solid #d9cfb6">No (per col)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Yes</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Create</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">c()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">matrix()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">array()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">list()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">data.frame()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">factor()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Access</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">v[i]</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">m[i,j]</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">a[i,j,k]</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">L[[i]]</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">df$x</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">levels(f)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Use</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6">series</td><td style="padding:5px 7px;border:1px solid #d9cfb6">linear algebra</td><td style="padding:5px 7px;border:1px solid #d9cfb6">tensors</td><td style="padding:5px 7px;border:1px solid #d9cfb6">mixed results</td><td style="padding:5px 7px;border:1px solid #d9cfb6">datasets</td><td style="padding:5px 7px;border:1px solid #d9cfb6">categories</td></tr>
+      </table>
+
+      <p class="topic-head">Vector</p>
+      <pre class="r-code"><code><span class="cmt"># 1D, same-type</span>
+v <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>)
+v[<span class="num">2</span>:<span class="num">4</span>]      <span class="cmt"># 20 30 40</span>
+v[-<span class="num">1</span>]         <span class="cmt"># drop first element</span>
+v <span class="kw">+</span> <span class="fn">c</span>(<span class="num">1</span>,<span class="num">2</span>)   <span class="cmt"># 11 22 31 42 51 (recycling!)</span></code></pre>
+      <div class="box tip"><span class="label">Gotcha</span>Type coercion &mdash; <code class="inline">c(1, "a", TRUE)</code> silently becomes character. Hierarchy: <code class="inline">logical &lt; integer &lt; numeric &lt; character</code>.</div>
+
+      <p class="topic-head">Matrix</p>
+      <pre class="r-code"><code>m <span class="kw">&lt;-</span> <span class="fn">matrix</span>(<span class="num">1</span>:<span class="num">6</span>, nrow=<span class="num">2</span>, ncol=<span class="num">3</span>)  <span class="cmt"># col-major by default</span>
+m[<span class="num">1</span>, ]                <span class="cmt"># row 1 (drops to vector!)</span>
+m[<span class="num">1</span>, , drop=<span class="kw">FALSE</span>]   <span class="cmt"># keeps as 1x3 matrix</span>
+m <span class="kw">%*%</span> <span class="fn">t</span>(m)            <span class="cmt"># matrix multiplication</span>
+m <span class="kw">*</span> m                 <span class="cmt"># element-wise</span></code></pre>
+      <div class="box tip"><span class="label">Gotcha</span>Single-row subset drops dimension; use <code class="inline">drop=FALSE</code> to preserve.</div>
+
+      <p class="topic-head">List vs Data Frame</p>
+      <div class="diag-2col">
+        <div class="diag-col green"><span class="dchead">List &mdash; mixed bag</span>
+<pre class="r-code"><code>L <span class="kw">&lt;-</span> <span class="fn">list</span>(id=<span class="num">1</span>, name=<span class="str">"Anki"</span>,
+          marks=<span class="fn">c</span>(<span class="num">88</span>,<span class="num">92</span>))
+L[[<span class="str">"marks"</span>]]   <span class="cmt"># vector</span>
+L[<span class="str">"marks"</span>]     <span class="cmt"># still list</span>
+L<span class="kw">$</span>name          <span class="cmt"># "Anki"</span></code></pre>
+        </div>
+        <div class="diag-col gold"><span class="dchead">Data Frame &mdash; tabular</span>
+<pre class="r-code"><code>df <span class="kw">&lt;-</span> <span class="fn">data.frame</span>(
+  id=<span class="num">1</span>:<span class="num">3</span>,
+  name=<span class="fn">c</span>(<span class="str">"A"</span>,<span class="str">"B"</span>,<span class="str">"C"</span>),
+  score=<span class="fn">c</span>(<span class="num">88</span>,<span class="num">92</span>,<span class="num">75</span>)
+)
+df<span class="kw">$</span>score              <span class="cmt"># column</span>
+df[df<span class="kw">$</span>score<span class="kw">&gt;</span><span class="num">80</span>, ]    <span class="cmt"># filter</span></code></pre>
+        </div>
+      </div>
+
+      <p class="topic-head">Factor</p>
+      <pre class="r-code"><code>grade <span class="kw">&lt;-</span> <span class="fn">factor</span>(<span class="fn">c</span>(<span class="str">"B"</span>,<span class="str">"A"</span>,<span class="str">"C"</span>,<span class="str">"A"</span>),
+                levels=<span class="fn">c</span>(<span class="str">"C"</span>,<span class="str">"B"</span>,<span class="str">"A"</span>), ordered=<span class="kw">TRUE</span>)
+<span class="fn">levels</span>(grade)   <span class="cmt"># "C" "B" "A"</span>
+<span class="fn">table</span>(grade)    <span class="cmt"># frequency</span>
+grade <span class="kw">&gt;</span> <span class="str">"B"</span>      <span class="cmt"># TRUE for "A"</span></code></pre>
+      <div class="box why"><span class="label">Trap</span><code class="inline">as.numeric(factor)</code> returns integer codes, not original numbers! Use <code class="inline">as.numeric(as.character(f))</code>.</div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q: Vector vs List?</p>
+      <ul class="qa-bullets">
+        <li>Vector = atomic (same type, contiguous block).</li>
+        <li>List = generic (mixed types, vector of pointers).</li>
+        <li>Access: <code class="inline">v[i]</code> vs <code class="inline">L[i]</code> (sublist) vs <code class="inline">L[[i]]</code> (element).</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q: Why does R "recycle"?</p>
+      <ul class="qa-bullets">
+        <li>Shorter vector repeats to match longer one's length.</li>
+        <li><code class="inline">c(1,2,3,4,5,6) + c(10,20)</code> &rarr; <code class="inline">11 22 13 24 15 26</code>.</li>
+        <li>Warning issued if longer length isn't a multiple of shorter.</li>
+        <li>Enables vectorised arithmetic without explicit loops.</li>
+      </ul>
+      </div>
+    </div>
+    <!-- /Block 03 -->
+
+    <!-- ============ BLOCK 04 ============ -->
+    <div class="theory-unit" id="r-loops">
+      <div class="unit-title"><span class="unit-num">Block 04</span>Loops &amp; Apply Family</div>
+      <div class="box def"><span class="label">3 Loops + 6 Apply Helpers</span>R favours vectorization &mdash; apply family is faster &amp; cleaner than explicit loops.</div>
+
+      <p class="topic-head">Explicit Loops</p>
+      <pre class="r-code"><code><span class="cmt"># for: known iterations</span>
+<span class="kw">for</span> (i <span class="kw">in</span> <span class="num">1</span>:<span class="num">5</span>) <span class="fn">print</span>(i<span class="kw">^</span><span class="num">2</span>)
+
+<span class="cmt"># while: condition-driven</span>
+s <span class="kw">&lt;-</span> <span class="num">0</span>; i <span class="kw">&lt;-</span> <span class="num">1</span>
+<span class="kw">while</span> (s <span class="kw">&lt;=</span> <span class="num">50</span>) { s <span class="kw">&lt;-</span> s <span class="kw">+</span> i; i <span class="kw">&lt;-</span> i <span class="kw">+</span> <span class="num">1</span> }
+
+<span class="cmt"># repeat: must break</span>
+x <span class="kw">&lt;-</span> <span class="num">0</span>
+<span class="kw">repeat</span> { x <span class="kw">&lt;-</span> x <span class="kw">+</span> <span class="num">1</span>; <span class="kw">if</span> (x <span class="kw">==</span> <span class="num">5</span>) <span class="kw">break</span> }</code></pre>
+
+      <p class="topic-head">break vs next</p>
+      <div class="diag-2col">
+        <div class="diag-col green"><span class="dchead">break &mdash; exit loop</span>
+<pre class="r-code"><code><span class="kw">for</span> (i <span class="kw">in</span> <span class="num">1</span>:<span class="num">10</span>) {
+  <span class="kw">if</span> (i <span class="kw">==</span> <span class="num">4</span>) <span class="kw">break</span>
+  <span class="fn">print</span>(i)
+}
+<span class="cmt"># 1 2 3</span></code></pre>
+        </div>
+        <div class="diag-col gold"><span class="dchead">next &mdash; skip iteration</span>
+<pre class="r-code"><code><span class="kw">for</span> (i <span class="kw">in</span> <span class="num">1</span>:<span class="num">5</span>) {
+  <span class="kw">if</span> (i <span class="kw">==</span> <span class="num">3</span>) <span class="kw">next</span>
+  <span class="fn">print</span>(i)
+}
+<span class="cmt"># 1 2 4 5</span></code></pre>
+        </div>
+      </div>
+
+      <p class="topic-head">Apply Family Comparison</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:8px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6">Fn</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Input</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Output</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Use Case</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Example</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">apply</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">matrix</td><td style="padding:5px 7px;border:1px solid #d9cfb6">vector/matrix</td><td style="padding:5px 7px;border:1px solid #d9cfb6">row/col ops</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">apply(m,1,sum)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">lapply</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">list/vec</td><td style="padding:5px 7px;border:1px solid #d9cfb6">LIST</td><td style="padding:5px 7px;border:1px solid #d9cfb6">elem-wise</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">lapply(x,sqrt)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">sapply</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">list/vec</td><td style="padding:5px 7px;border:1px solid #d9cfb6">simplified vec</td><td style="padding:5px 7px;border:1px solid #d9cfb6">cleaner lapply</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">sapply(x,sqrt)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">vapply</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">list/vec</td><td style="padding:5px 7px;border:1px solid #d9cfb6">type-checked</td><td style="padding:5px 7px;border:1px solid #d9cfb6">safe sapply</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">vapply(x,sqrt,numeric(1))</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">mapply</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">multi vecs</td><td style="padding:5px 7px;border:1px solid #d9cfb6">vector</td><td style="padding:5px 7px;border:1px solid #d9cfb6">multi-arg fn</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">mapply(sum,1:3,4:6)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">tapply</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">vec + factor</td><td style="padding:5px 7px;border:1px solid #d9cfb6">grouped vec</td><td style="padding:5px 7px;border:1px solid #d9cfb6">group-by</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">tapply(x,g,mean)</code></td></tr>
+      </table>
+
+      <pre class="r-code"><code><span class="cmt"># apply on matrix</span>
+m <span class="kw">&lt;-</span> <span class="fn">matrix</span>(<span class="num">1</span>:<span class="num">6</span>, <span class="num">2</span>, <span class="num">3</span>)
+<span class="fn">apply</span>(m, <span class="num">1</span>, sum)    <span class="cmt"># row sums: 9 12</span>
+<span class="fn">apply</span>(m, <span class="num">2</span>, mean)   <span class="cmt"># col means: 1.5 3.5 5.5</span>
+
+<span class="cmt"># lapply vs sapply</span>
+<span class="fn">lapply</span>(<span class="num">1</span>:<span class="num">3</span>, <span class="kw">function</span>(x) x<span class="kw">^</span><span class="num">2</span>)  <span class="cmt"># [[1]] 1 [[2]] 4 [[3]] 9</span>
+<span class="fn">sapply</span>(<span class="num">1</span>:<span class="num">3</span>, <span class="kw">function</span>(x) x<span class="kw">^</span><span class="num">2</span>)  <span class="cmt"># 1 4 9 (vector)</span>
+
+<span class="cmt"># tapply: group-by</span>
+scores <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">80</span>,<span class="num">90</span>,<span class="num">70</span>,<span class="num">85</span>,<span class="num">95</span>)
+grp    <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="str">"A"</span>,<span class="str">"B"</span>,<span class="str">"A"</span>,<span class="str">"B"</span>,<span class="str">"A"</span>)
+<span class="fn">tapply</span>(scores, grp, mean)  <span class="cmt"># A:81.67 B:87.5</span></code></pre>
+
+      <div class="box tip"><span class="label">Decision Tree</span>Matrix row/col? &rarr; <code class="inline">apply</code>. Need list out? &rarr; <code class="inline">lapply</code>. Want vector? &rarr; <code class="inline">sapply</code>. Type-safe? &rarr; <code class="inline">vapply</code>. Multi-arg? &rarr; <code class="inline">mapply</code>. Group-by? &rarr; <code class="inline">tapply</code>.</div>
+    </div>
+    <!-- /Block 04 -->
+
+    <!-- ============ BLOCK 05 ============ -->
+    <div class="theory-unit" id="r-distrib">
+      <div class="unit-title"><span class="unit-num">Block 05</span>Statistical Distributions Cheatsheet</div>
+      <div class="box def"><span class="label">The d/p/q/r Convention</span><strong>d</strong>=density, <strong>p</strong>=CDF, <strong>q</strong>=quantile (inverse CDF), <strong>r</strong>=random sample. Append distribution name: norm, binom, pois, t, chisq, f, exp, unif, geom.</div>
+
+      <div class="diag-4">
+        <div class="diag-card"><span class="dk">d &mdash; density</span><code style="font-size:13px;font-weight:700">dnorm(x)</code><div class="diag-sub">PDF/PMF at x</div></div>
+        <div class="diag-card"><span class="dk">p &mdash; CDF</span><code style="font-size:13px;font-weight:700">pnorm(q)</code><div class="diag-sub">P(X &le; q)</div></div>
+        <div class="diag-card"><span class="dk">q &mdash; quantile</span><code style="font-size:13px;font-weight:700">qnorm(p)</code><div class="diag-sub">inverse CDF</div></div>
+        <div class="diag-card"><span class="dk">r &mdash; random</span><code style="font-size:13px;font-weight:700">rnorm(n)</code><div class="diag-sub">draw n samples</div></div>
+      </div>
+
+      <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6">Distribution</th><th style="padding:5px 7px;border:1px solid #d9cfb6">R Stem</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Params</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Mean</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Variance</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Use</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Bernoulli</td><td style="padding:5px 7px;border:1px solid #d9cfb6">binom (size=1)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">p</td><td style="padding:5px 7px;border:1px solid #d9cfb6">p</td><td style="padding:5px 7px;border:1px solid #d9cfb6">p(1-p)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">single yes/no</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Binomial</td><td style="padding:5px 7px;border:1px solid #d9cfb6">binom</td><td style="padding:5px 7px;border:1px solid #d9cfb6">n, p</td><td style="padding:5px 7px;border:1px solid #d9cfb6">np</td><td style="padding:5px 7px;border:1px solid #d9cfb6">np(1-p)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">k successes in n trials</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Poisson</td><td style="padding:5px 7px;border:1px solid #d9cfb6">pois</td><td style="padding:5px 7px;border:1px solid #d9cfb6">&lambda;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">&lambda;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">&lambda;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">rare events / interval</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Geometric</td><td style="padding:5px 7px;border:1px solid #d9cfb6">geom</td><td style="padding:5px 7px;border:1px solid #d9cfb6">p</td><td style="padding:5px 7px;border:1px solid #d9cfb6">(1-p)/p</td><td style="padding:5px 7px;border:1px solid #d9cfb6">(1-p)/p&sup2;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">failures before 1st success</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Uniform (cont)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">unif</td><td style="padding:5px 7px;border:1px solid #d9cfb6">a, b</td><td style="padding:5px 7px;border:1px solid #d9cfb6">(a+b)/2</td><td style="padding:5px 7px;border:1px solid #d9cfb6">(b-a)&sup2;/12</td><td style="padding:5px 7px;border:1px solid #d9cfb6">equal density [a,b]</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Normal</td><td style="padding:5px 7px;border:1px solid #d9cfb6">norm</td><td style="padding:5px 7px;border:1px solid #d9cfb6">&mu;, &sigma;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">&mu;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">&sigma;&sup2;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">bell curve, CLT</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Exponential</td><td style="padding:5px 7px;border:1px solid #d9cfb6">exp</td><td style="padding:5px 7px;border:1px solid #d9cfb6">rate &lambda;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">1/&lambda;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">1/&lambda;&sup2;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">time between events</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Student's t</td><td style="padding:5px 7px;border:1px solid #d9cfb6">t</td><td style="padding:5px 7px;border:1px solid #d9cfb6">df</td><td style="padding:5px 7px;border:1px solid #d9cfb6">0</td><td style="padding:5px 7px;border:1px solid #d9cfb6">df/(df-2)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">small-sample mean</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Chi-square</td><td style="padding:5px 7px;border:1px solid #d9cfb6">chisq</td><td style="padding:5px 7px;border:1px solid #d9cfb6">df</td><td style="padding:5px 7px;border:1px solid #d9cfb6">df</td><td style="padding:5px 7px;border:1px solid #d9cfb6">2&middot;df</td><td style="padding:5px 7px;border:1px solid #d9cfb6">variance, GoF</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">F</td><td style="padding:5px 7px;border:1px solid #d9cfb6">f</td><td style="padding:5px 7px;border:1px solid #d9cfb6">df1, df2</td><td style="padding:5px 7px;border:1px solid #d9cfb6">df2/(df2-2)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">&mdash;</td><td style="padding:5px 7px;border:1px solid #d9cfb6">ANOVA, var ratio</td></tr>
+      </table>
+
+      <p class="topic-head">Normal &mdash; The Bell Curve</p>
+      <pre class="r-code"><code><span class="cmt"># Standard Normal N(0,1)</span>
+<span class="fn">dnorm</span>(<span class="num">0</span>)               <span class="cmt"># 0.399 (peak)</span>
+<span class="fn">pnorm</span>(<span class="num">1.96</span>)            <span class="cmt"># 0.975</span>
+<span class="fn">qnorm</span>(<span class="num">0.975</span>)           <span class="cmt"># 1.96 (critical z)</span>
+<span class="fn">rnorm</span>(<span class="num">5</span>, mean=<span class="num">100</span>, sd=<span class="num">15</span>) <span class="cmt"># IQ scores</span></code></pre>
+
+      <p class="topic-head">Binomial &amp; Poisson</p>
+      <pre class="r-code"><code><span class="fn">dbinom</span>(<span class="num">5</span>, size=<span class="num">10</span>, prob=<span class="num">0.5</span>)  <span class="cmt"># P(X=5)=0.246</span>
+<span class="fn">pbinom</span>(<span class="num">5</span>, size=<span class="num">10</span>, prob=<span class="num">0.5</span>)  <span class="cmt"># P(X&le;5)=0.623</span>
+<span class="fn">dpois</span>(<span class="num">2</span>, lambda=<span class="num">3</span>)         <span class="cmt"># P(X=2) for &lambda;=3</span>
+<span class="fn">rpois</span>(<span class="num">10</span>, lambda=<span class="num">3</span>)        <span class="cmt"># 10 simulated counts</span></code></pre>
+
+      <div class="box tip"><span class="label">Memory Aid</span><strong>1.</strong> d/p/q/r &mdash; same 4 letters for every distribution. <strong>2.</strong> Mean = Variance only for Poisson. <strong>3.</strong> Binomial counts hits in n trials; Poisson counts hits per interval. <strong>4.</strong> t for means, &chi;&sup2; for variances &amp; counts, F for ratios (ANOVA).</div>
+    </div>
+    <!-- /Block 05 -->
+
+    <!-- ============ BLOCK 06 ============ -->
+    <div class="theory-unit" id="r-oop">
+      <div class="unit-title"><span class="unit-num">Block 06</span>OOP in R &mdash; S3 vs S4 vs R5</div>
+      <div class="box def"><span class="label">Three OOP Systems</span>R supports 3 OOP styles: <strong>S3</strong> (informal, base R), <strong>S4</strong> (formal, Bioconductor), <strong>R5/Reference Classes</strong> (mutable, Java-like).</div>
+
+      <p class="topic-head">S3 &mdash; Informal</p>
+      <pre class="r-code"><code><span class="cmt"># 1. Create object as list</span>
+emp <span class="kw">&lt;-</span> <span class="fn">list</span>(name=<span class="str">"Rex"</span>, sal=<span class="num">50000</span>)
+<span class="cmt"># 2. Assign class</span>
+<span class="fn">class</span>(emp) <span class="kw">&lt;-</span> <span class="str">"Employee"</span>
+<span class="cmt"># 3. Method via naming convention</span>
+print.Employee <span class="kw">&lt;-</span> <span class="kw">function</span>(x, ...) {
+  <span class="fn">cat</span>(<span class="str">"Name:"</span>, x<span class="kw">$</span>name, <span class="str">"Salary:"</span>, x<span class="kw">$</span>sal, <span class="str">"\n"</span>)
+}
+<span class="fn">print</span>(emp)  <span class="cmt"># dispatches to print.Employee</span></code></pre>
+
+      <p class="topic-head">S4 &mdash; Formal</p>
+      <pre class="r-code"><code><span class="fn">setClass</span>(<span class="str">"Student"</span>, representation=<span class="fn">representation</span>(
+  name=<span class="str">"character"</span>, roll=<span class="str">"numeric"</span>, marks=<span class="str">"numeric"</span>
+))
+s1 <span class="kw">&lt;-</span> <span class="fn">new</span>(<span class="str">"Student"</span>, name=<span class="str">"Anki"</span>, roll=<span class="num">101</span>, marks=<span class="num">88</span>)
+s1<span class="kw">@</span>name   <span class="cmt"># slot access via @</span>
+
+<span class="fn">setGeneric</span>(<span class="str">"grade"</span>, <span class="kw">function</span>(obj) <span class="fn">standardGeneric</span>(<span class="str">"grade"</span>))
+<span class="fn">setMethod</span>(<span class="str">"grade"</span>, <span class="str">"Student"</span>, <span class="kw">function</span>(obj) {
+  <span class="kw">if</span> (obj<span class="kw">@</span>marks <span class="kw">&gt;=</span> <span class="num">75</span>) <span class="str">"A"</span> <span class="kw">else</span> <span class="str">"B"</span>
+})
+<span class="fn">grade</span>(s1)</code></pre>
+
+      <p class="topic-head">R5 / Reference Classes &mdash; Mutable</p>
+      <pre class="r-code"><code>Counter <span class="kw">&lt;-</span> <span class="fn">setRefClass</span>(<span class="str">"Counter"</span>,
+  fields  = <span class="fn">list</span>(n=<span class="str">"numeric"</span>),
+  methods = <span class="fn">list</span>(
+    inc = <span class="kw">function</span>() { n <span class="kw">&lt;&lt;-</span> n <span class="kw">+</span> <span class="num">1</span> },
+    show = <span class="kw">function</span>() { <span class="fn">cat</span>(<span class="str">"count ="</span>, n, <span class="str">"\n"</span>) }
+  )
+)
+c1 <span class="kw">&lt;-</span> Counter<span class="kw">$</span><span class="fn">new</span>(n=<span class="num">0</span>)
+c1<span class="kw">$</span><span class="fn">inc</span>(); c1<span class="kw">$</span><span class="fn">inc</span>()
+c1<span class="kw">$</span><span class="fn">show</span>()  <span class="cmt"># count = 2 (mutated in place!)</span></code></pre>
+
+      <p class="topic-head">Comparison</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6">Feature</th><th style="padding:5px 7px;border:1px solid #d9cfb6">S3</th><th style="padding:5px 7px;border:1px solid #d9cfb6">S4</th><th style="padding:5px 7px;border:1px solid #d9cfb6">R5</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Formality</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Informal</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Formal, typed</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Formal, Java-like</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Define</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">class()&lt;-</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">setClass()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">setRefClass()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Instance</td><td style="padding:5px 7px;border:1px solid #d9cfb6">list + class attr</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">new("X",...)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">X$new(...)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Slot access</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">$</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">@</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">$</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Mutable?</td><td style="padding:5px 7px;border:1px solid #d9cfb6">No</td><td style="padding:5px 7px;border:1px solid #d9cfb6">No</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><strong>Yes</strong></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Dispatch</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">UseMethod()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">setMethod()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">methods inside class</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Use when</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Quick scripts</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Strict packages</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Stateful objects</td></tr>
+      </table>
+
+      <div class="box tip"><span class="label">When to use which</span>S3 for everyday R (90% of code, used by <code class="inline">lm</code>, <code class="inline">data.frame</code>). S4 for Bioconductor/strict packages. R5 when you need mutable state (counters, caches, GUI widgets).</div>
+    </div>
+    <!-- /Block 06 -->
+
+    <!-- ============ BLOCK 07 ============ -->
+    <div class="theory-unit" id="r-plots">
+      <div class="unit-title"><span class="unit-num">Block 07</span>Plot Gallery (Base R + ggplot2)</div>
+      <div class="box def"><span class="label">Pick the Right Chart</span>Match chart to data type. Base R is fast; ggplot2 is publication-quality.</div>
+
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Data Type</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Best Chart</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Function</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">1 var continuous</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Histogram / Density</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">hist()</code> / <code class="inline">geom_density()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">1 var categorical</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Bar plot</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">barplot()</code> / <code class="inline">geom_bar()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">2 vars continuous</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Scatter</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">plot()</code> / <code class="inline">geom_point()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Time series</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Line</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">plot(type="l")</code> / <code class="inline">geom_line()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Part-of-whole</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Pie</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">pie()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">By-group distribution</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Boxplot</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">boxplot()</code> / <code class="inline">geom_boxplot()</code></td></tr>
+      </table>
+
+      <p class="topic-head">Scatter: Base R vs ggplot2</p>
+      <div class="diag-2col">
+        <div class="diag-col green"><span class="dchead">Base R</span>
+<pre class="r-code"><code><span class="fn">plot</span>(mtcars<span class="kw">$</span>wt, mtcars<span class="kw">$</span>mpg,
+     main=<span class="str">"MPG vs Weight"</span>,
+     pch=<span class="num">19</span>, col=<span class="str">"steelblue"</span>)</code></pre>
+        </div>
+        <div class="diag-col gold"><span class="dchead">ggplot2</span>
+<pre class="r-code"><code><span class="fn">library</span>(ggplot2)
+<span class="fn">ggplot</span>(mtcars, <span class="fn">aes</span>(wt, mpg)) <span class="kw">+</span>
+  <span class="fn">geom_point</span>(color=<span class="str">"steelblue"</span>) <span class="kw">+</span>
+  <span class="fn">labs</span>(title=<span class="str">"MPG vs Weight"</span>)</code></pre>
+        </div>
+      </div>
+
+      <p class="topic-head">Histogram + Boxplot</p>
+      <pre class="r-code"><code><span class="cmt"># Base R</span>
+<span class="fn">hist</span>(mtcars<span class="kw">$</span>mpg, breaks=<span class="num">10</span>, col=<span class="str">"skyblue"</span>, main=<span class="str">"MPG"</span>)
+<span class="fn">boxplot</span>(mpg <span class="kw">~</span> cyl, data=mtcars, col=<span class="str">"lightgreen"</span>)
+
+<span class="cmt"># ggplot2</span>
+<span class="fn">ggplot</span>(mtcars, <span class="fn">aes</span>(mpg)) <span class="kw">+</span> <span class="fn">geom_histogram</span>(bins=<span class="num">10</span>, fill=<span class="str">"skyblue"</span>)
+<span class="fn">ggplot</span>(mtcars, <span class="fn">aes</span>(<span class="fn">factor</span>(cyl), mpg)) <span class="kw">+</span> <span class="fn">geom_boxplot</span>()</code></pre>
+
+      <p class="topic-head">ggplot2 &mdash; 7-Layer Grammar</p>
+      <div class="box tip"><span class="label">The Layers</span><b>data</b> &rarr; <b>aes</b> (map cols to x/y/colour) &rarr; <b>geom</b> (points, bars, lines) &rarr; <b>stat</b> (smoothers, counts) &rarr; <b>facet</b> (small multiples) &rarr; <b>coord</b> &rarr; <b>theme</b>. Add layers with <code class="inline">+</code>.</div>
+
+      <pre class="r-code"><code><span class="fn">ggplot</span>(mtcars, <span class="fn">aes</span>(x=wt, y=mpg, color=<span class="fn">factor</span>(cyl))) <span class="kw">+</span>  <span class="cmt"># data + aes</span>
+  <span class="fn">geom_point</span>(size=<span class="num">3</span>) <span class="kw">+</span>                                  <span class="cmt"># geom</span>
+  <span class="fn">stat_smooth</span>(method=<span class="str">"lm"</span>, se=<span class="kw">FALSE</span>) <span class="kw">+</span>                  <span class="cmt"># stat</span>
+  <span class="fn">facet_wrap</span>(<span class="kw">~</span> gear) <span class="kw">+</span>                                <span class="cmt"># facet</span>
+  <span class="fn">theme_minimal</span>() <span class="kw">+</span> <span class="fn">labs</span>(title=<span class="str">"MPG vs Weight"</span>)        <span class="cmt"># theme + labels</span></code></pre>
+
+      <p class="topic-head">Saving Plots</p>
+      <pre class="r-code"><code><span class="cmt"># Base R</span>
+<span class="fn">png</span>(<span class="str">"scatter.png"</span>, width=<span class="num">800</span>, height=<span class="num">600</span>)
+<span class="fn">plot</span>(x, y)
+<span class="fn">dev.off</span>()  <span class="cmt"># IMPORTANT</span>
+
+<span class="cmt"># ggplot2</span>
+<span class="fn">ggsave</span>(<span class="str">"out.png"</span>, plot=p, width=<span class="num">8</span>, height=<span class="num">6</span>, dpi=<span class="num">300</span>)</code></pre>
+    </div>
+    <!-- /Block 07 -->
+
+    <!-- ============ BLOCK 08 ============ -->
+    <div class="theory-unit" id="r-tests">
+      <div class="unit-title"><span class="unit-num">Block 08</span>Statistical Tests Decision Guide</div>
+      <div class="box def"><span class="label">Pick the Right Test</span>Numerical &rarr; t/ANOVA/correlation. Categorical &rarr; chi-square. Non-normal &rarr; Wilcoxon. Always state H&#x2080; and H&#x2081;.</div>
+
+      <p class="topic-head">Decision Tree</p>
+      <div class="diag-step">
+        <div class="diag-step-box dk">Q1: Numerical or Categorical data?</div>
+        <div class="diag-step-arr">&darr;</div>
+        <div class="diag-step-box gr">Numerical &rarr; continue | Categorical &rarr; Chi-square</div>
+        <div class="diag-step-arr">&darr;</div>
+        <div class="diag-step-box dk">Q2: How many groups?</div>
+        <div class="diag-step-arr">&darr;</div>
+        <div class="diag-step-box gr">1 = one-sample t-test | 2 = two-sample t-test | 3+ = ANOVA</div>
+      </div>
+
+      <p class="topic-head">Master Decision Table</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Question</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Test</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">R Function</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Mean of 1 group vs known value</td><td style="padding:5px 7px;border:1px solid #d9cfb6">One-sample t</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">t.test(x, mu=50)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Means of 2 independent groups</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Two-sample t</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">t.test(x, y)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Before/after same subjects</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Paired t</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">t.test(x,y,paired=TRUE)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">3+ group means</td><td style="padding:5px 7px;border:1px solid #d9cfb6">ANOVA</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">aov(y~group, data=df)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">2 categorical association</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Chi-square</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">chisq.test(table(x,y))</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Linear correlation</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Pearson</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">cor.test(x,y)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Non-normal 2-group</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Wilcoxon</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">wilcox.test(x,y)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Test normality</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Shapiro-Wilk</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">shapiro.test(x)</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Compare 2 variances</td><td style="padding:5px 7px;border:1px solid #d9cfb6">F-test</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">var.test(x,y)</code></td></tr>
+      </table>
+
+      <div class="box tip"><span class="label">Golden Rule</span>p &lt; 0.05 &rarr; Reject H&#x2080; (significant). p &ge; 0.05 &rarr; Fail to reject H&#x2080; (not significant).</div>
+
+      <p class="topic-head">Quick Examples</p>
+      <pre class="r-code"><code><span class="cmt"># One-sample t-test</span>
+scores <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">78</span>,<span class="num">82</span>,<span class="num">85</span>,<span class="num">79</span>,<span class="num">88</span>,<span class="num">76</span>,<span class="num">81</span>,<span class="num">84</span>,<span class="num">80</span>,<span class="num">83</span>)
+<span class="fn">t.test</span>(scores, mu=<span class="num">75</span>)
+<span class="cmt"># t=5.84, df=9, p=0.00024 &rarr; Reject H&#x2080;, mean differs from 75</span>
+
+<span class="cmt"># Chi-square</span>
+tbl <span class="kw">&lt;-</span> <span class="fn">matrix</span>(<span class="fn">c</span>(<span class="num">30</span>,<span class="num">15</span>,<span class="num">20</span>,<span class="num">35</span>), nrow=<span class="num">2</span>)
+<span class="fn">chisq.test</span>(tbl)
+
+<span class="cmt"># ANOVA</span>
+yield <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">22</span>,<span class="num">24</span>,<span class="num">25</span>,<span class="num">28</span>,<span class="num">30</span>,<span class="num">32</span>,<span class="num">35</span>,<span class="num">37</span>,<span class="num">38</span>)
+fert  <span class="kw">&lt;-</span> <span class="fn">factor</span>(<span class="fn">rep</span>(<span class="fn">c</span>(<span class="str">"A"</span>,<span class="str">"B"</span>,<span class="str">"C"</span>), each=<span class="num">3</span>))
+<span class="fn">summary</span>(<span class="fn">aov</span>(yield <span class="kw">~</span> fert))</code></pre>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q: Type I vs Type II error?</p>
+      <ul class="qa-bullets">
+        <li>Type I (&alpha;) = Reject H&#x2080; when TRUE (false positive). Usually &alpha; = 0.05.</li>
+        <li>Type II (&beta;) = Fail to reject H&#x2080; when FALSE (false negative).</li>
+        <li>Power = 1 &minus; &beta;; usually targeted &ge; 0.80.</li>
+        <li>Mnemonic: Type I = "crying wolf", Type II = "missing the wolf".</li>
+      </ul>
+      </div>
+    </div>
+    <!-- /Block 08 -->
+
+    <!-- ============ BLOCK 09 ============ -->
+    <div class="theory-unit" id="r-hypotest">
+      <div class="unit-title"><span class="unit-num">Block 09</span>Hypothesis Testing &mdash; Worked Numericals</div>
+      <div class="box def"><span class="label">5-Step Recipe</span>1) State H&#x2080;/H&#x2081;, 2) Choose &alpha; (0.05), 3) Compute statistic, 4) Find p-value, 5) Decide (reject if p &lt; &alpha;).</div>
+
+      <p class="topic-head">Problem 1 &mdash; One-Sample t-test</p>
+      <div class="box why"><span class="label">Setup</span>Factory claims bulbs last 1000 hrs. Sample of 8: {995,1010,980,1005,990,1020,985,1000}. Test &alpha;=0.05.</div>
+
+      <div class="box def">
+      <strong>H&#x2080;:</strong> &mu; = 1000 &nbsp;|&nbsp; <strong>H&#x2081;:</strong> &mu; &ne; 1000 (two-tailed)<br>
+      <strong>x&#772;</strong> = 7985/8 = <b>998.125</b> &nbsp;|&nbsp; <strong>s</strong> &asymp; <b>13.34</b> &nbsp;|&nbsp; <strong>SE</strong> = 13.34/&radic;8 &asymp; 4.72<br>
+      <strong>t</strong> = (998.125 &minus; 1000) / 4.72 &asymp; <b>&minus;0.40</b><br>
+      <strong>df</strong> = 7; <strong>t<sub>crit</sub></strong> &asymp; &plusmn;2.365; <strong>p-value</strong> &asymp; 0.70
+      </div>
+
+      <pre class="r-code"><code>x <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">995</span>,<span class="num">1010</span>,<span class="num">980</span>,<span class="num">1005</span>,<span class="num">990</span>,<span class="num">1020</span>,<span class="num">985</span>,<span class="num">1000</span>)
+<span class="fn">t.test</span>(x, mu=<span class="num">1000</span>)
+<span class="cmt"># t=-0.3975, df=7, p-value=0.7028</span>
+<span class="cmt"># 95% CI: (986.97, 1009.28) -- contains 1000</span></code></pre>
+      <div class="box tip"><span class="label">Decision</span>p (0.70) &gt; &alpha; (0.05) &rarr; <b>Fail to reject H&#x2080;</b>. Claim supported.</div>
+
+      <p class="topic-head">Problem 2 &mdash; Two-Sample t-test</p>
+      <div class="box why"><span class="label">Setup</span>Class A: {78,82,85,90,76}. Class B: {72,75,70,80,74}. &alpha;=0.05.</div>
+      <div class="box def">
+      <strong>H&#x2080;:</strong> &mu;<sub>A</sub> = &mu;<sub>B</sub> &nbsp;|&nbsp; <strong>H&#x2081;:</strong> &mu;<sub>A</sub> &ne; &mu;<sub>B</sub><br>
+      x&#772;<sub>A</sub> = 82.2, s<sub>A</sub> &asymp; 5.59 &nbsp;|&nbsp; x&#772;<sub>B</sub> = 74.2, s<sub>B</sub> &asymp; 3.77<br>
+      SE = &radic;(31.2/5 + 14.2/5) &asymp; 3.01<br>
+      <strong>t</strong> = (82.2 &minus; 74.2) / 3.01 &asymp; <b>2.66</b>; df &asymp; 7; p &asymp; <b>0.03</b>
+      </div>
+      <pre class="r-code"><code>a <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">78</span>,<span class="num">82</span>,<span class="num">85</span>,<span class="num">90</span>,<span class="num">76</span>)
+b <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">72</span>,<span class="num">75</span>,<span class="num">70</span>,<span class="num">80</span>,<span class="num">74</span>)
+<span class="fn">t.test</span>(a, b)
+<span class="cmt"># t=2.6553, df=7.4, p-value=0.02989</span></code></pre>
+      <div class="box tip"><span class="label">Decision</span>p (0.03) &lt; 0.05 &rarr; <b>Reject H&#x2080;</b>. Class A scores significantly higher.</div>
+
+      <p class="topic-head">Problem 3 &mdash; Chi-Square Independence</p>
+      <div class="box why"><span class="label">Setup</span>
+      <table style="font-size:11.5px;margin:6px 0">
+      <tr><td></td><td><b>Product A</b></td><td><b>Product B</b></td><td><b>Total</b></td></tr>
+      <tr><td><b>Male</b></td><td>30</td><td>20</td><td>50</td></tr>
+      <tr><td><b>Female</b></td><td>15</td><td>35</td><td>50</td></tr>
+      <tr><td><b>Total</b></td><td>45</td><td>55</td><td>100</td></tr>
+      </table>
+      </div>
+      <div class="box def">
+      <strong>H&#x2080;:</strong> independent &nbsp;|&nbsp; <strong>H&#x2081;:</strong> dependent<br>
+      E<sub>ij</sub> = (row total &times; col total) / grand total<br>
+      E(M,A) = 50&times;45/100 = 22.5 &nbsp;|&nbsp; E(M,B) = 27.5 &nbsp;|&nbsp; E(F,A) = 22.5 &nbsp;|&nbsp; E(F,B) = 27.5<br>
+      &chi;&sup2; = &Sigma;(O&minus;E)&sup2;/E = 2.5 + 2.045 + 2.5 + 2.045 &asymp; <b>9.09</b><br>
+      df = (2&minus;1)(2&minus;1) = 1; &chi;&sup2;<sub>crit</sub> = 3.841; p &asymp; <b>0.003</b>
+      </div>
+      <pre class="r-code"><code>tbl <span class="kw">&lt;-</span> <span class="fn">matrix</span>(<span class="fn">c</span>(<span class="num">30</span>,<span class="num">15</span>,<span class="num">20</span>,<span class="num">35</span>), nrow=<span class="num">2</span>,
+              dimnames=<span class="fn">list</span>(<span class="fn">c</span>(<span class="str">"M"</span>,<span class="str">"F"</span>), <span class="fn">c</span>(<span class="str">"A"</span>,<span class="str">"B"</span>)))
+<span class="fn">chisq.test</span>(tbl, correct=<span class="kw">FALSE</span>)
+<span class="cmt"># X-squared=9.09, df=1, p-value=0.0026</span></code></pre>
+      <div class="box tip"><span class="label">Decision</span>p (0.003) &lt; 0.05 &rarr; <b>Reject H&#x2080;</b>. Gender and product preference ARE associated.</div>
+    </div>
+    <!-- /Block 09 -->
+
+    <!-- ============ BLOCK 10 ============ -->
+    <div class="theory-unit" id="r-central">
+      <div class="unit-title"><span class="unit-num">Block 10</span>Central Tendency &amp; Dispersion Numericals</div>
+      <div class="box def"><span class="label">Quick Formulas</span>&mu; = &Sigma;x/n &middot; Median = middle &middot; Mode = most freq &middot; &sigma;&sup2; = &Sigma;(x&minus;&mu;)&sup2;/n &middot; SD = &radic;Var &middot; Range = max&minus;min &middot; IQR = Q3&minus;Q1 &middot; CV = (&sigma;/&mu;) &times; 100%</div>
+
+      <p class="topic-head">Problem 1 &mdash; Mean, Median, Mode</p>
+      <div class="box why"><span class="label">Data</span>{12, 15, 14, 10, 18, 14, 16, 14, 19, 14}, n = 10</div>
+      <div class="box def">
+      &Sigma;x = 146 &nbsp;&rarr;&nbsp; <strong>Mean = 14.6</strong><br>
+      Sorted: 10,12,14,14,14,14,15,16,18,19 &nbsp;&rarr;&nbsp; <strong>Median = (14+14)/2 = 14</strong><br>
+      14 appears 4 times &nbsp;&rarr;&nbsp; <strong>Mode = 14</strong>
+      </div>
+      <pre class="r-code"><code>x <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">12</span>,<span class="num">15</span>,<span class="num">14</span>,<span class="num">10</span>,<span class="num">18</span>,<span class="num">14</span>,<span class="num">16</span>,<span class="num">14</span>,<span class="num">19</span>,<span class="num">14</span>)
+<span class="fn">mean</span>(x)      <span class="cmt"># 14.6</span>
+<span class="fn">median</span>(x)    <span class="cmt"># 14</span>
+<span class="fn">names</span>(<span class="fn">table</span>(x))[<span class="fn">which.max</span>(<span class="fn">table</span>(x))]   <span class="cmt"># "14"</span></code></pre>
+
+      <p class="topic-head">Problem 2 &mdash; Variance &amp; SD</p>
+      <div class="box why"><span class="label">Data</span>{2, 4, 4, 4, 5, 5, 7, 9}, n = 8</div>
+      <div class="box def">
+      Mean = 40/8 = <b>5</b><br>
+      Deviations: &minus;3, &minus;1, &minus;1, &minus;1, 0, 0, 2, 4 &nbsp;&rarr;&nbsp; Squared: 9, 1, 1, 1, 0, 0, 4, 16 &nbsp;&rarr;&nbsp; &Sigma;(x&minus;&mu;)&sup2; = 32<br>
+      <strong>Population &sigma;&sup2;</strong> = 32/8 = 4 &nbsp;|&nbsp; <strong>&sigma;</strong> = 2<br>
+      <strong>Sample s&sup2;</strong> = 32/7 &asymp; 4.571 &nbsp;|&nbsp; <strong>s</strong> &asymp; 2.138
+      </div>
+      <pre class="r-code"><code>x <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">2</span>,<span class="num">4</span>,<span class="num">4</span>,<span class="num">4</span>,<span class="num">5</span>,<span class="num">5</span>,<span class="num">7</span>,<span class="num">9</span>)
+<span class="fn">var</span>(x)   <span class="cmt"># 4.571 (sample, n-1)</span>
+<span class="fn">sd</span>(x)    <span class="cmt"># 2.138</span></code></pre>
+      <div class="box tip"><span class="label">Note</span>R's <code class="inline">var()</code> &amp; <code class="inline">sd()</code> use <b>n&minus;1</b> (sample, Bessel's correction).</div>
+
+      <p class="topic-head">Problem 3 &mdash; Weighted Mean</p>
+      <div class="box why"><span class="label">Data</span>Marks = (80, 75, 90), Credits = (3, 2, 5)</div>
+      <div class="box def">
+      x&#772;<sub>w</sub> = &Sigma;(w&middot;x) / &Sigma;w = (240 + 150 + 450) / 10 = <b>84</b>
+      </div>
+      <pre class="r-code"><code><span class="fn">weighted.mean</span>(<span class="fn">c</span>(<span class="num">80</span>,<span class="num">75</span>,<span class="num">90</span>), <span class="fn">c</span>(<span class="num">3</span>,<span class="num">2</span>,<span class="num">5</span>))  <span class="cmt"># 84</span></code></pre>
+
+      <p class="topic-head">Problem 4 &mdash; Range &amp; IQR</p>
+      <div class="box why"><span class="label">Data (sorted)</span>{5,7,8,9,10,12,15,18,20,25}, n=10</div>
+      <div class="box def">
+      Range = 25 &minus; 5 = <b>20</b><br>
+      Q1 = 8 (3rd value), Q3 = 18 (8th value)<br>
+      IQR = Q3 &minus; Q1 = <b>10</b>
+      </div>
+      <pre class="r-code"><code>x <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">5</span>,<span class="num">7</span>,<span class="num">8</span>,<span class="num">9</span>,<span class="num">10</span>,<span class="num">12</span>,<span class="num">15</span>,<span class="num">18</span>,<span class="num">20</span>,<span class="num">25</span>)
+<span class="fn">diff</span>(<span class="fn">range</span>(x))   <span class="cmt"># 20</span>
+<span class="fn">IQR</span>(x)           <span class="cmt"># 9 (R uses linear interpolation)</span></code></pre>
+      <div class="box tip"><span class="label">Note</span><code class="inline">range(x)</code> returns c(min,max), not the difference. Use <code class="inline">diff(range(x))</code>.</div>
+
+      <p class="topic-head">Problem 5 &mdash; Coefficient of Variation</p>
+      <div class="box why"><span class="label">Data</span>Set A: &mu;=50, &sigma;=5. Set B: &mu;=200, &sigma;=10.</div>
+      <div class="box def">
+      CV<sub>A</sub> = (5/50) &times; 100 = <b>10%</b><br>
+      CV<sub>B</sub> = (10/200) &times; 100 = <b>5%</b><br>
+      &rarr; Set B is more consistent (smaller CV).
+      </div>
+
+      <div class="box tip"><span class="label">Trap Qs</span>Median is robust to outliers (use for skewed data). Mean is sensitive. For categorical &rarr; mode only. CV needs positive mean &amp; ratio scale.</div>
+    </div>
+    <!-- /Block 10 -->
+
+    <!-- ============ BLOCK 11 ============ -->
+    <div class="theory-unit" id="r-corr">
+      <div class="unit-title"><span class="unit-num">Block 11</span>Correlation &amp; Regression Numericals</div>
+      <div class="box def"><span class="label">Key Formulas</span>Pearson r = &Sigma;(x&minus;x&#772;)(y&minus;y&#772;) / &radic;(&Sigma;(x&minus;x&#772;)&sup2;&middot;&Sigma;(y&minus;y&#772;)&sup2;) &nbsp;|&nbsp; Slope b = &Sigma;(x&minus;x&#772;)(y&minus;y&#772;) / &Sigma;(x&minus;x&#772;)&sup2; &nbsp;|&nbsp; Intercept a = y&#772; &minus; b&middot;x&#772;</div>
+
+      <p class="topic-head">Problem 1 &mdash; Pearson r</p>
+      <div class="box why"><span class="label">Data</span>x = {1,2,3,4,5}, y = {2,4,5,4,5}. x&#772; = 3, y&#772; = 4</div>
+      <table style="width:100%;border-collapse:collapse;font-size:11.5px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:4px 7px;border:1px solid #d9cfb6">x</th><th style="padding:4px 7px;border:1px solid #d9cfb6">y</th><th style="padding:4px 7px;border:1px solid #d9cfb6">x&minus;x&#772;</th><th style="padding:4px 7px;border:1px solid #d9cfb6">y&minus;y&#772;</th><th style="padding:4px 7px;border:1px solid #d9cfb6">(x&minus;x&#772;)(y&minus;y&#772;)</th><th style="padding:4px 7px;border:1px solid #d9cfb6">(x&minus;x&#772;)&sup2;</th><th style="padding:4px 7px;border:1px solid #d9cfb6">(y&minus;y&#772;)&sup2;</th></tr>
+      <tr><td style="padding:4px 7px;border:1px solid #d9cfb6">1</td><td style="padding:4px 7px;border:1px solid #d9cfb6">2</td><td style="padding:4px 7px;border:1px solid #d9cfb6">-2</td><td style="padding:4px 7px;border:1px solid #d9cfb6">-2</td><td style="padding:4px 7px;border:1px solid #d9cfb6">4</td><td style="padding:4px 7px;border:1px solid #d9cfb6">4</td><td style="padding:4px 7px;border:1px solid #d9cfb6">4</td></tr>
+      <tr><td style="padding:4px 7px;border:1px solid #d9cfb6">2</td><td style="padding:4px 7px;border:1px solid #d9cfb6">4</td><td style="padding:4px 7px;border:1px solid #d9cfb6">-1</td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td><td style="padding:4px 7px;border:1px solid #d9cfb6">1</td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td></tr>
+      <tr><td style="padding:4px 7px;border:1px solid #d9cfb6">3</td><td style="padding:4px 7px;border:1px solid #d9cfb6">5</td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td><td style="padding:4px 7px;border:1px solid #d9cfb6">1</td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td><td style="padding:4px 7px;border:1px solid #d9cfb6">1</td></tr>
+      <tr><td style="padding:4px 7px;border:1px solid #d9cfb6">4</td><td style="padding:4px 7px;border:1px solid #d9cfb6">4</td><td style="padding:4px 7px;border:1px solid #d9cfb6">1</td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td><td style="padding:4px 7px;border:1px solid #d9cfb6">1</td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td></tr>
+      <tr><td style="padding:4px 7px;border:1px solid #d9cfb6">5</td><td style="padding:4px 7px;border:1px solid #d9cfb6">5</td><td style="padding:4px 7px;border:1px solid #d9cfb6">2</td><td style="padding:4px 7px;border:1px solid #d9cfb6">1</td><td style="padding:4px 7px;border:1px solid #d9cfb6">2</td><td style="padding:4px 7px;border:1px solid #d9cfb6">4</td><td style="padding:4px 7px;border:1px solid #d9cfb6">1</td></tr>
+      <tr style="background:rgba(22,163,74,.08)"><td style="padding:4px 7px;border:1px solid #d9cfb6"><b>&Sigma;</b></td><td style="padding:4px 7px;border:1px solid #d9cfb6"></td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td><td style="padding:4px 7px;border:1px solid #d9cfb6">0</td><td style="padding:4px 7px;border:1px solid #d9cfb6"><b>6</b></td><td style="padding:4px 7px;border:1px solid #d9cfb6"><b>10</b></td><td style="padding:4px 7px;border:1px solid #d9cfb6"><b>6</b></td></tr>
+      </table>
+      <div class="box def">
+      <strong>r</strong> = 6 / &radic;(10 &times; 6) = 6 / &radic;60 = 6 / 7.746 &asymp; <b>0.775</b>
+      </div>
+      <pre class="r-code"><code><span class="fn">cor</span>(<span class="fn">c</span>(<span class="num">1</span>:<span class="num">5</span>), <span class="fn">c</span>(<span class="num">2</span>,<span class="num">4</span>,<span class="num">5</span>,<span class="num">4</span>,<span class="num">5</span>))  <span class="cmt"># 0.7746</span></code></pre>
+
+      <p class="topic-head">Problem 2 &mdash; Linear Regression</p>
+      <div class="box why"><span class="label">Data</span>x (hrs) = {2,4,6,8,10}, y (score) = {40,55,65,75,90}. x&#772;=6, y&#772;=65</div>
+      <div class="box def">
+      &Sigma;(x&minus;x&#772;)(y&minus;y&#772;) = 100 + 20 + 0 + 20 + 100 = <b>240</b><br>
+      &Sigma;(x&minus;x&#772;)&sup2; = 16 + 4 + 0 + 4 + 16 = <b>40</b><br>
+      <strong>Slope b</strong> = 240/40 = <b>6.0</b><br>
+      <strong>Intercept a</strong> = 65 &minus; 6&times;6 = <b>29</b><br>
+      <strong>Equation:</strong> &#375; = 29 + 6&middot;x<br>
+      <strong>Predict at x=7:</strong> 29 + 42 = <b>71</b><br>
+      <strong>r&sup2;</strong> = (240)&sup2; / (40 &times; 1450) &asymp; <b>0.993</b> (99.3% variance explained)
+      </div>
+      <pre class="r-code"><code>x <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">2</span>,<span class="num">4</span>,<span class="num">6</span>,<span class="num">8</span>,<span class="num">10</span>)
+y <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">40</span>,<span class="num">55</span>,<span class="num">65</span>,<span class="num">75</span>,<span class="num">90</span>)
+model <span class="kw">&lt;-</span> <span class="fn">lm</span>(y <span class="kw">~</span> x)
+<span class="fn">summary</span>(model)
+<span class="cmt"># Intercept = 29.0, Slope = 6.0, R-sq = 0.9931</span>
+<span class="fn">predict</span>(model, <span class="fn">data.frame</span>(x=<span class="num">7</span>))  <span class="cmt"># 71</span></code></pre>
+
+      <p class="topic-head">Problem 3 &mdash; Spearman Rank Correlation</p>
+      <div class="box why"><span class="label">Formula</span>&rho; = 1 &minus; (6&middot;&Sigma;d&sup2;) / (n(n&sup2;&minus;1))</div>
+      <pre class="r-code"><code>math <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">45</span>,<span class="num">70</span>,<span class="num">65</span>,<span class="num">30</span>,<span class="num">90</span>)
+sci  <span class="kw">&lt;-</span> <span class="fn">c</span>(<span class="num">35</span>,<span class="num">90</span>,<span class="num">70</span>,<span class="num">40</span>,<span class="num">95</span>)
+<span class="fn">cor</span>(math, sci, method=<span class="str">"spearman"</span>)  <span class="cmt"># ~0.9</span></code></pre>
+
+      <div class="box tip"><span class="label">Interpretation</span>r near +1 = strong positive &middot; r near &minus;1 = strong negative &middot; r near 0 = no linear relation &middot; r&sup2; = % of variance explained.</div>
+    </div>
+    <!-- /Block 11 -->
+
+    <!-- ============ BLOCK 12 ============ -->
+    <div class="theory-unit" id="r-recipes">
+      <div class="unit-title"><span class="unit-num">Block 12</span>15 Common R Code Recipes</div>
+      <div class="box def"><span class="label">Quick Recipes</span>The 15 one-liners every viva student must know cold.</div>
+
+      <pre class="r-code"><code><span class="cmt"># 1. Read &amp; inspect CSV</span>
+df <span class="kw">&lt;-</span> <span class="fn">read.csv</span>(<span class="str">"data.csv"</span>, stringsAsFactors=<span class="kw">FALSE</span>)
+<span class="fn">head</span>(df); <span class="fn">str</span>(df); <span class="fn">summary</span>(df); <span class="fn">dim</span>(df)
+
+<span class="cmt"># 2. Filter rows</span>
+<span class="fn">subset</span>(df, age <span class="kw">&gt;</span> <span class="num">18</span> <span class="kw">&amp;</span> gender <span class="kw">==</span> <span class="str">"F"</span>)
+df[df<span class="kw">$</span>age <span class="kw">&gt;</span> <span class="num">18</span>, ]
+
+<span class="cmt"># 3. Select columns</span>
+df[, <span class="fn">c</span>(<span class="str">"name"</span>, <span class="str">"age"</span>)]
+df<span class="kw">$</span>name
+
+<span class="cmt"># 4. Sort by column</span>
+df[<span class="fn">order</span>(df<span class="kw">$</span>age), ]            <span class="cmt"># ascending</span>
+df[<span class="fn">order</span>(<span class="kw">-</span>df<span class="kw">$</span>score), ]         <span class="cmt"># descending</span>
+
+<span class="cmt"># 5. Add new column (mutate)</span>
+df<span class="kw">$</span>bmi <span class="kw">&lt;-</span> df<span class="kw">$</span>weight <span class="kw">/</span> (df<span class="kw">$</span>height<span class="kw">^</span><span class="num">2</span>)
+
+<span class="cmt"># 6. Group + summarize</span>
+<span class="fn">aggregate</span>(score <span class="kw">~</span> group, data=df, FUN=mean)
+
+<span class="cmt"># 7. Handle missing values</span>
+<span class="fn">is.na</span>(x); <span class="fn">na.omit</span>(df); <span class="fn">mean</span>(x, na.rm=<span class="kw">TRUE</span>)
+
+<span class="cmt"># 8. Convert column type</span>
+df<span class="kw">$</span>age <span class="kw">&lt;-</span> <span class="fn">as.numeric</span>(df<span class="kw">$</span>age)
+df<span class="kw">$</span>x   <span class="kw">&lt;-</span> <span class="fn">as.numeric</span>(<span class="fn">as.character</span>(df<span class="kw">$</span>x))  <span class="cmt"># factor &rarr; num</span>
+
+<span class="cmt"># 9. Merge data frames (JOINs)</span>
+<span class="fn">merge</span>(df1, df2, by=<span class="str">"id"</span>)                <span class="cmt"># inner</span>
+<span class="fn">merge</span>(df1, df2, by=<span class="str">"id"</span>, all.x=<span class="kw">TRUE</span>)   <span class="cmt"># left</span>
+<span class="fn">merge</span>(df1, df2, by=<span class="str">"id"</span>, all=<span class="kw">TRUE</span>)     <span class="cmt"># full outer</span>
+
+<span class="cmt"># 10. Apply over matrix</span>
+<span class="fn">apply</span>(m, <span class="num">1</span>, sum)    <span class="cmt"># row sums</span>
+<span class="fn">apply</span>(m, <span class="num">2</span>, mean)   <span class="cmt"># col means</span>
+
+<span class="cmt"># 11. Loop with progress</span>
+<span class="kw">for</span> (i <span class="kw">in</span> <span class="num">1</span>:n) {
+  results[i] <span class="kw">&lt;-</span> <span class="fn">mean</span>(<span class="fn">rnorm</span>(<span class="num">100</span>))
+  <span class="kw">if</span> (i <span class="kw">%%</span> <span class="num">1000</span> <span class="kw">==</span> <span class="num">0</span>) <span class="fn">cat</span>(<span class="str">"Done:"</span>, i, <span class="str">"\n"</span>)
+}
+
+<span class="cmt"># 12. Random sample / train-test split</span>
+<span class="fn">set.seed</span>(<span class="num">42</span>)
+idx <span class="kw">&lt;-</span> <span class="fn">sample</span>(<span class="fn">nrow</span>(df), <span class="fn">round</span>(<span class="num">0.7</span> <span class="kw">*</span> <span class="fn">nrow</span>(df)))
+train <span class="kw">&lt;-</span> df[idx, ]; test <span class="kw">&lt;-</span> df[<span class="kw">-</span>idx, ]
+
+<span class="cmt"># 13. Quick stats</span>
+<span class="fn">summary</span>(df<span class="kw">$</span>score)
+<span class="fn">quantile</span>(df<span class="kw">$</span>score, probs=<span class="fn">c</span>(<span class="num">0.25</span>, <span class="num">0.5</span>, <span class="num">0.75</span>))
+
+<span class="cmt"># 14. Save / re-load object</span>
+<span class="fn">saveRDS</span>(model, <span class="str">"model.rds"</span>)
+model <span class="kw">&lt;-</span> <span class="fn">readRDS</span>(<span class="str">"model.rds"</span>)
+
+<span class="cmt"># 15. Histogram with normal curve overlay</span>
+<span class="fn">hist</span>(x, prob=<span class="kw">TRUE</span>, col=<span class="str">"lightblue"</span>)
+<span class="fn">curve</span>(<span class="fn">dnorm</span>(x, <span class="fn">mean</span>(x), <span class="fn">sd</span>(x)), col=<span class="str">"red"</span>, lwd=<span class="num">2</span>, add=<span class="kw">TRUE</span>)</code></pre>
+
+      <div class="box why"><span class="label">Pattern Memorization</span>If you can write these 15 from memory, you can answer 80% of practical viva questions.</div>
+    </div>
+    <!-- /Block 12 -->
+
+    <!-- ============ BLOCK 13 ============ -->
+    <div class="theory-unit" id="r-strings-dates">
+      <div class="unit-title"><span class="unit-num">Block 13</span>Strings &amp; Dates in R</div>
+      <div class="box def"><span class="label">String Functions</span>R has rich string fns in base + <code class="inline">stringr</code> package. All vectorised.</div>
+
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Function</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Example</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Result</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">paste()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">paste("Hi","R",sep="-")</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">"Hi-R"</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">paste0()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">paste0("file",1,".csv")</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">"file1.csv"</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">sprintf()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">sprintf("%.2f", 3.14159)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">"3.14"</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">nchar()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">nchar("hello")</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">5</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">substr()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">substr("Hello",1,3)</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">"Hel"</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">toupper / tolower</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">toupper("hi")</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">"HI"</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">trimws()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">trimws("  hi  ")</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">"hi"</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">gsub() / sub()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">gsub("o","0","food")</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">"f00d"</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">grepl()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">grepl("a",c("cat","dog"))</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">T F</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">strsplit()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">strsplit("a,b,c",",")</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">list("a","b","c")</td></tr>
+      </table>
+
+      <p class="topic-head">Dates &amp; Times</p>
+      <div class="box def"><span class="label">Storage</span>Dates stored as integer = <strong>days since 1970-01-01</strong>. Date-times = POSIXct (seconds since epoch). Numeric under the hood, so arithmetic works.</div>
+
+      <pre class="r-code"><code><span class="fn">Sys.Date</span>()                          <span class="cmt"># "2026-05-20"</span>
+<span class="fn">Sys.time</span>()                          <span class="cmt"># current date-time</span>
+<span class="fn">as.Date</span>(<span class="str">"15/01/2024"</span>, <span class="str">"%d/%m/%Y"</span>)  <span class="cmt"># parse</span>
+<span class="fn">format</span>(d, <span class="str">"%d %B %Y"</span>)                <span class="cmt"># "15 January 2024"</span>
+<span class="fn">difftime</span>(d2, d1, units=<span class="str">"days"</span>)
+<span class="fn">weekdays</span>(d)   <span class="cmt"># "Monday"</span>
+<span class="fn">months</span>(d)     <span class="cmt"># "January"</span>
+d <span class="kw">+</span> <span class="num">30</span>          <span class="cmt"># add 30 days</span></code></pre>
+
+      <p class="topic-head">Format Specifiers</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6">Code</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Meaning</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Code</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Meaning</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">%Y</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Year 4-digit</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">%H</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Hour (24h)</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">%y</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Year 2-digit</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">%M</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Minute</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">%m</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Month num</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">%S</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Second</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">%B / %b</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Month full / short</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">%A / %a</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Weekday full / short</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">%d</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Day of month</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">%I</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Hour (12h)</td></tr>
+      </table>
+    </div>
+    <!-- /Block 13 -->
+
+    <!-- ============ BLOCK 14 ============ -->
+    <div class="theory-unit" id="r-coercion">
+      <div class="unit-title"><span class="unit-num">Block 14</span>Type Coercion Deep Dive</div>
+      <div class="box def"><span class="label">Why It Matters</span>R auto-converts types when mixed. Understanding hierarchy prevents silent bugs &mdash; especially when reading CSVs or user input.</div>
+
+      <p class="topic-head">Coercion Hierarchy</p>
+      <div class="diag-flow">
+        <div class="diag-node"><div class="diag-b gr">logical</div><div class="diag-sub">TRUE/FALSE</div></div>
+        <div class="diag-arr">&rsaquo;</div>
+        <div class="diag-node"><div class="diag-b gr">integer</div><div class="diag-sub">1L</div></div>
+        <div class="diag-arr">&rsaquo;</div>
+        <div class="diag-node"><div class="diag-b gd">double</div><div class="diag-sub">2.5</div></div>
+        <div class="diag-arr">&rsaquo;</div>
+        <div class="diag-node"><div class="diag-b gd">complex</div><div class="diag-sub">1+2i</div></div>
+        <div class="diag-arr">&rsaquo;</div>
+        <div class="diag-node"><div class="diag-b dk">character</div><div class="diag-sub">"hi"</div></div>
+      </div>
+
+      <pre class="r-code"><code><span class="cmt"># Implicit coercion examples</span>
+<span class="fn">c</span>(<span class="kw">TRUE</span>, <span class="num">1</span>)              <span class="cmt"># 1 1 (numeric)</span>
+<span class="fn">c</span>(<span class="num">1L</span>, <span class="num">2.5</span>)              <span class="cmt"># 1.0 2.5 (double)</span>
+<span class="fn">c</span>(<span class="num">1</span>, <span class="str">"a"</span>)               <span class="cmt"># "1" "a" (char)</span>
+<span class="fn">sum</span>(<span class="kw">TRUE</span>, <span class="kw">FALSE</span>, <span class="kw">TRUE</span>)  <span class="cmt"># 2 (logical &rarr; int)</span></code></pre>
+
+      <p class="topic-head">Explicit Conversion (as.*)</p>
+      <pre class="r-code"><code><span class="fn">as.numeric</span>(<span class="str">"3.14"</span>)        <span class="cmt"># 3.14</span>
+<span class="fn">as.integer</span>(<span class="num">3.99</span>)          <span class="cmt"># 3 (truncates)</span>
+<span class="fn">as.character</span>(<span class="num">42</span>)          <span class="cmt"># "42"</span>
+<span class="fn">as.logical</span>(<span class="fn">c</span>(<span class="num">0</span>,<span class="num">1</span>,<span class="num">2</span>))     <span class="cmt"># F T T</span>
+<span class="fn">as.Date</span>(<span class="str">"2026-05-20"</span>)</code></pre>
+
+      <p class="topic-head">Factor-to-Numeric Trap</p>
+      <pre class="r-code"><code>f <span class="kw">&lt;-</span> <span class="fn">factor</span>(<span class="fn">c</span>(<span class="str">"10"</span>,<span class="str">"20"</span>,<span class="str">"30"</span>))
+<span class="fn">as.numeric</span>(f)                  <span class="cmt"># 1 2 3 (codes! WRONG)</span>
+<span class="fn">as.numeric</span>(<span class="fn">as.character</span>(f))    <span class="cmt"># 10 20 30 (CORRECT)</span></code></pre>
+      <div class="box why"><span class="label">Classic Pitfall</span>Factors store integer codes internally. Always go through <code class="inline">as.character()</code> first to recover original values.</div>
+
+      <p class="topic-head">CSV Import Pitfall</p>
+      <div class="box tip"><span class="label">Always</span>Run <code class="inline">str(df)</code> after <code class="inline">read.csv()</code>. Stray characters ("N/A", commas) make number columns import as character. Fix with <code class="inline">df$col &lt;- as.numeric(df$col)</code>.</div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q: numeric vs integer in R?</p>
+      <ul class="qa-bullets">
+        <li><code class="inline">numeric</code> = double-precision float (default).</li>
+        <li><code class="inline">integer</code> = whole number, suffix <code class="inline">L</code> (e.g., <code class="inline">5L</code>).</li>
+        <li><code class="inline">typeof(5)</code> = "double"; <code class="inline">typeof(5L)</code> = "integer".</li>
+      </ul>
+      </div>
+    </div>
+    <!-- /Block 14 -->
+
+    <!-- ============ BLOCK 15 ============ -->
+    <div class="theory-unit" id="r-errors">
+      <div class="unit-title"><span class="unit-num">Block 15</span>Common R Errors &amp; Fixes</div>
+      <div class="box def"><span class="label">Top 15 Errors</span>Recognise the message, know the cause, apply the fix.</div>
+
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Error</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Cause</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Fix</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">object 'x' not found</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Typo / case mismatch</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Check spelling; <code class="inline">ls()</code> lists vars</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">could not find function "..."</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Package not loaded</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">library(pkg)</code> after install</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">non-numeric arg to binary op</td><td style="padding:5px 7px;border:1px solid #d9cfb6">String in arithmetic</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Wrap with <code class="inline">as.numeric()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">NAs introduced by coercion</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Bad string to number</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Clean text first with <code class="inline">gsub()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">subscript out of bounds</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Index too large</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Use <code class="inline">1:length(x)</code> / <code class="inline">nrow()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">replacement has X rows, data has Y</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Length mismatch</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Use vectorised ops; check lengths</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">condition has length &gt; 1</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">if()</code> on vector</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Use <code class="inline">ifelse()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">unexpected symbol/INPUT</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Syntax error</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Check quotes, parens, commas</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">argument "x" missing, no default</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Required arg not given</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Pass argument or set default</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">cannot open the connection</td><td style="padding:5px 7px;border:1px solid #d9cfb6">File not found</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Check <code class="inline">getwd()</code>, use full path</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">incorrect number of dimensions</td><td style="padding:5px 7px;border:1px solid #d9cfb6">2D index on vector</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Check <code class="inline">dim(x)</code> first</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">more elements supplied than to replace</td><td style="padding:5px 7px;border:1px solid #d9cfb6">RHS too long</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Match LHS slot length</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">discrete value to continuous scale (ggplot)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Wrong aes mapping</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Convert to factor / numeric</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">no package called '...'</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Not installed</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">install.packages("pkg")</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">sum not defined for "Date"</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Math on Date object</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">as.numeric()</code> first</td></tr>
+      </table>
+
+      <div class="box tip"><span class="label">Debugging Workflow</span>1) Read the FULL error &middot; 2) Run <code class="inline">traceback()</code> &middot; 3) Add <code class="inline">browser()</code> to step through &middot; 4) Print intermediate values &middot; 5) Wrap in <code class="inline">tryCatch()</code> for production.</div>
+    </div>
+    <!-- /Block 15 -->
+
+    <!-- ============ BLOCK 16 ============ -->
+    <div class="theory-unit" id="r-mostlikely">
+      <div class="unit-title"><span class="unit-num">Block 16</span>Most-Likely Viva Questions (Curated 25)</div>
+      <div class="box why"><span class="label">High-Probability Set</span>These 25 questions appear in 80%+ of viva sessions. Memorize model answers &mdash; concise but complete.</div>
+
+      <p class="topic-head">Lab Practical Favorites (8)</p>
+      <div class="theory-qa-item">
+      <p class="tq">Q1: What is R? Why use it for Data Science?</p>
+      <ul class="qa-bullets">
+        <li>Open-source, interpreted language for statistical computing, created 1993 by Ihaka &amp; Gentleman.</li>
+        <li>Vectorised operations; first-class data frames, vectors, lists.</li>
+        <li>20,000+ CRAN packages; built-in <code class="inline">lm()</code>, <code class="inline">glm()</code>, <code class="inline">t.test()</code>.</li>
+        <li>Publication-quality plots via <code class="inline">ggplot2</code>; reproducible via RMarkdown.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q2: <code class="inline">&lt;-</code> vs <code class="inline">=</code>?</p>
+      <ul class="qa-bullets">
+        <li>Both assign; <code class="inline">&lt;-</code> is idiomatic R (preferred).</li>
+        <li><code class="inline">=</code> used for named arguments inside function calls.</li>
+        <li><code class="inline">&lt;&lt;-</code> super-assigns to parent environment.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q3: <code class="inline">cat()</code> vs <code class="inline">print()</code>?</p>
+      <ul class="qa-bullets">
+        <li><code class="inline">print()</code>: shows object with quotes &amp; <code class="inline">[1]</code> index.</li>
+        <li><code class="inline">cat()</code>: raw output, no quotes, no auto-newline.</li>
+        <li><code class="inline">cat()</code> takes multiple args with separator.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q4: The <code class="inline">%%</code> operator?</p>
+      <ul class="qa-bullets">
+        <li>Modulo (remainder): <code class="inline">7 %% 3 = 1</code>.</li>
+        <li>Companion <code class="inline">%/%</code> = integer division: <code class="inline">7 %/% 3 = 2</code>.</li>
+        <li>Vectorised; check even/odd with <code class="inline">x %% 2 == 0</code>.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q5: Vector vs List?</p>
+      <ul class="qa-bullets">
+        <li>Vector: atomic, all elements same type, created with <code class="inline">c()</code>.</li>
+        <li>List: generic, mixed types, created with <code class="inline">list()</code>.</li>
+        <li>Access: vector <code class="inline">v[i]</code>; list <code class="inline">L[[i]]</code> or <code class="inline">L$name</code>.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q6: How does <code class="inline">matrix()</code> fill?</p>
+      <ul class="qa-bullets">
+        <li>Default: <strong>column-by-column</strong> (column-major).</li>
+        <li><code class="inline">byrow=TRUE</code> for row-by-row fill.</li>
+        <li>If data shorter than n&times;m, recycling kicks in.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q7: Access nth row / nth column?</p>
+      <ul class="qa-bullets">
+        <li>Row n: <code class="inline">m[n, ]</code>; column n: <code class="inline">m[, n]</code>.</li>
+        <li>Result drops to vector; use <code class="inline">drop=FALSE</code> to preserve matrix.</li>
+        <li>Negative index excludes: <code class="inline">m[-2, ]</code> = all rows except 2.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q8: What does <code class="inline">as.vector()</code> do to a matrix?</p>
+      <ul class="qa-bullets">
+        <li>Strips <code class="inline">dim</code> attribute, returns 1D vector.</li>
+        <li>Elements read in column-major order.</li>
+        <li>Equivalent to <code class="inline">c(mat)</code>.</li>
+      </ul>
+      </div>
+
+      <p class="topic-head">Theory &mdash; Units I &amp; II (6)</p>
+      <div class="theory-qa-item">
+      <p class="tq">Q9: What is Data Science?</p>
+      <ul class="qa-bullets">
+        <li>Interdisciplinary field combining stats + programming + domain knowledge.</li>
+        <li>Extracts knowledge from structured &amp; unstructured data.</li>
+        <li>Pillars: math/stats, CS/programming, domain expertise.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q10: Data Science vs Analytics vs Engineering?</p>
+      <ul class="qa-bullets">
+        <li>Engineer: builds pipelines, ETL, data infrastructure.</li>
+        <li>Analyst: descriptive analysis, dashboards, KPIs.</li>
+        <li>Scientist: predictive models, ML, statistics.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q11: Supervised vs Unsupervised?</p>
+      <ul class="qa-bullets">
+        <li>Supervised: labelled data (regression, classification).</li>
+        <li>Unsupervised: unlabelled data (clustering, PCA).</li>
+        <li>Examples: spam classifier vs customer segmentation.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q12: What is CRAN?</p>
+      <ul class="qa-bullets">
+        <li>Comprehensive R Archive Network &mdash; official repository.</li>
+        <li>Hosts R + 20,000+ packages.</li>
+        <li>Install: <code class="inline">install.packages("name")</code>.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q13: What is a Factor in R?</p>
+      <ul class="qa-bullets">
+        <li>Categorical variable with fixed set of <strong>levels</strong>.</li>
+        <li>Internally integer codes + character labels.</li>
+        <li>Essential for regression (auto-creates dummy vars).</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q14: NA vs NULL vs NaN vs Inf?</p>
+      <ul class="qa-bullets">
+        <li><code class="inline">NA</code> = missing value, has type, occupies a slot.</li>
+        <li><code class="inline">NULL</code> = absence; length 0.</li>
+        <li><code class="inline">NaN</code> = not a number (e.g., 0/0).</li>
+        <li><code class="inline">Inf</code> = infinity (e.g., 1/0).</li>
+      </ul>
+      </div>
+
+      <p class="topic-head">Theory &mdash; Unit III (6)</p>
+      <div class="theory-qa-item">
+      <p class="tq">Q15: How to create a function?</p>
+      <ul class="qa-bullets">
+        <li><code class="inline">f &lt;- function(x, y=default) { body; return(val) }</code></li>
+        <li>Last expression returns automatically.</li>
+        <li><code class="inline">...</code> for variable-length arguments.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q16: lapply vs sapply?</p>
+      <ul class="qa-bullets">
+        <li>Both apply fn to each element.</li>
+        <li><code class="inline">lapply</code> always returns LIST.</li>
+        <li><code class="inline">sapply</code> simplifies to vector/matrix when possible.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q17: S3 vs S4 classes?</p>
+      <ul class="qa-bullets">
+        <li>S3: informal, class attribute + naming convention.</li>
+        <li>S4: formal, <code class="inline">setClass()</code> with typed slots, <code class="inline">@</code> access.</li>
+        <li>S4 used in Bioconductor for rigor.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q18: What is recursion? Example?</p>
+      <ul class="qa-bullets">
+        <li>Function calls itself with smaller subproblem; needs base case.</li>
+        <li>Factorial: <code class="inline">fact &lt;- function(n) if (n &lt;= 1) 1 else n * fact(n-1)</code>.</li>
+        <li>R isn't tail-optimised &mdash; deep recursion hits stack.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q19: <code class="inline">[</code> vs <code class="inline">[[</code> for lists?</p>
+      <ul class="qa-bullets">
+        <li><code class="inline">[</code> = sub-setting; returns list of selected elements.</li>
+        <li><code class="inline">[[</code> = extraction; returns the actual element.</li>
+        <li><code class="inline">$</code> = shortcut for <code class="inline">[[</code> by name.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q20: rbind vs cbind?</p>
+      <ul class="qa-bullets">
+        <li><code class="inline">rbind()</code> stacks rows (vertical); same column count.</li>
+        <li><code class="inline">cbind()</code> binds columns (horizontal); same row count.</li>
+        <li>Memory: r = rows, c = columns.</li>
+      </ul>
+      </div>
+
+      <p class="topic-head">Theory &mdash; Unit IV (5)</p>
+      <div class="theory-qa-item">
+      <p class="tq">Q21: Hypothesis testing &amp; p-value?</p>
+      <ul class="qa-bullets">
+        <li>Decide between H&#x2080; (no effect) and H&#x2081; (effect) using sample.</li>
+        <li>Steps: state hypotheses, pick &alpha;, compute statistic, find p-value, decide.</li>
+        <li>p-value = P(data | H&#x2080;). Reject H&#x2080; if p &lt; &alpha;.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q22: Pearson vs Spearman?</p>
+      <ul class="qa-bullets">
+        <li>Pearson: linear, continuous data, sensitive to outliers.</li>
+        <li>Spearman: rank-based, monotonic, robust to outliers.</li>
+        <li>Range: &minus;1 to +1.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q23: How to fit linear regression?</p>
+      <ul class="qa-bullets">
+        <li><code class="inline">model &lt;- lm(y ~ x, data=df)</code>; inspect with <code class="inline">summary(model)</code>.</li>
+        <li>Intercept = predicted y when x=0; slope = change in y per unit x.</li>
+        <li>R&sup2; = proportion of y variance explained.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q24: Base R graphics vs ggplot2?</p>
+      <ul class="qa-bullets">
+        <li>Base R: procedural, fast, simple (<code class="inline">plot</code>, <code class="inline">hist</code>).</li>
+        <li>ggplot2: declarative Grammar of Graphics, layered with <code class="inline">+</code>.</li>
+        <li>ggplot2 has smart defaults, auto-legends, faceting.</li>
+      </ul>
+      </div>
+
+      <div class="theory-qa-item">
+      <p class="tq">Q25: dnorm vs pnorm vs qnorm vs rnorm?</p>
+      <ul class="qa-bullets">
+        <li><code class="inline">dnorm(x)</code> = density (PDF height).</li>
+        <li><code class="inline">pnorm(q)</code> = P(X &le; q) (CDF).</li>
+        <li><code class="inline">qnorm(p)</code> = inverse CDF (quantile).</li>
+        <li><code class="inline">rnorm(n)</code> = n random samples.</li>
+      </ul>
+      </div>
+    </div>
+    <!-- /Block 16 -->
+
+    <!-- ============ BLOCK 17 ============ -->
+    <div class="theory-unit" id="r-templates">
+      <div class="unit-title"><span class="unit-num">Block 17</span>Long-Answer Templates</div>
+      <div class="box def"><span class="label">Structure Wins Marks</span>Examiners reward organisation. Use these 5 templates for common question stems.</div>
+
+      <p class="topic-head">Template 1 &mdash; "Explain X"</p>
+      <div class="box prof"><span class="label">Skeleton</span>1) Definition (1 sentence) &middot; 2) Key features (3-4 bullets) &middot; 3) Syntax/example &middot; 4) Use case &middot; 5) Compare with sibling concept.</div>
+      <div class="theory-qa-item">
+      <p class="tq">Worked: "Explain Data Frame in R"</p>
+      <ul class="qa-bullets">
+        <li><b>Def:</b> 2D table-like structure; columns can have different types, all same length.</li>
+        <li><b>Features:</b> mixed column types, named rows/cols, default of <code class="inline">read.csv()</code>.</li>
+        <li><b>Syntax:</b> <code class="inline">df &lt;- data.frame(Name=c("A"), Age=c(20))</code>.</li>
+        <li><b>Use:</b> storing real datasets &mdash; student records, survey data.</li>
+        <li><b>Contrast:</b> unlike matrix (single type), allows mixed types per column.</li>
+      </ul>
+      </div>
+
+      <p class="topic-head">Template 2 &mdash; "Compare X and Y"</p>
+      <div class="box prof"><span class="label">Skeleton</span>1) One-line def each &middot; 2) Comparison TABLE (6+ rows) &middot; 3) When to use each &middot; 4) One-sentence conclusion.</div>
+      <div class="theory-qa-item">
+      <p class="tq">Worked: "Matrix vs Data Frame"</p>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:6px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6">Feature</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Matrix</th><th style="padding:5px 7px;border:1px solid #d9cfb6">Data Frame</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Types allowed</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Single (homogeneous)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Mixed per column</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Created with</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">matrix()</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">data.frame()</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Use</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Linear algebra</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Datasets</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Access</td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">m[i,j]</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">df$col</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">CSV import default?</td><td style="padding:5px 7px;border:1px solid #d9cfb6">No</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Yes</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Memory</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Contiguous block</td><td style="padding:5px 7px;border:1px solid #d9cfb6">List of vectors</td></tr>
+      </table>
+      </div>
+
+      <p class="topic-head">Template 3 &mdash; "Discuss Importance of X"</p>
+      <div class="box prof"><span class="label">Skeleton</span>1) Context (why this matters) &middot; 2) 4-5 specific benefits &middot; 3) Concrete example &middot; 4) Limitations.</div>
+
+      <p class="topic-head">Template 4 &mdash; "Write Program for ..."</p>
+      <div class="box prof"><span class="label">Skeleton</span>1) Restate problem &middot; 2) Aim &middot; 3) Input/Output &middot; 4) Algorithm (3-5 numbered steps) &middot; 5) R code &middot; 6) Sample output.</div>
+
+      <div class="box tip"><span class="label">Speak-Aloud Phrases</span>
+      "I would approach this by first defining the term, then giving an example." &middot;
+      "A key consideration here is the data type." &middot;
+      "The trade-off is between flexibility and performance." &middot;
+      "In practice, we usually use <code class="inline">read.csv()</code>." &middot;
+      "To summarise, the difference comes down to homogeneous vs heterogeneous data."
+      </div>
+    </div>
+    <!-- /Block 17 -->
+
+    <!-- ============ BLOCK 18 ============ -->
+    <div class="theory-unit" id="r-vspy">
+      <div class="unit-title"><span class="unit-num">Block 18</span>R vs Python &mdash; Quick Comparison</div>
+      <div class="box def"><span class="label">Both Are Great</span>R was born for statistics; Python for general programming with strong ML libs. Choose based on task, not religion.</div>
+
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:8px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Feature</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">R</th><th style="padding:5px 7px;border:1px solid #d9cfb6;text-align:left">Python</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Year</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6">1993 (Ihaka &amp; Gentleman)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">1991 (van Rossum)</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Primary use</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Statistics, research</td><td style="padding:5px 7px;border:1px solid #d9cfb6">General-purpose, web, ML</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Indexing</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>1-based</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>0-based</b></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>DataFrame</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Built-in + <code class="inline">dplyr</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">pandas</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Visualization</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">ggplot2</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">matplotlib</code>, <code class="inline">seaborn</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>ML libraries</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">caret</code>, <code class="inline">tidymodels</code></td><td style="padding:5px 7px;border:1px solid #d9cfb6"><code class="inline">scikit-learn</code></td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Deep Learning</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Via wrappers</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Native (TF, PyTorch)</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Stats built-in?</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Yes (<code class="inline">lm</code>, <code class="inline">glm</code>)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Needs scipy/statsmodels</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6"><b>Production</b></td><td style="padding:5px 7px;border:1px solid #d9cfb6">Less common (Shiny/Plumber)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Yes (Flask, FastAPI)</td></tr>
+      </table>
+
+      <p class="topic-head">Same Task &mdash; Side by Side</p>
+      <div class="diag-2col">
+        <div class="diag-col green"><span class="dchead">R</span>
+<pre class="r-code"><code><span class="cmt"># Read + head</span>
+df <span class="kw">&lt;-</span> <span class="fn">read.csv</span>(<span class="str">"f.csv"</span>)
+<span class="fn">head</span>(df, <span class="num">5</span>)
+
+<span class="cmt"># Group + mean</span>
+<span class="fn">aggregate</span>(salary <span class="kw">~</span> dept, df, mean)
+
+<span class="cmt"># Linear regression</span>
+<span class="fn">lm</span>(y <span class="kw">~</span> x, data=df)
+
+<span class="cmt"># Scatter plot</span>
+<span class="fn">plot</span>(x, y)</code></pre>
+        </div>
+        <div class="diag-col gold"><span class="dchead">Python</span>
+<pre class="r-code"><code><span class="kw">import</span> pandas <span class="kw">as</span> pd
+df <span class="kw">=</span> pd.<span class="fn">read_csv</span>(<span class="str">"f.csv"</span>)
+df.<span class="fn">head</span>(<span class="num">5</span>)
+
+df.<span class="fn">groupby</span>(<span class="str">'dept'</span>)[<span class="str">'salary'</span>].<span class="fn">mean</span>()
+
+<span class="kw">from</span> sklearn.linear_model
+<span class="kw">import</span> LinearRegression
+LinearRegression().<span class="fn">fit</span>(X, y)
+
+plt.<span class="fn">scatter</span>(x, y)</code></pre>
+        </div>
+      </div>
+
+      <div class="box tip"><span class="label">Choose R when...</span>heavy statistics, research, publication plots, RMarkdown/Shiny apps. <strong>Choose Python when...</strong> production ML, web apps, deep learning, large data pipelines. They interoperate via <code class="inline">reticulate</code> (R&rarr;Py) or <code class="inline">rpy2</code> (Py&rarr;R).</div>
+    </div>
+    <!-- /Block 18 -->
+
+    <!-- ============ BLOCK 19 ============ -->
+    <div class="theory-unit" id="r-lifecycle">
+      <div class="unit-title"><span class="unit-num">Block 19</span>CRISP-DM, KDD &amp; OSEMN Lifecycles</div>
+      <div class="box def"><span class="label">Three Frameworks</span>CRISP-DM = industry standard. KDD = academic ancestor. OSEMN = modern pragmatic shorthand.</div>
+
+      <p class="topic-head">CRISP-DM &mdash; 6 Phases</p>
+      <div class="diag-flow" style="justify-content:center;flex-wrap:wrap">
+        <div class="diag-node"><div class="diag-b gr">Business<br>Understanding</div><div class="diag-sub">define goal</div></div>
+        <div class="diag-arr">&rsaquo;</div>
+        <div class="diag-node"><div class="diag-b gr">Data<br>Understanding</div><div class="diag-sub">collect, explore</div></div>
+        <div class="diag-arr">&rsaquo;</div>
+        <div class="diag-node"><div class="diag-b gd">Data<br>Preparation</div><div class="diag-sub">clean (60-80%)</div></div>
+        <div class="diag-arr" style="color:#a16207">&rsaquo;</div>
+        <div class="diag-node"><div class="diag-b gd">Modelling</div><div class="diag-sub">train, tune</div></div>
+        <div class="diag-arr" style="color:#a16207">&rsaquo;</div>
+        <div class="diag-node"><div class="diag-b dk">Evaluation</div><div class="diag-sub">validate</div></div>
+        <div class="diag-arr">&rsaquo;</div>
+        <div class="diag-node"><div class="diag-b dk">Deployment</div><div class="diag-sub">deploy, monitor</div></div>
+      </div>
+
+      <p class="topic-head">KDD &mdash; 5 Phases</p>
+      <div class="diag-step">
+        <div class="diag-step-box dk">1. Selection &mdash; choose target data subset</div>
+        <div class="diag-step-arr">&darr;</div>
+        <div class="diag-step-box gr">2. Pre-processing &mdash; clean, handle missing</div>
+        <div class="diag-step-arr">&darr;</div>
+        <div class="diag-step-box gd">3. Transformation &mdash; feature engineering, normalisation</div>
+        <div class="diag-step-arr">&darr;</div>
+        <div class="diag-step-box gd">4. Data Mining &mdash; algorithm application</div>
+        <div class="diag-step-arr">&darr;</div>
+        <div class="diag-step-box dk">5. Interpretation &mdash; pattern &rarr; knowledge</div>
+      </div>
+
+      <p class="topic-head">OSEMN &mdash; Pragmatic 5-Step</p>
+      <div class="diag-4">
+        <div class="diag-card"><span class="dk">O &mdash; Obtain</span><code style="font-size:11px">read.csv, httr, rvest</code><div class="diag-sub">gather data</div></div>
+        <div class="diag-card"><span class="dk">S &mdash; Scrub</span><code style="font-size:11px">dplyr, tidyr, janitor</code><div class="diag-sub">clean, format</div></div>
+        <div class="diag-card"><span class="dk">E &mdash; Explore</span><code style="font-size:11px">summary, ggplot2</code><div class="diag-sub">EDA, viz</div></div>
+        <div class="diag-card"><span class="dk">M &mdash; Model</span><code style="font-size:11px">lm, glm, caret</code><div class="diag-sub">build model</div></div>
+        <div class="diag-card"><span class="dk">N &mdash; iNterpret</span><code style="font-size:11px">rmarkdown, shiny</code><div class="diag-sub">report findings</div></div>
+      </div>
+
+      <table style="width:100%;border-collapse:collapse;font-size:12px;margin:8px 0">
+      <tr style="background:rgba(22,163,74,.12)"><th style="padding:5px 7px;border:1px solid #d9cfb6">Feature</th><th style="padding:5px 7px;border:1px solid #d9cfb6">CRISP-DM</th><th style="padding:5px 7px;border:1px solid #d9cfb6">KDD</th><th style="padding:5px 7px;border:1px solid #d9cfb6">OSEMN</th></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Year</td><td style="padding:5px 7px;border:1px solid #d9cfb6">1996 (industry)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">1996 (academic)</td><td style="padding:5px 7px;border:1px solid #d9cfb6">2010 (industry blog)</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Phases</td><td style="padding:5px 7px;border:1px solid #d9cfb6">6</td><td style="padding:5px 7px;border:1px solid #d9cfb6">5</td><td style="padding:5px 7px;border:1px solid #d9cfb6">5</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Focus</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Business problem &rarr; solution</td><td style="padding:5px 7px;border:1px solid #d9cfb6">DB &rarr; knowledge</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Hands-on workflow</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Iterative?</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Yes, explicit loops</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Linear-ish</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Implied</td></tr>
+      <tr><td style="padding:5px 7px;border:1px solid #d9cfb6">Industry use</td><td style="padding:5px 7px;border:1px solid #d9cfb6">De-facto standard</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Academia</td><td style="padding:5px 7px;border:1px solid #d9cfb6">Bootcamps</td></tr>
+      </table>
+
+      <div class="box tip"><span class="label">Time Allocation</span><b>60-80%</b> on data preparation/cleaning &middot; <b>10-20%</b> on modelling &middot; <b>5-15%</b> on interpretation &amp; deployment. That's why "garbage in, garbage out" matters most.</div>
+    </div>
+    <!-- /Block 19 -->
+
+    <!-- ============ BLOCK 20 ============ -->
+    <div class="theory-unit" id="r-vivatips">
+      <div class="unit-title"><span class="unit-num">Block 20</span>Final Viva Tips &amp; Examiner Mindset</div>
+      <div class="box why"><span class="label">The Examiner's Mindset</span>Examiners aren't trying to fail you &mdash; they're verifying you understand the lab program + the theory behind it. <strong>Confidence + accuracy beats verbosity.</strong></div>
+
+      <p class="topic-head">Pre-Viva Checklist (Pack Tonight)</p>
+      <div class="box tip"><span class="label">Bring These</span>
+      <ul style="margin:4px 0 0 18px;line-height:1.85">
+        <li>Printed lab record / file with all 12 experiments</li>
+        <li>Pen + extra pen (one will fail, guaranteed)</li>
+        <li>Calculator (basic, non-programmable)</li>
+        <li>College ID card</li>
+        <li>Syllabus / unit-wise notes</li>
+        <li>1-page hand-written summary (your safety net)</li>
+        <li>Water bottle &mdash; a sip buys you 3 seconds to think</li>
+      </ul>
+      </div>
+
+      <p class="topic-head">3 Types of Questions Examiners Ask</p>
+      <div class="box def"><span class="label">Categories</span>
+      <ul style="margin:4px 0 0 18px;line-height:1.85">
+        <li><b>Direct from lab record:</b> "Explain experiment 7", "Why did you use this function?"</li>
+        <li><b>Concept extension:</b> "What if input were 0?", "Can you do this without a loop?"</li>
+        <li><b>Unit theory link:</b> "Which Unit is this from?", "Define the term you just used."</li>
+      </ul>
+      </div>
+
+      <p class="topic-head">How to Answer Each Type</p>
+      <div class="box prof"><span class="label">Direct &mdash; Narrate Flow</span>"This program takes input X using <code class="inline">readline()</code>, uses the modulo operator <code class="inline">%%</code> to check divisibility, and a <code class="inline">for</code> loop to iterate from 1 to n..."</div>
+      <div class="box prof"><span class="label">"Why did you...?" &mdash; Justify + Alternative</span>"I used <code class="inline">%%</code> because it returns the remainder. An alternative would be <code class="inline">Filter(function(i) n %% i == 0, 1:n)</code>."</div>
+      <div class="box prof"><span class="label">"What if...?" &mdash; Edge Cases Aloud</span>"Good question. If input were 0, the loop wouldn't execute since 1:0 is reversed. We could guard with <code class="inline">if (n &lt;= 0) stop('positive only')</code>."</div>
+
+      <p class="topic-head">When You Don't Know &mdash; 4 Safe Moves</p>
+      <div class="box why"><span class="label">Never Freeze</span>
+      <ul style="margin:4px 0 0 18px;line-height:1.85">
+        <li><b>Honest deflection:</b> "I don't remember the exact syntax, but the idea is..."</li>
+        <li><b>Reason from related:</b> "Let me think &mdash; this is similar to <code class="inline">sapply()</code>, so probably..."</li>
+        <li><b>Ask for a moment:</b> "May I take a second to think?" (totally fine)</li>
+        <li><b>Never invent:</b> don't make up function names &mdash; examiners pounce</li>
+      </ul>
+      </div>
+
+      <p class="topic-head">Common Traps</p>
+      <div class="box why"><span class="label">Avoid These</span>
+      <ul style="margin:4px 0 0 18px;line-height:1.85">
+        <li>"Why R?" &mdash; DON'T say "because syllabus". DO say: free, open-source, 18k CRAN, stats-first, ggplot2.</li>
+        <li>"What is the output?" &mdash; trace step-by-step; don't guess.</li>
+        <li>"Difference between X and Y?" &mdash; always give 3+ differences with examples.</li>
+        <li>Don't argue with examiner &mdash; say "let me verify" and move on.</li>
+        <li>Don't simulate R in your head if unsure &mdash; say "let me show you in R".</li>
+      </ul>
+      </div>
+
+      <p class="topic-head">Body Language Wins</p>
+      <div class="box tip"><span class="label">Silent Signals</span>
+      <ul style="margin:4px 0 0 18px;line-height:1.85">
+        <li>Eye contact &mdash; not the floor.</li>
+        <li>Sit up straight &mdash; slouching reads as low confidence.</li>
+        <li>Slow down &mdash; measured beats rushed.</li>
+        <li>Pause before answering (2 sec) &mdash; shows you're thinking.</li>
+        <li>Smile at start and end.</li>
+      </ul>
+      </div>
+
+      <p class="topic-head">Tomorrow Morning Routine</p>
+      <div class="box def"><span class="label">9:30 AM Schedule</span>
+      <ul style="margin:4px 0 0 18px;line-height:1.85">
+        <li><b>7:00 AM &mdash;</b> Wake, light breakfast (not heavy &mdash; you need a sharp brain, not a food coma).</li>
+        <li><b>7:30 AM &mdash;</b> Quick re-read of Block 01 (Rapid-Fire) + Block 16 (Most-likely Qs).</li>
+        <li><b>8:30 AM &mdash;</b> Open RStudio with your lab file. Run 2-3 experiments to verify.</li>
+        <li><b>8:50 AM &mdash;</b> Pack your bag using the checklist above. Leave home.</li>
+        <li><b>9:20 AM &mdash;</b> Reach hall, breathe deep, quick glance at the 1-page summary.</li>
+        <li><b>9:30 AM &mdash;</b> Walk in calm. Smile. You've prepared.</li>
+      </ul>
+      </div>
+
+      <div class="box prof"><span class="label">Final Mantra</span>Be honest, be concise, be specific. You know more than you think &mdash; show the examiner the <em>structure</em> of your knowledge, not just facts. Walk in calm, walk out calmer. <strong>All the best!</strong></div>
+    </div>
+    <!-- /Block 20 -->
+
+  </section>
+  <!-- ===================== END QUICK REVISION HUB ===================== -->
+
   <footer>
     <span>BCD-204-V</span> &middot; <span>BCD-206-V</span> &nbsp;|&nbsp; BCA(DS) IV Semester &nbsp;&middot;&nbsp; Data Science Using R
   </footer>
@@ -2840,21 +4343,59 @@ function copyCode(btn) {
   });
 }
 
-// Active chip highlight on scroll
-const sections = document.querySelectorAll('#lab, #theory, #u1, #u2, #u3, #u4');
+// Active chip highlight on scroll — scroll-position based (handles tall sections reliably)
+const sectionIds = ['revision', 'lab', 'theory', 'u1', 'u2', 'u3', 'u4'];
 const chips = document.querySelectorAll('nav.chips a');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      chips.forEach(c => c.classList.remove('active'));
-      const id = entry.target.getAttribute('id');
-      const activeChip = document.querySelector(`nav.chips a[href="#${id}"]`);
-      if (activeChip) activeChip.classList.add('active');
+const topbarH = () => {
+  const tb = document.querySelector('.topbar');
+  return tb ? tb.offsetHeight : 100;
+};
+
+function setActiveChip(id){
+  chips.forEach(c => {
+    const matches = c.getAttribute('href') === '#' + id;
+    c.classList.toggle('active', matches);
+    if (matches) {
+      // Auto-scroll the chip into view in the chip strip
+      const rect = c.getBoundingClientRect();
+      const navEl = c.parentElement;
+      if (rect.left < 0 || rect.right > window.innerWidth) {
+        navEl.scrollTo({ left: c.offsetLeft - 16, behavior: 'smooth' });
+      }
     }
   });
-}, { threshold: 0.15, rootMargin: '-80px 0px -60% 0px' });
+}
 
-sections.forEach(s => observer.observe(s));
+let ticking = false;
+function updateActiveChip(){
+  // Find the LAST section whose top has passed the topbar — that's the one we're inside.
+  const offset = topbarH() + 20;
+  let active = sectionIds[0];
+  for (const id of sectionIds) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    const top = el.getBoundingClientRect().top;
+    if (top - offset <= 0) active = id;
+    else break;
+  }
+  // Special: if we're near the bottom of the page, force the last section active
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 4) {
+    active = sectionIds[sectionIds.length - 1];
+  }
+  setActiveChip(active);
+  ticking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(updateActiveChip);
+    ticking = true;
+  }
+}, { passive: true });
+window.addEventListener('resize', updateActiveChip, { passive: true });
+window.addEventListener('load', updateActiveChip);
+updateActiveChip();
+
 </script>
 </body>
 </html>
