@@ -4,15 +4,17 @@ A zero-dependency, offline-ready study hub for the BCA-IV 2nd Sessional. Seven s
 
 ## What's inside
 
-| Subject | File |
-|---|---|
-| DBMS | [dbms-study-guide.html](dbms-study-guide.html) |
-| Wireless Communication | [wc-study-guide.html](wc-study-guide.html) |
-| Logic & Computing (LOC) | [loc-study-guide.html](loc-study-guide.html) |
-| R for Data Science | [r-datascience-study-guide.html](r-datascience-study-guide.html) |
-| CTRC | [ctrc-study-guide.html](ctrc-study-guide.html) |
-| Probability & Statistics | [probstats-study-guide.html](probstats-study-guide.html) |
-| Indian Knowledge Systems (IKS) | [iks-study-guide.html](iks-study-guide.html) |
+| # | Subject | Code | File |
+| --- | --- | --- | --- |
+| 1 | DBMS | BCG-202-V | [dbms-exam-guide.html](dbms-exam-guide.html) |
+| 2 | Probability & Statistics | BCD-202-V | [probstats-exam-guide.html](probstats-exam-guide.html) |
+| 3 | Data Science Using R | BCD-204-V | [r-datascience-exam-guide.html](r-datascience-exam-guide.html) |
+| 4 | Logical Organisation of Computer | BCG-208-V | [loc-exam-guide.html](loc-exam-guide.html) |
+| 5 | Wireless Communication | BCG-216-V | [wc-exam-guide.html](wc-exam-guide.html) |
+| 6 | CTRC | AEC-109-V | [ctrc-exam-guide.html](ctrc-exam-guide.html) |
+| 7 | Indian Knowledge System | VAC-104-V | [iks-exam-guide.html](iks-exam-guide.html) |
+
+Each guide targets the **75-mark university theory paper** (Part I shorts + Part II long-form), engineered for senior-prof rigor: structured deep-dives, PYQ vault sorted unit ASC / year DESC, frequency-ranked repeated questions, and pattern-predicted questions for the next exam.
 
 [index.html](index.html) is the dashboard — exam countdown, subject tiles, deep links into each guide.
 
