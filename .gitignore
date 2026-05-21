@@ -44,4 +44,4 @@ build/
 workbox-*.js
 sw.js.map
 
-ruvector.db
+prompt.md
