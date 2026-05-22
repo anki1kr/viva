@@ -989,6 +989,12 @@ footer.end .offline-status.no{ background:var(--crimson); border-color:var(--cri
 
 input,textarea,select{ font-size:16px; }
 
+@media(hover:none) and (pointer:coarse){
+  a,button{ -webkit-tap-highlight-color:rgba(22,101,52,.08); }
+  .qcard,.pyq,.viva-card{ min-height:44px; }
+  nav.chips a{ min-height:44px; display:inline-flex; align-items:center; }
+}
+
 /* ---------- PRINT ---------- */
 @media print{
   @page{ margin: 1.4cm 1.2cm; }
