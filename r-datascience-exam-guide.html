@@ -131,6 +131,7 @@ nav.chips a{
   text-transform:uppercase;
 }
 nav.chips a:hover{ background:var(--brand); color:var(--paper); }
+nav.chips a.live{ background:var(--brand); color:var(--paper); }
 nav.chips a.hot{ background:var(--highlighter); border-color:var(--ink); }
 
 /* ---------- LAYOUT ---------- */
@@ -5804,6 +5805,17 @@ t.test(df$marks, mu = 60, alternative = "greater")
       el.classList.add('no');
     }
   }
+  const _chips = document.querySelectorAll('nav.chips a');
+  const _secs = [..._chips].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const _io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        _chips.forEach(c => c.classList.remove('live'));
+        document.querySelector(`nav.chips a[href="#${e.target.id}"]`)?.classList.add('live');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  _secs.forEach(s => _io.observe(s));
 </script>
 
 </body>

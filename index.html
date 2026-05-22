@@ -7,10 +7,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="BCA Viva" />
-<meta name="description" content="BCA(DS)-IV Viva Preparation Guide — DBMS, Probability & Statistics, Data Science using R. Lab programs first, theory Q&A next." />
+<meta name="description" content="BCA(DS)-IV Exam Prep — 7 subjects, 350+ PYQs, full-rigor model answers, offline-ready PWA. DBMS · P&S · DSUR · LOC · WC · CTRC · IKS." />
 <link rel="manifest" href="manifest.json" />
 <link rel="apple-touch-icon" href="icon-192.svg" />
-<title>BCA Viva Guide · BCA(DS)-IV</title>
+<title>BCA Exam Prep · BCA(DS)-IV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Spectral:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
@@ -222,6 +222,8 @@ h3 .badge{
 .viva-card.r     .stripe{ background:var(--forest); }
 .viva-card.wc    .stripe{ background:var(--brand); }
 .viva-card.loc   .stripe{ background:var(--gold); }
+.viva-card.ctrc  .stripe{ background:#7c2d12; }
+.viva-card.iks   .stripe{ background:#a16207; }
 
 .viva-card .inner{ padding:18px 16px 16px; }
 
@@ -236,6 +238,8 @@ h3 .badge{
 .viva-card.r     .subject-code{ color:var(--forest); }
 .viva-card.wc    .subject-code{ color:var(--brand); }
 .viva-card.loc   .subject-code{ color:var(--gold); }
+.viva-card.ctrc  .subject-code{ color:#7c2d12; }
+.viva-card.iks   .subject-code{ color:#a16207; }
 
 .viva-card .name{
   font-family:"Fraunces",serif;
@@ -269,6 +273,8 @@ h3 .badge{
 .viva-card.r     .pill{ color:var(--forest);  background:var(--forest-soft); }
 .viva-card.wc    .pill{ color:var(--brand);   background:var(--brand-soft); }
 .viva-card.loc   .pill{ color:#854d0e;        background:#fef3c7; }
+.viva-card.ctrc  .pill{ color:#7c2d12;        background:#fde8d8; border-color:#7c2d12; }
+.viva-card.iks   .pill{ color:#92400e;        background:#fef3c7; border-color:#a16207; }
 
 /* Topics list */
 .viva-card .topics{
@@ -299,6 +305,8 @@ h3 .badge{
 .viva-card.r     .cta{ background:var(--forest);  color:#fff; }
 .viva-card.wc    .cta{ background:var(--brand);   color:#fff; }
 .viva-card.loc   .cta{ background:var(--gold);    color:#fff; }
+.viva-card.ctrc  .cta{ background:#7c2d12;        color:#fff; }
+.viva-card.iks   .cta{ background:#a16207;        color:#fff; }
 .viva-card .cta .arr{ font-size:20px; font-weight:300; }
 
 /* ── HOW TO USE ── */
@@ -471,10 +479,10 @@ input,textarea,select{ font-size:16px; }
 
 <!-- ── TOPBAR ── -->
 <header class="topbar">
-  <div class="logo">V</div>
+  <div class="logo">E</div>
   <div>
-    <h1>BCA Viva Guide</h1>
-    <div class="sub">BCA(DS)-IV · Lab-first approach</div>
+    <h1>BCA Exam Prep</h1>
+    <div class="sub">BCA(DS)-IV · 7 subjects · 75 M theory</div>
   </div>
 </header>
 
@@ -482,22 +490,22 @@ input,textarea,select{ font-size:16px; }
 
   <!-- ── HERO ── -->
   <div class="hero">
-    <span class="stamp">Viva Prep · 2026</span>
-    <div class="meta-line">BCA(DS) IV · 3 subjects · lab + theory</div>
-    <h2>Viva<br>Guide<em>lab-first approach</em></h2>
-    <p class="lead">code → concepts → questions ✦</p>
+    <span class="stamp">Exam Prep · 2026</span>
+    <div class="meta-line">BCA(DS)-IV · 7 subjects · 75 M theory paper</div>
+    <h2>Exam<br>Prep<em>PYQ-driven approach</em></h2>
+    <p class="lead">units → PYQs → predictions ✦</p>
     <div class="stats">
       <div class="stat">
         <div class="lbl">subjects</div>
-        <div class="num">3</div>
+        <div class="num">7</div>
       </div>
       <div class="stat">
-        <div class="lbl">lab programs</div>
-        <div class="num">32</div>
+        <div class="lbl">exam guides</div>
+        <div class="num">7</div>
       </div>
       <div class="stat">
-        <div class="lbl">viva Q&amp;A</div>
-        <div class="num">150+</div>
+        <div class="lbl">PYQs</div>
+        <div class="num">350+</div>
       </div>
     </div>
   </div>
@@ -512,68 +520,62 @@ input,textarea,select{ font-size:16px; }
     <button id="installBtn">Install</button>
   </div>
 
-  <!-- ── HOW TO USE ── -->
-  <h3><span class="ico">💡</span> How to prepare <span class="badge">approach</span></h3>
-  <div class="how-grid">
-    <div class="how-item">
-      <div class="step">Step 1</div>
-      <div class="act">Open Lab Guide</div>
-      <div class="desc">Go to the 🧪 Lab Guide section of your subject</div>
-    </div>
-    <div class="how-item">
-      <div class="step">Step 2</div>
-      <div class="act">Read the Code</div>
-      <div class="desc">Study each program — it's written to be easy to remember</div>
-    </div>
-    <div class="how-item">
-      <div class="step">Step 3</div>
-      <div class="act">Check Concepts</div>
-      <div class="desc">Read key concepts + viva Q&amp;A for that experiment</div>
-    </div>
-    <div class="how-item">
-      <div class="step">Step 4</div>
-      <div class="act">Theory Q&amp;A</div>
-      <div class="desc">Finish with the 📚 Theory section for full coverage</div>
-    </div>
-  </div>
-
-  <!-- ── VIVA GUIDES (main) ── -->
-  <h3><span class="ico">🧪</span> Viva Guides <span class="badge">3 subjects</span></h3>
+  <!-- ── EXAM MASTERY (75-mark theory) ── -->
+  <h3><span class="ico">📜</span> Exam Mastery <span class="badge">7 subjects · 75 M</span></h3>
 
   <div class="viva-cards">
 
-    <!-- DBMS -->
-    <a href="viva/dbms-viva.html" class="viva-card dbms">
+    <!-- 1 · 26 May 2026 -->
+    <a href="iks-exam-guide.html" class="viva-card iks">
       <span class="stripe"></span>
       <div class="inner">
-        <div class="subject-code">BCG-202-V · BCG-210-V</div>
-        <div class="name">DBMS</div>
-        <div class="full">Database Management Systems</div>
+        <div class="subject-code">VAC-104-V · 26 May 2026</div>
+        <div class="name">IKS Exam</div>
+        <div class="full">Indian Knowledge System · University Paper</div>
         <div class="pills">
-          <span class="pill">10 SQL Programs</span>
-          <span class="pill">40+ Q&amp;A</span>
+          <span class="pill">60+ PYQs</span>
+          <span class="pill">12 Repeated</span>
+          <span class="pill">8 Predicted</span>
         </div>
         <ul class="topics">
-          <li>DDL &amp; DML commands</li>
-          <li>Constraints &amp; Keys</li>
-          <li>JOINs &amp; Subqueries</li>
-          <li>Transactions (TCL)</li>
-          <li>Cursor · Normalization</li>
+          <li>6 Units · Yoga · Maths · Ayurveda · Vastu</li>
+          <li>6 BCA/BSc cross-program papers</li>
+          <li>Full-rigor model answers (Sec. 6)</li>
+          <li>Memory-anchor blocks per topic</li>
+          <li>3-hour revision plan</li>
         </ul>
       </div>
-      <div class="cta">Open DBMS Viva <span class="arr">›</span></div>
+      <div class="cta">Open IKS Exam Guide <span class="arr">›</span></div>
     </a>
 
-  </div>
+    <!-- 2 · 29 May 2026 -->
+    <a href="ctrc-exam-guide.html" class="viva-card ctrc">
+      <span class="stripe"></span>
+      <div class="inner">
+        <div class="subject-code">AEC-109-V · 29 May 2026</div>
+        <div class="name">CTRC Exam</div>
+        <div class="full">Critical Thinking &amp; Rhetorical Communication · University Paper</div>
+        <div class="pills">
+          <span class="pill">87 PYQs</span>
+          <span class="pill">12 Repeated</span>
+          <span class="pill">8 Predicted</span>
+        </div>
+        <ul class="topics">
+          <li>5 Units · argument · rhetoric · fallacies</li>
+          <li>BCA-25 + BSC-25 + 2 sister-course papers</li>
+          <li>Full-rigor model answers (Sec. 6)</li>
+          <li>5 inline SVG diagrams (Toulmin, Shannon…)</li>
+          <li>3-hour revision plan</li>
+        </ul>
+      </div>
+      <div class="cta">Open CTRC Exam Guide <span class="arr">›</span></div>
+    </a>
 
-  <!-- ── EXAM MASTERY (75-mark theory) ── -->
-  <h3><span class="ico">📜</span> Exam Mastery <span class="badge">75 M theory</span></h3>
-
-  <div class="viva-cards">
+    <!-- 3 · 01 Jun 2026 -->
     <a href="dbms-exam-guide.html" class="viva-card dbms">
       <span class="stripe"></span>
       <div class="inner">
-        <div class="subject-code">BCG-202-V · 75 M Theory</div>
+        <div class="subject-code">BCG-202-V · 01 Jun 2026</div>
         <div class="name">DBMS Exam</div>
         <div class="full">Database Management System · University Paper</div>
         <div class="pills">
@@ -584,7 +586,7 @@ input,textarea,select{ font-size:16px; }
         <ul class="topics">
           <li>4 Units · ER → SQL → Concurrency</li>
           <li>2023 → 2025 corpus (BCA + B.Tech)</li>
-          <li>Full-rigor model answers (§6)</li>
+          <li>Full-rigor model answers (Sec. 6)</li>
           <li>Mark-allocation breakdowns</li>
           <li>3-hour revision plan</li>
         </ul>
@@ -592,54 +594,11 @@ input,textarea,select{ font-size:16px; }
       <div class="cta">Open DBMS Exam Guide <span class="arr">›</span></div>
     </a>
 
-    <a href="probstats-exam-guide.html" class="viva-card stats">
-      <span class="stripe"></span>
-      <div class="inner">
-        <div class="subject-code">BCD-202-V · 75 M Theory</div>
-        <div class="name">P&amp;S Exam</div>
-        <div class="full">Probability &amp; Statistics · University Paper</div>
-        <div class="pills">
-          <span class="pill">52 PYQs</span>
-          <span class="pill">12 Repeated</span>
-          <span class="pill">8 Predicted</span>
-        </div>
-        <ul class="topics">
-          <li>4 Units · structured deep-dives</li>
-          <li>Dec-2022 → May-2025 corpus</li>
-          <li>Full-rigor model answers (§6)</li>
-          <li>Mark-allocation breakdowns</li>
-          <li>3-hour revision plan</li>
-        </ul>
-      </div>
-      <div class="cta">Open P&amp;S Exam Guide <span class="arr">›</span></div>
-    </a>
-
-    <a href="r-datascience-exam-guide.html" class="viva-card r">
-      <span class="stripe"></span>
-      <div class="inner">
-        <div class="subject-code">BCD-204-V · 75 M Theory</div>
-        <div class="name">DSUR Exam</div>
-        <div class="full">Data Science Using R · University Paper</div>
-        <div class="pills">
-          <span class="pill">42 PYQs</span>
-          <span class="pill">12 Repeated</span>
-          <span class="pill">7 Predicted</span>
-        </div>
-        <ul class="topics">
-          <li>4 Units · Intro DS → Stats in R</li>
-          <li>May-2023 / 2024 / 2025 corpus</li>
-          <li>Full-rigor model answers (§6)</li>
-          <li>Mark-allocation breakdowns</li>
-          <li>3-hour revision plan</li>
-        </ul>
-      </div>
-      <div class="cta">Open DSUR Exam Guide <span class="arr">›</span></div>
-    </a>
-
+    <!-- 4 · 08 Jun 2026 -->
     <a href="loc-exam-guide.html" class="viva-card loc">
       <span class="stripe"></span>
       <div class="inner">
-        <div class="subject-code">BCG-208-V · 75 M Theory</div>
+        <div class="subject-code">BCG-208-V · 08 Jun 2026</div>
         <div class="name">LOC Exam</div>
         <div class="full">Logical Organisation of Computer · University Paper</div>
         <div class="pills">
@@ -658,10 +617,11 @@ input,textarea,select{ font-size:16px; }
       <div class="cta">Open LOC Exam Guide <span class="arr">›</span></div>
     </a>
 
+    <!-- 5 · 10 Jun 2026 -->
     <a href="wc-exam-guide.html" class="viva-card wc">
       <span class="stripe"></span>
       <div class="inner">
-        <div class="subject-code">BCG-216-V · 75 M Theory</div>
+        <div class="subject-code">BCG-216-V · 10 Jun 2026</div>
         <div class="name">WC Exam</div>
         <div class="full">Wireless Communication · University Paper</div>
         <div class="pills">
@@ -679,58 +639,63 @@ input,textarea,select{ font-size:16px; }
       </div>
       <div class="cta">Open WC Exam Guide <span class="arr">›</span></div>
     </a>
+
+    <!-- 6 · 12 Jun 2026 -->
+    <a href="r-datascience-exam-guide.html" class="viva-card r">
+      <span class="stripe"></span>
+      <div class="inner">
+        <div class="subject-code">BCA-DS-23-206 · 12 Jun 2026</div>
+        <div class="name">DSUR Exam</div>
+        <div class="full">Data Science Using R · University Paper</div>
+        <div class="pills">
+          <span class="pill">42 PYQs</span>
+          <span class="pill">12 Repeated</span>
+          <span class="pill">7 Predicted</span>
+        </div>
+        <ul class="topics">
+          <li>4 Units · Intro DS → Stats in R</li>
+          <li>May-2023 / 2024 / 2025 corpus</li>
+          <li>Full-rigor model answers (Sec. 6)</li>
+          <li>Mark-allocation breakdowns</li>
+          <li>3-hour revision plan</li>
+        </ul>
+      </div>
+      <div class="cta">Open DSUR Exam Guide <span class="arr">›</span></div>
+    </a>
+
+    <!-- 7 · 17 Jun 2026 -->
+    <a href="probstats-exam-guide.html" class="viva-card stats">
+      <span class="stripe"></span>
+      <div class="inner">
+        <div class="subject-code">BCD-202-V · 17 Jun 2026</div>
+        <div class="name">P&amp;S Exam</div>
+        <div class="full">Probability &amp; Statistics · University Paper</div>
+        <div class="pills">
+          <span class="pill">52 PYQs</span>
+          <span class="pill">12 Repeated</span>
+          <span class="pill">8 Predicted</span>
+        </div>
+        <ul class="topics">
+          <li>4 Units · structured deep-dives</li>
+          <li>Dec-2022 → May-2025 corpus</li>
+          <li>Full-rigor model answers (Sec. 6)</li>
+          <li>Mark-allocation breakdowns</li>
+          <li>3-hour revision plan</li>
+        </ul>
+      </div>
+      <div class="cta">Open P&amp;S Exam Guide <span class="arr">›</span></div>
+    </a>
+
   </div>
 
-  <!-- ── TIP ── -->
   <div class="tip">
-    <strong>viva tip</strong> Examiner usually picks 1–2 lab programs first, then asks definitions. Know your code well — especially the <em>key commands and their purpose</em>, not just the output.
-  </div>
-
-  <!-- ── EXAM MASTERY GUIDES ── -->
-  <h3><span class="ico">🎯</span> Exam Mastery Guides <span class="badge">full syllabus</span></h3>
-
-  <div class="old-cards">
-    <a href="ctrc-exam-guide.html" class="old-card oc-ctrc">
-      <span class="oc-emoji">🎯</span>
-      <div class="oc-name">CTRC · Full Exam</div>
-      <div class="oc-desc">AEC-109-V · 87 PYQs · most-repeated + predicted Qs</div>
-    </a>
-  </div>
-
-  <div class="tip">
-    <strong>exam mastery</strong> Full-syllabus theory guides built from PYQ analysis. Each contains unit notes, 80+ PYQs with model answers, most-repeated questions ranked by frequency, and predicted Qs based on pattern analysis. More subjects coming.
-  </div>
-
-  <!-- ── SESSIONAL GUIDES ── -->
-  <h3><span class="ico">📚</span> Sessional Study Guides <span class="badge">reference</span></h3>
-
-  <div class="old-cards">
-    <a href="other/probstats-alt.html" class="old-card oc-alt">
-      <span class="oc-emoji">🧒</span>
-      <div class="oc-name">P&amp;S · ELI5</div>
-      <div class="oc-desc">Alt guide · easy English + 40 worked Qs</div>
-    </a>
-    <a href="other/r-datascience-mobile.html" class="old-card oc-r">
-      <span class="oc-emoji">📈</span>
-      <div class="oc-name">DSUR Sessional</div>
-      <div class="oc-desc">Data Science Using R exam guide</div>
-    </a>
-    <a href="other/ctrc-study-guide.html" class="old-card oc-ctrc">
-      <span class="oc-emoji">💬</span>
-      <div class="oc-name">CTRC</div>
-      <div class="oc-desc">Critical Thinking &amp; Rhetoric guide</div>
-    </a>
-    <a href="other/iks-mobile.html" class="old-card oc-iks">
-      <span class="oc-emoji">🕉️</span>
-      <div class="oc-name">IKS</div>
-      <div class="oc-desc">Indian Knowledge System guide</div>
-    </a>
+    <strong>exam tip</strong> Each guide is built from real PYQs — study the <em>repeated questions first</em> (they appear 3–5× across papers), then the predicted Qs. That alone covers 60–70 % of any paper.
   </div>
 
   <!-- ── FOOTER ── -->
   <footer class="end">
-    <h4>Viva me <b>pass kar!</b></h4>
-    <div class="meta">BCA(DS)-IV · DBMS · Stats · Data Science R · Viva Prep 2026</div>
+    <h4>Exam me <b>full marks!</b></h4>
+    <div class="meta">BCA(DS)-IV · DBMS · P&amp;S · DSUR · LOC · WC · CTRC · IKS · 2026</div>
     <span class="offline-status" id="offlineStatus">⚡ Checking offline status…</span>
   </footer>
 
