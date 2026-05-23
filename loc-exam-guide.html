@@ -930,6 +930,17 @@ input,textarea,select{ font-size:16px; }
     <span class="priority">⭐ HIGH-YIELD · 22-26/75 M · 4-5 PYQs/year</span>
   </div>
 
+  <div class="box prof">
+    <span class="label">Unit 1 spotlight · 5 hottest items (~28-32 marks band)</span>
+    <ol style="margin:6px 0 0 18px">
+      <li><b>Addressing modes</b> (4× freq) — 9-mode compare table + Direct/Indirect/Relative/Reg-indirect EA numerical (LOC23-1g, LOC_CSE24-1i, loc_may25 Q4 15M).</li>
+      <li><b>IEEE-754 FP + normalisation</b> (3× freq) — represent decimal in single precision; add two FP numbers and renormalise (LOC23-2a 10M, LOC_CSE24-2b 5M).</li>
+      <li><b>Booth's signed multiplier</b> (2× freq) — −6 × −9 = +54 worked numerical with flowchart (LOC_CSE24-3b 5M).</li>
+      <li><b>RISC vs CISC + 8085/8086 differences</b> (3× freq) — 8-row compare table + 9-row 8085/8086 (LOC_CSE24-1f, loc_may25-7c, LOC_CSE24-7c).</li>
+      <li><b>Number-system conversions</b> (2× freq) — decimal-binary-octal-hex mixed conversions plus 2's-complement subtraction (loc24-2b, loc25-3c/3d/3e).</li>
+    </ol>
+  </div>
+
   <!-- 1.1 Architecture vs Organisation -->
   <div class="topic" id="t-1-1">
     <h3>1.1 Computer architecture vs organisation <span class="tag hot">PYQ</span></h3>
@@ -1013,6 +1024,11 @@ input,textarea,select{ font-size:16px; }
     <div class="box why">
       <span class="label">Why it matters</span>
       Every modern CPU (Intel, ARM, RISC-V) is a descendant of von Neumann's model. The only modification at scale is the <b>Harvard architecture</b> (separate instruction &amp; data caches) — used in DSPs and the L1 of almost every modern CPU — to break the <em>von Neumann bottleneck</em> (single bus is the throughput limit).
+    </div>
+
+    <div class="box prof">
+      <span class="label">How prof asks this</span>
+      Asked as 1.5-mark short in LOC_CSE24 Q1(a). Senior profs want the year (<b>1945, EDVAC</b>), the <b>single-bus</b> model, and <b>"instructions-as-data"</b> to be named explicitly. A two-sentence answer scores full 1.5 only if all three are present.
     </div>
   </div>
 
@@ -1158,7 +1174,21 @@ flag  -  -  -  -  O  D  I  T  S  Z  -  A  -  P  -  C
 ─────────────────────────────────────────────</div>
     <div class="box prof">
       <span class="label">How prof asks this</span>
-      LOC_CSE24 Q1(b) asks "What is program status word?" (1.5 M) and Q5(a) gives a numerical: "<em>perform addition on −81 and FE (hex). What is the resultant FLAGS value?</em>" — see the worked solution in the PYQ vault for the full flag-by-flag walk-through.
+      LOC_CSE24 Q1(b) asks "What is program status word?" (1.5 M) and Q5(a) gives a numerical: "<em>perform addition on −81 and FE (hex). What is the resultant FLAGS value?</em>" — full flag-by-flag walk-through follows.
+    </div>
+
+    <h4>Worked: 8086 flag computation (LOC_CSE24 Q5a, 5 M)</h4>
+    <div class="numeric">
+      <p class="q">Perform 16-bit addition of −81 (decimal) and FE (hex). Determine CF, ZF, SF, OF, PF, AF.</p>
+      <div class="step k" data-k="1"><b>Encode operands.</b> −81 in 16-bit 2's complement: +81 = 0000 0000 0101 0001; invert = 1111 1111 1010 1110; +1 = 1111 1111 1010 1111 = FFAF<sub>16</sub>. FE<sub>16</sub> = 0000 0000 1111 1110.</div>
+      <div class="step k" data-k="2"><b>Add.</b> FFAF + 00FE: bit-by-bit gives 1 0000 0000 1010 1101 → result = 00AD, carry-out = 1.</div>
+      <div class="step k" data-k="3"><b>CF</b> = carry out of bit 15 = <b>1</b>.</div>
+      <div class="step k" data-k="4"><b>ZF</b> = (result == 0)? 00AD ≠ 0 → ZF = <b>0</b>.</div>
+      <div class="step k" data-k="5"><b>SF</b> = MSB of result = bit 15 of 00AD = <b>0</b>.</div>
+      <div class="step k" data-k="6"><b>OF</b> = signed-overflow: signed inputs −81 and +254; signed result = +173 fits the 16-bit signed range → OF = <b>0</b>.</div>
+      <div class="step k" data-k="7"><b>AF</b> = carry from bit 3 to bit 4 in the low nibble. Low nibble of FFAF = F (1111), of 00FE = E (1110). 1111 + 1110 = 1 1101 → carry into bit 4 → AF = <b>1</b>.</div>
+      <div class="step k" data-k="8"><b>PF</b> = even parity of low byte. Low byte 0xAD = 1010 1101 has 5 ones (odd) → PF = <b>0</b> (PF=1 only when ones-count of the low byte is even).</div>
+      <p class="a">FLAGS: CF=1, ZF=0, SF=0, OF=0, AF=1, PF=0.</p>
     </div>
   </div>
 
@@ -1537,6 +1567,15 @@ Sign-magnitude  : 1101   (MSB=1 → negative, magnitude 101)
       <div class="step k" data-k="4"><b>Interpret:</b> invert(11110101)+1 = 00001010 + 1 = 00001011 = 11<sub>10</sub>. So result = −11.</div>
       <p class="a">36 − 47 = <b>−11</b>, represented as 11110101 in 8-bit 2's complement.</p>
     </div>
+
+    <h4>Worked: base conversions (loc24 Q2b style, 5 M)</h4>
+    <div class="numeric">
+      <p class="q">(i) (79.4375)<sub>10</sub> → octal · (ii) (5D.8F)<sub>16</sub> → binary · (iii) (10111011.1101)<sub>2</sub> → decimal.</p>
+      <div class="step k" data-k="1"><b>(i) 79 to octal.</b> 79÷8 = 9 r 7; 9÷8 = 1 r 1; 1÷8 = 0 r 1. Read remainders bottom-up → integer = 117. Fraction 0.4375: 0.4375×8 = 3.5 → digit 3, remainder 0.5; 0.5×8 = 4.0 → digit 4, stop. Result: <b>(117.34)<sub>8</sub></b>.</div>
+      <div class="step k" data-k="2"><b>(ii) 5D.8F to binary.</b> Each hex digit → 4 bits. 5 = 0101, D = 1101, 8 = 1000, F = 1111. Result: <b>(0101 1101 . 1000 1111)<sub>2</sub></b>.</div>
+      <div class="step k" data-k="3"><b>(iii) 10111011.1101 to decimal.</b> Integer 10111011 = 128 + 0 + 32 + 16 + 8 + 0 + 2 + 1 = 187. Fraction .1101 = 1/2 + 1/4 + 0 + 1/16 = 0.5 + 0.25 + 0.0625 = 0.8125. Result: <b>(187.8125)<sub>10</sub></b>.</div>
+      <p class="a">Rule: integer part by repeated division (read remainders bottom-up); fraction by repeated multiplication (read integer parts top-down).</p>
+    </div>
   </div>
 
   <!-- 1.12 Floating point -->
@@ -1743,6 +1782,17 @@ C<sub>4</sub> = G<sub>3</sub> + P<sub>3</sub>G<sub>2</sub> + P<sub>3</sub>P<sub>
       <figcaption><b>Fig 1.13</b> · 4-bit ripple-carry adder · carry propagates from FA0 to FA3</figcaption>
     </figure>
 
+    <h4>Worked: trace a 4-bit RCA · 1011 + 1010</h4>
+    <div class="numeric">
+      <p class="q">Add A = 1011, B = 1010 in a 4-bit RCA. Trace each full-adder stage with sum and carry.</p>
+      <div class="step k" data-k="1"><b>FA0:</b> A<sub>0</sub>=1, B<sub>0</sub>=0, C<sub>0</sub>=0. S<sub>0</sub> = 1⊕0⊕0 = 1; C<sub>1</sub> = 1·0 + (1⊕0)·0 = 0.</div>
+      <div class="step k" data-k="2"><b>FA1:</b> A<sub>1</sub>=1, B<sub>1</sub>=1, C<sub>1</sub>=0. S<sub>1</sub> = 1⊕1⊕0 = 0; C<sub>2</sub> = 1·1 + (1⊕1)·0 = 1.</div>
+      <div class="step k" data-k="3"><b>FA2:</b> A<sub>2</sub>=0, B<sub>2</sub>=0, C<sub>2</sub>=1. S<sub>2</sub> = 0⊕0⊕1 = 1; C<sub>3</sub> = 0·0 + (0⊕0)·1 = 0.</div>
+      <div class="step k" data-k="4"><b>FA3:</b> A<sub>3</sub>=1, B<sub>3</sub>=1, C<sub>3</sub>=0. S<sub>3</sub> = 1⊕1⊕0 = 0; C<sub>4</sub> = 1·1 + 0 = 1.</div>
+      <div class="step k" data-k="5"><b>Result:</b> S = 0101 with carry-out C<sub>4</sub> = 1 → full result 10101 = 21<sub>10</sub>. Verify: 1011 (11) + 1010 (10) = 21. ✓</div>
+      <p class="a">Worst-case delay = 4 · t<sub>FA</sub> — the carry produced at FA1 had to ripple through FA2 and FA3 before S<sub>3</sub> stabilised.</p>
+    </div>
+
     <p>An <b>n-bit adder/subtractor</b> reuses an RCA: control line M selects add (M=0) or subtract (M=1). Each B<sub>i</sub> XORs with M, and C<sub>0</sub> = M (forces 2's-complement of B when subtracting).</p>
 
     <div class="box why">
@@ -1857,6 +1907,17 @@ ASR = arithmetic shift right (sign-extending).</div>
       <figcaption><b>Fig 1.14b</b> · Non-restoring division · single add-or-subtract per cycle · final fix-up if remainder negative</figcaption>
     </figure>
 
+    <h4>Worked: 4-bit restoring division · 7 ÷ 3</h4>
+    <div class="numeric">
+      <p class="q">Divide dividend Q = 0111 (7) by divisor M = 0011 (3) using 4-bit restoring division. Find quotient and remainder.</p>
+      <div class="step k" data-k="1"><b>Init.</b> A = 0000, M = 0011, Q = 0111, count = 4.</div>
+      <div class="step k" data-k="2"><b>Step 1.</b> Shift (A,Q) left → A = 0000, Q = 1110. A ← A − M = 0000 − 0011 = 1101 (negative). Restore: A ← A + M = 0000. Q<sub>0</sub> = 0. (A,Q) = (0000, 1110).</div>
+      <div class="step k" data-k="3"><b>Step 2.</b> Shift left → A = 0001, Q = 1100. A − M = 0001 − 0011 = 1110 (negative). Restore → A = 0001. Q<sub>0</sub> = 0. (A,Q) = (0001, 1100).</div>
+      <div class="step k" data-k="4"><b>Step 3.</b> Shift left → A = 0011, Q = 1000. A − M = 0011 − 0011 = 0000 (non-negative). Q<sub>0</sub> = 1. (A,Q) = (0000, 1001).</div>
+      <div class="step k" data-k="5"><b>Step 4.</b> Shift left → A = 0001, Q = 0010. A − M = 0001 − 0011 = 1110 (negative). Restore → A = 0001. Q<sub>0</sub> = 0. (A,Q) = (0001, 0010).</div>
+      <p class="a">Quotient Q = 0010 = <b>2</b>. Remainder A = 0001 = <b>1</b>. Verify: 3·2 + 1 = 7. ✓</p>
+    </div>
+
     <div class="box tip">
       <span class="label">Exam trick</span>
       For a 5-mark "Draw flowchart of non-restoring division" (LOC_CSE24 Q1e, 1.5M) — draw the diamond decision, the two branches (A+M / A−M), and the Q<sub>0</sub> assignment. Note the final-fix-up step explicitly — examiners look for it.
@@ -1960,6 +2021,19 @@ Outputs: s<sub>i</sub> = x<sub>i</sub> ⊕ y<sub>i</sub> ⊕ z<sub>i</sub>      
     <h2><span class="num">02</span>Control unit, Memory system &amp; Peripherals</h2>
     <p class="lede">Hardwired vs microprogrammed control · semiconductor memory technologies · programmed/interrupt-driven/DMA I/O · process-state transitions · SCSI &amp; USB.</p>
     <span class="priority">⭐ HIGH-YIELD · 24-28/75 M · 5+ PYQs/year</span>
+  </div>
+
+  <div class="box prof">
+    <span class="label">Unit 2 spotlight · 7 hottest items (~30-34 marks band — HEAVIEST unit)</span>
+    <ol style="margin:6px 0 0 18px">
+      <li><b>DMA controller block diagram + 3 transfer modes</b> (4× freq, GUARANTEED) — burst, cycle-stealing, transparent (LOC23-5a, LOC_CSE24-6b, loc_may25-7d).</li>
+      <li><b>Microprogrammed CU + address sequencing</b> (3× freq, 15M tier) — 4 next-address sources, block diagram, CAR trace (LOC23 Q6, LOC_CSE24 Q4b).</li>
+      <li><b>Interrupts</b> (3× freq) — Hardware/software/exception/NMI + priority schemes + process-state role (LOC23 Q4ii, LOC_CSE24-7a, loc_may25-1h).</li>
+      <li><b>Stack-based CPU + RPN evaluation</b> (2× freq) — zero-address ISA + RPN stack trace (LOC23-3 5M, LOC_CSE24-3a 10M).</li>
+      <li><b>8086 flag-register hex addition numerical</b> (signature-prof) — CF/ZF/SF/OF/PF/AF for −81 + FE (LOC_CSE24-5a).</li>
+      <li><b>Handshaking + async vs sync transfer</b> (2× freq) — 4-edge handshake timing + sync/async compare (LOC23-4).</li>
+      <li><b>I/O interface · I/O controller · SCSI/USB/PCI</b> (2× freq) — why an I/O interface is needed + controller block (LOC23-1j, LOC_CSE24-1g, loc_may25-5b).</li>
+    </ol>
   </div>
 
   <!-- 2.1 Control unit -->
@@ -2170,6 +2244,17 @@ Outputs: s<sub>i</sub> = x<sub>i</sub> ⊕ y<sub>i</sub> ⊕ z<sub>i</sub>      
       <figcaption><b>Fig 2.2</b> · Address sequencing · four next-address sources feed a MUX whose select is driven by status flags + μ-instruction control bits</figcaption>
     </figure>
 
+    <h4>Worked: CAR trace for ADD M (concrete μ-routine)</h4>
+    <div class="numeric">
+      <p class="q">Trace CAR values through one execution of <code>ADD M</code> (memory-reference, direct addressing). Assume FETCH lives at μ0–μ1 and MAP yields μ23 for the ADD opcode.</p>
+      <div class="step k" data-k="1"><b>μ0 (CAR = 0)</b> FETCH: MAR ← PC; M ← read; PC ← PC + 1. Next-address = CAR + 1 → CAR = 1.</div>
+      <div class="step k" data-k="2"><b>μ1 (CAR = 1)</b> FETCH: IR ← MBR. Next-address = MAP(opcode) → CAR = 23.</div>
+      <div class="step k" data-k="3"><b>μ23 (CAR = 23)</b> ADD-routine: MAR ← IR.addr. Next = CAR + 1 → CAR = 24.</div>
+      <div class="step k" data-k="4"><b>μ24 (CAR = 24)</b> ADD-routine: MBR ← M[MAR]. Next = CAR + 1 → CAR = 25.</div>
+      <div class="step k" data-k="5"><b>μ25 (CAR = 25)</b> ADD-routine: AC ← AC + MBR; update PSW. Next = unconditional branch → CAR = 0 (back to FETCH).</div>
+      <p class="a">CAR sequence: 0 → 1 → 23 → 24 → 25 → 0. Shows all 4 address sources: increment (μ0→1, μ23→24, μ24→25), opcode-map (μ1→23), and unconditional branch (μ25→0).</p>
+    </div>
+
     <div class="box prof">
       <span class="label">How prof asks this</span>
       A 15-mark question (LOC23 Q6, LOC_CSE24 Q4b) demands: <em>definition · 4 sources · block diagram · single example of an instruction microroutine (e.g. ADD) showing the CAR trace</em>. The diagram alone is worth 5 marks — draw it large and label the MUX inputs.
@@ -2202,6 +2287,14 @@ ALU encodes function (ADD, SUB, AND, OR, XOR, NOT, INC, DEC ...).</div>
 
     <p><b>For R1 ← R2 + R3:</b> SRC1=R2, SRC2=R3, DEST=R1, ALU=ADD.</p>
     <p><b>For R4 ← R4 ∨ R5:</b> SRC1=R4, SRC2=R5, DEST=R4, ALU=OR.</p>
+
+    <h4>Worked: encode R1 ← R2 + R3 as a 32-bit control word</h4>
+    <div class="numeric">
+      <p class="q">Given the field layout SRC1(3 b) · SRC2(3 b) · DEST(3 b) · ALU(4 b) · CONST(16 b), encode R1 ← R2 + R3 and R4 ← R4 ∨ R5 with R0=000, R1=001, R2=010, R3=011, R4=100, R5=101; ALU codes ADD=0000, OR=0100.</p>
+      <div class="step k" data-k="1"><b>R1 ← R2 + R3.</b> SRC1 = 010, SRC2 = 011, DEST = 001, ALU = 0000, CONST = 0…0. Control word = <code>010 011 001 0000 0000000000000000</code>.</div>
+      <div class="step k" data-k="2"><b>R4 ← R4 ∨ R5.</b> SRC1 = 100, SRC2 = 101, DEST = 100, ALU = 0100, CONST = 0…0. Control word = <code>100 101 100 0100 0000000000000000</code>.</div>
+      <p class="a">Total bits per micro-instruction = 3 + 3 + 3 + 4 + 16 = 29 (pad to 32 with reserved bits). Both ops fit one control word — single-cycle execution.</p>
+    </div>
 
     <div class="box tip">
       <span class="label">Score-saving habit</span>
@@ -2241,6 +2334,29 @@ I (bit 15) = indirect bit for memory-reference</div>
       <span class="label">Why this matters</span>
       The hypothetical CPU is the canonical "design a CPU from scratch" exam answer. State: data-path (buses, registers, ALU), control unit type, ISA breakdown, sample microroutine for one instruction (ADD). 15-mark prompt; the diagram alone scores 5.
     </div>
+
+    <h4>Stack-based CPU · Worked: RPN evaluation (LOC23 Q3, 5 M)</h4>
+    <p>A <b>stack-based (zero-address) CPU</b> has no addressable operand fields — every arithmetic instruction implicitly pops operands from the top of the stack and pushes the result. Programs are compiled to <b>Reverse Polish Notation (RPN / postfix)</b>; evaluation is a simple linear stack walk.</p>
+    <div class="numeric">
+      <p class="q">Convert <code>(3 + 4) × [10 × (2 + 6) + 8]</code> to reverse Polish notation, then trace the stack to evaluate.</p>
+      <div class="step k" data-k="1"><b>Postfix conversion.</b> Inner: (3+4) → 3 4 + ; (2+6) → 2 6 + ; 10·(2+6) → 10 2 6 + × ; +8 → 10 2 6 + × 8 + ; final × → <code>3 4 + 10 2 6 + × 8 + ×</code>.</div>
+      <div class="step k" data-k="2"><b>Stack trace.</b>
+        <pre>token  stack
+3      [3]
+4      [3,4]
++      [7]
+10     [7,10]
+2      [7,10,2]
+6      [7,10,2,6]
++      [7,10,8]
+×      [7,80]
+8      [7,80,8]
++      [7,88]
+×      [616]</pre>
+      </div>
+      <div class="step k" data-k="3"><b>Verify:</b> (3+4)·[10·(2+6)+8] = 7·[80+8] = 7·88 = 616. ✓</div>
+      <p class="a">Stack-CPU evaluates expressions in linear time with no register-allocation step; RPN is the natural code form (LOC_CSE24 Q3a, 10 M, extends to a 6-operand example).</p>
+    </div>
   </div>
 
   <!-- 2.5 Semiconductor memory -->
@@ -2271,6 +2387,11 @@ I (bit 15) = indirect bit for memory-reference</div>
     <div class="box tip">
       <span class="label">Volatile vs non-volatile — one liner</span>
       Volatile = loses content on power-off (SRAM, DRAM). Non-volatile = retains content (ROM, flash). Modern systems use both: DRAM for working memory, flash for persistent storage.
+    </div>
+
+    <div class="box prof">
+      <span class="label">How prof asks this (1.5 M shorts)</span>
+      Asked as 1.5-mark short in loc_may25-1d ("what is ROM used for") and loc_may25-1e ("volatile vs non-volatile"). Single-sentence answers: <b>ROM stores firmware/boot code</b> (non-volatile); <b>volatile</b> = loses content on power-off (RAM); <b>non-volatile</b> = retains content (ROM, flash, EEPROM). Mark allocation: 0.5 M for the definition, 1 M for one concrete example each.
     </div>
   </div>
 
@@ -2537,6 +2658,11 @@ I (bit 15) = indirect bit for memory-reference</div>
     </ul>
 
     <div class="box why">
+      <span class="label">Interrupts drive process-state transitions</span>
+      The OS uses interrupts to change a process's lifecycle state: <b>Timer interrupt</b> → preempt running process → READY; <b>I/O completion interrupt</b> → wake a process from BLOCKED → READY; <b>Page-fault exception</b> → suspend RUNNING → BLOCKED until the disk-service ISR completes. Without interrupts the kernel cannot regain CPU — every modern OS scheduler is interrupt-driven.
+    </div>
+
+    <div class="box why">
       <span class="label">Privileged vs non-privileged instructions</span>
       Most CPUs split instructions into <b>privileged</b> (only runnable in kernel mode — I/O, interrupt control, page-table writes) and <b>non-privileged</b> (user mode — arithmetic, branches). Attempting a privileged instruction from user mode raises an exception, transferring control to the OS — the foundation of OS protection.
     </div>
@@ -2646,6 +2772,16 @@ I (bit 15) = indirect bit for memory-reference</div>
     <span class="priority">⭐ MEDIUM-YIELD · 12-15/75 M · ALWAYS 1× long Q</span>
   </div>
 
+  <div class="box prof">
+    <span class="label">Unit 3 spotlight · 4 hottest items (~13-18 marks band)</span>
+    <ol style="margin:6px 0 0 18px">
+      <li><b>Pipeline hazards (data + control)</b> (2× freq, 15M tier) — RAW/WAR/WAW + branch prediction + space-time diagram (LOC23-7 15M, LOC_CSE24-5b 10M).</li>
+      <li><b>Flynn's classification</b> (2× freq) — SISD / SIMD / MISD / MIMD compare (LOC_CSE24-2a 5M).</li>
+      <li><b>Pipeline speedup / throughput</b> (1× freq, formula recall) — S = nk/(k+n−1) (LOC_CSE24-1h).</li>
+      <li><b>Cache coherence + MESI</b> (1× freq) — protocol families + 4 states (LOC_CSE24-1c).</li>
+    </ol>
+  </div>
+
   <!-- 3.1 Pipelining basics -->
   <div class="topic" id="t-3-1">
     <h3>3.1 Basic concept of pipelining</h3>
@@ -2753,6 +2889,16 @@ For n → ∞:  S<sub>k</sub> → k    (theoretical max = number of stages)
       <div class="step k" data-k="2">Non-pipelined time = n · k · τ<sub>p</sub> = 100 · 4 · 4 = <b>1600 ns</b>.</div>
       <div class="step k" data-k="3">Speedup = 1600 / 412 = <b>3.88</b>.</div>
       <p class="a">Speedup ≈ <b>3.88</b> (theoretical limit = 4 stages; 97% of ideal).</p>
+    </div>
+
+    <h4>Worked: efficiency and throughput (predicted 5 M)</h4>
+    <div class="numeric">
+      <p class="q">A 6-stage pipeline processes 50 instructions with stage cycle τ<sub>p</sub> = 2 ns. Compute (a) total time, (b) throughput, (c) speedup, (d) efficiency.</p>
+      <div class="step k" data-k="1"><b>Total time</b> = (k + n − 1) · τ<sub>p</sub> = (6 + 49) · 2 = <b>110 ns</b>.</div>
+      <div class="step k" data-k="2"><b>Throughput</b> = n / total time = 50 / 110 = 0.4545 instr/ns ≈ <b>454.5 MIPS</b>.</div>
+      <div class="step k" data-k="3"><b>Non-pipelined time</b> = n · k · τ<sub>p</sub> = 50 · 6 · 2 = 600 ns. <b>Speedup</b> = 600 / 110 = <b>5.45</b>.</div>
+      <div class="step k" data-k="4"><b>Efficiency</b> = S / k = 5.45 / 6 = 0.909 = <b>91 %</b> (since n = 50 ≫ k = 6, fill/drain overhead is small).</div>
+      <p class="a">As n grows, efficiency approaches 100% — fill-and-drain overhead amortises across the workload.</p>
     </div>
 
     <div class="box why">
@@ -2889,6 +3035,11 @@ For n → ∞:  S<sub>k</sub> → k    (theoretical max = number of stages)
         <li><b>Thread/task-level (TLP)</b> — multi-core, multiprocessor.</li>
       </ul>
     </div>
+
+    <div class="box tip">
+      <span class="label">Cross-link · RISC vs CISC</span>
+      Syllabus item 3.4 also lists "RISC vs CISC". The full 8-row compare table lives at <a href="#t-1-8">topic 1.8</a> — re-use that table for the Unit-3 short-note prompts in LOC_CSE24-7c and loc_may25-7c (each ~5 M).
+    </div>
   </div>
 
   <!-- 3.5 Flynn -->
@@ -3009,6 +3160,17 @@ For n → ∞:  S<sub>k</sub> → k    (theoretical max = number of stages)
     <h2><span class="num">04</span>Memory organisation</h2>
     <p class="lede">Interleaving · hierarchy · cache size vs block size · direct/associative/set-associative mapping · replacement (FIFO, LRU, Optimal) · write-through &amp; write-back policies.</p>
     <span class="priority">⭐ HIGH-YIELD · 14-18/75 M · ALWAYS 1× numerical</span>
+  </div>
+
+  <div class="box prof">
+    <span class="label">Unit 4 spotlight · 5 hottest items (~17-22 marks band)</span>
+    <ol style="margin:6px 0 0 18px">
+      <li><b>Cache TAG / SET / WORD sizing</b> (2× freq, GUARANTEED numerical) — set-associative formulae (LOC23-5b 10M, LOC_CSE24-6a 5M).</li>
+      <li><b>Page-replacement FIFO / LRU / Optimal trace</b> (1× freq, HIGH-VALUE 10M) — predicted to scale to 15M with Optimal added (LOC23-3b).</li>
+      <li><b>Hit ratio + cache performance</b> (2× freq) — T<sub>avg</sub> formula + 5 improvement techniques (LOC23-5b, LOC_CSE24-7e).</li>
+      <li><b>Locality of reference + secondary memory</b> (2× freq) — temporal vs spatial; why secondary memory (LOC23-1b).</li>
+      <li><b>Write-back vs write-through + memory hierarchy</b> (3× freq) — short-notes target (LOC_CSE24-7b, 7e, loc_may25-6b).</li>
+    </ol>
   </div>
 
   <!-- 4.1 Memory hierarchy -->
@@ -3177,6 +3339,15 @@ For n → ∞:  S<sub>k</sub> → k    (theoretical max = number of stages)
       <li>Prefetching — speculatively fetching the next block.</li>
       <li>Victim cache — small fully-associative cache for recently evicted blocks.</li>
     </ul>
+
+    <h4>Worked: average access time</h4>
+    <div class="numeric">
+      <p class="q">Cache access time = 5 ns; main-memory access time = 100 ns; hit ratio h = 0.95. Find T<sub>avg</sub> and the miss-penalty contribution.</p>
+      <div class="step k" data-k="1">T<sub>avg</sub> = h·T<sub>cache</sub> + (1 − h)·T<sub>main</sub> = 0.95·5 + 0.05·100 = 4.75 + 5 = <b>9.75 ns</b>.</div>
+      <div class="step k" data-k="2">Miss-penalty contribution = (1 − h)·T<sub>main</sub> = <b>5 ns</b> — half the average even though only 5 % of accesses miss.</div>
+      <div class="step k" data-k="3">If h drops to 0.90: T<sub>avg</sub> = 4.5 + 10 = 14.5 ns — a 5-point hit-rate drop costs ~50 % extra time. Hit ratio matters non-linearly.</div>
+      <p class="a">Cache effectiveness depends on h staying above ≈0.95 — that is why doubling cache size yields only 1-2 % h improvement but is still worth it.</p>
+    </div>
   </div>
 
   <!-- 4.5 Mapping techniques -->
@@ -3256,6 +3427,14 @@ k comparators per set (k-way)</div>
       <figcaption><b>Fig 4.5</b> · address-bit partitioning differs by mapping scheme · the SET field is the differentiator</figcaption>
     </figure>
 
+    <div class="formula"><b>UNIVERSAL CACHE-SIZING RECIPE</b>
+1. Compute main-memory address-width: log₂(main-memory in addressable units)
+2. WORD  = log₂(words per block)            ; block-offset bits
+3. Compute total cache lines = cache size / block size
+4. For DIRECT:     LINE = log₂(cache lines); TAG = total − LINE − WORD
+5. For SET-ASSOC:  sets = cache lines / k; SET = log₂(sets); TAG = total − SET − WORD
+6. For FULLY-ASSOC: TAG = total − WORD (no LINE/SET field)</div>
+
     <h4>Worked: cache design (LOC23 Q5b, 10 M)</h4>
     <div class="numeric">
       <p class="q">A 2-way set-associative cache uses blocks of 4 words and can hold 2048 words from a 128K × 32 main memory. Compute (i) all sizes (ii) TAG / SET / WORD bit-widths.</p>
@@ -3324,6 +3503,20 @@ victim chosen by least-recently-used among frames
 hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
       </div>
       <p class="a">FIFO yields 1 hit; LRU yields 3 hits — LRU exploits temporal locality on the back-edge of the trace (re-use of 4, 0, 1).</p>
+    </div>
+
+    <h4>Worked: Optimal (Belady's) trace · same 4-frame setup</h4>
+    <div class="numeric">
+      <p class="q">Apply OPTIMAL replacement to the trace <code>7 5 3 2 1 0 4 7 4 2 0 1 3 5</code> with 4 frames. Rule: evict the resident page whose <em>next</em> use is farthest in the future (∞ if never used again).</p>
+      <div class="step k" data-k="1"><b>Refs 7, 5, 3, 2 — compulsory fills.</b> Frames = {7, 5, 3, 2}; 4 misses, 0 hits.</div>
+      <div class="step k" data-k="2"><b>ref 1:</b> miss. Future uses among residents — 7@step8, 5@step14, 3@step13, 2@step10. Evict <b>5</b> (farthest = step 14). Frames = {7, 1, 3, 2}.</div>
+      <div class="step k" data-k="3"><b>ref 0:</b> miss. Future — 7@8, 1@12, 3@13, 2@10. Evict <b>3</b> (step 13). Frames = {7, 1, 0, 2}.</div>
+      <div class="step k" data-k="4"><b>ref 4:</b> miss. Future — 7@8, 1@12, 0@11, 2@10. Evict <b>1</b> (step 12). Frames = {7, 4, 0, 2}.</div>
+      <div class="step k" data-k="5"><b>ref 7:</b> hit. <b>ref 4:</b> hit. <b>ref 2:</b> hit. <b>ref 0:</b> hit.</div>
+      <div class="step k" data-k="6"><b>ref 1:</b> miss. Future — 7 never again, 4 never again, 0 never again, 2 never again, 3@13, 5@14. Evict <b>7</b> (any of the never-used; pick first). Frames = {1, 4, 0, 2}.</div>
+      <div class="step k" data-k="7"><b>ref 3:</b> miss. Evict <b>4</b> (never used again). Frames = {1, 3, 0, 2}.</div>
+      <div class="step k" data-k="8"><b>ref 5:</b> miss. Evict any (all never reused). Frames = {1, 3, 5, 2}.</div>
+      <p class="a">Optimal: 4 hits, 10 misses — strictly ≥ FIFO (1) and LRU (3) on every trace. Optimal needs future knowledge so it is a lower-bound baseline, never a real algorithm. <b>Belady's stack property</b>: adding frames never hurts.</p>
     </div>
 
     <div class="box warn">
@@ -3433,6 +3626,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
         <li><b>Informed tool selection</b> — choosing the right CPU (RISC vs CISC, vector vs scalar) for a target workload.</li>
       </ol>
       <p>It bridges the abstract software view and the concrete hardware reality — without it, modern computing has no shared vocabulary. See <a href="#t-1-1">topic 1.1</a> for the architecture vs organisation distinction.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.1 recap · architecture vs organisation</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>Architecture</b> = programmer-visible attributes — ISA, registers, addressing modes, data formats; the answer to "what does the machine do?"</li>
+          <li><b>Organisation</b> = hardware-level realisation — bus widths, ALU layout, pipeline depth, cache hierarchy, control signals; the answer to "how is it built?"</li>
+          <li>Same architecture → many organisations: x86 ISA realised by Intel Core, AMD Ryzen with vastly different microarchitectures.</li>
+          <li>Architecture is stable for decades (x86 since 1978); organisation changes every chip generation.</li>
+          <li>Document split: ISA manual (programmer's ref) vs datasheet / μ-arch spec.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3441,6 +3644,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">What do you mean by stored program control concept?</div>
     <div class="ans">
       <p>The <b>stored-program control concept</b> — proposed by von Neumann (1945) — states that <mark>both the program (instructions) and the data on which it operates are stored in the same read-write main memory</mark>. The CPU fetches each instruction sequentially by address held in the program counter, decodes it, and executes it. Because instructions are themselves binary patterns, the machine is reprogrammable just by loading a different program — the foundation of all general-purpose computers. See <a href="#t-1-2">topic 1.2</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.2 recap · von Neumann model</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Proposed by <b>John von Neumann (1945, EDVAC report)</b> — single memory for both instructions and data.</li>
+          <li>Five defining properties: single memory · sequential execution by PC · instructions are binary patterns · fetch-decode-execute loop · reprogrammable hardware.</li>
+          <li>Single shared bus connects CPU · memory · I/O — the "von Neumann bottleneck" (one bus is the throughput limit).</li>
+          <li>Variant: <b>Harvard architecture</b> separates I and D caches (used in DSPs and modern L1) to break the bottleneck.</li>
+          <li>Every modern CPU (Intel, ARM, RISC-V) is a descendant.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3449,6 +3662,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">What is Program Status Word?</div>
     <div class="ans">
       <p>The PSW is a CPU register that <mark>collects ALU status flags and CPU mode bits into a single word</mark>: Z (zero), S (sign), C (carry), V (overflow), P (parity), AC (auxiliary carry), I (interrupt-enable), T (trap), and the user/kernel mode bit. On interrupt entry the PSW is automatically pushed onto the stack and restored on RETI, preserving the running program's full execution context. See <a href="#t-1-5">topic 1.5</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.5 recap · PSW / 8086 FLAGS</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>PSW = single register collecting ALU status flags + system-state bits; pushed on interrupt entry, restored on RETI.</li>
+          <li>Status flags: <b>Z</b> (zero) · <b>S/N</b> (sign) · <b>C</b> (carry, unsigned overflow) · <b>V/O</b> (signed overflow) · <b>P</b> (even-parity of low byte) · <b>AC</b> (BCD auxiliary carry from bit 3→4).</li>
+          <li>Control flags: <b>I/IF</b> (interrupt enable) · <b>T/TF</b> (trap, single-step) · <b>D/DF</b> (string-op direction).</li>
+          <li>Mode bit: user vs kernel (privileged) — foundation of OS protection.</li>
+          <li>8086 FLAGS layout (low to high): C-P-A-Z-S-T-I-D-O occupying bits 0, 2, 4, 6, 7, 8, 9, 10, 11.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3457,6 +3680,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">Differentiate between computer architecture and computer organisation.</div>
     <div class="ans">
       <p><b>Computer architecture</b> = the <em>programmer-visible</em> view: ISA, addressing modes, register set, exceptions. <b>Computer organisation</b> = the <em>hardware-level</em> realisation: bus widths, ALU implementation, cache layout, control signals. Same architecture (e.g. x86) can be realised by many organisations (Intel Core vs AMD Ryzen). See the full 5-row table at <a href="#t-1-1">topic 1.1</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.1 recap · 5-row compare</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Visibility: Architecture is visible to programmer; Organisation is hidden hardware.</li>
+          <li>Question answered: "What does it do?" vs "How is it done?"</li>
+          <li>Examples: ISA + addressing modes vs control signals + ALU bit-width + cache size.</li>
+          <li>Change frequency: Architecture is stable for decades; Organisation changes every chip generation.</li>
+          <li>Document: ISA manual (programmer's reference) vs datasheet / μ-arch spec.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3470,6 +3703,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
         <li>Loop: shift-left (A,Q); if sign(A) = +, A ← A − M else A ← A + M; Q<sub>0</sub> ← sign(A); n−−.</li>
         <li>Fix-up: if at end A &lt; 0, perform A ← A + M.</li>
       </ul>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.14 recap · restoring vs non-restoring</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>Restoring</b>: subtract divisor; if remainder negative, restore by adding back → up to 2 ops per cycle.</li>
+          <li><b>Non-restoring</b>: subtract divisor; if negative, next step adds instead → exactly 1 add OR subtract per cycle.</li>
+          <li>Non-restoring is ~2× faster on average; only final fix-up required if last remainder negative.</li>
+          <li>Flowchart kernel: A=0, M=divisor, Q=dividend; loop = shift-left (A,Q) → if sign(A)=+ then A←A−M else A←A+M → Q<sub>0</sub>←sign(A) → n−−; fix-up at end.</li>
+          <li>Worked 4-bit example 7÷3: quotient=2, remainder=1 (verify 3·2+1=7).</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3478,6 +3721,17 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">Bring out the differences between 8085 and 8086 microprocessors.</div>
     <div class="ans">
       <p>8085 is an 8-bit, 16-bit-address microprocessor (1976); 8086 is its 16-bit, 20-bit-address successor (1978) with segmentation, dual-unit pipelining, and built-in multiply/divide. See full 9-row comparison at <a href="#t-1-8">topic 1.8</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.8 recap · 8085 vs 8086 essentials</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Year + width: 8085 = 1976, 8-bit data / 16-bit address (64 KB); 8086 = 1978, 16-bit data / 20-bit address (1 MB via segmentation).</li>
+          <li>Registers: 8085 has A, B-C, D-E, H-L, SP, PC; 8086 has AX BX CX DX SI DI BP SP + segment regs (CS/DS/SS/ES).</li>
+          <li>Pipelining: 8085 sequential; 8086 has 2-stage BIU↔EU prefetch pipeline.</li>
+          <li>Built-in MUL/DIV instructions in 8086; 8085 needs software routines.</li>
+          <li>Modes: 8085 single mode; 8086 Min/Max modes (single- or multi-CPU); clocks 3 MHz vs 5/8/10 MHz.</li>
+          <li>Marks the move from <em>accumulator-based</em> ISA to <em>general-register</em> ISA with segmentation.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3486,6 +3740,21 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">An instruction stored at location 200 has address field at 201 with value 320. R1 contains 500. Find EA for (i) Direct (ii) Relative (iii) Register indirect.</div>
     <div class="ans">
       <p>Direct: EA = A = <b>320</b>. Relative: EA = PC + A = 202 + 320 = <b>522</b> (PC has already advanced to next instruction). Register indirect: EA = (R1) = <b>500</b>. Full step-by-step at <a href="#t-1-7">topic 1.7</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.7 recap · 9 addressing modes (EA formulas)</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>Immediate</b>: EA = operand itself (in-line constant).</li>
+          <li><b>Direct</b>: EA = A (address field is the EA).</li>
+          <li><b>Indirect</b>: EA = M[A] (two memory accesses, enables pointers).</li>
+          <li><b>Register</b>: EA = R (no memory access, fastest).</li>
+          <li><b>Register-indirect</b>: EA = (R) (pointer in register).</li>
+          <li><b>Indexed</b>: EA = A + R<sub>x</sub> (array element access).</li>
+          <li><b>Base-register</b>: EA = B + A (relocatable code, segments).</li>
+          <li><b>Relative</b>: EA = PC + A (branches; PC = <em>next</em> instr's address).</li>
+          <li><b>Stack</b>: EA = top-of-stack via SP (PUSH/POP, call/return).</li>
+          <li><b>Pitfall</b>: PC-relative uses PC of next instruction, not current.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3494,6 +3763,17 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">Why are registers used in computers?</div>
     <div class="ans">
       <p>Five reasons: (1) <em>Speed</em> — register access is sub-nanosecond, vs 50-100 ns for main memory. (2) <em>Reduce memory traffic</em> — reused values stay cached in a register. (3) <em>Hold control state</em> — PC, IR, flags must be in registers for the CPU to access them every cycle. (4) <em>Support addressing modes</em> — register-indirect, indexed, base-register modes all need registers. (5) <em>Enable compiler optimisation</em> — register allocation is the single biggest compile-time win. See <a href="#t-1-4">topic 1.4</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.4 recap · standard register set</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>PC</b> (Program Counter) — address of next instruction to fetch.</li>
+          <li><b>IR</b> (Instruction Register) — instruction currently being decoded.</li>
+          <li><b>MAR / MBR</b> — Memory Address Register drives address bus; Memory Buffer Register buffers data.</li>
+          <li><b>AC</b> (Accumulator) — default ALU destination (single-accumulator machines).</li>
+          <li><b>SP</b> (Stack Pointer) — top-of-stack; <b>PSW</b> = status flags + mode bits.</li>
+          <li><b>R0..Rn</b> — general-purpose registers (8/16/32 typical); register-file access ≤ 1 ns vs 50-100 ns for DRAM.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3502,6 +3782,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">Compare register stack and memory stack.</div>
     <div class="ans">
       <p>A <b>register stack</b> lives inside the CPU in dedicated registers — small (≤ 64 entries), 1-cycle access, with FULL/EMPTY flags. A <b>memory stack</b> is a region of main memory pointed to by SP — large (only limited by allocated memory), multi-cycle access, used by all general-purpose CPUs for user-program activation records. See <a href="#t-1-10">topic 1.10</a> for the full comparison.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.10 recap · register vs memory stack</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Location: register stack inside CPU; memory stack is a region of main memory.</li>
+          <li>Capacity: register stack ≤ 64 entries (fixed at silicon); memory stack limited only by allocated memory.</li>
+          <li>Speed: register = 1-cycle push/pop; memory = multi-cycle (bus delay).</li>
+          <li>SP behaviour: register SP increments on PUSH; memory SP usually decrements (grows downward).</li>
+          <li>Wrap-around trick: SP=0000 with FULL=1, EMPTY=0 → stack holds 2<sup>n</sup> items (n = SP bit-width); 4-bit SP = 16, 8-bit SP = 256.</li>
+        </ul>
+      </div>
       <div class="table-wrap"><table>
         <thead><tr><th>Property</th><th>Register stack</th><th>Memory stack</th></tr></thead>
         <tbody>
@@ -3519,6 +3809,15 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">What is bus arbitration?</div>
     <div class="ans">
       <p>Bus arbitration is the protocol that decides which of several bus-master devices (CPU, DMA, co-processor) gets ownership of a shared bus on a given cycle, preventing contention. Three schemes: <em>daisy-chain</em> (serial grant signal), <em>centralised parallel</em> (one arbiter, dedicated request lines), and <em>distributed polling</em> (each device runs its own arbitration). See <a href="#t-1-9">topic 1.9</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.9 recap · 3 arbitration schemes</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>Daisy-chain</b>: grant flows serially through devices; first requester takes it. Few lines, simple, fixed priority; single fault breaks chain.</li>
+          <li><b>Centralised parallel</b>: one arbiter with dedicated request lines per device; flexible priority, fast; arbiter is single point of failure.</li>
+          <li><b>Distributed polling</b>: each device runs its own arbitration logic, ties broken by address. No central arbiter, scalable; complex per-device logic.</li>
+          <li><b>Common-bus via MUX</b>: for k registers of n bits, use n k:1 MUXes (one per bit); 2 select lines for k=4.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3529,6 +3828,14 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
       <p><b>Direct addressing:</b> EA = A — the address field <em>is</em> the effective address. <code>LDA 500</code> reads the word at memory location 500. One memory access to fetch the operand.</p>
       <p><b>Indirect addressing:</b> EA = M[A] — the address field <em>points to</em> a memory location that holds the actual EA. <code>LDA (500)</code> reads M[500] to get the EA, then reads M[EA] to get the operand. Two memory accesses — slower but flexible (used for pointers).</p>
       <p>See <a href="#t-1-7">topic 1.7</a> for all 9 modes.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.7 recap · the other 7 modes (EA)</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Immediate (operand in instr), Register (EA = R), Register-indirect (EA = (R)).</li>
+          <li>Indexed (EA = A + R<sub>x</sub>), Base-register (EA = B + A) — same arithmetic, opposite semantics.</li>
+          <li>Relative (EA = PC + A; PC is <em>next</em> instr's address), Stack (EA = top-of-stack via SP).</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3537,6 +3844,13 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">Let SP = 0000 in the stack. How many items are there in the stack if FULL = 1 and EMPTY = 0?</div>
     <div class="ans">
       <p>SP = 0000 alone is ambiguous (empty or just-wrapped). FULL = 1 with EMPTY = 0 disambiguates: the SP has wrapped around — the stack is full. For an <em>n</em>-bit SP, capacity is 2<sup>n</sup>; so the stack holds <b>2<sup>n</sup> items</b>. For a 4-bit SP it is <b>16</b>; for 8-bit SP it is <b>256</b>. See <a href="#t-1-10">topic 1.10</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.10 recap · formula</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Capacity of n-bit SP wrap-around stack = <b>2<sup>n</sup> items</b>; FULL=1 + EMPTY=0 + SP=0000 disambiguates the just-wrapped (full) state from the empty state.</li>
+          <li>Register-stack vs memory-stack: 1-cycle vs multi-cycle, ≤64 vs limited-by-RAM, FULL/EMPTY flags vs SP-relative addressing.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3545,6 +3859,13 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">Explain a bus system for four registers that uses multiplexers.</div>
     <div class="ans">
       <p>For an <em>n</em>-bit common bus serving 4 registers, use <em>n</em> 4-to-1 multiplexers — one per bit. Bit <em>i</em> of each register is wired to the <em>i</em>-th MUX. Two select lines (S<sub>1</sub> S<sub>0</sub>) choose which register's bits get gated onto the bus this cycle. Cost: <em>n</em> 4:1 MUXes; control: 2 select lines. See <a href="#t-1-9">topic 1.9, Fig 1.9</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.9 recap · MUX formula</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>For k registers of n bits: number of MUXes = n; size = k:1; select lines = log<sub>2</sub>(k).</li>
+          <li>Example: k=4, n=8 → 8 MUXes × 4:1, 2 select lines.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3556,6 +3877,15 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
       <p>A floating-point number is <b>normalised</b> when its mantissa lies in the range [base<sup>−1</sup>, 1) — i.e. the most-significant digit is non-zero. For IEEE-754 binary this means the implicit leading bit is 1, so the mantissa is always of the form <code>1.xxx × 2<sup>E</sup></code>. Normalisation guarantees a <em>unique</em> representation and full mantissa precision.</p>
       <h5>(2) Diagram — IEEE-754 single</h5>
       <p>See the 32-bit layout at <a href="#t-1-12">topic 1.12</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.12 recap · IEEE-754 single (32-bit)</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Layout: 1 sign · 8 exponent (bias 127) · 23 mantissa with implicit leading 1.</li>
+          <li>Value = (−1)<sup>S</sup> × 1.M × 2<sup>E−127</sup>.</li>
+          <li>Special encodings: E=0,M=0 → ±0; E=0,M≠0 → denormal (×2<sup>−126</sup>); E=255,M=0 → ±∞; E=255,M≠0 → NaN.</li>
+          <li>FP-addition 4-step procedure: align exponents → add mantissas → renormalise → round.</li>
+        </ul>
+      </div>
       <h5>(3) Step-by-step addition</h5>
       <div class="step k" data-k="1">Align exponents: both numbers already have 10<sup>1</sup> — no shift.</div>
       <div class="step k" data-k="2">Add mantissas: 0.9504 + 0.8200 = 1.7704.</div>
@@ -3594,6 +3924,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
         <li><b>AC ← DR</b> · T1: BUS ← DR (enable DR's tri-state buffer onto bus) · T2: AC ← BUS (clock AC's load enable).</li>
         <li><b>PC ← PC + 1</b> · single clock: PC's increment input is asserted; counter advances on the next rising edge.</li>
       </ul>
+      <div class="box tip refsum">
+        <span class="label">Topic 2.3 recap · micro-op + control word</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Micro-operation = single elementary transfer (load/shift/inc/ALU-op) completable in one clock.</li>
+          <li>Control word = binary encoding of one μ-instruction; horizontal format partitions into fields.</li>
+          <li>3-bus single-cycle CPU layout: SRC1 (3b) · SRC2 (3b) · DEST (3b) · ALU (4b) · CONST (16b) = 29 bits (pad to 32).</li>
+          <li>SRC1/SRC2 select reg → bus A/B; DEST selects write-back reg; ALU encodes ADD/SUB/AND/OR/XOR/NOT/INC/DEC.</li>
+          <li>Score habit: write each μ-op with a clock-cycle prefix (T1, T2, ...) and a semicolon-comment for unambiguous marking.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3606,6 +3946,14 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
         <li><b>R1 ← R2 + R3</b> · SRC1 = 010 (R2) · SRC2 = 011 (R3) · DEST = 001 (R1) · ALU = ADD (0000).</li>
         <li><b>R4 ← R4 ∨ R5</b> · SRC1 = 100 (R4) · SRC2 = 101 (R5) · DEST = 100 (R4) · ALU = OR (0100).</li>
       </ul>
+      <div class="box tip refsum">
+        <span class="label">Topic 2.3 recap · field widths</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Field layout: SRC1 (3b) · SRC2 (3b) · DEST (3b) · ALU (4b) · CONST (16b) → 29 bits (pad to 32).</li>
+          <li>ALU codes: ADD=0000, OR=0100, SUB=0001, AND=0011, XOR=0101 (etc., per design).</li>
+          <li>Reg codes: R0=000, R1=001, R2=010, R3=011, R4=100, R5=101.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3647,6 +3995,15 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
       <p>47 = 00101111; 36 = 00100100; 1's complement of 36 = 11011011. Add: 00101111 + 11011011 = 100001010. Carry-out = 1 → "end-around carry" rule: add 1 to LSB → 00001010 + 1 = <b>00001011 = +11</b>. ✓</p>
       <h5>(iii) 36 − 47 using 2's complement</h5>
       <p>2's complement of 47 = 11010001. Add 00100100 + 11010001 = 11110101. No carry-out → negative result. Magnitude = 2's complement of 11110101 = 00001011 = 11. So result = <b>−11</b>. See <a href="#t-1-11">topic 1.11</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.11 recap · signed encodings</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Three encodings of −5 in 4-bit: sign-magnitude = 1101 · 1's complement = 1010 · 2's complement = 1011 (1's-comp + 1).</li>
+          <li>2's complement has a single zero, range −2<sup>n−1</sup>…+(2<sup>n−1</sup>−1), and addition works with plain binary — universal in modern CPUs.</li>
+          <li>Subtract via 2's complement: take 2's-comp of subtrahend, then add; no carry-out ⇒ negative; magnitude = re-apply 2's-comp.</li>
+          <li>1's complement needs "end-around carry" (add the carry-out back to LSB) to handle subtraction.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3672,6 +4029,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">What is the role of control memory in a micro-programmed control unit?</div>
     <div class="ans">
       <p>Control memory is a ROM (sometimes RAM for writable control store) that <mark>holds the microprogram</mark> — a sequence of <em>micro-instructions</em>, each a horizontal bit-vector that emits the control signals needed for one clock. Every cycle the CAR addresses CM, the fetched micro-instruction lands in CBR, and the bit-fields of CBR <em>directly drive</em> the data-path's control lines (register loads, ALU function selects, bus enables). See <a href="#t-2-1">topic 2.1</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 2.1 recap · μ-programmed CU components</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>CAR</b> · Control Address Register — points to next μ-instruction.</li>
+          <li><b>CM</b> · Control Memory — ROM (or writable control store) holding the microprogram.</li>
+          <li><b>CBR</b> · Control Buffer Register — current μ-instruction; its bit-fields drive control lines.</li>
+          <li><b>Sequencer</b> · MUX + incrementer; <b>SBR</b> · subroutine register for shared μ-routines (FETCH).</li>
+          <li>Hardwired vs μ-programmed: faster (gate delay) vs flexible (patch microcode); RISC (ARM/MIPS/RISC-V) uses hardwired, CISC (x86/VAX/IBM-360) uses μ-programmed.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3680,6 +4047,14 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">Why is I/O interface required for peripheral devices? Explain.</div>
     <div class="ans">
       <p>An I/O interface bridges the speed, format, and signalling mismatch between CPU and peripheral. Specifically it: (1) buffers the data-rate mismatch (CPU at GHz vs disk at kHz of head moves), (2) does serial ↔ parallel conversion, (3) generates &amp; honours hand-shaking signals, (4) exposes device-status registers the CPU can poll, (5) issues interrupts when the device is ready. Without it, the CPU would have to handle electrical signalling that runs many orders of magnitude slower than its own clock — wasting cycles. See <a href="#t-2-7">topic 2.7</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 2.7 recap · I/O controller block</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Sits between system bus and device, exposing four CPU-visible registers: Data, Status, Command, Address-decoder/IRQ logic.</li>
+          <li>Mismatches bridged: data rate (GHz CPU vs kHz disk), word format, signal voltage, synchronisation.</li>
+          <li>Functions: buffer rate mismatch, serial↔parallel conversion, handshake signalling, device-status polling, interrupt generation.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3688,6 +4063,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">Explain the concept of cache coherence.</div>
     <div class="ans">
       <p>Cache coherence is the guarantee that all caches in a multiprocessor see a <em>consistent</em> value for every shared memory location. If one core writes X = 7, every other core's subsequent read of X must return 7 (or an even more recent value), not the stale value its own cache may hold. Coherence is maintained by bus-snooping protocols (e.g. <b>MESI</b>) or directory-based protocols. See <a href="#t-3-7">topic 3.7</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 3.7 recap · MESI states</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>M</b> · Modified: dirty, held only by this cache; triggered by write hit on E/M line.</li>
+          <li><b>E</b> · Exclusive: matches memory, held only here; first read miss with no other holder.</li>
+          <li><b>S</b> · Shared: matches memory, may exist in other caches; read miss with another responder.</li>
+          <li><b>I</b> · Invalid: empty/stale; triggered by snooping a remote write.</li>
+          <li>Two protocol families: bus-snooping (MESI) for small multi-core; directory-based for NUMA/large systems.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3701,6 +4086,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
         <li><b>USB</b> — serial hot-pluggable tiered-star (127 devices/controller), consumer peripherals, supplies power.</li>
       </ul>
       <p>See full comparison at <a href="#t-2-12">topic 2.12</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 2.12 recap · SCSI vs USB</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Topology: SCSI = bus/chain (8-16 devices); USB = tiered star (127 per controller).</li>
+          <li>Speed: SCSI Ultra-320 = 320 MB/s; USB4 = 40 Gb/s.</li>
+          <li>Hot-plug: SCSI limited; USB native.</li>
+          <li>Power: SCSI devices self-powered; USB supplies bus power (USB-C PD up to 5 V / 5 A).</li>
+          <li>Use: SCSI = server storage; USB = consumer peripherals; <b>PCI(e)</b> = internal expansion-card bus (x16 PCIe 5.0 ≈ 64 GB/s, today's GPU interface).</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3709,6 +4104,16 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
     <div class="qbody">Represent the decimal number −262.125 in single precision floating-point format.</div>
     <div class="ans">
       <p>Full step-by-step at <a href="#t-1-12">topic 1.12</a>. Final answer: <b>1 10000111 00000110001 0000000000 00</b> = <b>0xC3830000</b>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.12 recap · −262.125 in 5 steps</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>Sign</b>: negative → S = 1.</li>
+          <li><b>Magnitude</b>: 262.125 = 100000110.001<sub>2</sub>.</li>
+          <li><b>Normalise</b>: 1.00000110001 × 2<sup>8</sup>; mantissa stored = 00000110001 + 12 zeros (23 bits).</li>
+          <li><b>Biased exponent</b>: E = 8 + 127 = 135 = 10000111<sub>2</sub>.</li>
+          <li><b>Concatenate</b> S|E|M → 1 10000111 00000110001 0000000000 00 = <code>0xC3830000</code>.</li>
+        </ul>
+      </div>
       <div class="score">
         <span class="lbl">Mark allocation · 5 M</span>
         <ul>
@@ -3733,6 +4138,15 @@ hits: 0 0 0 0 0 0 0 0 1 0 1 1 0 0   = 3 hits, 11 misses</pre>
         <li>Hence A − B = A + (−B) = A + 1's-complement(B) + 1, all in one circuit.</li>
       </ul>
       <p>Diagram: see <a href="#t-1-13">topic 1.13, Fig 1.13</a> — replace each bare B<sub>i</sub> with an XOR-gate driven by M, and tie C<sub>0</sub> = M.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.13 recap · RCA equations</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>Full-adder</b>: S<sub>i</sub> = A<sub>i</sub> ⊕ B<sub>i</sub> ⊕ C<sub>i</sub>; C<sub>i+1</sub> = A<sub>i</sub>B<sub>i</sub> + (A<sub>i</sub>⊕B<sub>i</sub>)C<sub>i</sub>.</li>
+          <li><b>n-bit RCA delay</b>: worst-case n · t<sub>FA</sub> (carry ripples through all stages).</li>
+          <li><b>Adder/subtractor</b>: XOR each B<sub>i</sub> with mode M, set C<sub>0</sub>=M; M=0 ⇒ A+B; M=1 ⇒ A−B = A + 1's-comp(B) + 1.</li>
+          <li><b>CLA</b>: generate G<sub>i</sub>=A<sub>i</sub>·B<sub>i</sub>, propagate P<sub>i</sub>=A<sub>i</sub>⊕B<sub>i</sub>; computes all carries in O(log n).</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3792,6 +4206,16 @@ POP X       ; X ← top</pre>
     <div class="qbody">Multiply (−6)<sub>10</sub> and (−9)<sub>10</sub> using Booth's multiplier. Draw the flowchart.</div>
     <div class="ans">
       <p>Result = <b>+54</b>. Full 7-step trace at <a href="#t-1-14">topic 1.14</a>. Flowchart at Fig 1.14. The two negatives cancel — Booth's recoding produces three add/subtract operations and 5 ASRs; (−6)×(−9) = +54 verifies the algorithm's correctness on doubly-negative operands.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 1.14 recap · Booth's recoding table</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Examine bit pair (Q<sub>0</sub>, Q<sub>−1</sub>); append Q<sub>−1</sub>=0 to the multiplier before starting.</li>
+          <li>00 → no-op then ASR · 01 → A ← A+M then ASR · 10 → A ← A−M then ASR · 11 → no-op then ASR.</li>
+          <li>Loop n times (n = bit-width); result in (A,Q).</li>
+          <li>Uses 2's complement directly — no separate sign handling; handles all 4 sign combinations uniformly.</li>
+          <li>For (−6)×(−9) in 5-bit: M=11010, Q=10111, Q<sub>−1</sub>=0 → 5 iterations → (A,Q) = 00001 10110 = +54.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3801,6 +4225,16 @@ POP X       ; X ← top</pre>
     <div class="ans">
       <p>Asynchronous data transfer is a transfer protocol where sender and receiver <em>share no common clock</em>. Coordination uses handshake signals — sender places data + asserts <em>data-valid</em>; receiver latches + asserts <em>data-accepted</em>; sender drops valid; receiver drops accepted (4-edge handshake).</p>
       <p><b>Method — 4-edge handshake:</b> see Fig 2.11 timing diagram at <a href="#t-2-11">topic 2.11</a>. Each edge is one half of a cycle. Slow but reliable across long wires; basis of SCSI parallel-bus, classic Centronics printer port.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 2.11 recap · 4-edge handshake</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>① Sender places data on bus and asserts DV (data-valid).</li>
+          <li>② Receiver sees DV, latches data, asserts DA (data-accepted).</li>
+          <li>③ Sender sees DA, deasserts DV.</li>
+          <li>④ Receiver sees DV low, deasserts DA. Cycle complete.</li>
+          <li>Sync vs async: sync = shared clock, fastest, distance-limited; async = handshake-based, slower, long-distance tolerant; UART, USB, SCSI use handshake.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3866,10 +4300,10 @@ POP X       ; X ← top</pre>
         <li><b>ZF = 0</b> (result ≠ 0)</li>
         <li><b>SF = 0</b> (MSB = 0)</li>
         <li><b>OF = 0</b> (signed: −81 + 254 = +173, fits in 16 bits)</li>
-        <li><b>PF = 1</b> (low byte 0xAD = 10101101 has 5 ones · 5 is odd → in 8086 PF=0 means odd parity → set per convention: PF = 0)</li>
-        <li><b>AF = 0</b> (no carry from bit 3 to 4 in low nibble)</li>
+        <li><b>PF = 0</b> (8086 PF = 1 iff the low byte has an <em>even</em> number of 1s; low byte 0xAD = 1010 1101 has 5 ones → odd → PF = 0)</li>
+        <li><b>AF = 1</b> (low nibbles: F + E = 1111 + 1110 = 1 1101 → carry from bit 3 to bit 4)</li>
       </ul>
-      <p>Final FLAGS (relevant bits): CF=1, PF=0, AF=0, ZF=0, SF=0, OF=0.</p>
+      <p>Final FLAGS (relevant bits): CF=1, PF=0, AF=1, ZF=0, SF=0, OF=0. (Matches the topic-1.5 walkthrough — single source of truth.)</p>
     </div>
   </div>
 
@@ -3983,6 +4417,15 @@ POP X       ; X ← top</pre>
     <div class="qbody">Describe DMA with suitable block diagram. Why does DMA have priority over CPU when both request a memory transfer? Explain.</div>
     <div class="ans">
       <p>See <a href="#t-2-9">topic 2.9</a> for block diagram. <b>Priority rationale:</b> peripheral data is <em>volatile</em> — if a disk-sector word isn't latched before the next platter rotation, it's lost. The CPU, by contrast, can wait an extra cycle without harm. So bus priority follows the rule: <em>"deadline-strict peripherals beat deadline-flexible CPU."</em></p>
+      <div class="box tip refsum">
+        <span class="label">Topic 2.9 recap · DMA registers + modes</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>DMA controller exposes 4 registers to CPU: <em>address · word-count · mode · data</em>.</li>
+          <li>6-step handshake: CPU programs registers → device DRQ → DMA asserts BR → CPU asserts BG, tri-states bus → DMA transfers → on count=0 release bus + IRQ.</li>
+          <li><b>Burst</b>: whole block, CPU stalled, fastest. <b>Cycle-stealing</b>: 1 word/grant, CPU ~99%. <b>Transparent</b>: only CPU-idle cycles, zero impact, slowest.</li>
+          <li>Diagram must include BR/BG handshake on CPU side AND data lines on device side.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -4074,6 +4517,14 @@ POP X       ; X ← top</pre>
     <div class="qbody">Explain locality of reference principle in cache memory. Why is secondary memory used in computer system?</div>
     <div class="ans">
       <p><b>Locality of reference:</b> programs concentrate accesses on small subsets of addresses — temporally (recent → soon again) and spatially (nearby → soon). Cache exploits this by holding recently used 64-byte lines. <b>Secondary memory:</b> needed for non-volatility, capacity (10-100× cheaper per GB), backup, and virtual-memory backing. See <a href="#t-4-1">topic 4.1</a> and <a href="#t-4-2">4.2</a>.</p>
+      <div class="box tip refsum">
+        <span class="label">Topics 4.1 + 4.2 recap · hierarchy + secondary</span>
+        <ul style="margin:4px 0 0 18px">
+          <li>Pyramid (top→bottom): Register (≤1 KB, 0.3 ns) → L1 (32-64 KB, 1 ns) → L2 (256 KB-1 MB, 4 ns) → L3 (4-64 MB, 12 ns) → DRAM (16-128 GB, 60 ns) → SSD (1-8 TB, 50 µs) → HDD/tape.</li>
+          <li>Each tier ~10× larger, ~10× slower than the one above; locality drives 95-99% hits at top.</li>
+          <li>Secondary memory needed for: <b>non-volatility</b> (RAM volatile), <b>capacity</b> (10-100× cheaper/GB), <b>backup/archival</b>, <b>virtual-memory backing</b>.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -4128,6 +4579,14 @@ POP X       ; X ← top</pre>
     <div class="qbody">What is memory interleaving? How is it useful?</div>
     <div class="ans">
       <p>Memory interleaving splits main memory into <em>k</em> independent banks; successive addresses map to different banks (low-order interleaving). Useful because sequential / streaming accesses (cache-line fills, DMA, array iteration) engage all banks in parallel, raising effective bandwidth ≈ k×. See <a href="#t-4-3">topic 4.3</a> with Fig 4.3.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 4.3 recap · low vs high-order</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>Low-order</b> interleaving uses low address bits → consecutive words in different banks (best for sequential/streaming, cache-line fill).</li>
+          <li><b>High-order</b> interleaving uses high bits → each bank holds a contiguous range (best for fault isolation, multiprogramming).</li>
+          <li>k-way example: word i lives in bank (i mod k); sequential access engages all k banks in parallel ⇒ ~k× bandwidth.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -4136,6 +4595,15 @@ POP X       ; X ← top</pre>
     <div class="qbody">Block-set associative cache · 128 blocks in 4 block-sets · main memory 16,384 blocks · 256 8-bit words per block. Bits for TAG, SET, WORD?</div>
     <div class="ans">
       <p>Full step-by-step at <a href="#t-4-5">topic 4.5</a>. Result: TAG = <b>9 b</b>, SET = <b>5 b</b>, WORD = <b>8 b</b>, total 22-bit byte-address.</p>
+      <div class="box tip refsum">
+        <span class="label">Topic 4.5 recap · set-assoc sizing recipe</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>Steps</b>: (1) MM addr-width = log<sub>2</sub>(MM size in addressable units); (2) WORD = log<sub>2</sub>(words per block); (3) lines = cache / block; (4) sets = lines / k; (5) SET = log<sub>2</sub>(sets); (6) TAG = total − SET − WORD.</li>
+          <li>For this Q: 128 blocks / 4-block sets = 32 sets; WORD=log<sub>2</sub>(256)=8; SET=log<sub>2</sub>(32)=5; MM addr = log<sub>2</sub>(16384·256) = 22; TAG = 22 − 5 − 8 = 9.</li>
+          <li>Address-bit split per mapping: Direct = TAG·LINE·WORD; Fully-assoc = TAG·WORD; Set-assoc = TAG·SET·WORD.</li>
+          <li>Comparators: Direct 1 · Fully-assoc all-lines · Set-assoc k per set.</li>
+        </ul>
+      </div>
     </div>
   </div>
 

@@ -484,12 +484,27 @@ input,textarea,select{font-size:16px}
     <span class="priority high">High-yield · 18–22/75 M</span>
   </div>
 
+  <div class="box warn">
+    <span class="label">Unit 1 spotlight · what gets asked</span>
+    <ul style="margin:6px 0 0 18px">
+      <li><strong>GSM architecture</strong> is asked in EVERY paper — 15M almost guaranteed. Pre-build the 3-subsystem diagram (MS·BSS·NSS) plus the 10-element table.</li>
+      <li><strong>Bluetooth + scatternet + 7-state baseband</strong> is the second-most-repeated U1 topic (BCA25-5a 8M).</li>
+      <li>1.5M definition staples: <em>scatternet, WLAN→PAN, IEEE 802.11, AMPS, 4G advantages</em>.</li>
+      <li>"List four advantages of 3G/4G" is a recurring 1.5M shell — keep the 4-bullet answer pre-memorised.</li>
+      <li>Wireless-vs-wired is a 1.5M side-question; just pick any TWO of the 6 axes from the table.</li>
+    </ul>
+  </div>
+
   <!-- 1.1 Evolution -->
   <div class="topic" id="t-evolution">
     <h3>1.1 Evolution of Wireless Communications <span class="tag fav">always 1.5–10 M</span></h3>
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Wireless communication</strong> is the transfer of information between two or more points <mark>without an electrical conductor</mark>, using electromagnetic waves (radio, microwave, infrared, or light) as the carrier medium.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Wireless = sending information through the air using radio waves instead of a wire. Picture a walkie-talkie: voice becomes a wave, the wave travels invisibly, the other side turns it back into voice. Mobile phones do the same thing but at a much bigger scale, and have done so across five "generations" (1G to 5G). Each generation kept the same idea — wave through air — but used smaller cells, smarter codes, and faster digital tricks so that millions of people could share the same sky at once.
     </div>
     <p>The field has grown across <strong>five generations</strong> over roughly five decades, with each generation broadly increasing data rate by an order of magnitude while shrinking cell size and tightening spectral efficiency.</p>
 
@@ -521,6 +536,10 @@ input,textarea,select{font-size:16px}
   <!-- 1.2 Examples + Advantages -->
   <div class="topic" id="t-examples">
     <h3>1.2 Examples of Wireless Systems &amp; Advantages over Wired <span class="tag fav">freq 1.5M</span></h3>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      A "wireless system" is any device-to-device link that uses radio waves. The examples differ only in three knobs — how far the link reaches, how fast it carries data, and how many devices share it. A pager sends a few characters over a city; Wi-Fi sends gigabits over a room; a satellite phone sends voice across continents. Same idea, different range/speed mix.
+    </div>
     <p><strong>Common examples:</strong> cellular phones (GSM/CDMA), cordless phones (DECT), pagers, satellite phones, Wi-Fi (802.11), Bluetooth (802.15.1), WiMAX (802.16), Zigbee, GPS, RFID, NFC, NB-IoT, Wireless Local Loop (WLL).</p>
 
     <div class="table-wrap">
@@ -538,6 +557,19 @@ input,textarea,select{font-size:16px}
     </table>
     </div>
     <span class="scribble">2-mark answer = pick any TWO axes, one line each, plus a "wired has shorter latency / higher security" caveat.</span>
+
+    <h4>Worked example · Cordless telephone disadvantages (1.5–2 M shell, BCA25-Q1a)</h4>
+    <div class="steps">
+      <div class="step"><span class="k">Step 1</span><b class="label">Range</b>Limited to ~50–100 m from the base station — useless outside the home; the phone dies as soon as you cross the front door.</div>
+      <div class="step"><span class="k">Step 2</span><b class="label">Interference</b>2.4 GHz ISM band is crowded — Wi-Fi, microwaves and baby monitors cause clicks, static and dropouts.</div>
+      <div class="step"><span class="k">Step 3</span><b class="label">Battery dependency</b>Handset runs on a rechargeable cell — standby drain means a flat handset = no phone, unlike a wired POTS line that keeps working in a power cut.</div>
+      <div class="step"><span class="k">Step 4</span><b class="label">Voice quality + security</b>Fading and multipath inside the home reduce MOS; older models also lack encryption ⇒ trivially eavesdroppable with a scanner.</div>
+    </div>
+
+    <div class="box why">
+      <span class="label">Why "paging needs low data rates" is the one-liner examiners want</span>
+      Paging serves <strong>one-way short alerts</strong> — names, numbers, a few characters at most. Holding the rate at 1.2–6.4 kbps (POCSAG/FLEX) keeps the receiver dirt-cheap and lets <em>battery life run for months on a single coin cell</em>. That single sentence (battery-life on a coin cell) is what scores the 1.5 M in 24BTECH's "Why low data rates" question.
+    </div>
   </div>
 
   <!-- 1.3 GSM (2G) -->
@@ -546,6 +578,14 @@ input,textarea,select{font-size:16px}
     <div class="box def">
       <span class="label">Definition</span>
       <strong>GSM (Global System for Mobile)</strong> is a <mark>digital, circuit-switched 2G cellular standard</mark> developed by ETSI (1990) operating in the 900/1800 MHz bands. It uses a <strong>TDMA + FDD</strong> air interface (8 time slots per 200 kHz carrier) and SIM-based authentication.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      GSM is the rulebook that lets your 2G phone make a call. Three groups of machines do the work: (1) the phone itself with its SIM card (MS), (2) the radio towers and the controller that ties them together (BSS), (3) the brain in the network operator's data centre — switches, databases, security (NSS). When you press call, your phone talks to the nearest tower (Um interface), the tower talks to its controller (Abis), and the controller talks to the brain (A). The brain looks up where the called person is and connects the two.
+    </div>
+    <div class="box why">
+      <span class="label">Memory hook · 3 words start every 8-M answer</span>
+      Write <strong>"Phone · Towers · Brain"</strong> on the first line of any GSM answer = MS · BSS · NSS. Examiners reward this 3-word scaffold because every block that follows clearly belongs to one of the three. Skipping the scaffold = the answer reads as a bullet dump even if the bullets are correct.
     </div>
 
     <figure class="diagram-fig">
@@ -631,6 +671,10 @@ input,textarea,select{font-size:16px}
       <span class="label">How prof asks</span>
       Common variants: "explain GSM architecture" (8–10M), "specification + working of GSM" (10M), "role of AuC + VLR" (15M-specific in BCA25). Pre-build the diagram once — it answers all three.
     </div>
+    <div class="box prof">
+      <span class="label">Prof-pattern · AuC triplet is the marker phrase</span>
+      When the question says "specification" or names AuC explicitly, examiners actively scan for the <strong>AuC triplet</strong>: <code>RAND → SRES (via A3) → K<sub>c</sub> (via A8)</code>. Quote the algorithm names A3/A8 verbatim, mention SIM and AuC share K<sub>i</sub>, and add A5/1 as the air-cipher. Missing the algorithm names caps the AuC block at ~1 of 3 marks even if the rest of the answer is rich.
+    </div>
   </div>
 
   <!-- 1.4 CDMA / 3G -->
@@ -639,6 +683,10 @@ input,textarea,select{font-size:16px}
     <div class="box def">
       <span class="label">Definition</span>
       <strong>CDMA (Code Division Multiple Access)</strong> is a spread-spectrum multiple-access technique where every user transmits over the <em>same frequency</em> at the <em>same time</em>, distinguished only by a unique <strong>orthogonal spreading code (PN sequence)</strong>. The receiver decodes its signal by correlating with the known code; other users appear as low-level noise.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      In a noisy party, two people can still hear each other if they speak in two languages no one else knows. CDMA does the same with radio: every user gets a unique "language" (a long PN code). All users transmit on the same frequency at the same time; the receiver listens only for its language. Other users sound like background hiss. That hiss limit is why CDMA needs everyone to talk at the same volume — the "near-far" problem.
     </div>
 
     <div class="formula"><span class="lab">CDMA basics</span>
@@ -666,6 +714,14 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
       <span class="label">Near-far problem (asked separately as 1.5-M short Q)</span>
       A nearby strong transmitter swamps a distant weak one because both share the same band → CDMA <em>must</em> use fast closed-loop power control (800 Hz in IS-95) keeping every received signal at the same level. This is why "near/far effect on TDMA" (BCA25-1h) is a trick: TDMA is largely <em>immune</em> because users are separated in time, not code.
     </div>
+
+    <h4>Worked example · PN-code multiplexing in 4 steps</h4>
+    <div class="steps">
+      <div class="step"><span class="k">Step 1</span><b class="label">User A spreads bit</b>User A multiplies its data bit <code>1</code> by an 8-chip code <code>10110010</code> ⇒ sends the chip sequence <code>10110010</code> on the air.</div>
+      <div class="step"><span class="k">Step 2</span><b class="label">User B spreads bit</b>User B multiplies its data bit <code>1</code> by a <em>different</em> 8-chip code <code>01101001</code> ⇒ sends <code>01101001</code> on the same frequency, same time.</div>
+      <div class="step"><span class="k">Step 3</span><b class="label">Signals add over the air</b>The two spread sequences sum: receiver sees <code>10110010 + 01101001</code> as one combined waveform — a noisy looking blob to anyone without a code.</div>
+      <div class="step"><span class="k">Step 4</span><b class="label">Receiver despreads</b>Receiver A multiplies the sum by its own code <code>10110010</code> and integrates over 8 chips. B's contribution averages to ~0 (orthogonal code) while A's signal correlates strongly ⇒ data bit <code>1</code> pops out clean. Same trick recovers B at receiver B.</div>
+    </div>
   </div>
 
   <!-- 1.5 4G intro -->
@@ -674,6 +730,10 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
     <div class="box def">
       <span class="label">Definition</span>
       <strong>4G (Fourth Generation)</strong> is an all-IP packet-switched mobile broadband system standardised by 3GPP as <strong>LTE</strong> and LTE-Advanced (peak ≥ 100 Mbps mobile / 1 Gbps stationary), and by IEEE as <strong>WiMAX</strong> (802.16e). It uses <mark>OFDMA on the downlink, SC-FDMA on the uplink, and 2×2/4×4 MIMO</mark>.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      4G is "mobile broadband." Three ideas make it work: (1) OFDMA splits the band into thousands of tiny sub-channels so many users can share it without colliding; (2) MIMO uses several antennas at once to push more bits through the same air; (3) the whole network is IP (just like the internet) so voice, video, and data all ride one pipe.
     </div>
 
     <h4>Four advantages of 4G (BCA25-1b verbatim list)</h4>
@@ -695,6 +755,10 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
     <div class="box def">
       <span class="label">Definition</span>
       <strong>WLL (also Radio-in-the-Loop / Fixed Wireless Access)</strong> replaces the copper "last-mile" between the local telephone exchange and the subscriber with a radio link, so a fixed-location customer accesses PSTN services via a small antenna instead of a wired drop.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      WLL replaces the wire from a customer's home to the local telephone exchange with a short radio link. The phone is still fixed — sits in the house, never moves — but its "last mile" is a small antenna instead of a copper drop. Used heavily in rural India where trenching cable is too expensive.
     </div>
 
     <h4>Architecture (one-line per block)</h4>
@@ -723,6 +787,10 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
       <span class="label">Definition</span>
       A <strong>Wireless LAN</strong> is a short-range (≤ 100 m) local-area network using the <strong>IEEE 802.11 family</strong> of standards in unlicensed ISM bands (2.4 GHz, 5 GHz, 6 GHz). It uses <mark>CSMA/CA</mark> for medium access and supports both <em>infrastructure</em> mode (via an Access Point) and <em>ad-hoc</em> mode (peer-to-peer).
     </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Wi-Fi = a short-range radio LAN. Devices listen first ("is anyone talking?"), wait a random gap, then transmit (CSMA/CA). One central Access Point (AP) coordinates the room. Range ~100 m, indoor.
+    </div>
     <div class="table-wrap">
     <table>
       <caption>802.11 amendments worth knowing</caption>
@@ -749,6 +817,10 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Bluetooth (IEEE 802.15.1)</strong> is a short-range (1–100 m), low-power wireless standard in the 2.4 GHz ISM band, using <mark>Frequency-Hopping Spread Spectrum (FHSS)</mark> at 1600 hops/sec across 79 (Classic) or 40 (BLE) channels. It forms ad-hoc <em>Personal Area Networks (PANs)</em> with a master/slave star topology.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Bluetooth links nearby gadgets (earbuds, fitness band, mouse) over a few metres of air. One device becomes the boss ("master"), up to 7 others follow ("slaves") — that group is a piconet. To avoid interference, the boss keeps changing channel 1600 times a second (frequency hopping). Two piconets that share one device chain together into a "scatternet".
     </div>
 
     <h4>How Bluetooth works (the 8-mark answer in 5 lines)</h4>
@@ -780,6 +852,10 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
     <div class="box def">
       <span class="label">Scatternet (BCA25-1e literal 1.5-M ask)</span>
       A <strong>scatternet</strong> is the interconnection of <mark>two or more piconets</mark> that share a common device (the "bridge"). The bridge slave time-multiplexes between the two piconets, enabling larger ad-hoc networks while preserving the 7-slave-per-piconet limit.
+    </div>
+    <div class="box prof">
+      <span class="label">Prof-pattern · the "Park" line is the high-mark trigger</span>
+      When the prof asks "<em>explain detailed baseband states</em>", the 7-row table is necessary but not sufficient. The line examiners scan for is: <strong>"Park = up to 255 parked slaves possible, lowest power consumption (slave still keeps PM_ADDR, can be reactivated without re-pairing)."</strong> Quote both the 255-slave number and the lowest-power claim verbatim — it lifts the answer from 5 to full 8 marks.
     </div>
 
     <figure class="diagram-fig">
@@ -853,12 +929,29 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
     <span class="priority must">Heaviest · 30–38/75 M</span>
   </div>
 
+  <div class="box warn">
+    <span class="label">Unit 2 spotlight · HEAVIEST unit (44% of marks, 27 PYQs)</span>
+    <ul style="margin:6px 0 0 18px">
+      <li><strong>Expect 1.5 Part-B questions from this unit alone</strong> — one 15M + one 7.5M is the historical norm.</li>
+      <li><strong>Handoff MAHO/MCHO/NCHO</strong> is asked in EVERY paper (6× repeat) at 8M or 15M depth — almost guaranteed.</li>
+      <li><strong>Performance criteria 7-KPI table</strong> appears 6× — memorise verbatim with the target column.</li>
+      <li><strong>The only numerical zone is here — frequency reuse.</strong> Formats: BW/cell, channels/cell, control+voice split, Q=√(3N) derivation, draw N=12 cluster.</li>
+      <li><strong>Cell splitting / sectoring / microzone</strong> are 5× rotating — be ready for any of the 3 as a 5–7.5M.</li>
+      <li>Interference space/time/frequency is a recurring short Q (BCA25-1f literal).</li>
+      <li>Hexagonal cells (4 reasons) and "directional antenna usefulness" are stock 1.5M staples.</li>
+    </ul>
+  </div>
+
   <!-- 2.1 Spectrum Allocation -->
   <div class="topic" id="t-spectrum">
     <h3>2.1 Spectrum Allocation <span class="tag">5–8M</span></h3>
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Spectrum allocation</strong> is the process by which a national or international regulator (<mark>ITU-R globally, WPC/TRAI in India, FCC in the USA</mark>) assigns specific frequency bands to specific services (cellular, broadcasting, satellite, defence) and licences them to operators for a fixed period, usually via auction.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Spectrum = the slice of radio frequencies a service is allowed to use. There are only so many useful frequencies (roughly 30 MHz to 6 GHz for cellular), and two phones on the same one would jam each other. So a government regulator (ITU globally, TRAI in India) auctions slices to operators.
     </div>
     <h4>Why spectrum is finite (and why it's regulated)</h4>
     <ul>
@@ -893,6 +986,10 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
       <span class="label">Definition</span>
       A <strong>cellular system</strong> divides the service area into many small <mark>hexagonal cells</mark>, each served by its own low-power base station; cells in a cluster use unique frequencies and the same frequency set is <em>reused</em> in cells far enough apart that co-channel interference is acceptable.
     </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      A "cell" is just a small patch of ground covered by one short antenna. Cut the whole city into tile-like patches (hexagons fit best — no gaps), put a short antenna in each, and you've built a cellular network. Because each antenna is short-range and low-power, the same radio channel can be reused in a far-away tile without the two interfering — that's how millions of people share the same band.
+    </div>
 
     <h4>Why hexagonal cells (BCA25-1c verbatim)</h4>
     <ol>
@@ -919,8 +1016,12 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
     </table>
     </div>
     <div class="box why">
-      <span class="label">Why this is asked so often</span>
-      It is a litmus test — every student knows "GSM architecture", but only the prepared candidate names <em>seven</em> KPIs with targets. Memorise the table → 5 marks guaranteed.
+      <span class="label">Why this is asked so often · the 7-KPI rule</span>
+      It is a litmus test — every student knows "GSM architecture", but only the prepared candidate names <em>seven</em> KPIs with targets. <strong>Only the candidate who names SEVEN KPIs with targets earns full 5M.</strong> A 4-KPI answer caps at 3M. A 6-KPI answer = 4M. Memorise the table verbatim including the target column (GoS ≤ 2%, MOS ≥ 4, coverage ≥ 95%) → 5 marks guaranteed.
+    </div>
+    <div class="box prof">
+      <span class="label">Prof-pattern · "performance criteria" is a marker phrase</span>
+      Whenever the question stem contains the phrase "<em>performance criteria</em>" OR "<em>cellular system</em>" alone, output the 7-KPI table verbatim. Examiners count criteria — <strong>6 = 4M, 7 = 5M</strong>. The Target column is non-negotiable: examiners specifically check for <strong>GoS ≤ 2% and MOS ≥ 4</strong>. Drop either target and the corresponding row scores ½.
     </div>
 
     <figure class="diagram-fig">
@@ -1002,6 +1103,10 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
       <span class="label">Definition</span>
       <strong>Analog cellular</strong> (1G · AMPS, NMT, TACS) transmits voice as a continuous FM-modulated waveform; <strong>digital cellular</strong> (2G+) digitises voice (PCM/vocoder) and transmits encoded bits using GMSK/QPSK/QAM modulation with channel coding, encryption, and TDMA/CDMA multiple access.
     </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Analog cellular (1G) sends voice as a wavy radio signal — the air itself carries the shape of your voice. Digital cellular (2G+) chops voice into 1s and 0s first, then sends those bits. Bits are cheaper to compress, encrypt, and pack many users onto one frequency — that's why 2G killed 1G.
+    </div>
     <div class="table-wrap">
     <table>
       <caption>Analog vs Digital cellular — the Q7 "Differentiate" table</caption>
@@ -1032,6 +1137,10 @@ For IS-95   R<sub>c</sub> = 1.2288 Mcps · R<sub>b</sub> ≈ 9.6 kbps  →  <spa
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Frequency reuse</strong> is the design principle of allocating the <em>same</em> set of channel frequencies to multiple, geographically separated cells in a cellular network. Cells using the same frequency are called <mark>co-channel cells</mark>. The separation is engineered so that co-channel interference stays below an acceptable level.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Same radio channels are used in many places at once. The trick: keep cells that share a channel far enough apart that they don't hear each other. Group N nearby cells into a "cluster"; inside the cluster every cell uses a different channel set. Outside the cluster, the pattern repeats. Bigger N = more separation between same-frequency cells = less interference, but also less capacity (because each cluster needs N channel sets). The standard sweet-spot is N = 7.
     </div>
 
     <div class="formula"><span class="lab">Three reuse formulas you MUST carry</span>
@@ -1133,8 +1242,44 @@ Signal-to-interference  <b>S/I = (1/6) · Q<sup>n</sup></b>    <span class="m">n
       <div class="step"><span class="k">Step 5</span><b class="label">Per-cell allocation (N=7)</b>Voice/cell = 640/7 ≈ <strong>91 voice channels</strong>; Control/cell = 20/7 ≈ <strong>3 control channels</strong> per cell.</div>
     </div>
 
+    <div class="numeric">
+      <div class="ntitle">Worked numerical #3 · full mixed-case (predicted 2026 variant) — the 8-step master template</div>
+      <p><b>Given:</b> Total system bandwidth = 25 MHz · Channel (simplex) bandwidth = 25 kHz · duplex pair = 50 kHz · Cluster size N = 7 · 1 MHz reserved for control channels · Cell radius R = 2 km.</p>
+      <p><b>Find:</b> (a) Total duplex channels · (b) Voice channels per cell · (c) Control channels per cell · (d) Co-channel reuse ratio Q · (e) Co-channel distance D · (f) Cells sharing the same frequency set in a 49-cell deployment.</p>
+      <div class="steps">
+        <div class="step"><span class="k">Step 1</span><b class="label">Duplex channel size</b>Each call needs uplink + downlink ⇒ <pre style="margin:4px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px">duplex pair = 2 × 25 kHz = <b>50 kHz</b></pre></div>
+        <div class="step"><span class="k">Step 2</span><b class="label">Total duplex channels in the system</b><pre style="margin:4px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px">Total / duplex = 25 MHz / 50 kHz
+              = 25,000 kHz / 50 kHz
+              = <b>500 channels</b></pre></div>
+        <div class="step"><span class="k">Step 3</span><b class="label">Control channels (system-wide)</b><pre style="margin:4px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px">1 MHz reserved / 50 kHz per pair
+              = 1000 kHz / 50 kHz
+              = <b>20 control channels</b></pre></div>
+        <div class="step"><span class="k">Step 4</span><b class="label">Voice channels (system-wide)</b><pre style="margin:4px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px">500 − 20 = <b>480 voice channels</b></pre></div>
+        <div class="step"><span class="k">Step 5</span><b class="label">Per-cell allocation (cluster N = 7)</b><pre style="margin:4px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px">Voice/cell   = 480 / 7 ≈ 68.57
+             ⇒ <b>68 voice channels per cell</b>   (round down)
+Control/cell = 20  / 7 ≈ 2.86
+             ⇒ <b>3 control channels per cell</b>   (round up)
+   examiners accept either rounding if both shown</pre></div>
+        <div class="step"><span class="k">Step 6</span><b class="label">Co-channel reuse ratio Q</b><pre style="margin:4px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px">Q = √(3 N) = √(3 × 7) = √21 ≈ <b>4.58</b></pre></div>
+        <div class="step"><span class="k">Step 7</span><b class="label">Co-channel distance D</b><pre style="margin:4px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px">D = Q × R = 4.58 × 2 km ≈ <b>9.16 km</b>
+        (co-channel cells are ~9 km apart)</pre></div>
+        <div class="step"><span class="k">Step 8</span><b class="label">Cells sharing same frequency set (49-cell deployment)</b><pre style="margin:4px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px">Clusters in city = 49 / 7 = <b>7 clusters</b>
+Each cluster has 7 distinct frequency groups
+⇒ <b>7 cells share each frequency group</b> (one per cluster)</pre></div>
+      </div>
+      <p style="margin-top:10px"><b>Answers boxed:</b> (a) <mark>500 duplex channels</mark> · (b) <mark>68 voice channels per cell</mark> · (c) <mark>3 control channels per cell</mark> · (d) <mark>Q ≈ 4.58</mark> · (e) <mark>D ≈ 9.16 km</mark> · (f) <mark>7 cells share same set</mark>.</p>
+    </div>
+
+    <div class="box why">
+      <span class="label">Why the rounding rule matters · examiners reward "show your rounding"</span>
+      Examiners accept either rounding (e.g. 68.57 → 68 or 69) <em>but the candidate must show the rounding decision explicitly</em>. Write: "480/7 = 68.57, take <strong>68 voice channels per cell</strong>; the leftover 4 channels (480 − 68×7) return to the spare/operator pool." That single sentence converts a 4-mark partial into a full-marks answer because the examiner sees the engineering judgement, not just arithmetic.
+    </div>
     <div class="box prof">
-      <span class="label">How prof asks</span>
+      <span class="label">Prof-pattern · 4 sub-shells of any reuse Q</span>
+      Any reuse question is one of <strong>4 sub-shells</strong>: <em>(i)</em> draw N=12 cluster (BCA25-1g 1.5M) · <em>(ii)</em> derive Q = √(3N) (23BTECH-5b 7M) · <em>(iii)</em> compute BW per cell (BCA25-3b 7M) · <em>(iv)</em> compute voice + control split (IT23-6b 5M, IT24-1g 1.5M). The 8-step master numerical above is the superset — every sub-shell is a sub-path of it. Memorise the 8 steps and you cover all 4 formats.
+    </div>
+    <div class="box prof">
+      <span class="label">How prof asks (compressed)</span>
       Reuse appears as: (a) "draw N=12 layout" 1.5-M (BCA25-1g), (b) "frequency reuse distance formula" 1.5-M (IT23-1f), (c) "derive Q=√3N" 7-M (23BTECH-5b), (d) full numerical 7-M (BCA25-3b, IT23-6b, IT24-1g). Carry the table and the 3 formulas — they cover all four formats.
     </div>
   </div>
@@ -1145,6 +1290,10 @@ Signal-to-interference  <b>S/I = (1/6) · Q<sup>n</sup></b>    <span class="m">n
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Channel assignment</strong> is the policy by which the network decides which physical channel (frequency / timeslot / code) a new call gets when it arrives in a cell. Two main families: <mark>Fixed (FCA)</mark>, <mark>Dynamic (DCA)</mark>, with <em>Hybrid</em> and <em>Borrowing</em> as variants.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      When a new call arrives, the network has to pick a free channel for it. Two policies: (1) Fixed — every cell has its own channel set from day one, simple but wasteful at hotspots. (2) Dynamic — keep all channels in a shared pool and hand one out per call, smarter but needs extra signalling. Borrowing is the middle path: cells start with fixed sets but can borrow from a neighbour when full.
     </div>
 
     <div class="table-wrap">
@@ -1182,6 +1331,10 @@ Signal-to-interference  <b>S/I = (1/6) · Q<sup>n</sup></b>    <span class="m">n
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Handoff (US) / Handover (Europe)</strong> is the process of <mark>transferring an ongoing call</mark> or data session from one base station / channel to another while maintaining the conversation. It is triggered by deteriorating signal quality — typically as a subscriber moves between cells.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      When you walk while on a call, you eventually move out of one tower's reach and into another's. The network has to hand the call from the old tower to the new one without you noticing — that's a handoff. Three flavours by who decides: <strong>NCHO</strong> (the network alone, slow, 1G); <strong>MAHO</strong> (the phone measures, the network decides, GSM); <strong>MCHO</strong> (the phone decides itself, fastest, DECT). Two flavours by how cleanly: hard = drop old, grab new (brief click); soft = hold both at once (only CDMA can do this).
     </div>
 
     <h4>Triggers — what makes a handoff happen?</h4>
@@ -1270,6 +1423,10 @@ Signal-to-interference  <b>S/I = (1/6) · Q<sup>n</sup></b>    <span class="m">n
       <span class="label">How prof asks</span>
       Six different question shells, all answered by the same handover diagram + classification table: "what is handover" (8M), "implementation in cellular system" (10M), "MAHO/MCHO/NCHO with diagram" (15M), "hard vs soft" (1.5M short), "handover management techniques" (8M), "impact on user experience" (10M).
     </div>
+    <div class="box prof">
+      <span class="label">Prof-pattern · the 5 magic words</span>
+      Examiners reward FIVE specific words appearing in any handoff answer: <strong>hysteresis · dwell · guard channel · ping-pong · rake</strong>. If a handoff answer is missing all five, marks cap at ~10/15 even when the rest is rich. Always include the 4-stage implementation flow as well: <em>measure → decide → execute → complete</em>. Two checklist items + the diagram = ceiling 14–15/15.
+    </div>
   </div>
 
   <!-- 2.7 Interference -->
@@ -1278,6 +1435,10 @@ Signal-to-interference  <b>S/I = (1/6) · Q<sup>n</sup></b>    <span class="m">n
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Interference</strong> in cellular = any unwanted signal that degrades the desired transmission, limiting both voice quality and system capacity. Three flavours dominate: <mark>co-channel</mark>, <mark>adjacent-channel</mark>, and <mark>intermodulation</mark>.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Interference = anything your receiver hears that isn't your wanted signal. Three big sources: (1) another tower in a faraway cluster reusing your frequency (co-channel), (2) leakage from the channel next door (adjacent-channel), (3) for CDMA only — a nearby user drowning out a distant one (near-far). Fixes: more space (larger N), more sharpness (filters), more discipline (power control).
     </div>
 
     <div class="table-wrap">
@@ -1320,6 +1481,14 @@ but smaller capacity per MHz.   That is the design trade-off.</div>
       <span class="label">Definition · GoS</span>
       <strong>Grade of Service (GoS)</strong> is the probability that a call request is blocked or experiences a delay greater than a specified value during the <em>busy hour</em>. Typically expressed as a probability (e.g., GoS = 0.02 means 2 calls per 100 are blocked at peak).
     </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      At busy hour, your network may not have a free channel for a new caller. GoS = the probability that happens. Carriers aim for ≤ 2% — i.e., at most 2 of every 100 callers at peak get the "all circuits busy" tone. The maths uses the Erlang-B formula; you do not need to compute Erlang-B in this paper, only define and quote the 2% target.
+    </div>
+    <div class="box why">
+      <span class="label">Why the GoS short-Q always has 2 ingredients</span>
+      The 1.5-M "Define GoS" Q appears in 3 papers — every full-mark answer has <strong>TWO ingredients: (1) definition</strong> (probability of block/delay at busy hour) <strong>+ (2) the 2% target</strong>. Either alone scores only 1 of 1.5 marks. Combine in one sentence: <em>"GoS = probability of a blocked or excessively-delayed call at the busy hour; cellular operators target GoS ≤ 0.02 (2%)."</em>
+    </div>
 
     <div class="formula"><span class="lab">Erlang B (blocked-calls-cleared)</span>
 <b>B(C, A) = (A<sup>C</sup>/C!) / Σ<sub>k=0..C</sub> A<sup>k</sup>/k!</b>
@@ -1348,6 +1517,10 @@ Used when a blocked call is dropped (no queue) — typical for voice.</div>
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Cell splitting</strong> is the process of <mark>subdividing a congested cell into smaller cells (microcells)</mark>, each with its own base station and reduced transmit power. The new cells preserve the original frequency-reuse pattern but multiply capacity per unit area.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Cell splitting = take an overloaded cell and cut it into four smaller cells, each with its own tower. Now four sets of channels live where one used to — 4× the capacity in the same area. Drawback: 4× the handovers (you cross more borders) and a new site survey per micro-cell.
     </div>
 
     <div class="formula"><span class="lab">Capacity gain</span>
@@ -1379,6 +1552,10 @@ For n = 4 (urban) → 16× less power than the original BS.</div>
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Cell sectoring</strong> replaces the omni-directional antenna at the BS with <mark>3 (120°) or 6 (60°) directional antennas</mark>. Each sector behaves as a separate logical cell. The base station hardware is shared but the cell area is split by angle, not by radius.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Sectoring = swap the round-coverage antenna at the top of the tower for three (or six) pie-slice antennas pointing in different directions. The cell footprint stays the same size, but each slice is a separate logical cell with its own channels. Because each slice faces only one direction, it "hears" only 2 (instead of 6) far-away cells reusing its frequency — interference drops ~5 dB.
     </div>
 
     <h4>How sectoring reduces co-channel interference</h4>
@@ -1463,6 +1640,10 @@ Trade-off: sectoring increases <b>intra-cell handoffs</b>
       <span class="label">Definition</span>
       The <strong>microcell zone concept</strong> covers a large cell with multiple low-power <mark>zone transmitters</mark> linked to a single base station by fibre or microwave. The mobile uses whichever zone has the strongest signal but stays under the <em>same</em> BS — so a zone change is <strong>not</strong> a handoff (no MSC involvement).
     </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Microzone = inside one big cell, sprinkle several low-power "mini-antennas" (zone transmitters) all wired back to the same brain (one BS). The phone uses whichever mini-antenna is closest, but the brain stays the same — so moving between zones is NOT a handoff. Used inside stadiums, malls, tunnels.
+    </div>
 
     <h4>Why it beats plain cell-splitting</h4>
     <ul>
@@ -1501,6 +1682,17 @@ Trade-off: sectoring increases <b>intra-cell handoffs</b>
       <span class="label">How prof asks</span>
       "Improving coverage and capacity" appears as 7-M (BCA25 syllabus heading itself), 5-M (IT25-3b), 7-M (23BTECH-2b). This single table answers all three; add 1 paragraph on the chosen technique for the marks asked.
     </div>
+    <div class="box tip">
+      <span class="label">Which technique answers which question stem · the map</span>
+      Decode the stem and the technique chooses itself:
+      <ul style="margin:6px 0 0 18px">
+        <li>"<em>reduce interference</em>" / "<em>improve S/I</em>" ⇒ <strong>sectoring</strong> (cuts interferers 6 → 2 or 1).</li>
+        <li>"<em>add raw capacity</em>" / "<em>more channels per km²</em>" ⇒ <strong>cell splitting</strong> (4× capacity per split).</li>
+        <li>"<em>indoor coverage</em>" / "<em>stadium / tunnel / mall</em>" ⇒ <strong>microzone</strong> (zone Tx, no MSC HOs).</li>
+        <li>"<em>4G/5G capacity multiplication</em>" / "<em>beam-steered users</em>" ⇒ <strong>smart antennas / SDMA / massive MIMO</strong>.</li>
+        <li>"<em>linear scaling with spectrum</em>" ⇒ <strong>add new spectrum</strong> (if regulator auctions more).</li>
+      </ul>
+    </div>
   </div>
 
 </section>
@@ -1513,12 +1705,27 @@ Trade-off: sectoring increases <b>intra-cell handoffs</b>
     <span class="priority high">High-yield · 15–22/75 M</span>
   </div>
 
+  <div class="box warn">
+    <span class="label">Unit 3 spotlight · what gets asked</span>
+    <ul style="margin:6px 0 0 18px">
+      <li><strong>CDMA concept + use areas</strong> is the U3 anchor (4× repeat) — 10M (BCA25-2a, 24BTECH-5a, IT24-6b, IT25-3a).</li>
+      <li><strong>Spread spectrum "why spread" + FHSS detail</strong> is the second 10M item (BCA25-6a).</li>
+      <li><strong>FDMA vs TDMA / TDMA vs CDMA</strong> differentiator appears as the standard "Diff b/w" 5M Q.</li>
+      <li><strong>SDMA</strong> is rising — appeared in 24BTECH-5b (7.5M) and IT25-3a; predict for 2026 BCA.</li>
+      <li><strong>Near-far on TDMA (BCA25-1h)</strong> is a TRICK question — correct answer: "TDMA is immune; near-far is CDMA's problem."</li>
+    </ul>
+  </div>
+
   <!-- 3.1 Intro & FDMA/TDMA/CDMA/SDMA -->
   <div class="topic" id="t-multiple-access">
     <h3>3.1 Multiple Access — FDMA · TDMA · CDMA · SDMA <span class="tag hot">⭐⭐ 10–15M</span></h3>
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Multiple Access (MA)</strong> is the set of techniques that allow several users to <mark>share the same finite radio resource</mark> (spectrum + time) simultaneously, while keeping their signals separable at the receiver. The "resource axis" along which users are separated names the technique.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Many users, one piece of spectrum. To share it, the network separates them along an axis: FDMA cuts the band into channels (one each), TDMA gives everyone the whole band but in turns (time slots), CDMA gives everyone the band at once but each with a private code, SDMA points narrow beams at different users so they never collide in space. OFDMA mixes frequency + time for the smartest sharing — that's why 4G/5G use it.
     </div>
 
     <div class="table-wrap">
@@ -1586,6 +1793,10 @@ Trade-off: sectoring increases <b>intra-cell handoffs</b>
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Spread Spectrum (SS)</strong> is a transmission technique in which the signal bandwidth is intentionally <mark>spread over a far wider range</mark> than the minimum required by the data rate, using a pseudo-random spreading code known only to sender and intended receiver.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Spread spectrum = take a narrow data signal and intentionally smear it across a much wider band. Two ways to smear: DSSS multiplies every bit by a fast random sequence (chips); FHSS keeps the signal narrow but hops the carrier frequency 1600 times a second across many channels. Either way, an eavesdropper without the spreading rule sees only noise. Used in Bluetooth (FHSS), GPS + 3G (DSSS), military comms.
     </div>
 
     <h4>Why spread the spectrum? (BCA25-6a literal)</h4>
@@ -1689,6 +1900,10 @@ Jamming margin:  <b>M<sub>J</sub> = G<sub>p</sub> − (S/N)<sub>min</sub></b>  (
       <span class="label">Definition</span>
       <strong>Packet Radio</strong> = forwarding short, addressed data packets over a shared radio channel using random-access MAC protocols. The grandfather of ALL modern wireless data (WLAN, Zigbee, LoRa).
     </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Packet radio = send short data "packets" over a shared radio channel with no master scheduler. The simplest rule (ALOHA) is "just transmit and hope"; if two packets collide, both retry after a random wait. Slotted ALOHA improves this by forcing every transmission to begin at a clock tick. CSMA (used in Wi-Fi) is even smarter: listen first, only transmit if the channel is idle.
+    </div>
     <h4>ALOHA family (IT24-1e literal)</h4>
     <ul>
       <li><strong>Pure ALOHA (1971)</strong> — transmit any time; if collision, wait random back-off and retry. Max throughput ≈ <strong>18.4 %</strong> at G = 0.5. Vulnerability = 2× packet duration.</li>
@@ -1707,6 +1922,10 @@ Jamming margin:  <b>M<sub>J</sub> = G<sub>p</sub> − (S/N)<sub>min</sub></b>  (
     <div class="box def">
       <span class="label">Definition</span>
       <strong>SDMA</strong> reuses the same frequency, time slot, and code in <mark>different spatial regions</mark> by exploiting directional / smart antennas, beamforming, and MIMO. It is the multiplicative axis on top of FDMA/TDMA/CDMA.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      SDMA = give every user their own beam of radio waves instead of sharing the band. The base station's antenna array can be electronically tilted to point a narrow beam at user A while another beam points at user B — both can use the SAME frequency and time because they're in different directions. This is the secret behind 5G massive-MIMO.
     </div>
 
     <h4>Implementation methods</h4>
@@ -1777,11 +1996,19 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
     </div>
     <p><strong>On TDMA (BCA25-1h):</strong> mostly <em>immune</em> because each user owns its own time slot — only that user's signal is decoded at any instant. Adjacent-slot interference can occur if guard times are too short, but it is a minor issue compared to CDMA.</p>
     <p><strong>On CDMA:</strong> <em>severe</em> — all users overlap in the same band; without fast power control, the nearest user's signal masks all others. IS-95 mitigates with closed-loop power control at 800 Hz, keeping every received signal at the same level (~ −110 dBm).</p>
+    <div class="box prof">
+      <span class="label">Prof-pattern · BCA25-1h is a TRICK question</span>
+      "How does near-far influence TDMA systems?" — the expected answer is <strong>"not significantly — TDMA users are time-separated, so near-far is a CDMA-specific problem"</strong>. Many students answer as if TDMA suffers near-far heavily and lose the entire 1.5 mark. Always lead with the immunity line, then qualify with "minor adjacent-slot leakage if guard times are too short". Conversely, CDMA needs the 800 Hz closed-loop power control — that contrast IS the answer.
+    </div>
   </div>
 
   <!-- 3.7 TDD vs FDD -->
   <div class="topic" id="t-tdd-fdd">
     <h3>3.7 TDD vs FDD <span class="tag fav">1.5M (23BTECH-1d)</span></h3>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      In FDD, your phone uses two frequencies — one to send (uplink), another to listen (downlink). In TDD, it uses ONE frequency but alternates between sending and listening on a clock. FDD = simpler radio, needs paired spectrum. TDD = cheaper spectrum, flexible upload/download ratio (great for video streaming-heavy traffic).
+    </div>
     <div class="table-wrap">
     <table>
       <thead><tr><th>Axis</th><th>FDD (Frequency Division)</th><th>TDD (Time Division)</th></tr></thead>
@@ -1806,9 +2033,23 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
     <span class="priority med">Medium yield · 10–15/75 M</span>
   </div>
 
+  <div class="box warn">
+    <span class="label">Unit 4 spotlight · what gets asked</span>
+    <ul style="margin:6px 0 0 18px">
+      <li><strong>Lightest unit (11%)</strong> — usually one Part-B question + 1–2 short Qs; do not over-invest.</li>
+      <li><strong>ISDN architecture + BRI/PRI rates</strong> is the top recurring item (3× repeat: BCA25-1i, 24BTECH-6a 7.5M, 23BTECH-7b 7M).</li>
+      <li><strong>Traffic routing 7-step + timing diagram</strong> appears in 3 papers at 7–10M (BCA25-5b, IT23-2a, 23BTECH-3a).</li>
+      <li><strong>ISDN vs AIN differentiator</strong> (transport layer vs service layer) is high-yield 1.5–7M.</li>
+    </ul>
+  </div>
+
   <!-- 4.1 Wireless vs Fixed -->
   <div class="topic" id="t-wireless-vs-fixed">
     <h3>4.1 Wireless vs Fixed Telephone Networks <span class="tag">5–7M</span></h3>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Fixed phone network = every subscriber has a fixed cable into the exchange; routing is straightforward because the number tells you where the line goes. Wireless network = the subscriber moves; the network has to track location (HLR/VLR) and route the call to wherever the phone currently is.
+    </div>
     <div class="table-wrap">
     <table>
       <caption>Six axes — clean Q7-style differentiator</caption>
@@ -1846,6 +2087,10 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
       <span class="label">Definition</span>
       The <strong>transmission hierarchy</strong> is the layered set of digital multiplexing levels used by carriers to carry voice and data over the fixed backbone. Two main standards: <mark>PDH</mark> (Plesiochronous, 1970s) and <mark>SDH/SONET</mark> (Synchronous, 1990s+).
     </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Behind every cell tower is a wired pipe carrying many voice channels at once. The international ladder of pipe sizes (E1 = 30 calls, E3 = 480 calls, STM-1 = 2,016 calls) is called the transmission hierarchy. When you ask "how does data get from the tower to the rest of the network", the answer involves these pipes.
+    </div>
     <div class="table-wrap">
     <table>
       <caption>PDH (European E-series) and SONET (US OC-series) levels</caption>
@@ -1872,6 +2117,10 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
     <div class="box def">
       <span class="label">Definition</span>
       <strong>Traffic routing</strong> in a wireless network = the procedure by which the MSC and SS7 signalling network decide the path a call takes from caller to callee, accounting for the callee's <em>mobility</em> via HLR/VLR location lookup.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Calling a moving phone is harder than calling a fixed one — the number doesn't tell you where it is right now. The trick: the home database (HLR) always knows the user's current visiting database (VLR). When a landline dials a mobile, the gateway switch asks the HLR "where is this number?", gets a temporary roaming number (MSRN), uses MSRN to route to the right MSC, which then pages the phone.
     </div>
 
     <h4>The 7-step mobile-terminated call flow (the 7-M answer)</h4>
@@ -1940,6 +2189,10 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
       <span class="label">CCS — Common Channel Signalling</span>
       A signalling system that uses a <strong>separate, dedicated digital channel</strong> for all call-control messages, distinct from the voice trunks themselves. The dominant standard is <mark>SS7 (Signalling System No. 7)</mark> from ITU-T. The opposite (older) approach is CAS — Channel-Associated Signalling — where dial-tones, ringing, etc. share the voice channel itself.
     </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Originally, dial tones and ring signals shared the same wire as your voice (channel-associated signalling). SS7 (Common Channel Signalling) moved all those control messages onto a separate, dedicated signalling network — so the voice trunk is freed and new services (caller-ID, SMS, prepaid balance check) became possible by just adding more SS7 messages, not by re-wiring switches.
+    </div>
     <h4>Why CCS / SS7 won</h4>
     <ul>
       <li><strong>Faster call setup</strong> — control messages don't wait for trunks; SS7 messages are short and packetised.</li>
@@ -1963,6 +2216,10 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
     <div class="box def">
       <span class="label">Definition</span>
       <strong>ISDN</strong> is an ITU-T standard for <mark>fully digital, end-to-end</mark> transmission of voice, data, and signalling over the existing copper telephone subscriber loop, replacing analog modems. Two main service categories: <strong>BRI</strong> and <strong>PRI</strong>.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      ISDN = a fully digital telephone line that goes all the way from the user to the central office. Replaces the analog modem with two digital "B" channels (64 kbps each, voice or data) plus a small "D" channel (16 kbps, signalling). Pre-broadband; superseded by DSL and FTTH, but still examinable for the architecture and rates.
     </div>
 
     <div class="table-wrap">
@@ -2067,6 +2324,10 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
     <div class="box def">
       <span class="label">Definition</span>
       <strong>AIN</strong> is an architectural framework (Bellcore, 1990s) that separates <mark>switching</mark> (handled by the SSP) from <mark>service logic</mark> (handled by the SCP) so that new telecom services can be deployed without re-programming every switch.
+    </div>
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      AIN = separate the switch (the box that connects wires) from the service logic (the rules of what counts as "toll-free", "prepaid balance left", "voicemail"). The switch (SSP) pauses on a "trigger" and queries a central database (SCP) via the signalling network (STP). Adding a new service = updating SCP only, not every switch in the country.
     </div>
     <h4>Three core elements</h4>
     <ul>
@@ -2420,31 +2681,99 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">7 M</span><span>BCA · 2025 · Q3b</span><span class="freq">⭐ Numerical</span></div>
     <p class="qtext">A city is divided into 49 hexagonal cells, and the network follows a 7-cell frequency-reuse pattern. If the total available spectrum is 35 MHz, calculate the bandwidth assigned per cell.</p>
-    <div class="ans">Full numerical worked in <a href="#t-reuse" style="color:var(--brand)">Sec. 2.4</a>. <strong>Answer: 5 MHz/cell</strong>. Show all 5 steps: cluster size = 7, clusters = 49/7 = 7, BW/group = 35/7 = 5 MHz, each cell = one group ⇒ <mark>5 MHz/cell</mark>. Close with the system-capacity sanity check (7 clusters × 35 MHz reused = 245 MHz effective).</div>
+    <div class="ans">Full numerical worked in <a href="#t-reuse" style="color:var(--brand)">Sec. 2.4</a>; master 8-step template at <a href="#rq-numerical-master" style="color:var(--brand);font-weight:700">#repeated-qs · Q3.5</a>. <strong>Answer: 5 MHz/cell</strong>. Show all 5 steps: cluster size = 7, clusters = 49/7 = 7, BW/group = 35/7 = 5 MHz, each cell = one group ⇒ <mark>5 MHz/cell</mark>. Close with the system-capacity sanity check (7 clusters × 35 MHz reused = 245 MHz effective).
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.4 (frequency reuse) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Cluster size <b>N = i² + ij + j²</b> ⇒ valid {1, 3, 4, 7, 9, 12, 13, …}; N = 7 is GSM default.</li>
+          <li>Reuse ratio <b>Q = √(3N)</b>; co-channel distance <b>D = R√(3N)</b>.</li>
+          <li>S/I ≈ (1/6)·Q<sup>n</sup> with n = 4 urban ⇒ N=7 gives ~18.7 dB (sweet spot).</li>
+          <li>BW per cell = Total BW / N; sanity check: <b>system capacity multiplies ≈ N<sub>cluster</sub>×</b>.</li>
+          <li>Examiners want the rounding decision shown: e.g., "480/7 = 68.57, take 68 voice channels per cell, leftover returns to spare pool".</li>
+        </ul>
+      </div>
+      <div class="box tip" style="margin-top:14px">
+        <span class="label">Key takeaways · revise these 5</span>
+        <ul style="margin:6px 0 0 18px">
+          <li>Step 1: identify cluster size from problem (N = 7 here).</li>
+          <li>Step 2: clusters in city = total cells / N (49 / 7 = 7).</li>
+          <li>Step 3: BW per frequency group = total BW / N (35 MHz / 7 = 5 MHz).</li>
+          <li>Step 4: each cell uses exactly one group ⇒ <b>5 MHz / cell</b>.</li>
+          <li>Step 5: sanity check — 7 clusters × 35 MHz reused ⇒ 245 MHz effective system capacity.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">5 M</span><span>BCA · 2025 · Q2b</span><span class="freq">⭐ 4× repeat</span></div>
     <p class="qtext">What are Performance Criteria of basic cellular system?</p>
-    <div class="ans">Per <a href="#t-cellular-basics" style="color:var(--brand)">Sec. 2.2</a> — 7-row table: (1) Voice quality (MOS ≥ 4), (2) Coverage (≥ 95 %), (3) Capacity (Erlangs/cell), (4) GoS (≤ 2 %), (5) Call-drop rate (≤ 2 %), (6) Handoff success (≥ 98 %), (7) Spectral efficiency. Close with 1 line: "All seven KPIs must be balanced — improving one usually costs another."</div>
+    <div class="ans">Per <a href="#t-cellular-basics" style="color:var(--brand)">Sec. 2.2</a> — 7-row table: (1) Voice quality (MOS ≥ 4), (2) Coverage (≥ 95 %), (3) Capacity (Erlangs/cell), (4) GoS (≤ 2 %), (5) Call-drop rate (≤ 2 %), (6) Handoff success (≥ 98 %), (7) Spectral efficiency. Close with 1 line: "All seven KPIs must be balanced — improving one usually costs another."
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.2 (basic cellular) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Hexagonal cells with low-power BSs ⇒ same frequency set reused in geographically separated cells.</li>
+          <li>Targets are non-negotiable: <b>MOS ≥ 4 · Coverage ≥ 95 % · GoS ≤ 2 % · Call-drop ≤ 2 % · HO success ≥ 98 %</b>.</li>
+          <li>Prof scoring rule: 6 KPIs = 4M, 7 KPIs = 5M; missing the target column drops that row to ½.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">5 M</span><span>BCA · 2025 · Q6b</span></div>
     <p class="qtext">Explain Microzone cell concept in detail.</p>
-    <div class="ans">Per <a href="#t-microzone" style="color:var(--brand)">Sec. 2.11</a>: definition (multiple low-power zone Tx linked to one BS), advantages (no inter-cell HOs, lower interference, BS reuse, indoor coverage), one diagram (3 zones around a BS), one application (a stadium or shopping mall). Contrast vs cell-splitting (no MSC re-planning needed).</div>
+    <div class="ans">Per <a href="#t-microzone" style="color:var(--brand)">Sec. 2.11</a>: definition (multiple low-power zone Tx linked to one BS), advantages (no inter-cell HOs, lower interference, BS reuse, indoor coverage), one diagram (3 zones around a BS), one application (a stadium or shopping mall). Contrast vs cell-splitting (no MSC re-planning needed).
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.11 (microzone) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Multiple low-power zone transmitters all wired back to ONE base station (single BS controls the macro-cell).</li>
+          <li>Phone uses whichever zone Tx is closest, but <b>moving between zones is NOT a handoff</b> (same BS).</li>
+          <li>Benefits: indoor coverage (stadium / mall / tunnel), no inter-cell HO signalling load, BS reuse vs cell-splitting.</li>
+          <li>Implementation methods: leaky feeder cable, distributed antennas, repeaters, beam-steered smart antennas.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">5 M</span><span>BCA · 2025 · Q7-i</span></div>
     <p class="qtext">Differentiate between analog and digital cellular system.</p>
-    <div class="ans">Per <a href="#t-analog-digital" style="color:var(--brand)">Sec. 2.3</a>: 9-axis table (modulation · multiple access · vocoder · channel coding · encryption · capacity · power efficiency · services · examples). 5-mark = give 6 most-different rows + a closing line on 3× capacity gain.</div>
+    <div class="ans">Per <a href="#t-analog-digital" style="color:var(--brand)">Sec. 2.3</a>: 9-axis table (modulation · multiple access · vocoder · channel coding · encryption · capacity · power efficiency · services · examples). 5-mark = give 6 most-different rows + a closing line on 3× capacity gain.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.3 (analog vs digital) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Analog (1G AMPS): continuous FM waveform · FDMA · no encryption · ~666 channels in 25 MHz.</li>
+          <li>Digital (2G GSM): GMSK bits · TDMA / CDMA · A5/1 encryption · vocoder + channel coding · 3–10× capacity.</li>
+          <li>Digital wins on 7 of 9 axes; only continuous waveform purity is theoretically better in analog, reversed in practice by coding gain.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">1.5 M</span><span>BCA · 2025 · Q1c</span></div>
     <p class="qtext">What are the reasons for choosing Hexagonal cells in cellular system?</p>
-    <div class="ans">(1) Tessellate without gaps or overlap (only 3 polygons do — hexagon closest to circle). (2) Maximum area per radius (≈ 2.6 R²). (3) Six equidistant neighbours at √3·R simplifies reuse maths. (4) Best match to omni-antenna circular radiation. See <a href="#t-cellular-basics" style="color:var(--brand)">Sec. 2.2</a>.</div>
+    <div class="ans">(1) Tessellate without gaps or overlap (only 3 polygons do — hexagon closest to circle). (2) Maximum area per radius (≈ 2.6 R²). (3) Six equidistant neighbours at √3·R simplifies reuse maths. (4) Best match to omni-antenna circular radiation. See <a href="#t-cellular-basics" style="color:var(--brand)">Sec. 2.2</a>.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.2 (basic cellular) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Only 3 regular polygons tile the plane: triangle, square, hexagon — hexagon hugs the circle tightest.</li>
+          <li>Hexagon area = (3√3/2)·R² ≈ 2.598 R² (bigger than square 2R², smaller than disc).</li>
+          <li>Six neighbours all at distance √3·R — feeds straight into the reuse D = R√(3N) formula.</li>
+        </ul>
+      </div>
+      <div class="box tip" style="margin-top:14px">
+        <span class="label">Key takeaways · revise these 5</span>
+        <ul style="margin:6px 0 0 18px">
+          <li><b>Tessellation</b> — hexagons tile the plane with no gaps or overlap.</li>
+          <li><b>Area efficiency</b> — for a given radius R, hex covers ~2.6 R² (closer to a circle than a square).</li>
+          <li><b>Six equidistant neighbours</b> at √3·R — six co-channel interferers in the first tier, which gives the (1/6) in S/I = (1/6)Q<sup>n</sup>.</li>
+          <li><b>Omni-radiation match</b> — antennas radiate roughly circularly; hex is the closest tessellating shape.</li>
+          <li><b>Simplifies D-formula</b> — D = R√(3N) is a direct consequence of the hex grid basis vectors at 60°.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2456,13 +2785,22 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">1.5 M</span><span>BCA · 2025 · Q1f</span></div>
     <p class="qtext">Explain the term inference (interference) in space, time and frequency domain.</p>
-    <div class="ans">Per <a href="#t-interference" style="color:var(--brand)">Sec. 2.7</a>: Interference separable in three domains → <strong>Space</strong> (mitigated by sectoring, antenna tilt, geographic separation), <strong>Time</strong> (mitigated by TDMA slots and scheduling), <strong>Frequency</strong> (mitigated by FDMA allocation, guard bands, frequency hopping). GSM uses all three; CDMA largely replaces them with code-domain separation + fast power control.</div>
+    <div class="ans">Per <a href="#t-interference" style="color:var(--brand)">Sec. 2.7</a>: Interference separable in three domains → <strong>Space</strong> (mitigated by sectoring, antenna tilt, geographic separation), <strong>Time</strong> (mitigated by TDMA slots and scheduling), <strong>Frequency</strong> (mitigated by FDMA allocation, guard bands, frequency hopping). GSM uses all three; CDMA largely replaces them with code-domain separation + fast power control.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.7 (interference) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Four interference flavours: <b>co-channel · adjacent-channel · intermodulation · near-far</b> (CDMA-only).</li>
+          <li>S/I = (1/6)·Q<sup>n</sup>; with N = 7 and n = 4 ⇒ ≈ 18.7 dB.</li>
+          <li>Recipe: larger N (more space) · sectoring (cut interferers 6 → 2) · sharper filters (frequency) · power control (CDMA discipline).</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">1.5 M</span><span>BCA · 2025 · Q1g</span></div>
     <p class="qtext">Draw the cell structure for frequency-reuse factor N = 12.</p>
-    <div class="ans">N = 12 ⇒ i = 2, j = 2 ⇒ Q = √(3·12) = 6. Cluster of 12 hexagons numbered 1–12, repeating across the plane. Draw 12-cell cluster in the standard "wide rural" layout (see <a href="#t-reuse" style="color:var(--brand)">Sec. 2.4 Fig 2.4a</a> for N=7 pattern; for N=12 you'd extend with i=2, j=2 step pattern). Annotate one co-channel cell at distance D = 6R.</div>
+    <div class="ans">N = 12 ⇒ i = 2, j = 2 ⇒ Q = √(3·12) = 6. Cluster of 12 hexagons numbered 1–12, repeating across the plane. Draw 12-cell cluster in the standard "wide rural" layout (see <a href="#t-reuse" style="color:var(--brand)">Sec. 2.4 Fig 2.4a</a> for N=7 pattern; for N=12 you'd extend with i=2, j=2 step pattern). Annotate one co-channel cell at distance D = 6R. Master template at <a href="#rq-numerical-master" style="color:var(--brand);font-weight:700">#repeated-qs · Q3.5</a>.</div>
   </div>
 
   <div class="pyq">
@@ -2474,7 +2812,17 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">7.5 M</span><span>BTech ENC · 2024 · Q7a</span></div>
     <p class="qtext">Explain the different hand off strategies used in wireless communication.</p>
-    <div class="ans">Per <a href="#t-handoff" style="color:var(--brand)">Sec. 2.6</a>: definition + 4-axis classification table (decision authority · continuity · cell relation · technology) + MAHO/MCHO/NCHO comparison table + hard vs soft diagram + 3 triggers (RSS, BER, distance). See full at <a href="#rq-handoff" style="color:var(--brand)">#repeated-qs · Q2</a>.</div>
+    <div class="ans">Per <a href="#t-handoff" style="color:var(--brand)">Sec. 2.6</a>: definition + 4-axis classification table (decision authority · continuity · cell relation · technology) + MAHO/MCHO/NCHO comparison table + hard vs soft diagram + 3 triggers (RSS, BER, distance). See full at <a href="#rq-handoff" style="color:var(--brand)">#repeated-qs · Q2</a>.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.6 (handoff) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Triggers: <b>RSS low · BER high · distance exceeded · traffic balancing</b>.</li>
+          <li>Decision authority: <b>NCHO</b> (network alone, 1G, ~10 s) → <b>MAHO</b> (GSM, ~1–2 s) → <b>MCHO</b> (DECT, &lt; 1 s).</li>
+          <li>Continuity: hard = break-before-make (GSM); soft = make-before-break (CDMA only, rake-combined).</li>
+          <li>5 magic words examiners reward: <b>hysteresis · dwell · guard channel · ping-pong · rake</b>.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2486,7 +2834,16 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">7.5 M</span><span>BTech ENC · 2024 · Q3a</span></div>
     <p class="qtext">Why do we need cell splitting and how can it be implemented?</p>
-    <div class="ans">Per <a href="#t-cell-splitting" style="color:var(--brand)">Sec. 2.9</a>: <em>Why</em> = cell exceeds Erlang-B capacity at given GoS during hotspot growth. <em>Implementation</em> = 5 steps (identify hotspot → halve R → new BSs at vertices → reduce Tx power by 2<sup>n</sup> → update neighbour lists). Mention 4× capacity gain. Close with the pitfall: 4× handover signalling load.</div>
+    <div class="ans">Per <a href="#t-cell-splitting" style="color:var(--brand)">Sec. 2.9</a>: <em>Why</em> = cell exceeds Erlang-B capacity at given GoS during hotspot growth. <em>Implementation</em> = 5 steps (identify hotspot → halve R → new BSs at vertices → reduce Tx power by 2<sup>n</sup> → update neighbour lists). Mention 4× capacity gain. Close with the pitfall: 4× handover signalling load.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.9 (cell splitting) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Take one overloaded cell → cut into 4 micro-cells, each with its own BS at half the radius.</li>
+          <li>Capacity gain ≈ <b>4×</b> in the same area; power reduction ≈ 16× (path-loss scales as R<sup>n</sup>).</li>
+          <li>Drawback: 4× handovers (more cell borders) + new site survey + neighbour-list updates ⇒ signalling load.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2546,7 +2903,17 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">7 M</span><span>BTech ENC · 2023 · Q2b</span></div>
     <p class="qtext">Explain the different techniques of improving coverage and capacity in cellular system.</p>
-    <div class="ans">Per <a href="#t-coverage-summary" style="color:var(--brand)">Sec. 2.12 master table</a>: cell splitting (4× capacity), sectoring (3× + S/I gain), microzone, smart antennas/SDMA, adding spectrum, power control. 7-mark = give the table + 2 lines on the top 3 techniques.</div>
+    <div class="ans">Per <a href="#t-coverage-summary" style="color:var(--brand)">Sec. 2.12 master table</a>: cell splitting (4× capacity), sectoring (3× + S/I gain), microzone, smart antennas/SDMA, adding spectrum, power control. 7-mark = give the table + 2 lines on the top 3 techniques.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.12 (coverage/capacity map) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>"reduce interference / improve S/I" ⇒ <b>sectoring</b>.</li>
+          <li>"add raw capacity / more channels per km²" ⇒ <b>cell splitting</b>.</li>
+          <li>"indoor / stadium / tunnel" ⇒ <b>microzone</b>.</li>
+          <li>"4G/5G beam-steered capacity" ⇒ <b>smart antennas / SDMA / massive MIMO</b>.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2558,14 +2925,24 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">8 M</span><span>BTech ENC · 2023 · Q5a</span></div>
     <p class="qtext">What is hand-off mechanism? Explain practical hand-off considerations.</p>
-    <div class="ans">Definition + 3 triggers + 4-axis classification. <strong>Practical considerations</strong>: hysteresis margin (avoid ping-pong), dwell timer, prioritising voice calls during handover, queueing handoff requests when target cell is busy, guard channels for handoff calls. See <a href="#t-handoff" style="color:var(--brand)">Sec. 2.6</a>.</div>
+    <div class="ans">Definition + 3 triggers + 4-axis classification. <strong>Practical considerations</strong>: hysteresis margin (avoid ping-pong), dwell timer, prioritising voice calls during handover, queueing handoff requests when target cell is busy, guard channels for handoff calls. See <a href="#t-handoff" style="color:var(--brand)">Sec. 2.6</a>.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.6 (handoff) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Three flavours by decision authority: <b>NCHO · MAHO · MCHO</b> (slow → fast).</li>
+          <li>Two flavours by continuity: <b>hard</b> (break-before-make, GSM) · <b>soft</b> (make-before-break, CDMA, rake-combined).</li>
+          <li>5 magic words: <b>hysteresis · dwell · guard channel · ping-pong · rake</b>.</li>
+          <li>4-stage implementation flow: <b>measure → decide → execute → complete</b>.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">7 M</span><span>BTech ENC · 2023 · Q5b</span></div>
     <p class="qtext">Derive the relation Q = √(3N) where Q is co-channel reuse ratio and N is cluster size.</p>
     <div class="ans">
-      <p>Set up the hex grid in (i, j) coordinates with cell centres spaced √3·R apart. The co-channel cell is reached by stepping <em>i</em> hexes along one axis, turning 60°, and stepping <em>j</em> more.</p>
+      <p>Set up the hex grid in (i, j) coordinates with cell centres spaced √3·R apart. The co-channel cell is reached by stepping <em>i</em> hexes along one axis, turning 60°, and stepping <em>j</em> more. (This is the Step-6 derivation in the master template at <a href="#rq-numerical-master" style="color:var(--brand);font-weight:700">#repeated-qs · Q3.5</a>.)</p>
       <p>Using the law of cosines with 60° between the two basis vectors:</p>
       <div class="formula">D² = (i·√3·R)² + (j·√3·R)² − 2·(i·√3·R)·(j·√3·R)·cos(120°)
    = 3R²(i² + j² + ij)         <span class="c">since cos(120°) = −1/2</span>
@@ -2573,13 +2950,41 @@ Capacity per unit area  = N<sub>channels</sub> / (cell area · N)
 Therefore:    <b>D = R · √(3·N)</b>   where <b>N = i² + ij + j²</b>
 
 Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.4 (frequency reuse) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Hex centres in a cluster sit on basis vectors at 60°, each centre-to-centre step = √3·R.</li>
+          <li>Cluster index N = i² + ij + j² counts hexes reachable in i + j moves on those basis vectors.</li>
+          <li>For (i, j) = (2, 1): N = 4 + 2 + 1 = 7, Q = √21 ≈ 4.58 (the GSM default).</li>
+        </ul>
+      </div>
+      <div class="box tip" style="margin-top:14px">
+        <span class="label">Key takeaways · revise these 5</span>
+        <ul style="margin:6px 0 0 18px">
+          <li>Set up hex grid <b>basis vectors at 60°</b>; centre-to-centre spacing is √3·R.</li>
+          <li>Apply <b>law of cosines</b> with the 60° internal turn ⇒ external angle 120° between vectors.</li>
+          <li>Use the fact <b>cos(120°) = −1/2</b> — this collapses the cross term into +ij.</li>
+          <li>Result: D² = 3R²(i² + ij + j²) = 3R²·N ⇒ <b>D = R√(3N)</b>, divide by R for <b>Q = √(3N)</b>. ∎</li>
+          <li>Generalises to <b>any (i, j)</b>: (1,0)→N=1, (1,1)→N=3, (2,0)→N=4, (2,1)→N=7, (2,2)→N=12.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">8 M</span><span>BTech ENC · 2023 · Q7a</span></div>
     <p class="qtext">Distinguish between fixed channel assignment and dynamic channel assignment in cellular networks.</p>
-    <div class="ans">Per <a href="#t-channel-assign" style="color:var(--brand)">Sec. 2.5</a>: full 7-row table (allocation · decision time · complexity · uniform traffic · bursty traffic · interference control · examples). 8-mark = table + 2 lines on borrowing/hybrid variants.</div>
+    <div class="ans">Per <a href="#t-channel-assign" style="color:var(--brand)">Sec. 2.5</a>: full 7-row table (allocation · decision time · complexity · uniform traffic · bursty traffic · interference control · examples). 8-mark = table + 2 lines on borrowing/hybrid variants.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.5 (channel assignment) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li><b>FCA</b> — each cell has fixed channel set from day one; simple, wasteful at hotspots.</li>
+          <li><b>DCA</b> — channels in shared pool, handed out per call; smarter, needs extra signalling.</li>
+          <li><b>Borrowing</b> middle path — start FCA, borrow from neighbour when full.</li>
+          <li>Modern reality: LTE/5G run packet-level DCA at 1 ms TTI in the eNodeB MAC scheduler.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2620,7 +3025,17 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">5 M</span><span>BTech IT · 2025 · Q3b</span></div>
     <p class="qtext">Write short notes on cell splitting and cell sectoring. How do these techniques enhance cellular network performance?</p>
-    <div class="ans">Per <a href="#t-cell-splitting" style="color:var(--brand)">Sec. 2.9</a> + <a href="#t-sectoring" style="color:var(--brand)">Sec. 2.10</a>: definitions + capacity gains + side effects. Close with the Sec. 2.10 cell-splitting-vs-sectoring 6-row table for the comparison mark.</div>
+    <div class="ans">Per <a href="#t-cell-splitting" style="color:var(--brand)">Sec. 2.9</a> + <a href="#t-sectoring" style="color:var(--brand)">Sec. 2.10</a>: definitions + capacity gains + side effects. Close with the Sec. 2.10 cell-splitting-vs-sectoring 6-row table for the comparison mark.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topics 2.9 + 2.10 →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li><b>Cell splitting</b> — cut one cell into 4 micro-cells with new BSs; capacity ≈ 4×; cost: 4× HOs + new sites.</li>
+          <li><b>Sectoring</b> — replace omni antenna with 3 (120°) or 6 (60°) pie-slice antennas; same footprint, each slice a separate logical cell.</li>
+          <li>Sectoring interference cut: <b>120° → ~5 dB</b> S/I gain (6 → 2 interferers); 60° → ~8 dB (6 → 1).</li>
+          <li>Combined trade-off: splitting adds raw capacity, sectoring adds S/I headroom enabling smaller N.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2686,14 +3101,23 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">1.5 M</span><span>BTech IT · 2024 · Q1g</span></div>
     <p class="qtext">A cellular system is designed with 49 cells in a hexagonal grid. If frequency-reuse factor K = 7, calculate the number of cells that share the same set of frequencies.</p>
     <div class="ans">
-      <p>49 / 7 = <strong>7 cells</strong> share the same set of frequencies (one cell per cluster, 7 clusters in the grid).</p>
+      <p>49 / 7 = <strong>7 cells</strong> share the same set of frequencies (one cell per cluster, 7 clusters in the grid). This is Step 8 of the master template at <a href="#rq-numerical-master" style="color:var(--brand);font-weight:700">#repeated-qs · Q3.5</a>.</p>
     </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">1.5 M</span><span>BTech IT · 2023 · Q1f</span></div>
     <p class="qtext">How is frequency-reuse distance measured in cellular systems?</p>
-    <div class="ans">By the formula <strong>D = R · √(3N)</strong>, where R is cell radius and N is cluster size. D is the centre-to-centre distance between two cells using the same frequency. Larger D ⇒ less co-channel interference but lower capacity. See <a href="#t-reuse" style="color:var(--brand)">Sec. 2.4</a>.</div>
+    <div class="ans">By the formula <strong>D = R · √(3N)</strong>, where R is cell radius and N is cluster size. D is the centre-to-centre distance between two cells using the same frequency. Larger D ⇒ less co-channel interference but lower capacity. See <a href="#t-reuse" style="color:var(--brand)">Sec. 2.4</a>.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.4 (frequency reuse) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Reuse ratio Q = D / R = √(3N); for N = 7 (GSM default), Q ≈ 4.58.</li>
+          <li>Valid cluster sizes: N = i² + ij + j² ⇒ {1, 3, 4, 7, 9, 12, 13, …}.</li>
+          <li>Cells using the same frequency set are <b>co-channel cells</b>; D is engineered so co-channel interference stays below threshold.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2722,7 +3146,16 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">5 M</span><span>BTech IT · 2023 · Q3b</span></div>
     <p class="qtext">How can capacity of cellular communication system be improved? Discuss any two capacity-enhancement schemes.</p>
-    <div class="ans">Per <a href="#t-cellular-capacity" style="color:var(--brand)">Sec. 3.5</a>: pick (1) <strong>Cell splitting</strong> — area shrinks ⇒ channels/km² ↑4×, and (2) <strong>Sectoring</strong> — improves S/I ⇒ allows smaller N ⇒ more channels per cell. One paragraph each + one trade-off line.</div>
+    <div class="ans">Per <a href="#t-cellular-capacity" style="color:var(--brand)">Sec. 3.5</a>: pick (1) <strong>Cell splitting</strong> — area shrinks ⇒ channels/km² ↑4×, and (2) <strong>Sectoring</strong> — improves S/I ⇒ allows smaller N ⇒ more channels per cell. One paragraph each + one trade-off line.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 3.5 (capacity) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>System capacity ∝ (BW / channel) × (cells / area) × (1 / N).</li>
+          <li>5 standard enhancement schemes: splitting, sectoring, microzone, smart antennas / SDMA, adding spectrum.</li>
+          <li>CDMA bonus: universal reuse (N = 1) + soft handoff add a multiplier on top.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2745,7 +3178,27 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U2</span><span class="marks">5 M</span><span>BTech IT · 2023 · Q6b</span></div>
     <p class="qtext">Numerical: 33 MHz BW, 25 kHz simplex channels, 7-cell reuse, 1 MHz control. Determine channels per cell.</p>
-    <div class="ans">Worked in <a href="#t-reuse" style="color:var(--brand)">Sec. 2.4</a> numerical block. <strong>Answer: 91 voice + 3 control channels per cell.</strong> Show all 5 steps.</div>
+    <div class="ans">Worked in <a href="#t-reuse" style="color:var(--brand)">Sec. 2.4</a> numerical block; master 8-step template at <a href="#rq-numerical-master" style="color:var(--brand);font-weight:700">#repeated-qs · Q3.5</a>. <strong>Answer: 91 voice + 3 control channels per cell.</strong> Show all 5 steps.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 2.4 (frequency reuse) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Simplex channel = one-way slot of size W; duplex pair = 2W (uplink + downlink).</li>
+          <li>Total system channels = Total BW / duplex pair.</li>
+          <li>Per-cell allocation = system / N, then split into voice + control with explicit rounding shown.</li>
+          <li>For 33 MHz / 25 kHz simplex with N = 7 and 1 MHz control: 660 total, 20 control, 640 voice ⇒ 91 voice + 3 control per cell.</li>
+        </ul>
+      </div>
+      <div class="box tip" style="margin-top:14px">
+        <span class="label">Key takeaways · revise these 5</span>
+        <ul style="margin:6px 0 0 18px">
+          <li>Duplex pair = <b>2 × simplex</b> bandwidth (25 kHz simplex ⇒ 50 kHz duplex).</li>
+          <li>Total channels = <b>total BW / duplex pair</b> (33 MHz / 50 kHz = 660).</li>
+          <li>Control channels = <b>control BW / duplex pair</b> (1 MHz / 50 kHz = 20).</li>
+          <li>Voice channels = <b>total − control</b> (660 − 20 = 640).</li>
+          <li>Per-cell = <b>system / N</b> (640/7 ≈ 91 voice, 20/7 ≈ 3 control). Show the rounding line.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <!-- ============ UNIT 3 PYQs ============ -->
@@ -2771,13 +3224,32 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U3</span><span class="marks">5 M</span><span>BCA · 2025 · Q7-ii</span></div>
     <p class="qtext">Differentiate between FDMA &amp; TDMA.</p>
-    <div class="ans">Per <a href="#t-multiple-access" style="color:var(--brand)">Sec. 3.1 master table</a>: FDMA = frequency separation, narrow channels per user always-on; TDMA = time-slot separation, full BW per user 1/N of the time. TDMA wins on capacity (3× FDMA) and battery (burst Tx, sleep otherwise) and digital efficiency. Add the Sec. 3.1 figure if time.</div>
+    <div class="ans">Per <a href="#t-multiple-access" style="color:var(--brand)">Sec. 3.1 master table</a>: FDMA = frequency separation, narrow channels per user always-on; TDMA = time-slot separation, full BW per user 1/N of the time. TDMA wins on capacity (3× FDMA) and battery (burst Tx, sleep otherwise) and digital efficiency. Add the Sec. 3.1 figure if time.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 3.1 (multi-access) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>FDMA cuts band into narrow channels, one per user — simple, narrowband filters, 1G AMPS.</li>
+          <li>TDMA gives full BW per user but in time slots — 3× capacity, burst Tx allows handset sleep, GSM/DECT.</li>
+          <li>Master table separation axes: <b>frequency · time · code · space · sub-carrier</b> (FDMA/TDMA/CDMA/SDMA/OFDMA).</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U3</span><span class="marks">1.5 M</span><span>BCA · 2025 · Q1h</span></div>
     <p class="qtext">How does near/far effect influence TDMA systems?</p>
-    <div class="ans">Per <a href="#t-near-far" style="color:var(--brand)">Sec. 3.6</a>: TDMA is largely <em>immune</em> to near/far — each user owns its own time slot so the receiver decodes only that user at a time. Adjacent-slot leakage can occur if guard intervals are too short, but this is a minor issue (microseconds of overlap), unlike CDMA where near/far is a critical design problem.</div>
+    <div class="ans">Per <a href="#t-near-far" style="color:var(--brand)">Sec. 3.6</a>: TDMA is largely <em>immune</em> to near/far — each user owns its own time slot so the receiver decodes only that user at a time. Adjacent-slot leakage can occur if guard intervals are too short, but this is a minor issue (microseconds of overlap), unlike CDMA where near/far is a critical design problem.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 3.6 (near-far) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Near-far problem = a nearby strong Tx drowns a distant weak one when both share the same band.</li>
+          <li><b>CDMA-specific</b> — codes are orthogonal only at equal received power; severe without power control.</li>
+          <li>CDMA fix: closed-loop power control at <b>800 Hz in IS-95</b>, keeping every received signal level.</li>
+          <li>TDMA users are time-separated, so near-far does NOT influence them significantly — that's the trick BCA25-1h tests.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2802,7 +3274,16 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U3</span><span class="marks">7.5 M</span><span>BTech ENC · 2024 · Q5b</span></div>
     <p class="qtext">What do you mean by space-division multiple access (SDMA)? Explain it with feature, application using appropriate figure.</p>
-    <div class="ans">Per <a href="#t-sdma" style="color:var(--brand)">Sec. 3.4</a>: definition + 4 implementation methods (sectoring, smart antennas, MIMO, massive MIMO) + features (capacity ∝ beams, interference rejection, range gain) + applications (LTE-A, 5G NR, satellite spot beams) + the 3-beam diagram.</div>
+    <div class="ans">Per <a href="#t-sdma" style="color:var(--brand)">Sec. 3.4</a>: definition + 4 implementation methods (sectoring, smart antennas, MIMO, massive MIMO) + features (capacity ∝ beams, interference rejection, range gain) + applications (LTE-A, 5G NR, satellite spot beams) + the 3-beam diagram.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 3.4 (SDMA) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>SDMA = give each user their own narrow radio beam — same f, same t, different direction.</li>
+          <li>4 implementation methods: <b>sectoring · smart antennas · MIMO · massive MIMO</b>.</li>
+          <li>Capacity multiplies by number of beams; applications: LTE-A, 5G NR, satellite spot-beams.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2821,6 +3302,14 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
     <div class="pyq-tags"><span class="unit">U3</span><span class="marks">1.5 M</span><span>BTech ENC · 2023 · Q1d</span></div>
     <p class="qtext">Difference between TDD and FDD?</p>
     <div class="ans">Per <a href="#t-tdd-fdd" style="color:var(--brand)">Sec. 3.7</a>: FDD = different frequencies for UL/DL (paired spectrum, needs duplexer); TDD = same frequency, alternating slots (unpaired spectrum, just a switch). FDD ideal for symmetric voice; TDD adapts UL/DL ratio for asymmetric data.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 3.7 (TDD vs FDD) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>FDD: two frequencies, simultaneous; needs duplexer + paired spectrum + guard band. Symmetric voice.</li>
+          <li>TDD: one frequency, alternating UL/DL slots; just a Tx/Rx switch + guard time. Asymmetric data ratio adjustable.</li>
+          <li>Examples — FDD: GSM, UMTS-FDD, LTE-FDD. TDD: TD-SCDMA, LTE-TDD (Band 38/41), 5G NR n78.</li>
+        </ul>
+      </div>
       <div class="table-wrap">
       <table>
         <thead><tr><th>Axis</th><th>FDD</th><th>TDD</th></tr></thead>
@@ -2861,7 +3350,15 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U3</span><span class="marks">1.5 M</span><span>BTech IT · 2024 · Q1e</span></div>
     <p class="qtext">How does random access work in ALOHA-based multiple-access techniques?</p>
-    <div class="ans">Per <a href="#t-packet-radio" style="color:var(--brand)">Sec. 3.3</a>: <strong>Pure ALOHA</strong> — transmit at will; if ACK not received (collision), wait random back-off and retry. <strong>Slotted ALOHA</strong> — Tx allowed only at slot boundaries, halving vulnerability window ⇒ doubling throughput (37 % vs 18 %).</div>
+    <div class="ans">Per <a href="#t-packet-radio" style="color:var(--brand)">Sec. 3.3</a>: <strong>Pure ALOHA</strong> — transmit at will; if ACK not received (collision), wait random back-off and retry. <strong>Slotted ALOHA</strong> — Tx allowed only at slot boundaries, halving vulnerability window ⇒ doubling throughput (37 % vs 18 %).
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 3.3 (packet radio) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Pure ALOHA peak throughput ≈ <b>18.4 %</b>; slotted ALOHA ≈ <b>36.8 %</b> (slots halve the collision window).</li>
+          <li>CSMA improves this by listening first; CSMA/CA used in Wi-Fi (802.11) with random back-off + RTS/CTS.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2876,7 +3373,16 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U4</span><span class="marks">7 M</span><span>BCA · 2025 · Q5b</span></div>
     <p class="qtext">Explain the traffic routing in wireless network.</p>
-    <div class="ans">Per <a href="#t-traffic-routing" style="color:var(--brand)">Sec. 4.4</a>: 7-step mobile-terminated call flow (PSTN → GMSC → HLR → VLR → MSRN → serving MSC → paging → connect) + the 5-block routing diagram + 1-paragraph note that mobility = HLR/VLR lookup overhead vs fixed-network static routing.</div>
+    <div class="ans">Per <a href="#t-traffic-routing" style="color:var(--brand)">Sec. 4.4</a>: 7-step mobile-terminated call flow (PSTN → GMSC → HLR → VLR → MSRN → serving MSC → paging → connect) + the 5-block routing diagram + 1-paragraph note that mobility = HLR/VLR lookup overhead vs fixed-network static routing.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 4.4 (traffic routing) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>7-step flow: <b>PSTN dial → GMSC → HLR query → VLR returns MSRN → GMSC routes to serving MSC → MSC pages MS → traffic channel assigned</b>.</li>
+          <li>Key trick: HLR always knows current VLR; <b>MSRN is the temporary roaming number</b> used to route to the right MSC.</li>
+          <li>Mobile-originated (BCA25-5b): <b>RACH → SDCCH → Auth (A3) → Cipher (A5) → CC-SETUP → TCH</b>.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2902,25 +3408,64 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U4</span><span class="marks">1.5 M</span><span>BCA · 2025 · Q1i</span></div>
     <p class="qtext">Write in brief about ISDN.</p>
-    <div class="ans">Per <a href="#t-isdn" style="color:var(--brand)">Sec. 4.6</a>: <strong>ISDN (Integrated Services Digital Network)</strong> = ITU-T standard for end-to-end digital transmission of voice, data and signalling over the existing copper subscriber loop. BRI = 2B + D = 144 kbps; PRI Europe = 30B + D ≈ 2 Mbps (E1). Replaced analog modems; superseded by xDSL/fibre.</div>
+    <div class="ans">Per <a href="#t-isdn" style="color:var(--brand)">Sec. 4.6</a>: <strong>ISDN (Integrated Services Digital Network)</strong> = ITU-T standard for end-to-end digital transmission of voice, data and signalling over the existing copper subscriber loop. BRI = 2B + D = 144 kbps; PRI Europe = 30B + D ≈ 2 Mbps (E1). Replaced analog modems; superseded by xDSL/fibre.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 4.6 (ISDN) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Two B channels (64 kbps each, voice/data) + one D channel (signalling) = the basic ISDN model.</li>
+          <li><b>BRI</b> = 2B + D (16 kbps) = 144 kbps; for home / SOHO.</li>
+          <li><b>PRI</b> Europe = 30B + D (64 kbps) ≈ 1.984 Mbps (E1); PRI US = 23B + D ≈ 1.544 Mbps (T1); for PBX / corporate.</li>
+          <li>Reference points: <b>R, S, T, U</b> at TE1/TE2/TA/NT1/NT2/LT boundaries.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U4</span><span class="marks">7.5 M</span><span>BTech ENC · 2024 · Q6a</span></div>
     <p class="qtext">Explain the architecture of ISDN. How is it different from other technologies?</p>
-    <div class="ans">Per <a href="#t-isdn" style="color:var(--brand)">Sec. 4.6</a>: TE1/TE2/TA/NT1/NT2/LT/ET + R, S, T, U reference points + BRI/PRI rates table. <strong>Differences:</strong> fully digital (vs analog POTS), supports simultaneous voice + data on same line, out-of-band signalling via D-channel (vs in-band DTMF), higher throughput than analog modem (vs 56 kbps), but lower than xDSL/fibre.</div>
+    <div class="ans">Per <a href="#t-isdn" style="color:var(--brand)">Sec. 4.6</a>: TE1/TE2/TA/NT1/NT2/LT/ET + R, S, T, U reference points + BRI/PRI rates table. <strong>Differences:</strong> fully digital (vs analog POTS), supports simultaneous voice + data on same line, out-of-band signalling via D-channel (vs in-band DTMF), higher throughput than analog modem (vs 56 kbps), but lower than xDSL/fibre.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 4.6 (ISDN architecture) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Customer-premises blocks: <b>TE1</b> (ISDN-native terminal) · <b>TE2</b> (non-ISDN + <b>TA</b> adapter) · <b>NT1</b> (line termination) · <b>NT2</b> (PBX/switch).</li>
+          <li>Carrier side: <b>LT</b> (line termination) and <b>ET</b> (exchange termination) at the central office.</li>
+          <li>Reference points <b>R · S · T · U</b> mark the interfaces between these blocks (R = TE2↔TA, S = TE↔NT2, T = NT2↔NT1, U = NT1↔LT).</li>
+          <li>BRI 2B + D = 144 kbps · PRI Europe 30B + D ≈ 2 Mbps · PRI US 23B + D ≈ 1.544 Mbps.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U4</span><span class="marks">1.5 M</span><span>BTech ENC · 2023 · Q1f</span></div>
     <p class="qtext">What are the advantages of AIN?</p>
-    <div class="ans">Per <a href="#t-ain" style="color:var(--brand)">Sec. 4.7</a>: rapid service deployment, vendor independence, personalisation, reduced switch software complexity, foundation for toll-free / call-forwarding / voicemail / prepaid / number-portability services.</div>
+    <div class="ans">Per <a href="#t-ain" style="color:var(--brand)">Sec. 4.7</a>: rapid service deployment, vendor independence, personalisation, reduced switch software complexity, foundation for toll-free / call-forwarding / voicemail / prepaid / number-portability services.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 4.7 (AIN) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>3 core elements: <b>SSP</b> (Service Switching Point) · <b>SCP</b> (Service Control Point) · <b>STP</b> (Signal Transfer Point).</li>
+          <li>SSP pauses on a "trigger" and queries SCP via STP (SS7); SCP holds the service logic.</li>
+          <li>Add a new service = update SCP only, not every switch — that's the "rapid deployment" advantage.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U4</span><span class="marks">8 M</span><span>BTech ENC · 2023 · Q3a</span></div>
     <p class="qtext">Discuss with the help of timing diagram how a call initiated by a mobile is established.</p>
-    <div class="ans">Per <a href="#t-traffic-routing" style="color:var(--brand)">Sec. 4.4 (mobile-originated section)</a>: 6-step flow — RACH request → SDCCH assignment → authentication (A3) + ciphering (A5) → CC-SETUP with B-number → MSC routing → TCH assignment + ALERT/CONNECT. Draw a vertical-time-axis sequence diagram across MS · BTS · BSC · MSC columns.</div>
+    <div class="ans">Per <a href="#t-traffic-routing" style="color:var(--brand)">Sec. 4.4 (mobile-originated section)</a>: 6-step flow — RACH request → SDCCH assignment → authentication (A3) + ciphering (A5) → CC-SETUP with B-number → MSC routing → TCH assignment + ALERT/CONNECT. Draw a vertical-time-axis sequence diagram across MS · BTS · BSC · MSC columns.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 4.4 (traffic routing) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Mobile-originated mnemonic: <b>RACH → SDCCH → Auth → Cipher → CC-SETUP → TCH</b>.</li>
+          <li>RACH = random-access channel for first contact; SDCCH = stand-alone dedicated control channel for signalling.</li>
+          <li>A3 generates SRES from RAND; A5/1 ciphers the air interface; CC-SETUP carries the dialled number.</li>
+          <li>Mobile-terminated counterpart uses HLR → VLR → MSRN to route INTO the right serving MSC, then paging.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
@@ -2932,13 +3477,30 @@ Divide both sides by R:    <b>Q = D / R = √(3N)</b>   ∎</div>
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U4</span><span class="marks">7 M</span><span>BTech ENC · 2023 · Q7b</span></div>
     <p class="qtext">Distinguish between ISDN and AIN.</p>
-    <div class="ans">Per <a href="#t-isdn" style="color:var(--brand)">Sec. 4.6 (ISDN vs AIN sub-section)</a>: ISDN = transport-layer (digital bits between user and exchange); AIN = service-layer (programmable service logic on top of transport). ISDN moves bits; AIN moves services. Table form with 5 rows: role, layer, elements, examples, deployment era.</div>
+    <div class="ans">Per <a href="#t-isdn" style="color:var(--brand)">Sec. 4.6 (ISDN vs AIN sub-section)</a>: ISDN = transport-layer (digital bits between user and exchange); AIN = service-layer (programmable service logic on top of transport). ISDN moves bits; AIN moves services. Table form with 5 rows: role, layer, elements, examples, deployment era.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topics 4.6 + 4.7 →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li><b>ISDN</b> blocks: TE/TA/NT1/NT2/LT/ET with R/S/T/U reference points; rates BRI 144 kbps, PRI ≈ 2 Mbps.</li>
+          <li><b>AIN</b> blocks: <b>SSP</b> (switch) · <b>SCP</b> (service logic DB) · <b>STP</b> (SS7 packet switch).</li>
+          <li>One line: "ISDN moves bits, AIN moves services" — examiners love this one-liner.</li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <div class="pyq">
     <div class="pyq-tags"><span class="unit">U4</span><span class="marks">10 M</span><span>BTech IT · 2023 · Q2a</span></div>
     <p class="qtext">Explain and illustrate using timing diagram how a call to mobile user initiated by a landline subscriber is established.</p>
     <div class="ans">Per <a href="#t-traffic-routing" style="color:var(--brand)">Sec. 4.4</a>: 7-step mobile-terminated flow with the routing diagram + a column-style timing sequence (PSTN → GMSC → HLR → VLR → MSC → BSC → BTS → MS). 10-mark depth.
+      <div class="box tip refsum" style="margin-top:14px">
+        <strong>From topic 4.4 (traffic routing) →</strong>
+        <ul style="margin:6px 0 0 18px">
+          <li>Mobile-terminated 7-step: <b>PSTN dial → GMSC → HLR query → VLR returns MSRN → GMSC routes via MSRN → MSC pages MS in LA → MS responds, TCH assigned</b>.</li>
+          <li>HLR = permanent home register; VLR = visiting cache co-located with serving MSC.</li>
+          <li>MSRN (Mobile Station Roaming Number) is the temporary E.164 number used to route into the right MSC.</li>
+        </ul>
+      </div>
       <div class="box tip" style="margin-top:14px">
         <span class="label">Key takeaways · revise these 5</span>
         <ul style="margin:6px 0 0 18px">
@@ -3134,6 +3696,74 @@ N=12 →  Q=6.00  →  S/I ≈ 22.2 dB  (rural, low capacity)</div>
         <li>5-step numerical template: duplex channel size → total duplex → minus control → divide by N → state per-cell allocation.</li>
         <li>Trade-off: larger N ⇒ higher S/I but fewer channels per cell — designer picks min-N meeting voice-quality threshold.</li>
         <li>CDMA breaks the rule with <b>N = 1</b> (code-domain separation + power control); LTE uses fractional reuse at cell edges.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q3.5 · Numerical Master Template -->
+  <div class="qcard repeated" id="rq-numerical-master">
+    <div class="qhead">
+      <span class="qno">Q3.5 · Unit 2 · Numerical Master</span>
+      <span class="marks">15 M</span>
+      <span class="confidence high">⭐⭐ Predicted 2026 variant · covers all 4 reuse sub-shells</span>
+    </div>
+    <p class="qbody">Frequency-reuse numerical — master template for any variant the paper throws. Given total system BW, simplex channel BW, cluster size N, control-channel reservation and cell radius R, find: (a) total duplex channels, (b) voice channels per cell, (c) control channels per cell, (d) co-channel reuse ratio Q, (e) co-channel distance D, (f) cells sharing the same frequency set in an M-cell deployment.</p>
+    <div class="years"><b>Cross-links every reuse PYQ:</b> BCA25-3b (5 MHz/cell) · BCA25-1g (N=12 draw) · 23BTECH-5b (Q derivation) · IT23-6b (91 voice + 3 control) · IT24-1g (cells sharing set)</div>
+    <div class="ans">
+      <div class="blk"><b class="h">Block 1 · The 8-step master template (always follow this order)</b>
+        <p>Memorise the 8 steps; every reuse Q is a sub-path of them. Full worked instance lives at <a href="#t-reuse" style="color:var(--brand)">Sec. 2.4 numerical block</a> ("Worked numerical #3"). The steps:</p>
+        <div class="formula">Step 1 — duplex pair  = 2 × simplex channel BW
+Step 2 — total duplex = total system BW / duplex pair
+Step 3 — control     = control-BW / duplex pair
+Step 4 — voice       = total − control
+Step 5 — per-cell    = (voice/N) voice + (control/N) control   <span class="c">show rounding</span>
+Step 6 — Q           = √(3N)
+Step 7 — D           = Q × R
+Step 8 — cells sharing same set = M / N  (M = total cells in deployment)</div>
+      </div>
+      <div class="blk"><b class="h">Block 2 · Worked instance (25 MHz, 25 kHz simplex, N=7, 1 MHz control, R=2 km, 49 cells)</b>
+        <div class="formula">Step 1: duplex pair    = 2 × 25 kHz = 50 kHz
+Step 2: total duplex   = 25 MHz / 50 kHz = 500 channels
+Step 3: control        = 1 MHz / 50 kHz = 20 channels
+Step 4: voice          = 500 − 20 = 480 channels
+Step 5: per cell       = 480/7 ≈ 68.57 → <b>68 voice</b>
+                          20/7  ≈ 2.86  → <b>3 control</b>
+Step 6: Q              = √(3·7) = √21 ≈ 4.58
+Step 7: D              = 4.58 × 2 km ≈ 9.16 km
+Step 8: cells sharing  = 49 / 7 = <b>7 cells</b> share each frequency group</div>
+        <p><b>Answers boxed:</b> 500 duplex · 68 voice/cell · 3 control/cell · Q ≈ 4.58 · D ≈ 9.16 km · 7 cells share each group.</p>
+      </div>
+      <div class="blk"><b class="h">Block 3 · The 4 reuse sub-shells, mapped to template steps</b>
+        <ul>
+          <li><strong>(i) "Draw N=12 cluster"</strong> (BCA25-1g, 1.5M) — Steps 6–7 only. State N = 12 ⇒ i = 2, j = 2 ⇒ Q = √36 = 6, then draw the 12-hex cluster.</li>
+          <li><strong>(ii) "Derive Q = √(3N)"</strong> (23BTECH-5b, 7M) — only Steps 6, no numbers. Set up hex basis vectors at 60°, apply law of cosines, use cos(120°) = −1/2.</li>
+          <li><strong>(iii) "Compute BW per cell"</strong> (BCA25-3b, 7M) — Steps 1–2, then total BW ÷ N. (35 MHz, 49 cells, N = 7 ⇒ 5 MHz/cell.)</li>
+          <li><strong>(iv) "Voice + control split"</strong> (IT23-6b, 5M; IT24-1g, 1.5M) — Steps 1–5 (and Step 8 for "cells sharing").</li>
+        </ul>
+      </div>
+      <div class="blk"><b class="h">Block 4 · Rounding rule + edge cases</b>
+        <p>Examiners accept either rounding (68.57 → 68 or 69) <em>but the candidate must show the rounding decision explicitly</em>. Write: "480/7 = 68.57, take <strong>68 voice channels per cell</strong>; leftover channels (480 − 68×7 = 4) return to the operator's spare pool." One sentence converts a 4-mark partial into full marks.</p>
+        <p><strong>Edge cases the examiner may throw:</strong> (1) "voice channel BW only" (no separate control) — skip Steps 3–4. (2) "Channels per sector" — divide per-cell allocation by sector count (typically 3 for 120° sectoring). (3) "CDMA reuse" — trick; CDMA uses N = 1, all cells share the same band, so the calculation collapses.</p>
+      </div>
+      <div class="blk"><b class="h">Block 5 · Sanity-check capacity multiplier</b>
+        <p>Always close with: "<em>System capacity = (M/N) clusters × per-cluster channels = reused spectrum bandwidth</em>." For 49 cells, N = 7, total BW 35 MHz: 7 clusters × 35 MHz = 245 MHz of effective reused spectrum — a 7× gain from frequency reuse. This single line earns the closing 1–2 marks examiners look for.</p>
+      </div>
+    </div>
+    <div class="box tip" style="margin-top:14px">
+      <span class="label">Compression hints</span>
+      <strong>15-mark</strong>: all 8 steps + Blocks 3–5 + sub-shell map. <strong>10-mark</strong>: 8 steps + Block 4 rounding. <strong>7-mark</strong>: just the 8 steps with one fully worked instance. <strong>5-mark</strong>: Steps 1–5 only (voice + control split). <strong>1.5-mark</strong>: state the relevant formula (Q = √(3N) or D = R√(3N)) with one (i, j) example.
+    </div>
+    <div class="score" style="margin-top:14px">
+      <b>15-mark allocation:</b> B1 template <b>3 M</b> · B2 worked instance <b>5 M</b> · B3 sub-shells <b>3 M</b> · B4 rounding/edges <b>2 M</b> · B5 sanity check <b>2 M</b> = <span class="total">15 M</span>
+    </div>
+    <div class="box tip" style="margin-top:14px">
+      <span class="label">Key takeaways · revise these 5</span>
+      <ul style="margin:6px 0 0 18px">
+        <li>Memorise the <b>8-step template</b> — every reuse sub-shell (draw / derive / BW / split) is a sub-path of it.</li>
+        <li>Always state <b>duplex pair = 2 × simplex</b> first; many candidates skip this and lose Step 1's mark.</li>
+        <li>Show the <b>rounding decision</b> explicitly — examiners accept either round but want the engineering judgement.</li>
+        <li>For N = 7: <b>Q ≈ 4.58, S/I ≈ 18.7 dB</b>; for N = 12: Q = 6, S/I ≈ 22.2 dB. Quote both.</li>
+        <li>Close with the <b>capacity-multiplier sanity check</b> — M/N clusters × system BW = reused spectrum, demonstrating reuse gain.</li>
       </ul>
     </div>
   </div>

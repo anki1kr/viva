@@ -1173,6 +1173,16 @@ input,textarea,select{ font-size:16px; }
       <span class="label">How prof asks (15M, May-2025 Q2a)</span>
       "Describe components of Data Science and the role of data analytics in real-world applications." Don't just define — name <b>all three pillars</b>, include the <b>Venn diagram</b>, give <b>3 real-world apps</b> (Netflix recs, fraud detection, healthcare diagnosis), and end with <b>2 limitations</b> (data quality dependency · interpretability).
     </div>
+
+    <div class="box why">
+      <span class="label">Why it matters</span>
+      DS is the <b>umbrella</b> that uses statistics + computing + domain together — alone, none of the three solve real-world problems. A pure statistician without code can't process big data; a pure programmer without stats can't tell signal from noise; a pure domain expert without either can't quantify a hunch. The whole point of "data science" as a label is to insist on all three at once.
+    </div>
+
+    <div class="numeric">
+      <div class="q">Name 3 real-world DS applications with the technique used (1.5M Part-A).</div>
+      <div class="a">(1) Netflix recs — collaborative filtering · (2) UPI fraud detection — anomaly detection · (3) ECG heart-attack prediction — classification</div>
+    </div>
   </div>
 
   <!-- 1.2 -->
@@ -1299,6 +1309,11 @@ input,textarea,select{ font-size:16px; }
     </figure>
 
     <p class="mnem"><b>Mnemonic:</b> <i>Never Bake Potato Uniformly</i> — Normal, Binomial, Poisson, Uniform.</p>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      A <b>distribution</b> is just a <i>picture</i> of how often each value shows up. <b>Normal</b> = bell curve (most things are near the middle, very few at the edges — heights, marks). <b>Binomial</b> = coin-flip counts (how many heads in 10 flips). <b>Poisson</b> = rare-event counts (calls in an hour, typos per page). <b>Uniform</b> = every value equally likely (a fair die, a random pick).
+    </div>
   </div>
 
   <!-- 1.5 -->
@@ -1376,6 +1391,16 @@ input,textarea,select{ font-size:16px; }
     </svg>
     <figcaption><b>Fig 1.7</b> · Many transactional DBs feed one warehouse via ETL</figcaption>
     </figure>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      <b>Database</b> = filing cabinet your shopkeeper uses for <i>today's</i> bills — every sale, every receipt, fast to update. <b>Data Warehouse</b> = a giant warehouse of every old bill your shop has ever issued, organised so analysts can ask "how did sales change over 5 years?" without slowing the cash counter.
+    </div>
+
+    <div class="box prof">
+      <span class="label">How prof asks (5M, May-2025 Q7a)</span>
+      At <b>5M</b>: a 4-row contrast (Purpose · Data · Operations · Users) is enough — don't waste time writing all 7 rows. At <b>10M</b>: full 7-row table + one ETL line. The phrase <b>ETL = extract, transform, load</b> is a 1-mark bonus the prof always rewards if you spell it out.
+    </div>
   </div>
 
   <!-- 1.8 -->
@@ -1415,6 +1440,11 @@ input,textarea,select{ font-size:16px; }
     <figcaption><b>Fig 1.9</b> · IaaS → PaaS → SaaS abstraction stack — more abstract = less control + less management</figcaption>
     </figure>
     <p><b>Key feature for DS:</b> elastic on-demand compute — train a model on 32 cores for an hour, pay only for that hour.</p>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Renting compute over the internet, like getting electricity from the grid instead of running a generator at home. You pay only for what you use, scale up when you need a big GPU, scale down to almost nothing when idle. No server to buy, no admin to hire.
+    </div>
   </div>
 
   <!-- 1.10 -->
@@ -1522,6 +1552,11 @@ input,textarea,select{ font-size:16px; }
     <div class="box prof">
       <span class="label">How prof asks (10M)</span>
       Always lead with the <b>input difference</b> (labelled vs unlabelled), then the <b>6-row table</b>, then <b>one example per side</b>, then a <b>diagram</b>. Don't forget <i>reinforcement learning</i> as the third type (mention briefly so you sound complete).
+    </div>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      <b>Supervised</b> = a teacher gives you a stack of labelled examples ("this email = spam, that one = ham"); you learn the rule and apply it to new email. <b>Unsupervised</b> = you get a pile of data with no labels and have to find patterns on your own ("these 300 customers look similar — let's call them Group A").
     </div>
   </div>
 </section>
@@ -1661,6 +1696,17 @@ remove.packages("x")</code></pre>
     </table>
     </div>
     <p><b>Trap:</b> <code>NA</code> propagates through arithmetic (use <code>na.rm=TRUE</code>); <code>NaN</code> is technically also <code>NA</code> but the reverse is not true; <code>NULL</code> has length 0 (never appears inside a vector — only between objects); <code>Inf</code> participates in arithmetic (<code>Inf + 1 = Inf</code>, <code>1/Inf = 0</code>).</p>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Four ways data can be "not a normal number" — each says something different.
+      <ul style="margin:6px 0 0; padding-left:22px;">
+        <li><code>NA</code> = "we don't know what this should be" (missing — the box exists, the value is gone).</li>
+        <li><code>NaN</code> = "this is broken math, like 0÷0" (the computation never had a valid answer).</li>
+        <li><code>NULL</code> = "nothing was ever here" (no box at all — used to <i>remove</i> a column).</li>
+        <li><code>Inf</code> = "too big to write" (overflow or division by zero).</li>
+      </ul>
+    </div>
   </div>
 
   <div class="topic" id="t-2-7">
@@ -1729,6 +1775,16 @@ sum(1:10); prod(1:5)
 min(x); max(x); range(x)
 mean(x); median(x); sd(x); var(x)
 length(x)</code></pre>
+
+    <div class="box prof">
+      <span class="label">How prof asks (1.5M, May-2023 Q1a, May-2024 Q1f)</span>
+      Verbatim ask: "Write any 3 math functions in R". Safe trio = <code>sqrt()</code> · <code>log()</code> · <code>round()</code>. One-line gloss each + a numeric example earns full marks. Avoid <code>sum()/mean()</code> because the prof reads them as <i>aggregation</i> not <i>math</i>.
+    </div>
+
+    <div class="numeric">
+      <div class="q">Predict the output: <code>sqrt(16); log(exp(2)); round(2.567, 1)</code></div>
+      <div class="a">4 · 2 · 2.6</div>
+    </div>
   </div>
 
   <div class="topic" id="t-2-10">
@@ -1754,8 +1810,8 @@ names(v) <- c("a","b","c"); v["b"]  # named</code></pre>
   </div>
 
   <div class="topic" id="t-2-11">
-    <h3>2.11 Matrices and Arrays</h3>
-    <p><b>Matrix</b> = 2-D homogeneous. <b>Array</b> = N-D homogeneous.</p>
+    <h3>2.11 Matrices and Arrays <span class="tag hot">⭐ May-2023 Q6b (7.5M)</span></h3>
+    <p><b>Matrix</b> = 2-D homogeneous (every cell same type). <b>Array</b> = N-D homogeneous.</p>
 <pre><code>m <- matrix(1:12, nrow=3, ncol=4, byrow=TRUE)
 m[2,3]; m[2,]; m[,3]   # element / row / column
 dim(m); nrow(m); ncol(m)
@@ -1767,6 +1823,36 @@ det(square_mat)        # determinant
 # Array (3-D)
 a <- array(1:24, dim=c(2,3,4))
 a[1,2,3]</code></pre>
+
+    <p><b>Worked answer — May-2023 Q6b verbatim:</b> two 3×3 matrices, element-wise <code>*</code> AND matrix product <code>%*%</code> in one program.</p>
+<pre><code class="language-r"># May-2023 Q6b — two 3x3 matrices, both multiplications
+A <- matrix(1:9, nrow = 3, ncol = 3)              # 1..9 column-wise
+B <- matrix(c(9,8,7,6,5,4,3,2,1), 3, 3)           # 9..1 column-wise
+
+A
+#      [,1] [,2] [,3]
+# [1,]    1    4    7
+# [2,]    2    5    8
+# [3,]    3    6    9
+
+# (i) Element-wise (Hadamard) — same shape required, cell-by-cell
+A * B
+#      [,1] [,2] [,3]
+# [1,]    9   24   21
+# [2,]   16   25   16
+# [3,]   21   24    9
+
+# (ii) True matrix multiplication — uses %*% (rows-of-A · cols-of-B)
+A %*% B
+#      [,1] [,2] [,3]
+# [1,]   90   54   18
+# [2,]  114   69   24
+# [3,]  138   84   30</code></pre>
+
+    <div class="box prof">
+      <span class="label">How prof asks (7.5M, May-2023 Q6b)</span>
+      The prof wants <b>BOTH</b> <code>*</code> AND <code>%*%</code> in one program — many students write only one and lose 2.5M. Mark allocation: matrix creation <b>2M</b> · element-wise <b>2M</b> · matrix product <b>2.5M</b> · output comments <b>1M</b>. Always label which output is which.
+    </div>
   </div>
 
   <div class="topic" id="t-2-12">
@@ -1783,7 +1869,7 @@ o[1] < o[2]                  # TRUE</code></pre>
   </div>
 
   <div class="topic" id="t-2-13">
-    <h3>2.13 Lists</h3>
+    <h3>2.13 Lists <span class="tag hot">⭐ May-2023 Q2a (6M), May-2024 Q3a (5M)</span></h3>
     <p>1-D, <mark class="pink">heterogeneous + recursive</mark>. The most flexible container in R.</p>
 <pre><code>L <- list(name="A", marks=c(80,90), pass=TRUE,
           sub_list=list(x=1, y=2))
@@ -1795,10 +1881,35 @@ L["pass"]     # sub-list with one element
 
 length(L)
 names(L)</code></pre>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      A <b>list</b> is a flexible bag — each pocket can hold a different type (number, text, table, even another function). A <b>vector</b> is a box where every item must be the same type; a list is a bag where they can differ. That's the only real difference for the exam.
+    </div>
+
+    <p><b>Worked answer — May-2023 Q2a verbatim:</b> build a list with 4 different element types and label them with <code>names()</code>.</p>
+<pre><code class="language-r"># vector + string + matrix + function — name them with names()
+lst <- list(
+  v = c(10, 20, 30),               # vector (1-D box, same type)
+  s = "Hello",                      # string
+  m = matrix(1:4, nrow = 2),        # matrix (2-D homogeneous)
+  f = function(x) x ^ 2             # function (yes, functions are objects)
+)
+
+names(lst) <- c("nums", "greet", "grid", "square")
+names(lst)
+# [1] "nums"   "greet"  "grid"   "square"
+
+lst$nums            # 10 20 30
+lst$square(5)       # 25  — call the function inside the list
+lst[["grid"]]
+#      [,1] [,2]
+# [1,]    1    3
+# [2,]    2    4</code></pre>
   </div>
 
   <div class="topic" id="t-2-14">
-    <h3>2.14 Data Frames</h3>
+    <h3>2.14 Data Frames <span class="tag hot">⭐ May-2025 Q3a (5M)</span></h3>
     <p>2-D, <mark>heterogeneous</mark> — columns differ in type, rows are observations. The workhorse for tabular data.</p>
 <pre><code>df <- data.frame(
   name=c("A","B","C"),
@@ -1809,6 +1920,28 @@ df$marks                 # column access
 df[df$marks > 75, ]      # row filter
 df[, c("name","marks")]  # column subset
 str(df); summary(df); head(df); nrow(df)</code></pre>
+
+    <p><b>Worked answer — May-2025 Q3a verbatim:</b> build a student data frame, add a column, filter rows, compute mean marks.</p>
+<pre><code class="language-r"># Student data frame
+students <- data.frame(
+  name  = c("Anu", "Bobby", "Chitra", "Deepak", "Esha"),
+  marks = c(72, 85, 91, 58, 88),
+  stringsAsFactors = FALSE          # keep names as strings, not factors
+)
+
+# (i) Add a new column — pass/fail grade
+students$grade <- ifelse(students$marks >= 60, "Pass", "Fail")
+
+# (ii) Filter rows where marks > 80
+top <- students[students$marks > 80, ]
+print(top)
+#     name marks grade
+# 2  Bobby    85  Pass
+# 3 Chitra    91  Pass
+# 5   Esha    88  Pass
+
+# (iii) Mean marks of the class
+mean(students$marks)               # 78.8</code></pre>
   </div>
 
 </section>
@@ -1858,8 +1991,8 @@ str(df); summary(df); head(df); nrow(df)</code></pre>
   </div>
 
   <div class="topic" id="t-3-1">
-    <h3>3.1 Function Creation &amp; Scripts</h3>
-    <p>R is functional first — every operation is a function call. UDFs are first-class objects.</p>
+    <h3>3.1 Function Creation &amp; Scripts <span class="tag hot">⭐ Jul-2025 Q3b · May-2025 Q4</span></h3>
+    <p>R is functional first — every operation is a function call. UDFs (user-defined functions) are first-class objects: you can pass them around like any other value.</p>
 <pre><code># Anatomy: name <- function(args) { body }
 greet <- function(name="friend", greeting="Hello") {
   paste(greeting, name)
@@ -1873,8 +2006,29 @@ sapply(1:5, function(x) x^2)   # 1 4 9 16 25
 
 # R 4.1+ lambda shorthand
 sapply(1:5, \(x) x^2)</code></pre>
-    <p><b>Features:</b> default args · lazy evaluation · last expression auto-returned · lexical scoping · pass-by-value.</p>
+    <p><b>Features:</b> default args · lazy evaluation (an arg is only computed when first used) · last expression auto-returned · lexical scoping · pass-by-value.</p>
     <p><b>Scripts:</b> save as <code>.R</code>, run via <code>source("file.R")</code> or <code>Rscript file.R</code> from shell.</p>
+
+    <p><b>Worked answer — Jul-2025 Q3b (square fn) + May-2025 Q4 (grade classifier):</b></p>
+<pre><code class="language-r"># 1. Simple — square of a number (Jul-2025 Q3b)
+square <- function(x) {
+  x * x                      # last expression is auto-returned
+}
+square(7)        # 49
+square(-4)       # 16
+
+# 2. With default arg + if-else chain (May-2025 Q4 grade classifier)
+classify <- function(marks, pass_cut = 40) {
+  if (marks >= 75)            "A"
+  else if (marks >= 60)       "B"
+  else if (marks >= pass_cut) "C"
+  else                        "Fail"
+}
+classify(82)     # "A"
+classify(63)     # "B"
+classify(45)     # "C"
+classify(38)     # "Fail"
+classify(38, pass_cut = 35)   # "C"  — caller overrides default</code></pre>
   </div>
 
   <div class="topic" id="t-3-2">
@@ -1976,6 +2130,40 @@ for (i in 1:5) {
   if (i == 3) next
   print(i)
 }                   # prints 1 2 4 5</code></pre>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      <b>for</b> = run a fixed number of times (you know the count up front). <b>while</b> = run until the test fails (you know the rule, not the count). <b>repeat</b> = run forever — you break out yourself with <code>break</code>. Same job, different way of expressing "when do I stop?".
+    </div>
+
+    <p><b>Worked answer — May-2023 Q1j (cubes of 1..7) in all three loop forms:</b></p>
+<pre><code class="language-r"># for — cube of 1..7 (May-2023 Q1j verbatim)
+for (i in 1:7) {
+  print(i ^ 3)
+}
+# [1] 1
+# [1] 8
+# [1] 27
+# [1] 64
+# [1] 125
+# [1] 216
+# [1] 343
+
+# while — same task, manual counter
+i <- 1
+while (i <= 7) {
+  cat(i ^ 3, " ")            # 1 8 27 64 125 216 343
+  i <- i + 1
+}
+
+# repeat — runs forever, needs explicit break (May-2023 Q1g)
+i <- 1
+repeat {
+  cat(i ^ 3, " ")
+  i <- i + 1
+  if (i > 7) break           # only way out
+}
+# Output: 1 8 27 64 125 216 343</code></pre>
   </div>
 
   <div class="topic" id="t-3-4">
@@ -1990,6 +2178,29 @@ switch(day,
   "Mid-week"             # default (no name)
 )</code></pre>
     <p><b>Behaviour:</b> evaluates the first arg, matches against named alternatives, returns the corresponding value. An unnamed last argument is the default. Empty cases fall through to the next.</p>
+
+    <p><b>Worked answer — May-2023 Q3b verbatim:</b> a calculator using <code>switch()</code> as multi-way dispatch.</p>
+<pre><code class="language-r"># Calculator — replaces a long if-else if chain
+calc <- function(op, a, b) {
+  switch(op,
+    add = a + b,
+    sub = a - b,
+    mul = a * b,
+    div = a / b,
+    "Unknown operation"          # default (unnamed last arg)
+  )
+}
+
+calc("add", 5, 3)        # 8
+calc("sub", 10, 4)       # 6
+calc("mul", 4, 6)        # 24
+calc("div", 20, 5)       # 4
+calc("xor", 1, 1)        # "Unknown operation"  — falls to default</code></pre>
+
+    <div class="box prof">
+      <span class="label">How prof asks (8M, May-2023 Q3b)</span>
+      Two-part question: (i) differentiate <code>if</code> vs <code>ifelse</code> (already covered in 3.2) — <b>4M</b>; (ii) write a program using <code>switch</code> — <b>4M</b>. Many students answer only one half. The unnamed last arg is the default — call it out for the 1-mark bonus.
+    </div>
   </div>
 
   <div class="topic" id="t-3-5">
@@ -2053,6 +2264,11 @@ cbind(df, bonus=df$marks * 0.1)
 
 # Export
 write.csv(df, "students.csv", row.names=FALSE)</code></pre>
+
+    <div class="numeric">
+      <div class="q">Given <code>df &lt;- data.frame(x=1:5, y=c(10,20,30,40,50))</code>, what does <code>df[df$x &gt; 2, "y"]</code> return?</div>
+      <div class="a">c(30, 40, 50) — rows where x &gt; 2 are rows 3, 4, 5; pull only their y column</div>
+    </div>
   </div>
 
   <div class="topic" id="t-3-7">
@@ -2187,6 +2403,44 @@ apply(m, 1, mean)  # 4 5 6</code></pre>
       <span class="label">Why apply family beats loops</span>
       Vectorised, written in C internally → <b>3–10× faster</b> than equivalent <code>for</code> loop for the same task. Encourages declarative ("apply this to each") over imperative thinking.
     </div>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      All 5 variants do the same job: "<i>apply this function to each piece of my data</i>". They differ only in (a) what shape goes in (matrix? list? grouped vector?) and (b) what shape comes out (list? vector? matrix?). Pick the variant whose name fits your input shape — that's the whole trick.
+    </div>
+
+    <p><b>Worked answer — Jul-2025 Q5a verbatim:</b> demonstrate all 5 variants on small data so the contrast is visible.</p>
+<pre><code class="language-r"># 1. apply — matrix row/col operations (works on 2-D)
+m <- matrix(1:6, nrow = 2)
+#      [,1] [,2] [,3]
+# [1,]    1    3    5
+# [2,]    2    4    6
+apply(m, 1, sum)        # row sums  -> 9 12
+apply(m, 2, sum)        # col sums  -> 3 7 11
+
+# 2. lapply — always returns a list (one element per input element)
+lapply(1:3, function(x) x ^ 2)
+# [[1]] 1
+# [[2]] 4
+# [[3]] 9
+
+# 3. sapply — same as lapply but simplifies to vector when possible
+sapply(1:3, function(x) x ^ 2)      # 1 4 9   (vector, not list)
+
+# 4. tapply — group-wise summary (needs a factor as the grouping key)
+marks   <- c(80, 75, 90, 65, 88)
+section <- c("A", "B", "A", "B", "A")
+tapply(marks, section, mean)
+#    A    B
+# 86.0 70.0
+
+# 5. mapply — multi-argument parallel apply (sapply on 2+ vectors at once)
+mapply(function(a, b) a + b, 1:3, 4:6)    # 5 7 9</code></pre>
+
+    <div class="box prof">
+      <span class="label">How prof asks (10M, Jul-2025 Q5a · verbatim 3× across 2023/24/25)</span>
+      <b>Highest-recurring topic in the paper</b> — never skip. At 10M, mention ALL 5 variants with one code line each + a comparison table. At 1.5M Part-A, just say "<code>lapply</code> returns a list, <code>sapply</code> simplifies to a vector". Mark allocation at 10M: definitions table <b>3M</b> · 5 code snippets <b>5M</b> · "why faster than for" point <b>2M</b>.
+    </div>
   </div>
 
   <div class="topic" id="t-3-8">
@@ -2281,6 +2535,21 @@ a$deposit(50); a$balance    # 150 — MUTATED in-place</code></pre>
     </svg>
     <figcaption><b>Fig 3.8</b> · Three OOP systems: S3 is informal, S4 is formal &amp; immutable, R5 is mutable &amp; encapsulated</figcaption>
     </figure>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Three flavours of "class" in R, ordered from casual to strict.
+      <ul style="margin:6px 0 0; padding-left:22px;">
+        <li><b>S3</b> = casual — just tag a list as a class, then write <code>print.MyClass()</code> and R finds it automatically. No type checks.</li>
+        <li><b>S4</b> = formal — declare named <b>slots</b> with types up front (like Java fields); R validates them. Access slots with <code>@</code>.</li>
+        <li><b>RefClass (R5)</b> = mutable — the only system where <code>obj$x &lt;- val</code> inside a method actually changes the original object instead of a copy. Closest thing R has to Java/Python classes.</li>
+      </ul>
+    </div>
+
+    <div class="box prof">
+      <span class="label">How prof asks (May-2023 Q6a 7.5M · May-2025 Q3b 10M)</span>
+      Clear <b>2-year cycle</b> — 2023, 2025, due again 2026 at <b>10–15M</b>. Mark allocation: definitions <b>3M</b> · 3 code examples (S3, S4, RefClass) <b>6M</b> · contrast table <b>3M</b> · mutability point as a single-line takeaway <b>1M bonus</b>. Always end with "S3 = informal · S4 = formal · R5 = mutable".
+    </div>
   </div>
 
   <div class="topic" id="t-3-9">
@@ -2326,7 +2595,7 @@ ls(); rm(list=ls())             # list / clear</code></pre>
   </div>
 
   <div class="topic" id="t-4-2">
-    <h3>4.2 Import &amp; Export — CSV files <span class="tag hot">⭐ 2024 Q3b, 2025 Q3a</span></h3>
+    <h3>4.2 Import &amp; Export — CSV files <span class="tag hot">⭐⭐ May-2023 Q5b · May-2024 Q3b · Jul-2025 Q3a (10M × 3)</span></h3>
 <pre><code># Read
 df <- read.csv("students.csv",
                header=TRUE,
@@ -2344,6 +2613,42 @@ write.table(df, "out.tsv", sep="\t", quote=FALSE)
 library(data.table)
 df <- fread("students.csv")
 fwrite(df, "out.csv")</code></pre>
+
+    <p><b>Worked answer — May-2023 Q5b verbatim:</b> Jon/Bill/Maria/Tom/Emma dataset, export to CSV, read back, verify.</p>
+<pre><code class="language-r"># May-2023 Q5b verbatim dataset
+people <- data.frame(
+  name = c("Jon", "Bill", "Maria", "Tom", "Emma"),
+  age  = c(23, 41, 32, 55, 40),
+  stringsAsFactors = FALSE
+)
+
+# (i) Export to CSV — row.names=FALSE drops the extra index column
+write.csv(people, "people.csv", row.names = FALSE)
+
+# (ii) Read back from disk
+people2 <- read.csv("people.csv", stringsAsFactors = FALSE)
+
+# (iii) Verify round-trip is loss-less
+identical(people, people2)        # TRUE
+
+# (iv) Inspect structure
+str(people2)
+# 'data.frame': 5 obs. of 2 variables:
+#  $ name: chr  "Jon" "Bill" "Maria" "Tom" "Emma"
+#  $ age : int  23 41 32 55 40
+
+head(people2)
+#    name age
+# 1   Jon  23
+# 2  Bill  41
+# 3 Maria  32
+# 4   Tom  55
+# 5  Emma  40</code></pre>
+
+    <div class="box prof">
+      <span class="label">How prof asks (10M verbatim 3× — 2023 Q5b · 2024 Q3b · Jul-2025 Q3a)</span>
+      Three years in a row at <b>10M</b>. Almost guaranteed for 2026. Mark allocation: data-frame construction <b>3M</b> · <code>write.csv()</code> with <code>row.names=FALSE</code> <b>3M</b> · <code>read.csv()</code> with <code>stringsAsFactors=FALSE</code> <b>2M</b> · verification via <code>identical()</code> or <code>str()</code> <b>2M</b>. Lose marks if you skip the two key arg names.
+    </div>
   </div>
 
   <div class="topic" id="t-4-3">
@@ -2407,6 +2712,22 @@ safe_div <- function(a, b) {
 }
 safe_div(10, 0)    # Inf (no error in R, but you can wrap)
 safe_div(10, "x")  # err: non-numeric ; NA</code></pre>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Four tools, four different questions.
+      <ul style="margin:6px 0 0; padding-left:22px;">
+        <li><code>traceback()</code> = "where did the error come from?" — prints the call stack after a crash.</li>
+        <li><code>debug(fn)</code> = "step through this function line-by-line" — pauses on every line.</li>
+        <li><code>browser()</code> = "pause HERE and let me poke around" — drop it in your own code as a breakpoint.</li>
+        <li><code>tryCatch()</code> = "try this, but don't crash if it fails" — graceful error handling for production.</li>
+      </ul>
+    </div>
+
+    <div class="box prof">
+      <span class="label">How prof asks (May-2023 Q7a 7.5M · May-2025 Q5a 5M)</span>
+      At <b>5M</b>: list any 2–3 tools with a one-line use case each. At <b>7.5M</b>: add a small code example + explain when each is preferred. <code>browser()</code> placed inside an <code>if</code> is the cleanest demo (only stops when the condition triggers). Don't forget to mention <code>tryCatch()</code> as the production-ready option — examiners reward it.
+    </div>
   </div>
 
   <div class="topic" id="t-4-5">
@@ -2523,6 +2844,42 @@ ggplot(df, aes(x = hours, y = marks, color = grade)) +
       <li><b>6 · Themes (<code>theme_*</code>)</b> — non-data styling: fonts, gridlines, panel background, legend position, axis ticks. Themes never change the data or its mapping, only the presentation. Example: <code>theme_minimal()</code> strips chartjunk for publication; <code>theme(legend.position = "bottom")</code> tweaks one element.</li>
     </ul>
     <p><b>Compose order:</b> Data → Aesthetics → Geometries are <i>mandatory</i>; Statistics, Facets and Themes are <i>optional</i> refinements. Each layer is added with the <code>+</code> operator, so a complete ggplot reads top-to-bottom like a recipe: <code>ggplot(df, aes(x, y)) + geom_point() + stat_smooth() + facet_wrap(~g) + theme_minimal()</code>.</p>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      <b>Base graphics</b> = paint directly on a canvas, one brush stroke at a time — fast and final. <b>ggplot2</b> = stack transparencies (data layer + mapping layer + shapes layer + theme layer) and combine them with <code>+</code>. Slower to render, but much easier to change later — just swap one layer instead of redrawing.
+    </div>
+
+    <p><b>Worked answer — May-2024 Q4a (scatter+histogram, 10M) + May-2025 Q6b (bar chart, 5M):</b></p>
+<pre><code class="language-r">library(ggplot2)
+set.seed(42)
+df <- data.frame(
+  student = paste0("S", 1:30),
+  hours   = round(runif(30, 1, 10), 1),
+  marks   = round(runif(30, 35, 95))
+)
+
+# 1. SCATTER (May-2024 Q4a) — hours vs marks with regression line
+ggplot(df, aes(x = hours, y = marks)) +
+  geom_point(size = 3, colour = "#166534") +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Study hours vs marks", x = "Hours", y = "Marks")
+# Output: scatter of 30 points with a green-on-fitted line trending upward
+
+# 2. HISTOGRAM (May-2024 Q4a) — marks distribution
+ggplot(df, aes(x = marks)) +
+  geom_histogram(binwidth = 10, fill = "#15803d", colour = "white") +
+  labs(title = "Marks distribution", x = "Marks", y = "Count")
+# Output: 6 bars covering 35-95 in 10-mark bins
+
+# 3. BAR CHART (May-2025 Q6b 5M) — count per grade
+df$grade <- cut(df$marks,
+                breaks = c(0, 50, 70, 100),
+                labels = c("Fail", "Pass", "Distinction"))
+ggplot(df, aes(x = grade)) +
+  geom_bar(fill = "#a16207") +
+  labs(title = "Grade counts", x = "Grade", y = "Students")
+# Output: 3 bars showing how many students fall in each grade band</code></pre>
   </div>
 
   <div class="topic" id="t-4-6">
@@ -2633,9 +2990,24 @@ summary(x)     # Min Q1 Median Mean Q3 Max</code></pre>
       <p class="a">Mean=<b>5</b> · Median=<b>4.5</b> · Mode=<b>4</b> (frequency 3) · SD≈<b>2.07</b></p>
     </div>
 
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Three ways to answer "what's a <i>typical</i> value?".
+      <ul style="margin:6px 0 0; padding-left:22px;">
+        <li><b>Mean</b> = arithmetic average — pulled sideways by outliers (one millionaire skews "average income").</li>
+        <li><b>Median</b> = the middle value when sorted — robust, ignores outliers. Use for incomes, house prices.</li>
+        <li><b>Mode</b> = the value that shows up most often — the only one that works for categorical data (most-watched movie, favourite colour).</li>
+      </ul>
+    </div>
+
     <div class="box prof">
       <span class="label">How prof asks (10M, May-2025 Q5b)</span>
       Don't just list — for each measure give <b>formula → R function → one-line example output → when to prefer it</b>. End with a one-line takeaway: <i>"for symmetric data the three coincide; in skew, median &lt; mean for right-skew."</i>
+    </div>
+
+    <div class="numeric">
+      <p class="q">For x = c(2, 4, 4, 4, 5, 5, 7, 9), compute variance step-by-step.</p>
+      <p class="a">mean=5 · deviations²: 9, 1, 1, 1, 0, 0, 4, 16 → sum=32 · R uses n−1 → var = 30/7 ≈ <b>4.286</b> (so var(x) = 4.286, sd ≈ 2.07)</p>
     </div>
 
     <figure class="diagram-fig">
@@ -2780,6 +3152,33 @@ t.test(weights, mu = 50)
       <span class="label">Common pitfalls</span>
       (1) p &gt; α does <i>not</i> prove H₀ — only fails to reject. (2) α is set <i>before</i> looking at data. (3) Don't confuse statistical with practical significance.
     </div>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Hypothesis testing = an honest court. <b>H₀ (null)</b> is the "innocent" default — no effect, no difference. The sample is the <b>evidence</b>. If the evidence is strong enough (p-value below α=5%), we reject H₀ ("guilty"); otherwise we acquit ("not enough proof"). We never <i>prove</i> H₀ — we just fail to reject it. Same logic as "innocent until proven guilty".
+    </div>
+
+    <p><b>Worked answer — May-2024 Q5b verbatim:</b> one-sample t-test, claim "class mean = 70", α = 0.05.</p>
+<pre><code class="language-r"># Claim: average score of the class is 70. Test at alpha = 0.05.
+scores <- c(68, 72, 75, 69, 71, 66, 74, 73, 70, 67)
+
+# Step 1: H0: mu = 70   ·  H1: mu != 70 (two-sided)
+# Step 2: alpha = 0.05
+# Steps 3-4: compute t-statistic & p-value
+t.test(scores, mu = 70, conf.level = 0.95)
+#
+# One Sample t-test
+# data:  scores
+# t = 0.452, df = 9, p-value = 0.6622
+# alternative hypothesis: true mean is not equal to 70
+# 95 percent confidence interval:
+#  68.69  72.51
+# sample estimates:
+# mean of x
+#      70.5
+#
+# Step 5: Decision rule — p (0.6622) > alpha (0.05)  ->  FAIL TO REJECT H0
+# Step 6: Conclusion — no evidence the class mean differs from 70.</code></pre>
   </div>
 
   <div class="topic" id="t-4-9">
@@ -2805,6 +3204,33 @@ cov(x, y)                       # 1.25 (covariance)</code></pre>
       <span class="label">Covariance vs Correlation (2024 Part-A h)</span>
       <b>Covariance</b> measures joint variability in <i>original units</i> — magnitude is hard to interpret. <b>Correlation</b> standardises covariance by SDs, giving a unit-free [−1, 1] number → directly comparable across datasets. <i>cor(x,y) = cov(x,y) / (sd(x) × sd(y))</i>.
     </div>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Correlation packs two facts into one number from −1 to +1. The <b>sign</b> says the direction (positive = both rise together, negative = one rises as the other falls). The <b>size</b> says the strength (close to ±1 = strong straight-line link, near 0 = no linear link). Covariance says the same direction but in messy original units (kg × marks) — correlation is the cleaned-up, unit-free version.
+    </div>
+
+    <p><b>Worked answer — May-2024 Q1d/h verbatim:</b> compute cor, cor.test, and verify cor = cov ÷ (sd·sd).</p>
+<pre><code class="language-r"># Sample: study hours vs marks
+hours <- c(2, 3, 4, 5, 6, 7, 8)
+marks <- c(45, 55, 60, 70, 72, 80, 88)
+
+cor(hours, marks)                          # 0.992  (Pearson, default)
+cor(hours, marks, method = "spearman")     # 1.000  (rank-based)
+
+cor.test(hours, marks)
+#         Pearson's product-moment correlation
+# t = 17.5, df = 5, p-value = 1.2e-05
+# alternative hypothesis: true correlation is not equal to 0
+# 95 percent confidence interval:
+#  0.949 0.999
+# sample estimates:
+#       cor
+# 0.992
+# -> p < 0.05  =>  reject H0 (correlation IS non-zero)
+
+# Manual relation: cor = cov / (sd_x * sd_y)
+cov(hours, marks) / (sd(hours) * sd(marks))   # 0.992 (matches cor())</code></pre>
 
     <figure class="diagram-fig">
     <svg viewBox="0 0 640 230" xmlns="http://www.w3.org/2000/svg">
@@ -2909,6 +3335,51 @@ rpois(10, lambda=3)            # 10 Poisson draws
 runif(5, min=0, max=1)         # uniform sample</code></pre>
 
     <p class="mnem"><b>Mnemonic for 4 prefixes:</b> <i>"d</i>ensity · <i>p</i>robability · <i>q</i>uantile · <i>r</i>andom" — d·p·q·r in alphabetical order.</p>
+
+    <div class="box eli5">
+      <span class="label">Plain English</span>
+      Every distribution in R ships with 4 sibling functions named <code>d/p/q/r</code> + the short name (norm, binom, pois, unif).
+      <ul style="margin:6px 0 0; padding-left:22px;">
+        <li><code>d</code> = the <b>height</b> of the curve at a point (density / probability mass).</li>
+        <li><code>p</code> = the <b>area</b> under the curve up to a point (cumulative probability P(X ≤ x)).</li>
+        <li><code>q</code> = the <b>reverse</b> of <code>p</code> — give me the cutoff for a given probability.</li>
+        <li><code>r</code> = give me <b>random samples</b> from this distribution.</li>
+      </ul>
+      So <code>dnorm</code>=height, <code>pnorm</code>=area, <code>qnorm</code>=reverse-area, <code>rnorm</code>=random — repeat that for every distribution.
+    </div>
+
+    <p><b>Worked answer — May-2023 Q4b (4 normal fns) + May-2024 Q4b (binomial fit):</b></p>
+<pre><code class="language-r"># The four faces of the normal distribution (May-2023 Q4b verbatim)
+dnorm(0, mean = 0, sd = 1)
+# [1] 0.3989  — PDF value at x = 0 (the peak of the standard normal)
+
+pnorm(1.96, mean = 0, sd = 1)
+# [1] 0.975   — P(X <= 1.96) for the standard normal
+
+qnorm(0.975, mean = 0, sd = 1)
+# [1] 1.96    — inverse of pnorm: x such that P(X <= x) = 0.975
+
+set.seed(1)
+rnorm(5, mean = 50, sd = 10)
+# [1] 43.7  51.8  41.6  65.9  53.3  — 5 random samples
+
+# ---- Binomial goodness-of-fit (May-2024 Q4b verbatim) ----
+# Observed: x = 0..5; freq = 2, 16, 28, 12, 9, 3 ; N = 70 families of n = 5
+x <- 0:5
+f <- c(2, 16, 28, 12, 9, 3)
+N <- sum(f)                       # 70
+n <- 5
+mean_obs <- sum(x * f) / N        # 2.214
+p_hat    <- mean_obs / n          # 0.443 — estimated success prob
+expected <- N * dbinom(x, size = n, prob = p_hat)
+round(expected, 1)
+# [1]  6.4  25.4  40.4  32.1  12.8  2.0
+# Compare with observed (2 16 28 12 9 3) — fit roughly right, tail too thin.</code></pre>
+
+    <div class="box prof">
+      <span class="label">How prof asks (5–10M, 3× across 2023/2024/2025)</span>
+      Highest-yield Unit-4 <i>numeric</i> question. <b>May-2023 Q4b</b> (5M define 4 fns) · <b>May-2024 Q4b</b> (5M fit binomial) · <b>May-2024 Q5a</b> (8M Poisson) · <b>May-2024 Q6a</b> (10M mean+variance table) · <b>May-2024 Q7c &amp; May-2025 Q7c</b> (5M short notes) · <b>Jul-2025 Q7b</b> (5M). At <b>10M</b>: combine the dpqr table + 4 code lines + one numeric fit. At <b>5M</b>: pick either the table OR one fitting example.
+    </div>
   </div>
 </section>
 
@@ -2925,6 +3396,21 @@ runif(5, min=0, max=1)         # uniform sample</code></pre>
     <b>Core corpus (3 papers · DSUR/BCA-DS):</b> May-2023 (312403 / BCA-DS-213), May-2024 (312403 / BCA-DS-213), May-2025 (311409 / BCA-DS-23-206). 2023/24 use the older "Scientific R Programming" code but cover the same Units I–IV as BCD-204-V.<br>
     <b>Adjacent corpus (3 papers · separately analysed below):</b> CSE25 (B.Tech CSE · R Programming · July 2025) ~80% syllabus overlap with DSUR; ML21 + ML24 (B.Tech Machine Learning) only intersect at 3 topics — supervised/unsupervised, cov vs correlation, prior/posterior. Everything else in those papers is flagged <code>OUT-OF-SYLLABUS</code>.<br>
     Each question tagged <code>{year, unit, marks, frequency}</code> and cross-linked to its concept topic above.
+  </div>
+
+  <div class="box warn">
+    <span class="label">CSE25 out-of-syllabus drift — read before revising</span>
+    BCA-DS-23-206 syllabus does <b>NOT</b> cover the following topics, even though they appear on the adjacent CSE25 (B.Tech) paper:
+    <ul style="margin:6px 0 0; padding-left:22px;">
+      <li><b>ANOVA</b> (Jul-2025 Q5b)</li>
+      <li><b>Logistic regression</b> (Jul-2025 Q6a)</li>
+      <li><b>Web scraping</b> (Jul-2025 Q6b)</li>
+      <li><b>Clustering &amp; Decision Trees</b> (Jul-2025 Q7a)</li>
+      <li><b>Residual analysis</b> (Jul-2025 Q7c)</li>
+      <li><b>Basic regression definition</b> (May-2024 Q1c)</li>
+      <li><b>String manipulation</b> (Jul-2025 Q1h — covered in t-3-9 but NOT in syllabus 2.3)</li>
+    </ul>
+    The B.Tech CSE paper draws from a wider ML syllabus, which is why these slipped in. <b>Do NOT invest revision time</b> on them unless the June 2026 BCA paper signals a curriculum shift. Treat as <i>bonus knowledge</i> only — each question card below is wrapped with an additional warn-tag so you can skip on first pass.
   </div>
 
   <!-- ========== UNIT 1 PYQs ========== -->
@@ -3016,6 +3502,15 @@ clusters <- kmeans(customer_data, centers=3)</code></pre>
       <p class="q">Mention one key feature of cloud computing in the context of data science. <a href="#t-1-9" style="font-family:'JetBrains Mono'; font-size:11px; color:var(--brand);">↗ Sec. 1.9</a></p>
       <div class="ans">
         <p><b>Elastic, on-demand compute</b> — a data scientist can spin up a 32-core GPU instance for training a model and tear it down minutes later, paying only for the hours used. This eliminates capital expenditure on hardware and supports rapid experimentation on terabyte-scale data.</p>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 1.9 — Cloud Computing for DS</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b>Definition:</b> on-demand delivery of compute, storage, networking and applications over the internet on a pay-as-you-use basis.</li>
+            <li><b>Service pyramid:</b> <b>IaaS</b> (raw infra — AWS EC2, Azure VM) → <b>PaaS</b> (platform — Heroku, App Engine) → <b>SaaS</b> (apps — Gmail, Office 365). More abstract = less control + less management.</li>
+            <li><b>Deployment models:</b> Public · Private · Hybrid · Community.</li>
+            <li><b>Why DS loves it:</b> elastic scale (32-core GPU for 1 hour), no capital cost, instant collaboration on shared datasets, managed services (S3, BigQuery, SageMaker) cut ops burden.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -3110,6 +3605,16 @@ v <- seq(1, 5)</code></pre>
           <li><code>mean(x)</code> — returns the arithmetic mean of a numeric vector. Example: <code>mean(c(1,2,3))</code> → 2.</li>
           <li><code>sqrt(x)</code> — returns the square root, element-wise on vectors. Example: <code>sqrt(c(4,9,16))</code> → c(2, 3, 4).</li>
         </ol>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 2.9 — Pre-defined math families</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b>Arithmetic:</b> <code>abs(-5)</code>=5, <code>sqrt(16)</code>=4, <code>exp(1)</code>=2.718, <code>log(100)</code>=4.605 (natural), <code>log10(100)</code>=2, <code>log2(8)</code>=3.</li>
+            <li><b>Rounding family:</b> <code>ceiling(2.3)</code>=3, <code>floor(2.7)</code>=2, <code>round(2.567, 1)</code>=2.6, <code>signif(123.45, 3)</code>=123, <code>trunc(2.9)</code>=2.</li>
+            <li><b>Aggregation:</b> <code>sum</code>, <code>prod</code>, <code>min</code>, <code>max</code>, <code>range</code>, <code>mean</code>, <code>median</code>, <code>sd</code>, <code>var</code>, <code>length</code>.</li>
+            <li><b>Vectorisation rule:</b> all base math funs work element-wise — <code>sqrt(c(4,9,16))</code> → c(2,3,4), no loop required.</li>
+            <li><b>Safe trio for 1.5M:</b> <code>sqrt()</code>, <code>log()</code>, <code>round()</code> — examiner reads <code>sum/mean</code> as aggregation.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -3120,6 +3625,19 @@ v <- seq(1, 5)</code></pre>
       <p class="q">Write about type conversions in R. <a href="#t-2-7" style="font-family:'JetBrains Mono'; font-size:11px; color:var(--brand);">↗ Sec. 2.7</a></p>
       <div class="ans">
         <p>R supports explicit coercion via <code>as.*()</code> functions: <code>as.integer()</code>, <code>as.numeric()</code>, <code>as.character()</code>, <code>as.logical()</code>. Implicit coercion follows the hierarchy logical &lt; integer &lt; numeric &lt; complex &lt; character — e.g. <code>c(TRUE, 2, "x")</code> all become character.</p>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 2.7 — Type conversion</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b>6 atomic types:</b> logical · integer · double (numeric) · complex · character · raw — every R object built from these.</li>
+            <li><b>Inspect:</b> <code>class(3.14)</code> = "numeric", <code>typeof(3.14)</code> = "double"; <code>class(5L)</code> = "integer".</li>
+            <li><b>Explicit coercion:</b> <code>as.integer("42")</code>=42, <code>as.numeric("3.14")</code>=3.14, <code>as.character(99)</code>="99", <code>as.logical(0)</code>=FALSE.</li>
+            <li><b>Implicit hierarchy</b> (low → high): logical &lt; integer &lt; numeric &lt; complex &lt; character. Mixed vectors coerce to the highest type.</li>
+          </ul>
+<pre><code class="language-r">c(TRUE, 2L, 3.5, "x")  # all become "x" (character — highest)
+c(TRUE, 2L, 3.5)        # all become 3.5 doubles (numeric)
+c(TRUE, FALSE, 1L)      # all become integer (1, 0, 1)
+# Pitfall: 5 is double, 5L is integer — trailing L matters</code></pre>
+        </div>
       </div>
     </div>
   </div>
@@ -3458,6 +3976,25 @@ df$colname       # by name (preferred)</code></pre>
       <p class="q">What is the use of the switch() statement in R? <a href="#t-3-4" style="font-family:'JetBrains Mono'; font-size:11px; color:var(--brand);">↗ Sec. 3.4</a></p>
       <div class="ans">
         <p><code>switch()</code> selects one value among several based on a key, replacing long <code>if/else if</code> chains. Syntax: <code>switch(expr, case1=val1, case2=val2, default)</code>.</p>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 3.4 — switch()</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b>Behaviour:</b> evaluates the first arg, matches against named alternatives, returns the matched value. An <i>unnamed</i> last argument is the default fallback.</li>
+            <li><b>Fall-through:</b> an empty case (<code>sat = ,</code>) inherits the next defined value — handy for grouped keys.</li>
+            <li><b>Numeric vs string dispatch:</b> with a string key, matches by name; with an integer i, <code>switch(i, "A","B","C")</code> uses i as positional index.</li>
+            <li><b>Pitfall:</b> no match + no default → returns <code>NULL</code> invisibly. Always supply a default.</li>
+          </ul>
+<pre><code class="language-r">calc &lt;- function(op, a, b) {
+  switch(op,
+    add = a + b,
+    sub = a - b,
+    mul = a * b,
+    div = a / b,
+    "Unknown operation")    # default (unnamed last)
+}
+calc("mul", 4, 6)    # 24
+calc("xor", 1, 1)    # "Unknown operation"</code></pre>
+        </div>
       </div>
     </div>
   </div>
@@ -3767,6 +4304,28 @@ identical(df, df2)        # TRUE</code></pre>
       <p class="q">Write a short note on Object Oriented Programming with R, S3 and reference classes.</p>
       <div class="ans">
         <p>(Cross-reference: full answer at <b>2025 Q3(b)</b> above; see Sec. 3.8.) Key beats: R has three OOP systems — S3 (informal, name-lookup dispatch via <code>fn.class()</code>), S4 (formal slots with <code>setClass</code>/<code>setMethod</code>, validated, accessed with <code>@</code>), and Reference Classes/R5 (mutable, method-encapsulated, Java-like). Include the 7-row contrast and one code snippet per system.</p>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 3.8 — S3 vs S4 vs Reference Classes</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b>S3</b> — informal: <code>class(x) &lt;- "Stud"</code>; methods named <code>print.Stud</code>, looked up by name. No type validation. Fastest, used in base R + tidyverse.</li>
+            <li><b>S4</b> — formal: <code>setClass</code> declares typed slots accessed with <code>@</code>; <code>setGeneric/setMethod</code> dispatch. Validates types at construction. Used in Bioconductor.</li>
+            <li><b>RefClass (R5)</b> — mutable: <code>setRefClass</code> with fields + methods; only system supporting <code>&lt;&lt;-</code> in-place mutation across method calls. Java-like.</li>
+            <li><b>Mutability rule:</b> S3 / S4 follow copy-on-modify; R5 alone mutates in place — critical for stateful objects (DB handles, GUIs).</li>
+          </ul>
+<pre><code class="language-r"># S3 — name lookup
+x &lt;- list(name="A", marks=85);  class(x) &lt;- "Student"
+print.Student &lt;- function(o, ...) cat("Student:", o$name)
+
+# S4 — typed slots
+setClass("Student", representation(name="character", marks="numeric"))
+s &lt;- new("Student", name="A", marks=85);  s@name      # "A"
+
+# R5 — mutable
+Acc &lt;- setRefClass("Acc",
+  fields = list(bal="numeric"),
+  methods = list(deposit = function(x) { bal &lt;&lt;- bal + x }))
+a &lt;- Acc$new(bal=100);  a$deposit(50);  a$bal          # 150</code></pre>
+        </div>
       </div>
     </div>
   </div>
@@ -4279,6 +4838,10 @@ rbinom(100, size=10, prob=0.4)# 100 simulations</code></pre>
     <div class="qbody">
       <p class="q">What is regression?</p>
       <div class="ans">
+        <div class="box warn">
+          <span class="label">OUT-OF-SYLLABUS for BCD-204-V — skip in revision</span>
+          BCD-204-V Units I–IV cover <i>correlation</i> (Sec. 4.9) but not <i>regression</i> as a standalone topic. The 2024 paper still asked this 1.5M; the 2026 paper is unlikely to repeat. Included only for completeness.
+        </div>
         <p><b>Regression</b> is a statistical technique that models the relationship between a dependent variable y and one or more independent variables X, allowing prediction of y from X. Simple linear regression: ŷ = a + bx, fitted by minimising Σ(y − ŷ)². R: <code>lm(y ~ x, data=df)</code>.</p>
       </div>
     </div>
@@ -4473,6 +5036,15 @@ rbinom(100, size=10, prob=0.4)# 100 simulations</code></pre>
       <div class="ans">
         <pre><code>install.packages("ggplot2")   # downloads from CRAN
 library(ggplot2)              # loads into session</code></pre>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 2.4 — install vs library</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b>install.packages("pkg")</b> — downloads once from CRAN into <code>~/R/library</code> (disk).</li>
+            <li><b>library(pkg)</b> — loads the installed package into the current session (RAM); errors if missing. <code>require()</code> is the soft variant — returns <code>FALSE</code> instead of erroring.</li>
+            <li>Workflow: install once per machine, <code>library()</code> once per session at script top.</li>
+            <li>House-keeping: <code>installed.packages()</code>, <code>update.packages()</code>, <code>remove.packages("x")</code>.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -4483,6 +5055,18 @@ library(ggplot2)              # loads into session</code></pre>
       <p class="q">What is a vector in R? <a href="#t-2-10" style="font-family:'JetBrains Mono'; font-size:11px; color:var(--brand);">↗ Sec. 2.10</a></p>
       <div class="ans">
         <p>A vector is R's basic 1-D, homogeneous data structure holding values of the same atomic type. Created with <code>c()</code>, <code>:</code> or <code>seq()</code>. Example: <code>v &lt;- c(1, 2, 3)</code>.</p>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 2.10 — Vectors</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b>Definition:</b> 1-D, homogeneous (all elements same atomic type: logical, integer, double, character, complex, raw).</li>
+            <li><b>Constructors:</b> <code>c(1,2,3)</code>, <code>1:10</code> (sequence), <code>seq(0, 1, by=.1)</code>, <code>rep(0, 5)</code>.</li>
+            <li><b>Indexing (4 styles):</b> positive <code>v[2]</code>, negative <code>v[-2]</code>, logical <code>v[v&gt;2]</code>, named <code>v["a"]</code>.</li>
+            <li><b>Recycling rule:</b> shorter vector recycled to match longer — <code>c(1,2,3) + c(10,20)</code> → <code>c(11,22,13)</code> (with warning if not a multiple).</li>
+          </ul>
+<pre><code class="language-r">v &lt;- c(2, 4, 6, 8)
+v[v &gt; 3]      # 4 6 8  (logical index)
+v * 2         # 4 8 12 16 (vectorised, element-wise)</code></pre>
+        </div>
       </div>
     </div>
   </div>
@@ -4493,6 +5077,21 @@ library(ggplot2)              # loads into session</code></pre>
       <p class="q">Define DataFrame. <a href="#t-2-14" style="font-family:'JetBrains Mono'; font-size:11px; color:var(--brand);">↗ Sec. 2.14</a></p>
       <div class="ans">
         <p>A <b>data frame</b> is a 2-D heterogeneous tabular structure where each column may hold a different atomic type and each row is one observation. Built with <code>data.frame(col1=, col2=, …)</code>; the workhorse for tabular analytics in R.</p>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 2.14 — Data Frames</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b>Shape:</b> 2-D, heterogeneous — every column is a vector of equal length; columns may differ in type (character, numeric, logical, factor).</li>
+            <li><b>Access:</b> <code>df$col</code> (by name), <code>df[, "col"]</code> (matrix-style), <code>df[[2]]</code> (list-style); row filter <code>df[df$marks &gt; 70, ]</code>.</li>
+            <li><b>Inspect:</b> <code>str(df)</code>, <code>summary(df)</code>, <code>head(df)</code>, <code>dim(df)</code>, <code>nrow(df)</code>, <code>ncol(df)</code>.</li>
+            <li><b>Always</b> set <code>stringsAsFactors=FALSE</code> in pre-R 4.0 code so character columns stay character.</li>
+          </ul>
+<pre><code class="language-r">df &lt;- data.frame(
+  name  = c("A","B","C"),
+  marks = c(80, 90, 65),
+  pass  = c(TRUE, TRUE, FALSE),
+  stringsAsFactors = FALSE)
+df[df$marks &gt; 75, ]   # filter rows where marks &gt; 75</code></pre>
+        </div>
       </div>
     </div>
   </div>
@@ -4503,6 +5102,21 @@ library(ggplot2)              # loads into session</code></pre>
       <p class="q">What is the purpose of ggplot2? <a href="#t-4-5" style="font-family:'JetBrains Mono'; font-size:11px; color:var(--brand);">↗ Sec. 4.5</a></p>
       <div class="ans">
         <p><code>ggplot2</code> is R's flagship visualisation package implementing the <i>grammar of graphics</i> — plots are composed as layers (geoms) with aesthetic mappings (<code>aes</code>), scales, facets and themes added via the <code>+</code> operator. Used for publication-quality statistical graphics with minimal code.</p>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 4.5 — ggplot2 grammar of graphics</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b>6 layers</b> composed with <code>+</code>: data → <code>aes()</code> mappings → <code>geom_*()</code> → stats → facets → themes.</li>
+            <li><b>Common geoms:</b> <code>geom_bar</code> (counts), <code>geom_histogram</code> (continuous bins), <code>geom_point</code> (scatter), <code>geom_smooth</code> (regression), <code>geom_line</code> (time series).</li>
+            <li><b>Faceting:</b> <code>facet_wrap(~var)</code> — small multiples in one line; vs base R's <code>par(mfrow=)</code>.</li>
+            <li><b>Themes:</b> <code>theme_minimal()</code>, <code>theme_bw()</code> for instant publication look; <code>labs(title=, x=, y=)</code> for axis text.</li>
+          </ul>
+<pre><code class="language-r">library(ggplot2)
+ggplot(df, aes(x = grade, fill = grade)) +
+  geom_bar() +
+  labs(title = "Grade distribution") +
+  theme_minimal()
+# Single call replaces 6+ base-R commands (barplot, title, legend, …)</code></pre>
+        </div>
       </div>
     </div>
   </div>
@@ -4542,6 +5156,10 @@ library(ggplot2)              # loads into session</code></pre>
     <div class="qbody">
       <p class="q">Name two functions used in string manipulation in R. <a href="#t-3-9" style="font-family:'JetBrains Mono'; font-size:11px; color:var(--brand);">↗ Sec. 3.9</a></p>
       <div class="ans">
+        <div class="box warn">
+          <span class="label">OUT-OF-SYLLABUS for BCD-204-V — skip in revision</span>
+          String manipulation appears at <code>t-3-9</code> for awareness but is <b>NOT</b> in BCA-DS-23-206 syllabus 2.3 / 3.x. Only CSE25 (B.Tech) asks it.
+        </div>
         <ol>
           <li><code>paste(x, y, sep="-")</code> — concatenate strings with a separator. <code>paste("a","b",sep="-")</code> → <code>"a-b"</code>.</li>
           <li><code>gsub(pattern, replacement, x)</code> — global substring substitution. <code>gsub("a","X","banana")</code> → <code>"bXnXnX"</code>.</li>
@@ -4572,6 +5190,15 @@ rbind(df, new_row)         # add rows</code></pre>
           pass  = TRUE)
 L$name        # "Ankit"
 L[[2]]        # c(80, 90, 75)</code></pre>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 3.5 — Lists in R</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b>Shape:</b> 1-D, heterogeneous, recursive — elements may differ in type and length, and a list can contain other lists.</li>
+            <li><b>Three access modes:</b> <code>L$name</code> by name; <code>L[[i]]</code> extracts the element itself (strips one wrapper); <code>L["name"]</code> returns a sub-list (keeps wrapper).</li>
+            <li><b>Add / remove:</b> <code>L$grade &lt;- "A"</code> appends; <code>L$marks &lt;- NULL</code> removes; <code>names(L) &lt;- c(...)</code> sets names post-hoc.</li>
+            <li><b>Why use lists:</b> mixed-type bundling (string + numeric + matrix + function); also the return shape of <code>lm()</code>, <code>t.test()</code> etc.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -4754,6 +5381,24 @@ ggplot(df, aes(x = hours, y = marks, color = grade)) +
       <p class="q">Compare <code>apply</code>, <code>lapply</code>, <code>sapply</code>, and <code>tapply</code> with examples. <a href="#t-3-7" style="font-family:'JetBrains Mono'; font-size:11px; color:var(--brand);">↗ Sec. 3.7</a></p>
       <div class="ans">
         <p>This is the exact format predicted at <a href="#predicted-qs">P2</a> for BCD-204-V — full 4-function comparison table + <code>mapply</code> bonus is at Sec. 3.7. CSE25's appearance at 10 M validates the prediction.</p>
+        <div class="box tip refsum">
+          <span class="label">Inline summary · Sec. 3.7 — apply family (5 variants)</span>
+          <ul style="margin:6px 0 0 18px">
+            <li><b><code>apply(M, MARGIN, FN)</code></b> — for matrices/arrays; MARGIN 1 = rows, 2 = cols → vector or matrix.</li>
+            <li><b><code>lapply(X, FN)</code></b> — input vector/list; <b>always</b> returns a list (preserves heterogeneity).</li>
+            <li><b><code>sapply(X, FN)</code></b> — simplified lapply; vector if scalars, matrix if same-length vectors, list otherwise.</li>
+            <li><b><code>tapply(x, INDEX, FN)</code></b> — vector + factor → group-wise summary (mean salary by dept).</li>
+            <li><b><code>mapply(FN, A, B, ...)</code></b> — multi-arg parallel apply; treats N vectors as N argument streams.</li>
+          </ul>
+<pre><code class="language-r">m &lt;- matrix(1:6, 2, 3)
+apply(m, 1, sum)        # row sums   → 9 12
+lapply(1:3, sqrt)       # list of 3
+sapply(1:3, sqrt)       # vector 1.00 1.41 1.73
+tapply(c(80,90,75,85),  # grouped mean
+       c("A","A","B","B"), mean)  # A=85, B=80
+mapply(`+`, 1:3, 4:6)   # 5 7 9
+# Mnemonic: A-L-S-M-T  · 3–10× faster than for loops</code></pre>
+        </div>
       </div>
     </div>
   </div>
@@ -4763,6 +5408,10 @@ ggplot(df, aes(x = hours, y = marks, color = grade)) +
     <div class="qbody">
       <p class="q">Illustrate the use of ANOVA with proper R syntax.</p>
       <div class="ans">
+        <div class="box warn">
+          <span class="label">OUT-OF-SYLLABUS for BCD-204-V — for awareness only</span>
+          ANOVA is mentioned briefly as a Unit-4 test (Sec. 4.8 table) but not assessed in DSUR papers. CSE25 (B.Tech) asks it; June 2026 BCA paper unlikely to. Skip on first revision pass.
+        </div>
         <p><b>ANOVA</b> (Analysis of Variance) extends the t-test to compare means of <b>three or more</b> groups under one categorical factor. H₀: all group means equal.</p>
         <pre><code># Example: marks by class section (A/B/C)
 marks   <- c(78,85,90,72,88,  70,75,68,80,72,  60,65,55,70,62)
@@ -4790,8 +5439,8 @@ TukeyHSD(model)</code></pre>
       <p class="q">Describe and implement a logistic regression model in R.</p>
       <div class="ans">
         <div class="box warn">
-          <span class="label">Syllabus note</span>
-          BCD-204-V mentions regression generally; <i>logistic</i> regression is not explicitly listed. Treat as a stretch topic — useful for understanding but unlikely to appear in DSUR.
+          <span class="label">OUT-OF-SYLLABUS for BCD-204-V — skip in revision</span>
+          BCD-204-V mentions regression generally; <i>logistic</i> regression is not explicitly listed in 4.7 (correlation only). Treat as a stretch topic — useful for understanding but unlikely to appear in DSUR.
         </div>
         <p><b>Logistic regression</b> models a binary outcome y ∈ {0, 1} using the sigmoid:</p>
         <span class="formula">P(y = 1 | x) = 1 / (1 + exp(−(β₀ + β₁x)))</span>

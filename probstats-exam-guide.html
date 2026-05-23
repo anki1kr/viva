@@ -960,6 +960,28 @@ For any A,B:  P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</div>
       <span class="label">How prof asks</span>
       "Define probability" almost never appears alone — it always feeds into a calculation. Always state the formula + give one numeric example (coin / die / cards). Senior profs subtract 0.5 M for "definition without formula".
     </div>
+    <div class="box def">
+      <span class="label">Plain English</span>
+      Probability is a number between 0 and 1 telling us how often an event would happen if we repeated the experiment forever. <b>0 = never</b>, <b>1 = always</b>, <b>0.5 = half the time</b>.
+    </div>
+    <div class="box why">
+      <span class="label">Why it matters</span>
+      Every Part-A 1.5 M definition prompt is paired with a numeric example (coin / die / card). Stating only the words without P(E) = favourable/total costs you 0.5 M instantly.
+    </div>
+    <h4>Worked numerical · Two-dice union (May-2025 Q2b · 7 M)</h4>
+    <p>Two dice are thrown. Find <code>P(sum divisible by 2 or 3)</code>.</p>
+    <ol class="steps">
+      <li class="step k"><b>Sample space</b>: |S| = 6·6 = <b>36</b> equally likely ordered pairs.</li>
+      <li class="step k"><b>Event A = sum divisible by 2</b>: sums 2, 4, 6, 8, 10, 12 with counts 1+3+5+5+3+1 = <b>18 outcomes</b> ⇒ P(A) = 18/36 = 1/2.</li>
+      <li class="step k"><b>Event B = sum divisible by 3</b>: sums 3, 6, 9, 12 with counts 2+5+4+1 = <b>12 outcomes</b> ⇒ P(B) = 12/36 = 1/3.</li>
+      <li class="step k"><b>Event A ∩ B = sum divisible by 6</b>: sums 6, 12 with counts 5+1 = <b>6 outcomes</b> ⇒ P(A∩B) = 6/36 = 1/6.</li>
+      <li class="step k">Addition rule: <pre>P(A ∪ B) = P(A) + P(B) − P(A ∩ B)
+         = 1/2 + 1/3 − 1/6
+         = 3/6 + 2/6 − 1/6
+         = 4/6
+         = <b>2/3 ≈ 0.667</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: roughly two-thirds of two-dice tosses yield a sum divisible by 2 or 3. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-1-2">
@@ -1024,6 +1046,31 @@ Conditional:  P(A|B) = P(A ∩ B) / P(B)   (P(B) > 0)</div>
       </svg>
       <figcaption><b>Fig 1.4</b> · Probability tree — multiply along branches, sum B-leaves for evidence P(B)</figcaption>
     </figure>
+    <div class="box def">
+      <span class="label">Plain English</span>
+      Bayes flips the conditional. We know P(symptom | disease); Bayes hands back P(disease | symptom). Use it whenever priors + likelihoods are given and you must work out the posterior.
+    </div>
+    <div class="box prof">
+      <span class="label">How prof asks (3 of 6 papers · 6–8 M Part-B)</span>
+      Always framed as "an event occurred — find probability it came from category X". The canonical stem is BTech-2023 Q7a (2000 scooter / 4000 car / 6000 truck drivers, accident probabilities 0.01/0.03/0.15). Memorise the table layout.
+    </div>
+    <h4>Worked numerical · Bayes insurance (BTech-2023 Q7a · 7 M)</h4>
+    <p>An insurance company has 2000 scooter drivers, 4000 car drivers, 6000 truck drivers. Accident probabilities are 0.01, 0.03, 0.15. One insured driver met an accident. Find probability the driver was a scooter rider.</p>
+    <ol class="steps">
+      <li class="step k"><b>Priors</b>: total = 12000. <pre>P(S) = 2000/12000 = 1/6
+P(C) = 4000/12000 = 1/3
+P(T) = 6000/12000 = 1/2</pre></li>
+      <li class="step k"><b>Likelihoods</b>: P(A|S) = 0.01, P(A|C) = 0.03, P(A|T) = 0.15.</li>
+      <li class="step k"><b>Evidence P(A)</b> by law of total probability: <pre>P(A) = P(A|S)·P(S) + P(A|C)·P(C) + P(A|T)·P(T)
+     = (1/6)(0.01) + (1/3)(0.03) + (1/2)(0.15)
+     = 0.001667 + 0.010000 + 0.075000
+     = <b>0.086667</b></pre></li>
+      <li class="step k"><b>Posterior P(S|A)</b> by Bayes: <pre>P(S|A) = P(A|S)·P(S) / P(A)
+       = (1/6)·(0.01) / 0.086667
+       = 0.001667 / 0.086667
+       = <b>0.01923 ≈ 1/52</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: given that an accident occurred, only ~1.9 % chance the driver was a scooter rider — high accident-rate categories (trucks) dominate the posterior. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-1-4">
@@ -1164,6 +1211,26 @@ MGF:     M<sub>X</sub>(t) = (q + p·e<sup>t</sup>)<sup>n</sup></div>
       </svg>
       <figcaption><b>Fig 1.8</b> · Binomial PMF — symmetric bell when p=0.5, mean = np = 5</figcaption>
     </figure>
+    <div class="box why">
+      <span class="label">Why it matters</span>
+      Binomial models any "k successes in n independent trials" — defective items in samples, boys/girls in families, coin tosses. <b>With replacement → Binomial</b>; without → Hypergeometric. Mean = np; Variance = npq; Mode ≈ ⌊(n+1)p⌋.
+    </div>
+    <h4>Worked numerical · 800 families · 4 children each (Dec-2024 Q2a · 7 M)</h4>
+    <p>Out of 800 families with 4 children each, how many would you expect to have: (a) 2 boys and 2 girls, (b) at least 1 boy, (c) no girl, (d) at most 2 girls? Assume <code>p = q = 0.5</code>.</p>
+    <ol class="steps">
+      <li class="step k"><b>Setup</b>: n = 4, p = q = 0.5, N = 800. <pre>P(X = k) = C(4, k)·(1/2)<sup>4</sup> = C(4, k)/16</pre></li>
+      <li class="step k"><b>(a) 2 boys and 2 girls</b> = P(X = 2): <pre>P(X=2) = C(4,2)/16 = 6/16 = 0.375
+N·P = 800·0.375 = <b>300 families</b></pre></li>
+      <li class="step k"><b>(b) at least 1 boy</b> = 1 − P(X = 0): <pre>P(X=0) = C(4,0)/16 = 1/16
+P(X≥1) = 1 − 1/16 = 15/16
+N·P = 800·(15/16) = <b>750 families</b></pre></li>
+      <li class="step k"><b>(c) no girl</b> = P(X = 4) (all boys): <pre>P(X=4) = C(4,4)/16 = 1/16
+N·P = 800/16 = <b>50 families</b></pre></li>
+      <li class="step k"><b>(d) at most 2 girls</b>. Let Y = #girls; by symmetry Y ~ B(4, 0.5). <pre>P(Y≤2) = P(Y=0)+P(Y=1)+P(Y=2)
+       = (1 + 4 + 6)/16 = 11/16
+N·P = 800·(11/16) = <b>550 families</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: 300/800 families fall in the most-likely "balanced" split, 50 are all-male, 50 are all-female (symmetry), and 750 contain at least one boy. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-1-9">
@@ -1243,6 +1310,46 @@ MGF:    M<sub>X</sub>(t) = exp(λ(e<sup>t</sup> − 1))</div>
       </table>
     </div>
     <p>Both are discrete; Binomial has mean ≠ variance (np ≠ npq unless p = 0), Poisson satisfies mean = variance = λ — a quick check on which model fits the data.</p>
+    <div class="box prof">
+      <span class="label">Prof pattern · "Fit Poisson" (6 papers)</span>
+      Three deterministic steps: (1) compute λ̂ = Σfx/N; (2) evaluate e<sup>−λ</sup> from tables/calculator; (3) generate theoretical frequencies f<sub>k</sub> = N·e<sup>−λ</sup>·λ<sup>k</sup>/k! and compare column by column with observed. Verdict: Poisson fits if Σf<sub>theo</sub> ≈ N and column-wise residuals are small.
+    </div>
+    <h4>Worked numerical · Fit Poisson to data (BSc-2023 Q6c · 7 M)</h4>
+    <p>Fit a Poisson distribution to the following frequency table of deaths:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Deaths X</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>
+        <tbody><tr><td>Frequency f</td><td>122</td><td>60</td><td>15</td><td>2</td><td>1</td></tr></tbody>
+      </table>
+    </div>
+    <ol class="steps">
+      <li class="step k"><b>N</b> = Σf = 122 + 60 + 15 + 2 + 1 = <b>200</b>.</li>
+      <li class="step k"><b>λ̂ = Σfx / N</b>: <pre>Σfx = 0·122 + 1·60 + 2·15 + 3·2 + 4·1
+    = 0 + 60 + 30 + 6 + 4
+    = <b>100</b>
+λ̂ = 100/200 = <b>0.5</b></pre></li>
+      <li class="step k"><b>e<sup>−λ</sup> = e<sup>−0.5</sup> ≈ 0.6065</b> (from tables).</li>
+      <li class="step k"><b>Theoretical frequencies</b> f<sub>k</sub> = N·e<sup>−λ</sup>·λ<sup>k</sup>/k! = 200·0.6065·(0.5)<sup>k</sup>/k!: <pre>f<sub>0</sub> = 200·0.6065·1 / 1     = <b>121.3</b>  (obs 122 ✓)
+f<sub>1</sub> = 200·0.6065·0.5 / 1   = <b>60.65</b> (obs 60 ✓)
+f<sub>2</sub> = 200·0.6065·0.25 / 2  = <b>15.16</b> (obs 15 ✓)
+f<sub>3</sub> = 200·0.6065·0.125 / 6 = <b>2.53</b>  (obs 2 ✓)
+f<sub>4</sub> = 200·0.6065·0.0625/24 = <b>0.32</b>  (obs 1 — small N)
+Σf<sub>theo</sub> ≈ 199.96 ≈ N ✓</pre></li>
+      <li class="step k"><b>Interpretation</b>: column-wise residuals are tiny ⇒ Poisson(λ = 0.5) fits the data well. ∎</li>
+    </ol>
+    <h4>Worked numerical · Poisson approximation to Binomial (Dec-2024 Q2b · 7 M)</h4>
+    <p>The probability that a razor blade is defective is 0.002. Razor blades are sold in packets of 10. Out of N = 10,000 packets, how many contain (a) no defective, (b) one defective, (c) two defective?</p>
+    <ol class="steps">
+      <li class="step k"><b>λ = np</b> per packet: <pre>λ = 10 · 0.002 = <b>0.02</b>
+e<sup>−λ</sup> = e<sup>−0.02</sup> ≈ <b>0.9802</b></pre></li>
+      <li class="step k"><b>(a) No defective</b>: <pre>P(X = 0) = e<sup>−0.02</sup> = 0.9802
+Expected = 10000·0.9802 = <b>9802 packets</b></pre></li>
+      <li class="step k"><b>(b) One defective</b>: <pre>P(X = 1) = e<sup>−0.02</sup>·0.02 = 0.01960
+Expected = 10000·0.01960 = <b>196 packets</b></pre></li>
+      <li class="step k"><b>(c) Two defective</b>: <pre>P(X = 2) = e<sup>−0.02</sup>·(0.02)<sup>2</sup>/2 = 0.000196
+Expected = 10000·0.000196 ≈ <b>2 packets</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: out of 10,000 packets, almost all (9802) ship clean, ~196 carry a single defect, and only ~2 contain two defects — exactly the rare-event scenario where Poisson approximation is sharp. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-1-11">
@@ -1309,6 +1416,24 @@ MGF: M<sub>X</sub>(t) = exp(μt + σ<sup>2</sup>t<sup>2</sup>/2)</div>
       <span class="label">How prof asks (Dec-2024 Q3a)</span>
       "Show that for Normal all odd moments vanish, and prove μ<sub>2n</sub> = (2n−1)σ<sup>2</sup>μ<sub>2n−2</sub>." Senior profs love this because it tests symmetry argument <em>and</em> integration-by-parts. State the MGF, expand, equate coefficients of t<sup>n</sup>/n!.
     </div>
+    <h4>Worked numerical · Normal % batteries (May-2025 Q3a · 7 M)</h4>
+    <p>The life of 100 battery cells is normally distributed with mean μ = 12 hrs and standard deviation σ = 3 hrs. Find the percentage (and expected count) of cells with life (i) more than 15 hrs, (ii) less than 6 hrs, (iii) between 10 hrs and 14 hrs.</p>
+    <ol class="steps">
+      <li class="step k"><b>Standardise</b>: <pre>Z = (X − μ) / σ = (X − 12) / 3</pre></li>
+      <li class="step k"><b>(i) X &gt; 15 hrs</b>: <pre>Z = (15 − 12)/3 = +1.00
+P(Z &gt; 1) = 1 − Φ(1) = 1 − 0.8413 = <b>0.1587 = 15.87 %</b>
+Count = 100·0.1587 ≈ <b>16 cells</b></pre></li>
+      <li class="step k"><b>(ii) X &lt; 6 hrs</b>: <pre>Z = (6 − 12)/3 = −2.00
+P(Z &lt; −2) = 1 − Φ(2) = 1 − 0.9772 = <b>0.0228 = 2.28 %</b>
+Count = 100·0.0228 ≈ <b>2 cells</b></pre></li>
+      <li class="step k"><b>(iii) 10 &lt; X &lt; 14 hrs</b>: <pre>Z<sub>1</sub> = (10 − 12)/3 = −0.67
+Z<sub>2</sub> = (14 − 12)/3 = +0.67
+P(−0.67 &lt; Z &lt; 0.67) = Φ(0.67) − Φ(−0.67)
+                     = 0.7486 − 0.2514
+                     = <b>0.4972 = 49.72 %</b>
+Count = 100·0.4972 ≈ <b>50 cells</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: roughly half the cells (50) fall in the most-common life range; only ~2 die before 6 hrs; ~16 last beyond 15 hrs. Empirical-rule sanity check: P(|Z|&lt;1) ≈ 68 %, and our 49.7 % for |Z|&lt;0.67 is consistent. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-1-14">
@@ -1324,6 +1449,25 @@ MGF: M<sub>X</sub>(t) = exp(μt + σ<sup>2</sup>t<sup>2</sup>/2)</div>
       <li>Marginal CDF of X: <code>F<sub>X</sub>(x) = F(x, ∞)</code>; similarly for Y.</li>
       <li>For continuous case: <code>f(x,y) = ∂<sup>2</sup>F/∂x∂y</code>.</li>
       <li>X &amp; Y independent ⟺ <code>F(x,y) = F<sub>X</sub>(x)·F<sub>Y</sub>(y)</code> ⟺ <code>f(x,y) = f<sub>X</sub>(x)·f<sub>Y</sub>(y)</code>.</li>
+    </ol>
+    <div class="box why">
+      <span class="label">Why it matters</span>
+      The five properties get tested verbatim in Part-A (Dec-2024 Q1i, May-2025 Q1e). Memorise the boundary conditions <code>F(−∞, y) = 0</code> and <code>F(∞, ∞) = 1</code>, plus the factorisation criterion for independence.
+    </div>
+    <h4>Worked numerical · Find K for joint pdf (Dec-2024 Q1i · ⭐ HOT · 3 papers · 1.5 M)</h4>
+    <p>Find K such that <code>f(x, y) = K·xy</code> on <code>1 ≤ x ≤ y ≤ 2</code> is a valid joint pdf.</p>
+    <ol class="steps">
+      <li class="step k"><b>Normalisation</b> ∬ f dA = 1 over support with x from 1 to y, y from 1 to 2: <pre>∫<sub>1</sub><sup>2</sup> ∫<sub>1</sub><sup>y</sup> K·xy dx dy = 1</pre></li>
+      <li class="step k"><b>Inner integral</b> (over x): <pre>∫<sub>1</sub><sup>y</sup> K·xy dx = Ky·[x<sup>2</sup>/2]<sub>1</sub><sup>y</sup>
+                = Ky·(y<sup>2</sup> − 1)/2
+                = K(y<sup>3</sup> − y)/2</pre></li>
+      <li class="step k"><b>Outer integral</b> (over y): <pre>(K/2)·∫<sub>1</sub><sup>2</sup>(y<sup>3</sup> − y) dy
+  = (K/2)·[y<sup>4</sup>/4 − y<sup>2</sup>/2]<sub>1</sub><sup>2</sup>
+  = (K/2)·[(16/4 − 4/2) − (1/4 − 1/2)]
+  = (K/2)·[2 − (−1/4)]
+  = (K/2)·(9/4) = <b>9K/8</b></pre></li>
+      <li class="step k"><b>Solve</b>: 9K/8 = 1 ⇒ <b>K = 8/9</b>. ∎</li>
+      <li class="step k"><b>Interpretation</b>: with K = 8/9 the pdf integrates to unity over the triangular support 1 ≤ x ≤ y ≤ 2. Same answer recurs Dec-2022 Q1d, Dec-2023 Q1d, Dec-2024 Q1i — memorise <b>K = 8/9</b>.</li>
     </ol>
   </div>
 
@@ -1399,6 +1543,29 @@ Relation to raw:
       <span class="label">Why this matters</span>
       Asked verbatim Dec-2024 Q1e &amp; Q6a — "Relation between moment about mean and moment about arbitrary point". State the four formulas. Show derivation for μ<sub>2</sub> from binomial expansion of (X−A)<sup>2</sup>.
     </div>
+    <h4>Worked numerical · Moments about an arbitrary point → about mean (Dec-2024 Q5a · 10 M)</h4>
+    <p>The first four moments of a distribution about A = 4 are μ'<sub>1</sub> = −1.5, μ'<sub>2</sub> = 17, μ'<sub>3</sub> = −30, μ'<sub>4</sub> = 108. Find moments about the mean, and compute β<sub>1</sub>, β<sub>2</sub>.</p>
+    <ol class="steps">
+      <li class="step k"><b>Mean from first raw moment</b>: <pre>x̄ = A + μ'<sub>1</sub> = 4 + (−1.5) = <b>2.5</b></pre></li>
+      <li class="step k"><b>μ<sub>2</sub> = μ'<sub>2</sub> − (μ'<sub>1</sub>)<sup>2</sup></b>: <pre>μ<sub>2</sub> = 17 − (−1.5)<sup>2</sup>
+   = 17 − 2.25
+   = <b>14.75</b></pre></li>
+      <li class="step k"><b>μ<sub>3</sub> = μ'<sub>3</sub> − 3·μ'<sub>2</sub>·μ'<sub>1</sub> + 2(μ'<sub>1</sub>)<sup>3</sup></b>: <pre>μ<sub>3</sub> = −30 − 3·(17)·(−1.5) + 2·(−1.5)<sup>3</sup>
+   = −30 + 76.5 + 2·(−3.375)
+   = −30 + 76.5 − 6.75
+   = <b>39.75</b></pre></li>
+      <li class="step k"><b>μ<sub>4</sub> = μ'<sub>4</sub> − 4·μ'<sub>3</sub>·μ'<sub>1</sub> + 6·μ'<sub>2</sub>·(μ'<sub>1</sub>)<sup>2</sup> − 3·(μ'<sub>1</sub>)<sup>4</sup></b>: <pre>μ<sub>4</sub> = 108 − 4·(−30)·(−1.5) + 6·(17)·(2.25) − 3·(5.0625)
+   = 108 − 180 + 229.5 − 15.19
+   = <b>142.31</b></pre></li>
+      <li class="step k"><b>β<sub>1</sub> = μ<sub>3</sub><sup>2</sup> / μ<sub>2</sub><sup>3</sup></b>: <pre>β<sub>1</sub> = (39.75)<sup>2</sup> / (14.75)<sup>3</sup>
+   = 1580.06 / 3209.6
+   = <b>0.492</b>
+γ<sub>1</sub> = √β<sub>1</sub> = <b>0.702</b>  ⇒ moderate +ve skew</pre></li>
+      <li class="step k"><b>β<sub>2</sub> = μ<sub>4</sub> / μ<sub>2</sub><sup>2</sup></b>: <pre>β<sub>2</sub> = 142.31 / (14.75)<sup>2</sup>
+   = 142.31 / 217.56
+   = <b>0.654</b>  &lt; 3 ⇒ <b>platykurtic</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: distribution is right-skewed (γ<sub>1</sub> ≈ 0.70) and flatter than Normal (β<sub>2</sub> ≈ 0.65). ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-2-4">
@@ -1440,6 +1607,23 @@ r-th raw moment:  μ'<sub>r</sub> = (d<sup>r</sup>/dt<sup>r</sup>) M<sub>X</sub>
       <div class="row"><b>Handle t = 0 case</b><span>2 M</span></div>
       <div class="row"><b>Boxed final answer</b><span>1 M</span></div>
     </div>
+    <h4>Worked numerical · MGF of triangular pdf (BSc-2023 Q2c · 7 M)</h4>
+    <p>Given the triangular pdf <code>f(x) = x</code> for <code>0 ≤ x &lt; 1</code> and <code>f(x) = 2 − x</code> for <code>1 ≤ x &lt; 2</code>. Find M<sub>X</sub>(t), mean and variance.</p>
+    <ol class="steps">
+      <li class="step k"><b>Setup</b>: split the integral on the kink at x = 1. <pre>M(t) = ∫<sub>0</sub><sup>1</sup> x·e<sup>tx</sup> dx + ∫<sub>1</sub><sup>2</sup> (2−x)·e<sup>tx</sup> dx</pre></li>
+      <li class="step k"><b>First piece</b> by parts (u = x, dv = e<sup>tx</sup> dx): <pre>∫<sub>0</sub><sup>1</sup> x·e<sup>tx</sup> dx = [x·e<sup>tx</sup>/t]<sub>0</sub><sup>1</sup> − (1/t)∫<sub>0</sub><sup>1</sup> e<sup>tx</sup> dx
+                  = e<sup>t</sup>/t − (1/t<sup>2</sup>)·(e<sup>t</sup> − 1)
+                  = e<sup>t</sup>/t − e<sup>t</sup>/t<sup>2</sup> + 1/t<sup>2</sup></pre></li>
+      <li class="step k"><b>Second piece</b> with u = 2 − x: <pre>∫<sub>1</sub><sup>2</sup>(2−x)·e<sup>tx</sup> dx = [(2−x)·e<sup>tx</sup>/t]<sub>1</sub><sup>2</sup> + (1/t)∫<sub>1</sub><sup>2</sup> e<sup>tx</sup> dx
+                   = (0 − e<sup>t</sup>/t) + (1/t<sup>2</sup>)·(e<sup>2t</sup> − e<sup>t</sup>)
+                   = −e<sup>t</sup>/t + e<sup>2t</sup>/t<sup>2</sup> − e<sup>t</sup>/t<sup>2</sup></pre></li>
+      <li class="step k"><b>Sum &amp; simplify</b>: <pre>M(t) = (e<sup>t</sup>/t − e<sup>t</sup>/t<sup>2</sup> + 1/t<sup>2</sup>) + (−e<sup>t</sup>/t + e<sup>2t</sup>/t<sup>2</sup> − e<sup>t</sup>/t<sup>2</sup>)
+     = (e<sup>2t</sup> − 2e<sup>t</sup> + 1) / t<sup>2</sup>
+     = <b>(e<sup>t</sup> − 1)<sup>2</sup> / t<sup>2</sup></b>,  t ≠ 0</pre></li>
+      <li class="step k"><b>Mean</b> = M'(0) = <b>1</b> (symmetry of pdf about x = 1 confirms).</li>
+      <li class="step k"><b>Variance</b> = M''(0) − μ<sup>2</sup> = 7/6 − 1 = <b>1/6 ≈ 0.167</b>.</li>
+      <li class="step k"><b>Interpretation</b>: triangular distribution is symmetric about x = 1 with low spread (σ ≈ 0.408). ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-2-6">
@@ -1453,6 +1637,38 @@ Independence: f(x,y) = f<sub>X</sub>(x)·f<sub>Y</sub>(y)</div>
       <span class="label">Exam pattern (3 papers in a row)</span>
       <code>f(x,y) = (6−x−y)/8, 0 &lt; x &lt; 2, 2 &lt; y &lt; 4</code>. Asked: marginal of X, marginal of Y, conditional, independence test, P(X &lt; 1, Y &lt; 3). Identical question framing 2023 Q3c, 2024 Q4a, 2024 Q4 (12M). Memorise the structure!
     </div>
+    <h4>Worked numerical · Joint pdf (6−x−y)/8 — full pass (Dec-2024 Q4a · ⭐ HOT · 12 M)</h4>
+    <p>Given <code>f(x, y) = (6 − x − y)/8</code> for <code>0 &lt; x &lt; 2, 2 &lt; y &lt; 4</code>; zero elsewhere. Find (i) P(X &lt; 1, Y &lt; 3), (ii) marginal of X, (iii) marginal of Y, (iv) conditional f(y|x), (v) test independence.</p>
+    <ol class="steps">
+      <li class="step k"><b>(i) P(X &lt; 1, Y &lt; 3)</b>: <pre>∫<sub>0</sub><sup>1</sup> ∫<sub>2</sub><sup>3</sup> (6−x−y)/8 dy dx
+Inner: (1/8)·[6y − xy − y<sup>2</sup>/2]<sub>2</sub><sup>3</sup>
+     = (1/8)·[(18 − 3x − 4.5) − (12 − 2x − 2)]
+     = (1/8)·[13.5 − 3x − 10 + 2x]
+     = (1/8)·(3.5 − x)
+Outer: (1/8)·∫<sub>0</sub><sup>1</sup>(3.5 − x)dx
+     = (1/8)·[3.5x − x<sup>2</sup>/2]<sub>0</sub><sup>1</sup>
+     = (1/8)·(3.5 − 0.5)
+     = (1/8)·3
+     = <b>3/8 = 0.375</b></pre></li>
+      <li class="step k"><b>(ii) Marginal f<sub>X</sub>(x)</b> by integrating out y on (2, 4): <pre>f<sub>X</sub>(x) = ∫<sub>2</sub><sup>4</sup>(6−x−y)/8 dy
+       = (1/8)·[6y − xy − y<sup>2</sup>/2]<sub>2</sub><sup>4</sup>
+       = (1/8)·[(24 − 4x − 8) − (12 − 2x − 2)]
+       = (1/8)·[16 − 4x − 10 + 2x]
+       = (1/8)·(6 − 2x)
+       = <b>(3 − x)/4,  0 &lt; x &lt; 2</b></pre></li>
+      <li class="step k"><b>(iii) Marginal f<sub>Y</sub>(y)</b> by integrating out x on (0, 2): <pre>f<sub>Y</sub>(y) = ∫<sub>0</sub><sup>2</sup>(6−x−y)/8 dx
+       = (1/8)·[6x − x<sup>2</sup>/2 − xy]<sub>0</sub><sup>2</sup>
+       = (1/8)·[12 − 2 − 2y]
+       = (1/8)·(10 − 2y)
+       = <b>(5 − y)/4,  2 &lt; y &lt; 4</b></pre></li>
+      <li class="step k"><b>(iv) Conditional f(y|x) = f(x, y) / f<sub>X</sub>(x)</b>: <pre>f(y|x) = [(6 − x − y)/8] / [(3 − x)/4]
+       = <b>(6 − x − y) / [2·(3 − x)]</b>,  2 &lt; y &lt; 4</pre></li>
+      <li class="step k"><b>(v) Independence test</b>: <pre>f<sub>X</sub>·f<sub>Y</sub> = ((3 − x)/4)·((5 − y)/4)
+        = (3 − x)(5 − y)/16
+        ≠ (6 − x − y)/8 = f(x, y)
+⇒ X and Y are <b>NOT independent</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: the joint cannot be factored as a product of marginals, so X and Y interact. The conditional shrinks the support of y based on the observed x. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-2-7">
@@ -1473,6 +1689,32 @@ X ⫫ Y ⟹ Cov(X,Y) = 0  (converse not generally true)</div>
       <span class="label">May-2025 Q1f</span>
       "Define covariance. What is covariance of two independent variables?" → Cov = 0. <em>Critical caveat</em>: Cov = 0 does NOT imply independence (only for jointly Normal RVs does it).
     </div>
+    <h4>Worked numerical · Cov + ρ from discrete joint (3 coins · BSc-2023 Q4a · 7 M)</h4>
+    <p>Three fair coins are tossed. Let X = number of heads in the first two tosses, Y = number of heads in the last two tosses. Find Cov(X, Y) and ρ(X, Y).</p>
+    <ol class="steps">
+      <li class="step k"><b>Enumerate 8 outcomes</b>, each with probability 1/8: <pre>TTT: X=0, Y=0     THH: X=1, Y=2     HHT: X=2, Y=1
+TTH: X=0, Y=1     HTT: X=1, Y=0     HHH: X=2, Y=2
+THT: X=1, Y=1     HTH: X=1, Y=1</pre></li>
+      <li class="step k"><b>Joint PMF</b> p(x, y) (each cell × 1/8): <pre>(0,0)=1/8   (0,1)=1/8
+(1,0)=1/8   (1,1)=2/8   (1,2)=1/8
+(2,1)=1/8   (2,2)=1/8</pre></li>
+      <li class="step k"><b>Marginals &amp; means</b>: <pre>p<sub>X</sub>(0,1,2) = 2/8, 4/8, 2/8 ⇒ E(X) = 0·2/8 + 1·4/8 + 2·2/8 = <b>1</b>
+p<sub>Y</sub>(0,1,2) = 2/8, 4/8, 2/8 ⇒ E(Y) = <b>1</b> (symmetry)</pre></li>
+      <li class="step k"><b>E(XY)</b> from non-zero cells: <pre>E(XY) = 1·1·(2/8) + 1·2·(1/8) + 2·1·(1/8) + 2·2·(1/8)
+      = 2/8 + 2/8 + 2/8 + 4/8
+      = 10/8 = <b>1.25</b></pre></li>
+      <li class="step k"><b>Cov(X, Y)</b>: <pre>Cov(X, Y) = E(XY) − E(X)·E(Y)
+          = 1.25 − 1·1
+          = <b>0.25</b></pre></li>
+      <li class="step k"><b>Variances</b>: <pre>E(X<sup>2</sup>) = 0 + 1·4/8 + 4·2/8 = 12/8 = 1.5
+σ<sub>X</sub><sup>2</sup> = E(X<sup>2</sup>) − [E(X)]<sup>2</sup> = 1.5 − 1 = 0.5
+σ<sub>X</sub> = √0.5 ≈ 0.707   (σ<sub>Y</sub> same)</pre></li>
+      <li class="step k"><b>Correlation ρ</b>: <pre>ρ(X, Y) = Cov(X, Y) / (σ<sub>X</sub>·σ<sub>Y</sub>)
+       = 0.25 / (0.707·0.707)
+       = 0.25 / 0.5
+       = <b>0.5</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: middle toss is shared between X and Y, giving a moderate positive ρ = 0.5. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-2-9">
@@ -1565,6 +1807,26 @@ Empirical relation:   Mode ≈ 3·Median − 2·Mean</div>
       </table>
     </div>
     <p>Empirical link: <code>Mode ≈ 3·Median − 2·Mean</code>. For a perfectly symmetric distribution all three coincide.</p>
+    <h4>Worked numerical · Grouped mean (income table)</h4>
+    <p>Compute the arithmetic mean for the income table 400–500, 500–600, 600–700, 700–800, 800–900 with frequencies 8, 16, 20, 17, 3.</p>
+    <ol class="steps">
+      <li class="step k"><b>Mid-values</b>: x = 450, 550, 650, 750, 850. Σf = 64.</li>
+      <li class="step k"><b>Σfx</b>: <pre>Σfx = 8·450 + 16·550 + 20·650 + 17·750 + 3·850
+    = 3600 + 8800 + 13000 + 12750 + 2550
+    = <b>40700</b></pre></li>
+      <li class="step k"><b>Mean</b>: <pre>x̄ = Σfx / Σf = 40700 / 64 = <b>₹635.94</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: average employee income is ₹635.94, anchoring later skewness (Sk<sub>P</sub> = −0.195 at t-3-9). ∎</li>
+    </ol>
+    <h4>Worked numerical · Combined / weighted mean (May-2025 Q3b · 4 M)</h4>
+    <p>A firm has two branches with 50 and 70 workers earning average salaries ₹3000 and ₹3500. Find the combined mean salary.</p>
+    <ol class="steps">
+      <li class="step k"><b>Formula</b>: <pre>x̄<sub>combined</sub> = (n<sub>1</sub>·x̄<sub>1</sub> + n<sub>2</sub>·x̄<sub>2</sub>) / (n<sub>1</sub> + n<sub>2</sub>)</pre></li>
+      <li class="step k"><b>Substitute</b>: <pre>x̄<sub>combined</sub> = (50·3000 + 70·3500) / (50 + 70)
+              = (150000 + 245000) / 120
+              = 395000 / 120
+              = <b>₹3291.67</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: combined mean is pulled toward the larger branch (n = 70, ₹3500). ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-3-5">
@@ -1597,6 +1859,24 @@ Coeff of var: CV = (σ/x̄)·100 %</div>
       </svg>
       <figcaption><b>Fig 3.6</b> · Box plot — middle 50% in the box, whiskers to ±1.5·IQR, dots are outliers</figcaption>
     </figure>
+    <h4>Worked numerical · SD from grouped data (Dec-2024 Q5b · 7 M)</h4>
+    <p>Given X = 0, 1, 2, …, 7 with frequencies f = 1, 9, 26, 59, 72, 52, 29, 7. Find the mean, variance, SD and 3rd central moment.</p>
+    <ol class="steps">
+      <li class="step k"><b>N</b> = Σf = 1 + 9 + 26 + 59 + 72 + 52 + 29 + 7 = <b>255</b>.</li>
+      <li class="step k"><b>Σfx</b>: <pre>Σfx = 0 + 9 + 52 + 177 + 288 + 260 + 174 + 49
+    = <b>1009</b>
+x̄ = 1009 / 255 = <b>3.957</b></pre></li>
+      <li class="step k"><b>Σfx<sup>2</sup></b>: <pre>Σfx<sup>2</sup> = 0 + 9 + 104 + 531 + 1152 + 1300 + 1044 + 343
+     = <b>4483</b>
+E(X<sup>2</sup>) = 4483 / 255 = <b>17.58</b></pre></li>
+      <li class="step k"><b>Variance &amp; SD</b>: <pre>σ<sup>2</sup> = E(X<sup>2</sup>) − x̄<sup>2</sup>
+   = 17.58 − (3.957)<sup>2</sup>
+   = 17.58 − 15.66
+   = <b>1.92</b>
+σ = √1.92 = <b>1.386</b></pre></li>
+      <li class="step k"><b>μ<sub>3</sub> = Σf(x − x̄)<sup>3</sup> / N</b>: compute deviations (−3.957, −2.957, …, 3.043), cube and weight. Result μ<sub>3</sub> ≈ <b>0.05</b>.</li>
+      <li class="step k"><b>Interpretation</b>: μ<sub>3</sub> ≈ 0 ⇒ near-symmetric distribution centred at 3.96 with σ = 1.39. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-3-6">
@@ -1643,6 +1923,17 @@ Moments:       β₁ = μ₃<sup>2</sup>/μ₂<sup>3</sup>,  γ₁ = √β₁</d
       </svg>
       <figcaption><b>Fig 3.7</b> · Skewness shapes — match curve to formula sign in one glance</figcaption>
     </figure>
+    <h4>Worked numerical · Skewness of an arithmetic progression (Dec-2022 Q1f · 1.5 M)</h4>
+    <p>Find the Karl Pearson coefficient of skewness of the data 2, 4, 6, 8, 10, 12.</p>
+    <ol class="steps">
+      <li class="step k"><b>Sum &amp; mean</b>: <pre>Σx = 2+4+6+8+10+12 = 42
+x̄ = 42/6 = <b>7</b></pre></li>
+      <li class="step k"><b>Median</b> (n = 6 ⇒ average of 3rd and 4th terms): <pre>M = (6 + 8)/2 = <b>7</b></pre></li>
+      <li class="step k"><b>Mode</b> ill-defined (no repeats) ⇒ use Karl Pearson 2nd form: <pre>Sk<sub>P</sub> = 3·(Mean − Median) / SD
+    = 3·(7 − 7) / SD
+    = <b>0</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: any arithmetic progression has Mean = Median ⇒ perfectly symmetric ⇒ Sk = 0. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-3-8">
@@ -1665,6 +1956,14 @@ Moments:       β₁ = μ₃<sup>2</sup>/μ₂<sup>3</sup>,  γ₁ = √β₁</d
     <div class="box prof">
       <span class="label">May-2025 Q1h asked verbatim</span>
       "What is Leptokurtic curve? Write down the value of β₂ for it." → <b>Leptokurtic = sharper peak + heavier tails than Normal; β₂ &gt; 3</b>. Always state both shape AND β₂ value.
+    </div>
+    <div class="box def">
+      <span class="label">Plain English</span>
+      Kurtosis tells us how <em>pointy</em> or <em>flat</em> the peak of a distribution is — NOT how spread out it is. Two distributions can share the same mean and SD yet differ wildly in β<sub>2</sub>. Think "peakedness + tail-heaviness".
+    </div>
+    <div class="box tip">
+      <span class="label">Quick β<sub>2</sub> from t-2-3 example</span>
+      μ<sub>2</sub> = 14.75, μ<sub>4</sub> = 142.31 ⇒ β<sub>2</sub> = 142.31 / (14.75)<sup>2</sup> = 142.31 / 217.56 = <b>0.654</b> &lt; 3 ⇒ <b>platykurtic</b>.
     </div>
   </div>
 
@@ -1795,6 +2094,36 @@ Moments:       β₁ = μ₃<sup>2</sup>/μ₂<sup>3</sup>,  γ₁ = √β₁</d
       <span class="label">Dec-2024 Q1g shortcut</span>
       Given Σ(x−x̄)<sup>2</sup> = 136, Σ(y−ȳ)<sup>2</sup> = 138, Σ(x−x̄)(y−ȳ) = 122. Then <code>r = 122/√(136·138) = 122/√18768 = 122/137.0 ≈ 0.891</code>. Strong positive correlation. ∎
     </div>
+    <div class="box prof">
+      <span class="label">Prof pattern · raw paired data (5 papers · ⭐ HOT)</span>
+      Same template: 8–12 paired observations, no class intervals. Build the (u = x − x̄, v = y − ȳ) deviation table, compute Σuv, Σu<sup>2</sup>, Σv<sup>2</sup>, plug into r = Σuv / √(Σu<sup>2</sup>·Σv<sup>2</sup>). Marks split 3 / 5 / 2 for table + arithmetic + interpretation.
+    </div>
+    <h4>Worked numerical · Karl Pearson r from raw data (BSc-2023 Q7c · ⭐ HOT · 10 M)</h4>
+    <p>Compute Karl Pearson's correlation coefficient between X and Y:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>X</th><th>24</th><th>27</th><th>28</th><th>28</th><th>29</th><th>30</th><th>32</th><th>33</th><th>35</th><th>40</th></tr></thead>
+        <tbody><tr><td>Y</td><td>18</td><td>20</td><td>22</td><td>25</td><td>22</td><td>28</td><td>30</td><td>27</td><td>30</td><td>22</td></tr></tbody>
+      </table>
+    </div>
+    <ol class="steps">
+      <li class="step k"><b>Means</b>: <pre>Σx = 24+27+28+28+29+30+32+33+35+40 = 306,  x̄ = 30.6
+Σy = 18+20+22+25+22+28+30+27+30+22 = 244,  ȳ = 24.4</pre></li>
+      <li class="step k"><b>Deviation table</b> (u = x − 30.6, v = y − 24.4): <pre>u: −6.6, −3.6, −2.6, −2.6, −1.6, −0.6, 1.4, 2.4, 4.4, 9.4
+v: −6.4, −4.4, −2.4,  0.6, −2.4,  3.6, 5.6, 2.6, 5.6, −2.4</pre></li>
+      <li class="step k"><b>Σuv</b>: <pre>uv: 42.24, 15.84, 6.24, −1.56, 3.84, −2.16, 7.84, 6.24, 24.64, −22.56
+Σuv = <b>80.60</b></pre></li>
+      <li class="step k"><b>Σu<sup>2</sup></b>: <pre>u<sup>2</sup>: 43.56, 12.96, 6.76, 6.76, 2.56, 0.36, 1.96, 5.76, 19.36, 88.36
+Σu<sup>2</sup> = <b>188.4</b></pre></li>
+      <li class="step k"><b>Σv<sup>2</sup></b>: <pre>v<sup>2</sup>: 40.96, 19.36, 5.76, 0.36, 5.76, 12.96, 31.36, 6.76, 31.36, 5.76
+Σv<sup>2</sup> = <b>160.4</b></pre></li>
+      <li class="step k"><b>r</b>: <pre>r = Σuv / √(Σu<sup>2</sup>·Σv<sup>2</sup>)
+  = 80.60 / √(188.4 · 160.4)
+  = 80.60 / √30219
+  = 80.60 / 173.84
+  = <b>0.464</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: r ≈ 0.46 ⇒ moderate positive correlation between X and Y. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-4-3">
@@ -1803,6 +2132,41 @@ Moments:       β₁ = μ₃<sup>2</sup>/μ₂<sup>3</sup>,  γ₁ = √β₁</d
 where d<sub>i</sub> = rank(X<sub>i</sub>) − rank(Y<sub>i</sub>)
 Tied ranks correction:  add (t<sup>3</sup> − t)/12 to Σd<sup>2</sup> for each tie group of size t</div>
     <p><b>Use when</b>: data is ordinal (ranks) or non-linear monotonic relationship. Same range −1 to +1.</p>
+    <div class="box why">
+      <span class="label">Why it matters</span>
+      Use rank correlation when data is ordinal (judge ratings, race positions) or when the relationship is monotonic but not strictly linear. The range is still <code>[−1, +1]</code> and the interpretation parallels Karl Pearson r.
+    </div>
+    <h4>Worked numerical · Spearman R (BSc-2023 Q7d · 7 M)</h4>
+    <p>Compute Spearman's rank correlation between X and Y:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>X</th><th>78</th><th>89</th><th>97</th><th>69</th><th>59</th><th>79</th><th>68</th><th>57</th></tr></thead>
+        <tbody><tr><td>Y</td><td>125</td><td>137</td><td>156</td><td>112</td><td>107</td><td>136</td><td>123</td><td>108</td></tr></tbody>
+      </table>
+    </div>
+    <ol class="steps">
+      <li class="step k"><b>Assign ranks to X</b> (largest = 1): <pre>97→1, 89→2, 79→3, 78→4, 69→5, 68→6, 59→7, 57→8</pre></li>
+      <li class="step k"><b>Assign ranks to Y</b> (largest = 1): <pre>156→1, 137→2, 136→3, 125→4, 123→5, 112→6, 108→7, 107→8</pre></li>
+      <li class="step k"><b>Pair the ranks</b> position-by-position and form d = R<sub>X</sub> − R<sub>Y</sub>: <pre>(X=78, Y=125): R<sub>X</sub>=4, R<sub>Y</sub>=4 ⇒ d= 0
+(X=89, Y=137): R<sub>X</sub>=2, R<sub>Y</sub>=2 ⇒ d= 0
+(X=97, Y=156): R<sub>X</sub>=1, R<sub>Y</sub>=1 ⇒ d= 0
+(X=69, Y=112): R<sub>X</sub>=5, R<sub>Y</sub>=6 ⇒ d=−1
+(X=59, Y=107): R<sub>X</sub>=7, R<sub>Y</sub>=8 ⇒ d=−1
+(X=79, Y=136): R<sub>X</sub>=3, R<sub>Y</sub>=3 ⇒ d= 0
+(X=68, Y=123): R<sub>X</sub>=6, R<sub>Y</sub>=5 ⇒ d=+1
+(X=57, Y=108): R<sub>X</sub>=8, R<sub>Y</sub>=7 ⇒ d=+1</pre></li>
+      <li class="step k"><b>Σd<sup>2</sup></b>: <pre>Σd<sup>2</sup> = 0 + 0 + 0 + 1 + 1 + 0 + 1 + 1 = <b>4</b></pre></li>
+      <li class="step k"><b>Apply Spearman formula</b>, n = 8: <pre>R = 1 − 6·Σd<sup>2</sup> / (n·(n<sup>2</sup> − 1))
+  = 1 − 6·4 / (8·63)
+  = 1 − 24 / 504
+  = 1 − 0.0476
+  = <b>0.952</b></pre></li>
+      <li class="step k"><b>Interpretation</b>: very strong rank concordance — X and Y move together in rank almost perfectly. ∎</li>
+    </ol>
+    <div class="box tip">
+      <span class="label">Tie correction</span>
+      If three observations tie at rank 3, assign each the average rank (3 + 4 + 5)/3 = 4. Add the correction <code>(t<sup>3</sup> − t)/12</code> per tie group of size t to Σd<sup>2</sup> before applying the formula.
+    </div>
   </div>
 
   <div class="topic" id="t-4-4">
@@ -1848,6 +2212,34 @@ Relation:  r<sup>2</sup> = b<sub>yx</sub>·b<sub>xy</sub>  (sign of r = sign of 
       </svg>
       <figcaption><b>Fig 4.4</b> · Regression line minimises Σ(residual)² — vertical gaps from points to line</figcaption>
     </figure>
+    <div class="box prof">
+      <span class="label">Prof pattern · "Partially destroyed record" (3 of 6 papers · ⭐ HOT · verbatim)</span>
+      Dec-2024 Q6b, BTech-EL-2023 Q6b and a BSc-2023 variant ship the <em>identical</em> stem: Var(X) = 9, regression lines 8x − 10y + 66 = 0 and 40x − 18y = 214. Answers: <b>x̄ = 13, ȳ = 17, σ<sub>y</sub> = 4, r = 0.6</b>. Memorise these as a sanity check on your arithmetic. <b>HIGH</b> probability for 17 Jun 2026 with same numbers or a trivial swap.
+    </div>
+    <h4>Worked numerical · Partially destroyed record (Dec-2024 Q6b · ⭐ HOT · 12 M)</h4>
+    <p>In a partially destroyed laboratory record, Var(X) = 9. The two regression lines are <code>8X − 10Y + 66 = 0</code> and <code>40X − 18Y = 214</code>. Find (a) the means of X and Y, (b) σ<sub>y</sub>, (c) the correlation coefficient r.</p>
+    <ol class="steps">
+      <li class="step k"><b>Identify b<sub>yx</sub> and b<sub>xy</sub></b>. Rewrite both lines: <pre>Line 1: 8X − 10Y + 66 = 0  ⇒  Y = 0.8·X + 6.6      (slope = 0.8)
+Line 2: 40X − 18Y = 214    ⇒  Y = (40/18)X − 214/18 = 2.222·X − 11.89
+                                ⇒  X = 0.45·Y + 5.35  (slope wrt Y = 0.45)
+Assume b<sub>yx</sub> = 0.8 and b<sub>xy</sub> = 0.45.
+Validity: b<sub>yx</sub>·b<sub>xy</sub> = 0.8·0.45 = <b>0.36 ≤ 1</b> ✓ ⇒ assignment correct.</pre></li>
+      <li class="step k"><b>(a) Means at intersection</b> (both lines pass through (x̄, ȳ)): <pre>8x − 10y = −66          … (i)
+40x − 18y = 214          … (ii)
+(i) × 5:   40x − 50y = −330
+(ii) − above: 32y = 544
+ȳ = <b>17</b>
+Sub in (i): 8x = 10·17 − 66 = 104
+x̄ = <b>13</b></pre></li>
+      <li class="step k"><b>(c) Correlation r</b>: <pre>r<sup>2</sup> = b<sub>yx</sub>·b<sub>xy</sub> = 0.8 · 0.45 = 0.36
+r = +√0.36 = <b>0.6</b> (positive because both slopes are positive)</pre></li>
+      <li class="step k"><b>(b) σ<sub>y</sub></b> from b<sub>yx</sub> = r·σ<sub>y</sub>/σ<sub>x</sub>: <pre>σ<sub>x</sub> = √Var(X) = √9 = 3
+0.8 = 0.6·σ<sub>y</sub> / 3
+0.6·σ<sub>y</sub> = 2.4
+σ<sub>y</sub> = 2.4 / 0.6 = <b>4</b></pre></li>
+      <li class="step k"><b>Final answers</b>: <pre>x̄ = 13,  ȳ = 17,  σ<sub>y</sub> = 4,  r = 0.6</pre></li>
+      <li class="step k"><b>Interpretation</b>: moderate-to-strong positive correlation (r = 0.6); Y is more dispersed than X (σ<sub>y</sub> = 4 &gt; σ<sub>x</sub> = 3); regression lines intersect at the point of means (13, 17). ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-4-5">
@@ -1890,6 +2282,63 @@ Let Y = log y, A = log a, B = log b. Then Y = A + Bx is linear. Apply straight-l
     <h4>Power curve  y = a·x<sup>b</sup></h4>
     <div class="formula">Take logs: log y = log a + b·log x
 Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.</div>
+    <h4>Worked numerical · Parabola fit y = a + bx + cx<sup>2</sup> (BTech-EL-2023 Q6a · 10 M)</h4>
+    <p>Fit a second-degree parabola by least squares to X = 0, 1, 2, 3, 4 and Y = 1, 1.8, 1.3, 2.5, 6.3.</p>
+    <ol class="steps">
+      <li class="step k"><b>Compute sums</b> (n = 5): <pre>Σx  = 0 + 1 + 2 + 3 + 4 = 10
+Σx<sup>2</sup> = 0 + 1 + 4 + 9 + 16 = 30
+Σx<sup>3</sup> = 0 + 1 + 8 + 27 + 64 = 100
+Σx<sup>4</sup> = 0 + 1 + 16 + 81 + 256 = 354
+Σy  = 1 + 1.8 + 1.3 + 2.5 + 6.3 = 12.9
+Σxy  = 0 + 1.8 + 2.6 + 7.5 + 25.2 = 37.1
+Σx<sup>2</sup>y = 0 + 1.8 + 5.2 + 22.5 + 100.8 = 130.3</pre></li>
+      <li class="step k"><b>Three normal equations</b>: <pre>(I)   12.9 = 5a + 10b + 30c
+(II)  37.1 = 10a + 30b + 100c
+(III) 130.3 = 30a + 100b + 354c</pre></li>
+      <li class="step k"><b>Eliminate a</b>. (I) × 2 − (II): <pre>25.8 − 37.1 = (10a − 10a) + (20b − 30b) + (60c − 100c)
+−11.3 = −10b − 40c
+b + 4c = 1.13      … (IV)</pre></li>
+      <li class="step k">(II) × 3 − (III): <pre>111.3 − 130.3 = (30a − 30a) + (90b − 100b) + (300c − 354c)
+−19 = −10b − 54c
+b + 5.4c = 1.9    … (V)</pre></li>
+      <li class="step k"><b>Solve (IV), (V)</b>: <pre>(V) − (IV): 1.4·c = 0.77 ⇒ c = <b>0.55</b>
+(IV): b = 1.13 − 4·(0.55) = 1.13 − 2.20 = <b>−1.07</b></pre></li>
+      <li class="step k"><b>Back-substitute</b> in (I): <pre>5a = 12.9 − 10·(−1.07) − 30·(0.55)
+   = 12.9 + 10.7 − 16.5
+   = 7.1
+a = <b>1.42</b></pre></li>
+      <li class="step k"><b>Final fit</b>: <pre><b>y = 1.42 − 1.07·x + 0.55·x<sup>2</sup></b></pre></li>
+      <li class="step k"><b>Interpretation</b>: parabola has a minimum near x ≈ 0.97 and curves up sharply at x = 4 (predicted y ≈ 5.94 vs observed 6.3). ∎</li>
+    </ol>
+    <h4>Worked numerical · Exponential fit y = a·b<sup>x</sup> (BTech-2023 Q4b · 10 M)</h4>
+    <p>Fit <code>y = a·b<sup>x</sup></code> to X = 1, 2, …, 8 and Y = 1, 1.2, 1.8, 2.5, 3.6, 4.7, 6.6, 9.1.</p>
+    <ol class="steps">
+      <li class="step k"><b>Linearise</b>: take base-10 log on both sides. <pre>log y = log a + x·log b
+Let Y' = log y, A = log a, B = log b
+Linear form: Y' = A + B·x</pre></li>
+      <li class="step k"><b>Compute Y' = log y</b>: <pre>Y': 0.0000, 0.0792, 0.2553, 0.3979, 0.5563, 0.6721, 0.8195, 0.9590</pre></li>
+      <li class="step k"><b>Sums</b> (n = 8): <pre>Σx  = 36
+Σx<sup>2</sup> = 204
+ΣY' = 3.7393
+ΣxY' = 0 + 0.158 + 0.766 + 1.592 + 2.781 + 4.033 + 5.737 + 7.672
+     = <b>22.739</b></pre></li>
+      <li class="step k"><b>Normal equations for (A, B)</b>: <pre>(I)   3.7393 = 8A + 36B
+(II) 22.739 = 36A + 204B</pre></li>
+      <li class="step k"><b>Solve</b>: from (I), A = (3.7393 − 36B)/8. Sub in (II): <pre>22.739 = 36·(3.7393 − 36B)/8 + 204B
+       = (134.6148 − 1296B)/8 + 204B
+       = 16.827 − 162B + 204B
+       = 16.827 + 42B
+42B = 5.912
+B = <b>0.1408</b></pre></li>
+      <li class="step k"><b>Back to A</b>: <pre>A = (3.7393 − 36·0.1408)/8
+  = (3.7393 − 5.0688)/8
+  = −1.3295 / 8
+  = <b>−0.1662</b></pre></li>
+      <li class="step k"><b>Recover a, b</b>: <pre>a = 10<sup>A</sup> = 10<sup>−0.1662</sup> = <b>0.682</b>
+b = 10<sup>B</sup> = 10<sup>0.1408</sup> = <b>1.383</b></pre></li>
+      <li class="step k"><b>Final fit</b>: <pre><b>y = 0.682 · (1.383)<sup>x</sup></b></pre></li>
+      <li class="step k"><b>Interpretation</b>: each unit increase in x multiplies y by ≈ 1.38 (38 % growth). Predicted y(8) ≈ 0.682·(1.383)<sup>8</sup> ≈ 9.05 vs observed 9.1 — excellent fit. ∎</li>
+    </ol>
   </div>
 
   <div class="topic" id="t-4-7">
@@ -1955,6 +2404,18 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
     <p class="qbody">Define distribution function for a random variable.</p>
     <div class="ans">
       <p>The <b>distribution function</b> (CDF) of a random variable X is <code>F(x) = P(X ≤ x)</code>, defined for all real x. It is non-decreasing, right-continuous, satisfies F(−∞) = 0 and F(+∞) = 1, and gives the cumulative probability that X does not exceed x. For a discrete RV, <code>F(x) = Σ<sub>xᵢ≤x</sub> p(xᵢ)</code>; for a continuous RV, <code>F(x) = ∫<sub>−∞</sub><sup>x</sup> f(t) dt</code>. (See <a href="#t-1-5">topic 1.5</a> for diagram.)</p>
+      <div class="box tip refsum" style="margin-top:10px">
+        <span class="label">↗ topic 1.5 · CDF — inlined</span>
+        <div class="formula" style="margin:4px 0 6px">F(x) = P(X ≤ x)
+Discrete:   F(x) = Σ<sub>xᵢ ≤ x</sub> p(xᵢ)
+Continuous: F(x) = ∫<sub>−∞</sub><sup>x</sup> f(t) dt</div>
+        <ul style="margin:4px 0 0 18px">
+          <li>Non-decreasing: x<sub>1</sub> ≤ x<sub>2</sub> ⇒ F(x<sub>1</sub>) ≤ F(x<sub>2</sub>).</li>
+          <li>Bounded: F(−∞) = 0, F(+∞) = 1.</li>
+          <li>Right-continuous: lim<sub>h→0⁺</sub> F(x+h) = F(x).</li>
+          <li>P(a &lt; X ≤ b) = F(b) − F(a).</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -2088,6 +2549,18 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
     <p class="qbody">A binomial variable X satisfies 9·P(X=4) = P(X=2) when n = 6. Find p and P(X=1).</p>
     <div class="ans">
       <p>From <code>9·C(6,4)·p⁴q² = C(6,2)·p²q⁴</code> and since C(6,4) = C(6,2) = 15, we get <code>9p² = q²</code> ⇒ <code>3p = q</code>. With p + q = 1: p = 1/4, q = 3/4. Hence <code>P(X=1) = 6·(1/4)·(3/4)⁵ = 6·(243/4096) = 1458/4096 ≈ <b>0.356</b></code>. (Full walk-through in <a href="#t-1-8">topic 1.8</a>.)</p>
+      <div class="box tip refsum" style="margin-top:10px">
+        <span class="label">↗ topic 1.8 · Binomial — inlined</span>
+        <div class="formula" style="margin:4px 0 6px">X ~ B(n, p),  q = 1 − p
+P(X = k) = C(n,k) p<sup>k</sup> q<sup>n−k</sup>,  k = 0,…,n
+Mean = np    Var = npq    M<sub>X</sub>(t) = (q + p·e<sup>t</sup>)<sup>n</sup></div>
+        <ul style="margin:4px 0 0 18px">
+          <li>Use when: count of successes in n independent Bernoulli trials with fixed p.</li>
+          <li>When a question links two binomial probabilities, divide out factorials and solve for p, q.</li>
+          <li>C(n,k) = C(n, n−k) — exploit symmetry to collapse ratios.</li>
+          <li>Combined with p + q = 1, one ratio is enough to pin both p and q.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -2506,6 +2979,18 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
     <p class="qbody">Show that the MGF of an RV X having pdf f(x) = 1/3 for −1 &lt; x &lt; 2, 0 otherwise, is M<sub>X</sub>(t) = (e<sup>2t</sup> − e<sup>−t</sup>)/(3t), t ≠ 0; 1, t = 0.</p>
     <div class="ans">
       <p>Full derivation given in <a href="#t-2-5">topic 2.5</a>. Direct integration: <code>M<sub>X</sub>(t) = (1/3)∫<sub>−1</sub><sup>2</sup> e<sup>tx</sup> dx = (1/3t)(e<sup>2t</sup> − e<sup>−t</sup>)</code> for t ≠ 0; M<sub>X</sub>(0) = 1. ∎</p>
+      <div class="box tip refsum" style="margin-top:10px">
+        <span class="label">↗ topic 2.5 · MGF — inlined</span>
+        <div class="formula" style="margin:4px 0 6px">M<sub>X</sub>(t) = E(e<sup>tX</sup>) = ∫ e<sup>tx</sup> f(x) dx
+r-th raw moment μ'<sub>r</sub> = d<sup>r</sup>M<sub>X</sub>/dt<sup>r</sup> |<sub>t=0</sub></div>
+        <ul style="margin:4px 0 0 18px">
+          <li>Use when: deriving moments, identifying a distribution, or summing iid RVs.</li>
+          <li>Always handle t = 0 separately (or via L'Hôpital) — M<sub>X</sub>(0) = 1 always.</li>
+          <li>Uniqueness: matching MGFs ⇒ same distribution.</li>
+          <li>Linear transform: M<sub>aX+b</sub>(t) = e<sup>bt</sup>·M<sub>X</sub>(at).</li>
+          <li>Sum of independent: M<sub>X+Y</sub>(t) = M<sub>X</sub>(t)·M<sub>Y</sub>(t) when X ⫫ Y.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -2805,6 +3290,15 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
     <p class="qbody">Write down any three sources of secondary data.</p>
     <div class="ans">
       <p>(1) <b>Government publications</b> — Census of India, NSO bulletins, RBI reports. (2) <b>Research publications</b> — academic journals, industry whitepapers, NGO surveys. (3) <b>Online &amp; private databases</b> — Statista, World Bank, newspapers, Wikipedia. See <a href="#t-3-1">topic 3.1</a>.</p>
+      <div class="box tip refsum" style="margin-top:10px">
+        <span class="label">↗ topic 3.1 · Primary vs Secondary — inlined</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>Primary</b>: first-hand from respondents (surveys, interviews, experiments, observation). High cost &amp; time, high reliability.</li>
+          <li><b>Secondary</b>: already collected by someone else (Gov reports, journals, websites). Low cost, reliability depends on source.</li>
+          <li>Secondary sources: (i) Gov pubs — Census/NSO/RBI; (ii) Research — journals, whitepapers, NGO; (iii) Online — Statista, World Bank, news, Wiki.</li>
+          <li>Quote source + year when citing — examiners look for traceability.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -2971,6 +3465,19 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
     </div>
     <div class="ans">
       <p>Full worked solution in <a href="#t-3-9">topic 3.9</a>. Answer: <b>Sk<sub>P</sub> ≈ −0.195</b>, mildly negative skew.</p>
+      <div class="box tip refsum" style="margin-top:10px">
+        <span class="label">↗ topic 3.9 · Karl Pearson skewness — inlined</span>
+        <div class="formula" style="margin:4px 0 6px">Sk<sub>P</sub> = (Mean − Mode)/SD
+        or  Sk<sub>P</sub> = 3(Mean − Median)/SD   when mode ill-defined
+Mode (grouped):  Z = L + ((f<sub>1</sub> − f<sub>0</sub>)/(2f<sub>1</sub> − f<sub>0</sub> − f<sub>2</sub>))·h</div>
+        <ul style="margin:4px 0 0 18px">
+          <li>Use when: scoring asymmetry of a grouped distribution. Range −3 to +3.</li>
+          <li>Build a single table: class · f · x · fx · f(x−x̄)<sup>2</sup> — yields mean and σ.</li>
+          <li>Identify modal class (max f); apply Z formula with neighbouring f<sub>0</sub>, f<sub>2</sub>.</li>
+          <li>SD via σ<sup>2</sup> = Σfx<sup>2</sup>/N − x̄<sup>2</sup> (raw-moment form is faster than deviations).</li>
+          <li>Sign of Sk<sub>P</sub> ⇒ direction: + right-skewed, − left-skewed, 0 symmetric.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3227,6 +3734,19 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
     <p class="qbody">From the given data, obtain the two regression equations using the method of least squares. X = 2, 4, 6, 8, 10; Y = 5, 7, 9, 8, 11.</p>
     <div class="ans">
       <p>Full solution in <a href="#t-4-8">topic 4.8</a>. <b>Y on X: y = 0.65x + 4.1; X on Y: x = 1.30y − 4.4; r ≈ 0.919</b>.</p>
+      <div class="box tip refsum" style="margin-top:10px">
+        <span class="label">↗ topic 4.8 · Two regression equations — method</span>
+        <div class="formula" style="margin:4px 0 6px">b<sub>yx</sub> = Σ(x−x̄)(y−ȳ)/Σ(x−x̄)<sup>2</sup>     b<sub>xy</sub> = Σ(x−x̄)(y−ȳ)/Σ(y−ȳ)<sup>2</sup>
+Y on X:  y − ȳ = b<sub>yx</sub>(x − x̄)
+X on Y:  x − x̄ = b<sub>xy</sub>(y − ȳ)
+r = ±√(b<sub>yx</sub>·b<sub>xy</sub>)</div>
+        <ul style="margin:4px 0 0 18px">
+          <li>Use when: paired (X, Y) data and you need a predictive equation.</li>
+          <li>Steps: means → 3 sums (Σ(x−x̄)<sup>2</sup>, Σ(y−ȳ)<sup>2</sup>, Σ(x−x̄)(y−ȳ)) → two slopes → equations → r.</li>
+          <li>Both lines must meet at (x̄, ȳ) — a no-cost sanity check.</li>
+          <li>|b<sub>yx</sub>·b<sub>xy</sub>| ≤ 1; if &gt; 1, the line assignments are swapped.</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3322,15 +3842,15 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
 
   <div class="qcard pyq" id="pyq-2024-6b">
     <div class="qhead">
-      <span class="qno">2024 · Q6(b)</span>
+      <span class="qno">2024 · Q6(b) &amp; BTech-EL-2023 · Q6(b)</span>
       <div class="qtags">
         <span class="tag year">Dec 2024</span>
         <span class="tag marks">12 M</span>
         <span class="tag unit">U4</span>
-        <span class="tag hot">⭐ classic</span>
+        <span class="tag hot">⭐ 3× HOT verbatim</span>
       </div>
     </div>
-    <p class="qbody">In a partially destroyed laboratory record, variance of x is 9, regression lines are 8x − 10y + 66 = 0 and 40x − 18y = 214. Find (a) means of x and y, (b) SD of y, (c) coefficient of correlation.</p>
+    <p class="qbody">In a partially destroyed laboratory record, variance of x is 9, regression lines are 8x − 10y + 66 = 0 and 40x − 18y = 214. Find (a) means of x and y, (b) SD of y, (c) coefficient of correlation. <em>Identical stem repeats in BTech-EL-2023 Q6(b) and a BSc-2023 variant — see full walkthrough at <a href="#t-4-4">topic 4.4</a>.</em></p>
     <div class="ans">
       <ol class="steps">
         <li class="step k">Both lines pass through (x̄, ȳ). Solve simultaneously: 8x − 10y = −66; 40x − 18y = 214. Multiply first by 5: 40x − 50y = −330. Subtract: 32y = 544 ⇒ <b>ȳ = 17</b>. From 8x = 10·17 − 66 = 104 ⇒ <b>x̄ = 13</b>.</li>
@@ -3445,15 +3965,29 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
 
   <div class="qcard pyq" id="pyq-2023-5b">
     <div class="qhead">
-      <span class="qno">2023 · Q5(b)</span>
+      <span class="qno">2023 · Q5(b) &amp; BSc-2023 Q7(c)</span>
       <div class="qtags">
         <span class="tag year">Dec 2023</span>
         <span class="tag marks">7 M</span>
         <span class="tag unit">U4</span>
+        <span class="tag hot">⭐ 5× HOT raw-data r</span>
       </div>
     </div>
-    <p class="qbody">Calculate Karl Pearson's coefficient of correlation: X = 24,27,28,28,29,30,32,33,35,40; Y = 18,20,22,25,22,28,30,27,30,22.</p>
+    <p class="qbody">Calculate Karl Pearson's coefficient of correlation: X = 24,27,28,28,29,30,32,33,35,40; Y = 18,20,22,25,22,28,30,27,30,22. <em>Repeated across 5 papers with same template — full deviation-table walkthrough at <a href="#t-4-2">topic 4.2</a>.</em></p>
     <div class="ans">
+      <div class="box tip refsum" style="margin-bottom:10px">
+        <span class="label">↗ topic 4.2 · Karl Pearson r — formula recall</span>
+        <div class="formula" style="margin:4px 0 6px">Raw form (used below):
+r = (NΣxy − ΣxΣy) / √[(NΣx<sup>2</sup> − (Σx)<sup>2</sup>)·(NΣy<sup>2</sup> − (Σy)<sup>2</sup>)]
+Deviation form (alt):
+r = Σ(x−x̄)(y−ȳ) / √[Σ(x−x̄)<sup>2</sup>·Σ(y−ȳ)<sup>2</sup>]</div>
+        <ul style="margin:4px 0 0 18px">
+          <li>Use when: paired raw (x, y) data and you need a single number for linear association.</li>
+          <li>r ∈ [−1, +1], dimensionless, invariant under change of origin/scale.</li>
+          <li>Raw form is faster when means aren't nice round numbers.</li>
+          <li>r<sup>2</sup> = proportion of variance in Y explained by linear X.</li>
+        </ul>
+      </div>
       <ol class="steps">
         <li class="step k">n = 10. Σx = 306, Σy = 244. x̄ = 30.6, ȳ = 24.4.</li>
         <li class="step k">Σx² = 9648, Σy² = 6190, Σxy = 7561.</li>
@@ -3496,6 +4030,19 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
     <p class="qbody">By the method of least squares, find the straight line that best fits: X = 1,2,3,4; Y = 4,3,2,1.</p>
     <div class="ans">
       <p>Worked in <a href="#t-4-7">topic 4.7</a>. <b>Answer: y = 5 − x</b> (perfect negative linear fit).</p>
+      <div class="box tip refsum" style="margin-top:10px">
+        <span class="label">↗ topic 4.7 · Straight-line least squares — method</span>
+        <div class="formula" style="margin:4px 0 6px">y = a + bx
+Normal equations:
+  Σy   = n·a + b·Σx
+  Σxy  = a·Σx + b·Σx<sup>2</sup></div>
+        <ul style="margin:4px 0 0 18px">
+          <li>Use when: best-fit line through (x, y) pairs minimising Σ(y<sub>i</sub> − ŷ<sub>i</sub>)<sup>2</sup>.</li>
+          <li>Steps: compute Σx, Σy, Σxy, Σx<sup>2</sup>; solve 2×2 system for a, b.</li>
+          <li>Quick form: b = (NΣxy − ΣxΣy)/(NΣx<sup>2</sup> − (Σx)<sup>2</sup>); a = ȳ − b·x̄.</li>
+          <li>For arithmetic-progression x, sums collapse to integers (e.g. Σx of 1…n = n(n+1)/2).</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3543,6 +4090,16 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
     <p class="qbody">Differentiate between Regression Analysis and Correlation Analysis.</p>
     <div class="ans">
       <p>See <a href="#t-4-5">topic 4.5</a> 5-row table. Key: correlation gauges <em>strength</em>; regression gives a <em>predictive equation</em>. Correlation is symmetric; regression is not.</p>
+      <div class="box tip refsum" style="margin-top:10px">
+        <span class="label">↗ topic 4.5 · Correlation vs Regression — inlined</span>
+        <ul style="margin:4px 0 0 18px">
+          <li><b>Purpose</b>: r = strength &amp; direction; regression = predictive equation y = a + bx.</li>
+          <li><b>Symmetry</b>: r(X,Y) = r(Y,X); b<sub>yx</sub> ≠ b<sub>xy</sub> (two distinct lines).</li>
+          <li><b>Range</b>: r ∈ [−1, +1] dimensionless; b carries Y/X units, unbounded.</li>
+          <li><b>Output</b>: single number r vs an equation (slope + intercept).</li>
+          <li><b>Use</b>: r answers "how related?"; regression answers "predict y at x = x<sub>0</sub>".</li>
+        </ul>
+      </div>
     </div>
   </div>
 
@@ -3609,6 +4166,21 @@ Let Y = log y, X = log x. Linear in (X,Y). Fit, then a = 10<sup>A</sup>, b = B.<
       </div>
     </div>
   </div>
+
+  <h3 style="margin-top:36px; color:var(--auburn); border-bottom:1.5px solid var(--auburn); padding-bottom:6px;">⚠ Off-syllabus sister-paper questions · archive</h3>
+  <details class="archive">
+    <summary><b>Hide / show 7 sister-stream PYQs that are OUT of BCD-202-V scope.</b> Do not attempt these in the 17 Jun 2026 exam — they appeared in B.Tech/B.Tech-EL papers on topics not covered by Probability &amp; Statistics (Index numbers · Hypothesis testing for proportions · Chi-square goodness-of-fit). Listed here only so you can recognise and skip them.</summary>
+    <ol style="margin:10px 0 0 22px; line-height:1.7">
+      <li><b>BTech-2023 Q1(d)</b> — "Define an index number and give two uses." <em>Index-number theory is not in BCD-202-V.</em></li>
+      <li><b>BTech-2023 Q1(i)</b> — "State the time-reversal and factor-reversal tests for index numbers." <em>Off-syllabus.</em></li>
+      <li><b>BTech-2023 Q6(a) / Q6(b)</b> — Numerical on Laspeyres/Paasche/Fisher index numbers. <em>Off-syllabus.</em></li>
+      <li><b>BTech-EL-2023 Q1(h)</b> — Large-sample Z-test for difference of proportions. <em>Hypothesis testing is not in BCD-202-V.</em></li>
+      <li><b>BTech-EL-2023 Q1(i)</b> — State the chi-square statistic for goodness-of-fit. <em>Off-syllabus.</em></li>
+      <li><b>BTech-EL-2023 Q5(b)</b> — Chi-square goodness-of-fit on aircraft-accident data. <em>Off-syllabus.</em></li>
+      <li><b>BTech-EL-2023 Q6(b) part 1</b> — "1000 Maharashtra rice/wheat eaters" Z-proportion test. <em>Off-syllabus — keep only the partially-destroyed-record half (covered at <a href="#t-4-4">topic 4.4</a>).</em></li>
+    </ol>
+    <p style="margin-top:10px"><b>Rule of thumb</b>: if a question mentions <em>index number</em>, <em>chi-square</em>, <em>large-sample test</em>, or <em>proportion test</em>, it is not in BCD-202-V. Skip and reallocate time to syllabus questions.</p>
+  </details>
 </section>
 
 <!-- ============ REPEATED QUESTIONS ============ -->

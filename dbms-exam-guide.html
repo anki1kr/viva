@@ -2545,6 +2545,16 @@ CREATE VIEW Toppers AS SELECT Roll, Name FROM Student WHERE Marks &gt;= 75;</cod
   <div class="qbody">Elaborate in detail the three-schema architecture of Database system. Also differentiate between Logical and Physical Data Independence.</div>
   <div class="ans">
     <span class="label">Model answer · 7-mark structure</span>
+    <div class="box tip refsum"><span class="label">From Q 1-8 (10-mark full DI answer) · inline summary →</span>
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Definition</b> — Data Independence is the ability to alter one schema level without modifying the next higher level or applications.</li>
+        <li><b>Three levels</b> (ANSI/SPARC, Fig 1.1) — Internal (storage), Conceptual (logical schema), External (per-user views).</li>
+        <li><b>Two mappings</b>: Internal↔Conceptual ⇒ <b>Physical DI</b>; Conceptual↔External ⇒ <b>Logical DI</b>.</li>
+        <li><b>Physical DI</b>: add B-tree index / change file org without touching apps. Usually achievable.</li>
+        <li><b>Logical DI</b>: add columns / split tables without breaking existing views. Harder; partial.</li>
+        <li>To trim from 10M → 7M: keep three-level diagram + mapping table; cut to 3 advantage bullets.</li>
+      </ul>
+    </div>
     <p>(See full answer at <a href="#pyq-1-8" style="color:var(--brand)">Q 1-8</a> — same content, compressed to 7 M by trimming the advantages section to three bullet points.)</p>
     <p>Briefly: three levels (Internal · Conceptual · External) connected by two mappings; the lower mapping provides Physical DI, the upper one Logical DI. Physical DI hides storage changes from apps; Logical DI hides conceptual schema evolution from existing views.</p>
   </div>
@@ -2616,6 +2626,16 @@ CREATE VIEW Toppers AS SELECT Roll, Name FROM Student WHERE Marks &gt;= 75;</cod
   <div class="qbody">What are the different types of Database Users?</div>
   <div class="ans">
     <span class="label">Model answer · 5-mark structure</span>
+    <div class="box tip refsum"><span class="label">From Q 1-6 (5-mark DBMS users) · inline summary →</span>
+      <ul style="margin:6px 0 0 18px">
+        <li><b>DBA</b> — defines schema, grants privileges, tunes performance, manages backups.</li>
+        <li><b>Database Designers</b> — identify what data to store and design the schema.</li>
+        <li><b>End Users</b>: <em>casual</em> (managers ad-hoc), <em>naive</em> (bank teller forms), <em>sophisticated</em> (engineers + analytics), <em>standalone</em> (MS Access/SQLite).</li>
+        <li><b>System Analysts &amp; Application Programmers</b> — embed SQL in code (Java/COBOL/Python).</li>
+        <li><b>Workers behind the scene</b> — DBMS designers, tool developers, operators.</li>
+        <li>First four interact with content; the fifth builds + maintains the DBMS itself.</li>
+      </ul>
+    </div>
     <p>(See <a href="#pyq-1-6" style="color:var(--brand)">Q 1-6</a>.) Five categories: DBA, Database Designers, End Users (casual / naive / sophisticated / standalone), System Analysts &amp; Application Programmers, Workers behind the scene. Each category interacts with the database at a different level of abstraction; the authorisation subsystem restricts what each one may do.</p>
   </div>
 </div>
@@ -2628,6 +2648,15 @@ CREATE VIEW Toppers AS SELECT Roll, Name FROM Student WHERE Marks &gt;= 75;</cod
   <div class="qbody">What do you mean by data independence? Explain physical and logical data independence in detail.</div>
   <div class="ans">
     <span class="label">Model answer · 5-mark structure</span>
+    <div class="box tip refsum"><span class="label">From Q 1-8 · inline summary →</span>
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Definition</b> — DI = alter one schema level without modifying the next higher level or apps.</li>
+        <li><b>Physical DI</b> (Internal↔Conceptual): change storage / indexes / file org; apps untouched.</li>
+        <li><b>Logical DI</b> (Conceptual↔External): add columns, split tables; existing views unchanged.</li>
+        <li><b>3-row table</b>: <em>Location</em> (which mapping) · <em>What changes</em> (storage vs schema) · <em>Impact</em> (apps unchanged in both).</li>
+        <li>Physical DI is routine; logical DI is harder but more valuable.</li>
+      </ul>
+    </div>
     <p>Same content as <a href="#pyq-1-8" style="color:var(--brand)">Q 1-8</a>, compressed: define DI, give the three-level architecture sketch, contrast physical vs logical via a 3-row table (location · what changes · impact). Close with: <em>physical DI is routine; logical DI is the harder, more valuable form.</em></p>
   </div>
 </div>
@@ -2640,6 +2669,17 @@ CREATE VIEW Toppers AS SELECT Roll, Name FROM Student WHERE Marks &gt;= 75;</cod
   <div class="qbody">Explain architecture of DBMS in detail.</div>
   <div class="ans">
     <span class="label">Model answer</span>
+    <div class="box tip refsum"><span class="label">From Q 1-5 (DBMS components 10M) · inline summary →</span>
+      4-block structure with Fig 1.2 mandatory:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>DDL Compiler / Data Dictionary Manager</b> — processes CREATE/ALTER/DROP; stores metadata.</li>
+        <li><b>Query Processor</b> = DML compiler + Query optimiser + Execution engine; uses catalog statistics to pick a plan.</li>
+        <li><b>Transaction Manager</b> — preserves ACID via concurrency-control (locks/timestamps) + recovery (WAL, checkpoints).</li>
+        <li><b>Storage Manager</b> — Buffer Manager (caches pages), File Manager (disk blocks), Index Manager (B+-trees/hash), Authorisation Manager.</li>
+        <li><b>Data + Indexes + Dictionary</b> on disk — the physical files.</li>
+        <li>3 layers top-down: users &amp; interfaces → query processor → storage manager + data store.</li>
+      </ul>
+    </div>
     <p>(See <a href="#pyq-1-5" style="color:var(--brand)">Q 1-5</a>.) Same 4-block answer covering the five major components (DDL Compiler, Query Processor, Transaction Manager, Storage Manager, Data Dictionary) with Fig 1.2 as the mandatory diagram.</p>
   </div>
 </div>
@@ -2967,6 +3007,15 @@ ENROLS(<u>Roll*, CID*</u>, Grade)
   <div class="qbody">How Network Model and Hierarchical Model differ from each other in terms of data representation and query processing?</div>
   <div class="ans">
     <span class="label">Model answer</span>
+    <div class="box tip refsum"><span class="label">From Q 2-6 (Hierarchical vs Network 8M) · inline summary →</span>
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Hierarchical</b> — tree structure; one-to-many parent→child; each child has exactly one parent; M:N forces data duplication. <em>Example DBMS:</em> IBM IMS (1968).</li>
+        <li><b>Network</b> — directed graph; M:N natively via <em>owner-member sets</em>; pointers can go owner→member and sibling→sibling. <em>Example DBMS:</em> IDMS, IDS (CODASYL 1971).</li>
+        <li>Both <b>navigational</b> — programmer specifies pointer path (DL/1 for IMS; CODASYL DML for network).</li>
+        <li>Weak data independence — apps must know physical layout.</li>
+        <li>Relational succeeded both by decoupling query language from storage via declarative SQL.</li>
+      </ul>
+    </div>
     <p>(See <a href="#pyq-2-6" style="color:var(--brand)">Q 2-6</a>.) Briefly: hierarchical = tree (1:N only, M:N forces duplication); network = graph (native M:N via owner-member sets). Both query languages are navigational — the programmer specifies the path of pointers to follow — versus the relational model's declarative SQL.</p>
   </div>
 </div>
@@ -3078,6 +3127,16 @@ PAYMENT(<u>PID*, PayDate</u>, Amount, Mode)              -- composite PK
   <div class="qbody">Draw E-R Diagram for University.</div>
   <div class="ans">
     <span class="label">Model answer · 5-mark compression</span>
+    <div class="box tip refsum"><span class="label">From Q 2-3 (University ER 15M) · inline summary →</span>
+      Senior-prof 5-block ER template (full 15M scope):
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Entities</b> — DEPARTMENT, COURSE, STUDENT, PROFESSOR (strong); FACULTY-DEPENDENT (weak under PROFESSOR).</li>
+        <li><b>Attribute ovals</b> — underline keys (DeptID, Roll, CourseID), double-oval multi-valued (Phones), dashed derived (Age).</li>
+        <li><b>Relationships</b> — DEPARTMENT 1:N OFFERS COURSE · STUDENT M:N ENROLS COURSE (descriptive: Grade) · DEPARTMENT 1:N EMPLOYS PROFESSOR.</li>
+        <li><b>Cardinalities + participation</b> — every STUDENT total participation in ENROLS; PROFESSOR partial.</li>
+        <li><b>Reduce</b>: DEPARTMENT, COURSE (DeptID FK), STUDENT, PROFESSOR (DeptID FK), ENROLS (Roll, CourseID, Grade composite).</li>
+      </ul>
+    </div>
     <p>(See full 15-mark answer at <a href="#pyq-2-3" style="color:var(--brand)">Q 2-3</a>.) For a 5-marker, draw a minimal version: <b>DEPARTMENT — OFFERS — COURSE — ENROLS — STUDENT</b>. Show key attributes underlined, list cardinalities (1:N, M:N), and skip detailed attribute ovals for brevity. Reduce to four tables: DEPARTMENT, COURSE (with DeptID FK), STUDENT, ENROLS (junction with Grade).</p>
   </div>
 </div>
@@ -3186,6 +3245,15 @@ PAYMENT(<u>PID*, PayDate</u>, Amount, Mode)              -- composite PK
   <div class="qbody">What is the difference between domain and tuple calculus? Explain by example queries.</div>
   <div class="ans">
     <span class="label">Model answer · 5-mark structure</span>
+    <div class="box tip refsum"><span class="label">From Q 3-2 (TRC vs DRC side-by-side query) · inline summary →</span>
+      Same query <em>"employees earning &gt; 50 000"</em> in both notations:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>TRC</b>: <code>{t.Name | Employee(t) ∧ t.Salary &gt; 50000}</code> — variable is a whole tuple, dot notation.</li>
+        <li><b>DRC</b>: <code>{ &lt;n&gt; | ∃e,s,d ( Employee(e,n,s,d) ∧ s &gt; 50000 ) }</code> — variables are individual column values.</li>
+        <li><b>TRC ↔ SQL/QUEL</b>; <b>DRC ↔ QBE</b>.</li>
+        <li>Both must be safe — finite result, no infinite-domain dependence.</li>
+      </ul>
+    </div>
     <p>(See <a href="#pyq-3-2" style="color:var(--brand)">Q 3-2</a> for the side-by-side query.) Four-axis comparison:</p>
     <div class="table-wrap"><table>
       <thead><tr><th>Aspect</th><th>TRC</th><th>DRC</th></tr></thead>
@@ -3787,6 +3855,16 @@ R4(<u>book_title, author</u>)                 -- relationship of book to its aut
   <div class="qbody">Explain insert anomalies, delete anomalies and update anomalies with the help of examples.</div>
   <div class="ans">
     <span class="label">Model answer</span>
+    <div class="box tip refsum"><span class="label">From Q 4-5 (modification anomalies 5M) · inline summary →</span>
+      Use one denormalised table (e.g. <code>ENROL(Roll, Course, Instructor, Office)</code>) to show all 3:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Insertion anomaly</b> — cannot add a new course/instructor until at least one student enrols (PK requires Roll).</li>
+        <li><b>Update anomaly</b> — renaming "DBMS" → "DBS" needs UPDATE on every enrolled-student row; missing one leaves the DB inconsistent.</li>
+        <li><b>Deletion anomaly</b> — last student withdraws ⇒ row vanishes ⇒ all info about that course/instructor disappears too.</li>
+        <li>All three are symptoms of hidden FDs (<code>Course → Instructor</code>, <code>Instructor → Office</code>).</li>
+        <li>Cure = 3NF/BCNF decomposition — each fact stored in exactly one relation.</li>
+      </ul>
+    </div>
     <p>(See <a href="#pyq-4-5" style="color:var(--brand)">Q 4-5</a>.) Use a single denormalised schema (e.g. <code>ENROL(Roll, Course, Instructor, Office)</code>) and demonstrate each anomaly on it. Close with: <em>"All three are symptoms of hidden FDs; 3NF/BCNF decomposition eliminates them by placing each fact in exactly one relation."</em></p>
   </div>
 </div>
@@ -4137,6 +4215,14 @@ R4(<u>book_title, author</u>)                 -- relationship of book to its aut
   <div class="qbody">How B-Trees assist in indexing? How insertion and deletion is performed in these trees?</div>
   <div class="ans">
     <span class="label">Model answer · 5-mark structure</span>
+    <div class="box tip refsum"><span class="label">From Q 4-12 / 4-21 (B-Tree full versions) · inline summary →</span>
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Structure</b> — balanced multi-way search tree; every node holds ⌈m/2⌉ to m children; all leaves at same level; one node = one disk block.</li>
+        <li><b>Lookup</b> — binary-search keys in node, follow child pointer; O(log<sub>m</sub> N) I/Os.</li>
+        <li><b>Why beats Index-Sequential</b> — self-balancing on insert/delete (no manual reorganisation); leaf splits/merges keep height nearly constant; B+-trees give sequential leaf links for fast range scans.</li>
+        <li><b>Default index</b> in MySQL, PostgreSQL, Oracle, SQL Server.</li>
+      </ul>
+    </div>
     <p>(See <a href="#pyq-4-12" style="color:var(--brand)">Q 4-12</a> and <a href="#pyq-4-21" style="color:var(--brand)">Q 4-21</a> for fuller versions.)</p>
     <p><b>Indexing —</b> B-tree maps every key to a record pointer; lookup is O(log<sub>m</sub> N). Range scans are sequential along linked leaves (B+-tree). Used as the default index in MySQL, PostgreSQL, Oracle.</p>
     <p><b>Insertion —</b> descend to a leaf, insert in sorted order. If the leaf overflows (more than m−1 keys), split it into two halves and push the median up to the parent. The split may cascade to the root; if the root splits, the tree height grows by one.</p>
@@ -4287,6 +4373,15 @@ Surrogate key   : auto-increment id (if business has no natural unique attr)</sp
   <div class="qbody">Explain the three-schema (three-level) architecture of a database system in detail. Differentiate Physical and Logical Data Independence.</div>
   <div class="ans">
     <span class="label">Full-rigor 15-mark answer</span>
+    <div class="box tip refsum"><span class="label">From Q 1-8 (10-mark version) · inline summary →</span>
+      <b>Data Independence</b> = ability to change one schema level without modifying the next higher level or applications. Two flavours, both delivered by the ANSI/SPARC three-schema architecture:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Physical DI</b> (Internal ↔ Conceptual) — change storage layout, indexes, file org without touching apps. <em>Usually achievable.</em></li>
+        <li><b>Logical DI</b> (Conceptual ↔ External) — add columns, split tables without breaking existing views. <em>Harder; partial in many DBMSs.</em></li>
+        <li>Quick test: storage change ⇒ Physical; schema change ⇒ Logical.</li>
+        <li>10-mark answer = definition + Fig 1.1 + comparison table (lies-between / what-changes / impact / ease / example) + closing line "Physical DI is routine; Logical DI is harder, more valuable."</li>
+      </ul>
+    </div>
     <p>(See full 10-mark version at <a href="#pyq-1-8" style="color:var(--brand)">Q 1-8</a>; this expands it.)</p>
     <p><b>(1) Definition + context —</b> Proposed by ANSI/SPARC in 1975 to separate the user's view of data from the way it is physically stored. The architecture has three levels — Internal, Conceptual, External — connected by two mappings that decouple the levels and yield two forms of data independence.</p>
     <p><b>(2) Mandatory diagram —</b> see <a href="#t-1-4" style="color:var(--brand)">Fig 1.1</a>.</p>
@@ -4436,6 +4531,15 @@ Key tests:
   <div class="qbody">Discuss methods for recovery management in DBMS, including checkpoints and undo/redo logging. Why are these preferred over shadow paging?</div>
   <div class="ans">
     <span class="label">Full-rigor 15-mark answer</span>
+    <div class="box tip refsum"><span class="label">From Q 4-18 (5-mark compressed) · inline summary →</span>
+      Recovery restores DB to a consistent state after failure. Three main approaches:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>WAL undo/redo (industry standard, ARIES)</b> — log <code>&lt;T, X, old, new&gt;</code> before page flush; on crash UNDO uncommitted + REDO committed.</li>
+        <li><b>Checkpoints</b> — periodically flush log + buffers + record <code>&lt;CHECKPOINT, active_T&gt;</code>. Recovery scans backwards from last checkpoint only — dramatic speedup.</li>
+        <li><b>Shadow Paging</b> — shadow + current page tables; commit = atomic pointer swap; crash = discard current. No log needed but poor concurrency, fragments disk, whole-DB scope.</li>
+        <li>Modern DBMSs use WAL + Checkpoints; shadow paging is mostly historical.</li>
+      </ul>
+    </div>
     <p>(See compressed 5-mark version at <a href="#pyq-4-18" style="color:var(--brand)">Q 4-18</a>; expanded here.)</p>
     <p><b>(1) Definition + context —</b> Recovery is the DBMS subsystem that restores the database to the latest consistent state after any failure (transaction abort, system crash, disk failure). It enforces the "D" of ACID.</p>
     <p><b>(2) Failure model + diagram</b></p>
@@ -4520,6 +4624,16 @@ Key tests:
   <div class="qbody">Explain the concept of Normalisation. Demonstrate UNF → 1NF → 2NF → 3NF → BCNF with a worked example. Why is BCNF stricter than 3NF?</div>
   <div class="ans">
     <span class="label">Full-rigor 15-mark answer</span>
+    <div class="box tip refsum"><span class="label">From Q 4-4 (10-mark normalize) · inline summary →</span>
+      Normalisation = systematic decomposition so every non-trivial FD has a candidate key on its LHS. Eliminates insert/update/delete anomalies.
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Worked schema</b>: <code>STUDENT(<u>Roll</u>, Name, Course, Instructor, InstructorOffice, {Phone₁,₂})</code>.</li>
+        <li><b>UNF→1NF</b>: split multi-valued <code>Phone</code> into <code>PHONE(Roll, PhoneNo)</code> table.</li>
+        <li><b>1NF→2NF</b>: if PK is <code>(Roll, Course)</code>, <code>Name</code> depends only on Roll (partial FD) — split <code>STUDENT(Roll, Name)</code> from <code>ENROL(Roll, Course, Instructor, InstructorOffice)</code>.</li>
+        <li><b>2NF→3NF</b>: transitive <code>InstructorOffice → Instructor → Course</code> — split into <code>ENROL(Roll, Course)</code> + <code>COURSE(Course, Instructor)</code> + <code>INSTRUCTOR(Instructor, Office)</code>.</li>
+        <li><b>Losslessness</b>: at every split, the common attribute must be a candidate key of one resulting relation.</li>
+      </ul>
+    </div>
     <p>(See compressed 10-mark version at <a href="#pyq-4-4" style="color:var(--brand)">Q 4-4</a>; here we extend to BCNF and compare 3NF vs BCNF for the extra 5 marks.)</p>
     <p><b>(1) Definition + context —</b> Normalisation is the systematic decomposition of a relation into smaller relations so that every non-trivial FD has a candidate key on its LHS. Goal: eliminate the three modification anomalies caused by hidden FDs.</p>
     <p><b>(2) Mandatory diagram —</b> see <a href="#t-4-3" style="color:var(--brand)">Fig 4.1</a> (NF ladder).</p>
@@ -4571,6 +4685,16 @@ Key tests:
   <div class="qbody">Explain concurrency control protocols — Two-Phase Locking (2PL) and Timestamp Ordering — in detail. Why is Strict 2PL preferred in commercial DBMSs?</div>
   <div class="ans">
     <span class="label">Full-rigor 15-mark answer</span>
+    <div class="box tip refsum"><span class="label">From Q 4-16 + Q 4-20 (2PL + TS compressed) · inline summary →</span>
+      Both compressed answers cover the same two protocols:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>2PL</b>: growing (acquire only) → shrinking (release only); no new lock after first release. Conflict-serializable.</li>
+        <li><b>Strict 2PL</b>: hold X-locks till COMMIT/ROLLBACK ⇒ recoverable + cascadeless (industrial standard).</li>
+        <li><b>Timestamp Ordering</b>: TS(T) at start; read_TS/write_TS per item; abort if op violates timestamp order (Thomas's Write Rule for obsolete writes).</li>
+        <li>2PL deadlocks possible (needs Wait-Die/Wound-Wait); TS is deadlock-free but starvation possible.</li>
+        <li>Mechanism contrast: 2PL = locking/blocking; TS = stamps/aborting; MVCC pairs TS with multi-version reads.</li>
+      </ul>
+    </div>
     <p>(See compressed forms at <a href="#pyq-4-16" style="color:var(--brand)">Q 4-16</a> and <a href="#pyq-4-20" style="color:var(--brand)">Q 4-20</a>.)</p>
     <p><b>(1) Definition + context —</b> Concurrency control is the DBMS function that interleaves multiple transactions so the database stays consistent AND each transaction appears to execute in isolation. Without it, four anomalies appear: lost update, dirty read, unrepeatable read, phantom read.</p>
     <p><b>(2) 2PL</b></p>
@@ -4634,6 +4758,16 @@ Key tests:
   <div class="qbody">Define Conflict Serializability. Using the Precedence Graph method, determine whether a given schedule is conflict-serializable. (Use any sample 3-transaction schedule.)</div>
   <div class="ans">
     <span class="label">Full-rigor 15-mark answer</span>
+    <div class="box tip refsum"><span class="label">From Q 4-11 (precedence-graph schedule) · inline summary →</span>
+      The canonical worked schedule for conflict-serializability:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Schedule S</b>: <code>R1(A) R2(A) R1(B) R2(B) R3(B) W1(A) W2(B)</code>.</li>
+        <li>R2(A) ↔ W1(A) (same item, ≥1 write) ⇒ <b>edge T2 → T1</b>.</li>
+        <li>R1(B) ↔ W2(B) ⇒ <b>edge T1 → T2</b>.</li>
+        <li>R3(B) ↔ W2(B) ⇒ <b>edge T3 → T2</b>.</li>
+        <li><b>Conclusion</b>: T1↔T2 cycle ⇒ NOT conflict-serializable.</li>
+      </ul>
+    </div>
     <p>(Use <a href="#pyq-4-11" style="color:var(--brand)">Q 4-11</a> as the worked schedule.)</p>
     <p><b>(1) Definition + context —</b> A schedule S is <b>conflict-serializable</b> iff it can be transformed into a serial schedule by repeatedly swapping <em>adjacent non-conflicting operations</em>. Two operations conflict if (a) they belong to different transactions, (b) they refer to the same data item, and (c) at least one is a WRITE. Conflict-serializability is the practical correctness criterion enforced by 2PL.</p>
     <p><b>(2) Mandatory diagram — Precedence (Serialization) Graph</b></p>
@@ -4708,6 +4842,15 @@ Key tests:
   <div class="qbody">Draw and explain an ER Diagram for a given real-world scenario (University / Banking / Insurance / Hospital). Reduce it to relational schemas with all keys and FKs.</div>
   <div class="ans">
     <span class="label">Full-rigor 15-mark answer</span>
+    <div class="box tip refsum"><span class="label">From Q 2-3 (University) + Q 2-9 (Insurance) · inline summary →</span>
+      Two worked precedents using the same 5-step recipe:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>University (Q 2-3)</b>: DEPARTMENT—OFFERS—COURSE—ENROLS—STUDENT; cardinalities 1:N (DEPT–COURSE) + M:N (STUDENT–COURSE with Grade); reduce to 4 tables (DEPARTMENT, COURSE with DeptID FK, STUDENT, ENROLS junction).</li>
+        <li><b>Insurance (Q 2-9)</b>: CUSTOMER — HOLDS — POLICY with descriptive PremiumPaid, DueDate; CUSTOMER 1:N CLAIM; reduce CUSTOMER/POLICY/HOLDS/CLAIM with FKs.</li>
+        <li>Pattern transfers — only entity names change. Always: underline keys · label cardinalities · double-line total participation · descriptive attrs sit on the relationship.</li>
+        <li>For 5M: minimal diagram + cardinality labels + 4-table reduction. For 15M: add assumptions, all attribute ovals, weak-entity handling, FK annotations.</li>
+      </ul>
+    </div>
     <p>(Worked University example at <a href="#pyq-2-3" style="color:var(--brand)">Q 2-3</a>; Insurance at <a href="#pyq-2-9" style="color:var(--brand)">Q 2-9</a>.)</p>
     <p><b>Universal 5-block strategy for any scenario</b></p>
     <div class="step"><span class="k">1</span><div class="body"><b>Identify entities</b> — nouns in the problem statement. Mark which are <em>strong</em> (own PK) vs <em>weak</em> (depend on owner — e.g. DEPENDENT, ROOM).</div></div>
@@ -4763,6 +4906,16 @@ BILL(<u>PID*, BillNo</u>, Date, Amount, PaidFlag)
   <div class="qbody">Discuss the different types of DBMS users.</div>
   <div class="ans">
     <span class="label">Full-rigor 5–15 M answer</span>
+    <div class="box tip refsum"><span class="label">From Q 1-6 (5-mark DBMS users) · inline summary →</span>
+      <ul style="margin:6px 0 0 18px">
+        <li><b>DBA</b> — supreme authority; schema, GRANT/REVOKE, backup, tuning.</li>
+        <li><b>Database Designers</b> — design schema during design phase; hand off to DBA.</li>
+        <li><b>End Users</b> — split four ways: <em>casual</em> (managers ad-hoc), <em>naive/parametric</em> (bank teller forms), <em>sophisticated</em> (engineers + analytics), <em>standalone</em> (MS Access/SQLite).</li>
+        <li><b>System Analysts &amp; Application Programmers</b> — gather requirements + embedded SQL (COBOL/Java/Python).</li>
+        <li><b>Workers behind the scene</b> — DBMS designers, tool developers, operators.</li>
+        <li>Authorisation subsystem restricts what each role can do (least privilege).</li>
+      </ul>
+    </div>
     <p>(See full 5-mark version at <a href="#pyq-1-6" style="color:var(--brand)">Q 1-6</a>; expand to 10/15 by adding the comparison table below.)</p>
     <p>Five categories: <b>DBA, Designers, End Users (casual / naive / sophisticated / standalone), System Analysts &amp; Programmers, Workers behind the scene.</b></p>
     <div class="table-wrap"><table>
@@ -4799,6 +4952,16 @@ BILL(<u>PID*, BillNo</u>, Date, Amount, PaidFlag)
   <div class="qbody">Compare and contrast Hierarchical, Network, and Relational data models with examples.</div>
   <div class="ans">
     <span class="label">Full-rigor 10 M answer</span>
+    <div class="box tip refsum"><span class="label">From Q 2-6 (Hierarchical vs Network 8M) · inline summary →</span>
+      Both navigational; superseded by relational.
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Hierarchical (tree)</b> — IBM IMS (1968). Parent→child 1:N only; M:N forces data duplication. Query: DL/1.</li>
+        <li><b>Network (graph)</b> — CODASYL/DBTG (1971). M:N native via <em>owner-member sets</em>. Query: CODASYL DML.</li>
+        <li><b>Relational (tables)</b> — Codd (1970). M:N via junction tables; declarative SQL.</li>
+        <li>Both old models = <b>navigational</b> (programmer specifies pointer-following path); weak data independence.</li>
+        <li>Lost ground because applications had to know the physical pointer paths.</li>
+      </ul>
+    </div>
     <p>(See worked answer at <a href="#pyq-2-6" style="color:var(--brand)">Q 2-6</a>.) Mandatory: include <a href="#t-2-10" style="color:var(--brand)">Fig 2.3</a> showing all three model shapes (tree / graph / tables) side-by-side, plus the 6-row comparison table. Close with: <em>"The relational model dominates because it decoupled query language from physical pointers, enabling declarative SQL and cost-based optimisation — capabilities neither hierarchical nor network models offered."</em></p>
   </div>
 </div>
@@ -4833,6 +4996,15 @@ BILL(<u>PID*, BillNo</u>, Date, Amount, PaidFlag)
   <div class="qbody">Explain how B-Trees / B+-Trees assist in database indexing. How are they more efficient than Index-Sequential files? Sketch insertion and deletion.</div>
   <div class="ans">
     <span class="label">Full-rigor 10 M answer</span>
+    <div class="box tip refsum"><span class="label">From Q 4-12 / 4-21 / 4-26 (B-Tree indexing) · inline summary →</span>
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Structure</b>: balanced multi-way search tree of order <i>m</i>; every node holds ⌈m/2⌉ to m children; all leaves at same level; one node = one disk block.</li>
+        <li><b>Search</b>: binary-search keys in node, follow child pointer — O(log<sub>m</sub> N) I/O even for millions of rows.</li>
+        <li><b>Insert</b>: descend to leaf, add in sorted order; if overflow (more than m−1 keys) → split + push median to parent; may cascade to root.</li>
+        <li><b>Delete</b>: remove from leaf; if underflow (fewer than ⌈m/2⌉−1) → <em>borrow</em> from sibling or <em>merge</em> with sibling pulling separator down; may cascade up.</li>
+        <li><b>B+-tree variant</b>: leaves linked sequentially ⇒ fast range scans; data pointers only at leaves. Default index in MySQL, PostgreSQL, Oracle.</li>
+      </ul>
+    </div>
     <p>See worked versions at <a href="#pyq-4-12" style="color:var(--brand)">Q 4-12</a>, <a href="#pyq-4-21" style="color:var(--brand)">Q 4-21</a> and <a href="#pyq-4-26" style="color:var(--brand)">Q 4-26</a>. Key points: balanced multi-way search tree; node = disk block; O(log<sub>k</sub> N) I/O for lookup; B+-tree links leaves for fast range scans; split on overflow / borrow-or-merge on underflow keeps the tree balanced without manual reorg — the main weakness of older index-sequential files.</p>
     <div class="box tip" style="margin-top:14px">
       <span class="label">Key takeaways · revise these 5</span>
@@ -4855,6 +5027,16 @@ BILL(<u>PID*, BillNo</u>, Date, Amount, PaidFlag)
   <div class="qbody">Explain Tuple Relational Calculus and Domain Relational Calculus. Show the same query expressed in both notations.</div>
   <div class="ans">
     <span class="label">Full-rigor 5–10 M answer</span>
+    <div class="box tip refsum"><span class="label">From Q 3-2 + Q 3-3 (TRC vs DRC side-by-side) · inline summary →</span>
+      Same query <em>"employees earning &gt; 50 000"</em> in both notations:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>TRC</b>: <code>{t.Name | Employee(t) ∧ t.Salary &gt; 50000}</code> — variable is a whole tuple, dot notation for attributes; basis of SQL/QUEL.</li>
+        <li><b>DRC</b>: <code>{ &lt;n&gt; | ∃e,s,d ( Employee(e,n,s,d) ∧ s &gt; 50000 ) }</code> — variables are individual column values; basis of QBE.</li>
+        <li>Both are <b>declarative</b> (first-order predicate logic) — no operation ordering.</li>
+        <li>Both must be <b>safe</b> — finite result, no infinite-domain quantification.</li>
+        <li><b>Codd's theorem</b>: RA, TRC, DRC equivalent in expressive power for safe queries.</li>
+      </ul>
+    </div>
     <p>See <a href="#pyq-3-2" style="color:var(--brand)">Q 3-2</a> and <a href="#pyq-3-3" style="color:var(--brand)">Q 3-3</a>. Key contrast: TRC variables = whole tuples, form <code>{t | P(t)}</code>; DRC variables = column values, form <code>{ &lt;x₁..xₙ&gt; | P(x₁..xₙ) }</code>. Both must be <em>safe</em>. By Codd's theorem they have the same expressive power as relational algebra.</p>
     <div class="box tip" style="margin-top:14px">
       <span class="label">Key takeaways · revise these 5</span>
@@ -4877,6 +5059,16 @@ BILL(<u>PID*, BillNo</u>, Date, Amount, PaidFlag)
   <div class="qbody">Differentiate Wait-Die and Wound-Wait schemes of deadlock prevention. State the four Coffman conditions.</div>
   <div class="ans">
     <span class="label">Full-rigor 5–15 M answer</span>
+    <div class="box tip refsum"><span class="label">From Q 4-13 (deadlock prevention 10M) · inline summary →</span>
+      <ul style="margin:6px 0 0 18px">
+        <li><b>4 Coffman conditions (1971)</b> — all four must hold for deadlock: <em>Mutual Exclusion · Hold &amp; Wait · No Pre-emption · Circular Wait</em>.</li>
+        <li><b>Wait-Die</b> (non-preemptive): older T waits for younger's lock; younger T <em>dies</em> (aborts) if it requests an older's lock.</li>
+        <li><b>Wound-Wait</b> (preemptive): older T <em>wounds</em> (forcibly aborts) younger's lock-holding T; younger T waits for older.</li>
+        <li>Both favour older Ts ⇒ break Circular Wait condition.</li>
+        <li>Aborted Ts <b>restart with their original timestamp</b> ⇒ no starvation.</li>
+        <li>Alternative: <em>detection</em> via wait-for graph + victim selection — preferred when deadlocks are rare.</li>
+      </ul>
+    </div>
     <p>See full deadlock answer at <a href="#pyq-4-13" style="color:var(--brand)">Q 4-13</a>. Key table:</p>
     <div class="table-wrap"><table>
       <thead><tr><th>Scheme</th><th>Older T requests lock held by younger</th><th>Younger T requests lock held by older</th></tr></thead>
@@ -5101,6 +5293,16 @@ R3(<u>E</u>, A)</span>
     <div class="box prof"><span class="label">Why this prediction</span>
       <em>Signals 1+2+5.</em> The ER-design 15-marker is the most consistent Unit II long-form question. Cyclic pattern in the BCA paper: <em>University (2025) → likely a new domain (2026)</em>. Of the two unused scenarios most popular with senior profs — Hospital and Library — Hospital aligns with the broader 2024 BBA "Banking" precedent (real-world business mini-world). Insurance was tested in 2025-B.Tech-alt, lowering its repeat probability.
     </div>
+    <div class="box tip refsum"><span class="label">From RQ-9 (5-step ER recipe) · inline summary →</span>
+      Recipe transfers to any business scenario — only entity names change.
+      <ul style="margin:6px 0 0 18px">
+        <li><b>1. Entities</b> — nouns in prompt; mark strong vs weak (BILL weak under PATIENT).</li>
+        <li><b>2. Attributes</b> — underline keys, double-oval multi-valued, dashed derived.</li>
+        <li><b>3. Relationships</b> — verbs; tag degree, cardinality, participation, descriptive attrs.</li>
+        <li><b>4. Diagram</b> — rect/oval/diamond; double border = weak; double diamond = identifying; double line = total participation.</li>
+        <li><b>5. Reduce</b> — strong → 1 table; weak → owner PK + partial key; 1:N → FK on N side; M:N → junction table; multi-valued → own table.</li>
+      </ul>
+    </div>
     <p>Use the <b>5-step strategy</b> from <a href="#rep-9" style="color:var(--brand)">RQ-9</a>. See the worked Hospital example at <a href="#rep-9" style="color:var(--brand)">RQ-9 → step 5</a> with five entities (PATIENT, DOCTOR, DEPARTMENT, APPOINTMENT, BILL), three relationships, four cardinalities and total/partial participation labels.</p>
     <p><b>Final relational schemas</b></p>
     <span class="formula">PATIENT(<u>PID</u>, Name, DOB, Gender, Address, {Phone})
@@ -5135,6 +5337,15 @@ PATIENT_PHONE(<u>PID*, Phone</u>)
     <div class="box prof"><span class="label">Why this prediction</span>
       <em>Signals 1+3.</em> 2PL theory question appeared in 2025-B.Tech (Q5a) and 2023-B.Tech (Q5b). The 2025-BCA stream covered concurrency only at the 1.5-mark level (Q1j). For Part B, this is overdue at the 8–10 mark tier.
     </div>
+    <div class="box tip refsum"><span class="label">From Q 4-20 + RQ-7 (2PL + TS detail) · inline summary →</span>
+      <ul style="margin:6px 0 0 18px">
+        <li><b>2PL phases</b>: Growing (acquire only) → Shrinking (release only); no re-acquire after first release. Guarantees conflict-serializability.</li>
+        <li><b>4 variants</b>: Basic · Conservative (lock everything upfront — deadlock-free) · <b>Strict</b> (X-locks till commit) · Rigorous (all locks till commit).</li>
+        <li><b>Strict 2PL</b> ⇒ no dirty reads ⇒ recoverable + cascadeless + trivial recovery (UNDO failing T only).</li>
+        <li>2PL can deadlock — needs Wait-Die / Wound-Wait / detection schemes.</li>
+        <li>Adopted by every commercial DBMS (Oracle, SQL Server, DB2, PostgreSQL with MVCC).</li>
+      </ul>
+    </div>
     <p>See full answer at <a href="#pyq-4-20" style="color:var(--brand)">Q 4-20</a> and aggregated rigor at <a href="#rep-7" style="color:var(--brand)">RQ-7</a>. Bring in: growing/shrinking phases, four variants (Basic / Conservative / Strict / Rigorous), why Strict's X-lock-held-till-commit policy ⇒ no dirty reads ⇒ recoverable and cascadeless.</p>
     <div class="box tip" style="margin-top:14px">
       <span class="label">Key takeaways · revise these 5</span>
@@ -5159,6 +5370,16 @@ PATIENT_PHONE(<u>PID*, Phone</u>)
     <span class="label">Reasoning + reference</span>
     <div class="box prof"><span class="label">Why this prediction</span>
       <em>Signals 3+5.</em> Unit III is the most under-represented unit in the 2025 BCA Part B (only 1.5-mark short answer on RA vs RC). Senior profs flip between definition-only (2024) and example-query (2025 B.Tech alt) framings; the next paper is overdue for the example-query framing at the 5-mark tier in the BCA stream.
+    </div>
+    <div class="box tip refsum"><span class="label">From Q 3-3 + RQ-14 (TRC vs DRC) · inline summary →</span>
+      Both are <em>declarative</em> relational calculi — describe <em>what</em>, not <em>how</em>.
+      <ul style="margin:6px 0 0 18px">
+        <li><b>TRC</b>: variables range over whole tuples — form <code>{ t | P(t) }</code>; uses dot notation <code>t.Attr</code>; basis of SQL/QUEL.</li>
+        <li><b>DRC</b>: variables range over individual domain values — form <code>{ &lt;x₁..xₙ&gt; | P(x₁..xₙ) }</code>; positional; basis of QBE.</li>
+        <li>Example (earn &gt; 30 000): TRC <code>{t.Name | Employee(t) ∧ t.Salary &gt; 30000}</code>; DRC <code>{ &lt;n&gt; | ∃e,s,d ( Employee(e,n,s,d) ∧ s &gt; 30000 ) }</code>.</li>
+        <li>Both must be <b>safe</b> (finite result, no infinite-domain quantification).</li>
+        <li><b>Codd's theorem</b>: RA = safe TRC = safe DRC in expressive power.</li>
+      </ul>
     </div>
     <p>See <a href="#pyq-3-3" style="color:var(--brand)">Q 3-3</a> and <a href="#rep-14" style="color:var(--brand)">RQ-14</a>. Provide the four-axis comparison table + both formal queries side-by-side. Add the safety remark — both must be safe (finite result, no infinite-domain dependence).</p>
     <div class="box tip" style="margin-top:14px">
@@ -5215,6 +5436,16 @@ PATIENT_PHONE(<u>PID*, Phone</u>)
     <div class="box prof"><span class="label">Why this prediction</span>
       <em>Signal 3.</em> "Concept of security" is in the syllabus's "Unit IV → security, concurrency and recovery" cluster but was not tested in the 2025 BCA paper. Concurrency &amp; recovery have been heavily tested; security is the under-represented sibling.
     </div>
+    <div class="box tip refsum"><span class="label">From topic 4.13 · inline summary →</span>
+      4 security layers all DBMSs need to provide:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Authentication</b> — "who are you?" — password, certificate, OTP, biometrics, MFA. Always precedes authorization.</li>
+        <li><b>Authorisation</b> — "what can you do?" — GRANT / REVOKE on objects + operations.</li>
+        <li><b>Auditing</b> — "what did you do?" — audit log + trigger-based trail for compliance (HIPAA, GDPR, SOX).</li>
+        <li><b>Encryption</b> — TDE for data-at-rest, TLS for data-in-transit.</li>
+        <li>Access-control models: <b>DAC</b> (owner decides via GRANT/REVOKE), <b>MAC</b> (system labels TS/S/P; clearance ≥ classification), <b>RBAC</b> (permissions → roles → users — scales).</li>
+      </ul>
+    </div>
     <p>See <a href="#t-4-13" style="color:var(--brand)">topic 4.13</a>. Cover: <b>Authentication</b> (who you are — password / cert / OTP / biometrics) → <b>Authorisation</b> (what you can do — GRANT/REVOKE) → <b>Access control models</b>:</p>
     <ul>
       <li><b>DAC</b> (Discretionary) — owner decides; SQL GRANT/REVOKE.</li>
@@ -5243,7 +5474,18 @@ PATIENT_PHONE(<u>PID*, Phone</u>)
 
 <details class="drill-q">
   <summary>D1. Differentiate between Schema and Instance.</summary>
-  <div class="ans-body">Schema = the structural blueprint (tables, columns, types, constraints) — rarely changes. Instance = the actual rows in the database at a moment in time — changes constantly. Schema is the <em>type</em>; instance is the <em>value</em>. See <a href="#t-1-8" style="color:var(--brand)">topic 1.8</a>.</div>
+  <div class="ans-body">Schema = the structural blueprint (tables, columns, types, constraints) — rarely changes. Instance = the actual rows in the database at a moment in time — changes constantly. Schema is the <em>type</em>; instance is the <em>value</em>.
+    <div class="box tip refsum" style="margin-top:8px"><span class="label">From topic 1.8 · inline summary →</span>
+      Data model = concepts to describe DB structure, operations, constraints. Three categories: <b>Conceptual</b> (ER, EER — close to user), <b>Representational</b> (Relational/Network/Hierarchical), <b>Physical</b> (records/B+-trees/hash).
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Schema</b> = type/blueprint — rarely changes (tables, columns, constraints).</li>
+        <li><b>Instance</b> = value — actual rows at one moment, changes constantly.</li>
+        <li><b>Metadata</b> = stored schema description in the catalog; changes with schema.</li>
+        <li>Tiny example: <code>STUDENT(Roll INT, Name VARCHAR)</code> is schema; <code>(1,'Ankit')</code> is one row of the instance.</li>
+      </ul>
+    </div>
+    See <a href="#t-1-8" style="color:var(--brand)">topic 1.8</a>.
+  </div>
 </details>
 <details class="drill-q">
   <summary>D2. What is meant by Data Independence? Name its two types.</summary>
@@ -5271,7 +5513,19 @@ PATIENT_PHONE(<u>PID*, Phone</u>)
 </details>
 <details class="drill-q">
   <summary>D8. What is BCNF? How does it differ from 3NF?</summary>
-  <div class="ans-body">BCNF: for every non-trivial FD X→A, X must be a super key. 3NF allows the FD if A is a prime attribute. BCNF is stricter; dependency preservation may be lost. See <a href="#t-4-4" style="color:var(--brand)">topic 4.4</a>.</div>
+  <div class="ans-body">BCNF: for every non-trivial FD X→A, X must be a super key. 3NF allows the FD if A is a prime attribute. BCNF is stricter; dependency preservation may be lost.
+    <div class="box tip refsum" style="margin-top:8px"><span class="label">From topic 4.4 · inline summary →</span>
+      <b>3NF</b> condition: for every non-trivial X→A either X is a superkey OR A is a prime attribute. <b>BCNF</b> drops the "prime" escape clause — every determinant must be a superkey.
+      <ul style="margin:6px 0 0 18px">
+        <li>BCNF is <b>stricter</b>; every BCNF relation is 3NF, not vice versa.</li>
+        <li>Both guarantee <b>lossless decomposition</b>.</li>
+        <li><b>Dependency preservation</b>: 3NF always; BCNF may fail.</li>
+        <li>Counter-example: <code>R(Course, Instructor, Hour)</code> with <code>{Course,Hour}→Instructor</code>, <code>Instructor→Course</code> is 3NF but not BCNF.</li>
+        <li>4NF eliminates non-trivial multi-valued dependencies; 5NF eliminates join dependencies — mostly theoretical.</li>
+      </ul>
+    </div>
+    See <a href="#t-4-4" style="color:var(--brand)">topic 4.4</a>.
+  </div>
 </details>
 <details class="drill-q">
   <summary>D9. State the ACID properties of a transaction.</summary>
@@ -5294,11 +5548,36 @@ PATIENT_PHONE(<u>PID*, Phone</u>)
 
 <details class="drill-q">
   <summary>D13. (Unit I) Explain the three-schema architecture in detail and contrast Physical with Logical Data Independence.</summary>
-  <div class="ans-body">Anchor at <a href="#rep-3" style="color:var(--brand)">RQ-3</a> for the 15-mark structure: definition → diagram → three-level breakdown → mapping table → advantages → pitfalls.</div>
+  <div class="ans-body">
+    <div class="box tip refsum" style="margin-bottom:8px"><span class="label">From RQ-3 (15-mark template) · inline summary →</span>
+      15-mark structure for three-schema + DI:
+      <ul style="margin:6px 0 0 18px">
+        <li><b>Definition + context</b> (ANSI/SPARC 1975 — decouple user view from physical storage).</li>
+        <li><b>Mandatory diagram</b> — Fig 1.1 three stacked layers + two mapping arrows.</li>
+        <li><b>Three levels</b>: Internal (how — files/indexes), Conceptual (what — DBA's global schema), External (which — per-user views).</li>
+        <li><b>Two mappings → two independencies</b> table: Physical DI (Internal↔Conceptual) vs Logical DI (Conceptual↔External).</li>
+        <li><b>Advantages</b>: tune storage without breaking apps · schema evolves · per-user security · vendor migration.</li>
+        <li><b>Pitfall</b> — "storage change → Physical; schema change → Logical" — never mix them up.</li>
+      </ul>
+    </div>
+    Anchor at <a href="#rep-3" style="color:var(--brand)">RQ-3</a> for the 15-mark structure: definition → diagram → three-level breakdown → mapping table → advantages → pitfalls.
+  </div>
 </details>
 <details class="drill-q">
   <summary>D14. (Unit II) Design an ER diagram for a Library Management System with members, books, copies, reservations, and fines. Reduce to relational schemas.</summary>
-  <div class="ans-body">Apply the 5-step ER strategy from <a href="#rep-9" style="color:var(--brand)">RQ-9</a>. Likely entity set: MEMBER, BOOK (catalog), COPY (weak — depends on BOOK), RESERVATION (M:N MEMBER–COPY with date), FINE (1:N MEMBER with paid flag). COPY is the canonical "weak entity" case.</div>
+  <div class="ans-body">
+    <div class="box tip refsum" style="margin-bottom:8px"><span class="label">From RQ-9 (5-step ER recipe) · inline summary →</span>
+      Universal 5-step strategy works for any scenario (university/banking/hospital/library):
+      <ul style="margin:6px 0 0 18px">
+        <li><b>1. Entities</b> — nouns in the prompt; mark strong vs weak (e.g. COPY weak under BOOK).</li>
+        <li><b>2. Attributes</b> per entity — underline keys, double-oval multi-valued, dashed derived.</li>
+        <li><b>3. Relationships</b> — verbs; tag degree + cardinality + participation + descriptive attrs.</li>
+        <li><b>4. Diagram</b> with canonical notation (rect/oval/diamond; double border = weak, double diamond = identifying, double line = total).</li>
+        <li><b>5. Reduce</b> — strong → 1 table; weak → owner PK + partial key; 1:N → FK on N side; M:N → junction table; multi-valued → own table.</li>
+      </ul>
+    </div>
+    Apply the 5-step ER strategy from <a href="#rep-9" style="color:var(--brand)">RQ-9</a>. Likely entity set: MEMBER, BOOK (catalog), COPY (weak — depends on BOOK), RESERVATION (M:N MEMBER–COPY with date), FINE (1:N MEMBER with paid flag). COPY is the canonical "weak entity" case.
+  </div>
 </details>
 <details class="drill-q">
   <summary>D15. (Unit III) Given EMPLOYEE(name, dno), DEPT(<u>dno</u>, dname), WORKS_ON(empID, pno, hours): write RA expressions for (a) all employees in 'IT'; (b) employees who work on no project; (c) project with the highest total hours.</summary>
@@ -5310,11 +5589,35 @@ PATIENT_PHONE(<u>PID*, Phone</u>)
 </details>
 <details class="drill-q">
   <summary>D17. (Unit IV) Explain concurrency control via Two-Phase Locking. Why is Strict 2PL preferred? Sketch a scenario showing cascading aborts under basic 2PL.</summary>
-  <div class="ans-body">See <a href="#rep-7" style="color:var(--brand)">RQ-7</a>. Cascading-abort scenario: T1 writes X, releases lock in shrinking phase, T2 reads X and commits, T1 aborts ⇒ T2's commit is invalid (dirty read). Strict 2PL holds X-locks till commit → no dirty reads → no cascade.</div>
+  <div class="ans-body">
+    <div class="box tip refsum" style="margin-bottom:8px"><span class="label">From RQ-7 (15-mark 2PL/TS template) · inline summary →</span>
+      Concurrency control prevents 4 anomalies: lost update · dirty read · unrepeatable read · phantom.
+      <ul style="margin:6px 0 0 18px">
+        <li><b>2PL phases</b>: Growing (only acquire locks) → Shrinking (only release; no new locks).</li>
+        <li><b>4 variants</b>: Basic · Conservative (lock all upfront — deadlock-free) · <b>Strict</b> (X-locks till commit) · Rigorous (all locks till commit).</li>
+        <li><b>Strict 2PL</b> X-locks-held-till-commit ⇒ no dirty reads ⇒ recoverable + cascadeless.</li>
+        <li>2PL can deadlock — needs Wait-Die / Wound-Wait / detection.</li>
+        <li>Industry standard in Oracle/SQL Server/DB2/PostgreSQL+MVCC.</li>
+      </ul>
+    </div>
+    See <a href="#rep-7" style="color:var(--brand)">RQ-7</a>. Cascading-abort scenario: T1 writes X, releases lock in shrinking phase, T2 reads X and commits, T1 aborts ⇒ T2's commit is invalid (dirty read). Strict 2PL holds X-locks till commit → no dirty reads → no cascade.
+  </div>
 </details>
 <details class="drill-q">
   <summary>D18. (Unit IV) Explain Write-Ahead Logging with Checkpoints. Walk through recovery for the timeline: T1 commits before checkpoint, T2 starts after checkpoint and is active when the system crashes.</summary>
-  <div class="ans-body">See <a href="#rep-5" style="color:var(--brand)">RQ-5</a>. Recovery: analysis phase identifies T1 as committed and T2 as active. REDO phase reapplies T1's new values from the last checkpoint forward (in case the data pages weren't flushed). UNDO phase rolls back T2's partial writes using <code>old_value</code> from its log records.</div>
+  <div class="ans-body">
+    <div class="box tip refsum" style="margin-bottom:8px"><span class="label">From RQ-5 (WAL + Checkpoint 15-mark) · inline summary →</span>
+      Recovery restores DB to consistent state after failure (enforces D of ACID).
+      <ul style="margin:6px 0 0 18px">
+        <li><b>WAL rule</b>: every change appends <code>&lt;T, X, old, new&gt;</code> to the log <em>before</em> the data page is flushed.</li>
+        <li>On COMMIT, <code>&lt;T, COMMIT&gt;</code> forced to stable storage.</li>
+        <li><b>3-phase crash recovery</b>: Analysis (committed vs active Ts) → REDO (reapply new for committed) → UNDO (rollback active with old).</li>
+        <li><b>Checkpoint</b> = log marker + flush; recovery scans backward only from last checkpoint — drastically faster.</li>
+        <li>WAL+Checkpoint beats Shadow Paging (concurrency, per-T rollback, small sequential log writes, ARIES algorithm).</li>
+      </ul>
+    </div>
+    See <a href="#rep-5" style="color:var(--brand)">RQ-5</a>. Recovery: analysis phase identifies T1 as committed and T2 as active. REDO phase reapplies T1's new values from the last checkpoint forward (in case the data pages weren't flushed). UNDO phase rolls back T2's partial writes using <code>old_value</code> from its log records.
+  </div>
 </details>
 
 <!-- ============== ✦4.10 REVISION PLAN ============== -->
