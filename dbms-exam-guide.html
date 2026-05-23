@@ -862,6 +862,18 @@ input,textarea,select{ font-size:16px; }
     <span class="priority">High-yield · 1 long Q + 4 short Qs typical</span>
   </div>
 
+  <!-- ===== Unit 1 Repeated-Question Spotlight ===== -->
+  <div class="box prof" style="margin:18px 0 24px"><span class="label">⭐ Unit 1 · Repeated-Question Spotlight</span>
+    <p style="margin:6px 0 8px; font-style:normal;">Five stems profs reuse paper after paper. Anchor each one cold — they buy ~14 marks of Unit 1.</p>
+    <ol style="margin:6px 0 0 18px; font-style:normal;">
+      <li><b>DBA responsibilities</b> — 4/6 papers · 1.5–5M · <a href="#t-1-5" style="color:var(--brand)">→ 1.5</a> · 2023, 2024 CSE, 2025 BTECH, 2024 BBA · model at <a href="#pyq-1-9" style="color:var(--brand)">pyq-1-9</a>.</li>
+      <li><b>Three-schema architecture + Logical vs Physical DI</b> — 4/6 papers · 5–10M · <a href="#t-1-4" style="color:var(--brand)">→ 1.4</a> · 2023, 2024 CSE, 2025 BCA, 2025 BTECH · models at <a href="#pyq-1-7" style="color:var(--brand)">pyq-1-7</a>/<a href="#pyq-1-8" style="color:var(--brand)">8</a>.</li>
+      <li><b>Types of DBMS users</b> — 4/6 papers · 1.5–5M · <a href="#t-1-5" style="color:var(--brand)">→ 1.5</a> · 2024 BBA, 2025 BCA, 2025 BTECH(both) · model at <a href="#pyq-1-6" style="color:var(--brand)">pyq-1-6</a>.</li>
+      <li><b>DBMS components with neat diagram</b> — 2/6 papers (recurring 7–10M) · <a href="#t-1-6" style="color:var(--brand)">→ 1.6</a> · 2025 BCA, 2025 BTECH-alt · model at <a href="#pyq-1-5" style="color:var(--brand)">pyq-1-5</a>.</li>
+      <li><b>Advantages of DBMS over file system</b> — 2/6 papers · 1.5–5M · <a href="#t-1-1" style="color:var(--brand)">→ 1.1</a>/<a href="#t-1-3" style="color:var(--brand)">1.3</a> · 2023, 2025 BCA.</li>
+    </ol>
+  </div>
+
   <!-- 1.1 -->
   <div class="topic" id="t-1-1">
     <h3>1.1 Database &amp; DBMS · Why it replaces files <span class="tag fav">always 1.5M</span></h3>
@@ -901,6 +913,9 @@ input,textarea,select{ font-size:16px; }
       </tbody>
     </table></div>
     <span class="scribble">Data + context → Information · Metadata = data dictionary</span>
+    <div class="box why"><span class="label">Why prof asks this 1.5M</span>
+      Gateway question — every paper opens with a definitional 1.5M stem. Drop the 3-row data→information→metadata table and you bank a guaranteed 1.5M with zero prep cost.
+    </div>
   </div>
 
   <!-- 1.3 -->
@@ -927,6 +942,9 @@ input,textarea,select{ font-size:16px; }
       <li>Centralised failure — entire DB goes down on hardware crash</li>
     </ul>
     <div class="mnem"><b>Mnemonic</b>"SHARES" — <b>S</b>haring · <b>H</b>iding (independence) · <b>A</b>tomicity · <b>R</b>eliability · <b>E</b>nforcement of rules · <b>S</b>elf-description.</div>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      4/6 papers asked this as "List/Discuss advantages of database over file system" (1.5M or 5M). Always lead with 3 numbered points (redundancy, concurrency, declarative SQL). For 5M tier add ACID guarantee + recovery; close with one closing line "Hence DBMS centralises data and enforces integrity that file systems cannot."
+    </div>
   </div>
 
   <!-- 1.4 -->
@@ -1022,6 +1040,9 @@ input,textarea,select{ font-size:16px; }
       <li>Routine integrity checks &amp; audit trails</li>
     </ul>
     <div class="mnem"><b>Mnemonic</b>"S G B T L I" → <b>S</b>chema · <b>G</b>rant · <b>B</b>ackup · <b>T</b>uning · <b>L</b>iaison · <b>I</b>ntegrity. (Six responsibilities; perfect for a 5-marker.)</div>
+    <div class="box prof"><span class="label">How prof asks this <span class="tag hot" style="font-style:normal">4/6 papers</span></span>
+      Appears 4/6 papers verbatim as "What are responsibilities of DBA?" (1.5M) and "Short note on types of DBMS users" (5M). For 5M tier name all 5 user categories WITH one concrete example each (DBA = sets schema, designer = makes ER diagram, casual end-user = manager running ad-hoc query, naive = bank teller, sophisticated = analyst). For 1.5M tier the SGBTLI mnemonic alone is enough.
+    </div>
   </div>
 
   <!-- 1.6 -->
@@ -1073,6 +1094,9 @@ input,textarea,select{ font-size:16px; }
       <li><b>Storage Manager</b> — translates high-level operations into low-level file accesses; manages buffers and indexes.</li>
       <li><b>Data Dictionary / Catalog</b> — system tables that store schema, statistics, privileges.</li>
     </ol>
+    <div class="box why"><span class="label">Why this is a 10-mark magnet</span>
+      The 5-component answer + Fig 1.2 = guaranteed 8/10. The differentiator between 8/10 and 10/10 is the Query Processor breakdown: DML compiler + Query Optimiser + Execution Engine. Always name those three sub-modules — examiners scan for them.
+    </div>
   </div>
 
   <!-- 1.7 -->
@@ -1158,6 +1182,9 @@ input,textarea,select{ font-size:16px; }
       </tbody>
     </table></div>
     <p>DML is further split into <b>procedural</b> (specify <em>how</em>: relational algebra) and <b>non-procedural / declarative</b> (specify <em>what</em>: SQL, relational calculus).</p>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      "Write SQL for ALTER/DROP/UPDATE/INSERT" is a verbatim 2023 BTECH Q1(h) stem worth 1.5M. Memorise the exact one-line syntax for each — they cost zero memory and bank 1.5M. See <a href="#t-4-6" style="color:var(--brand)">topic 4.6</a> for the full SQL syntax block.
+    </div>
   </div>
 
   <!-- 1.10 -->
@@ -1200,6 +1227,18 @@ input,textarea,select{ font-size:16px; }
     <h2><span class="num">02</span>Entity-Relationship &amp; Relational Model</h2>
     <p class="lede">The unit where you design schemas and reduce ER diagrams to tables. Heavy diagrams, heavy weightage.</p>
     <span class="priority">High-yield · 1 long Q (ER design) + 3 short Qs typical</span>
+  </div>
+
+  <!-- ===== Unit 2 Repeated-Question Spotlight ===== -->
+  <div class="box prof" style="margin:18px 0 24px"><span class="label">⭐ Unit 2 · Repeated-Question Spotlight</span>
+    <p style="margin:6px 0 8px; font-style:normal;">Five stems profs reuse paper after paper. ER-from-scenario is the single most reliable 15-mark question in the corpus — practise hospital and library scenarios because university/banking/insurance are already burnt.</p>
+    <ol style="margin:6px 0 0 18px; font-style:normal;">
+      <li><b>ER from word scenario (university/banking/insurance/hospital/library)</b> — 4/6 papers · <mark>GUARANTEED 10–15M</mark> · <a href="#t-2-7" style="color:var(--brand)">→ 2.7</a> · 2025 BCA = university, 2025 BTECH-alt = insurance, 2024 BBA = banking, 2023 = university → <b>2026 unused = hospital / library / airline</b>.</li>
+      <li><b>Define keys (Candidate/Primary/Foreign) with example</b> — 5/6 papers · 1.5–5M · <a href="#t-2-3" style="color:var(--brand)">→ 2.3</a> · <mark>highest frequency in entire corpus</mark>.</li>
+      <li><b>Types of attributes with notations</b> — 2/6 papers · 1.5–5M · <a href="#t-2-5" style="color:var(--brand)">→ 2.5</a> · 2024 BBA, 2025 BTECH.</li>
+      <li><b>Strong vs Weak entity with example</b> — 2/6 papers · 1.5–5M · <a href="#t-2-8" style="color:var(--brand)">→ 2.8</a> · 2023, 2024 BBA.</li>
+      <li><b>Hierarchical vs Network vs Relational comparison</b> — 3/6 papers · 5–10M · <a href="#t-2-10" style="color:var(--brand)">→ 2.10</a> · 2024 CSE, 2025 BTECH(both).</li>
+    </ol>
   </div>
 
   <!-- 2.1 -->
@@ -1268,6 +1307,9 @@ input,textarea,select{ font-size:16px; }
       </tbody>
     </table></div>
     <div class="mnem"><b>Mnemonic</b>"Super people Can Pick Any Friend's Composite Surname" → Super · Candidate · Primary · Alternate · Foreign · Composite · Surrogate.</div>
+    <div class="box prof"><span class="label">How prof asks this <span class="tag hot" style="font-style:normal">5/6 papers · highest in corpus</span></span>
+      5/6 papers ask "Define the following: Candidate Key, Primary key, Foreign key" (1.5M) or "Differentiate between PK and FK" (1.5M). Highest-frequency stem in the entire corpus. Always include one concrete example per key — single-line definitions lose marks. PK example: <code>Roll</code> in STUDENT. FK example: <code>Roll</code> in ENROLMENT references STUDENT.Roll.
+    </div>
   </div>
 
   <!-- 2.4 -->
@@ -1342,6 +1384,9 @@ input,textarea,select{ font-size:16px; }
       <li><b>Partial / Optional</b> (single line) — some entities may not participate (an Employee may not <em>manage</em> any Department).</li>
     </ul>
     <div class="mnem"><b>Mnemonic</b>"DCP" — every relationship is described by <b>D</b>egree · <b>C</b>ardinality · <b>P</b>articipation. Always cite all three on a 5-marker.</div>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      2025 BTECH Q2(b) and 2025 BTECH-alt Q1(d) tested "cardinality + participation" for 5M and 1.5M. Always cite DCP (Degree-Cardinality-Participation) explicitly — examiners look for the three labels in every relationship answer. Total participation is drawn as a double line; partial as a single line — never skip the line-style note.
+    </div>
   </div>
 
   <!-- 2.7 -->
@@ -1400,6 +1445,9 @@ input,textarea,select{ font-size:16px; }
       </svg>
       <figcaption><b>Fig 2.2</b> · Canonical ER notation · entity (rect) · attribute (oval) · relationship (diamond) · weak items double-bordered</figcaption>
     </figure>
+    <div class="box prof"><span class="label">How prof asks this <span class="tag hot" style="font-style:normal">guaranteed 15M</span></span>
+      4/6 papers have one ER-from-scenario question worth 10–15M. The diagram alone is 3–4M; reduce-to-schema is 4–5M; assumptions / cardinality labels are the remaining marks. <em>5-step strategy:</em> (1) list entities and underline keys, (2) draw all relationships as diamonds with cardinality + participation labels, (3) attach attributes (ovals — double for multi-valued, dashed for derived), (4) state explicit assumptions, (5) reduce to relational schemas using one-table-per-entity + junction-table-for-M:N rules. See <a href="#rep-9" style="color:var(--brand)">rep-9</a> for the full worked template.
+    </div>
   </div>
 
   <!-- 2.8 -->
@@ -1430,6 +1478,10 @@ input,textarea,select{ font-size:16px; }
       <li><b>Aggregation</b> — treating a relationship as a higher-level entity so another relationship can attach to it. e.g. <em>Project Assignment</em> (Employee–Project–Hours) becomes an entity to which a <em>Manager</em> relationship can be added.</li>
       <li><b>Integration</b> — merging multiple user views into one global schema; handles synonyms, homonyms, and structural conflicts.</li>
     </ul>
+    <h4>Worked example · Specialization (PERSON → STUDENT / EMPLOYEE)</h4>
+    <div class="step"><span class="k">1</span><div class="body">Identify the superclass and disjoint subclasses. <code>PERSON(<u>SSN</u>, Name)</code> specialises into <code>STUDENT</code> (extra attribute <code>GPA</code>) and <code>EMPLOYEE</code> (extra attribute <code>Salary</code>). Constraint = <em>disjoint + total</em> (every person is exactly one of student or employee).</div></div>
+    <div class="step"><span class="k">2</span><div class="body">Draw the ISA triangle pointing up from each subclass to PERSON. Mark the disjoint circle with "d" and the total participation with a double line.</div></div>
+    <div class="step"><span class="k">3</span><div class="body">Reduce to relational schema: <code>PERSON(<u>SSN</u>, Name)</code> + <code>STUDENT(<u>SSN→FK</u>, GPA)</code> + <code>EMPLOYEE(<u>SSN→FK</u>, Salary)</code>. The subclass tables share the superclass PK as their own PK and as a FK back to PERSON.</div></div>
   </div>
 
   <!-- 2.10 -->
@@ -1514,6 +1566,16 @@ input,textarea,select{ font-size:16px; }
     <span class="priority">Medium · ~15 marks · ER queries + calculus theory</span>
   </div>
 
+  <!-- ===== Unit 3 Repeated-Question Spotlight ===== -->
+  <div class="box prof" style="margin:18px 0 24px"><span class="label">⭐ Unit 3 · Repeated-Question Spotlight</span>
+    <p style="margin:6px 0 8px; font-style:normal;">Three patterns dominate this unit. The RA-on-multi-relation schema question is now annual — practise Employee/Project, Sailors/Boats/Reserves, Employee/Assigned_to/Project until cold.</p>
+    <ol style="margin:6px 0 0 18px; font-style:normal;">
+      <li><b>Tuple vs Domain calculus with example query</b> — 3/6 papers · 1.5–5M · <a href="#t-3-8" style="color:var(--brand)">→ 3.8</a> · 2024 CSE, 2025 BTECH(both) · models at <a href="#pyq-3-2" style="color:var(--brand)">pyq-3-2/3</a>.</li>
+      <li><b>Relational algebra on multi-relation schema</b> — 3/6 papers · 8–10M · <a href="#t-3-2" style="color:var(--brand)">→ 3.2</a>–<a href="#t-3-6" style="color:var(--brand)">3.6</a> · 2024 CSE (Employee/Project), 2025 BTECH (Sailors/Boats/Reserves), 2023 (Employee/Assigned_to/Project).</li>
+      <li><b>Unary + Binary RA operators with example queries</b> — 1/6 + predicted recurrence · 10M · <a href="#t-3-2" style="color:var(--brand)">→ 3.2</a>, <a href="#t-3-4" style="color:var(--brand)">3.4</a>.</li>
+    </ol>
+  </div>
+
   <!-- 3.1 -->
   <div class="topic" id="t-3-1">
     <h3>3.1 What is Relational Algebra? <span class="tag fav">always 1.5M</span></h3>
@@ -1544,6 +1606,11 @@ input,textarea,select{ font-size:16px; }
     <h4>Rename ρ</h4>
     <p>Renames a relation and/or its attributes — useful for self-joins.</p>
     <span class="formula">ρ<sub>S(A1,A2,…)</sub>(R)    e.g. ρ<sub>E1</sub>(Employee)</span>
+    <h4>Worked example · σ then π on STUDENT</h4>
+    <p>Schema: <code>STUDENT(Roll, Name, Marks, Course)</code> with 4 rows: (1, Ankit, 87, BCA), (2, Riya, 65, BCA), (3, Mehak, 92, BBA), (4, Karan, 78, BCA).</p>
+    <div class="step"><span class="k">1</span><div class="body"><code>σ<sub>Marks&gt;75</sub>(STUDENT)</code> filters tuples row-by-row. Output 3 rows: (1, Ankit, 87, BCA), (3, Mehak, 92, BBA), (4, Karan, 78, BCA). Riya is dropped (65 ≤ 75).</div></div>
+    <div class="step"><span class="k">2</span><div class="body"><code>π<sub>Name,Course</sub>(σ<sub>Marks&gt;75</sub>(STUDENT))</code> projects only Name and Course. Output = {(Ankit, BCA), (Mehak, BBA), (Karan, BCA)}. Note that duplicates would be removed (sets, not bags) — none here.</div></div>
+    <div class="step"><span class="k">3</span><div class="body"><code>ρ<sub>S(R, N, M, C)</sub>(STUDENT)</code> renames STUDENT to S with attributes R, N, M, C. Useful for self-joins like "find students in the same course": <code>π<sub>S.N, T.N</sub>(σ<sub>S.C=T.C ∧ S.R≠T.R</sub>(ρ<sub>S</sub>(STUDENT) × ρ<sub>T</sub>(STUDENT)))</code>.</div></div>
   </div>
 
   <!-- 3.3 -->
@@ -1586,6 +1653,11 @@ input,textarea,select{ font-size:16px; }
         <tr><td>Full Outer (⟗)</td><td>Kept</td><td>Kept</td><td>Reconciliation reports</td></tr>
       </tbody>
     </table></div>
+    <h4>Worked example · SQL ↔ RA side-by-side on EMP/DEPT</h4>
+    <p>Schema: <code>EMP(eid, name, dno)</code> · <code>DEPT(dno, dname)</code>. Show employee names with their department names.</p>
+    <div class="step"><span class="k">SQL · Inner</span><div class="body"><code>SELECT e.name, d.dname FROM emp e INNER JOIN dept d ON e.dno = d.dno;</code><br>Equivalent RA: <code>π<sub>name, dname</sub>( emp ⋈<sub>emp.dno=dept.dno</sub> dept )</code>.</div></div>
+    <div class="step"><span class="k">SQL · Left Outer</span><div class="body"><code>SELECT e.name, d.dname FROM emp e LEFT JOIN dept d ON e.dno = d.dno;</code><br>RA: <code>π<sub>name, dname</sub>( emp ⟕<sub>emp.dno=dept.dno</sub> dept )</code>. Keeps employees with no department (dname = NULL).</div></div>
+    <div class="step"><span class="k">SQL · Full Outer</span><div class="body"><code>SELECT e.name, d.dname FROM emp e FULL OUTER JOIN dept d ON e.dno = d.dno;</code><br>RA: <code>π<sub>name, dname</sub>( emp ⟗<sub>emp.dno=dept.dno</sub> dept )</code>. Keeps unmatched employees AND unmatched (empty) departments.</div></div>
   </div>
 
   <!-- 3.5 -->
@@ -1600,6 +1672,9 @@ Answer = R ÷ S</span>
     <h4>Generalized Projection</h4>
     <p>Extension of π allowing arithmetic / functions in the projection list.</p>
     <span class="formula">π<sub>Name, Salary*1.10</sub>(Employee)</span>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      Division ÷ shows up in 3/6 papers disguised as "works on ALL projects that X works on" (2024 CSE Q4(a)(iii), 2025 BTECH Q4(a)(iv) variants). It's the operator that separates 8/10 from 10/10 on the RA long-form. Always introduce dividend + divisor as separate intermediate names (e.g. <code>R</code> and <code>S</code>) before writing <code>R ÷ S</code> — examiners want to see you understand the schema split.
+    </div>
   </div>
 
   <!-- 3.6 -->
@@ -1682,6 +1757,20 @@ e.g.  Dno ℱ COUNT(SSN), AVG(Salary) (Employee)</span>
     <span class="priority">Highest-yield · 2 long Qs + 4 short Qs typical</span>
   </div>
 
+  <!-- ===== Unit 4 Repeated-Question Spotlight ===== -->
+  <div class="box prof" style="margin:18px 0 24px"><span class="label">⭐ Unit 4 · Repeated-Question Spotlight · 50% of the paper</span>
+    <p style="margin:6px 0 8px; font-style:normal;">Unit 4 carries half the marks. Seven stems below are GUARANTEED on every paper — anchor them all cold. Normalize-with-FDs and precedence-graph show up every single year — practise three variants of each.</p>
+    <ol style="margin:6px 0 0 18px; font-style:normal;">
+      <li><b>Normalize R with FDs to 3NF/BCNF + lossless + dependency-preserving</b> — 3/6 papers · <mark>GUARANTEED 7–10M</mark> · <a href="#t-4-3" style="color:var(--brand)">→ 4.3</a> · 2024 CSE BOOK relation, 2025 BTECH R(ABCD), 2025 BTECH-alt R(ABCDE).</li>
+      <li><b>Precedence graph conflict-serializability check</b> — 4/6 papers · <mark>GUARANTEED 5–7M</mark> · <a href="#t-4-11" style="color:var(--brand)">→ 4.11</a> · new schedule every year — practice 3 variants.</li>
+      <li><b>2PL / Strict-2PL / Timestamp protocol</b> — 3/6 papers · 8–10M · <a href="#t-4-10" style="color:var(--brand)">→ 4.10</a> · 2023, 2025 BTECH, 2025 BTECH-alt.</li>
+      <li><b>Armstrong's axioms sound &amp; complete</b> — 3/6 papers · 1.5–5M · <a href="#t-4-1" style="color:var(--brand)">→ 4.1</a> · 2024 CSE, 2025 BTECH(both).</li>
+      <li><b>Checkpoints in recovery</b> — 3/6 papers · 1.5M · <a href="#t-4-12" style="color:var(--brand)">→ 4.12</a> · 2024 CSE, 2025 BTECH(both).</li>
+      <li><b>B-tree indexing + insertion/deletion</b> — 3/6 papers · 5–10M · <a href="#t-4-8" style="color:var(--brand)">→ 4.8</a> · 2024 CSE, 2025 BTECH(both).</li>
+      <li><b>"Short notes on any three" final 15M dump</b> — 5/6 papers <mark>GUARANTEED</mark> · <a href="#pyq-4-6" style="color:var(--brand)">→ pyq-4-6 (Q7)</a> · 2025 BCA mix: Query Opt / Concurrency-Recovery / SQL DDL+DML / Data Models / DBA Roles.</li>
+    </ol>
+  </div>
+
   <!-- 4.1 -->
   <div class="topic" id="t-4-1">
     <h3>4.1 Functional Dependencies &amp; Armstrong's Axioms <span class="tag hot">repeat ⭐⭐⭐</span></h3>
@@ -1717,6 +1806,9 @@ return result</span>
     <div class="box tip"><span class="label">Key from closure</span>
       X is a <b>superkey</b> iff <code>X⁺ = all attributes of R</code>. X is a <b>candidate key</b> iff additionally no proper subset of X has that property.
     </div>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      "Why Armstrong's axioms are sound and complete?" appears 3/6 papers verbatim (1.5–5M). The answer has two halves and you must give BOTH for full marks: <b>SOUND</b> = every FD derived using the axioms is actually true in every relation that satisfies F; <b>COMPLETE</b> = every FD that logically follows from F can be derived using only these three axioms. Both halves required — students who give only one lose half the marks.
+    </div>
   </div>
 
   <!-- 4.2 -->
@@ -1733,6 +1825,23 @@ return result</span>
     </table></div>
     <div class="box why"><span class="label">Cure</span>
       Decompose the relation into smaller relations where every non-trivial FD has a candidate key on the left (BCNF) or at least every non-key attribute depends only on candidate keys (3NF).
+    </div>
+    <h4>Worked example · all 3 anomalies on one denormalised table</h4>
+    <p>Schema: <code>STUDENT(<u>Roll</u>, Name, Course, Instructor, InstructorOffice)</code> with hidden FDs <code>Course → Instructor</code> and <code>Instructor → InstructorOffice</code>. Three rows:</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Roll</th><th>Name</th><th>Course</th><th>Instructor</th><th>InstructorOffice</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Ankit</td><td>DBMS</td><td>Dr. Sharma</td><td>B-204</td></tr>
+        <tr><td>2</td><td>Riya</td><td>DBMS</td><td>Dr. Sharma</td><td>B-204</td></tr>
+        <tr><td>3</td><td>Mehak</td><td>OS</td><td>Dr. Verma</td><td>C-118</td></tr>
+      </tbody>
+    </table></div>
+    <div class="step"><span class="k">Insert</span><div class="body">Want to record a new instructor "Dr. Iyer" for course "AI" — but no student has enrolled yet. The row needs a Roll value (PK constraint) ⇒ <em>cannot insert</em> the Instructor/Course fact alone.</div></div>
+    <div class="step"><span class="k">Update</span><div class="body">Dr. Sharma moves office to B-310. Must <code>UPDATE</code> every row with Instructor='Dr. Sharma' (rows 1 and 2). Forget one and the DB shows both B-204 and B-310 for the same instructor — inconsistent.</div></div>
+    <div class="step"><span class="k">Delete</span><div class="body">Mehak (Roll 3) withdraws. Deleting her row also wipes the only record of OS / Dr. Verma / C-118 — that course information disappears even though the course still exists in reality.</div></div>
+    <p>Decomposing to <code>STUDENT(Roll, Name)</code> + <code>ENROL(Roll, Course)</code> + <code>COURSE(Course, Instructor)</code> + <code>INSTRUCTOR(Instructor, Office)</code> stores each fact exactly once and eliminates all three anomalies.</p>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      2023 Q4(a) and 2025 BCA Q6(b) asked "Explain insert/delete/update anomalies with examples" (5–10M). The trick: use the <em>same</em> denormalised table to illustrate all three anomalies — don't invent three different tables. Senior profs deduct marks when each anomaly uses a different schema.
     </div>
   </div>
 
@@ -1862,6 +1971,16 @@ return result</span>
       <li><code>UPDATE … SET col = expr WHERE …</code></li>
       <li><code>DELETE FROM … WHERE …</code></li>
     </ul>
+    <h4>Worked example · verbatim SQL syntax on STUDENT</h4>
+    <p>The exact one-liners profs expect for the 2023 BTECH Q1(h) "Write SQL for ALTER/DROP/UPDATE/INSERT" question:</p>
+    <pre><code>CREATE TABLE Student(Roll INT PRIMARY KEY, Name VARCHAR(30), Marks INT);
+ALTER  TABLE Student ADD    Email VARCHAR(50);
+ALTER  TABLE Student DROP   COLUMN Email;
+INSERT INTO  Student VALUES (1, 'Ankit', 87);
+UPDATE Student SET Marks = 90 WHERE Roll = 1;
+DELETE FROM  Student WHERE Marks &lt; 33;
+DROP   TABLE Student;
+CREATE VIEW Toppers AS SELECT Roll, Name FROM Student WHERE Marks &gt;= 75;</code></pre>
     <h4>Views</h4>
     <div class="box def"><span class="label">View</span>
       A <b>view</b> is a named, stored SELECT statement that behaves like a virtual table. <code>CREATE VIEW v AS SELECT …</code>. The view is not materialised by default — every reference re-runs the query.
@@ -1875,6 +1994,9 @@ return result</span>
     </ul>
     <div class="box warn"><span class="label">Limitations</span>
       Views over multiple tables or with aggregates are usually read-only — you cannot <code>INSERT</code> or <code>UPDATE</code> through them. <em>Materialised views</em> store the result physically and need a refresh policy.
+    </div>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      View questions: "What is View in SQL? Why is it used?" (2025 BCA Q1(i), 1.5M). The 4-reason mnemonic <b>SSL R</b> gets full marks: <b>S</b>ecurity (hide columns/rows) · <b>S</b>implicity (encapsulate joins) · <b>L</b>ogical-DI (app insulated from base changes) · <b>R</b>eusability (DRY). For the 2023 Q1(h) SQL-syntax stem, memorise the 8-line block above verbatim — copy-paste it in the exam.
     </div>
   </div>
 
@@ -1935,6 +2057,9 @@ return result</span>
       <li><b>Sort-Merge Join</b> — sort both relations on the join key, then linear scan.</li>
       <li><b>Hash Join</b> — build hash on smaller relation, probe with larger. Best for equi-joins with no usable index.</li>
     </ul>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      "How is query optimization done using heuristics?" appears 2/6 papers (2025 BTECH-alt Q5(b), 2025 BTECH Q7(c)) for 5–7M. Always cite the 6 rules in order: (1) push-σ-down, (2) push-π-down, (3) combine cascades, (4) reorder joins by selectivity, (5) convert × to ⋈ where a predicate exists, (6) use available indexes. <em>5/5 if all 6 rules named, 3/5 if vague.</em>
+    </div>
   </div>
 
   <!-- 4.8 -->
@@ -2011,6 +2136,9 @@ return result</span>
     </ul>
     <h4>Insertion / deletion sketch</h4>
     <p>Insert: locate leaf, add key in sorted order. If leaf overflows, <em>split</em> it and push the median up. The split may cascade. Delete: remove key from leaf; if underflow, <em>borrow</em> from sibling or <em>merge</em> two siblings and pull the separator down.</p>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      3/6 papers: "How B-tree assists indexing? Insertion + deletion in B-tree" (2024 CSE Q6(a) 8M, 2025 BTECH Q6(a) 8M, 2025 BTECH-alt Q7(b) 5M). Mark allocation: diagram (Fig 4.3) = 3M; insert algorithm = 2M; delete algorithm = 2M; advantages = 1M. Always sketch a 3-level tree showing one split (insert) and one borrow/merge (delete) — examiners look for the cascading split arrow.
+    </div>
   </div>
 
   <!-- 4.9 -->
@@ -2071,6 +2199,14 @@ return result</span>
     </div>
     <h4>Detection &amp; recovery</h4>
     <p>Build a <b>wait-for graph</b>; periodically check for cycles. On detection choose a <em>victim</em> (least work done, fewest locks held) and roll back. Detection is preferred when deadlocks are rare; prevention when frequent.</p>
+    <h4>Worked example · 2-transaction deadlock + wait-die resolution</h4>
+    <p>Two transactions T1 (TS=100, older) and T2 (TS=200, younger). Items A and B. Under 2PL:</p>
+    <div class="step"><span class="k">1</span><div class="body"><code>T1: Lock-X(A)</code> succeeds (growing phase). <code>T2: Lock-X(B)</code> succeeds. Both hold one X-lock each.</div></div>
+    <div class="step"><span class="k">2</span><div class="body"><code>T1: Lock-X(B)</code> — B held by T2 → T1 must wait. <code>T2: Lock-X(A)</code> — A held by T1 → T2 must wait. <b>Wait-for graph: T1 → T2 → T1 cycle ⇒ DEADLOCK.</b></div></div>
+    <div class="step"><span class="k">3</span><div class="body">Apply <b>Wait-Die</b>: T1 (older, lower TS) <em>waits</em> for T2's lock on B. T2 (younger, higher TS) requested A held by older T1 ⇒ T2 <em>dies</em> (abort + restart with original TS=200). T1 now acquires B, completes both phases, commits. T2 restarts cleanly. No starvation because T2 keeps its original timestamp.</div></div>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      3/6 papers ask 2PL / Strict-2PL / Timestamp protocol (8–10M). 2025 BTECH Q5(a) explicitly asks "Why Strict 2PL is preferred for recoverability". One-line answer to bank the mark: <em>Strict 2PL holds all X-locks until COMMIT/ROLLBACK → no other transaction can read uncommitted data → no dirty reads → schedule is recoverable + cascadeless.</em>
+    </div>
   </div>
 
   <!-- 4.11 -->
@@ -2121,6 +2257,9 @@ return result</span>
     <div class="box why"><span class="label">Why undo/redo logging beats shadow paging</span>
       Logging handles many concurrent transactions, requires only the log to be forced (cheap), and provides per-transaction rollback. Shadow paging duplicates work and serialises the commit.
     </div>
+    <div class="box prof"><span class="label">How prof asks this</span>
+      Checkpoint 1.5M ask repeats 3/6 papers (2024 CSE Q1(h), 2025 BTECH Q1(i), 2025 BTECH-alt Q1(f)). One-line answer: <em>"A checkpoint is a log marker forcing all dirty buffers to disk; on crash, recovery starts from the last checkpoint instead of scanning the whole log → faster restart."</em>
+    </div>
   </div>
 
   <!-- 4.13 -->
@@ -2141,6 +2280,9 @@ return result</span>
       <li><b>MAC (Mandatory)</b> — system-wide labels (TOP-SECRET / SECRET / PUBLIC). Subjects access objects only if their clearance ≥ object's classification.</li>
       <li><b>RBAC (Role-Based)</b> — permissions assigned to roles, users assigned to roles. Scales much better than per-user grants.</li>
     </ul>
+    <div class="box warn"><span class="label">⚠ Syllabus disclaimer · MAC/DAC/RBAC</span>
+      <b>In syllabus</b> for BCG-202-V: "Concept of security" (Unit 4 last line) — so expect at least one short ask on auth-vs-authz or general access control. <b>Out of syllabus</b> for BCG-202-V: MAC/DAC/RBAC <em>specifically</em> (only in B.Tech PCC-CS-501). Treat MAC/DAC/RBAC as insurance — read this 3-line summary once and move on. Do NOT memorise label-hierarchies or Bell-LaPadula.
+    </div>
   </div>
 
   <!-- 4.14 -->
@@ -2359,6 +2501,7 @@ return result</span>
   <div class="qhead">
     <span class="qmark">15 M</span>
     <span class="qmeta">2025 BCA · Q7 · U1 (Roles part) · <a href="#t-1-5" style="color:var(--brand)">→ topic 1.5</a></span>
+    <span class="tag hot">4/6 papers</span>
   </div>
   <div class="qbody">Short note on: Roles of DBA and Database Designers.</div>
   <div class="ans">
@@ -2550,6 +2693,7 @@ return result</span>
   <div class="qhead">
     <span class="qmark">1.5 M</span>
     <span class="qmeta">2025 BCA · Q1(e) · U2 · <a href="#t-2-3" style="color:var(--brand)">→ topic 2.3</a></span>
+    <span class="tag hot">5/6 papers · highest in corpus</span>
   </div>
   <div class="qbody">Define Primary Key and Foreign Key with examples.</div>
   <div class="ans">
@@ -2574,6 +2718,7 @@ return result</span>
   <div class="qhead">
     <span class="qmark">15 M</span>
     <span class="qmeta">2025 BCA · Q4 · U2 · <a href="#t-2-7" style="color:var(--brand)">→ topic 2.7</a></span>
+    <span class="tag hot">4/6 papers · guaranteed 15M</span>
   </div>
   <div class="qbody">Draw and explain an E-R diagram for the following scenario: A university has multiple departments. Each department offers multiple courses. Each course can be taught by multiple instructors and each instructor can teach multiple courses. Students enroll in courses, and grades are recorded. Represent all necessary entities, relationships, attributes, and keys.</div>
   <div class="ans">
@@ -3137,6 +3282,37 @@ MGR ← department ⋈<sub>managerID=empID</sub> employee
   </div>
 </div>
 
+<div class="qcard" id="dbms-23-4b">
+  <div class="qhead">
+    <span class="qmark">5 M</span>
+    <span class="qmeta">2023 B.Tech CE(DS) · Q4(b) · U3/U4 · <a href="#t-4-6" style="color:var(--brand)">→ topic 4.6</a></span>
+  </div>
+  <div class="qbody">Schema: <code>Employee(<u>Emp_id</u>, name)</code>; <code>Assigned_to(<u>project_id, emp_id</u>)</code>; <code>Project(<u>project_id</u>, project_name, chief_arch)</code>. Write SQL queries for: (1) employees on project S9; (2) employees on both S5 and S6; (3) employees other than e11 working on at least one project that e11 works on.</div>
+  <div class="ans">
+    <span class="label">Model answer · 5-mark · 3 sub-queries</span>
+    <p><b>(1) Employees on project S9</b> — single join, project name through Employee:</p>
+    <pre><code>SELECT e.Emp_id, e.name
+FROM   Employee e
+JOIN   Assigned_to a ON e.Emp_id = a.emp_id
+WHERE  a.project_id = 'S9';</code></pre>
+    <p><b>(2) Employees on BOTH S5 and S6</b> — use <code>INTERSECT</code>, or two-step IN:</p>
+    <pre><code>SELECT emp_id FROM Assigned_to WHERE project_id = 'S5'
+INTERSECT
+SELECT emp_id FROM Assigned_to WHERE project_id = 'S6';</code></pre>
+    <p>If your DB doesn't support INTERSECT, equivalent IN form:</p>
+    <pre><code>SELECT emp_id FROM Assigned_to WHERE project_id = 'S5'
+  AND   emp_id IN (SELECT emp_id FROM Assigned_to WHERE project_id = 'S6');</code></pre>
+    <p><b>(3) Other employees working on at least one project that e11 works on</b> — use IN against e11's project list, exclude e11:</p>
+    <pre><code>SELECT DISTINCT emp_id
+FROM   Assigned_to
+WHERE  emp_id &lt;&gt; 'e11'
+  AND  project_id IN (SELECT project_id FROM Assigned_to WHERE emp_id = 'e11');</code></pre>
+    <div class="box prof"><span class="label">How prof grades</span>
+      Each query = ~1.5M: 0.5 for SELECT structure, 0.5 for correct WHERE/JOIN/IN logic, 0.5 for handling the "exclude self" or "both" condition. <em>Watch out:</em> using <code>UNION</code> instead of <code>INTERSECT</code> for (2) is the #1 mistake — UNION = either project, INTERSECT = both. The (3) query's correlated-subquery / IN pattern is also tested in the 2024 CSE division question — same template applies.
+    </div>
+  </div>
+</div>
+
 <div class="qcard" id="pyq-3-6">
   <div class="qhead">
     <span class="qmark">8 M</span>
@@ -3196,6 +3372,23 @@ R ← reserves ⋈ A
   </div>
 </div>
 
+<div class="qcard" id="dbms-23-1h">
+  <div class="qhead">
+    <span class="qmark">1.5 M</span>
+    <span class="qmeta">2023 B.Tech CE(DS) · Q1(h) · U4 · <a href="#t-4-6" style="color:var(--brand)">→ topic 4.6</a></span>
+  </div>
+  <div class="qbody">Write SQL queries for the following commands: ALTER, DROP, UPDATE, INSERT.</div>
+  <div class="ans">
+    <span class="label">Model answer · verbatim 1-line syntax</span>
+    <p>On a <code>Student(Roll INT PRIMARY KEY, Name VARCHAR(30), Marks INT)</code> table:</p>
+    <pre><code>ALTER  TABLE Student ADD    Email VARCHAR(50);
+DROP   TABLE Student;
+INSERT INTO  Student VALUES (1, 'Ankit', 87);
+UPDATE Student SET Marks = 90 WHERE Roll = 1;</code></pre>
+    <p><b>One-liner explanation each:</b> <code>ALTER</code> changes schema (add/drop column); <code>DROP</code> removes the whole table + data; <code>INSERT</code> adds a new row; <code>UPDATE</code> modifies values in existing rows matching WHERE. Award 0.5 marks per statement — memorise verbatim.</p>
+  </div>
+</div>
+
 <div class="qcard" id="pyq-4-3">
   <div class="qhead">
     <span class="qmark">1.5 M</span>
@@ -3212,6 +3405,7 @@ R ← reserves ⋈ A
   <div class="qhead">
     <span class="qmark">10 M</span>
     <span class="qmeta">2025 BCA · Q6(a) · U4 · <a href="#t-4-3" style="color:var(--brand)">→ topic 4.3</a></span>
+    <span class="tag hot">3/6 papers · guaranteed</span>
   </div>
   <div class="qbody">Explain the concept of Normalization. Demonstrate the process of converting an unnormalized relation into 3NF with the help of an example.</div>
   <div class="ans">
@@ -3426,6 +3620,7 @@ R4(<u>book_title, author</u>)                 -- relationship of book to its aut
   <div class="qhead">
     <span class="qmark">5 M</span>
     <span class="qmeta">2024 B.Tech CSE · Q5(b) · U4 · <a href="#t-4-11" style="color:var(--brand)">→ topic 4.11</a></span>
+    <span class="tag hot">4/6 papers · guaranteed</span>
   </div>
   <div class="qbody">Define Conflict Serializability. Using Precedence Graph method, check whether schedule S = R1(A), R2(A), R1(B), R2(B), R3(B), W1(A), W2(B) is Conflict Serializable.</div>
   <div class="ans">
@@ -3950,6 +4145,21 @@ R4(<u>book_title, author</u>)                 -- relationship of book to its aut
 </div>
 
 <!-- ====== END PYQ VAULT ====== -->
+
+<details class="archive" style="margin:18px 0 28px; padding:12px 14px; background:var(--paper-deep); border:1px dashed var(--muted); border-radius:4px; color:var(--muted); font-size:13.5px;">
+  <summary style="cursor:pointer; font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:.18em; color:var(--muted); text-transform:uppercase; font-weight:700;">📦 Out-of-syllabus PYQs · skim only · NOT in BCG-202-V</summary>
+  <p style="margin:10px 0 8px;">These cards exist in the PYQ vault because they appeared in B.Tech (PCC-CS-501) or BBA (BBA-GEN-404) papers — same prof pool, wider syllabus. <b>Read them once for insurance only; do NOT memorise for BCG-202-V.</b> The BCG syllabus mentions "concept of security" but not MAC/DAC/RBAC; it has no Data Mining (KDD), no Data Warehouse, no Multimedia/Mobile/Spatial DB.</p>
+  <ul style="margin:8px 0 4px 18px; padding:0;">
+    <li><b>OLTP vs OLAP / Data Warehouse vs DB</b> — <a href="#pyq-1-11" style="color:var(--brand)">pyq-1-11</a> (2024 CSE) · skim only; not in BCG.</li>
+    <li><b>MAC vs DAC vs RBAC</b> — <a href="#t-4-13" style="color:var(--brand)">topic 4.13</a> + warn box already there; only the 3-line DAC/MAC/RBAC summary is needed for BCG, not deep B.Tech treatment.</li>
+    <li><b>KDD process (Data Mining)</b> — <a href="#pyq-4-25" style="color:var(--brand)">pyq-4-25</a> already flagged with warn box; <em>skip the model answer.</em></li>
+    <li><b>Authentication vs Authorization</b> — <a href="#pyq-1-13" style="color:var(--brand)">pyq-1-13</a> (2024 CSE Q1(d)); the in-syllabus "concept of security" line means this is borderline-keep, but BCG asks at most 1.5M — don't over-prep.</li>
+    <li><b>SQL Injection</b> — appears in 2025 BTECH-alt Q7(c) / 2024 CSE Q6(b); out of BCG. <em>Skip.</em></li>
+    <li><b>Digital Libraries / Firewalls</b> — 2024 BBA Q1(g/h); BBA-only, out of BCG. <em>Skip.</em></li>
+    <li><b>Multimedia / Mobile / Spatial DB · Data Warehousing</b> — 2024 BBA Q6, Q7; BBA-only, out of BCG. <em>Skip.</em></li>
+  </ul>
+  <p style="margin:10px 0 0; font-style:italic;">Net effect of this collapse: 9 days from the exam, the BCA student avoids 4–5 scrolls of irrelevant content and can focus on Unit 4's 50%.</p>
+</details>
 
 <!-- ============== ✦4.7 REPEATED QUESTIONS ============== -->
 <h3 class="section" id="repeated-qs"><span class="ico">⭐</span> Most-repeated questions <span class="badge">frequency-ranked</span></h3>
