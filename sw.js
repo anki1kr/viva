@@ -1,4 +1,4 @@
-// Service Worker for BCA Exam Prep
+﻿// Service Worker for BCA Exam Prep
 // Strategy:
 //   - HTML / navigation requests → network-first (so the live exam ticker
 //     and auto-hide JS always run against the latest file). Falls back to
@@ -6,7 +6,7 @@
 //   - Static assets (icons, manifest) → cache-first.
 // Bump CACHE_VERSION whenever PRECACHE_URLS changes so old caches are purged.
 
-const CACHE_VERSION = 'bca-prep-v14';
+const CACHE_VERSION = 'bca-prep-v20';
 const PRECACHE_URLS = [
   './',
   './index.html',
