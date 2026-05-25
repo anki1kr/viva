@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#a16207" />
+<meta name="description" content="IKS Crash-60 · PYQ-driven minimum-effort pass sheet · 16 Part-A shorts + 8 Part-B essays · covers ~75% of paper probability" />
+<title>IKS Crash-60 · Pass Sheet · 26 May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..800&family=Spectral:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f7f1e1; --paper-soft:#fffaef; --paper-deep:#ebe2cc;
+  --ink:#1a1209; --ink-soft:#3d2f1c; --muted:#6b5d47; --rule:#d9cfb6;
+  --brand:#a16207; --brand-2:#854d0e; --brand-soft:#fef3c7; --brand-deep:#713f12;
+  --gold:#a16207; --highlighter:#fde047;
+  --auburn:#7c2d12; --auburn-soft:#fde6d6;
+  --forest:#365314; --forest-soft:#ecf5dc;
+  --crimson:#9f1239; --crimson-soft:#fee2e2;
+  --navy:#1e3a8a; --navy-soft:#dbeafe;
+  --amber:#d97706; --amber-soft:#fef3c7;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bot: env(safe-area-inset-bottom, 0px);
+}
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; min-width:0; }
+html{ scroll-behavior:smooth; scroll-padding-top:96px; }
+:target{ scroll-margin-top:96px; }
+h2.section, h3.qhead, .plan, #parta, #partb, #mnem, #plan, #e1, #e2, #e3, #e4, #e5, #e6, #e7, #e8{ scroll-margin-top:96px; }
+body{
+  margin:0; font-family:"Spectral",Georgia,serif; font-size:15.5px; line-height:1.6; color:var(--ink);
+  background:
+    radial-gradient(ellipse at top left, rgba(252,235,200,.6), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(241,224,193,.5), transparent 70%),
+    var(--paper);
+  background-attachment:fixed;
+  padding-top:var(--safe-top); padding-bottom:var(--safe-bot);
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  word-wrap:break-word; overflow-wrap:break-word;
+}
+body::before{
+  content:""; position:fixed; inset:0;
+  background-image:repeating-linear-gradient(0deg, rgba(161,98,7,.013) 0 1px, transparent 1px 28px);
+  pointer-events:none; z-index:0;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(247,241,225,.96); backdrop-filter:blur(8px);
+  border-bottom:1.5px solid var(--ink);
+}
+.title{ display:flex; justify-content:space-between; align-items:center; padding:calc(10px + var(--safe-top)) 16px 4px; }
+.title b{ font-family:"Fraunces",serif; font-weight:700; font-size:17px; color:var(--brand); letter-spacing:-.01em; }
+.title small{ font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.18em; color:var(--muted); text-transform:uppercase; }
+nav.chips{ display:flex; gap:6px; padding:6px 12px 10px; overflow-x:auto; scrollbar-width:none; }
+nav.chips::-webkit-scrollbar{ display:none; }
+nav.chips a{
+  flex-shrink:0; padding:6px 12px;
+  font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:500; letter-spacing:.08em;
+  color:var(--ink); background:var(--paper-soft); border:1.5px solid var(--ink);
+  text-decoration:none; white-space:nowrap; text-transform:uppercase;
+}
+nav.chips a.hot{ background:var(--highlighter); }
+nav.chips a:hover{ background:var(--brand); color:var(--paper); }
+
+.wrap{ position:relative; z-index:1; max-width:780px; margin:0 auto; padding:14px 12px 80px; }
+@media(min-width:600px){ .wrap{ padding:24px 22px 96px; } body{ font-size:17px; line-height:1.7; } }
+
+.cover{
+  margin:0 0 24px; padding:22px 18px 20px;
+  background:
+    radial-gradient(circle at 15% 18%, rgba(253,224,71,.45), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(251,207,232,.35), transparent 45%),
+    var(--paper-soft);
+  border:1.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink); border-radius:4px; position:relative;
+}
+.cover .stamp{
+  position:absolute; top:14px; right:16px;
+  border:1.5px solid var(--crimson); color:var(--crimson);
+  padding:4px 10px; font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.18em;
+  transform:rotate(4deg); background:rgba(255,250,239,.6);
+}
+.cover h1{
+  font-family:"Fraunces",serif; font-weight:700;
+  font-size:clamp(30px,8vw,58px); line-height:.95; letter-spacing:-.02em; margin:8px 0 4px;
+}
+.cover h1 em{ font-style:italic; font-weight:400; color:var(--brand); display:block; font-size:.45em; margin-top:6px; }
+.cover .sub{ font-family:"Caveat",cursive; font-size:22px; color:var(--brand); margin:10px 0 16px; line-height:1.1; transform:rotate(-1deg); display:inline-block; }
+.cover .stats{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:10px 16px;
+  border-top:1.5px solid var(--ink); padding-top:14px; margin-top:6px;
+}
+.cover .stat .lbl{ font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.2em; color:var(--muted); text-transform:uppercase; margin-bottom:4px; }
+.cover .stat .num{ font-family:"Fraunces",serif; font-weight:700; font-size:22px; line-height:1; color:var(--ink); letter-spacing:-.02em; }
+.cover .stat:nth-child(2) .num{ color:var(--brand); }
+.cover .stat:nth-child(3) .num{ color:var(--crimson); }
+
+h2.section{
+  font-family:"Fraunces",serif; font-weight:700; font-size:28px; letter-spacing:-.01em;
+  margin:36px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--ink);
+  display:flex; align-items:baseline; gap:10px;
+}
+h2.section small{ font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.18em; color:var(--brand); text-transform:uppercase; }
+
+h3.qhead{
+  font-family:"Fraunces",serif; font-weight:700; font-size:19px; margin:22px 0 8px; line-height:1.25;
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:8px;
+}
+h3.qhead .tag{
+  font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.14em;
+  padding:2px 8px; background:var(--brand); color:var(--paper); text-transform:uppercase;
+}
+h3.qhead .tag.hot{ background:var(--crimson); }
+h3.qhead .tag.freq{ background:var(--forest); }
+h3.qhead .tag.year{ background:var(--paper-soft); color:var(--ink); border:1px solid var(--ink); }
+
+.box{
+  margin:10px 0; padding:12px 14px; border-radius:4px;
+  border:1px solid var(--rule); background:var(--paper-soft);
+}
+.box.def{ background:var(--brand-soft); border-color:var(--brand); }
+.box.tip{ background:var(--forest-soft); border-color:var(--forest); }
+.box.prof{ background:var(--auburn-soft); border-color:var(--auburn); }
+.box.warn{ background:var(--crimson-soft); border-color:var(--crimson); }
+.box.why{ background:var(--navy-soft); border-color:var(--navy); }
+.box.eli5{ background:var(--amber-soft); border-color:var(--amber); }
+.box b.lbl{
+  display:inline-block; font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.16em;
+  text-transform:uppercase; padding:2px 6px; margin-right:8px; border:1px solid currentColor; border-radius:2px;
+}
+.box.def b.lbl{ color:var(--brand-deep); }
+.box.tip b.lbl{ color:var(--forest); }
+.box.prof b.lbl{ color:var(--auburn); }
+.box.warn b.lbl{ color:var(--crimson); }
+.box.why b.lbl{ color:var(--navy); }
+.box.eli5 b.lbl{ color:var(--amber); }
+
+.ans{
+  margin:10px 0 18px; padding:14px 16px; background:#fff;
+  border-left:4px solid var(--brand); border-top:1px solid var(--rule); border-right:1px solid var(--rule); border-bottom:1px solid var(--rule);
+  border-radius:0 4px 4px 0;
+}
+.ans h4{
+  font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.18em;
+  color:var(--brand); text-transform:uppercase; margin:0 0 8px;
+}
+.ans ul,.ans ol{ margin:6px 0 6px 20px; padding:0; }
+.ans li{ margin:4px 0; }
+.ans p{ margin:6px 0; }
+.ans p.lead{ font-weight:600; }
+strong.hot{ background:var(--highlighter); padding:0 3px; }
+strong.key{ color:var(--brand-deep); }
+
+table.flash{ width:100%; border-collapse:collapse; margin:12px 0; font-size:14.5px; }
+table.flash th, table.flash td{ border:1px solid var(--rule); padding:8px 10px; text-align:left; vertical-align:top; }
+table.flash th{ background:var(--paper-deep); font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; }
+table.flash tr:nth-child(even) td{ background:var(--paper-soft); }
+table.flash td.q{ font-weight:600; width:35%; }
+
+.mnem{
+  font-family:"Caveat",cursive; font-size:22px; color:var(--auburn);
+  background:var(--highlighter); padding:6px 12px; display:inline-block;
+  transform:rotate(-1deg); margin:6px 0; border:1.5px solid var(--ink);
+}
+
+.plan{
+  background:var(--navy-soft); border:2px solid var(--navy); border-radius:6px;
+  padding:14px 16px; margin:16px 0 24px;
+}
+.plan h3{ margin:0 0 8px; font-family:"Fraunces",serif; font-size:20px; color:var(--navy); }
+.plan ol{ margin:6px 0 6px 20px; }
+.plan li{ margin:4px 0; }
+
+.hr{ border:0; border-top:1.5px dashed var(--rule); margin:24px 0; }
+
+.foot{
+  margin-top:40px; padding:14px; text-align:center;
+  font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.16em;
+  color:var(--muted); text-transform:uppercase;
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="title"><b>IKS · CRASH-60</b><small>26 MAY 2026 · 75 MARK</small></div>
+  <nav class="chips">
+    <a href="#plan" class="hot">Plan</a>
+    <a href="#parta">Part-A · 10×1.5</a>
+    <a href="#partb">Part-B · 4×15</a>
+    <a href="#e1">Ashtanga</a>
+    <a href="#e2">Rasa</a>
+    <a href="#e3">Texts</a>
+    <a href="#e4">Nature IKS</a>
+    <a href="#e5">Arthasastra</a>
+    <a href="#e6">Vastu</a>
+    <a href="#e7">Ayurveda</a>
+    <a href="#e8">VMaths</a>
+    <a href="#mnem">Mnemonics</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+<section class="cover">
+  <div class="stamp">PASS-OPTIMIZED</div>
+  <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.22em; color:var(--muted); text-transform:uppercase;">VAC-104-V · IKS</div>
+  <h1>Crash-60.<em>Memorize. Walk in. Pass.</em></h1>
+  <div class="sub">~75% of paper probability covered in 8 essays + 16 shorts</div>
+  <div class="stats">
+    <div class="stat"><div class="lbl">Target</div><div class="num">45/75</div></div>
+    <div class="stat"><div class="lbl">Coverage</div><div class="num">~60%</div></div>
+    <div class="stat"><div class="lbl">PYQs</div><div class="num">6 papers</div></div>
+  </div>
+</section>
+
+<div class="plan" id="plan">
+  <h3>Battle plan · 180 min</h3>
+  <ol>
+    <li><strong>00:00–00:30</strong> · Part-A · 10 shorts × 3 min · keep answers to <strong>3-4 lines max</strong>. Aim 12-13/15.</li>
+    <li><strong>00:30–02:30</strong> · Part-B · attempt <strong>any 4 of 6</strong> · 30 min each. Aim 11-12/15 per essay.</li>
+    <li><strong>02:30–03:00</strong> · Revisit, add Sanskrit terms, bold key names, check question numbering.</li>
+  </ol>
+  <p style="margin:8px 0 0;"><b>Picking your 4 longs:</b> Look for these in order — Ashtanga Yoga · Rasa Siddhanta · Vedic Texts · Nature+Philosophy IKS · Arthasastra · Vastu · Ayurveda/Panchmahabhutas. If <strong class="key">any 4 of these 7</strong> appear, you're golden.</p>
+</div>
+
+<div class="box warn">
+  <b class="lbl">Examiner rules · read before you uncap the pen</b>
+  <ol>
+    <li><strong>Match depth to marks.</strong>
+      <ul>
+        <li><strong>1.5 M (Part-A):</strong> 2-4 lines · direct fact + 1 supporting line. <em>Do not bullet.</em></li>
+        <li><strong>5 M (sub-part):</strong> bullet points + one-line explanation each.</li>
+        <li><strong>10 M (sub-part):</strong> headed sub-points + 1 example or named author/text.</li>
+        <li><strong>15 M (full Q):</strong> definition → 4-6 headed sub-points → example/diagram → significance/relevance today.</li>
+      </ul>
+    </li>
+    <li><strong>Structure visibly.</strong> Headings, numbered points, underlined key terms. The examiner <em>scans</em> — make scanning easy.</li>
+    <li><strong>Label every diagram</strong> (e.g. Vastu Purusha Mandala, 8-limbs flow, Tridosha triangle). Unlabeled diagram = half marks.</li>
+    <li><strong>Never repeat a point</strong> across sub-parts of the same question. Wastes time, leaves bad impression, zero extra marks.</li>
+    <li><strong>Write the full question number</strong> in the margin: <em>Q2(a), Q2(b), Q4, Q6(a)</em>. Never just "(a)" — examiners miss orphaned sub-parts.</li>
+    <li><strong>Sanskrit terms in italics / quotes</strong> + always cite an author (Patanjali, Bharata Muni, Kautilya, Aryabhata, Dhanvantari, Tirathji, Sushruta, Charaka).</li>
+    <li><strong>Drop "relevance today"</strong> in every long answer — prof's verbal tic, free marks.</li>
+  </ol>
+</div>
+
+<!-- ========== PART A ========== -->
+<h2 class="section" id="parta">PART A <small>10 SHORTS · 15 MARKS</small></h2>
+
+<div class="box prof">
+  <b class="lbl">Prof pattern</b>
+  Stems: <em>"what is / who was / how many / define / name two / mention one"</em>. Each answer = 2-4 lines. Don't write paragraphs. Just the fact + 1 supporting line.
+</div>
+
+<table class="flash">
+  <thead><tr><th>If asked…</th><th>Write this</th></tr></thead>
+  <tbody>
+
+  <tr><td class="q">What is IKS? / Define IKS.</td>
+  <td>Indian Knowledge System (IKS) is the structured body of <strong class="key">scientific, philosophical, spiritual and cultural knowledge</strong> developed in ancient India over 5,000+ years, preserved in Vedas, Upanishads, Shastras and Sutras. It covers maths, astronomy, medicine, linguistics, governance and ethics.</td></tr>
+
+  <tr><td class="q">What are Shruti and Smriti?</td>
+  <td><em>Shruti</em> ("that which is heard") = revealed eternal texts — the <strong>4 Vedas + Upanishads</strong>, considered apaurusheya (not man-made). <em>Smriti</em> ("that which is remembered") = man-authored texts — <strong>Puranas, Itihasas (Ramayana, Mahabharata), Dharmashastras</strong>.</td></tr>
+
+  <tr><td class="q">How many Vedas? Name them.</td>
+  <td><strong>Four Vedas:</strong> Rigveda (hymns), Yajurveda (rituals), Samaveda (melodies), Atharvaveda (spells, medicine). Atharvaveda is the upaveda source of Ayurveda.</td></tr>
+
+  <tr><td class="q">How many Puranas?</td>
+  <td><strong>18 Mahapuranas</strong> (e.g. Vishnu, Bhagavata, Shiva, Brahma) + 18 Upapuranas. Composed by <strong>Maharishi Vyasa</strong>.</td></tr>
+
+  <tr><td class="q">What are the six Vedangas?</td>
+  <td>Six auxiliary disciplines for understanding the Vedas: <strong>Shiksha</strong> (phonetics), <strong>Kalpa</strong> (ritual), <strong>Vyakarana</strong> (grammar), <strong>Nirukta</strong> (etymology), <strong>Chhandas</strong> (meter), <strong>Jyotisha</strong> (astronomy).</td></tr>
+
+  <tr><td class="q">Name two schools of Indian philosophy.</td>
+  <td><strong>Astika (orthodox):</strong> Nyaya, Vaisheshika, Samkhya, Yoga, Mimamsa, Vedanta — accept Vedas. <strong>Nastika (heterodox):</strong> Buddhism, Jainism, Charvaka — reject Vedic authority.</td></tr>
+
+  <tr><td class="q">What is Dharma?</td>
+  <td><strong>Dharma</strong> = righteous duty, moral law, and the cosmic order that sustains the universe. It is the first of the four Purusharthas (Dharma, Artha, Kama, Moksha) and governs personal, social and spiritual conduct.</td></tr>
+
+  <tr><td class="q">What is Karma?</td>
+  <td><strong>Karma</strong> = the universal law of cause and effect — every action (mental, verbal, physical) produces a corresponding result that shapes one's present and future lives. Central to Hindu, Buddhist and Jain ethics.</td></tr>
+
+  <tr><td class="q">What is Moksha?</td>
+  <td><strong>Moksha</strong> = liberation from the cycle of birth-death-rebirth (samsara). The fourth and highest Purushartha; achieved through Jnana (knowledge), Bhakti (devotion), Karma (action) or Yoga.</td></tr>
+
+  <tr><td class="q">What is the ultimate goal of Jainism?</td>
+  <td><strong>Kaivalya / Moksha</strong> — liberation of the soul (jiva) from karmic bondage, achieved through the Three Jewels: Right Faith, Right Knowledge, Right Conduct, plus strict <em>ahimsa</em> (non-violence).</td></tr>
+
+  <tr><td class="q">What is Ashtanga Yoga? / Who founded Yoga?</td>
+  <td>Ashtanga Yoga = the <strong>"eight-limbed path"</strong> codified by <strong>Maharishi Patanjali</strong> in the <em>Yoga Sutras</em>. The 8 limbs: Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi.</td></tr>
+
+  <tr><td class="q">Define Rasa Siddhanta.</td>
+  <td><strong>Rasa Siddhanta</strong> = the theory of aesthetic emotions in Indian dramaturgy, expounded by <strong>Bharata Muni</strong> in the <em>Natyashastra</em>. Rasa is the emotional flavour ("juice") the audience experiences. There are <strong>9 Rasas (Navarasa)</strong>.</td></tr>
+
+  <tr><td class="q">Who wrote / is credited with the Ashtadhyayi?</td>
+  <td><strong>Maharishi Panini</strong> (~5th century BCE). The <em>Ashtadhyayi</em> ("eight chapters") is the world's earliest scientific grammar — 3,959 sutras describing Sanskrit grammar.</td></tr>
+
+  <tr><td class="q">Who invented the concept of Zero?</td>
+  <td><strong>Aryabhata</strong> (5th c. CE) is credited with the concept of zero (<em>shunya</em>) as a number and place-value. <strong>Brahmagupta</strong> later defined arithmetic rules for zero (628 CE).</td></tr>
+
+  <tr><td class="q">Mention two contributions of ancient India to arithmetic/geometry.</td>
+  <td>(1) <strong>Decimal place-value system + concept of zero</strong> (Aryabhata, Brahmagupta). (2) <strong>Sulbasutras geometry</strong> — geometric construction for Vedic altars, including a statement of the Pythagoras theorem centuries before Pythagoras.</td></tr>
+
+  <tr><td class="q">What is Vedic Mathematics?</td>
+  <td>A system of <strong>16 sutras</strong> (aphorisms) for fast mental arithmetic, rediscovered by <strong>Jagadguru Swami Bharati Krsna Tirathji Maharaj</strong> (1884-1960) from the Atharvaveda appendix. E.g. <em>Ekadhikena Purvena</em> ("by one more than the previous").</td></tr>
+
+  <tr><td class="q">What is Jyotisha?</td>
+  <td><strong>Jyotisha Shastra</strong> = the Vedanga of astronomy and astrology. Has two parts — <em>Ganita</em> (mathematical/positional astronomy) and <em>Phalita</em> (predictive astrology). One of the six Vedangas.</td></tr>
+
+  <tr><td class="q">Underline the contribution of Varahmihir.</td>
+  <td>6th-c. CE polymath; wrote <em>Brihat Samhita</em> (encyclopaedia of astronomy, astrology, architecture) and <em>Pancha-Siddhantika</em> (summary of 5 astronomical systems). One of the <strong>Navaratnas of Vikramaditya</strong>.</td></tr>
+
+  <tr><td class="q">Define Ayurveda. How is it related to Vedas?</td>
+  <td><strong>Ayurveda</strong> = "science of life" (<em>ayus</em> + <em>veda</em>) — India's traditional holistic medical system. It is an <strong>upaveda of the Atharvaveda</strong>. Aims at preserving health, not just treating disease.</td></tr>
+
+  <tr><td class="q">What are the three Doshas?</td>
+  <td>The three bio-energies governing body and mind: <strong>Vata</strong> (air + ether — movement), <strong>Pitta</strong> (fire + water — metabolism), <strong>Kapha</strong> (earth + water — structure). Health = balance; disease = imbalance.</td></tr>
+
+  <tr><td class="q">What are Panchamahabhutas?</td>
+  <td>The <strong>five great elements</strong> from which all matter (including the body) is composed: <em>Prithvi</em> (earth), <em>Jala</em> (water), <em>Agni</em> (fire), <em>Vayu</em> (air), <em>Akasha</em> (ether/space). Foundation of Ayurveda and Samkhya.</td></tr>
+
+  <tr><td class="q">Who was Sushruta?</td>
+  <td>The "<strong>Father of Surgery</strong>" (~7th-6th c. BCE). Wrote <em>Sushruta Samhita</em> — describes 300+ surgical procedures, 120 instruments, including <strong>rhinoplasty (plastic surgery)</strong> and cataract surgery.</td></tr>
+
+  <tr><td class="q">Who is the founder of Ayurveda?</td>
+  <td><strong>Dhanvantari</strong> — divine physician of the gods, considered the founder of Ayurveda. The two foundational textbooks are <em>Charaka Samhita</em> (medicine) and <em>Sushruta Samhita</em> (surgery).</td></tr>
+
+  <tr><td class="q">What is the Vastu measurement system?</td>
+  <td>Traditional anthropometric units used in Vastusastra. Base unit = <strong>Angula</strong> (finger-width ≈ ¾"); <strong>Hasta</strong> (cubit) = 24 angulas; <strong>Danda</strong> = 4 hastas. Ensures buildings are scaled to human proportions.</td></tr>
+
+  <tr><td class="q">Why follow Vastu Shastra?</td>
+  <td>Vastu aligns buildings with the <strong>5 elements, 8 directions and cosmic energy</strong> to ensure health, prosperity and harmony of occupants. It integrates climate, ventilation, sunlight and psychology.</td></tr>
+
+  <tr><td class="q">Who was Chanakya / Vishnugupta?</td>
+  <td>4th-c. BCE statesman-philosopher (also called <strong>Kautilya</strong>), prime minister of Emperor Chandragupta Maurya. Author of <em>Arthashastra</em> (statecraft, economics) and <em>Chanakya Niti</em> (ethics, strategy). Founder of the Mauryan Empire's administrative system.</td></tr>
+
+  <tr><td class="q">What is the primary focus of Arthashastra?</td>
+  <td><strong>Political science and statecraft for kings</strong> — covering governance, economy, taxation, law, diplomacy, war, espionage. The first known comprehensive treatise on the science of polity (~3rd c. BCE).</td></tr>
+
+  <tr><td class="q">What is the core concept of NITI Shastra?</td>
+  <td><strong>Nitishastra</strong> = the science of ethical, practical and strategic conduct. <em>Chanakya Niti</em> teaches success principles: choose right friends, master finances, time your action, lead by example, plan before acting.</td></tr>
+
+  <tr><td class="q">Highlight contribution of Patanjali, Agastya and Kanad.</td>
+  <td><strong>Patanjali</strong> — codified Ashtanga Yoga (Yoga Sutras), also wrote on grammar (Mahabhashya). <strong>Agastya</strong> — Vedic sage, pioneer of Siddha medicine and Tamil literature. <strong>Kanad</strong> — founder of <em>Vaisheshika</em> school; proposed the <strong>atomic theory (paramanu)</strong>.</td></tr>
+
+  </tbody>
+</table>
+
+<!-- ========== PART B ========== -->
+<h2 class="section" id="partb">PART B <small>ANY 4 OF 6 · 60 MARKS</small></h2>
+
+<div class="box prof">
+  <b class="lbl">Essay scaffold</b>
+  Every long answer: (1) <strong>Hook</strong> — 1-line definition + author/origin. (2) <strong>Body</strong> — 4-6 headed sub-points, each 2-3 lines. (3) <strong>Significance / relevance today</strong> — 2-3 lines closing. Use bullet markers like → or • to look organised.
+</div>
+
+<!-- ========== ESSAY 1 ========== -->
+<h3 class="qhead" id="e1"><span class="tag hot">15M · #1 LOCK</span>Ashtanga Yoga — 8 limbs + significance</h3>
+
+<div class="box def">
+  <b class="lbl">Likely stem</b> "Explain the concept and eight limbs of Ashtanga Yoga. Discuss its psychological and spiritual significance." / "Examine the role of Yoga in well-being with applications in modern healthcare."
+</div>
+
+<div class="ans">
+<h4>Model answer</h4>
+<p class="lead">Ashtanga Yoga, literally the "eight-limbed path," was systematised by <strong class="key">Maharishi Patanjali</strong> in the <em>Yoga Sutras</em> (~200 BCE). It is the central school of the Yoga darshana — a graded discipline for purifying body, mind and consciousness leading to <strong>Samadhi (self-realisation)</strong>.</p>
+
+<p><strong class="key">The eight limbs (in order):</strong></p>
+<ol>
+<li><strong>Yama</strong> (5 social restraints) — Ahimsa (non-violence), Satya (truth), Asteya (non-stealing), Brahmacharya (continence), Aparigraha (non-possessiveness).</li>
+<li><strong>Niyama</strong> (5 personal observances) — Saucha (purity), Santosha (contentment), Tapas (austerity), Svadhyaya (self-study), Ishvarapranidhana (surrender to God).</li>
+<li><strong>Asana</strong> — steady, comfortable physical postures preparing the body for meditation.</li>
+<li><strong>Pranayama</strong> — regulation of breath (prana), balancing the nervous and respiratory systems.</li>
+<li><strong>Pratyahara</strong> — withdrawal of senses from external objects; turning attention inward.</li>
+<li><strong>Dharana</strong> — concentration on a single object, mantra or point.</li>
+<li><strong>Dhyana</strong> — uninterrupted meditation; sustained flow of awareness.</li>
+<li><strong>Samadhi</strong> — absorption; union of meditator with the object; liberation (Kaivalya).</li>
+</ol>
+
+<p><strong class="key">First four (Bahiranga / external):</strong> Yama, Niyama, Asana, Pranayama — discipline the body and conduct. <strong>Last four (Antaranga / internal):</strong> Pratyahara, Dharana, Dhyana, Samadhi — discipline the mind.</p>
+
+<p><strong class="key">Psychological significance:</strong> Reduces stress, anxiety and depression by calming the autonomic nervous system; enhances focus, memory and emotional balance; develops self-awareness, patience and impulse control.</p>
+
+<p><strong class="key">Spiritual significance:</strong> The final goal is <em>Chitta-vritti-nirodha</em> — cessation of mental fluctuations — leading to direct experience of the Self (Purusha) and liberation from suffering.</p>
+
+<p><strong class="key">Modern healthcare applications:</strong> Used worldwide for hypertension, diabetes, cardiac rehabilitation, PTSD therapy, chronic pain management; integrated into AYUSH ministry programmes, Yoga therapy and corporate wellness. International Yoga Day (21 June) recognised by UN since 2014.</p>
+
+<p><strong>Conclusion:</strong> Ashtanga Yoga is a complete <strong>mind-body-soul science</strong> — not just exercise. Its 8-step structure offers a timeless path from ethical living to ultimate freedom, with growing relevance in modern preventive medicine and mental health.</p>
+</div>
+
+<div class="box tip">
+  <b class="lbl">Mnemonic</b>
+  <strong>YN-APP-DDS</strong> → <em>"Young Naughty Apples Picked Promptly Drown Dancing Sages"</em> (Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi).
+</div>
+
+<!-- ========== ESSAY 2 ========== -->
+<h3 class="qhead" id="e2"><span class="tag hot">15M · #2 LOCK</span>Rasa Siddhanta of Natyashastra</h3>
+
+<div class="box def">
+  <b class="lbl">Likely stem</b> "Elaborate on / Discuss the Rasa Siddhanta of Natyasastra."
+</div>
+
+<div class="ans">
+<h4>Model answer</h4>
+<p class="lead">Rasa Siddhanta (the "theory of aesthetic emotion") is the foundational doctrine of Indian dramaturgy and aesthetics, propounded by <strong class="key">Bharata Muni</strong> in the <em>Natyashastra</em> (~200 BCE – 200 CE), the oldest surviving treatise on performing arts. <em>Rasa</em> literally means "juice" or "essence" — the emotional flavour an audience tastes when watching a performance.</p>
+
+<p><strong class="key">Bharata's famous sutra:</strong> <em>"Vibhavanubhava-vyabhicari-samyogad rasanispattih"</em> — "Rasa arises from the union of <strong>Vibhava, Anubhava and Vyabhicari Bhava</strong> with the underlying Sthayi Bhava."</p>
+
+<p><strong class="key">The four components of Rasa:</strong></p>
+<ol>
+<li><strong>Sthayi Bhava (Permanent emotion)</strong> — the dominant emotion residing in the spectator's mind (e.g. love, anger, sorrow). 8/9 Sthayi Bhavas correspond to 8/9 Rasas.</li>
+<li><strong>Vibhava (Determinants)</strong> — the cause / stimulus of the emotion. Two types: <em>Alambana</em> (the object — e.g. the heroine) and <em>Uddipana</em> (the environment — moonlight, garden).</li>
+<li><strong>Anubhava (Consequents)</strong> — the visible effects on the actor — gestures, expressions, words, tears.</li>
+<li><strong>Vyabhicari Bhava (Transitory emotions)</strong> — 33 fleeting feelings (shame, joy, fear, weariness) that strengthen the dominant Sthayi Bhava.</li>
+</ol>
+
+<p><strong class="key">The Nine Rasas (Navarasa):</strong></p>
+<ol>
+<li><strong>Shringara</strong> — Love / Romance (Sthayi: Rati)</li>
+<li><strong>Hasya</strong> — Laughter / Mirth (Hasa)</li>
+<li><strong>Karuna</strong> — Compassion / Pathos (Shoka)</li>
+<li><strong>Raudra</strong> — Anger / Fury (Krodha)</li>
+<li><strong>Veera</strong> — Heroism / Courage (Utsaha)</li>
+<li><strong>Bhayanaka</strong> — Fear / Terror (Bhaya)</li>
+<li><strong>Bibhatsa</strong> — Disgust (Jugupsa)</li>
+<li><strong>Adbhuta</strong> — Wonder / Astonishment (Vismaya)</li>
+<li><strong>Shanta</strong> — Peace / Tranquility (Shama) — added later by Abhinavagupta.</li>
+</ol>
+
+<p><strong class="key">Significance:</strong> Rasa theory is the bedrock of Indian classical dance (Bharatanatyam, Kathak, Odissi), drama, poetry, music and even painting. It treats art as a <strong>psychological-spiritual experience</strong>, not mere entertainment — <em>rasasvada</em> (tasting of rasa) is considered akin to <em>brahmasvada</em> (taste of the Absolute).</p>
+
+<p><strong class="key">Relevance today:</strong> Used in film studies, advertising, UX design, narrative writing and emotional intelligence training. The Navarasa framework is taught in performing-arts institutions worldwide and is a recognised global contribution to aesthetics.</p>
+</div>
+
+<div class="box tip">
+  <b class="lbl">Mnemonic</b>
+  <strong>SHR-HKR-VBB-AS</strong> → Shringara, Hasya, Karuna, Raudra, Veera, Bhayanaka, Bibhatsa, Adbhuta, Shanta. Image cue: <em>Love · Laughter · Tears · Anger · Bravery · Fear · Disgust · Wonder · Peace.</em>
+</div>
+
+<!-- ========== ESSAY 3 ========== -->
+<h3 class="qhead" id="e3"><span class="tag hot">15M · #3 LOCK</span>Classification of Vedic literature / ancient Indian texts</h3>
+
+<div class="box def">
+  <b class="lbl">Likely stem</b> "Discuss the classification of ancient Indian texts with examples." / "Write the different types of Vedic literature and its importance."
+</div>
+
+<div class="ans">
+<h4>Model answer</h4>
+<p class="lead">Ancient Indian literature is the most voluminous in the ancient world. It is broadly classified into <strong class="key">Shruti</strong> ("heard" — revealed, eternal) and <strong class="key">Smriti</strong> ("remembered" — human-authored, transmitted by tradition).</p>
+
+<p><strong class="key">A. SHRUTI (revealed):</strong></p>
+<ol>
+<li><strong>The Four Vedas</strong> — the supreme scripture:
+  <ul>
+    <li><em>Rigveda</em> — 1,028 hymns (suktas) praising deities; oldest, ~1500 BCE.</li>
+    <li><em>Yajurveda</em> — sacrificial rituals and mantras.</li>
+    <li><em>Samaveda</em> — melodies/chants; the source of Indian music.</li>
+    <li><em>Atharvaveda</em> — daily-life spells, healing, magic; the source of Ayurveda.</li>
+  </ul>
+</li>
+<li><strong>Each Veda has 4 sub-divisions:</strong> Samhitas (hymns), Brahmanas (ritual explanations), Aranyakas (forest meditations), <strong>Upanishads</strong> (philosophical — 108 in number; called <em>Vedanta</em>, "end of the Vedas").</li>
+</ol>
+
+<p><strong class="key">B. SMRITI (remembered):</strong></p>
+<ol>
+<li><strong>Itihasas (epics)</strong> — <em>Ramayana</em> (Valmiki, ~24,000 shlokas) and <em>Mahabharata</em> (Vyasa, ~1,00,000 shlokas — the longest poem in the world). Contains the Bhagavad Gita.</li>
+<li><strong>Puranas</strong> — 18 Mahapuranas + 18 Upapuranas composed by Vyasa. Cover cosmology, royal genealogies, mythology (e.g. Vishnu, Bhagavata, Shiva Purana).</li>
+<li><strong>Shastras</strong> — treatises on specific disciplines: <em>Dharmashastra</em> (law), <em>Arthashastra</em> (polity), <em>Kamashastra</em> (pleasure), <em>Nyayashastra</em> (logic).</li>
+<li><strong>Sutras</strong> — aphoristic texts: Brahma Sutras, Yoga Sutras, Kalpa Sutras.</li>
+<li><strong>Six Vedangas</strong> (auxiliary disciplines needed to study the Vedas):
+  <strong>Shiksha</strong> (phonetics), <strong>Kalpa</strong> (ritual), <strong>Vyakarana</strong> (grammar), <strong>Nirukta</strong> (etymology), <strong>Chhandas</strong> (meter), <strong>Jyotisha</strong> (astronomy).</li>
+<li><strong>Four Upavedas</strong> — Ayurveda (medicine), Dhanurveda (warfare), Gandharvaveda (music), Sthapatyaveda/Arthashastra (architecture/polity).</li>
+</ol>
+
+<p><strong class="key">Importance:</strong></p>
+<ul>
+<li>Preserved <strong>5,000+ years of knowledge</strong> through oral tradition with phonetic accuracy unmatched by any culture.</li>
+<li>Source of Indian <strong>philosophy, ethics, science, medicine, mathematics, music, dance and law</strong>.</li>
+<li>Upanishads gave the world concepts of <em>Atman, Brahman, Moksha</em>; influenced Schopenhauer, Emerson, Yeats.</li>
+<li>Vedic texts are inscribed on UNESCO's <strong>Memory of the World</strong> register.</li>
+</ul>
+
+<p><strong>Conclusion:</strong> The Vedic corpus is not a single book but an entire <strong>library of civilisation</strong>. Its layered classification — Shruti for eternal truth, Smriti for evolving social application — remains the framework for understanding Indian thought.</p>
+</div>
+
+<!-- ========== ESSAY 4 ========== -->
+<h3 class="qhead" id="e4"><span class="tag hot">15M · #4 LOCK</span>Nature, Philosophy &amp; Characteristics of IKS</h3>
+
+<div class="box def">
+  <b class="lbl">Likely stem</b> "What is the nature, philosophy and characteristics of Indian Knowledge System?" (this 6-word phrase appears verbatim in 3 papers).
+</div>
+
+<div class="ans">
+<h4>Model answer</h4>
+<p class="lead">The Indian Knowledge System (IKS) is the structured, continuous, multi-disciplinary body of knowledge developed in the Indian subcontinent over more than 5,000 years. It encompasses <strong class="key">philosophy, science, mathematics, astronomy, medicine, linguistics, arts, architecture, governance and ethics</strong> — all integrated under a common worldview.</p>
+
+<p><strong class="key">Nature of IKS:</strong></p>
+<ul>
+<li><strong>Holistic and integrative</strong> — does not separate science from spirituality, individual from cosmos, body from mind.</li>
+<li><strong>Experiential</strong> — knowledge (<em>jnana</em>) is validated by direct experience (<em>anubhava</em>), not just textual authority.</li>
+<li><strong>Oral + written tradition</strong> — preserved through guru-shishya parampara with phonetic precision long before writing.</li>
+<li><strong>Pluralistic</strong> — accepts multiple valid paths and viewpoints (e.g. 6 Astika + 3 Nastika schools coexist).</li>
+</ul>
+
+<p><strong class="key">Philosophy of IKS:</strong></p>
+<ul>
+<li>Built on the four <strong>Purusharthas</strong> — Dharma (duty), Artha (prosperity), Kama (desire), Moksha (liberation).</li>
+<li>Recognises <strong>Atman</strong> (individual self) and <strong>Brahman</strong> (universal consciousness) and their ultimate unity.</li>
+<li>Believes in <strong>karma, rebirth and liberation</strong> as the moral architecture of the universe.</li>
+<li>Knowledge has three levels: <em>Apara Vidya</em> (lower / empirical) and <em>Para Vidya</em> (higher / spiritual).</li>
+</ul>
+
+<p><strong class="key">Key characteristics:</strong></p>
+<ol>
+<li><strong>Vast and ancient</strong> — Vedas date back to ~1500 BCE; living tradition for 5,000+ years.</li>
+<li><strong>Multidisciplinary</strong> — same scholars contributed to mathematics, medicine, grammar, philosophy.</li>
+<li><strong>Systematised in Sutras and Shastras</strong> — codified knowledge using compact aphorisms.</li>
+<li><strong>Universal in scope</strong> — addresses cosmic, social and individual life.</li>
+<li><strong>Tolerant and dialogic</strong> — Astika/Nastika debate, Buddhism/Jainism flourished alongside Vedic thought.</li>
+<li><strong>Eco-spiritual</strong> — treats nature, rivers and animals as sacred; emphasises sustainability and ahimsa.</li>
+<li><strong>Practical &amp; applied</strong> — Yoga for health, Ayurveda for medicine, Vastu for housing, Arthashastra for governance.</li>
+</ol>
+
+<p><strong class="key">Relevance today:</strong> IKS principles are being revived through the <strong>National Education Policy 2020</strong>, AYUSH Ministry, International Yoga Day, and corporate management drawing from <em>Bhagavad Gita</em> and <em>Arthashastra</em>. It offers solutions to modern problems of mental health, ecology, ethics and sustainable development.</p>
+
+<p><strong>Conclusion:</strong> IKS is not a museum of old ideas — it is a <strong>living, integrative knowledge tradition</strong> uniquely capable of harmonising science, ethics and spirituality.</p>
+</div>
+
+<!-- ========== ESSAY 5 ========== -->
+<h3 class="qhead" id="e5"><span class="tag hot">15M · #5 LOCK</span>Arthashastra — economic / management thought</h3>
+
+<div class="box def">
+  <b class="lbl">Likely stem</b> "Elaborate on Indian economic thought as presented in Arthasastra." / "What is Arthashastra and its use in modern management?" / "Critically examine Arthashastra and Nitisastra."
+</div>
+
+<div class="ans">
+<h4>Model answer</h4>
+<p class="lead">The <em>Arthashastra</em> is the world's oldest surviving treatise on <strong class="key">statecraft, economics and political science</strong>, written by <strong class="key">Kautilya</strong> (also known as Chanakya / Vishnugupta), prime minister to Emperor Chandragupta Maurya in the 4th century BCE. The word <em>artha</em> means "material well-being" and <em>shastra</em> means "science" — together, "science of wealth and governance."</p>
+
+<p><strong class="key">Scope &amp; structure:</strong> 15 books, 150 chapters, 6,000 sutras covering king's duties, ministers, taxation, agriculture, trade, currency, mining, foreign policy, war, espionage, law and welfare. Predates Machiavelli's <em>The Prince</em> by ~1,800 years.</p>
+
+<p><strong class="key">Indian economic thought in Arthashastra:</strong></p>
+<ol>
+<li><strong>Welfare state</strong> — <em>"Praja sukhe sukham rajnah"</em> ("In the happiness of the people lies the king's happiness"). State exists for citizen welfare.</li>
+<li><strong>Taxation principles</strong> — fair, moderate, predictable; compared to a bee taking nectar without harming the flower. Rates: 1/6 of agricultural produce.</li>
+<li><strong>Public finance</strong> — distinguishes revenue, expenditure, surplus, reserves. Detailed budget categories.</li>
+<li><strong>State regulation</strong> — fixed weights/measures, regulated prices, anti-adulteration laws, consumer protection.</li>
+<li><strong>Promotion of trade &amp; agriculture</strong> — irrigation, roads, market towns, foreign trade.</li>
+<li><strong>Labour, wages, contracts</strong> — codified rules on employment, wages and dispute resolution.</li>
+</ol>
+
+<p><strong class="key">Saptanga — the Seven Pillars of the State (for any business / kingdom success):</strong></p>
+<ol>
+<li><strong>Swami</strong> — the King / Leader / CEO</li>
+<li><strong>Amatya</strong> — Ministers / Senior Management</li>
+<li><strong>Janapada</strong> — Territory and People / Market and Customers</li>
+<li><strong>Durga</strong> — Fortified Capital / Infrastructure &amp; Headquarters</li>
+<li><strong>Kosha</strong> — Treasury / Financial Capital</li>
+<li><strong>Danda</strong> — Army / Enforcement &amp; Discipline</li>
+<li><strong>Mitra</strong> — Allies / Partners and Network</li>
+</ol>
+
+<p><strong class="key">Modern management relevance:</strong></p>
+<ul>
+<li><strong>Leadership</strong> — Swami concept = visionary, ethical CEO who balances dharma with profit.</li>
+<li><strong>Strategy</strong> — Mandala (circle of states) theory anticipates modern stakeholder &amp; competitor analysis.</li>
+<li><strong>HR management</strong> — recruitment by merit (verification by <em>Upadhas</em> — 4 tests of integrity).</li>
+<li><strong>Risk management</strong> — distinguishes seven types of calamities and how to mitigate each.</li>
+<li><strong>Negotiation &amp; diplomacy</strong> — <em>Sama, Dama, Danda, Bheda</em> (persuasion, incentive, punishment, division) used in modern conflict resolution.</li>
+<li><strong>Corporate governance</strong> — checks and balances on ministers, anti-corruption audits.</li>
+</ul>
+
+<p><strong class="key">Connection to Nitishastra:</strong> The companion <em>Chanakya Niti</em> distils these into <strong>personal ethics and success principles</strong> — choice of friends, financial prudence, time management, self-discipline.</p>
+
+<p><strong>Conclusion:</strong> Arthashastra is a <strong>timeless management classic</strong>. Modern Indian management thinkers (B. Mahadevan, S. K. Chakraborty) use it alongside the Bhagavad Gita as the foundation of an <strong>Indian school of management</strong> that balances efficiency with ethics.</p>
+</div>
+
+<!-- ========== ESSAY 6 ========== -->
+<h3 class="qhead" id="e6"><span class="tag hot">15M · #6 LOCK</span>Vastu Shastra — measurement, principles, importance</h3>
+
+<div class="box def">
+  <b class="lbl">Likely stem</b> "What is Vaastu-Shastra and its basic principles? How is it important for human being?" / "Explain principles of city planning per Vastusastra."
+</div>
+
+<div class="ans">
+<h4>Model answer</h4>
+<p class="lead"><em>Vastu Shastra</em> is the ancient Indian science of architecture and spatial design. <em>Vastu</em> means "dwelling" and <em>shastra</em> means "science" — together, "the science of dwellings." Earliest references appear in the Vedas, Brihat Samhita (Varahmihir), Mayamatam and Manasara.</p>
+
+<p><strong class="key">A. Traditional measurement system:</strong></p>
+<ul>
+<li><strong>Angula</strong> — finger-width, the base unit (~¾ inch / 1.9 cm). 8 yavas = 1 angula.</li>
+<li><strong>Vitasti</strong> — span (12 angulas).</li>
+<li><strong>Hasta</strong> — cubit (24 angulas, ~18 inches).</li>
+<li><strong>Danda</strong> — rod (4 hastas).</li>
+<li><strong>Dhanu</strong> — bow length (4 hastas).</li>
+<li><strong>Krosha / Yojana</strong> — larger distances for town planning.</li>
+</ul>
+<p>The system is <strong>anthropometric</strong> — derived from the human body — ensuring built spaces are scaled to human proportions.</p>
+
+<p><strong class="key">B. Basic principles (Vastu Purusha Mandala):</strong></p>
+<ol>
+<li><strong>Five elements (Panchamahabhutas)</strong> — every site must balance Earth, Water, Fire, Air and Space.</li>
+<li><strong>Eight directions (Dik)</strong> — each direction is governed by a deity and has a specific function:
+  <ul>
+    <li><em>North-East (Ishanya)</em> — water, prayer room.</li>
+    <li><em>South-East (Agneya)</em> — fire, kitchen.</li>
+    <li><em>South-West (Nairutya)</em> — earth, master bedroom.</li>
+    <li><em>North-West (Vayavya)</em> — air, guest room / store.</li>
+  </ul>
+</li>
+<li><strong>Vastu Purusha Mandala</strong> — the cosmic grid (usually 9×9 = 81 padas) over which a building is laid out. <em>Brahmasthana</em> (centre) must be open.</li>
+<li><strong>Orientation</strong> — entrance preferably East or North for sunlight and positive energy.</li>
+<li><strong>Site selection</strong> — square/rectangular plots, sloping to north-east, fertile soil, fresh water.</li>
+<li><strong>Proportion &amp; symmetry</strong> — rooms sized by Ayadi formulas linking length, breadth and human use.</li>
+</ol>
+
+<p><strong class="key">C. City planning principles (Vastusastra):</strong></p>
+<ul>
+<li><strong>Grid layout</strong> — towns laid out on rectangular Mandala patterns (Dandaka, Sarvatobhadra, Nandyavarta, Padmaka, Swastika types).</li>
+<li><strong>Zoning</strong> — temples at centre, markets in east, residences by caste/occupation in designated zones, cremation grounds in south.</li>
+<li><strong>Roads</strong> — main roads (Rajamarga) intersect at right angles; minimum widths specified.</li>
+<li><strong>Water management</strong> — wells, tanks, rivers integrated; drainage sloping naturally.</li>
+<li><strong>Defence</strong> — fortified walls, moats, watch-towers.</li>
+<li><strong>Examples</strong> — Harappa, Mohenjo-daro, Pataliputra, Madurai, Jaipur all follow Vastu-based layouts.</li>
+</ul>
+
+<p><strong class="key">D. Importance for human beings / relevance today:</strong></p>
+<ul>
+<li>Optimises <strong>sunlight, ventilation and air circulation</strong> — directly improves physical health.</li>
+<li>Aligns dwellers with <strong>Earth's geomagnetic field</strong> (north-south sleeping axis) — better sleep.</li>
+<li>Reduces <strong>stress and psychological discomfort</strong> by balancing the five elements.</li>
+<li>Anticipates modern <strong>green building, sustainable architecture and biophilic design</strong>.</li>
+<li>Followed today in homes, offices, IT parks (Infosys Mysore campus), temples and government buildings.</li>
+</ul>
+
+<p><strong>Conclusion:</strong> Vastu Shastra is a sophisticated <strong>science of well-being through space</strong> — combining astronomy, geology, climate-science and psychology. Its enduring relevance lies in its ability to make human habitats both functional and harmonious.</p>
+</div>
+
+<!-- ========== ESSAY 7 ========== -->
+<h3 class="qhead" id="e7"><span class="tag hot">15M · #7 BACKUP</span>Ayurveda — system + Panchmahabhutas + vs Allopathy</h3>
+
+<div class="box def">
+  <b class="lbl">Likely stem</b> "What is Indian system of medicine? Write Ayurveda in brief." / "What is Panchmahabhutas of Ayurveda?" / "Compare Ayurveda with Allopathy in diagnosis, treatment, principles."
+</div>
+
+<div class="ans">
+<h4>Model answer</h4>
+<p class="lead"><strong class="key">Ayurveda</strong> — literally <em>"science of life"</em> (<em>ayus</em> = life, <em>veda</em> = knowledge) — is India's traditional holistic medical system and an <strong>upaveda of the Atharvaveda</strong>. Founded by <strong>Lord Dhanvantari</strong>, the divine physician; codified by <strong>Charaka</strong> (medicine — <em>Charaka Samhita</em>) and <strong>Sushruta</strong> (surgery — <em>Sushruta Samhita</em>). It is at least 3,000 years old and remains a living medical tradition.</p>
+
+<p><strong class="key">Core philosophy:</strong> <em>"Swasthasya swasthya rakshanam, aturasya vikara prashamanam"</em> — "to preserve health of the healthy and cure the disease of the sick." Health is the equilibrium of body, mind, sense organs and soul.</p>
+
+<p><strong class="key">A. The Panchamahabhutas — five great elements:</strong></p>
+<ol>
+<li><strong>Prithvi (Earth)</strong> — solidity, structure → bones, teeth, muscle.</li>
+<li><strong>Jala (Water)</strong> — fluidity, cohesion → blood, lymph, plasma.</li>
+<li><strong>Agni (Fire)</strong> — heat, transformation → digestion, metabolism, body temperature.</li>
+<li><strong>Vayu (Air)</strong> — movement → respiration, nerve impulses, circulation.</li>
+<li><strong>Akasha (Ether / Space)</strong> — space → channels (srotas), cavities, hearing.</li>
+</ol>
+<p>Every substance in the body and universe is composed of these five elements in varying proportions.</p>
+
+<p><strong class="key">B. The Tridosha theory:</strong> The five elements combine into three bio-energies:</p>
+<ul>
+<li><strong>Vata</strong> (Air + Ether) — movement, nerve impulses, elimination.</li>
+<li><strong>Pitta</strong> (Fire + Water) — digestion, metabolism, intellect, vision.</li>
+<li><strong>Kapha</strong> (Earth + Water) — structure, lubrication, immunity, stability.</li>
+</ul>
+<p>Each person has a unique <em>Prakriti</em> (constitution). Health = doshas in balance; disease = imbalance (<em>Vikriti</em>).</p>
+
+<p><strong class="key">C. The Sapta Dhatus &amp; Trimalas:</strong> 7 body tissues (rasa, rakta, mamsa, meda, asthi, majja, shukra) + 3 waste products (mala, mutra, sweda). Their balance maintains health.</p>
+
+<p><strong class="key">D. Eight branches of Ayurveda (Ashtanga Ayurveda):</strong> Kaya (general medicine), Shalya (surgery), Shalakya (ENT/eye), Kaumarabhritya (paediatrics), Bhuta Vidya (psychiatry), Agada Tantra (toxicology), Rasayana (rejuvenation), Vajikarana (sexual health).</p>
+
+<p><strong class="key">E. Ayurveda vs Allopathy (comparison):</strong></p>
+<table class="flash">
+<thead><tr><th>Axis</th><th>Ayurveda</th><th>Allopathy</th></tr></thead>
+<tbody>
+<tr><td><strong>Philosophy</strong></td><td>Holistic — body-mind-spirit</td><td>Reductionist — symptoms / organ-based</td></tr>
+<tr><td><strong>Diagnosis</strong></td><td>Pulse (nadi), tongue, prakriti, lifestyle, dosha analysis</td><td>Lab tests, imaging, biomarkers</td></tr>
+<tr><td><strong>Treatment</strong></td><td>Diet, herbs, panchakarma (detox), yoga, lifestyle</td><td>Synthetic drugs, surgery, targeted interventions</td></tr>
+<tr><td><strong>Goal</strong></td><td><strong>Prevention</strong> + root-cause cure</td><td>Symptom relief, disease management</td></tr>
+<tr><td><strong>Side-effects</strong></td><td>Generally low (natural)</td><td>Often significant</td></tr>
+<tr><td><strong>Speed</strong></td><td>Slow but lasting</td><td>Fast acute relief</td></tr>
+<tr><td><strong>Strength</strong></td><td>Chronic, lifestyle, psychosomatic</td><td>Emergencies, infections, surgery</td></tr>
+</tbody>
+</table>
+
+<p><strong class="key">F. Relevance today:</strong> AYUSH ministry, WHO recognition, integrative medicine programmes, Ayurveda + Yoga combined for diabetes, cardiac care, stress, immunity (gained global attention during COVID-19). India is the world hub for medical tourism in Ayurveda.</p>
+
+<p><strong>Conclusion:</strong> Ayurveda is not a rival but a <strong>complement to modern medicine</strong> — Allopathy excels in emergencies, Ayurveda excels in prevention, chronic care and well-being. The future lies in <strong>integrative healthcare</strong> drawing from both.</p>
+</div>
+
+<!-- ========== ESSAY 8 ========== -->
+<h3 class="qhead" id="e8"><span class="tag freq">10M · BACKUP</span>Vedic Mathematics &amp; Indian Mathematics</h3>
+
+<div class="box def">
+  <b class="lbl">Likely stem</b> "Describe the Vedic system of arithmetic computation." / "Describe Indian mathematics — arithmetic, geometry, trigonometry, Vedic system."
+</div>
+
+<div class="ans">
+<h4>Model answer</h4>
+<p class="lead">India made foundational contributions to world mathematics — the <strong class="key">decimal place-value system, the concept of zero, algebra, trigonometry, and infinite series for calculus</strong> were all developed in India centuries before Europe.</p>
+
+<p><strong class="key">A. Indian mathematics — key milestones:</strong></p>
+<ul>
+<li><strong>Sulbasutras</strong> (~800 BCE) — Vedic altar geometry; first statement of <strong>Pythagoras theorem</strong>, square roots, geometric constructions.</li>
+<li><strong>Aryabhata</strong> (5th c. CE) — concept of <strong>zero (shunya)</strong>, place-value, value of π (3.1416), sine table, Earth's rotation, algorithms for square/cube roots.</li>
+<li><strong>Brahmagupta</strong> (7th c.) — defined arithmetic rules for zero and negative numbers; Brahmagupta's identity.</li>
+<li><strong>Bhaskaracharya II</strong> (12th c.) — <em>Lilavati</em> and <em>Bijaganita</em> — arithmetic and algebra; early differential calculus concepts.</li>
+<li><strong>Kerala School</strong> (Madhava, 14th-16th c.) — infinite series for sine, cosine, π — anticipating Newton/Leibniz calculus by 250 years.</li>
+</ul>
+
+<p><strong class="key">B. Vedic Mathematics — system of mental arithmetic:</strong></p>
+<ul>
+<li>Rediscovered by <strong>Jagadguru Swami Sri Bharati Krsna Tirathji Maharaj</strong> (1884-1960) from the Atharvaveda appendix (parishishta), published as <em>Vedic Mathematics</em> (1965).</li>
+<li>Consists of <strong>16 sutras + 13 sub-sutras</strong> — short aphorisms describing universal computation patterns.</li>
+<li>Enables <strong>fast mental calculation</strong> — multiplication, division, squares, cubes, square roots, simultaneous equations done in seconds.</li>
+</ul>
+
+<p><strong class="key">C. Key Vedic sutras (examples):</strong></p>
+<ol>
+<li><strong>Ekadhikena Purvena</strong> — "By one more than the previous." Used for squaring numbers ending in 5: 35² → 3×(3+1)|25 = 1225.</li>
+<li><strong>Nikhilam Navatashcaramam Dashatah</strong> — "All from 9 and the last from 10." Used for multiplication near base (e.g. 98 × 97).</li>
+<li><strong>Urdhva-Tiryagbhyam</strong> — "Vertically and crosswise." General multiplication algorithm.</li>
+<li><strong>Paravartya Yojayet</strong> — "Transpose and apply." Used for division.</li>
+<li><strong>Shunyam Saamyasamuccaye</strong> — "When the sum is the same, that sum is zero."</li>
+</ol>
+
+<p><strong class="key">D. Significance &amp; relevance today:</strong></p>
+<ul>
+<li>Develops <strong>mental agility, number sense and confidence</strong> in students.</li>
+<li>Widely used for <strong>competitive exams</strong> (CAT, GMAT, banking, UPSC) for speed.</li>
+<li>Adopted in school curricula in India, UK, USA, Singapore.</li>
+<li>Trains the brain in <strong>multiple-path problem solving</strong>, complementing standard methods.</li>
+</ul>
+
+<p><strong>Conclusion:</strong> Indian mathematics gave the world its numerical foundation; Vedic Mathematics shows that even arithmetic can be done with <strong>elegance, speed and joy</strong>. Together they affirm India's place as the cradle of mathematical thought.</p>
+</div>
+
+<hr class="hr">
+
+<!-- ========== MNEMONICS ========== -->
+<h2 class="section" id="mnem">Last-15-min flash cards <small>memorise verbatim</small></h2>
+
+<div class="box tip">
+  <b class="lbl">Lists you must not forget</b>
+  <ul>
+    <li><strong>8 Limbs of Yoga:</strong> Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi.</li>
+    <li><strong>9 Rasas:</strong> Shringara, Hasya, Karuna, Raudra, Veera, Bhayanaka, Bibhatsa, Adbhuta, Shanta.</li>
+    <li><strong>4 Vedas:</strong> Rig, Yajur, Sama, Atharva.</li>
+    <li><strong>6 Vedangas:</strong> Shiksha, Kalpa, Vyakarana, Nirukta, Chhandas, Jyotisha.</li>
+    <li><strong>3 Doshas:</strong> Vata, Pitta, Kapha.</li>
+    <li><strong>5 Mahabhutas:</strong> Prithvi, Jala, Agni, Vayu, Akasha.</li>
+    <li><strong>4 Purusharthas:</strong> Dharma, Artha, Kama, Moksha.</li>
+    <li><strong>6 Astika schools:</strong> Nyaya, Vaisheshika, Samkhya, Yoga, Mimamsa, Vedanta.</li>
+    <li><strong>3 Nastika schools:</strong> Buddhism, Jainism, Charvaka.</li>
+    <li><strong>Saptanga (7 pillars):</strong> Swami, Amatya, Janapada, Durga, Kosha, Danda, Mitra.</li>
+    <li><strong>Vastu units:</strong> Angula → Vitasti → Hasta → Danda → Yojana.</li>
+    <li><strong>4 Vedic sub-divisions:</strong> Samhita, Brahmana, Aranyaka, Upanishad.</li>
+  </ul>
+</div>
+
+<div class="box why">
+  <b class="lbl">Names → contribution (one-liners)</b>
+  <ul>
+    <li><strong>Patanjali</strong> — Yoga Sutras / Ashtanga Yoga.</li>
+    <li><strong>Panini</strong> — Ashtadhyayi (Sanskrit grammar, 3,959 sutras).</li>
+    <li><strong>Bharata Muni</strong> — Natyashastra (Rasa theory).</li>
+    <li><strong>Kautilya / Chanakya / Vishnugupta</strong> — Arthashastra, Chanakya Niti.</li>
+    <li><strong>Vyasa</strong> — Mahabharata, Puranas.</li>
+    <li><strong>Valmiki</strong> — Ramayana.</li>
+    <li><strong>Aryabhata</strong> — Zero, π, Aryabhatiya.</li>
+    <li><strong>Brahmagupta</strong> — rules of zero, Brahmasphutasiddhanta.</li>
+    <li><strong>Bhaskaracharya</strong> — Lilavati, Bijaganita.</li>
+    <li><strong>Varahmihir</strong> — Brihat Samhita, Pancha-Siddhantika.</li>
+    <li><strong>Madhava (Kerala school)</strong> — infinite series, calculus precursor.</li>
+    <li><strong>Dhanvantari</strong> — founder of Ayurveda.</li>
+    <li><strong>Charaka</strong> — Charaka Samhita (medicine).</li>
+    <li><strong>Sushruta</strong> — Sushruta Samhita (surgery; rhinoplasty).</li>
+    <li><strong>Tirathji Maharaj</strong> — rediscovered Vedic Mathematics (16 sutras).</li>
+    <li><strong>Kanad</strong> — Vaisheshika school; atomic theory (paramanu).</li>
+    <li><strong>Agastya</strong> — Siddha medicine, Tamil literature.</li>
+    <li><strong>Abhinavagupta</strong> — added Shanta Rasa (9th rasa).</li>
+  </ul>
+</div>
+
+<div class="box prof">
+  <b class="lbl">Phrases to insert in every long answer</b>
+  <ul>
+    <li>"…and its <strong>relevance today</strong> is seen in…"</li>
+    <li>"…integrated into the <strong>AYUSH ministry / NEP 2020</strong>…"</li>
+    <li>"…applications in <strong>modern healthcare / management / education</strong>…"</li>
+    <li>"…recognised by <strong>UNESCO / WHO / United Nations</strong>…"</li>
+    <li>"…built on the principle of <strong>holistic integration of body, mind and spirit</strong>…"</li>
+  </ul>
+</div>
+
+<div class="box warn">
+  <b class="lbl">DON'Ts in the exam hall</b>
+  <ul>
+    <li><strong>Don't write everything you know</strong> — answer the question asked. A focused 12/15 beats a wandering 8/15.</li>
+    <li>Don't leave Part-A blanks. Every short = 1.5 marks free.</li>
+    <li>Avoid English-only answers — sprinkle <em>Sanskrit terms</em> (italicised) for authenticity.</li>
+    <li>Don't write Homeopathy — it's <strong>NOT</strong> in your syllabus.</li>
+    <li>Number your sub-points. Use headed structure. Examiners scan, they don't read.</li>
+  </ul>
+</div>
+
+<p class="foot">IKS Crash-60 · Built 25 May 2026 · ~75% paper-probability coverage · Memorise the 8 essays + 28 flashcards · Walk in confident.</p>
+
+</main>
+</body>
+</html>
