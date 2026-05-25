@@ -62,6 +62,8 @@ nav.chips a{
 }
 nav.chips a.hot{ background:var(--highlighter); }
 nav.chips a:hover{ background:var(--brand); color:var(--paper); }
+nav.chips a.live{ background:var(--brand); color:var(--paper); border-color:var(--brand-deep); }
+nav.chips a.hot.live{ background:var(--crimson); color:var(--paper); border-color:var(--ink); }
 
 .wrap{ position:relative; z-index:1; max-width:780px; margin:0 auto; padding:14px 12px 80px; }
 @media(min-width:600px){ .wrap{ padding:24px 22px 96px; } body{ font-size:17px; line-height:1.7; } }
@@ -809,5 +811,64 @@ table.flash td.q{ font-weight:600; width:35%; }
 <p class="foot">IKS Crash-60 · Built 25 May 2026 · ~75% paper-probability coverage · Memorise the 8 essays + 28 flashcards · Walk in confident.</p>
 
 </main>
+
+<script>
+(function(){
+  var chips = Array.prototype.slice.call(document.querySelectorAll('nav.chips a[href^="#"]'));
+  if(!chips.length) return;
+  var map = {};
+  var targets = [];
+  chips.forEach(function(a){
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if(el){ map[id] = a; targets.push(el); }
+  });
+
+  var setActive = function(id){
+    chips.forEach(function(a){ a.classList.remove('live'); });
+    if(map[id]) map[id].classList.add('live');
+    var active = map[id];
+    if(active){
+      var bar = active.getBoundingClientRect();
+      var nav = active.parentNode;
+      var navRect = nav.getBoundingClientRect();
+      if(bar.left < navRect.left || bar.right > navRect.right){
+        nav.scrollTo({ left: active.offsetLeft - 12, behavior: 'smooth' });
+      }
+    }
+  };
+
+  var visible = {};
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0;
+    });
+    var topId = null, topY = Infinity;
+    targets.forEach(function(t){
+      if(visible[t.id] > 0){
+        var y = t.getBoundingClientRect().top;
+        if(y < topY){ topY = y; topId = t.id; }
+      }
+    });
+    if(!topId){
+      var nearest = null, nearY = -Infinity;
+      targets.forEach(function(t){
+        var y = t.getBoundingClientRect().top;
+        if(y < 120 && y > nearY){ nearY = y; nearest = t.id; }
+      });
+      topId = nearest;
+    }
+    if(topId) setActive(topId);
+  }, { rootMargin: '-96px 0px -55% 0px', threshold: [0, 0.25, 0.5, 1] });
+
+  targets.forEach(function(t){ io.observe(t); });
+
+  chips.forEach(function(a){
+    a.addEventListener('click', function(){
+      setActive(a.getAttribute('href').slice(1));
+    });
+  });
+})();
+</script>
 </body>
 </html>
