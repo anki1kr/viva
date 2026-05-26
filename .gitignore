@@ -29,6 +29,12 @@ normalization-guide.html
 *.tmp
 *.bak
 
+# MCP plugin databases (ruflo/ruvector etc — not part of site)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
 # Env / secrets
 .env
 .env.*

@@ -6460,17 +6460,48 @@ t.test(df$marks, mu = 60, alternative = "greater")
       el.classList.add('no');
     }
   }
-  const _chips = document.querySelectorAll('nav.chips a');
-  const _secs = [..._chips].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
-  const _io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        _chips.forEach(c => c.classList.remove('live'));
-        document.querySelector(`nav.chips a[href="#${e.target.id}"]`)?.classList.add('live');
-      }
+  (function(){
+    var chips = Array.prototype.slice.call(document.querySelectorAll('nav.chips a[href^="#"]'));
+    if(!chips.length) return;
+    var map = {}, targets = [];
+    chips.forEach(function(a){
+      var id = a.getAttribute('href').slice(1);
+      var el = document.getElementById(id);
+      if(el){ map[id] = a; targets.push(el); }
     });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  _secs.forEach(s => _io.observe(s));
+    var setActive = function(id){
+      chips.forEach(function(a){ a.classList.remove('live'); });
+      var active = map[id]; if(!active) return;
+      active.classList.add('live');
+      var nav = active.parentNode;
+      var bar = active.getBoundingClientRect();
+      var navRect = nav.getBoundingClientRect();
+      if(bar.left < navRect.left || bar.right > navRect.right){
+        nav.scrollTo({ left: active.offsetLeft - 12, behavior: 'smooth' });
+      }
+    };
+    var visible = {};
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ visible[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+      var topId = null, topY = Infinity;
+      targets.forEach(function(t){
+        if(visible[t.id] > 0){
+          var y = t.getBoundingClientRect().top;
+          if(y < topY){ topY = y; topId = t.id; }
+        }
+      });
+      if(!topId){
+        var nearY = -Infinity;
+        targets.forEach(function(t){
+          var y = t.getBoundingClientRect().top;
+          if(y < 120 && y > nearY){ nearY = y; topId = t.id; }
+        });
+      }
+      if(topId) setActive(topId);
+    }, { rootMargin: '-96px 0px -55% 0px', threshold: [0, 0.25, 0.5, 1] });
+    targets.forEach(function(t){ io.observe(t); });
+    chips.forEach(function(a){ a.addEventListener('click', function(){ setActive(a.getAttribute('href').slice(1)); }); });
+  })();
 </script>
 
 </body>

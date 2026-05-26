@@ -526,7 +526,7 @@ input,textarea,select{ font-size:16px; }
   <div class="viva-cards">
 
     <!-- 1 · 26 May 2026 -->
-    <a href="iks-exam-guide.html" class="viva-card iks">
+    <a href="iks-exam-guide.html" class="viva-card iks" data-exam-end="2026-05-26T12:30">
       <span class="stripe"></span>
       <div class="inner">
         <div class="subject-code">VAC-104-V · 26 May 2026</div>
@@ -548,30 +548,8 @@ input,textarea,select{ font-size:16px; }
       <div class="cta">Open IKS Exam Guide <span class="arr">›</span></div>
     </a>
 
-    <!-- 1b · CRASH 60 · 26 May 2026 -->
-    <a href="iks-crash-60.html" class="viva-card iks" style="border-color:#9f1239;">
-      <span class="stripe" style="background:#9f1239;"></span>
-      <div class="inner">
-        <div class="subject-code" style="color:#9f1239;">CRASH-60 · PASS SHEET</div>
-        <div class="name">IKS · Crash-60</div>
-        <div class="full">Memorise &amp; pass · 8 essays + 28 flashcards · ~75% paper-probability</div>
-        <div class="pills">
-          <span class="pill">Target 45/75</span>
-          <span class="pill">6-paper PYQ</span>
-          <span class="pill">Last-mile</span>
-        </div>
-        <ul class="topics">
-          <li>10 Part-A shorts ready to copy (15 M)</li>
-          <li>8 essay-ready Part-B answers (60 M)</li>
-          <li>Mnemonics + name→contribution table</li>
-          <li>180-min battle plan</li>
-        </ul>
-      </div>
-      <div class="cta">Open Crash-60 Pass Sheet <span class="arr">›</span></div>
-    </a>
-
     <!-- 2 · 29 May 2026 -->
-    <a href="ctrc-exam-guide.html" class="viva-card ctrc">
+    <a href="ctrc-exam-guide.html" class="viva-card ctrc" data-exam-end="2026-05-29T12:30">
       <span class="stripe"></span>
       <div class="inner">
         <div class="subject-code">AEC-109-V · 29 May 2026</div>
@@ -594,7 +572,7 @@ input,textarea,select{ font-size:16px; }
     </a>
 
     <!-- 3 · 01 Jun 2026 -->
-    <a href="dbms-exam-guide.html" class="viva-card dbms">
+    <a href="dbms-exam-guide.html" class="viva-card dbms" data-exam-end="2026-06-01T12:30">
       <span class="stripe"></span>
       <div class="inner">
         <div class="subject-code">BCG-202-V · 01 Jun 2026</div>
@@ -617,7 +595,7 @@ input,textarea,select{ font-size:16px; }
     </a>
 
     <!-- 4 · 08 Jun 2026 -->
-    <a href="loc-exam-guide.html" class="viva-card loc">
+    <a href="loc-exam-guide.html" class="viva-card loc" data-exam-end="2026-06-08T12:30">
       <span class="stripe"></span>
       <div class="inner">
         <div class="subject-code">BCG-208-V · 08 Jun 2026</div>
@@ -640,7 +618,7 @@ input,textarea,select{ font-size:16px; }
     </a>
 
     <!-- 5 · 10 Jun 2026 -->
-    <a href="wc-exam-guide.html" class="viva-card wc">
+    <a href="wc-exam-guide.html" class="viva-card wc" data-exam-end="2026-06-10T12:30">
       <span class="stripe"></span>
       <div class="inner">
         <div class="subject-code">BCG-216-V · 10 Jun 2026</div>
@@ -663,7 +641,7 @@ input,textarea,select{ font-size:16px; }
     </a>
 
     <!-- 6 · 12 Jun 2026 -->
-    <a href="r-datascience-exam-guide.html" class="viva-card r">
+    <a href="r-datascience-exam-guide.html" class="viva-card r" data-exam-end="2026-06-12T12:30">
       <span class="stripe"></span>
       <div class="inner">
         <div class="subject-code">BCA-DS-23-206 · 12 Jun 2026</div>
@@ -686,7 +664,7 @@ input,textarea,select{ font-size:16px; }
     </a>
 
     <!-- 7 · 17 Jun 2026 -->
-    <a href="probstats-exam-guide.html" class="viva-card stats">
+    <a href="probstats-exam-guide.html" class="viva-card stats" data-exam-end="2026-06-17T12:30">
       <span class="stripe"></span>
       <div class="inner">
         <div class="subject-code">BCD-202-V · 17 Jun 2026</div>
@@ -744,6 +722,36 @@ input,textarea,select{ font-size:16px; }
   });
 
   window.addEventListener('appinstalled', () => installBox?.classList.remove('show'));
+
+  // Auto-hide exam tiles after their end-time (paper finishes at 12:30 PM local)
+  (function(){
+    var cards = document.querySelectorAll('.viva-card[data-exam-end]');
+    if(!cards.length) return;
+    var sweep = function(){
+      var now = Date.now();
+      var remaining = 0;
+      cards.forEach(function(card){
+        var end = new Date(card.getAttribute('data-exam-end')).getTime();
+        if(isNaN(end)) return;
+        if(now >= end){
+          card.style.display = 'none';
+        } else {
+          card.style.display = '';
+          remaining++;
+        }
+      });
+      var grid = document.querySelector('.viva-cards');
+      if(grid && remaining === 0 && !document.getElementById('allDoneMsg')){
+        var msg = document.createElement('div');
+        msg.id = 'allDoneMsg';
+        msg.style.cssText = 'grid-column:1/-1;padding:40px 20px;text-align:center;font-family:Fraunces,serif;font-size:22px;color:var(--ink);background:var(--paper-soft);border:1.5px solid var(--ink);border-radius:6px;';
+        msg.innerHTML = '🎓 <b>All exams done.</b><br><small style="font-family:JetBrains Mono,monospace;font-size:11px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;">go celebrate</small>';
+        grid.appendChild(msg);
+      }
+    };
+    sweep();
+    setInterval(sweep, 60000);
+  })();
 
   // Service worker (offline support)
   if ('serviceWorker' in navigator) {
