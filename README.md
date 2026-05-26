@@ -8,7 +8,7 @@ Subjects listed in exam date order (Morning: 09:30–12:30):
 
 | Exam date | Subject | Code | File |
 | --- | --- | --- | --- |
-| 26 May 2026 | Indian Knowledge System | VAC-104-V | [iks-exam-guide.html](iks-exam-guide.html) |
+| 26 May 2026 | Indian Knowledge System | VAC-104-V | [iks-exam-guide.html](iks-exam-guide.html) + [iks-crash-60.html](iks-crash-60.html) (60-min revision companion) |
 | 29 May 2026 | CTRC | AEC-109-V | [ctrc-exam-guide.html](ctrc-exam-guide.html) |
 | 01 Jun 2026 | DBMS | BCG-202-V | [dbms-exam-guide.html](dbms-exam-guide.html) |
 | 08 Jun 2026 | Logical Organisation of Computer | BCG-208-V | [loc-exam-guide.html](loc-exam-guide.html) |
@@ -42,6 +42,7 @@ The PWA manifest is in [manifest.json](manifest.json).
 .
 ├── index.html                         Dashboard (subject tiles sorted by exam date)
 ├── iks-exam-guide.html                Per-subject theory guides (75 M)
+├── iks-crash-60.html                  60-min revision companion to iks-exam-guide.html
 ├── ctrc-exam-guide.html
 ├── dbms-exam-guide.html
 ├── loc-exam-guide.html
@@ -63,6 +64,12 @@ If you change a guide's filename or add a new one:
 1. Update the tile/link in [index.html](index.html).
 2. Add the file to `PRECACHE_URLS` in [sw.js](sw.js).
 3. Bump `CACHE_VERSION` in [sw.js](sw.js).
+
+## Crash sheets
+
+A crash sheet is a 60-minute, exam-morning revision companion that sits alongside a full guide. It strips the deep dives down to the absolute must-recall items: the highest-frequency PYQs, the single-line definitions, the diagrams to redraw from memory, and the mnemonics. [iks-crash-60.html](iks-crash-60.html) is the reference implementation.
+
+Follow the same pattern for future subjects — name as `<subject>-crash-60.html`, register it in [sw.js](sw.js) `PRECACHE_URLS`, and link it from the matching row in the table above and the tile in [index.html](index.html).
 
 ## License
 

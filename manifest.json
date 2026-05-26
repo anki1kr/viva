@@ -28,17 +28,17 @@
     {
       "name": "DBMS Guide",
       "short_name": "DBMS",
-      "url": "./dbms-study-guide.html"
+      "url": "./dbms-exam-guide.html"
     },
     {
       "name": "Wireless Comm",
       "short_name": "WC",
-      "url": "./wc-study-guide.html"
+      "url": "./wc-exam-guide.html"
     },
     {
       "name": "LOC Guide",
       "short_name": "LOC",
-      "url": "./loc-study-guide.html"
+      "url": "./loc-exam-guide.html"
     }
   ]
 }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#a16207" />
-<meta name="description" content="IKS Crash-60 · PYQ-driven minimum-effort pass sheet · 16 Part-A shorts + 8 Part-B essays · covers ~75% of paper probability" />
+<meta name="description" content="IKS Crash-60 · PYQ-driven minimum-effort pass sheet · BCA-stream filtered · 15 Part-A shorts + 7 Part-B essays · covers ~75% of paper probability" />
 <title>IKS Crash-60 · Pass Sheet · 26 May 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +26,7 @@
 *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; min-width:0; }
 html{ scroll-behavior:smooth; scroll-padding-top:96px; }
 :target{ scroll-margin-top:96px; }
-h2.section, h3.qhead, .plan, #parta, #partb, #mnem, #plan, #e1, #e2, #e3, #e4, #e5, #e6, #e7, #e8{ scroll-margin-top:96px; }
+h2.section, h3.qhead, .plan, #parta, #partb, #mnem, #plan, #e1, #e2, #e3, #e5, #e6, #e7, #e8{ scroll-margin-top:96px; }
 body{
   margin:0; font-family:"Spectral",Georgia,serif; font-size:15.5px; line-height:1.6; color:var(--ink);
   background:
@@ -175,10 +175,31 @@ table.flash td.q{ font-weight:600; width:35%; }
 
 .hr{ border:0; border-top:1.5px dashed var(--rule); margin:24px 0; }
 
+/* DIAGRAMS — ported from main guide */
+.diagram-fig{ margin:14px -2px; padding:10px 6px 8px; background:#fffefb; border:1.5px solid var(--ink); border-radius:4px; text-align:center; position:relative; }
+.diagram-fig svg{ width:100%; height:auto; max-width:100%; display:block; margin:0 auto; }
+@media(min-width:600px){ .diagram-fig{ margin:18px -4px; padding:14px 8px 10px; } .diagram-fig svg{ max-width:620px; } }
+.diagram-fig figcaption{ font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; margin-top:6px; padding:0 4px; line-height:1.4; }
+.diagram-fig figcaption b{ color:var(--brand); font-weight:700; }
+
 .foot{
   margin-top:40px; padding:14px; text-align:center;
   font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.16em;
   color:var(--muted); text-transform:uppercase;
+}
+
+/* PRINT */
+@media print{
+  @page{ margin:1.4cm 1.2cm; }
+  html,body{ background:#fff !important; color:#000 !important; font-size:11pt; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  body::before{ display:none; }
+  .topbar,.up,nav.chips{ display:none !important; }
+  .wrap{ max-width:100%; padding:0; }
+  .cover{ box-shadow:none; border:1.5pt solid #000; page-break-after:always; }
+  section.unit,h2.section,#parta,#partb,#plan{ page-break-before:always; }
+  .topic,.box,.qcard,.pyq,.ans,table,pre,.diagram-fig,figure{ page-break-inside:avoid; }
+  .diagram-fig,figure{ break-inside:avoid; page-break-inside:avoid; }
+  .foot{ page-break-before:auto; }
 }
 </style>
 </head>
@@ -193,7 +214,6 @@ table.flash td.q{ font-weight:600; width:35%; }
     <a href="#e1">Ashtanga</a>
     <a href="#e2">Rasa</a>
     <a href="#e3">Texts</a>
-    <a href="#e4">Nature IKS</a>
     <a href="#e5">Arthasastra</a>
     <a href="#e6">Vastu</a>
     <a href="#e7">Ayurveda</a>
@@ -208,13 +228,20 @@ table.flash td.q{ font-weight:600; width:35%; }
   <div class="stamp">PASS-OPTIMIZED</div>
   <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.22em; color:var(--muted); text-transform:uppercase;">VAC-104-V · IKS</div>
   <h1>Crash-60.<em>Memorize. Walk in. Pass.</em></h1>
-  <div class="sub">~75% of paper probability covered in 8 essays + 16 shorts</div>
+  <div class="sub">BCA-stream filtered · 7 essays + 15 shorts covering ~75% of paper probability</div>
   <div class="stats">
     <div class="stat"><div class="lbl">Target</div><div class="num">45/75</div></div>
     <div class="stat"><div class="lbl">Coverage</div><div class="num">~60%</div></div>
     <div class="stat"><div class="lbl">PYQs</div><div class="num">6 papers</div></div>
   </div>
 </section>
+
+<div class="box def" style="margin:0 0 18px;font-size:14px;line-height:1.55;">
+  <b class="lbl">Exam-day quickref</b>
+  <div><strong>Date:</strong> 26 May 2026 · 09:30–12:30 &nbsp;|&nbsp; <strong>Paper:</strong> VAC-104-V · 75M · 3 hrs</div>
+  <div><strong>Part A:</strong> 10 shorts × 1.5M = 15M &nbsp;|&nbsp; <strong>Part B:</strong> 4 of 6 essays × 15M = 60M</div>
+  <div><strong>Strategy:</strong> 30 min Part-A · 30 min × 4 essays = 2h 30m · 30 min review</div>
+</div>
 
 <div class="plan" id="plan">
   <h3>Battle plan · 180 min</h3>
@@ -223,7 +250,7 @@ table.flash td.q{ font-weight:600; width:35%; }
     <li><strong>00:30–02:30</strong> · Part-B · attempt <strong>any 4 of 6</strong> · 30 min each. Aim 11-12/15 per essay.</li>
     <li><strong>02:30–03:00</strong> · Revisit, add Sanskrit terms, bold key names, check question numbering.</li>
   </ol>
-  <p style="margin:8px 0 0;"><b>Picking your 4 longs:</b> Look for these in order — Ashtanga Yoga · Rasa Siddhanta · Vedic Texts · Nature+Philosophy IKS · Arthasastra · Vastu · Ayurveda/Panchmahabhutas. If <strong class="key">any 4 of these 7</strong> appear, you're golden.</p>
+  <p style="margin:8px 0 0;"><b>Picking your 4 longs:</b> Look for these in order — Ashtanga Yoga · Rasa Siddhanta · Vedic Texts · Arthasastra · Vastu · Ayurveda/Panchmahabhutas · Vedic Maths. If <strong class="key">any 4 of these 7</strong> appear, you're golden.</p>
 </div>
 
 <div class="box warn">
@@ -258,91 +285,49 @@ table.flash td.q{ font-weight:600; width:35%; }
   <thead><tr><th>If asked…</th><th>Write this</th></tr></thead>
   <tbody>
 
-  <tr><td class="q">What is IKS? / Define IKS.</td>
+  <tr><td class="q">What is IKS? / Define IKS.<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span></td>
   <td>Indian Knowledge System (IKS) is the structured body of <strong class="key">scientific, philosophical, spiritual and cultural knowledge</strong> developed in ancient India over 5,000+ years, preserved in Vedas, Upanishads, Shastras and Sutras. It covers maths, astronomy, medicine, linguistics, governance and ethics.</td></tr>
 
-  <tr><td class="q">What are Shruti and Smriti?</td>
+  <tr><td class="q">What are Shruti and Smriti?<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span></td>
   <td><em>Shruti</em> ("that which is heard") = revealed eternal texts — the <strong>4 Vedas + Upanishads</strong>, considered apaurusheya (not man-made). <em>Smriti</em> ("that which is remembered") = man-authored texts — <strong>Puranas, Itihasas (Ramayana, Mahabharata), Dharmashastras</strong>.</td></tr>
 
-  <tr><td class="q">How many Vedas? Name them.</td>
-  <td><strong>Four Vedas:</strong> Rigveda (hymns), Yajurveda (rituals), Samaveda (melodies), Atharvaveda (spells, medicine). Atharvaveda is the upaveda source of Ayurveda.</td></tr>
-
-  <tr><td class="q">How many Puranas?</td>
-  <td><strong>18 Mahapuranas</strong> (e.g. Vishnu, Bhagavata, Shiva, Brahma) + 18 Upapuranas. Composed by <strong>Maharishi Vyasa</strong>.</td></tr>
-
-  <tr><td class="q">What are the six Vedangas?</td>
-  <td>Six auxiliary disciplines for understanding the Vedas: <strong>Shiksha</strong> (phonetics), <strong>Kalpa</strong> (ritual), <strong>Vyakarana</strong> (grammar), <strong>Nirukta</strong> (etymology), <strong>Chhandas</strong> (meter), <strong>Jyotisha</strong> (astronomy).</td></tr>
-
-  <tr><td class="q">Name two schools of Indian philosophy.</td>
+  <tr><td class="q">Name two schools of Indian philosophy.<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span></td>
   <td><strong>Astika (orthodox):</strong> Nyaya, Vaisheshika, Samkhya, Yoga, Mimamsa, Vedanta — accept Vedas. <strong>Nastika (heterodox):</strong> Buddhism, Jainism, Charvaka — reject Vedic authority.</td></tr>
 
-  <tr><td class="q">What is Dharma?</td>
-  <td><strong>Dharma</strong> = righteous duty, moral law, and the cosmic order that sustains the universe. It is the first of the four Purusharthas (Dharma, Artha, Kama, Moksha) and governs personal, social and spiritual conduct.</td></tr>
-
-  <tr><td class="q">What is Karma?</td>
-  <td><strong>Karma</strong> = the universal law of cause and effect — every action (mental, verbal, physical) produces a corresponding result that shapes one's present and future lives. Central to Hindu, Buddhist and Jain ethics.</td></tr>
-
-  <tr><td class="q">What is Moksha?</td>
-  <td><strong>Moksha</strong> = liberation from the cycle of birth-death-rebirth (samsara). The fourth and highest Purushartha; achieved through Jnana (knowledge), Bhakti (devotion), Karma (action) or Yoga.</td></tr>
-
-  <tr><td class="q">What is the ultimate goal of Jainism?</td>
-  <td><strong>Kaivalya / Moksha</strong> — liberation of the soul (jiva) from karmic bondage, achieved through the Three Jewels: Right Faith, Right Knowledge, Right Conduct, plus strict <em>ahimsa</em> (non-violence).</td></tr>
-
-  <tr><td class="q">What is Ashtanga Yoga? / Who founded Yoga?</td>
+  <tr><td class="q">What is Ashtanga Yoga? / Who founded Yoga?<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span></td>
   <td>Ashtanga Yoga = the <strong>"eight-limbed path"</strong> codified by <strong>Maharishi Patanjali</strong> in the <em>Yoga Sutras</em>. The 8 limbs: Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi.</td></tr>
 
-  <tr><td class="q">Define Rasa Siddhanta.</td>
+  <tr><td class="q">Define Rasa Siddhanta.<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span></td>
   <td><strong>Rasa Siddhanta</strong> = the theory of aesthetic emotions in Indian dramaturgy, expounded by <strong>Bharata Muni</strong> in the <em>Natyashastra</em>. Rasa is the emotional flavour ("juice") the audience experiences. There are <strong>9 Rasas (Navarasa)</strong>.</td></tr>
 
-  <tr><td class="q">Who wrote / is credited with the Ashtadhyayi?</td>
+  <tr><td class="q">Who wrote / is credited with the Ashtadhyayi?<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span></td>
   <td><strong>Maharishi Panini</strong> (~5th century BCE). The <em>Ashtadhyayi</em> ("eight chapters") is the world's earliest scientific grammar — 3,959 sutras describing Sanskrit grammar.</td></tr>
 
-  <tr><td class="q">Who invented the concept of Zero?</td>
-  <td><strong>Aryabhata</strong> (5th c. CE) is credited with the concept of zero (<em>shunya</em>) as a number and place-value. <strong>Brahmagupta</strong> later defined arithmetic rules for zero (628 CE).</td></tr>
-
-  <tr><td class="q">Mention two contributions of ancient India to arithmetic/geometry.</td>
+  <tr><td class="q">Mention two contributions of ancient India to arithmetic/geometry.<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span></td>
   <td>(1) <strong>Decimal place-value system + concept of zero</strong> (Aryabhata, Brahmagupta). (2) <strong>Sulbasutras geometry</strong> — geometric construction for Vedic altars, including a statement of the Pythagoras theorem centuries before Pythagoras.</td></tr>
 
-  <tr><td class="q">What is Vedic Mathematics?</td>
+  <tr><td class="q">What is Vedic Mathematics?<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span></td>
   <td>A system of <strong>16 sutras</strong> (aphorisms) for fast mental arithmetic, rediscovered by <strong>Jagadguru Swami Bharati Krsna Tirathji Maharaj</strong> (1884-1960) from the Atharvaveda appendix. E.g. <em>Ekadhikena Purvena</em> ("by one more than the previous").</td></tr>
 
-  <tr><td class="q">What is Jyotisha?</td>
-  <td><strong>Jyotisha Shastra</strong> = the Vedanga of astronomy and astrology. Has two parts — <em>Ganita</em> (mathematical/positional astronomy) and <em>Phalita</em> (predictive astrology). One of the six Vedangas.</td></tr>
-
-  <tr><td class="q">Underline the contribution of Varahmihir.</td>
+  <tr><td class="q">Underline the contribution of Varahmihir.<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span></td>
   <td>6th-c. CE polymath; wrote <em>Brihat Samhita</em> (encyclopaedia of astronomy, astrology, architecture) and <em>Pancha-Siddhantika</em> (summary of 5 astronomical systems). One of the <strong>Navaratnas of Vikramaditya</strong>.</td></tr>
 
-  <tr><td class="q">Define Ayurveda. How is it related to Vedas?</td>
+  <tr><td class="q">Define Ayurveda. How is it related to Vedas?<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span></td>
   <td><strong>Ayurveda</strong> = "science of life" (<em>ayus</em> + <em>veda</em>) — India's traditional holistic medical system. It is an <strong>upaveda of the Atharvaveda</strong>. Aims at preserving health, not just treating disease.</td></tr>
 
-  <tr><td class="q">What are the three Doshas?</td>
-  <td>The three bio-energies governing body and mind: <strong>Vata</strong> (air + ether — movement), <strong>Pitta</strong> (fire + water — metabolism), <strong>Kapha</strong> (earth + water — structure). Health = balance; disease = imbalance.</td></tr>
-
-  <tr><td class="q">What are Panchamahabhutas?</td>
-  <td>The <strong>five great elements</strong> from which all matter (including the body) is composed: <em>Prithvi</em> (earth), <em>Jala</em> (water), <em>Agni</em> (fire), <em>Vayu</em> (air), <em>Akasha</em> (ether/space). Foundation of Ayurveda and Samkhya.</td></tr>
-
-  <tr><td class="q">Who was Sushruta?</td>
+  <tr><td class="q">Who was Sushruta?<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span></td>
   <td>The "<strong>Father of Surgery</strong>" (~7th-6th c. BCE). Wrote <em>Sushruta Samhita</em> — describes 300+ surgical procedures, 120 instruments, including <strong>rhinoplasty (plastic surgery)</strong> and cataract surgery.</td></tr>
 
-  <tr><td class="q">Who is the founder of Ayurveda?</td>
-  <td><strong>Dhanvantari</strong> — divine physician of the gods, considered the founder of Ayurveda. The two foundational textbooks are <em>Charaka Samhita</em> (medicine) and <em>Sushruta Samhita</em> (surgery).</td></tr>
-
-  <tr><td class="q">What is the Vastu measurement system?</td>
+  <tr><td class="q">What is the Vastu measurement system?<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span></td>
   <td>Traditional anthropometric units used in Vastusastra. Base unit = <strong>Angula</strong> (finger-width ≈ ¾"); <strong>Hasta</strong> (cubit) = 24 angulas; <strong>Danda</strong> = 4 hastas. Ensures buildings are scaled to human proportions.</td></tr>
 
-  <tr><td class="q">Why follow Vastu Shastra?</td>
-  <td>Vastu aligns buildings with the <strong>5 elements, 8 directions and cosmic energy</strong> to ensure health, prosperity and harmony of occupants. It integrates climate, ventilation, sunlight and psychology.</td></tr>
-
-  <tr><td class="q">Who was Chanakya / Vishnugupta?</td>
+  <tr><td class="q">Who was Chanakya / Vishnugupta?<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span></td>
   <td>4th-c. BCE statesman-philosopher (also called <strong>Kautilya</strong>), prime minister of Emperor Chandragupta Maurya. Author of <em>Arthashastra</em> (statecraft, economics) and <em>Chanakya Niti</em> (ethics, strategy). Founder of the Mauryan Empire's administrative system.</td></tr>
 
-  <tr><td class="q">What is the primary focus of Arthashastra?</td>
-  <td><strong>Political science and statecraft for kings</strong> — covering governance, economy, taxation, law, diplomacy, war, espionage. The first known comprehensive treatise on the science of polity (~3rd c. BCE).</td></tr>
-
-  <tr><td class="q">What is the core concept of NITI Shastra?</td>
+  <tr><td class="q">What is the core concept of NITI Shastra?<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span></td>
   <td><strong>Nitishastra</strong> = the science of ethical, practical and strategic conduct. <em>Chanakya Niti</em> teaches success principles: choose right friends, master finances, time your action, lead by example, plan before acting.</td></tr>
 
-  <tr><td class="q">Highlight contribution of Patanjali, Agastya and Kanad.</td>
+  <tr><td class="q">Highlight contribution of Patanjali, Agastya and Kanad.<span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span></td>
   <td><strong>Patanjali</strong> — codified Ashtanga Yoga (Yoga Sutras), also wrote on grammar (Mahabhashya). <strong>Agastya</strong> — Vedic sage, pioneer of Siddha medicine and Tamil literature. <strong>Kanad</strong> — founder of <em>Vaisheshika</em> school; proposed the <strong>atomic theory (paramanu)</strong>.</td></tr>
 
   </tbody>
@@ -357,7 +342,7 @@ table.flash td.q{ font-weight:600; width:35%; }
 </div>
 
 <!-- ========== ESSAY 1 ========== -->
-<h3 class="qhead" id="e1"><span class="tag hot">15M · #1 LOCK</span>Ashtanga Yoga — 8 limbs + significance</h3>
+<h3 class="qhead" id="e1"><span class="tag hot">15M · #1 LOCK</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span>Ashtanga Yoga — 8 limbs + significance</h3>
 
 <div class="box def">
   <b class="lbl">Likely stem</b> "Explain the concept and eight limbs of Ashtanga Yoga. Discuss its psychological and spiritual significance." / "Examine the role of Yoga in well-being with applications in modern healthcare."
@@ -366,6 +351,53 @@ table.flash td.q{ font-weight:600; width:35%; }
 <div class="ans">
 <h4>Model answer</h4>
 <p class="lead">Ashtanga Yoga, literally the "eight-limbed path," was systematised by <strong class="key">Maharishi Patanjali</strong> in the <em>Yoga Sutras</em> (~200 BCE). It is the central school of the Yoga darshana — a graded discipline for purifying body, mind and consciousness leading to <strong>Samadhi (self-realisation)</strong>.</p>
+
+<figure class="diagram-fig" style="padding:18px 14px 14px;background:#fffefb;">
+  <div style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;text-align:center;margin-bottom:14px;color:var(--ink);">Ashtanga Yoga · 8-step ladder of consciousness</div>
+  <div style="display:flex;flex-direction:column;gap:6px;max-width:600px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:9px 12px;background:#fde6d6;border:1.5px solid #7c2d12;border-radius:4px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#7c2d12;">01</span>
+      <span style="font-size:14px;"><b>Yama</b> &nbsp;·&nbsp; <span style="color:var(--ink-soft);">Ethical restraints — ahimsa · satya · asteya · brahmacharya · aparigraha</span></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#7c2d12;text-transform:uppercase;font-weight:700;">Bahiranga</span>
+    </div>
+    <div style="display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:9px 12px;background:#fde6d6;border:1.5px solid #7c2d12;border-radius:4px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#7c2d12;">02</span>
+      <span style="font-size:14px;"><b>Niyama</b> &nbsp;·&nbsp; <span style="color:var(--ink-soft);">Observances — shaucha · santosha · tapa · svadhyaya · ishvara-pranidhana</span></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#7c2d12;text-transform:uppercase;font-weight:700;">Bahiranga</span>
+    </div>
+    <div style="display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:9px 12px;background:#fef3c7;border:1.5px solid #a16207;border-radius:4px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#a16207;">03</span>
+      <span style="font-size:14px;"><b>Asana</b> &nbsp;·&nbsp; <span style="color:var(--ink-soft);">Steady, comfortable posture</span></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#a16207;text-transform:uppercase;font-weight:700;">Bahiranga</span>
+    </div>
+    <div style="display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:9px 12px;background:#fef3c7;border:1.5px solid #a16207;border-radius:4px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#a16207;">04</span>
+      <span style="font-size:14px;"><b>Pranayama</b> &nbsp;·&nbsp; <span style="color:var(--ink-soft);">Breath regulation — control of prana (life force)</span></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#a16207;text-transform:uppercase;font-weight:700;">Bahiranga</span>
+    </div>
+    <div style="display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:9px 12px;background:#dcfce7;border:1.5px solid #365314;border-radius:4px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#365314;">05</span>
+      <span style="font-size:14px;"><b>Pratyahara</b> &nbsp;·&nbsp; <span style="color:var(--ink-soft);">Withdrawal of senses from objects</span></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#365314;text-transform:uppercase;font-weight:700;">Antaranga</span>
+    </div>
+    <div style="display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:9px 12px;background:#dcfce7;border:1.5px solid #365314;border-radius:4px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#365314;">06</span>
+      <span style="font-size:14px;"><b>Dharana</b> &nbsp;·&nbsp; <span style="color:var(--ink-soft);">Concentration on a single object</span></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#365314;text-transform:uppercase;font-weight:700;">Antaranga</span>
+    </div>
+    <div style="display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:9px 12px;background:#dbeafe;border:1.5px solid #1e3a8a;border-radius:4px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#1e3a8a;">07</span>
+      <span style="font-size:14px;"><b>Dhyana</b> &nbsp;·&nbsp; <span style="color:var(--ink-soft);">Sustained meditation — uninterrupted flow</span></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#1e3a8a;text-transform:uppercase;font-weight:700;">Antaranga</span>
+    </div>
+    <div style="display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:9px 12px;background:#fbcfe8;border:1.5px solid #9f1239;border-radius:4px;">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#9f1239;">08</span>
+      <span style="font-size:14px;"><b>Samadhi</b> &nbsp;·&nbsp; <span style="color:var(--ink-soft);">Total absorption · liberation · oneness</span></span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.14em;color:#9f1239;text-transform:uppercase;font-weight:700;">Antaratman</span>
+    </div>
+  </div>
+  <figcaption>8-step ladder · Yama–Niyama–Asana–Pranayama (Bahiranga · external) · Pratyahara–Dharana–Dhyana (Antaranga · internal) · Samadhi (Antaratman · innermost)</figcaption>
+</figure>
 
 <p><strong class="key">The eight limbs (in order):</strong></p>
 <ol>
@@ -396,7 +428,7 @@ table.flash td.q{ font-weight:600; width:35%; }
 </div>
 
 <!-- ========== ESSAY 2 ========== -->
-<h3 class="qhead" id="e2"><span class="tag hot">15M · #2 LOCK</span>Rasa Siddhanta of Natyashastra</h3>
+<h3 class="qhead" id="e2"><span class="tag hot">15M · #2 LOCK</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span>Rasa Siddhanta of Natyashastra</h3>
 
 <div class="box def">
   <b class="lbl">Likely stem</b> "Elaborate on / Discuss the Rasa Siddhanta of Natyasastra."
@@ -405,6 +437,49 @@ table.flash td.q{ font-weight:600; width:35%; }
 <div class="ans">
 <h4>Model answer</h4>
 <p class="lead">Rasa Siddhanta (the "theory of aesthetic emotion") is the foundational doctrine of Indian dramaturgy and aesthetics, propounded by <strong class="key">Bharata Muni</strong> in the <em>Natyashastra</em> (~200 BCE – 200 CE), the oldest surviving treatise on performing arts. <em>Rasa</em> literally means "juice" or "essence" — the emotional flavour an audience tastes when watching a performance.</p>
+
+<figure class="diagram-fig" style="padding:18px 14px 14px;background:#fffefb;">
+  <div style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;text-align:center;margin-bottom:14px;color:var(--ink);">Navarasa Wheel &middot; the 9 aesthetic flavours</div>
+  <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:6px;max-width:520px;margin:0 auto;">
+    <div style="padding:10px 6px;background:#fbcfe8;border:1.5px solid #9f1239;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Adbhuta</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9f1239;margin-top:3px;letter-spacing:.04em;">wonder</div>
+    </div>
+    <div style="padding:10px 6px;background:#dcfce7;border:1.5px solid #365314;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Sringara</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#365314;margin-top:3px;letter-spacing:.04em;">love</div>
+    </div>
+    <div style="padding:10px 6px;background:#fef3c7;border:1.5px solid #a16207;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Hasya</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#a16207;margin-top:3px;letter-spacing:.04em;">laughter</div>
+    </div>
+    <div style="padding:10px 6px;background:#dbeafe;border:1.5px solid #1e3a8a;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Bibhatsa</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#1e3a8a;margin-top:3px;letter-spacing:.04em;">disgust</div>
+    </div>
+    <div style="padding:10px 6px;background:#fff8e7;border:2.5px solid #a16207;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:14px;font-weight:800;color:var(--ink);">Shanta</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#a16207;margin-top:3px;letter-spacing:.04em;font-style:italic;">peace &middot; centre</div>
+    </div>
+    <div style="padding:10px 6px;background:#e5e7eb;border:1.5px solid #374151;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Karuna</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#374151;margin-top:3px;letter-spacing:.04em;">sorrow</div>
+    </div>
+    <div style="padding:10px 6px;background:#1f2937;border:1.5px solid #0f172a;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:#f9fafb;">Bhayanaka</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#e5e7eb;margin-top:3px;letter-spacing:.04em;">fear</div>
+    </div>
+    <div style="padding:10px 6px;background:#fef9c3;border:1.5px solid #854d0e;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Veera</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#854d0e;margin-top:3px;letter-spacing:.04em;">heroism</div>
+    </div>
+    <div style="padding:10px 6px;background:#fde6d6;border:1.5px solid #7c2d12;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Raudra</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#7c2d12;margin-top:3px;letter-spacing:.04em;">anger</div>
+    </div>
+  </div>
+  <figcaption>The 9 Rasas with English emotion mapping &mdash; Shanta (peace) added by Abhinavagupta sits at the centre because it is the substratum of all rasas.</figcaption>
+</figure>
 
 <p><strong class="key">Bharata's famous sutra:</strong> <em>"Vibhavanubhava-vyabhicari-samyogad rasanispattih"</em> — "Rasa arises from the union of <strong>Vibhava, Anubhava and Vyabhicari Bhava</strong> with the underlying Sthayi Bhava."</p>
 
@@ -440,7 +515,7 @@ table.flash td.q{ font-weight:600; width:35%; }
 </div>
 
 <!-- ========== ESSAY 3 ========== -->
-<h3 class="qhead" id="e3"><span class="tag hot">15M · #3 LOCK</span>Classification of Vedic literature / ancient Indian texts</h3>
+<h3 class="qhead" id="e3"><span class="tag hot">15M · #3 LOCK</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span>Classification of Vedic literature / ancient Indian texts</h3>
 
 <div class="box def">
   <b class="lbl">Likely stem</b> "Discuss the classification of ancient Indian texts with examples." / "Write the different types of Vedic literature and its importance."
@@ -449,6 +524,45 @@ table.flash td.q{ font-weight:600; width:35%; }
 <div class="ans">
 <h4>Model answer</h4>
 <p class="lead">Ancient Indian literature is the most voluminous in the ancient world. It is broadly classified into <strong class="key">Shruti</strong> ("heard" — revealed, eternal) and <strong class="key">Smriti</strong> ("remembered" — human-authored, transmitted by tradition).</p>
+
+<figure class="diagram-fig" style="padding:18px 14px 14px;background:#fffefb;">
+  <div style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;text-align:center;margin-bottom:14px;color:var(--ink);">Two-Trunk Classification with Examples</div>
+  <div style="display:flex;justify-content:center;margin-bottom:6px;">
+    <div style="padding:8px 18px;background:#fef3c7;border:1.5px solid #a16207;border-radius:6px;font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Sanskrit Canon</div>
+  </div>
+  <div style="display:flex;justify-content:center;color:#7c2d12;font-size:18px;line-height:1;margin-bottom:6px;"><span style="margin-right:120px;">↙</span><span>↘</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:600px;margin:0 auto;">
+    <div style="padding:10px 12px;background:#dcfce7;border:1.5px solid #365314;border-radius:6px;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;text-align:center;color:#365314;margin-bottom:6px;">Shruti · apaurusheya</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink);line-height:1.55;">
+        <div style="font-weight:700;color:#365314;">4 layers</div>
+        <div>Samhitas — 4 Vedas</div>
+        <div>Brahmanas — Shatapatha</div>
+        <div>Aranyakas — Brihadaranyaka</div>
+        <div>Upanishads — Isha, Katha</div>
+        <div style="font-style:italic;color:#365314;margin-top:4px;">(108 listed · 13 principal)</div>
+      </div>
+    </div>
+    <div style="padding:10px 12px;background:#fde6d6;border:1.5px solid #7c2d12;border-radius:6px;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;text-align:center;color:#7c2d12;margin-bottom:6px;">Smriti · paurusheya</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink);line-height:1.55;">
+        <div style="font-weight:700;color:#7c2d12;">5 buckets</div>
+        <div>Vedangas (6)</div>
+        <div>Itihasa — Ramayana · Mbh</div>
+        <div>Puranas (18) — Bhagavata</div>
+        <div>Dharmashastras — Manusmriti</div>
+        <div>Sutras — Yoga · Nyaya · Brahma</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;margin-top:12px;">
+    <div style="padding:8px 18px;background:#fff8e7;border:1.5px solid #a16207;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:11.5px;font-weight:700;color:#7c2d12;">Apastamba's rule</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink);margin-top:2px;">Shruti &gt; Smriti &gt; Sadachara &gt; Atma-tushti</div>
+    </div>
+  </div>
+  <figcaption>Shruti/Smriti two-trunk taxonomy with canonical examples + authority chain</figcaption>
+</figure>
 
 <p><strong class="key">A. SHRUTI (revealed):</strong></p>
 <ol>
@@ -485,51 +599,8 @@ table.flash td.q{ font-weight:600; width:35%; }
 <p><strong>Conclusion:</strong> The Vedic corpus is not a single book but an entire <strong>library of civilisation</strong>. Its layered classification — Shruti for eternal truth, Smriti for evolving social application — remains the framework for understanding Indian thought.</p>
 </div>
 
-<!-- ========== ESSAY 4 ========== -->
-<h3 class="qhead" id="e4"><span class="tag hot">15M · #4 LOCK</span>Nature, Philosophy &amp; Characteristics of IKS</h3>
-
-<div class="box def">
-  <b class="lbl">Likely stem</b> "What is the nature, philosophy and characteristics of Indian Knowledge System?" (this 6-word phrase appears verbatim in 3 papers).
-</div>
-
-<div class="ans">
-<h4>Model answer</h4>
-<p class="lead">The Indian Knowledge System (IKS) is the structured, continuous, multi-disciplinary body of knowledge developed in the Indian subcontinent over more than 5,000 years. It encompasses <strong class="key">philosophy, science, mathematics, astronomy, medicine, linguistics, arts, architecture, governance and ethics</strong> — all integrated under a common worldview.</p>
-
-<p><strong class="key">Nature of IKS:</strong></p>
-<ul>
-<li><strong>Holistic and integrative</strong> — does not separate science from spirituality, individual from cosmos, body from mind.</li>
-<li><strong>Experiential</strong> — knowledge (<em>jnana</em>) is validated by direct experience (<em>anubhava</em>), not just textual authority.</li>
-<li><strong>Oral + written tradition</strong> — preserved through guru-shishya parampara with phonetic precision long before writing.</li>
-<li><strong>Pluralistic</strong> — accepts multiple valid paths and viewpoints (e.g. 6 Astika + 3 Nastika schools coexist).</li>
-</ul>
-
-<p><strong class="key">Philosophy of IKS:</strong></p>
-<ul>
-<li>Built on the four <strong>Purusharthas</strong> — Dharma (duty), Artha (prosperity), Kama (desire), Moksha (liberation).</li>
-<li>Recognises <strong>Atman</strong> (individual self) and <strong>Brahman</strong> (universal consciousness) and their ultimate unity.</li>
-<li>Believes in <strong>karma, rebirth and liberation</strong> as the moral architecture of the universe.</li>
-<li>Knowledge has three levels: <em>Apara Vidya</em> (lower / empirical) and <em>Para Vidya</em> (higher / spiritual).</li>
-</ul>
-
-<p><strong class="key">Key characteristics:</strong></p>
-<ol>
-<li><strong>Vast and ancient</strong> — Vedas date back to ~1500 BCE; living tradition for 5,000+ years.</li>
-<li><strong>Multidisciplinary</strong> — same scholars contributed to mathematics, medicine, grammar, philosophy.</li>
-<li><strong>Systematised in Sutras and Shastras</strong> — codified knowledge using compact aphorisms.</li>
-<li><strong>Universal in scope</strong> — addresses cosmic, social and individual life.</li>
-<li><strong>Tolerant and dialogic</strong> — Astika/Nastika debate, Buddhism/Jainism flourished alongside Vedic thought.</li>
-<li><strong>Eco-spiritual</strong> — treats nature, rivers and animals as sacred; emphasises sustainability and ahimsa.</li>
-<li><strong>Practical &amp; applied</strong> — Yoga for health, Ayurveda for medicine, Vastu for housing, Arthashastra for governance.</li>
-</ol>
-
-<p><strong class="key">Relevance today:</strong> IKS principles are being revived through the <strong>National Education Policy 2020</strong>, AYUSH Ministry, International Yoga Day, and corporate management drawing from <em>Bhagavad Gita</em> and <em>Arthashastra</em>. It offers solutions to modern problems of mental health, ecology, ethics and sustainable development.</p>
-
-<p><strong>Conclusion:</strong> IKS is not a museum of old ideas — it is a <strong>living, integrative knowledge tradition</strong> uniquely capable of harmonising science, ethics and spirituality.</p>
-</div>
-
 <!-- ========== ESSAY 5 ========== -->
-<h3 class="qhead" id="e5"><span class="tag hot">15M · #5 LOCK</span>Arthashastra — economic / management thought</h3>
+<h3 class="qhead" id="e5"><span class="tag hot">15M · #5 LOCK</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span>Arthashastra — economic / management thought</h3>
 
 <div class="box def">
   <b class="lbl">Likely stem</b> "Elaborate on Indian economic thought as presented in Arthasastra." / "What is Arthashastra and its use in modern management?" / "Critically examine Arthashastra and Nitisastra."
@@ -538,6 +609,50 @@ table.flash td.q{ font-weight:600; width:35%; }
 <div class="ans">
 <h4>Model answer</h4>
 <p class="lead">The <em>Arthashastra</em> is the world's oldest surviving treatise on <strong class="key">statecraft, economics and political science</strong>, written by <strong class="key">Kautilya</strong> (also known as Chanakya / Vishnugupta), prime minister to Emperor Chandragupta Maurya in the 4th century BCE. The word <em>artha</em> means "material well-being" and <em>shastra</em> means "science" — together, "science of wealth and governance."</p>
+
+<figure class="diagram-fig" style="padding:18px 14px 14px;background:#fffefb;">
+  <div style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;text-align:center;margin-bottom:14px;color:var(--ink);">Saptanga · 7 Limbs of the State (Kautilya)</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:600px;margin:0 auto;">
+    <div style="padding:9px 10px;background:#fef3c7;border:1.5px dashed #a16207;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">+ Shatru</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#a16207;margin-top:2px;">enemy · Mandala edge</div>
+    </div>
+    <div style="padding:9px 10px;background:#fde6d6;border:2px solid #7c2d12;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">1. Swami</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#7c2d12;margin-top:2px;">ruler · CEO</div>
+    </div>
+    <div style="padding:9px 10px;background:#fde6d6;border:2px solid #7c2d12;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">2. Amatya</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#7c2d12;margin-top:2px;">ministers</div>
+    </div>
+    <div style="padding:9px 10px;background:#fde6d6;border:2px solid #7c2d12;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">7. Mitra</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#7c2d12;margin-top:2px;">ally</div>
+    </div>
+    <div style="padding:12px 10px;background:#fff8e7;border:2.5px solid #a16207;border-radius:6px;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+      <div style="font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--ink);letter-spacing:.05em;">RAJYA</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#a16207;margin-top:2px;">the state</div>
+    </div>
+    <div style="padding:9px 10px;background:#fde6d6;border:2px solid #7c2d12;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">3. Janapada</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#7c2d12;margin-top:2px;">territory</div>
+    </div>
+    <div style="padding:9px 10px;background:#fde6d6;border:2px solid #7c2d12;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">6. Danda</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#7c2d12;margin-top:2px;">army</div>
+    </div>
+    <div style="padding:9px 10px;background:#fde6d6;border:2px solid #7c2d12;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">5. Kosha</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#7c2d12;margin-top:2px;">treasury</div>
+    </div>
+    <div style="padding:9px 10px;background:#fde6d6;border:2px solid #7c2d12;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">4. Durga</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#7c2d12;margin-top:2px;">fort</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--ink);"><b>SAJaDuKoDaMi</b> · Swami → Amatya → Janapada → Durga → Kosha → Danda → Mitra</div>
+  <figcaption>7 limbs orbit Rajya · "SAJaDuKoDaMi" — Swami · Amatya · Janapada · Durga · Kosha · Danda · Mitra</figcaption>
+</figure>
 
 <p><strong class="key">Scope &amp; structure:</strong> 15 books, 150 chapters, 6,000 sutras covering king's duties, ministers, taxation, agriculture, trade, currency, mining, foreign policy, war, espionage, law and welfare. Predates Machiavelli's <em>The Prince</em> by ~1,800 years.</p>
 
@@ -578,7 +693,7 @@ table.flash td.q{ font-weight:600; width:35%; }
 </div>
 
 <!-- ========== ESSAY 6 ========== -->
-<h3 class="qhead" id="e6"><span class="tag hot">15M · #6 LOCK</span>Vastu Shastra — measurement, principles, importance</h3>
+<h3 class="qhead" id="e6"><span class="tag hot">15M · #6 LOCK</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span>Vastu Shastra — measurement, principles, importance</h3>
 
 <div class="box def">
   <b class="lbl">Likely stem</b> "What is Vaastu-Shastra and its basic principles? How is it important for human being?" / "Explain principles of city planning per Vastusastra."
@@ -587,6 +702,45 @@ table.flash td.q{ font-weight:600; width:35%; }
 <div class="ans">
 <h4>Model answer</h4>
 <p class="lead"><em>Vastu Shastra</em> is the ancient Indian science of architecture and spatial design. <em>Vastu</em> means "dwelling" and <em>shastra</em> means "science" — together, "the science of dwellings." Earliest references appear in the Vedas, Brihat Samhita (Varahmihir), Mayamatam and Manasara.</p>
+
+<figure class="diagram-fig" style="padding:18px 14px 14px;background:#fffefb;">
+  <div style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;text-align:center;margin-bottom:8px;color:var(--ink);">Vastu-Purusha-Mandala · 9×9 = 81 padas</div>
+  <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#7c2d12;margin-bottom:8px;">N · Kubera (wealth)</div>
+  <div style="display:flex;align-items:center;justify-content:center;gap:10px;max-width:600px;margin:0 auto;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#7c2d12;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;">W · Varuna</div>
+    <div style="display:grid;grid-template-columns:repeat(9,1fr);gap:0;width:220px;height:220px;background:#fef3c7;border:2px solid #a16207;box-sizing:border-box;">
+      <div style="grid-column:1/2;grid-row:1/2;border:0.5px solid #d6b97a;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:#7c2d12;font-weight:700;">Vy</div>
+      <div style="grid-column:2/4;grid-row:1/2;border:0.5px solid #d6b97a;"></div>
+      <div style="grid-column:4/7;grid-row:1/2;border:0.5px solid #d6b97a;background:#fdf6d8;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:11px;color:#7c2d12;font-weight:700;">Indra</div>
+      <div style="grid-column:7/9;grid-row:1/2;border:0.5px solid #d6b97a;"></div>
+      <div style="grid-column:9/10;grid-row:1/2;border:0.5px solid #d6b97a;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:#7c2d12;font-weight:700;">Is</div>
+      <div style="grid-column:1/4;grid-row:2/4;border:0.5px solid #d6b97a;background:#fdf6d8;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:11px;color:#7c2d12;font-weight:700;writing-mode:vertical-rl;transform:rotate(180deg);">Vayu</div>
+      <div style="grid-column:4/7;grid-row:2/4;border:0.5px solid #d6b97a;"></div>
+      <div style="grid-column:7/10;grid-row:2/4;border:0.5px solid #d6b97a;background:#fdf6d8;"></div>
+      <div style="grid-column:1/4;grid-row:4/7;border:0.5px solid #d6b97a;"></div>
+      <div style="grid-column:4/7;grid-row:4/7;background:#fde6d6;border:2px solid #7c2d12;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;">
+        <div style="font-family:'Fraunces',serif;font-size:11px;font-weight:700;color:#7c2d12;line-height:1;">Brahma</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#7c2d12;margin-top:2px;">sthana</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#7c2d12;">(3×3)</div>
+      </div>
+      <div style="grid-column:7/10;grid-row:4/7;border:0.5px solid #d6b97a;"></div>
+      <div style="grid-column:1/4;grid-row:7/9;border:0.5px solid #d6b97a;background:#fdf6d8;"></div>
+      <div style="grid-column:4/7;grid-row:7/9;border:0.5px solid #d6b97a;"></div>
+      <div style="grid-column:7/10;grid-row:7/9;border:0.5px solid #d6b97a;background:#fdf6d8;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:11px;color:#7c2d12;font-weight:700;writing-mode:vertical-rl;">Agni</div>
+      <div style="grid-column:1/2;grid-row:9/10;border:0.5px solid #d6b97a;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:#7c2d12;font-weight:700;">Nr</div>
+      <div style="grid-column:2/4;grid-row:9/10;border:0.5px solid #d6b97a;"></div>
+      <div style="grid-column:4/7;grid-row:9/10;border:0.5px solid #d6b97a;background:#fdf6d8;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:11px;color:#7c2d12;font-weight:700;">Yama</div>
+      <div style="grid-column:7/9;grid-row:9/10;border:0.5px solid #d6b97a;"></div>
+      <div style="grid-column:9/10;grid-row:9/10;border:0.5px solid #d6b97a;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:#7c2d12;font-weight:700;">Ag</div>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#7c2d12;writing-mode:vertical-rl;white-space:nowrap;">E · Indra</div>
+  </div>
+  <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#7c2d12;margin-top:8px;">S · Yama (death)</div>
+  <div style="text-align:center;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink);">81 padas · centre 9 padas = Brahmasthan (kept open)</div>
+  <div style="text-align:center;margin-top:2px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);">head NE · feet SW · deities in each cell</div>
+  <div style="text-align:center;margin-top:2px;font-family:'Spectral',serif;font-size:12px;font-style:italic;color:var(--muted);">9×9 = home grid · 8×8 = temple grid</div>
+  <figcaption>Vastu-Purusha-Mandala · 9×9 = 81 padas with central Brahmasthan and 4 cardinal deities</figcaption>
+</figure>
 
 <p><strong class="key">A. Traditional measurement system:</strong></p>
 <ul>
@@ -639,7 +793,7 @@ table.flash td.q{ font-weight:600; width:35%; }
 </div>
 
 <!-- ========== ESSAY 7 ========== -->
-<h3 class="qhead" id="e7"><span class="tag hot">15M · #7 BACKUP</span>Ayurveda — system + Panchmahabhutas + vs Allopathy</h3>
+<h3 class="qhead" id="e7"><span class="tag hot">15M · #7 BACKUP</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span>Ayurveda — system + Panchmahabhutas + vs Allopathy</h3>
 
 <div class="box def">
   <b class="lbl">Likely stem</b> "What is Indian system of medicine? Write Ayurveda in brief." / "What is Panchmahabhutas of Ayurveda?" / "Compare Ayurveda with Allopathy in diagnosis, treatment, principles."
@@ -648,6 +802,51 @@ table.flash td.q{ font-weight:600; width:35%; }
 <div class="ans">
 <h4>Model answer</h4>
 <p class="lead"><strong class="key">Ayurveda</strong> — literally <em>"science of life"</em> (<em>ayus</em> = life, <em>veda</em> = knowledge) — is India's traditional holistic medical system and an <strong>upaveda of the Atharvaveda</strong>. Founded by <strong>Lord Dhanvantari</strong>, the divine physician; codified by <strong>Charaka</strong> (medicine — <em>Charaka Samhita</em>) and <strong>Sushruta</strong> (surgery — <em>Sushruta Samhita</em>). It is at least 3,000 years old and remains a living medical tradition.</p>
+
+<figure class="diagram-fig" style="padding:18px 14px 14px;background:#fffefb;">
+  <div style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;text-align:center;margin-bottom:4px;color:var(--ink);">Panchamahabhuta → Tridosha</div>
+  <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:10px;">Row 1 · five elements</div>
+  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:600px;margin:0 auto;">
+    <div style="padding:8px 6px;background:#fef3c7;border:1.5px solid #a16207;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Akasha</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#a16207;margin-top:2px;">ether</div>
+    </div>
+    <div style="padding:8px 6px;background:#dcfce7;border:1.5px solid #365314;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Vayu</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#365314;margin-top:2px;">air</div>
+    </div>
+    <div style="padding:8px 6px;background:#fee2e2;border:1.5px solid #9f1239;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Agni</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9f1239;margin-top:2px;">fire</div>
+    </div>
+    <div style="padding:8px 6px;background:#dbeafe;border:1.5px solid #1e3a8a;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Jala</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#1e3a8a;margin-top:2px;">water</div>
+    </div>
+    <div style="padding:8px 6px;background:#fde6d6;border:1.5px solid #7c2d12;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:13px;font-weight:700;color:var(--ink);">Prithvi</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#7c2d12;margin-top:2px;">earth</div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;color:#a16207;font-size:18px;margin:6px 0;line-height:1;">↓</div>
+  <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:10px;">Row 2 · three doshas</div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:600px;margin:0 auto;">
+    <div style="padding:10px 8px;background:#dcfce7;border:1.5px solid #365314;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--ink);">Vata</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#365314;margin-top:4px;">Akasha + Vayu</div>
+    </div>
+    <div style="padding:10px 8px;background:#fee2e2;border:1.5px solid #9f1239;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--ink);">Pitta</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#9f1239;margin-top:4px;">Agni</div>
+    </div>
+    <div style="padding:10px 8px;background:#dbeafe;border:1.5px solid #1e3a8a;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--ink);">Kapha</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#1e3a8a;margin-top:4px;">Jala + Prithvi</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:10px;font-family:'Spectral',serif;font-size:12px;font-style:italic;color:var(--muted);">five mahabhutas pair up → three functional doshas</div>
+  <figcaption>Five elements pair up to form the three doshas — Vata, Pitta, Kapha</figcaption>
+</figure>
 
 <p><strong class="key">Core philosophy:</strong> <em>"Swasthasya swasthya rakshanam, aturasya vikara prashamanam"</em> — "to preserve health of the healthy and cure the disease of the sick." Health is the equilibrium of body, mind, sense organs and soul.</p>
 
@@ -693,7 +892,7 @@ table.flash td.q{ font-weight:600; width:35%; }
 </div>
 
 <!-- ========== ESSAY 8 ========== -->
-<h3 class="qhead" id="e8"><span class="tag freq">10M · BACKUP</span>Vedic Mathematics &amp; Indian Mathematics</h3>
+<h3 class="qhead" id="e8"><span class="tag freq">10M · BACKUP</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--brand);color:var(--paper);border-radius:2px;margin-left:6px;">BCA</span><span style="display:inline-block;padding:2px 6px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;background:var(--auburn);color:var(--paper);border-radius:2px;margin-left:4px;">BSC</span>Vedic Mathematics &amp; Indian Mathematics</h3>
 
 <div class="box def">
   <b class="lbl">Likely stem</b> "Describe the Vedic system of arithmetic computation." / "Describe Indian mathematics — arithmetic, geometry, trigonometry, Vedic system."
@@ -702,6 +901,31 @@ table.flash td.q{ font-weight:600; width:35%; }
 <div class="ans">
 <h4>Model answer</h4>
 <p class="lead">India made foundational contributions to world mathematics — the <strong class="key">decimal place-value system, the concept of zero, algebra, trigonometry, and infinite series for calculus</strong> were all developed in India centuries before Europe.</p>
+
+<figure class="diagram-fig" style="padding:18px 14px 14px;background:#fffefb;">
+  <div style="font-family:'Fraunces',serif;font-size:15px;font-weight:600;text-align:center;margin-bottom:4px;color:var(--ink);">Ekadhikena Purvena · 25 × 25 = 625</div>
+  <div style="text-align:center;font-family:'Spectral',serif;font-size:12px;font-style:italic;color:var(--muted);margin-bottom:14px;">"by one more than the previous one"</div>
+  <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;max-width:600px;margin:0 auto;">
+    <div style="flex:1 1 180px;min-width:160px;padding:11px 14px;background:#fef3c7;border:1.5px solid #a16207;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--ink);">Left box · tens</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#a16207;margin-top:6px;">2 × (2 + 1) = 6</div>
+    </div>
+    <div style="flex:1 1 180px;min-width:160px;padding:11px 14px;background:#dbeafe;border:1.5px solid #1e3a8a;border-radius:6px;text-align:center;">
+      <div style="font-family:'Fraunces',serif;font-size:14px;font-weight:700;color:var(--ink);">Right box · units</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#1e3a8a;margin-top:6px;">5 × 5 = 25</div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:center;gap:120px;color:#7c2d12;font-size:18px;line-height:1;margin:6px 0;">
+    <span>↘</span><span>↙</span>
+  </div>
+  <div style="display:flex;justify-content:center;max-width:600px;margin:0 auto;">
+    <div style="padding:10px 18px;background:#dcfce7;border:2px solid #365314;border-radius:6px;text-align:center;min-width:200px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:#365314;">6 | 25 → 625</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:8px;font-family:'Spectral',serif;font-size:12px;font-style:italic;color:var(--muted);">left | right · concatenate (no carry · 25 already two digits)</div>
+  <figcaption>Ekadhikena Purvena worked example · 25² = 625</figcaption>
+</figure>
 
 <p><strong class="key">A. Indian mathematics — key milestones:</strong></p>
 <ul>
@@ -808,7 +1032,7 @@ table.flash td.q{ font-weight:600; width:35%; }
   </ul>
 </div>
 
-<p class="foot">IKS Crash-60 · Built 25 May 2026 · ~75% paper-probability coverage · Memorise the 8 essays + 28 flashcards · Walk in confident.</p>
+<p class="foot">IKS Crash-60 · Built 25 May 2026 · BCA-stream filtered · ~75% paper-probability coverage · Memorise the 7 essays + 15 flashcards · Walk in confident.</p>
 
 </main>
 
