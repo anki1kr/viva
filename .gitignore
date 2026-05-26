@@ -16,7 +16,8 @@ $RECYCLE.BIN/
 .claude/
 CLAUDE.md
 prompt.md
-
+.claude-flow
+.swarm
 # Personal reference / source material (PYQs, syllabi, scans)
 reference/
 reference/**
