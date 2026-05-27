@@ -153,8 +153,9 @@ code{ font-family:"JetBrains Mono",monospace; font-size:.86em; background:var(--
 .table-wrap{ margin:14px -4px; overflow-x:auto; -webkit-overflow-scrolling:touch; }
 table{ width:100%; border-collapse:collapse; font-size:13px; background:var(--paper-soft); border:1.5px solid var(--ink); }
 @media(min-width:600px){ table{ font-size:14px; } }
-th{ font-family:"Fraunces",serif; font-weight:600; font-size:12.5px; background:var(--ink); color:var(--paper); padding:7px 10px; text-align:left; border-bottom:1.5px solid var(--ink); }
-td{ padding:6px 10px; border-bottom:1px solid var(--rule); vertical-align:top; }
+th{ font-family:"Fraunces",serif; font-weight:600; font-size:12.5px; background:var(--ink); color:var(--paper); padding:7px 10px; text-align:left; border-bottom:1.5px solid var(--ink); border-right:1px solid var(--rule); }
+td{ padding:6px 10px; border-bottom:1px solid var(--rule); border-right:1px solid var(--rule); vertical-align:top; }
+th:last-child, td:last-child{ border-right:none; }
 tbody tr:nth-child(odd){ background:rgba(235,226,204,.35); }
 
 /* ── DIAGRAM-FIG (CSS diagrams) ── */
@@ -237,6 +238,7 @@ tbody tr:nth-child(odd){ background:rgba(235,226,204,.35); }
 .qbody{ font-family:"Fraunces",serif; font-weight:600; font-size:15.5px; line-height:1.35; margin:0 0 10px; color:var(--ink); }
 .qbody::before{ content:"Q. "; color:var(--brand); font-style:italic; }
 .ans{ font-family:"Spectral",serif; font-size:14px; color:var(--ink); margin:10px 0 0; line-height:1.6; }
+.qcard.predicted .ans + .qbody{ margin-top:22px; padding-top:16px; border-top:1.5px dashed var(--rule); }
 .ans h5{ font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.2em; color:var(--brand); text-transform:uppercase; margin:14px 0 6px; font-weight:700; }
 .ans p{ margin:7px 0; }
 .ans ul,.ans ol{ padding-left:22px; margin:7px 0; }
@@ -841,52 +843,58 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
       <div class="qbody"><b>(a) Define critical thinking. List any two key elements.</b></div>
       <div class="ans">
-        <p>Critical thinking is the disciplined, reflective process of analysing information, questioning assumptions, weighing evidence and forming a reasoned judgment instead of accepting claims at face value. John Dewey (1910) called it <em>"reflective thinking."</em> Two key elements: <b>analysis</b> (breaking arguments into parts) and <b>evaluation</b> (judging evidence quality).</p>
+        <p><mark>Critical thinking</mark> is the disciplined, reflective process of analysing information, questioning assumptions, weighing evidence and forming a reasoned judgment instead of accepting claims at face value. Two key elements: <b><mark>analysis</mark></b> (breaking arguments into parts to inspect each premise) and <b><mark>evaluation</mark></b> (judging the quality, relevance and bias of evidence). Other elements include inference, interpretation, explanation and self-regulation.</p>
       </div>
 
       <div class="qbody"><b>(b) What is inductive reasoning? Give one example.</b></div>
       <div class="ans">
-        <p>Inductive reasoning moves from specific observations to a general conclusion. The conclusion is <em>probable</em>, not certain — new evidence can overturn it. <em>Example:</em> "Every swan I have seen is white → all swans are white" — overturned when black swans were found in Australia (1697).</p>
+        <p><mark>Inductive reasoning</mark> moves from <b>specific observations to a general conclusion</b>. The conclusion is <em><mark>probable</mark></em>, not certain — new evidence can overturn it. <em>Example:</em> "The first 100 mangoes from this tree were sweet → all mangoes from this tree are sweet." It is the engine of science, market research and machine learning, where rules are built from data.</p>
       </div>
 
       <div class="qbody"><b>(c) Differentiate between observation and inference.</b></div>
       <div class="ans">
-        <p>An <b>observation</b> is a direct sensory fact ("the sky is grey, the road is wet"). An <b>inference</b> is a conclusion drawn from observation ("it has rained recently"). Observation = data; inference = interpretation. Confusing the two is the root of biased reporting.</p>
+        <div class="table-wrap"><table>
+          <tr><th>Parameter</th><th><mark>Observation</mark></th><th><mark>Inference</mark></th></tr>
+          <tr><td><b>Definition</b></td><td>Direct sensory fact recorded as-is.</td><td>Conclusion drawn from one or more observations.</td></tr>
+          <tr><td><b>Nature</b></td><td>Data — neutral, verifiable.</td><td>Interpretation — adds meaning.</td></tr>
+          <tr><td><b>Example</b></td><td>"The sky is grey, the road is wet."</td><td>"It has rained recently."</td></tr>
+        </table></div>
+        <p style="font-size:13px; color:var(--muted); margin-top:6px;">Confusing the two is the root of biased reporting.</p>
       </div>
 
       <div class="qbody"><b>(d) What does the Blue Hat represent in De Bono's Six Thinking Hats?</b></div>
       <div class="ans">
-        <p>The Blue Hat is the <b>process-control</b> hat — the conductor of the thinking session. It sets the agenda, decides which hat the group wears next, manages time and draws the final summary. Often called <em>"thinking about thinking."</em></p>
+        <p>The <mark>Blue Hat</mark> is the <b><mark>process-control</mark></b> hat — the conductor of the thinking session. It sets the agenda, decides which hat the group wears next, manages time and draws the final summary. Often called <em>"thinking about thinking."</em></p>
       </div>
 
       <div class="qbody"><b>(e) Define rhetorical situation and name its components.</b></div>
       <div class="ans">
-        <p>The rhetorical situation, theorised by <b>Lloyd Bitzer (1968)</b>, is the full context within which any act of communication occurs. Five components: <em>Speaker, Audience, Topic, Purpose, Context</em> (time, place, culture). Mis-aligning any one causes the message to misfire.</p>
+        <p>The <b><mark>rhetorical situation</mark></b> is the full context within which an act of communication takes place. Five core components: <em><mark>Speaker</mark></em> (who delivers), <em><mark>Audience</mark></em> (who receives), <em><mark>Topic</mark></em> (what is said), <em><mark>Purpose</mark></em> (why — inform / persuade / entertain / inspire) and <em><mark>Context</mark></em> (time, place, culture, occasion). Mis-aligning any one — wrong tone for the audience, wrong moment for the topic — makes the message misfire.</p>
       </div>
 
       <div class="qbody"><b>(f) Expand CRAAP. What does Authority mean in the CRAAP test?</b></div>
       <div class="ans">
-        <p>CRAAP = <b>C</b>urrency, <b>R</b>elevance, <b>A</b>uthority, <b>A</b>ccuracy, <b>P</b>urpose (Sarah Blakeslee, CSU Chico Meriam Library, 2004). <b>Authority</b> asks: who created the source, what are the author's credentials, is the publisher reputable, is it peer-reviewed? A peer-reviewed journal outranks an anonymous blog.</p>
+        <p><mark>CRAAP</mark> = <b>C</b>urrency · <b>R</b>elevance · <b>A</b>uthority · <b>A</b>ccuracy · <b>P</b>urpose. It is a five-step checklist for evaluating any information source. <b><mark>Authority</mark></b> asks: <em>who</em> created the source, what are the author's credentials, is the publisher reputable, is the work <mark>peer-reviewed</mark>? A peer-reviewed journal or government report outranks an anonymous blog or unverified social-media post.</p>
       </div>
 
       <div class="qbody"><b>(g) Define alliteration with one example.</b></div>
       <div class="ans">
-        <p>Alliteration is the repetition of the same initial consonant sound in two or more nearby words. <em>Example:</em> "Peter Piper picked a peck of pickled peppers." It heightens rhythm, memorability and audience attention in speeches and slogans ("Coca-Cola", "PayPal").</p>
+        <p><mark>Alliteration</mark> is the repetition of the same <mark>initial consonant sound</mark> in two or more nearby words. <em>Example:</em> "Peter Piper picked a peck of pickled peppers." It heightens rhythm, memorability and audience attention in speeches and slogans ("Coca-Cola", "PayPal").</p>
       </div>
 
       <div class="qbody"><b>(h) What does STAR stand for in interview skills?</b></div>
       <div class="ans">
-        <p>STAR = <b>S</b>ituation, <b>T</b>ask, <b>A</b>ction, <b>R</b>esult. A structured framework for answering <em>behavioural</em> interview questions ("tell me about a time when…") with one concrete past example. Used by Google, Amazon and Microsoft hiring panels.</p>
+        <p><mark>STAR</mark> = <b>S</b>ituation · <b>T</b>ask · <b>A</b>ction · <b>R</b>esult. A structured framework for answering <em><mark>behavioural interview</mark></em> questions ("tell me about a time when…") with one concrete past example. The candidate first sets the scene (Situation), states their personal responsibility (Task), describes the step-by-step actions taken (Action) and ends with a <mark>quantified outcome</mark> and lesson learned (Result). Action carries the most marks because that is where the candidate's skill is visible.</p>
       </div>
 
       <div class="qbody"><b>(i) State the 3 Ps of conflict resolution.</b></div>
       <div class="ans">
-        <p><b>Problem</b> — define the real issue, separating it from personalities. <b>People</b> — manage relationships and emotions through active listening. <b>Process</b> — agree on a method (negotiation, mediation, arbitration) with steps and timeline. All three must be addressed for a durable solution.</p>
+        <p><b><mark>Problem</mark></b> — define the real issue, separating it from personalities. <b><mark>People</mark></b> — manage relationships and emotions through active listening. <b><mark>Process</mark></b> — agree on a method (negotiation, mediation, arbitration) with steps and timeline. All three must be addressed for a durable solution.</p>
       </div>
 
       <div class="qbody"><b>(j) Name any three conflict management strategies.</b></div>
       <div class="ans">
-        <p>From the <b>Thomas-Kilmann</b> model (1974): <b>Compromise</b> (split the difference under time pressure), <b>Collaborate</b> (win-win, best for long-term relationships) and <b>Avoid</b> (withdraw when the issue is trivial or timing is wrong).</p>
+        <p>The five recognised strategies are <b><mark>Avoid · Accommodate · Compete · Compromise · Collaborate</mark></b>, plotted on the <mark>assertiveness × cooperativeness</mark> grid. Three commonly named: <b><mark>Compromise</mark></b> — split the difference quickly when both sides have equal power and time is short; <b><mark>Collaborate</mark></b> — work jointly for a win-win, best when the relationship is long-term and stakes are high; <b><mark>Avoid</mark></b> — postpone or withdraw when the issue is trivial or emotions are too hot to talk productively.</p>
       </div>
     </div>
 
@@ -898,21 +906,25 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody">Explain inductive and deductive reasoning with suitable examples. How do they differ? How do these methods contribute to critical thinking?</div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>Reasoning is the engine of critical thinking. Two foundational forms are <em>inductive</em> (popularised by Francis Bacon in <em>Novum Organum</em>, 1620, as the cornerstone of empirical science) and <em>deductive</em> (formalised by Aristotle in <em>Prior Analytics</em>, c. 350 BCE, as the syllogism). Both move between specific facts and general rules but in opposite directions.</p>
+        <p>Reasoning is the engine of critical thinking — the disciplined process of moving from what we know to what we can responsibly claim. The two foundational modes are <em><mark>inductive</mark></em> (building general rules from specific observations) and <em><mark>deductive</mark></em> (applying general rules to specific cases). They move in opposite directions and yield different grades of certainty, which is why mixing them up — or leaning on only one — is the most common source of weak arguments in essays, news commentary and everyday debate.</p>
 
-        <h5>1. Inductive Reasoning — Specific → General</h5>
-        <ul>
-          <li><b>Definition:</b> Drawing a general conclusion from a finite set of specific observations. The conclusion is <em>probable</em>, never certain — fresh evidence can overturn it.</li>
-          <li><b>Example:</b> Every swan observed in Europe is white → therefore <em>all</em> swans are white. (This held until 1697 when Willem de Vlamingh found black swans in Australia — classic refutation of induction.)</li>
-          <li><b>Where used:</b> Scientific research, market research, machine learning models, medical diagnosis from symptoms.</li>
-        </ul>
-
-        <h5>2. Deductive Reasoning — General → Specific</h5>
-        <ul>
-          <li><b>Definition:</b> Starting from a general principle (premise) and applying it to a specific case to reach a logically <em>certain</em> conclusion — if the premises are true, the conclusion <em>must</em> follow.</li>
-          <li><b>Classic syllogism:</b> All men are mortal (P1). Socrates is a man (P2). ∴ Socrates is mortal (C). The form guarantees the conclusion when premises are true.</li>
-          <li><b>Where used:</b> Mathematics, formal logic, legal arguments, software verification.</li>
-        </ul>
+        <h5>Inductive vs Deductive — Side-by-Side Matrix</h5>
+        <div class="table-wrap"><table>
+          <tr><th>Parameter</th><th style="color:var(--brand);">Inductive Reasoning</th><th style="color:var(--forest);">Deductive Reasoning</th></tr>
+          <tr><td><b>Definition</b></td><td>Drawing a <em>general</em> conclusion from a finite set of specific observations.</td><td>Starting from a general principle and applying it to a specific case to reach a logically certain conclusion.</td></tr>
+          <tr><td><b>Direction</b></td><td><mark>Specific → General</mark> (bottom-up)</td><td><mark>General → Specific</mark> (top-down)</td></tr>
+          <tr><td><b>Certainty</b></td><td><em><mark>Probable</mark></em>; revisable when new evidence appears</td><td><em><mark>Certain</mark></em> if premises are true</td></tr>
+          <tr><td><b>Example</b></td><td>Every swan observed in Europe is white → all swans are white. (Overturned 1697 — black swans found in Australia.)</td><td>All men are mortal (P1) · Socrates is a man (P2) · ∴ Socrates is mortal. (Classic <mark>syllogism</mark>.)</td></tr>
+          <tr><td><b>Where used</b></td><td>Scientific research · market research · machine learning · medical diagnosis from symptoms</td><td>Mathematics · formal logic · legal arguments · software verification</td></tr>
+          <tr><td><b>Founder</b></td><td>Francis Bacon</td><td>Aristotle</td></tr>
+          <tr><td><b>Failure mode</b></td><td><mark>Hasty generalisation</mark> — too few cases</td><td><mark>Invalid / false premise</mark></td></tr>
+          <tr><td><b>When to use</b></td><td>You have raw data and want to discover the pattern</td><td>You have an accepted rule and want to test a specific case</td></tr>
+          <tr><td><b>Real-world feel</b></td><td>Detective gathering clues to a theory</td><td>Judge applying the law to a defendant</td></tr>
+          <tr><td><b>Strength</b></td><td>Generates new knowledge / hypotheses</td><td>Guarantees the conclusion <em>if</em> premises hold</td></tr>
+          <tr><td><b>Skills involved</b></td><td>Observation · evidence evaluation · hypothesis formation</td><td>Logical structure · premise analysis · consistency check</td></tr>
+          <tr><td><b>Limitation</b></td><td>Conclusions are <em>probable</em> only — one counter-example overturns the rule</td><td>Only as strong as the premises — a false premise hides a false conclusion</td></tr>
+          <tr><td><b>Cognitive habit</b></td><td>Stay open — be ready to revise</td><td>Stay rigorous — audit every premise</td></tr>
+        </table></div>
 
         <figure class="diagram-fig" style="margin:14px 0;padding:14px;background:var(--paper-soft);border:1px solid var(--rule);border-radius:6px;">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
@@ -928,24 +940,44 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <figcaption><b>Fig 2.1</b> · Direction of inference — induction generalises from particulars; deduction specialises from rules.</figcaption>
         </figure>
 
-        <h5>Comparison</h5>
-        <div class="table-wrap">
-          <table>
-            <tr><th>Parameter</th><th>Inductive</th><th>Deductive</th></tr>
-            <tr><td>Direction</td><td>Specific → General</td><td>General → Specific</td></tr>
-            <tr><td>Certainty</td><td>Probable; revisable</td><td>Certain if premises true</td></tr>
-            <tr><td>Primary use</td><td>Empirical sciences, ML, polling</td><td>Mathematics, law, formal logic</td></tr>
-            <tr><td>Founder</td><td>Francis Bacon (1620)</td><td>Aristotle (c. 350 BCE)</td></tr>
-            <tr><td>Failure mode</td><td>Hasty generalisation (too few cases)</td><td>Invalid / false premise</td></tr>
-          </table>
-        </div>
+        <h5>Process of Inductive Reasoning — 4 Steps</h5>
+        <ol>
+          <li><b>Observe</b> — collect specific instances or data points (e.g. five visits to a coffee shop, each with a long morning queue).</li>
+          <li><b>Detect pattern</b> — look for repetition, regularity, or trend across the observations.</li>
+          <li><b>Form hypothesis</b> — propose a general rule that fits every observed case ("this shop always has long morning queues").</li>
+          <li><b>Test and revise</b> — keep observing; if a counter-example surfaces, weaken the claim from "always" to "usually" or discard it.</li>
+        </ol>
+
+        <h5>Process of Deductive Reasoning — 4 Steps</h5>
+        <ol>
+          <li><b>State the general rule (major premise)</b> — e.g. "All seats in the theatre are reserved for ticket holders."</li>
+          <li><b>State the specific case (minor premise)</b> — e.g. "I do not have a ticket."</li>
+          <li><b>Apply the rule to the case</b> — check the case satisfies the premise's category.</li>
+          <li><b>Draw the necessary conclusion</b> — e.g. "Therefore I have no reserved seat." Audit each premise for truth before accepting the conclusion.</li>
+        </ol>
 
         <h5>Contribution to Critical Thinking</h5>
         <ul>
           <li><b>Induction</b> trains the mind to gather evidence systematically and stay open to revision — essential when reading research, polls or news.</li>
           <li><b>Deduction</b> trains the mind to test internal consistency: if I accept these premises, what must follow? It exposes hidden assumptions in arguments.</li>
-          <li>Strong critical thinkers <em>cycle</em> between the two: induce a hypothesis from data, then deduce its consequences and test them (Karl Popper's hypothetico-deductive model).</li>
+          <li>Strong critical thinkers <em>cycle</em> between the two: induce a hypothesis from data, then deduce its consequences and test them against fresh evidence — the <mark>hypothetico-deductive cycle</mark> at the heart of all modern science.</li>
+          <li><b>Detects manipulation:</b> propaganda usually rides on weak induction (one viral anecdote → sweeping claim). Knowing the modes lets you name the move and resist it.</li>
+          <li><b>Improves writing:</b> structured arguments in essays, reports and code-review comments all rest on stating premises clearly before stating the conclusion — a deductive habit.</li>
+          <li><b>Sharpens observation skills:</b> induction forces the thinker to notice patterns and weigh the strength of evidence rather than reacting to a single anecdote.</li>
+          <li><b>Builds argument-evaluation muscle:</b> deduction lets you test whether someone's conclusion <em>actually</em> follows from their stated premises — half of debate-club training is exactly this audit.</li>
         </ul>
+
+        <h5>Where Critical Thinking Uses Each Mode</h5>
+        <ul>
+          <li><b>Reading research / news:</b> induction — what pattern do these five studies suggest? Are the samples large enough to generalise?</li>
+          <li><b>Hypothesis formation:</b> induction — observe customer behaviour at a store, hypothesise "the menu is popular".</li>
+          <li><b>Testing claims:</b> deduction — if "all politicians lie" and "X is a politician", does the conclusion "X lies" really follow? Audit premise 1.</li>
+          <li><b>Decision-making:</b> deduction — apply company policy (general rule) to a specific case (this employee's request).</li>
+          <li><b>Detecting bias:</b> induction reveals cherry-picked samples; deduction reveals invalid syllogisms — both modes are needed.</li>
+        </ul>
+
+        <h5>Worked Mini-Example — Same Question, Both Modes</h5>
+        <p><b>Question:</b> Will the new canteen menu be popular? <em>Inductive route:</em> survey 50 students this week → 42 say "yes" → conclude "the menu is likely to be popular" (probable, sample-dependent). <em>Deductive route:</em> rule = "menus with paneer + dessert combos average 80%+ approval at this college" (premise from past data) → the new menu has both → conclude "this menu will likely cross 80%" (certain if the rule holds). A skilled analyst runs both and reports where they agree.</p>
 
         <div class="box warn"><span class="label">Common Pitfalls</span>
           <b>Inductive:</b> over-generalising from a small sample ("I met 3 rude Delhi drivers → all Delhi drivers are rude").
@@ -955,12 +987,12 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <div class="score">
           <b>Mark Allocation</b>
           <ul>
-            <li><span>Definitions with named scholars</span><span class="m">2M</span></li>
-            <li><span>Inductive + example</span><span class="m">2M</span></li>
-            <li><span>Deductive + example</span><span class="m">2M</span></li>
+            <li><span>Definitions of both modes</span><span class="m">2M</span></li>
+            <li><span>Inductive + example</span><span class="m">1.5M</span></li>
+            <li><span>Deductive + example</span><span class="m">1.5M</span></li>
             <li><span>Diagram (direction of inference)</span><span class="m">1M</span></li>
             <li><span>Comparison table</span><span class="m">1.5M</span></li>
-            <li><span>Contribution to critical thinking</span><span class="m">1.5M</span></li>
+            <li><span>Contribution to critical thinking + worked mini-example</span><span class="m">2.5M</span></li>
             <li><span>Total</span><span class="m">10M</span></li>
           </ul>
         </div>
@@ -971,7 +1003,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q2(b)</span><span class="tag hot">★★ BCA25 Q2(b) · BCA25 Q1(b) · BSC25 Q1(g)</span><span class="tag marks">5M</span></div>
       <div class="qbody">Discuss Edward de Bono's Six Thinking Hats in detail. How does this method improve problem-solving and decision-making in a team setting?</div>
       <div class="ans">
-        <p>The <b>Six Thinking Hats</b>, developed by Maltese psychologist <em>Edward de Bono</em> in his 1985 book of the same name, is a <em>parallel thinking</em> tool. Instead of adversarial debate, the whole team "wears" the same coloured hat at the same time, looking at the problem from one angle, then switches together — separating ego from idea.</p>
+        <p>The <b><mark>Six Thinking Hats</mark></b> is de Bono's <em><mark>parallel thinking</mark></em> tool. Instead of adversarial debate, the whole team "wears" the same coloured hat at the same time, looking at the problem from one angle, then switches together — separating ego from idea. Each hat is a deliberate mode of thinking, not a personality type, so a sceptic can wear the Yellow (optimism) hat and an optimist the Black (caution) hat without breaking character.</p>
 
         <figure class="diagram-fig" style="margin:14px 0;padding:14px;background:var(--paper-soft);border:1px solid var(--rule);border-radius:6px;">
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;">
@@ -986,21 +1018,48 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </figure>
 
         <ul>
-          <li><b>⬜ White Hat — Facts:</b> What information do we have? What is missing? Pure data, no opinion.</li>
-          <li><b>🟥 Red Hat — Emotions:</b> Gut feelings, intuition, hunches. No justification needed.</li>
-          <li><b>⬛ Black Hat — Caution:</b> Risks, weaknesses, why it may fail. The devil's advocate.</li>
-          <li><b>🟨 Yellow Hat — Benefits:</b> Optimism, value, why it will work.</li>
-          <li><b>🟩 Green Hat — Creativity:</b> New ideas, alternatives, lateral thinking.</li>
-          <li><b>🟦 Blue Hat — Process:</b> Conductor — sets agenda, sequences hats, summarises.</li>
+          <li><b>⬜ <mark>White Hat</mark> — Facts:</b> What information do we have? What is missing? Pure data, no opinion.</li>
+          <li><b>🟥 <mark>Red Hat</mark> — Emotions:</b> Gut feelings, intuition, hunches. No justification needed.</li>
+          <li><b>⬛ <mark>Black Hat</mark> — Caution:</b> Risks, weaknesses, why it may fail. The devil's advocate.</li>
+          <li><b>🟨 <mark>Yellow Hat</mark> — Benefits:</b> Optimism, value, why it will work.</li>
+          <li><b>🟩 <mark>Green Hat</mark> — Creativity:</b> New ideas, alternatives, lateral thinking.</li>
+          <li><b>🟦 <mark>Blue Hat</mark> — Process:</b> Conductor — sets agenda, sequences hats, summarises.</li>
         </ul>
-        <p><b>Team benefit:</b> Reduces conflict (everyone criticises together under Black Hat, no one is "the negative person"), prevents premature judgment, ensures balanced coverage of risks <em>and</em> opportunities, and speeds up meetings — IBM, Pepsi and the Norwegian government have all formally adopted it.</p>
+        <p><b>Team benefit:</b> Reduces conflict (everyone criticises together under Black Hat, no one is "the negative person"), prevents premature judgment, ensures balanced coverage of risks <em>and</em> opportunities, and speeds up meetings — IBM, Pepsi and the Norwegian government have all formally adopted it. A typical 60-minute meeting cycles all six hats in fixed time-boxes so no perspective dominates.</p>
+        <p><b>Classroom / BCA-project example:</b> A four-member project group debating which database to use for a final-year app can run a 30-minute Six Hats session — White (load, queries-per-second, dataset size), Red (which one we'd be excited to ship), Black (vendor lock-in, learning curve, exam-week risk), Yellow (best resume keyword), Green (could we mix two?), Blue (decide by Friday 6 PM, owner = group lead).</p>
+
+        <p><b>Full worked scenario — "Should the BCA-DS class go on industrial trip to Pune?"</b></p>
+        <ul style="font-size:.95em;">
+          <li><b>⬜ White:</b> Cost ₹12,000 per head · 3 days · 4 company visits confirmed · 60% class consent so far · last trip was 2 years ago.</li>
+          <li><b>🟥 Red:</b> Excited — first long trip post-COVID; some nervous about pre-exam timing; one parent group anxious about safety.</li>
+          <li><b>⬛ Black:</b> Trip falls 18 days before sessionals; refund policy if cancelled is only 50%; Pune is in another state — travel-day risk.</li>
+          <li><b>🟨 Yellow:</b> Strong placement networking; resume-line "industry exposure"; team bonding before final-year project; subsidised by college fund.</li>
+          <li><b>🟩 Green:</b> Could we replace Pune with Gurgaon (closer)? Could the 4 visits become 6 via virtual extension? Could optional "skip" be allowed for sessional-focused students?</li>
+          <li><b>🟦 Blue:</b> Decide by next Friday 5 PM; chair = class representative; vote requires 70% consent; if &lt; 70%, default to alternative venue.</li>
+        </ul>
+
+        <p><b>Benefits of parallel thinking:</b></p>
+        <ul>
+          <li><em>Reduces tunnel vision:</em> a Black-Hat-only person and a Yellow-Hat-only person both have to wear every hat — neither dominates.</li>
+          <li><em>Mitigates bias and assumptions:</em> White Hat forces data over gut; Red Hat surfaces emotions instead of letting them hide inside arguments.</li>
+          <li><em>Speeds up meetings:</em> instead of three rounds of negative-then-positive ping-pong, each direction gets a fixed time-box.</li>
+          <li><em>Creates psychological safety:</em> nobody is labelled "the critic" because everyone is criticising under the same Black Hat.</li>
+        </ul>
+
+        <p><b>When NOT to use Six Hats:</b></p>
+        <ul>
+          <li><em>Emergency / safety calls</em> — there's no time to cycle six modes; act first.</li>
+          <li><em>Routine / low-stakes choices</em> — overhead is greater than the benefit.</li>
+          <li><em>Highly creative ideation alone</em> — Green Hat in isolation (lateral thinking, SCAMPER) may be more effective than running all six.</li>
+        </ul>
+
         <span class="mnem"><b>Mnemonic — "WRBYGB"</b> · "White Reads, Black Beware, Yellow Believes, Green Grows, Red Reacts, Blue Bosses"</span>
         <div class="score">
           <b>Mark Allocation</b>
           <ul>
-            <li><span>Intro + de Bono (1985)</span><span class="m">1M</span></li>
+            <li><span>Intro + parallel-thinking concept</span><span class="m">0.75M</span></li>
             <li><span>Six hats (each 0.5M × 6)</span><span class="m">3M</span></li>
-            <li><span>Team-setting benefit + example org</span><span class="m">1M</span></li>
+            <li><span>Team-setting benefit + example org / classroom</span><span class="m">1.25M</span></li>
             <li><span>Total</span><span class="m">5M</span></li>
           </ul>
         </div>
@@ -1013,14 +1072,14 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody">Explain the STAR method in detail. How does each step (Situation, Task, Action, Result) contribute to delivering an effective interview response? How can STAR be tailored to fit a job description? Provide a complete example to illustrate its application.</div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>The <b>STAR method</b> is a structured framework for answering <em>behavioural interview questions</em> — the "tell me about a time when…" style of questions popularised by Tom Janz's <em>Behavioural Interviewing</em> (1982) and operationalised into the STAR acronym by Development Dimensions International (DDI) in the 1970s. Today it is the dominant interview format at Google, Amazon, Microsoft, Goldman Sachs and most of the Fortune 500.</p>
+        <p>The <b><mark>STAR method</mark></b> is the dominant structured framework for answering <em><mark>behavioural interview questions</mark></em> — the "tell me about a time when…" style designed to predict future performance from concrete past behaviour. Today it is the standard interview format at Google, Amazon, Microsoft, Goldman Sachs and most of the Fortune 500, and it is now the expected response shape in campus placement interviews at Indian product, consulting and analytics firms. STAR forces the candidate to ground every claim in a real, audit-able episode instead of rehearsed adjectives like "I'm a hard worker" or "I'm a team player".</p>
 
         <h5>The Four Steps and Their Contribution</h5>
         <ul>
-          <li><b>S — Situation:</b> Set the scene in 1–2 sentences. Where? When? Who was involved? Gives the interviewer essential context without burning time. <em>Contribution:</em> grounds the rest of the answer in a verifiable scenario.</li>
-          <li><b>T — Task:</b> Your specific responsibility or objective. <em>Not</em> the team's task — yours. <em>Contribution:</em> clarifies what success looked like for <em>you</em>, so Action and Result are measurable against it.</li>
-          <li><b>A — Action:</b> The single biggest chunk (~50% of the answer). Use "I" not "we". Describe step-by-step what <em>you</em> did, what skills you applied, what trade-offs you weighed. <em>Contribution:</em> this is where competencies (leadership, ownership, problem-solving) actually get demonstrated. Skipping detail here is the #1 reason candidates fail STAR.</li>
-          <li><b>R — Result:</b> Quantify the outcome (numbers, %, time saved, marks scored). State one lesson learned. End positively. <em>Contribution:</em> proves impact and shows reflection — the trait recruiters value most.</li>
+          <li><b>S — <mark>Situation</mark>:</b> Set the scene in 1–2 sentences. Where? When? Who was involved? Gives the interviewer essential context without burning time. <em>Contribution:</em> grounds the rest of the answer in a verifiable scenario.</li>
+          <li><b>T — <mark>Task</mark>:</b> Your specific responsibility or objective. <em>Not</em> the team's task — yours. <em>Contribution:</em> clarifies what success looked like for <em>you</em>, so Action and Result are measurable against it.</li>
+          <li><b>A — <mark>Action</mark>:</b> The single biggest chunk (<mark>~50% of the answer</mark>). Use "I" not "we". Describe step-by-step what <em>you</em> did, what skills you applied, what trade-offs you weighed. <em>Contribution:</em> this is where competencies (leadership, ownership, problem-solving) actually get demonstrated. Skipping detail here is the #1 reason candidates fail STAR.</li>
+          <li><b>R — <mark>Result</mark>:</b> Quantify the outcome (numbers, %, time saved, marks scored). State one lesson learned. End positively. <em>Contribution:</em> proves impact and shows <mark>quantified outcome</mark> — the trait recruiters value most.</li>
         </ul>
 
         <figure class="diagram-fig" style="margin:14px 0;padding:14px;background:var(--paper-soft);border:1px solid var(--rule);border-radius:6px;">
@@ -1055,6 +1114,34 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <li><b>Quantify Result in the JD's currency</b> — engineering roles want latency / uptime / lines reduced; sales roles want revenue / pipeline / retention.</li>
         </ul>
 
+        <h5>Tailoring STAR to a Campus Placement — Do / Don't</h5>
+        <ul>
+          <li><b>Do</b> rehearse 4–5 stories that <em>each</em> cover 2–3 competencies — "the project-rescue story" can answer leadership, ownership and crisis-management questions.</li>
+          <li><b>Do</b> have a 60-second crisp version <em>and</em> a 2-minute extended version of every story — interviewers cue both.</li>
+          <li><b>Do</b> open with the most senior project / leadership story; campus panels score the first answer most generously.</li>
+          <li><b>Don't</b> use a school-level story when a college-level one exists; recency matters.</li>
+          <li><b>Don't</b> over-rehearse — verbatim delivery sounds robotic. Memorise the beats, not the script.</li>
+          <li><b>Don't</b> volunteer weaknesses in the Result; end positively, then add one short lesson learned.</li>
+        </ul>
+
+        <h5>Sample Behavioural Questions — Which Competency They Test</h5>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Question stem</th><th>Competency tested</th></tr>
+            <tr><td>Tell me about a time you led a team through a challenge.</td><td>Leadership · ownership</td></tr>
+            <tr><td>Describe a situation where you handled failure or a setback.</td><td>Resilience · learning agility</td></tr>
+            <tr><td>Walk me through a conflict you resolved with a teammate.</td><td>Conflict resolution · empathy</td></tr>
+            <tr><td>Give an example of a tight-deadline decision you made.</td><td>Bias for action · prioritisation</td></tr>
+            <tr><td>Tell me about a time you used data to change a decision.</td><td>Data-driven thinking · analysis</td></tr>
+          </table>
+        </div>
+
+        <h5>Second Model Answer — "Tell me about a time you handled failure."</h5>
+        <p><b>Situation:</b> In semester 2 I led a campus hackathon team of three; we built an attendance app but our demo crashed live in front of judges in March 2024.</p>
+        <p><b>Task:</b> Recover credibility, finish the pitch within the remaining 4 minutes, and ensure the team learnt from the failure rather than blaming each other.</p>
+        <p><b>Action:</b> I (1) calmly acknowledged the crash to the judges and asked for 60 seconds to switch to a recorded demo on my phone; (2) walked the judges through the architecture diagram instead of the live app, focussing on the design decisions; (3) after the event, ran a 30-minute blameless post-mortem with the team — root cause was an un-tested DB migration shipped at 2 AM; (4) wrote a one-page "what we'd do differently" note and shared it with the next batch's hackathon group.</p>
+        <p><b>Result:</b> We finished 4th of 18 teams despite the crash (judges later said the recovery was rated positively). More importantly, the next hackathon I joined we adopted a 24-hour code-freeze before demo day — we won that one. Lesson: failure handled visibly is a stronger signal than a flawless run.</p>
+
         <h5>Complete Model Answer — "Tell me about a time you led a team through a challenge."</h5>
         <p><b>Situation:</b> In my third semester (Oct 2024), our group of four was working on a DBMS final project due in 14 days. Midway through, two members fell ill and were unavailable for a full week.</p>
         <p><b>Task:</b> As the de-facto lead I had to ship a working database schema, query layer and demo on the original deadline at submission-ready quality — without slipping or asking for an extension that would cost us 10% marks.</p>
@@ -1062,19 +1149,19 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <p><b>Result:</b> We submitted on the original deadline and scored 86/100 (top quartile). The professor commented our approach was "the most professional in the cohort." Personally, I learned that systematic scope-reduction and proactive stakeholder communication are more valuable than working longer hours.</p>
 
         <h5>Modern Relevance</h5>
-        <p>Amazon's "14 Leadership Principles" interview format is essentially STAR — every behavioural question maps to a principle and the rubric scores S/T/A/R independently. Google's "structured interviewing" similarly forces STAR responses. Knowing STAR is now table-stakes for any campus placement at a product or consulting firm.</p>
+        <p>Amazon's "14 Leadership Principles" interview format is essentially STAR — every behavioural question maps to a principle and the rubric scores S/T/A/R independently. Google's "structured interviewing" similarly forces STAR responses, with each interviewer scoring a single competency rather than overall fit. Microsoft, Goldman Sachs, McKinsey, BCG and Indian product giants (Flipkart, Razorpay, Zerodha) all use STAR-style behavioural rounds. Even college placement panels at IITs, IIITs and NITs now train recruiters in STAR scoring. The acronym is also embedded in 2024 LinkedIn Learning interview-prep courses, in popular books like <em>Cracking the Coding Interview</em>, and in the AI mock-interview tools (Yoodli, Final Round AI) that now coach students on STAR pacing in real time.</p>
 
         <h5>Conclusion</h5>
-        <p>STAR converts vague self-praise into evidence. Its discipline forces candidates to ground every claim in a concrete past situation, demonstrate the action they personally took, and prove impact with numbers — a far more reliable signal than rehearsed adjectives. Mastering STAR is mastering the language of modern hiring.</p>
+        <p>STAR converts vague self-praise into evidence. Its discipline forces candidates to ground every claim in a concrete past situation, demonstrate the action they personally took, and prove impact with numbers — a far more reliable signal than rehearsed adjectives. Beyond interviews, the same shape is now used in performance reviews, promotion packets and customer case studies, making STAR a transferable lifelong communication skill rather than a one-time placement trick. Mastering STAR is mastering the language of modern hiring — the difference between "I'm a team player" and "I led a team through 14 days of disruption to ship on the original deadline."</p>
 
         <div class="box warn"><span class="label">Common Pitfalls</span>
-          (1) Drowning in Situation — burning 60% of the answer on context. (2) Using "we" in Action — interviewers cannot score the team. (3) No quantified Result — "it went well" is worthless; "scored 86/100" is auditable. (4) Picking a story that does not match the asked competency.
+          (1) Drowning in Situation — burning 60% of the answer on context. (2) Using "we" in Action — interviewers cannot score the team. (3) No quantified Result — "it went well" is worthless; "scored 86/100" is auditable. (4) Picking a story that does not match the asked competency. (5) Talking about an old school project when a recent college story is available — recency signals current capability. (6) Rambling without structure — if the panel cannot tell where S ends and T begins, the answer fails the rubric.
         </div>
 
         <div class="score">
           <b>Mark Allocation</b>
           <ul>
-            <li><span>Intro + origin (Janz / DDI)</span><span class="m">1.5M</span></li>
+            <li><span>Intro + behavioural-question concept</span><span class="m">1.5M</span></li>
             <li><span>Each step explained with contribution (4 × 1.5M)</span><span class="m">6M</span></li>
             <li><span>Diagram (STAR ladder)</span><span class="m">1M</span></li>
             <li><span>Tailoring to JD (4 points)</span><span class="m">2M</span></li>
@@ -1092,7 +1179,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody">How can you determine whether a source is credible? Discuss the key criteria — currency, relevance, authority, accuracy and purpose — with examples. How would you apply the CRAAP test to a social media post?</div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>In a world where 500 hours of video are uploaded to YouTube every minute and X/Twitter publishes ~500 million posts a day, evaluating source credibility is no longer a librarian's job — it is a survival skill. The <b>CRAAP test</b>, developed by <em>Sarah Blakeslee</em> and her colleagues at the Meriam Library, <em>California State University Chico</em>, in <em>2004</em>, is the gold-standard checklist. CRAAP = <b>C</b>urrency, <b>R</b>elevance, <b>A</b>uthority, <b>A</b>ccuracy, <b>P</b>urpose.</p>
+        <p>In a world where 500 hours of video are uploaded to YouTube every minute and X/Twitter publishes ~500 million posts a day, evaluating source <mark>credibility</mark> is no longer a librarian's job — it is a survival skill. Misinformation now spreads roughly six times faster than corrections on social platforms, so the cost of citing a bad source is a lost mark in a college essay and, at scale, a public-health or election-level harm. The <b><mark>CRAAP test</mark></b> is the gold-standard five-criterion checklist used in university libraries worldwide for evaluating <em>any</em> information source — book, journal article, news report, blog, tweet or AI-generated answer. CRAAP = <b><mark>C</mark></b>urrency, <b><mark>R</mark></b>elevance, <b><mark>A</mark></b>uthority, <b><mark>A</mark></b>ccuracy, <b><mark>P</mark></b>urpose.</p>
 
         <figure class="diagram-fig" style="margin:14px 0;">
           <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;">
@@ -1107,15 +1194,15 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>The Five Criteria — with diagnostic questions and examples</h5>
         <ul>
-          <li><b>Currency — How recent?</b> In fast-moving fields (technology, medicine, COVID-19), anything older than 2–3 years may already be obsolete. <em>Ask:</em> When was it published? When was it last updated? Are links live?
+          <li><b><mark>Currency</mark> — How recent?</b> In fast-moving fields (technology, medicine, COVID-19), anything older than 2–3 years may already be obsolete. <em>Ask:</em> When was it published? When was it last updated? Are links live?
             <br><em>Example:</em> A 2018 article on "best machine-learning frameworks" is largely outdated — PyTorch dominance and the transformer revolution post-date it.</li>
-          <li><b>Relevance — Does it answer my specific question at the right depth?</b> <em>Ask:</em> Is the audience me (general / scholar / child)? Does it dive deep enough or is it a 200-word summary?
+          <li><b><mark>Relevance</mark> — Does it answer my specific question at the right depth?</b> <em>Ask:</em> Is the audience me (general / scholar / child)? Does it dive deep enough or is it a 200-word summary?
             <br><em>Example:</em> A 5-minute YouTube explainer on quantum computing is irrelevant for a postgraduate paper but perfect for a school assembly talk.</li>
-          <li><b>Authority — Who wrote / published this?</b> <em>Ask:</em> Author's credentials, institutional affiliation, publisher's reputation, peer review?
+          <li><b><mark>Authority</mark> — Who wrote / published this?</b> <em>Ask:</em> Author's credentials, institutional affiliation, publisher's reputation, <mark>peer review</mark>?
             <br><em>Example:</em> A vaccine claim on a <em>Lancet</em> peer-reviewed paper outranks the same claim on a personal blog — even if the blogger is loud.</li>
-          <li><b>Accuracy — Are claims supported and verifiable?</b> <em>Ask:</em> Are sources cited? Can the numbers be reproduced from raw data? Are there typos, broken citations or unsourced quotes?
+          <li><b><mark>Accuracy</mark> — Are claims supported and verifiable?</b> <em>Ask:</em> Are sources cited? Can the numbers be reproduced from raw data? Are there typos, broken citations or unsourced quotes?
             <br><em>Example:</em> Wikipedia is hit-or-miss on Accuracy — popular pages are well-cited; obscure pages can carry unsourced claims for years.</li>
-          <li><b>Purpose — Why does this exist? Inform, persuade, sell, entertain?</b> <em>Ask:</em> Who funded it? Is there a sponsorship banner? Are emotional words doing the work that evidence should?
+          <li><b><mark>Purpose</mark> — Why does this exist? Inform, persuade, sell, entertain?</b> <em>Ask:</em> Who funded it? Is there a sponsorship banner? Are emotional words doing the work that evidence should?
             <br><em>Example:</em> "10 reasons milk is dangerous" on a vegan-product website fails Purpose — the article exists to sell almond milk.</li>
         </ul>
 
@@ -1133,15 +1220,40 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </div>
         <p>Five fails → <b>reject</b>. Compare with a WHO press release on the same topic: dated, written by named experts, peer-reviewed studies linked, and the WHO has no product to sell — passes all five.</p>
 
-        <div class="box warn"><span class="label">Common Pitfall</span> Trusting <em>Authority</em> alone. The <em>New York Times</em> is authoritative but still has editorial Purpose (political slant). Always cross-check at least 3 of the 5 criteria — never let one impressive credential override the rest.</div>
+        <h5>Second Worked Example — AI-Generated Answer</h5>
+        <p>A student asks ChatGPT "what was India's GDP growth in 2024?" and gets a confident number. Apply CRAAP: <em>Currency</em> — what is the model's training cutoff? <em>Authority</em> — an LLM cites nothing by default. <em>Accuracy</em> — cross-check against the RBI or MoSPI press release. <em>Purpose</em> — the model is built to sound fluent, not to verify. Verdict: useful as a starting hypothesis, never as a citable source. Always pair the LLM answer with one named primary source.</p>
+
+        <h5>Third Worked Example — A News Article on "New Vaccine Linked to Side-Effects"</h5>
+        <p>A WhatsApp-forwarded news article claims a vaccine causes serious harm. Apply CRAAP: <em>Currency</em> — is the article from this year, or a 2021 piece resurfacing? <em>Relevance</em> — does it discuss the specific vaccine the reader received, or a different formulation? <em>Authority</em> — is the byline a medical reporter at a recognised outlet (Reuters, BBC, The Hindu) or an anonymous "health blog"? <em>Accuracy</em> — does it link to the peer-reviewed study, or just quote one anonymous "expert"? <em>Purpose</em> — is the page heavy with herbal-product ads or a clear journalism brand? Cross-check at the ICMR website or the WHO press release before forwarding.</p>
+
+        <h5>Applications of CRAAP</h5>
+        <ul>
+          <li><b>Academic research:</b> screening sources for thesis bibliographies — examiners deduct marks for citing low-Authority blogs.</li>
+          <li><b>Journalism:</b> reporters apply CRAAP before publishing, especially Authority and Accuracy, to avoid corrections and lawsuits.</li>
+          <li><b>Social-media literacy:</b> deciding which post to forward — three minutes of CRAAP prevents you from being a misinformation node.</li>
+          <li><b>Marketing claims:</b> evaluating "studies show X" claims in advertising — Purpose almost always fails because the advertiser funded the study.</li>
+          <li><b>Workplace decision-making:</b> screening market-research reports, vendor pitches and analyst notes before quoting them in board memos.</li>
+        </ul>
+
+        <h5>Limitations of CRAAP</h5>
+        <ul>
+          <li><em>Checklist mindset can be mechanical:</em> a source can tick all five boxes and still be wrong — credibility is necessary but not sufficient for truth.</li>
+          <li><em>Authority is contested:</em> in fast-moving fields (AI, crypto, climate) yesterday's authority may be today's outdated voice; over-weighting credentials can lock you into old paradigms.</li>
+          <li><em>Lateral reading often beats CRAAP:</em> professional fact-checkers open 3+ sources side-by-side rather than digging deeper into the one in front of them — CRAAP rewards depth on one source, not breadth.</li>
+        </ul>
+
+        <div class="box warn"><span class="label">Common Pitfalls</span>
+          (1) Trusting <em>Authority</em> alone — the <em>New York Times</em> is authoritative but still has editorial Purpose (political slant). (2) Mistaking polish for accuracy — slick design and confident tone are not evidence. (3) Confirmation-bias loop — only applying CRAAP to sources we already disagree with. (4) Stopping after one criterion passes — cross-check at least 3 of the 5 before citing.
+        </div>
 
         <div class="score">
           <b>Mark Allocation</b>
           <ul>
-            <li><span>Introduction + origin (Blakeslee, CSU Chico 2004)</span><span class="m">1M</span></li>
-            <li><span>Each criterion with question + example (5 × 1.2M)</span><span class="m">6M</span></li>
+            <li><span>Introduction + scale-of-misinfo framing</span><span class="m">1M</span></li>
+            <li><span>Each criterion with question + example (5 × 1.1M)</span><span class="m">5.5M</span></li>
             <li><span>Diagram (5-criteria grid)</span><span class="m">1M</span></li>
-            <li><span>Worked example — social media post table</span><span class="m">2M</span></li>
+            <li><span>Worked example — social media post table</span><span class="m">1.75M</span></li>
+            <li><span>Second worked example — AI-generated answer</span><span class="m">0.75M</span></li>
             <li><span>Total</span><span class="m">10M</span></li>
           </ul>
         </div>
@@ -1152,7 +1264,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q4(b)</span><span class="tag hot">★★ BCA25 Q6(a) + BCA25 Q1(e) + BSC25 Q1(d) + BSC25 Q5(a)</span><span class="tag marks">5M</span></div>
       <div class="qbody">What is bias in content analysis? How does it impact the evaluation of arguments? Explain strategies to identify and eliminate bias in information.</div>
       <div class="ans">
-        <p><b>Bias</b> is a systematic tendency to favour one perspective over others, distorting how information is selected, framed or interpreted — often unconsciously. Daniel Kahneman's <em>Thinking, Fast and Slow</em> (2011) catalogues over 30 such cognitive biases.</p>
+        <p><b><mark>Bias</mark></b> is a <mark>systematic tendency</mark> to favour one perspective over others, distorting how information is selected, framed or interpreted — often unconsciously. Psychologists have catalogued over 30 distinct cognitive biases, but in content analysis three patterns — confirmation, selection and framing — account for the majority of distorted arguments students encounter in news, advertising and social-media feeds.</p>
 
         <figure class="diagram-fig" style="margin:14px 0;padding:14px;background:var(--paper-soft);border:1px solid var(--rule);border-radius:6px;">
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;">
@@ -1176,25 +1288,35 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </figure>
 
         <ul>
-          <li><b>Confirmation bias:</b> seeking only evidence that supports an existing belief (e.g. WhatsApp echo chambers).</li>
-          <li><b>Selection / sampling bias:</b> cherry-picking convenient data (e.g. quoting only successful entrepreneurs to claim "drop-outs always succeed").</li>
-          <li><b>Framing bias:</b> wording shapes perception ("95% survival" vs "5% mortality" — same fact, opposite feeling).</li>
+          <li><b><mark>Confirmation bias</mark>:</b> seeking only evidence that supports an existing belief (e.g. WhatsApp echo chambers, Instagram Reels algorithm reinforcing one worldview).</li>
+          <li><b><mark>Selection bias</mark> / sampling bias:</b> cherry-picking convenient data (e.g. quoting only successful entrepreneurs to claim "drop-outs always succeed" — survivorship bias).</li>
+          <li><b><mark>Framing bias</mark>:</b> wording shapes perception ("95% survival" vs "5% mortality" — same fact, opposite feeling; "tax relief" vs "tax cut for the rich").</li>
+          <li><b><mark>Anchoring</mark> bias:</b> the first number you see drags the rest of your judgment toward it — used heavily in pricing and salary negotiation.</li>
+          <li><b><mark>Availability</mark> bias:</b> what is easy to recall feels more probable — plane crashes feel common because they make the news; road accidents feel rare because they don't.</li>
+          <li><b>Authority bias:</b> over-weighting an opinion because a credentialed person said it, regardless of evidence (a doctor commenting outside their specialty still sounds authoritative).</li>
+          <li><b>Bandwagon bias:</b> believing something because "everyone" does — virality is mistaken for truth on WhatsApp forwards and trending hashtags.</li>
         </ul>
-        <p><b>Impact on argument evaluation:</b> biased sources produce false premises → even deductively valid arguments lead to wrong conclusions; biased framing manipulates emotional response; biased sampling lets propaganda masquerade as data.</p>
+        <p><b>Impact on argument evaluation:</b> biased sources produce false premises → even deductively valid arguments lead to wrong conclusions; biased framing manipulates emotional response; biased sampling lets propaganda masquerade as data; anchoring locks negotiators into the opponent's range; availability inflates rare risks while hiding common ones.</p>
+        <p><b>How biased information harms decision-making:</b></p>
+        <ul>
+          <li><em>Wastes time and money</em> — wrong premises lead to wrong actions (e.g. fixing the wrong root cause in a bug post-mortem).</li>
+          <li><em>Erodes trust</em> — once an audience detects bias in one claim, they discount everything else from that source, including the truthful parts.</li>
+        </ul>
         <p><b>Strategies to identify and eliminate bias:</b></p>
         <ul>
-          <li><em>Read laterally</em> — open 3+ sources on opposite sides (Stanford fact-checker technique).</li>
-          <li><em>Check funding & affiliation</em> — who paid for the study?</li>
-          <li><em>Look for emotional language</em> — bias hides in adjectives ("shocking", "devastating").</li>
-          <li><em>Apply the CRAAP test</em> — Purpose criterion targets bias directly.</li>
-          <li><em>Seek alternative viewpoints</em> — they reveal blind spots, anticipate objections, strengthen the final judgment.</li>
+          <li><em>Read laterally</em> — open 3+ sources on opposite sides instead of digging deeper into the one in front of you (the lateral-reading technique used by professional fact-checkers).</li>
+          <li><em>Check funding &amp; affiliation</em> — who paid for the study, who owns the publication?</li>
+          <li><em>Look for emotional language</em> — bias hides in adjectives ("shocking", "devastating", "miraculous").</li>
+          <li><em>Apply the CRAAP test</em> — its Purpose criterion targets bias directly.</li>
+          <li><em>Steel-man the other side</em> — restate the opposing argument in its strongest form before rebutting; if you cannot, you do not yet understand it.</li>
+          <li><em>Use raw data over summaries</em> — a press release filters the study; the study filters the data. Push one layer closer to source when stakes are high.</li>
         </ul>
         <div class="score">
           <b>Mark Allocation</b>
           <ul>
-            <li><span>Bias definition + 3 types</span><span class="m">1.5M</span></li>
-            <li><span>Impact on argument evaluation</span><span class="m">1M</span></li>
-            <li><span>5 strategies to identify / eliminate</span><span class="m">2.5M</span></li>
+            <li><span>Bias definition + 7 bias types</span><span class="m">1.75M</span></li>
+            <li><span>Impact on argument evaluation + harms</span><span class="m">1M</span></li>
+            <li><span>6 strategies to identify / eliminate</span><span class="m">2.25M</span></li>
             <li><span>Total</span><span class="m">5M</span></li>
           </ul>
         </div>
@@ -1207,20 +1329,31 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody">Explain the 3 Ps of conflict resolution — Problem, People and Process. How do they help in effectively managing and resolving conflicts? Discuss the five conflict resolution strategies — avoid, compromise, accommodate, compete and collaborate — with examples of when each is appropriate.</div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>Conflict in workplaces, classrooms and online communities is unavoidable — surveys (CPP Global, 2008) found employees spend ~2.8 hours per week dealing with conflict. Two complementary frameworks dominate: the <b>3 Ps</b> (diagnostic — what to address) and the <b>Thomas-Kilmann Conflict Mode Instrument</b> (Kenneth W. Thomas + Ralph H. Kilmann, <em>1974</em>) which gives five strategies plotted on a 2-axis grid.</p>
+        <p>Conflict in workplaces, classrooms and online communities is unavoidable — the average employee spends roughly three hours per week dealing with it, and unresolved team conflict is the single largest cause of project slippage and attrition. Conflict is not the same as disagreement: disagreement is over <em>ideas</em>, conflict is over <em>scarcity</em> (time, money, recognition, decision rights). Two complementary frameworks dominate the field: the <b><mark>3 Ps</mark></b> (diagnostic — what to address) and the <b><mark>Thomas-Kilmann Conflict Mode Instrument</mark></b> which gives five strategies plotted on a 2-axis grid of <mark>assertiveness × cooperativeness</mark>.</p>
+
+        <h5>Stages of Conflict — How a Disagreement Becomes a Fight</h5>
+        <ol>
+          <li><b>Latent stage:</b> the underlying conditions exist (scarce time, unequal workload, mismatched goals) but no party has yet voiced concern.</li>
+          <li><b>Felt / perceived stage:</b> one or more parties notice the tension internally — annoyance, anxiety, sense of unfairness.</li>
+          <li><b>Manifest stage:</b> the conflict surfaces openly — argument, complaint, escalation, refusal to cooperate.</li>
+          <li><b>Outcome stage:</b> the dispute is resolved (or suppressed) through one of the five Thomas-Kilmann strategies.</li>
+          <li><b>Aftermath:</b> the residue — strengthened trust, lingering resentment, or new rules — shapes how future conflicts unfold.</li>
+        </ol>
+        <p>The earlier the intervention (felt stage), the cheaper the resolution. Letting a conflict reach manifest stage before addressing it usually requires a stronger strategy and damages the relationship more.</p>
 
         <h5>Part 1 — The 3 Ps of Conflict Resolution</h5>
         <ul>
-          <li><b>P1 — Problem:</b> Define the <em>actual</em> issue, separating it from the people involved. Surface the underlying interest beneath the stated position. <em>How it helps:</em> stops the conflict from drifting into personality attacks.
+          <li><b>P1 — <mark>Problem</mark>:</b> Define the <em>actual</em> issue, separating it from the people involved. Surface the underlying interest beneath the stated position. <em>How it helps:</em> stops the conflict from drifting into personality attacks.
             <br><em>Example:</em> Two teammates argue over deadline allocation. The Problem is unbalanced workload distribution, <b>not</b> that "Riya is lazy."</li>
-          <li><b>P2 — People:</b> Manage the human side — emotions, relationships, communication style. Use active listening, validate each party's feelings, ensure everyone is heard. <em>How it helps:</em> reduces defensiveness, opens space for honest dialogue.
+          <li><b>P2 — <mark>People</mark> (Perspective):</b> Manage the human side — emotions, relationships, communication style. Use active listening, validate each party's feelings, ensure everyone is heard. <em>How it helps:</em> reduces defensiveness, opens space for honest dialogue.
             <br><em>Example:</em> Before debating the schedule, the team lead lets each person describe how the workload felt to them.</li>
-          <li><b>P3 — Process:</b> Agree on a method — negotiation, mediation, arbitration — with clear steps, timeline, decision authority and follow-up. <em>How it helps:</em> turns vague "we'll talk about it" into a contract.
+          <li><b>P3 — <mark>Process</mark>:</b> Agree on a method — negotiation, mediation, arbitration — with clear steps, timeline, decision authority and follow-up. <em>How it helps:</em> turns vague "we'll talk about it" into a contract.
             <br><em>Example:</em> The team agrees: "By Friday we will re-distribute tasks; the project manager has final say; review again in 2 weeks."</li>
+          <li><b>Together they help by:</b> separating the issue (Problem) from the emotions (People) from the method (Process). Most failed conflict resolutions collapse one P into another — e.g. attacking the person instead of the problem, or jumping to process without addressing emotions first.</li>
         </ul>
 
         <h5>Part 2 — Five Conflict Resolution Strategies (Thomas-Kilmann)</h5>
-        <p>The two axes are <em>Assertiveness</em> (how much I push for my own goal) and <em>Cooperativeness</em> (how much I accommodate the other party's goal).</p>
+        <p>The two axes are <em><mark>Assertiveness</mark></em> (how much I push for my own goal) and <em><mark>Cooperativeness</mark></em> (how much I accommodate the other party's goal).</p>
 
         <figure class="diagram-fig" style="margin:14px 0;padding:14px;background:var(--paper-soft);border:1px solid var(--rule);border-radius:6px;">
           <div style="display:grid;grid-template-columns:80px 1fr 1fr;grid-template-rows:auto auto auto auto;gap:4px;font-size:12px;">
@@ -1244,25 +1377,56 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <div class="table-wrap">
           <table>
-            <tr><th>Strategy</th><th>What it means</th><th>Use when…</th><th>Risk</th></tr>
-            <tr><td><b>Avoid</b></td><td>Postpone or withdraw; neither side's goals pursued</td><td>Issue is trivial, timing is wrong, emotions are too hot</td><td>Problem festers, returns later bigger</td></tr>
-            <tr><td><b>Compete</b></td><td>Assert your position; one side wins</td><td>Emergency, safety, ethical line, unpopular but right call</td><td>Damages relationships, breeds resentment</td></tr>
-            <tr><td><b>Accommodate</b></td><td>Give in to preserve harmony</td><td>Issue matters far more to the other party; goodwill capital needed</td><td>Resentment if used too often; opponent learns to push</td></tr>
-            <tr><td><b>Compromise</b></td><td>Both concede something; quick mid-point</td><td>Equal power, tight deadline, temporary fix needed</td><td>Neither fully satisfied; sub-optimal solution</td></tr>
-            <tr><td><b>Collaborate ★</b></td><td>Work jointly for a win-win that satisfies both</td><td>Important long-term relationship, complex issue, time available</td><td>Time-intensive; needs trust and skill</td></tr>
+            <tr><th>Strategy</th><th>What it means</th><th>Use when…</th><th>Real example</th><th>Risk</th></tr>
+            <tr><td><b><mark>Avoid</mark></b></td><td>Postpone or withdraw; neither side's goals pursued</td><td>Issue is trivial, timing is wrong, emotions are too hot</td><td>Skip a heated WhatsApp thread at midnight; revisit in the morning</td><td>Problem festers, returns later bigger</td></tr>
+            <tr><td><b><mark>Compete</mark></b></td><td>Assert your position; one side wins</td><td>Emergency, safety, ethical line, unpopular but right call</td><td>Lab safety violation — supervisor overrules the team and shuts the experiment</td><td>Damages relationships, breeds resentment</td></tr>
+            <tr><td><b><mark>Accommodate</mark></b></td><td>Give in to preserve harmony</td><td>Issue matters far more to the other party; goodwill capital needed</td><td>Letting a teammate present the slide they wrote even though you'd phrase it differently</td><td>Resentment if used too often; opponent learns to push</td></tr>
+            <tr><td><b><mark>Compromise</mark></b></td><td>Both concede something; quick mid-point</td><td>Equal power, tight deadline, temporary fix needed</td><td>Two clubs share an auditorium — each gets two hours instead of four</td><td>Neither fully satisfied; sub-optimal solution</td></tr>
+            <tr><td><b><mark>Collaborate</mark> ★</b></td><td>Work jointly for a win-win that satisfies both</td><td>Important long-term relationship, complex issue, time available</td><td>Redesigning a final-year project scope so two members get the modules they're best at</td><td>Time-intensive; needs trust and skill</td></tr>
           </table>
         </div>
 
+        <h5>Choosing the Right Strategy — Decision Factors</h5>
+        <ul>
+          <li><b>Stakes of the issue:</b> high-stakes → collaborate or compete; low-stakes → avoid or accommodate.</li>
+          <li><b>Relationship importance:</b> long-term relationship → collaborate or accommodate; one-off transaction → compete or compromise.</li>
+          <li><b>Time available:</b> tight deadline → compromise; time-rich → collaborate.</li>
+          <li><b>Power balance:</b> equal power → compromise / collaborate; clear hierarchy with safety risk → compete.</li>
+          <li><b>Trust level:</b> high trust → collaborate; low trust → start with compromise and build up.</li>
+        </ul>
+
+        <h5>Additional Workplace Scenarios</h5>
+        <ul>
+          <li><em>Slack thread escalating at 11 PM</em> — <b>Avoid</b> (postpone), continue tomorrow morning when both sides have cooled.</li>
+          <li><em>Two team members want the same conference slot</em> — <b>Compromise</b> (alternate years) or <b>Collaborate</b> (one presents, the other co-authors).</li>
+          <li><em>Code-review disagreement on style</em> — <b>Accommodate</b> the reviewer's preference; style is low-stakes, goodwill is high-stakes.</li>
+          <li><em>Senior engineer pushes an insecure shortcut</em> — <b>Compete</b>; safety / security is a non-negotiable line.</li>
+          <li><em>Hybrid-team disagreement over remote-work policy</em> — <b>Collaborate</b>; long-term policy, multiple stakeholders, time available.</li>
+          <li><em>Two clubs booked the same auditorium for the same evening</em> — <b>Compromise</b> (two-hour split) is faster than full collaboration.</li>
+        </ul>
+
+        <h5>Worked Example — Picking the Right Strategy in a Classroom Project</h5>
+        <p><b>Scenario:</b> Four-member DBMS group; deadline in 6 days. Member A wants MongoDB, member B wants PostgreSQL, members C and D are neutral.</p>
+        <ol>
+          <li><b>3-P diagnosis:</b> <em>Problem</em> = which DB best satisfies the rubric's "relational integrity" criterion (not "who is more stubborn"). <em>People</em> = A has spent two days learning Mongo and is emotionally invested. <em>Process</em> = decision by Friday 6 PM; group lead has tie-break authority.</li>
+          <li><b>Strategy pick:</b> Use <b>Collaborate</b> first — propose a hybrid: PostgreSQL for the relational core (satisfies the rubric), MongoDB cache for the analytics dashboard (uses A's learning). If timeline kills collaboration, fall back to <b>Compromise</b> (PostgreSQL with A leading the analytics module). Last resort: <b>Compete</b> via group-lead tie-break.</li>
+          <li><b>Outcome:</b> No one resigns from the team; rubric is met; A's learning is honoured.</li>
+        </ol>
+
         <h5>Modern Relevance</h5>
-        <p>In hybrid and remote work (post-2020), text-based conflict (Slack, email) now outnumbers face-to-face disagreements. Without tone, even small frictions escalate — making the 3Ps even more vital. Companies like Pixar, Bridgewater Associates and the Indian Army have formal conflict-resolution protocols built explicitly on 3P + Thomas-Kilmann.</p>
+        <p>In hybrid and remote work (post-2020), text-based conflict (Slack, email) now outnumbers face-to-face disagreements. Without tone, even small frictions escalate — making the 3Ps even more vital. Companies like Pixar, Bridgewater Associates and the Indian Army have formal conflict-resolution protocols built explicitly on 3P + Thomas-Kilmann. Modern HR platforms (Workday, BambooHR) now include conflict-mode self-assessment quizzes during onboarding so managers know each report's default style. Engineering teams at GitHub, GitLab and Razorpay run quarterly "blameless retro" reviews built on the same Problem-People-Process split, while customer-success teams at SaaS firms route escalations through a four-step ladder (avoid → accommodate → compromise → collaborate) before they reach the legal team. The framework also underpins UN mediation training and the Indian National Lok Adalat process.</p>
 
         <h5>Conclusion</h5>
-        <p>The 3 Ps tell you <em>what</em> to address (issue, emotions, method) — the five strategies tell you <em>how</em> to address it. A skilled manager diagnoses with the 3 Ps then picks the appropriate strategy from the Thomas-Kilmann grid based on the stakes and the relationship. Used together they convert destructive conflict into productive disagreement.</p>
+        <p>The 3 Ps tell you <em>what</em> to address (issue, emotions, method); the five strategies tell you <em>how</em> to address it. A skilled manager diagnoses with the 3 Ps then picks the appropriate strategy from the Thomas-Kilmann grid based on the stakes, the relationship and the time available. Used together they convert destructive conflict into productive disagreement — the single most reliable predictor of long-term team health. The takeaway for a BCA-DS graduate entering industry: every team has friction; the people who get promoted are the ones who can name what's happening and pick the right move, not the ones who avoid every fight.</p>
+
+        <div class="box warn"><span class="label">Common Pitfalls</span>
+          (1) Confusing conflict with disagreement — disagreement over <em>ideas</em> is healthy; conflict over <em>scarcity</em> needs intervention. (2) Jumping to Process before addressing People — unresolved emotions sabotage the cleanest process. (3) Over-using one strategy — always-Avoiders let problems fester; always-Competers burn relationships. (4) Treating Collaborate as universally best — it is time-expensive and inappropriate for trivial or urgent issues.
+        </div>
 
         <div class="score">
           <b>Mark Allocation</b>
           <ul>
-            <li><span>Intro + Thomas-Kilmann (1974)</span><span class="m">1M</span></li>
+            <li><span>Intro + Thomas-Kilmann framework</span><span class="m">1M</span></li>
             <li><span>3 Ps with help-explanation + example (3 × 1.5M)</span><span class="m">4.5M</span></li>
             <li><span>Thomas-Kilmann diagram</span><span class="m">1M</span></li>
             <li><span>5 strategies — table with use-case + risk (5 × 1.3M)</span><span class="m">6.5M</span></li>
@@ -1279,7 +1443,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody">What is problem solving? Discuss the key strategies / elements of effective problem solving with examples. How does problem solving connect to critical thinking?</div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p><b>Problem solving</b> is the systematic cognitive process of identifying, analysing and resolving a difficulty in order to achieve a desired outcome. It combines critical thinking (analysis + evaluation), creativity (alternative generation) and decision-making (selecting + acting). Two classical models dominate: <em>George Polya's How to Solve It</em> (1945) — Understand → Plan → Execute → Look Back — and the <em>IDEAL</em> model of Bransford and Stein (1984) — Identify, Define, Explore, Act, Look back. The seven-strategy version below synthesises both with the modern Design Thinking cycle (IDEO, popularised 2009).</p>
+        <p><b><mark>Problem solving</mark></b> is the systematic cognitive process of identifying, analysing and resolving a difficulty in order to achieve a desired outcome. It combines critical thinking (analysis + evaluation), creativity (alternative generation) and decision-making (selecting + acting). Three standard frameworks are taught across disciplines: the <b><mark>Polya 4-step</mark></b> (Understand → Plan → Execute → Look Back) for mathematical and technical problems, the <b><mark>IDEAL</mark> model</b> (Identify, Define, Explore, Act, Look back) for general cognitive problems, and the <b><mark>Design Thinking</mark> cycle</b> (Empathise → Define → Ideate → Prototype → Test) for user-centred product problems. The seven-strategy version below synthesises all three into a single auditable cycle.</p>
 
         <figure class="diagram-fig" style="margin:14px 0;padding:14px;background:var(--paper-soft);border:1px solid var(--rule);border-radius:6px;">
           <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:11px;">
@@ -1305,8 +1469,8 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <h5>Seven Key Strategies / Elements</h5>
         <ol>
           <li><b>Define the problem clearly</b> — distinguish symptom from root cause. <em>Example:</em> "Students failing the unit" is a symptom; "no structured revision plan in the last week" is the root.</li>
-          <li><b>Analyse root causes</b> — use the <em>5-Whys</em> technique (Sakichi Toyoda, Toyota): ask "why?" five times in succession to drill from surface to source. <em>Example:</em> Why did the deploy fail? → Bad config. Why? → No staging test. Why? → Pipeline lacks staging step.</li>
-          <li><b>Generate alternatives</b> — brainstorm <em>quantity</em> before quality (Osborn's rules, 1953); use Green Hat thinking from De Bono. Premature filtering kills creative options.</li>
+          <li><b>Analyse root causes</b> — use Toyota's <em><mark>5-Whys</mark></em> technique: ask "why?" five times in succession to drill from surface symptom to source. <em>Example:</em> Why did the deploy fail? → Bad config. Why? → No staging test. Why? → Pipeline lacks staging step. Why? → Pipeline written under deadline pressure. Why? → No code-review for infra changes — fix the policy, not the symptom.</li>
+          <li><b>Generate alternatives</b> — brainstorm <em>quantity</em> before quality; defer judgment, encourage wild ideas, build on others. Use Green Hat thinking from de Bono. Premature filtering kills creative options. <em>Rule of thumb:</em> aim for 10+ options before evaluating any.</li>
           <li><b>Evaluate options</b> — score each alternative against criteria: feasibility, cost, time, risk, impact. A weighted decision matrix turns gut feel into auditable choice.</li>
           <li><b>Select the best solution</b> — pick the option with the highest weighted score <em>and</em> compatible long-term consequences. Document the reasoning.</li>
           <li><b>Implement with a plan</b> — assign owners, set milestones, allocate resources, plan for known risks. Without an action plan a great solution stays on paper.</li>
@@ -1316,16 +1480,37 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <h5>Comparison of Classical Problem-Solving Models</h5>
         <div class="table-wrap">
           <table>
-            <tr><th>Model</th><th>Scholar / Origin</th><th>Stages</th><th>Best for</th></tr>
-            <tr><td>Polya 4-step</td><td>George Polya, <em>How to Solve It</em>, 1945</td><td>Understand → Plan → Execute → Look Back</td><td>Maths, structured technical problems</td></tr>
-            <tr><td>IDEAL</td><td>Bransford &amp; Stein, 1984</td><td>Identify → Define → Explore → Act → Look back</td><td>General academic / cognitive problems</td></tr>
-            <tr><td>Design Thinking</td><td>IDEO &amp; Tim Brown, popularised 2009</td><td>Empathise → Define → Ideate → Prototype → Test</td><td>User-centred product / service design</td></tr>
-            <tr><td>5-Whys</td><td>Sakichi Toyoda, Toyota, 1930s</td><td>Ask "why?" five times in succession</td><td>Root-cause analysis in manufacturing / ops</td></tr>
+            <tr><th>Model</th><th>Origin</th><th>Stages</th><th>Best for</th><th>Common mistake</th></tr>
+            <tr><td>Polya 4-step</td><td>Mathematics tradition</td><td>Understand → Plan → Execute → Look Back</td><td>Maths, structured technical problems</td><td>Skipping "Look Back" — no learning captured</td></tr>
+            <tr><td>IDEAL model</td><td>Cognitive psychology</td><td>Identify → Define → Explore → Act → Look back</td><td>General academic / cognitive problems</td><td>Conflating Identify and Define — solving the wrong problem</td></tr>
+            <tr><td>Design Thinking</td><td>IDEO product-design framework</td><td>Empathise → Define → Ideate → Prototype → Test</td><td>User-centred product / service design</td><td>Empathising too briefly — building what you assume the user wants</td></tr>
+            <tr><td>5-Whys</td><td>Toyota production system</td><td>Ask "why?" five times in succession</td><td>Root-cause analysis in manufacturing / ops</td><td>Stopping at the third "why" — surface fix only</td></tr>
+            <tr><td>PDCA cycle</td><td>Quality-management tradition</td><td>Plan → Do → Check → Act</td><td>Continuous improvement loops</td><td>Treating it as one-shot instead of recurring</td></tr>
+            <tr><td>Heuristic approach</td><td>Cognitive psychology</td><td>Apply rules of thumb / shortcuts</td><td>Fast, "good-enough" decisions under time pressure</td><td>Mistaking heuristic for proof</td></tr>
+            <tr><td>Algorithmic approach</td><td>Computer science / mathematics</td><td>Follow a guaranteed step-by-step procedure</td><td>Well-defined problems with clear inputs / outputs</td><td>Using it on ill-defined human problems</td></tr>
           </table>
         </div>
 
-        <h5>Worked Example — Falling Internal Marks in BCA-IV</h5>
-        <p><b>Define:</b> Average internal mark dropped from 78 to 64 in one semester. <b>Analyse (5-Whys):</b> Why? Sessional answers were thin → Why? Students copy from notes → Why? Notes are unstructured → root: no model-answer library exists. <b>Generate:</b> 4 options — peer notes pool / faculty model answers / past-paper drills / hire tutor. <b>Evaluate:</b> peer pool fails Accuracy, tutor fails Cost → faculty model + drills win. <b>Select + Implement:</b> faculty publishes 2 model answers per unit; students do 1 drill paper weekly. <b>Review:</b> next semester average rebounds to 75.</p>
+        <h5>Barriers to Effective Problem Solving</h5>
+        <ul>
+          <li><b>Mental set:</b> falling back on a previously successful method even when it no longer fits the current problem (e.g. solving every coding bug by "restart and pray").</li>
+          <li><b><mark>Functional fixedness</mark>:</b> only seeing the conventional use of a tool / asset — missing creative re-purposing.</li>
+          <li><b>Confirmation bias:</b> seeking evidence that the chosen solution works, dismissing evidence it doesn't.</li>
+          <li><b><mark>Sunk-cost fallacy</mark>:</b> continuing a failing plan because of time / money already invested instead of cutting losses.</li>
+          <li><b>Information overload:</b> drowning in data without prioritising — paralysis by analysis.</li>
+          <li><b>Group-think:</b> in team settings, dissent is suppressed for harmony, and weak solutions go unchallenged.</li>
+        </ul>
+
+        <h5>Worked Example — Falling Internal Marks in BCA-IV (Full 7-stage Application)</h5>
+        <ol>
+          <li><b>Define:</b> Average internal mark in DBMS dropped from 78 to 64 in one semester. The visible <em>symptom</em> is low marks; the question is the <em>cause</em>.</li>
+          <li><b>Analyse (5-Whys):</b> Why low? → Sessional answers were thin. Why thin? → Students copy from notes. Why? → Notes are unstructured. Why? → No model answers exist for the unit. Why? → Faculty assumed students would build their own. <b>Root cause: no shared model-answer library.</b></li>
+          <li><b>Generate alternatives (Green Hat):</b> (a) peer notes pool, (b) faculty model answers, (c) weekly past-paper drills, (d) hire external tutor, (e) AI-generated answer keys reviewed by TA. Aim for 5+ options before evaluating any.</li>
+          <li><b>Evaluate:</b> score each on Feasibility · Cost · Accuracy · Impact. Peer pool fails Accuracy; tutor fails Cost; AI-only fails Accuracy without TA review. Winner: faculty model answers + weekly drills.</li>
+          <li><b>Select:</b> pick option (b) + (c) combination — highest weighted score, lowest residual risk.</li>
+          <li><b>Implement:</b> faculty publishes 2 model answers per unit by week 4; students complete 1 drill paper per week; class representative collects feedback fortnightly.</li>
+          <li><b>Review (Look Back):</b> next semester average rebounds to 75. Post-mortem: drills with feedback were more impactful than the model answers alone — institutionalise drills, retain answers as reference. Capture in a wiki for next batch.</li>
+        </ol>
 
         <h5>Connection to Critical Thinking</h5>
         <p>Problem solving is critical thinking <em>applied</em>. Critical thinking supplies the analytical engine (questioning assumptions, weighing evidence, detecting bias) which the Define, Analyse and Evaluate stages depend on. Conversely, problem-solving disciplines critical thinking by forcing it toward an actionable decision rather than endless deliberation.</p>
@@ -1333,17 +1518,18 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <div class="box warn"><span class="label">Common Pitfalls</span> (1) Jumping straight to Solution without Defining — solving the wrong problem efficiently. (2) Falling in love with the first idea (anchoring bias). (3) Skipping Review — repeating the same mistake next quarter.</div>
 
         <h5>Modern Relevance</h5>
-        <p>Design Thinking (IDEO, Tim Brown 2009) — Empathise, Define, Ideate, Prototype, Test — is the dominant problem-solving framework in product companies (Apple, Airbnb, ISRO's user-research division). It is the same 7-stage cycle re-wrapped for user-centred contexts.</p>
+        <p>IDEO's <b>Design Thinking</b> framework — Empathise, Define, Ideate, Prototype, Test — is the dominant problem-solving cycle in product companies (Apple, Airbnb, ISRO's user-research division, Indian government's MyGov citizen-service redesigns). It is the same seven-stage cycle re-wrapped for user-centred contexts and now appears in school and college curricula worldwide. The Indian government's "Atal Innovation Mission" trains school children in Design Thinking; product schools at IIIT-Hyderabad and IIM-Bangalore teach it as a core elective. Toyota's 5-Whys is now embedded in DevOps post-mortem culture at Netflix, Atlassian and Indian unicorns like Razorpay and Postman. Even AI-coding tools (GitHub Copilot Workspace, Devin) now structure their suggestions through an explicit "Define → Plan → Execute → Verify" cycle — a direct descendant of Polya and IDEAL. For a BCA-DS graduate, fluency in these frameworks is becoming as essential as fluency in SQL.</p>
 
         <h5>Conclusion</h5>
-        <p>Effective problem solving is not a single skill but a disciplined cycle. Following the seven stages — backed by Polya, IDEAL and Design Thinking — turns ambiguous difficulties into structured, evidence-based action and converts experience into organisational learning.</p>
+        <p>Effective problem solving is not a single skill but a disciplined cycle. Following the seven stages — backed by Polya, IDEAL and Design Thinking — turns ambiguous difficulties into structured, evidence-based action and converts experience into organisational learning. The most common failure mode is impatience: skipping Define and rushing to Implement, then discovering you solved the wrong problem efficiently. Building the habit of explicitly naming the stage you are in ("we are still in Analyse, not Select") is the single highest-leverage behavioural change a student can make. Mastered, it converts a lifetime of unrelated experiences into a compounding library of patterns.</p>
 
         <div class="score">
           <b>Mark Allocation</b>
           <ul>
-            <li><span>Definition + Polya/IDEAL scholars</span><span class="m">2M</span></li>
+            <li><span>Definition + 3 standard frameworks</span><span class="m">2M</span></li>
             <li><span>7-stage diagram</span><span class="m">1M</span></li>
-            <li><span>7 strategies with examples</span><span class="m">7M</span></li>
+            <li><span>7 strategies with examples</span><span class="m">6.5M</span></li>
+            <li><span>Comparison table (5 models)</span><span class="m">0.5M</span></li>
             <li><span>Worked example (BCA marks case)</span><span class="m">2M</span></li>
             <li><span>Link to critical thinking</span><span class="m">1M</span></li>
             <li><span>Modern relevance + conclusion</span><span class="m">2M</span></li>
@@ -1359,7 +1545,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody">What is the rhetorical situation? Explain its key elements — purpose, audience, topic and context — using an example to illustrate their importance in effective communication.</div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>The concept of <b>rhetorical situation</b> was formalised by American rhetorician <em>Lloyd F. Bitzer</em> in his landmark 1968 essay <em>"The Rhetorical Situation"</em> (Philosophy &amp; Rhetoric). Bitzer argued that no speech, essay or advertisement exists in a vacuum — it is always a <em>response</em> to a specific context. Earlier roots trace to Aristotle's <em>Rhetoric</em> (c. 350 BCE), which identified three persuasive appeals — <em>ethos</em> (credibility), <em>pathos</em> (emotion), <em>logos</em> (logic) — that operate <em>within</em> the rhetorical situation.</p>
+        <p>The <b><mark>rhetorical situation</mark></b> is the full set of conditions that surround and shape any act of communication. The core insight is that no speech, essay, advertisement or social-media post exists in a vacuum — it is always a <em>response</em> to a specific situation involving a speaker, an audience, a topic, a purpose and a context. Operating <em>inside</em> the rhetorical situation are the three classical persuasive appeals — <em><mark>ethos</mark></em> (credibility of the speaker), <em><mark>pathos</mark></em> (emotional resonance with the audience) and <em><mark>logos</mark></em> (logical structure of the argument) — which the communicator balances to suit the moment.</p>
 
         <figure class="diagram-fig" style="margin:14px 0;padding:14px;background:var(--paper-soft);border:1px solid var(--rule);border-radius:6px;">
           <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;text-align:center;">
@@ -1369,15 +1555,15 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
             <div style="background:var(--navy-soft);border:1.5px solid var(--navy);border-radius:4px;padding:10px 6px;"><b style="color:var(--navy);">PURPOSE</b><br><em style="font-size:11px;color:var(--muted);">Why it is said</em></div>
             <div style="background:var(--crimson-soft);border:1.5px solid var(--crimson);border-radius:4px;padding:10px 6px;"><b style="color:var(--crimson);">CONTEXT</b><br><em style="font-size:11px;color:var(--muted);">When / where / culture</em></div>
           </div>
-          <figcaption><b>Fig 7.1</b> · Five elements of the rhetorical situation (Bitzer, 1968) — misalign any one and the message misfires.</figcaption>
+          <figcaption><b>Fig 7.1</b> · Five elements of the rhetorical situation — misalign any one and the message misfires.</figcaption>
         </figure>
 
         <h5>The Five Key Elements</h5>
         <ul>
-          <li><b>Speaker (rhetor):</b> The author or presenter. Their credibility (<em>ethos</em>), expertise and tone shape how the message lands. A doctor talking about vaccines carries different weight than a film star.</li>
-          <li><b>Audience:</b> The intended receivers. Their age, expertise, beliefs and emotional state dictate vocabulary, evidence type and structure. <em>Bitzer's key insight:</em> rhetoric exists only when the audience can be moved to act.</li>
-          <li><b>Topic (subject):</b> The matter being addressed. Some topics are inherently sensitive (religion, politics) and demand more <em>pathos</em> management; technical topics demand more <em>logos</em>.</li>
-          <li><b>Purpose:</b> The communicative intent. The four canonical purposes:
+          <li><b><mark>Speaker</mark> (rhetor):</b> The author or presenter. Their credibility (<em>ethos</em>), expertise and tone shape how the message lands. A doctor talking about vaccines carries different weight than a film star.</li>
+          <li><b><mark>Audience</mark>:</b> The intended receivers. Their age, expertise, beliefs and emotional state dictate vocabulary, evidence type and structure. <em>Key insight:</em> rhetoric only works when the audience is capable of being moved to act — analysing what they already believe is half the battle.</li>
+          <li><b><mark>Topic</mark> (subject):</b> The matter being addressed. Some topics are inherently sensitive (religion, politics) and demand more <em>pathos</em> management; technical topics demand more <em>logos</em>.</li>
+          <li><b><mark>Purpose</mark>:</b> The communicative intent. The four canonical purposes:
             <ul>
               <li><em>Inform</em> — present facts (lectures, news reports)</li>
               <li><em>Persuade</em> — change belief or prompt action (editorials, ads)</li>
@@ -1385,7 +1571,14 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
               <li><em>Inspire</em> — stir emotion and motivation (graduation speeches, sermons)</li>
             </ul>
           </li>
-          <li><b>Context (Bitzer called it "exigence"):</b> The time, place, cultural moment, occasion. The same speech about freedom delivered on 15 August in India lands differently than on 4 July in the US.</li>
+          <li><b><mark>Context</mark> (also called "exigence"):</b> The time, place, cultural moment, occasion. The same speech about freedom delivered on 15 August in India lands differently than on 4 July in the US. Context also dictates channel — a condolence message on Twitter reads differently than on a phone call.</li>
+        </ul>
+
+        <h5>The Three Classical Appeals — Operating Inside the Situation</h5>
+        <ul>
+          <li><b><mark>Ethos</mark> (credibility):</b> the audience's trust in the speaker — built through expertise, track record, tone and visible fairness. A doctor citing peer-reviewed data earns ethos; a teenager citing the same data has to borrow ethos by quoting the source.</li>
+          <li><b><mark>Pathos</mark> (emotion):</b> the emotional connection — stories, vivid examples, shared values. Pathos opens the audience to logic; without it, even airtight arguments slide off.</li>
+          <li><b><mark>Logos</mark> (logic):</b> the structure of the argument — premises, evidence, reasoning. Strong logos with no pathos persuades nobody; strong pathos with no logos is mere manipulation. Skilled communicators braid all three.</li>
         </ul>
 
         <h5>Worked Example — Same Topic, Different Audiences</h5>
@@ -1400,24 +1593,50 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </div>
         <p>Same speaker, same purpose, but audience analysis reshapes vocabulary, evidence and tone. Skipping this analysis is why technical experts often fail to persuade — they speak <em>at</em> rather than <em>to</em> their audience.</p>
 
+        <h5>Steps of Audience Analysis</h5>
+        <ol>
+          <li><b>Identify the audience:</b> distinguish primary (target) audience, intended audience, secondary / unintended audience (who else might see this — a tweet meant for peers may be read by recruiters).</li>
+          <li><b>Map demographics:</b> age, education, occupation, region, language, cultural background — vocabulary and examples follow from this.</li>
+          <li><b>Profile interests and needs:</b> what problems do they face? what do they already care about? what's in it for them?</li>
+          <li><b>Gauge knowledge level:</b> are they experts, informed laypeople or beginners? Calibrate jargon and depth accordingly.</li>
+          <li><b>Assess attitudes and biases:</b> are they friendly, neutral, sceptical or hostile? Sceptical audiences need concession before persuasion.</li>
+        </ol>
+
+        <h5>Adjusting the Message to Context</h5>
+        <ul>
+          <li><b>Academic context</b> (lectures, journals): structured argument, citations, formal vocabulary, primarily logos with supporting ethos.</li>
+          <li><b>Professional context</b> (board memo, client pitch): tight executive summary first, clear ownership and asks, ethos via credentials and data.</li>
+          <li><b>Public context</b> (TEDx talk, town-hall): mix all three appeals; lead with pathos (story), back with logos (data), close with ethos (call-to-action from a credible voice).</li>
+          <li><b>Social-media context</b> (X / Instagram / WhatsApp): brief, hook-first, visual, pathos-heavy; logos compressed to one statistic.</li>
+        </ul>
+
         <h5>Importance in Effective Communication</h5>
         <ul>
           <li>Forces the communicator to think before speaking — preventing wasted words.</li>
           <li>Aligns vocabulary, tone, structure, evidence and length with what the audience needs.</li>
           <li>Identifies hostility, ignorance or scepticism in advance — so the rhetor can defuse objections.</li>
           <li>Picks the right channel (email vs town-hall vs Instagram reel) based on context.</li>
+          <li>Manages constraints and opportunities — a 3-minute speech and a 30-minute keynote demand different structures even when the topic is identical.</li>
           <li>Without it: a great message reaches the wrong audience at the wrong time and dies.</li>
         </ul>
+
+        <h5>Modern Relevance</h5>
+        <p>Every successful social-media campaign in 2025 — election ads, brand launches, government nudge campaigns — is a rhetorical-situation analysis dressed in modern tools. A/B testing on Instagram is literally audience analysis at industrial scale; persona-building in product marketing is a formalisation of the audience element; "content marketing" frameworks (HubSpot's TOFU/MOFU/BOFU funnel, the StoryBrand SB7) are repackaged rhetorical situations. Modern LLM "system prompts" likewise set Speaker, Audience, Purpose and Context before any content is generated.</p>
+
+        <h5>Conclusion</h5>
+        <p>The rhetorical situation is the diagnostic frame every effective communicator runs before drafting a single sentence. Mastering Speaker, Audience, Topic, Purpose and Context, plus the three appeals (ethos, pathos, logos), converts communication from guesswork into engineering. The student who internalises this framework will, in any future role, ask "who exactly am I talking to, and why?" before opening their laptop — a habit that separates persuasive professionals from frustrated ones.</p>
 
         <div class="score">
           <b>Mark Allocation</b>
           <ul>
-            <li><span>Intro + Bitzer (1968) + Aristotle</span><span class="m">1.5M</span></li>
-            <li><span>Diagram (5 elements)</span><span class="m">1M</span></li>
-            <li><span>5 elements with detail</span><span class="m">3M</span></li>
-            <li><span>Purpose — 4 sub-types with examples</span><span class="m">1.5M</span></li>
-            <li><span>Worked example (climate change table)</span><span class="m">2M</span></li>
-            <li><span>Importance for effective communication</span><span class="m">1M</span></li>
+            <li><span>Intro + rhetorical-situation concept</span><span class="m">0.75M</span></li>
+            <li><span>Diagram (5 elements)</span><span class="m">0.75M</span></li>
+            <li><span>5 elements with detail</span><span class="m">2M</span></li>
+            <li><span>Three appeals — ethos / pathos / logos</span><span class="m">1.25M</span></li>
+            <li><span>Steps of audience analysis</span><span class="m">1M</span></li>
+            <li><span>Adjusting message to context</span><span class="m">1M</span></li>
+            <li><span>Worked example (climate change table)</span><span class="m">1.5M</span></li>
+            <li><span>Importance + modern relevance + conclusion</span><span class="m">1.75M</span></li>
             <li><span>Total</span><span class="m">10M</span></li>
           </ul>
         </div>
@@ -1428,7 +1647,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q7(b)</span><span class="tag hot">★ BSC25 Q1(i)</span><span class="tag marks">5M</span></div>
       <div class="qbody">Write a note on rhetorical strategies of writing — explain compare, contrast, classify and describe with examples.</div>
       <div class="ans">
-        <p><b>Rhetorical strategies</b> are the structural moves a writer uses to develop an idea so the audience grasps it quickly. Four core strategies — taught from Aristotle through modern composition texts (Lunsford &amp; Connors, <em>The Everyday Writer</em>):</p>
+        <p><b><mark>Rhetorical strategies</mark></b> are the structural moves a writer uses to develop an idea so the audience grasps it quickly. They answer the question "how should I shape this paragraph so the reader actually gets it?" Four core strategies dominate academic, journalistic and professional writing:</p>
 
         <figure class="diagram-fig" style="margin:14px 0;padding:14px;background:var(--paper-soft);border:1px solid var(--rule);border-radius:6px;">
           <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;text-align:center;">
@@ -1457,15 +1676,25 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </figure>
 
         <ul>
-          <li><b>Compare:</b> Identify <em>similarities</em> between two things — usually to explain an unfamiliar concept via a familiar one (the "is like" move).
+          <li><b><mark>Compare</mark>:</b> Identify <em>similarities</em> between two things — usually to explain an unfamiliar concept via a familiar one (the "is like" move).
             <br><em>Example:</em> "RNA is similar to DNA in that both carry genetic information using a four-letter code." Bridges the gap from known to unknown.</li>
-          <li><b>Contrast:</b> Highlight <em>differences</em> to sharpen distinctions and prevent confusion.
+          <li><b><mark>Contrast</mark>:</b> Highlight <em>differences</em> to sharpen distinctions and prevent confusion.
             <br><em>Example:</em> "Unlike inductive reasoning, which generalises from observations, deductive reasoning begins from a general principle." Useful for definitions and policy debates.</li>
-          <li><b>Classify:</b> Group items into <em>categories</em> by shared characteristics — converts a long messy list into a navigable hierarchy.
+          <li><b><mark>Classify</mark>:</b> Group items into <em>categories</em> by shared characteristics — converts a long messy list into a navigable hierarchy.
             <br><em>Example:</em> "Sources of information can be classified as <em>primary</em> (raw data), <em>secondary</em> (analysis of primary) and <em>tertiary</em> (summaries of secondary)." Essential in research writing.</li>
-          <li><b>Describe:</b> Build a vivid, specific picture using sensory or factual detail — turns abstract claims into concrete images the reader can see.
+          <li><b><mark>Describe</mark>:</b> Build a vivid, specific picture using sensory or factual detail — turns abstract claims into concrete images the reader can see.
             <br><em>Example:</em> Instead of "climate change is bad," write "Himalayan glaciers are retreating ~30 m per year, threatening the drinking water of 1.9 billion people downstream." Numbers + named river basins = unforgettable.</li>
         </ul>
+        <p><b>How to combine them:</b> a strong 5–10 mark answer typically <em>Describes</em> the concept in plain language, <em>Classifies</em> its types, then <em>Compares</em> and <em>Contrasts</em> the most confused pair. That sequence walks the examiner from familiar to precise in four moves.</p>
+
+        <p><b>Other common strategies (brief):</b></p>
+        <ul style="font-size:.95em;">
+          <li><b>Definition</b> — open with a precise meaning before any analysis ("Inductive reasoning is the move from specific cases to a general rule.").</li>
+          <li><b>Narration</b> — tell a short ordered story to anchor an abstract claim in time and place.</li>
+          <li><b>Exemplification</b> — pile multiple concrete examples behind a single claim to make it inescapable.</li>
+          <li><b>Cause-effect</b> — trace why-led-to-what, useful for policy and historical writing.</li>
+        </ul>
+
         <span class="mnem"><b>Mnemonic — "4-C-D"</b> · <em>Compare, Contrast, Classify, Describe</em> — pick at least two when explaining any new concept in a 10M answer.</span>
         <div class="score">
           <b>Mark Allocation</b>
