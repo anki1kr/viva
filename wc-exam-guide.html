@@ -66,8 +66,8 @@ nav.chips a{
   text-decoration:none; white-space:nowrap; text-transform:uppercase;
 }
 nav.chips a:hover{ background:var(--brand); color:var(--paper); }
-nav.chips a.live{ background:var(--brand); color:var(--paper); }
 nav.chips a.hot{ background:var(--highlighter); border-color:var(--ink); }
+nav.chips a.live, nav.chips a.live.hot{ background:var(--brand); color:var(--paper); border-color:var(--ink); }
 
 /* ── WRAP ── */
 .wrap{ position:relative; z-index:1; max-width:760px; margin:0 auto; padding:14px 12px 80px; }
@@ -127,6 +127,7 @@ section.unit{ margin:0 0 36px; scroll-margin-top:100px; }
 .topic li::marker{ color:var(--brand); }
 
 mark{ background:linear-gradient(180deg,transparent 55%,var(--highlighter) 55%); padding:0 1px; }
+th mark, thead mark{ background:transparent !important; color:inherit !important; padding:0 !important; }
 strong{ color:var(--ink); font-weight:700; }
 em{ color:var(--ink-soft); }
 code{ font-family:"JetBrains Mono",monospace; font-size:.86em; background:var(--paper-deep); color:var(--ink); padding:1px 6px; border-radius:3px; border:1px solid var(--rule); }
@@ -326,7 +327,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
     </div>
     <div class="box why">
       <span class="label">The AuC Security Triplet</span>
-      Authentication Centre (AuC) generates **RAND, SRES, and Kc** (the security triplet) using A3 and A8 algorithms, preventing clone phones from stealing network resources.
+      Authentication Centre (AuC) generates <b><mark>RAND, SRES, and Kc</mark></b> (the security triplet) using A3 and A8 algorithms, preventing clone phones from stealing network resources.
     </div>
   </div>
 
@@ -355,14 +356,14 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
   <div class="topic" id="t-2-1">
     <h3>Frequency Reuse &amp; Cluster Math <span class="tag hot">⭐ Guaranteed 10M</span></h3>
     <div class="box def"><span class="label">Frequency Reuse</span>
-      Low-power antennas allow the same radio channels to be reused in faraway cells. Nearby cells are grouped into a **Cluster (N)**. Each cell inside a cluster gets a distinct set of channels.
+      Low-power antennas allow the same radio channels to be reused in faraway cells. Nearby cells are grouped into a <b><mark>Cluster (N)</mark></b>. Each cell inside a cluster gets a distinct set of channels.
     </div>
     <div class="formula">
       <b>Frequency Reuse Formulas</b><br>
       • <code>Q = D / R = sqrt(3N)</code> (Co-channel reuse ratio)<br>
       • <code>Standard N sizes = i² + ij + j²</code> (Common sizes: 3, 4, 7, 9, 12)
     </div>
-    <p>A smaller cluster size $N$ increases overall network capacity but reduces the physical distance between co-channel cells, increasing **Co-channel Interference (CCI)**.</p>
+    <p>A smaller cluster size N increases overall network capacity but reduces the physical distance between co-channel cells, increasing <b><mark>Co-channel Interference (CCI)</mark></b>.</p>
   </div>
 
   <!-- 2.2 Handoff -->
@@ -380,7 +381,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <div class="box warn">
       <span class="label">Practical Considerations &amp; Ping-Pong effect</span>
-      To prevent the **Ping-Pong Effect** (rapid, repetitive handoffs back and forth at the cell boundary), networks use a **Handoff Hysteresis** buffer: a handoff is triggered only if the new station's signal exceeds the old one by a specific threshold (e.g. 3 dB to 6 dB).
+      To prevent the <b><mark>Ping-Pong Effect</mark></b> (rapid, repetitive handoffs back and forth at the cell boundary), networks use a <b><mark>Handoff Hysteresis</mark></b> buffer: a handoff is triggered only if the new station's signal exceeds the old one by a specific threshold (e.g. 3 dB to 6 dB).
     </div>
   </div>
 
@@ -419,7 +420,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
     </div>
     <div class="box warn">
       <span class="label">Near-Far Problem in CDMA</span>
-      If a mobile user is physically close to the base station, its signal will completely drown out distant users on the same frequency. CDMA resolves this by enforcing **Strict Power Control** loops (checking and adjusting mobile power 800 times a second).
+      If a mobile user is physically close to the base station, its signal will completely drown out distant users on the same frequency. CDMA resolves this by enforcing <b><mark>Strict Power Control</mark></b> loops (checking and adjusting mobile power 800 times a second).
     </div>
   </div>
 
@@ -491,7 +492,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(b)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>Explain frequency reuse. Define co-channel cells.</b></div>
       <div class="ans">
-        <mark>Frequency reuse</mark> is the cellular design technique where low-power antennas reuse the same frequency channels at spatially separated cells. Cells that share the same set of frequencies are called **co-channel cells**.
+        <mark>Frequency reuse</mark> is the cellular design technique where low-power antennas reuse the same frequency channels at spatially separated cells. Cells that share the same set of frequencies are called <b><mark>co-channel cells</mark></b>.
       </div>
     </div>
 
@@ -500,7 +501,11 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(c)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>List three advantages of digital cellular systems (2G) over analog (1G).</b></div>
       <div class="ans">
-        (1) Higher spectral capacity via <mark>TDMA</mark>/<mark>CDMA</mark> packing. (2) Secure encrypted calls. (3) Ability to handle digital SMS and low-rate data services.
+        <ul>
+          <li><b>Higher spectral capacity</b>: via <mark>TDMA</mark>/<mark>CDMA</mark> packing.</li>
+          <li><b>Secure encrypted calls</b>: A5/1 ciphering and SIM-based authentication.</li>
+          <li><b>Digital data services</b>: SMS and low-rate data over GPRS/EDGE.</li>
+        </ul>
       </div>
     </div>
 
@@ -542,7 +547,12 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(g)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>List the three GSM security authentication triplets generated by the AuC.</b></div>
       <div class="ans">
-        The <mark>AuC</mark> security triplet consists of: (1) <b>RAND</b> (Random number), (2) <b>SRES</b> (Signed Response), and (3) <b>Kc</b> (Cipher key).
+        <p>The <mark>AuC</mark> security triplet consists of:</p>
+        <ul>
+          <li><b>RAND</b>: random challenge number sent to the MS.</li>
+          <li><b>SRES</b>: signed response computed from RAND and Ki via A3.</li>
+          <li><b>Kc</b>: cipher key derived from RAND and Ki via A8 for A5 ciphering.</li>
+        </ul>
       </div>
     </div>
 
@@ -584,7 +594,13 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>Describe the GSM System Architecture in detail with a neat block diagram. Detail the role of Mobile Station (MS), Base Station Subsystem (BSS), and Network Switching Subsystem (NSS) with a table.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>GSM (Global System for Mobile communications) is the canonical second-generation digital cellular standard. The full architecture decouples the system into <b>four functional subsystems</b> — Mobile Station, Base Station Subsystem, Network Switching Subsystem, and Operations Support Subsystem — connected by <b>four standard interfaces</b> (<mark>Um</mark>, <mark>Abis</mark>, <mark>A</mark>, and the SS7-family interfaces inside the NSS). This clean layering enables multi-vendor hardware compatibility, seamless inter-operator roaming, and the orderly evolution to 3G/4G/5G. GSM operates in three primary frequency bands: <mark>GSM-900</mark> (uplink 890–915 MHz, downlink 935–960 MHz), <b>DCS-1800</b> (1710–1785 / 1805–1880 MHz), and <b>PCS-1900</b> (1850–1910 / 1930–1990 MHz, North America). Each carrier is 200 kHz wide and supports 8 TDMA full-rate timeslots.</p>
+        <p>GSM (Global System for Mobile communications) is the canonical second-generation digital cellular standard. The full architecture decouples the system into <b>four functional subsystems</b> (Mobile Station, Base Station Subsystem, Network Switching Subsystem, and Operations Support Subsystem) connected by <b>four standard interfaces</b> (<mark>Um</mark>, <mark>Abis</mark>, <mark>A</mark>, and the SS7-family interfaces inside the NSS). This clean layering enables multi-vendor hardware compatibility, seamless inter-operator roaming, and the orderly evolution to 3G/4G/5G. GSM operates in three primary frequency bands:</p>
+        <ul>
+          <li><b>GSM-900</b>: uplink 890–915 MHz, downlink 935–960 MHz.</li>
+          <li><b>DCS-1800</b>: 1710–1785 / 1805–1880 MHz (Europe / Asia).</li>
+          <li><b>PCS-1900</b>: 1850–1910 / 1930–1990 MHz (North America).</li>
+        </ul>
+        <p>Each carrier is 200 kHz wide and supports 8 TDMA full-rate timeslots.</p>
 
         <figure class="diagram-fig">
           <div style="display:flex; flex-direction:column; gap:8px; max-width:560px; margin:0 auto; padding:8px; text-align:left;">
@@ -622,34 +638,34 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>1 · Mobile Station (MS) — the subscriber endpoint</h5>
         <ul>
-          <li><b>Mobile Equipment (ME):</b> the physical handset — RF transceiver, baseband DSP, vocoder, display, keypad, battery. Identified uniquely by the <b><mark>IMEI</mark></b> (International Mobile Equipment Identity, 15 digits) burned into firmware at manufacture; checked against the EIR before granting service.</li>
-          <li><b>SIM (Subscriber Identity Module):</b> smart-card holding the <b><mark>IMSI</mark></b> (International Mobile Subscriber Identity, max 15 digits: 3-digit MCC + 2/3-digit MNC + MSIN), the secret authentication key <b>Ki</b>, the temporary identity <b><mark>TMSI</mark></b>, the cipher key <b>Kc</b> after authentication, plus phonebook/SMS storage. The SIM decouples identity from hardware — swap SIMs, keep the same number.</li>
+          <li><b>Mobile Equipment (ME):</b> the physical handset (RF transceiver, baseband DSP, vocoder, display, keypad, battery). Identified uniquely by the <b><mark>IMEI</mark></b> (International Mobile Equipment Identity, 15 digits) burned into firmware at manufacture; checked against the EIR before granting service.</li>
+          <li><b>SIM (Subscriber Identity Module):</b> smart-card holding the <b><mark>IMSI</mark></b> (International Mobile Subscriber Identity, max 15 digits: 3-digit MCC + 2/3-digit MNC + MSIN), the secret authentication key <b>Ki</b>, the temporary identity <b><mark>TMSI</mark></b>, the cipher key <b>Kc</b> after authentication, plus phonebook/SMS storage. The SIM decouples identity from hardware: swap SIMs, keep the same number.</li>
           <li><b><mark>MSISDN</mark></b> (Mobile Station ISDN Number) is the public dialable number associated with the subscription in the HLR; the IMSI is private and never travels over the air in cleartext after first attach (TMSI replaces it).</li>
           <li><b>Power classes:</b> handhelds typically Class 4 (2 W @ 900 MHz) or Class 1 (1 W @ 1800 MHz); transmit power is dynamically adjusted by the BSC in 2 dB steps to minimise interference and conserve battery.</li>
         </ul>
 
         <h5>2 · Base Station Subsystem (BSS) — the radio access layer</h5>
         <ul>
-          <li><b><mark>BTS</mark> (Base Transceiver Station):</b> the radio tower hardware — antennas, TRX units (one per carrier), power amplifiers, combiners, climate control. Handles the <b>Um air interface</b>, performs GMSK modulation/demodulation, channel coding/decoding, ciphering A5/1, frequency hopping, and the timing-advance loop.</li>
-          <li><b><mark>BSC</mark> (Base Station Controller):</b> the intelligence head controlling typically 10–100 BTS sites over the <b>Abis</b> interface. Allocates radio channels, runs the handover decision algorithm (intra-BSC handovers are entirely local — never reach the MSC), manages power control commands, and concentrates the BTS traffic over the <b>A</b> interface to the MSC.</li>
+          <li><b><mark>BTS</mark> (Base Transceiver Station):</b> the radio tower hardware (antennas, TRX units per carrier, power amplifiers, combiners, climate control). Handles the <b>Um air interface</b>, performs GMSK modulation/demodulation, channel coding/decoding, ciphering A5/1, frequency hopping, and the timing-advance loop.</li>
+          <li><b><mark>BSC</mark> (Base Station Controller):</b> the intelligence head controlling typically 10–100 BTS sites over the <b>Abis</b> interface. Allocates radio channels, runs the handover decision algorithm (intra-BSC handovers are entirely local and never reach the MSC), manages power control commands, and concentrates the BTS traffic over the <b>A</b> interface to the MSC.</li>
           <li><b>TRAU (Transcoder &amp; Rate Adaptation Unit):</b> often physically inside the BSC or MSC; converts the GSM full-rate 13 kbps speech codec into the 64 kbps PCM used inside the wired PSTN.</li>
-          <li><b>Cell types served:</b> macrocells (1–35 km), microcells (≤ 1 km), picocells (indoor, ≤ 100 m). The BSS treats all transparently — only antenna power and timing-advance window differ.</li>
+          <li><b>Cell types served:</b> macrocells (1–35 km), microcells (≤ 1 km), picocells (indoor, ≤ 100 m). The BSS treats all transparently; only antenna power and timing-advance window differ.</li>
         </ul>
 
         <h5>3 · Network Switching Subsystem (NSS) — the core network</h5>
         <ul>
-          <li><b><mark>MSC</mark> (Mobile Services Switching Centre):</b> the heart of the NSS — a circuit-switched exchange that sets up, routes, and tears down calls. Performs all PSTN-facing signalling via SS7, handles inter-BSC and inter-MSC handovers, and orchestrates billing CDRs. A <b>GMSC</b> (Gateway MSC) is the specific MSC that interfaces with external PSTN/PLMN networks for incoming roamer calls.</li>
+          <li><b><mark>MSC</mark> (Mobile Services Switching Centre):</b> the heart of the NSS, a circuit-switched exchange that sets up, routes, and tears down calls. Performs all PSTN-facing signalling via SS7, handles inter-BSC and inter-MSC handovers, and orchestrates billing CDRs. A <b>GMSC</b> (Gateway MSC) is the specific MSC that interfaces with external PSTN/PLMN networks for incoming roamer calls.</li>
           <li><b><mark>HLR</mark> (Home Location Register):</b> the <em>permanent</em> master database of every subscriber on the operator's network — one logical HLR per PLMN. Stores the IMSI, MSISDN, Ki (reference copy), service profile, supplementary services, and a pointer to the current serving VLR. Updated only at subscription provisioning or location-area change.</li>
           <li><b><mark>VLR</mark> (Visitor Location Register):</b> a <em>volatile</em> local cache co-located with each MSC, holding a partial copy of every active subscriber's HLR record currently in the MSC's service area. Cuts cross-network HLR queries from millions/hour to once-per-location-update.</li>
           <li><b><mark>AuC</mark> (Authentication Centre):</b> a tamper-proof database, paired with the HLR, that produces the <b>authentication triplet (RAND, SRES, Kc)</b> using the A3 (signed-response) and A8 (cipher-key) algorithms keyed by the subscriber's secret Ki. The triplet is delivered to the VLR over the D interface; the MS computes its own SRES from RAND with its own Ki, and the VLR compares.</li>
-          <li><b><mark>EIR</mark> (Equipment Identity Register):</b> three lists keyed by IMEI — <em>white</em> (allowed), <em>grey</em> (tracked but allowed), <em>black</em> (stolen — service denied). Cross-checked at every attach.</li>
+          <li><b><mark>EIR</mark> (Equipment Identity Register):</b> three lists keyed by IMEI: <em>white</em> (allowed), <em>grey</em> (tracked but allowed), <em>black</em> (stolen, service denied). Cross-checked at every attach.</li>
         </ul>
 
         <h5>4 · Operations Support Subsystem (OSS) — manage &amp; maintain</h5>
         <ul>
           <li><b>NMC (Network Management Centre):</b> top-tier, network-wide dashboard for the entire PLMN — strategic planning, performance dashboards, security policy.</li>
-          <li><b>OMC (Operations &amp; Maintenance Centre):</b> regional / per-BSS layer — handles the classic <b>FCAPS</b> functions: Fault management (alarms, trouble tickets), Configuration management (cell-plan changes, software upgrades), Accounting (CDR collection, mediation to the billing system), Performance management (KPIs — drop rate, handover success, RxLev distribution), Security management (audit logs, key rotation).</li>
-          <li>Connected to BSS and NSS via TCP/IP-based <b>Q3</b> (TMN) interfaces — typically out-of-band on a separate management network.</li>
+          <li><b>OMC (Operations &amp; Maintenance Centre):</b> regional / per-BSS layer handling the classic <b>FCAPS</b> functions: Fault management (alarms, trouble tickets), Configuration management (cell-plan changes, software upgrades), Accounting (CDR collection, mediation to the billing system), Performance management (KPIs: drop rate, handover success, RxLev distribution), Security management (audit logs, key rotation).</li>
+          <li>Connected to BSS and NSS via TCP/IP-based <b>Q3</b> (TMN) interfaces, typically out-of-band on a separate management network.</li>
           <li>OSS is the only subsystem a human operator interacts with daily; the rest run autonomously.</li>
         </ul>
 
@@ -672,8 +688,8 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <li>BTS assigns SDCCH; MS sends <b>Service Request</b> with TMSI; BSC forwards to MSC over A interface.</li>
           <li>MSC asks VLR for the triplet (RAND, SRES, Kc); VLR replies (or fetches from AuC via D interface if cache miss).</li>
           <li>BTS sends RAND to MS over the air; MS computes SRES locally using Ki and A3; returns SRES.</li>
-          <li>VLR compares — match? MS then computes Kc with A8, ciphering starts on the air interface.</li>
-          <li>MSC routes the dialled number to the GMSC, which forwards over SS7 to the PSTN — and the call rings on the called party's side.</li>
+          <li>VLR compares: match? MS then computes Kc with A8, ciphering starts on the air interface.</li>
+          <li>MSC routes the dialled number to the GMSC, which forwards over SS7 to the PSTN, and the call rings on the called party's side.</li>
         </ol>
 
         <div class="box warn">
@@ -685,7 +701,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <p>Although 5G NR is the headline 2026 wireless standard, the GSM (2G) architecture remains the universal voice fallback layer. Major carriers (Vodafone, Airtel, T-Mobile) continue operating GSM cores for <em>CSFB</em> (Circuit-Switched Fallback) and IoT M2M devices that use GSM/GPRS modems for low-cost telemetry. The clean MS / BSS / NSS / OSS partition seeded every subsequent generation: UMTS introduced RNC + Node-B (a BSS variant) and the same HLR/AuC; LTE replaced MSC/HLR with the all-IP <b>MME + HSS + SGW/PGW</b> in the EPC; 5G introduced the <b>Service-Based Architecture</b> with AMF/SMF/UDM serving the same functions. The decoupling principle still rules cellular design.</p>
 
         <h5>Conclusion</h5>
-        <p>GSM's four-subsystem layered architecture is the textbook reference for cellular system design. Clean separation between handset (MS), radio access (BSS), switching (NSS), and operations (OSS) — bound by standardised Um, Abis, A, and SS7-family interfaces — enables vendor interoperability, seamless mobility, and international roaming. Mastering the MS/BSS/NSS/OSS partition, the IMSI/IMEI/TMSI/MSISDN identifier set, the AuC authentication triplet, and the role of each NSS element (MSC, HLR, VLR, AuC, EIR) unlocks every subsequent generation question (UMTS, LTE EPC, 5G SBA).</p>
+        <p>GSM's four-subsystem layered architecture is the textbook reference for cellular system design. Clean separation between handset (MS), radio access (BSS), switching (NSS), and operations (OSS), bound by standardised Um, Abis, A, and SS7-family interfaces, enables vendor interoperability, seamless mobility, and international roaming. Mastering the MS/BSS/NSS/OSS partition, the IMSI/IMEI/TMSI/MSISDN identifier set, the AuC authentication triplet, and the role of each NSS element (MSC, HLR, VLR, AuC, EIR) unlocks every subsequent generation question (UMTS, LTE EPC, 5G SBA).</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -791,7 +807,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>Classic <b>N = 7</b> reuse was the 2G GSM staple and still appears on cellular planning slides; <mark>4G</mark> LTE and 5G NR moved to <b>universal reuse (N = 1)</b> with <em>Fractional Frequency Reuse (FFR)</em> and <em>Soft Frequency Reuse (SFR)</em> — interior cell users receive the full band while edge users are restricted to orthogonal sub-bands to control <mark>co-channel interference</mark>. The classical hexagonal cluster geometry survives inside modern RF planning tools (Atoll, ICS Telecom, RANplan), and is the conceptual basis of <b>Coordinated Multi-Point (CoMP)</b> transmission and 5G beam-based interference coordination.</p>
+        <p>Classic <b>N = 7</b> reuse was the 2G GSM staple and still appears on cellular planning slides; <mark>4G</mark> LTE and 5G NR moved to <b>universal reuse (N = 1)</b> with <em>Fractional Frequency Reuse (FFR)</em> and <em>Soft Frequency Reuse (SFR)</em>: interior cell users receive the full band while edge users are restricted to orthogonal sub-bands to control <mark>co-channel interference</mark>. The classical hexagonal cluster geometry survives inside modern RF planning tools (Atoll, ICS Telecom, RANplan), and is the conceptual basis of <b>Coordinated Multi-Point (CoMP)</b> transmission and 5G beam-based interference coordination.</p>
 
         <h5>Conclusion</h5>
         <p>Frequency reuse remains the single most powerful capacity multiplier in any spatially-bounded radio system: halving the cluster size roughly doubles the per-cell channel count, but the cost is a smaller Q, a smaller co-channel distance, and a degraded S/I. Cellular operators trade these knobs against subscriber density, antenna heights, and modulation robustness. Modern networks push the principle to its physical limit — universal reuse plus aggressive interference coordination — but the geometry derived above (<code>N = i² + ij + j²</code>, <code>D = R√(3N)</code>) still governs the cell plan.</p>
@@ -817,7 +833,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>Compare MAHO, MCHO, and NCHO handoff strategies. Discuss the practical handoff considerations: hysteresis, dwell time, guard channels, and the ping-pong effect. Trace the 4-stage handoff sequence.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>A <b>handoff</b> (handover) transfers an active call from one radio channel or base station to another without dropping the user session, as the subscriber moves across a cell boundary or as link conditions degrade. Without robust handoff, cellular geometry would be useless — every cell crossing would terminate a call. The control logic has evolved through three architectural strategies — <b><mark>NCHO</mark> → <mark>MAHO</mark> → <mark>MCHO</mark></b> — distinguished by <em>who measures the radio link</em> and <em>who makes the switching decision</em>. In parallel, the radio-side classification splits into <b><mark>hard</mark>, <mark>soft</mark>, and <mark>softer</mark></b> handoffs based on how the transition is executed on the air interface.</p>
+        <p>A <b>handoff</b> (handover) transfers an active call from one radio channel or base station to another without dropping the user session, as the subscriber moves across a cell boundary or as link conditions degrade. Without robust handoff, cellular geometry would be useless: every cell crossing would terminate a call. The control logic has evolved through three architectural strategies (<b><mark>NCHO</mark> → <mark>MAHO</mark> → <mark>MCHO</mark></b>), distinguished by <em>who measures the radio link</em> and <em>who makes the switching decision</em>. In parallel, the radio-side classification splits into <b><mark>hard</mark>, <mark>soft</mark>, and <mark>softer</mark></b> handoffs based on how the transition is executed on the air interface.</p>
 
         <figure class="diagram-fig">
           <div style="display:flex; flex-direction:column; gap:8px; max-width:520px; margin:0 auto; padding:6px;">
@@ -846,8 +862,8 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <ul>
           <li><b>Who measures:</b> The base station continuously samples the mobile's uplink signal strength and SNR for its own cell, and (via dedicated locator receivers) for neighbouring cells too.</li>
           <li><b>Who decides:</b> Decision is centralised at the <b>MSC</b>. The MSC collects measurement reports from many BSs, identifies a better candidate, and instructs the handover.</li>
-          <li><b>Response time:</b> Very slow — typically <b>5–10 seconds</b> between trigger condition and actual switching. Sufficient for low-mobility vehicular traffic but useless for fast walking pedestrians inside microcells.</li>
-          <li><b>Signalling load:</b> Heavy on the BS↔MSC backhaul; the mobile is completely passive — it neither measures nor decides anything.</li>
+          <li><b>Response time:</b> Very slow, typically <b>5–10 seconds</b> between trigger condition and actual switching. Sufficient for low-mobility vehicular traffic but useless for fast walking pedestrians inside microcells.</li>
+          <li><b>Signalling load:</b> Heavy on the BS↔MSC backhaul; the mobile is completely passive: it neither measures nor decides anything.</li>
           <li><b>Standard:</b> 1G analog systems (AMPS, TACS, NMT). Phased out as digital cellular matured.</li>
         </ul>
 
@@ -855,7 +871,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <ul>
           <li><b>Who measures:</b> The mobile phone itself, during idle TDMA slots, continuously scans the BCCH carriers of up to <b>6 neighbouring cells</b> (the BA-list, Neighbour Cell List) and measures their RxLev / RxQual.</li>
           <li><b>Who decides:</b> Mobile periodically reports its measurement set (every SACCH frame ≈ 480 ms in GSM) to the serving BSC; the <b>BSC + MSC</b> evaluate the ranking and trigger the handover.</li>
-          <li><b>Response time:</b> Fast — typically <b>1–2 seconds</b>; well-suited to vehicular speeds (≤ 120 km/h) and most pedestrian traffic.</li>
+          <li><b>Response time:</b> Fast, typically <b>1–2 seconds</b>; well-suited to vehicular speeds (≤ 120 km/h) and most pedestrian traffic.</li>
           <li><b>Network entities involved:</b> MS measures, BTS forwards measurement reports, BSC runs the handover algorithm (intra-BSC handovers are handled locally), MSC coordinates only inter-BSC and inter-MSC cases.</li>
           <li><b>Standard:</b> 2G GSM, IS-136 (D-AMPS), 3G UMTS. The dominant strategy in deployed cellular networks.</li>
         </ul>
@@ -864,7 +880,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <ul>
           <li><b>Who measures:</b> Mobile phone. Same as MAHO.</li>
           <li><b>Who decides:</b> The <b>mobile itself</b> picks the target and initiates the switching; the network is informed after-the-fact and merely re-routes traffic.</li>
-          <li><b>Response time:</b> Near-instant — under <b>100 ms</b>; ideal for private indoor systems where cell boundaries are crossed frequently inside a single office floor.</li>
+          <li><b>Response time:</b> Near-instant, under <b>100 ms</b>; ideal for private indoor systems where cell boundaries are crossed frequently inside a single office floor.</li>
           <li><b>Signalling load:</b> Minimal on the backbone — most logic is on the mobile side. Trade-off: each handset is more complex and battery hungry.</li>
           <li><b>Standard:</b> DECT (cordless), early Wi-Fi roaming, private Bluetooth networks. Not used in macro-cellular networks because operators want to keep handover policy under their own control (anti-poaching across operators).</li>
         </ul>
@@ -896,8 +912,8 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <ul>
           <li><b><mark>Hysteresis</mark> margin:</b> The candidate cell's RxLev must exceed the serving cell's by a fixed margin (typically <b>3–6 dB</b> in GSM) before the handover is triggered. Without it, brief Rayleigh fades would constantly toggle the active cell.</li>
           <li><b>Dwell time:</b> The continuous duration the candidate must stay better-than-threshold (typically <b>≥ 5 seconds</b>). Filters out transient spikes from constructive multipath or open windows in moving vehicles.</li>
-          <li><b>Guard channels:</b> A fixed pool of channels in every cell <em>reserved</em> for incoming handovers and unavailable to new originating calls. Trades blocking probability for new calls (B<sub>new</sub> ↑) against drop probability for handovers (P<sub>drop</sub> ↓) — a 3 % guard reserve typically suffices.</li>
-          <li><b><mark>Ping-pong</mark> effect:</b> Rapid, repetitive back-and-forth handovers at a sharp cell boundary caused by fading or geometry. Eliminated by combining <b>hysteresis + dwell time</b> — the candidate must be both <em>better</em> and <em>persistently</em> better. Also mitigated by <b>directional retry</b> in 3G (mobile sticks to last serving cell unless candidate is significantly better).</li>
+          <li><b>Guard channels:</b> A fixed pool of channels in every cell <em>reserved</em> for incoming handovers and unavailable to new originating calls. Trades blocking probability for new calls (B<sub>new</sub> ↑) against drop probability for handovers (P<sub>drop</sub> ↓); a 3 % guard reserve typically suffices.</li>
+          <li><b><mark>Ping-pong</mark> effect:</b> Rapid, repetitive back-and-forth handovers at a sharp cell boundary caused by fading or geometry. Eliminated by combining <b>hysteresis + dwell time</b>: the candidate must be both <em>better</em> and <em>persistently</em> better. Also mitigated by <b>directional retry</b> in 3G (mobile sticks to last serving cell unless candidate is significantly better).</li>
           <li><b>Cell-dragging:</b> A pedestrian with a strong line-of-sight signal can stay attached to a distant cell long after geometrically it should have switched, raising co-channel interference for everyone else. Combatted by an <em>absolute</em> RxLev floor below which handover is forced regardless of relative comparison.</li>
         </ul>
 
@@ -979,7 +995,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <li><b>Mechanism:</b> A congested cell of radius <code>R</code> is subdivided into <b>four smaller cells</b> each of radius <code>R/2</code>, with new BTS sites at the new centres. Original transmit power is reduced by a factor of 16 (path-loss with n = 4) to preserve the same coverage geometry.</li>
           <li><b>Capacity formula:</b> Since cell area scales as <code>R²</code>, halving the radius yields <code>(R/R/2)² = 4×</code> more cells per km² — and therefore <b><mark>capacity ×4</mark></b> more channels per km². The cluster size N is preserved, so S/I is unchanged.</li>
           <li><b>Worked numerical:</b> A macro cell of <b>R = 10 km</b> serving 100 channels supports 1 channel/km² in its 314 km² footprint. Splitting to <b>R/2 = 5 km</b> gives 4 cells × 100 channels in the same 314 km² → <b>1.27 channels/km²</b> ⇒ raw capacity 4×.</li>
-          <li><b>Drawback:</b> Capital intensive — each split needs new tower, backhaul, and site acquisition. Handover signalling load jumps roughly 4× because users now cross more boundaries per minute at the same walking/driving speed.</li>
+          <li><b>Drawback:</b> Capital intensive: each split needs new tower, backhaul, and site acquisition. Handover signalling load jumps roughly 4× because users now cross more boundaries per minute at the same walking/driving speed.</li>
           <li><b>Used when:</b> A specific cell is consistently congested (Erlang-B blocking > 2 %) and physical space for additional sites exists. The "umbrella cell" technique keeps the original large cell active at reduced power for high-speed users, while the new small cells serve slow / stationary traffic.</li>
         </ul>
 
@@ -987,17 +1003,17 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <ul>
           <li><b>Mechanism:</b> The single omni-directional antenna at the cell centre is replaced by <b>3 directional antennas at <mark>120°</mark></b> (or 6 at <mark>60°</mark>), each illuminating its own pie-slice sector and reusing only a 1/3 (or 1/6) subset of the cell's channels.</li>
           <li><b>Interference reduction:</b> With 3-sector 120° antennas, the number of dominant first-tier interferers drops from <b>6 to 2</b>; with 6-sector, it drops to <b>1</b>. Therefore S/I improves by ~4.7 dB (3-sector) or ~7.8 dB (6-sector) over omni.</li>
-          <li><b>Enables smaller cluster:</b> The improved S/I allows the operator to drop the cluster size from N = 7 → N = 4 or N = 3 while still meeting the 18 dB threshold — raising frequency-reuse density and effective capacity by <b>(7/4) ≈ 1.75×</b> without any extra hardware beyond the antenna swap.</li>
-          <li><b>Capital cost:</b> Very low — only the antenna head is replaced; the BTS cabinet, backhaul, and licences are untouched. The single cheapest capacity upgrade.</li>
-          <li><b>Drawback:</b> Trunking efficiency drops — splitting 60 cell-wide channels into 3 sector pools of 20 each means each sector's Erlang-B blocking is worse for the same offered load (smaller pools waste more channels through randomness). Also, sector boundary crossings inside the same cell trigger <em>intra-cell sector handovers</em> — extra signalling.</li>
+          <li><b>Enables smaller cluster:</b> The improved S/I allows the operator to drop the cluster size from N = 7 → N = 4 or N = 3 while still meeting the 18 dB threshold, raising frequency-reuse density and effective capacity by <b>(7/4) ≈ 1.75×</b> without any extra hardware beyond the antenna swap.</li>
+          <li><b>Capital cost:</b> Very low: only the antenna head is replaced; the BTS cabinet, backhaul, and licences are untouched. The single cheapest capacity upgrade.</li>
+          <li><b>Drawback:</b> Trunking efficiency drops; splitting 60 cell-wide channels into 3 sector pools of 20 each means each sector's Erlang-B blocking is worse for the same offered load (smaller pools waste more channels through randomness). Also, sector boundary crossings inside the same cell trigger <em>intra-cell sector handovers</em>: extra signalling.</li>
         </ul>
 
         <h5>3 · <mark>Microcell zone</mark> — Distributed Antennas, One BTS</h5>
         <ul>
-          <li><b>Mechanism:</b> Multiple low-power "zone" antennas (Distributed Antenna System, DAS) are installed throughout one large cell — under street lights, building rooftops, lamp posts — all <b>fed by a single central base station</b> through optical fibre. Each antenna covers a small zone of ~100 m radius.</li>
-          <li><b>Single-BS architecture:</b> The user's call is dynamically switched from one zone antenna to another as the user moves, but it stays in the same BTS — so the handover is <em>internal</em> and never reaches the BSC. Result: <b>zero classical handovers</b> across the entire macro cell.</li>
+          <li><b>Mechanism:</b> Multiple low-power "zone" antennas (Distributed Antenna System, DAS) are installed throughout one large cell (under street lights, building rooftops, lamp posts), all <b>fed by a single central base station</b> through optical fibre. Each antenna covers a small zone of ~100 m radius.</li>
+          <li><b>Single-BS architecture:</b> The user's call is dynamically switched from one zone antenna to another as the user moves, but it stays in the same BTS, so the handover is <em>internal</em> and never reaches the BSC. Result: <b>zero classical handovers</b> across the entire macro cell.</li>
           <li><b>Capacity gain:</b> Each zone has its own subset of channels, effectively delivering small-cell capacity over the original macro footprint. Achieves capacity densities comparable to splitting but without the multi-BTS site cost.</li>
-          <li><b>Worked numerical:</b> A 1-km macro cell with 60 channels traditionally serves 60 simultaneous calls. Replacing it with 9 zone antennas in a 3×3 grid (each with 60 channels via spatial reuse inside the cell) raises effective capacity to ~9 × 60 = <b>540 channels</b> in the same macro footprint — at the cost of fibre/cabling, not towers.</li>
+          <li><b>Worked numerical:</b> A 1-km macro cell with 60 channels traditionally serves 60 simultaneous calls. Replacing it with 9 zone antennas in a 3×3 grid (each with 60 channels via spatial reuse inside the cell) raises effective capacity to ~9 × 60 = <b>540 channels</b> in the same macro footprint, at the cost of fibre/cabling, not towers.</li>
           <li><b>Drawback:</b> Fibre / coaxial cabling between zones and central BTS is expensive to retrofit in legacy buildings. Best suited to greenfield campuses, airports, malls, stadiums where conduit is already planned.</li>
         </ul>
 
@@ -1017,9 +1033,9 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>Trunking &amp; Handoff Trade-offs</h5>
         <ul>
-          <li><b>Cell splitting</b> is the only technique that delivers <em>uncapped</em> capacity growth — you can always split further — but the marginal cost rises and handover overhead scales linearly with the number of new boundaries.</li>
+          <li><b>Cell splitting</b> is the only technique that delivers <em>uncapped</em> capacity growth (you can always split further), but the marginal cost rises and handover overhead scales linearly with the number of new boundaries.</li>
           <li><b>Cell sectoring</b> is the cheapest single upgrade in the toolkit; it's the textbook first step for an operator running out of capacity on a legacy tower.</li>
-          <li><b>Microzone</b> deployment avoids the handover storm of splitting by mapping every zone under one central BTS, but it shifts cost from towers to fibre runs and centralised baseband racks — economically attractive only in dense indoor venues.</li>
+          <li><b>Microzone</b> deployment avoids the handover storm of splitting by mapping every zone under one central BTS, but it shifts cost from towers to fibre runs and centralised baseband racks: economically attractive only in dense indoor venues.</li>
         </ul>
 
         <div class="box warn">
@@ -1028,7 +1044,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>2026 networks heavily favour <b>5G small-cell densification</b> — a refinement of cell splitting where pico/femto cells (10–100 m radius) are deployed in malls, stadiums, and on street furniture (lamp posts, traffic signals). Massive-MIMO + <b>3D beamforming</b> in 5G NR effectively realises <em>adaptive sectoring</em> — 64 to 256 spatially-steered beams replace 3 fixed sectors, so the directional pattern follows the user instead of being static. Modern <b>Distributed Antenna Systems (DAS)</b> productise the microzone concept across enterprise indoors and venues (cricket stadiums, airports, metro systems). All three classical techniques therefore survive — just in software-defined, beam-shaped, fibre-fed form.</p>
+        <p>2026 networks heavily favour <b>5G small-cell densification</b>: a refinement of cell splitting where pico/femto cells (10–100 m radius) are deployed in malls, stadiums, and on street furniture (lamp posts, traffic signals). Massive-MIMO + <b>3D beamforming</b> in 5G NR effectively realises <em>adaptive sectoring</em>, with 64 to 256 spatially-steered beams replacing 3 fixed sectors, so the directional pattern follows the user instead of being static. Modern <b>Distributed Antenna Systems (DAS)</b> productise the microzone concept across enterprise indoors and venues (cricket stadiums, airports, metro systems). All three classical techniques therefore survive — just in software-defined, beam-shaped, fibre-fed form.</p>
 
         <h5>Conclusion</h5>
         <p>Cell splitting, sectoring, and microzone form the cellular capacity playbook. Splitting buys raw area gain at high capex; sectoring is the cheapest interference fix; microzone trades cabling for handover-free indoor capacity. Modern 5G blends all three — small cells (splitting), Massive-MIMO beams (sectoring), and centralised distributed units (microzone-style DAS) — but the underlying physics, same-channel reuse at a safe distance, has not changed since the original AMPS design.</p>
@@ -1053,7 +1069,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>Compare FDMA, TDMA, CDMA, and SDMA multiple access techniques in detail with a comparison table. Discuss the code separation concept in CDMA and show a worked bit-level despreading example.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>Multiple access defines <em>how multiple subscribers share a single physical wireless channel</em> without destructive interference. The four canonical schemes — <b><mark>FDMA</mark></b>, <b><mark>TDMA</mark></b>, <b><mark>CDMA</mark></b>, <b><mark>SDMA</mark></b> — partition the medium along four orthogonal axes: <em>frequency, time, code, space</em>. FDMA dominated 1G analog cellular (AMPS, TACS, NMT); TDMA became the workhorse of 2G GSM and IS-136; CDMA powered the IS-95 / CDMA2000 / WCDMA 3G family; and SDMA — long theoretical — finally arrived in mass deployment with <mark>4G</mark>/5G Massive-MIMO. Real-world systems hybridise: GSM is FDMA + TDMA, LTE is OFDMA, 5G NR is OFDMA + SDMA + power-domain NOMA. Understanding the four base axes is the foundation for everything modern.</p>
+        <p>Multiple access defines <em>how multiple subscribers share a single physical wireless channel</em> without destructive interference. The four canonical schemes (<b><mark>FDMA</mark></b>, <b><mark>TDMA</mark></b>, <b><mark>CDMA</mark></b>, <b><mark>SDMA</mark></b>) partition the medium along four orthogonal axes: <em>frequency, time, code, space</em>. FDMA dominated 1G analog cellular (AMPS, TACS, NMT); TDMA became the workhorse of 2G GSM and IS-136; CDMA powered the IS-95 / CDMA2000 / WCDMA 3G family; and SDMA (long theoretical) finally arrived in mass deployment with <mark>4G</mark>/5G Massive-MIMO. Real-world systems hybridise: GSM is FDMA + TDMA, LTE is OFDMA, 5G NR is OFDMA + SDMA + power-domain NOMA. Understanding the four base axes is the foundation for everything modern.</p>
 
         <figure class="diagram-fig">
           <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px; max-width:580px; margin:0 auto; padding:6px;">
@@ -1090,7 +1106,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <li><b>Axis:</b> Frequency. The total allocated bandwidth is sliced into many <b>narrowband sub-carriers</b>, each ~25–30 kHz wide in AMPS, separated by small guard bands.</li>
           <li><b>Multiplexing:</b> Each user is permanently assigned <em>one</em> sub-carrier for the duration of the call. The user transmits continuously on that carrier.</li>
           <li><b>Advantage:</b> Extremely simple analog hardware — a narrowband filter and an FM modulator are sufficient. No clock synchronisation required.</li>
-          <li><b>Disadvantage:</b> Wastes spectrum during talker silence (the channel is held idle); guard bands between adjacent users consume 10–15 % of the band; rigid — no on-demand data rate adaptation.</li>
+          <li><b>Disadvantage:</b> Wastes spectrum during talker silence (the channel is held idle); guard bands between adjacent users consume 10–15 % of the band; rigid, with no on-demand data rate adaptation.</li>
           <li><b>Real-world use:</b> 1G AMPS (832 channels × 30 kHz across 25 MHz), TACS, NMT-450/900. Today FDMA-style partitioning survives as the carrier-grid in OFDMA.</li>
         </ul>
 
@@ -1098,26 +1114,26 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <ul>
           <li><b>Axis:</b> Time. All users share the <em>same frequency</em> but transmit in different <b>time slots</b> of a repeating frame.</li>
           <li><b>Frame structure (GSM):</b> One TDMA frame = <b>8 timeslots × 577 μs = 4.615 ms</b>; one slot carries one burst of 156.25 bits → ~270.833 kbit/s gross on a 200 kHz carrier. Higher-level frames stack into multiframes (26 / 51) and superframes for control plus speech traffic.</li>
-          <li><b>Advantage:</b> Flexible — a user can be assigned multiple slots per frame to bump up data rate (HSCSD, EDGE). The transmitter is bursty, so it draws less average power and battery, and the receiver can sleep between its own slots (DTX/DRX).</li>
-          <li><b>Disadvantage:</b> Tight <b>time synchronisation</b> mandatory across the cell — each MS must fire its burst within a ±¼-symbol guard time. GSM solves this with <b>Timing Advance</b> commands from the BTS. Guard time + sync bits waste ~10 % of nominal capacity.</li>
+          <li><b>Advantage:</b> Flexible: a user can be assigned multiple slots per frame to bump up data rate (HSCSD, EDGE). The transmitter is bursty, so it draws less average power and battery, and the receiver can sleep between its own slots (DTX/DRX).</li>
+          <li><b>Disadvantage:</b> Tight <b>time synchronisation</b> mandatory across the cell; each MS must fire its burst within a ±¼-symbol guard time. GSM solves this with <b>Timing Advance</b> commands from the BTS. Guard time + sync bits waste ~10 % of nominal capacity.</li>
           <li><b>Real-world use:</b> 2G GSM (8 slots / 200 kHz carrier), IS-136 D-AMPS (3 slots / 30 kHz), DECT, satellite VSAT.</li>
         </ul>
 
         <h5>3 · CDMA — Code Division Multiple Access</h5>
         <ul>
           <li><b>Axis:</b> Code. <em>All</em> users transmit <em>simultaneously</em> on the <em>same wideband carrier</em>; user separation is purely mathematical, via unique <b>pseudo-noise (PN) codes</b> (e.g. Walsh codes).</li>
-          <li><b><mark>Spreading gain</mark> (G<sub>p</sub>):</b> The data bit is XOR'd with a much faster chip sequence — typical chip rate <code>W = 1.2288 Mcps</code> (IS-95), data rate <code>R = 9.6 kbps</code> → <b><mark>G_p = W/R</mark> = 1.2288 × 10⁶ / 9.6 × 10³ = 128 ≈ 21 dB</b>. This processing gain pulls the wanted signal out of the noise/interference floor.</li>
-          <li><b>Soft capacity:</b> There is no hard cap on number of users — adding users gradually raises everyone's interference floor (graceful degradation), unlike FDMA/TDMA which hit a hard wall.</li>
-          <li><b>Disadvantage:</b> The <b><mark>near-far effect</mark></b> — a close mobile drowns out distant ones unless aggressive closed-loop <b>power control</b> (~800 Hz updates in IS-95) equalises received powers at the BTS. Also requires highly accurate timing reference (often GPS-disciplined at the BTS).</li>
+          <li><b><mark>Spreading gain</mark> (G<sub>p</sub>):</b> The data bit is XOR'd with a much faster chip sequence; typical chip rate <code>W = 1.2288 Mcps</code> (IS-95), data rate <code>R = 9.6 kbps</code> → <b><mark>G_p = W/R</mark> = 1.2288 × 10⁶ / 9.6 × 10³ = 128 ≈ 21 dB</b>. This processing gain pulls the wanted signal out of the noise/interference floor.</li>
+          <li><b>Soft capacity:</b> There is no hard cap on number of users; adding users gradually raises everyone's interference floor (graceful degradation), unlike FDMA/TDMA which hit a hard wall.</li>
+          <li><b>Disadvantage:</b> The <b><mark>near-far effect</mark></b>: a close mobile drowns out distant ones unless aggressive closed-loop <b>power control</b> (~800 Hz updates in IS-95) equalises received powers at the BTS. Also requires highly accurate timing reference (often GPS-disciplined at the BTS).</li>
           <li><b>Real-world use:</b> 3G WCDMA, CDMA2000, IS-95. Surviving today inside 4G LTE's CDMA-based <b>HARQ</b> sub-layer and 5G NR's broadcast channels.</li>
         </ul>
 
         <h5>4 · SDMA — Space Division Multiple Access</h5>
         <ul>
-          <li><b>Axis:</b> Space. The same time-frequency resource is reused at <em>different spatial locations</em> through directional or beam-formed antennas — adaptive electromagnetic isolation replaces frequency/time/code separation.</li>
+          <li><b>Axis:</b> Space. The same time-frequency resource is reused at <em>different spatial locations</em> through directional or beam-formed antennas; adaptive electromagnetic isolation replaces frequency/time/code separation.</li>
           <li><b>Mechanism:</b> A phased-array antenna with N elements can synthesise N independent <b>beams</b> by adjusting per-element amplitude and phase weights. Massive-MIMO arrays in 5G NR use 64 to 256 elements per panel, supporting tens of simultaneous user beams on the same PRB.</li>
-          <li><b>Advantage:</b> Dramatic spectral-efficiency boost — the same band is reused N times per cell. Reduces co-channel interference at the source (not just at the receiver).</li>
-          <li><b>Disadvantage:</b> High array hardware complexity, channel-state-information (CSI) feedback overhead, and reliance on rich multipath (line-of-sight scenarios can collapse the spatial dimension). Also vulnerable to user mobility — beams must be re-steered continuously.</li>
+          <li><b>Advantage:</b> Dramatic spectral-efficiency boost: the same band is reused N times per cell. Reduces co-channel interference at the source (not just at the receiver).</li>
+          <li><b>Disadvantage:</b> High array hardware complexity, channel-state-information (CSI) feedback overhead, and reliance on rich multipath (line-of-sight scenarios can collapse the spatial dimension). Also vulnerable to user mobility: beams must be re-steered continuously.</li>
           <li><b>Real-world use:</b> 5G NR Massive-MIMO, IEEE 802.11ax (Wi-Fi 6) downlink MU-MIMO, satellite spot-beam systems (Starlink, OneWeb).</li>
         </ul>
 
@@ -1164,7 +1180,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>4G LTE and 5G NR use <b>OFDMA</b> (Orthogonal Frequency Division Multiple Access) — a refined FDMA where subcarriers are mutually orthogonal, eliminating guard bands. The uplink in LTE uses <b>SC-FDMA</b> for lower PAPR. Massive-MIMO in 5G is essentially SDMA at scale (64–256 antennas), and the next 6G generation (3GPP Rel-20+) explores <b>non-orthogonal multiple access (NOMA)</b> — multiple users on the same time-frequency resource separated by power level.</p>
+        <p>4G LTE and 5G NR use <b>OFDMA</b> (Orthogonal Frequency Division Multiple Access) — a refined FDMA where subcarriers are mutually orthogonal, eliminating guard bands. The uplink in LTE uses <b>SC-FDMA</b> for lower PAPR. Massive-MIMO in 5G is essentially SDMA at scale (64–256 antennas), and the next 6G generation (3GPP Rel-20+) explores <b>non-orthogonal multiple access (NOMA)</b>, with multiple users on the same time-frequency resource separated by power level.</p>
 
         <h5>Conclusion</h5>
         <p>FDMA, TDMA, CDMA, and SDMA represent the four orthogonal partitionings of the wireless medium; CDMA's mathematical orthogonality unlocked the 3G capacity revolution, and SDMA's spatial dimension now powers 5G Massive-MIMO. Real systems combine multiple axes (OFDMA + SDMA + power-domain NOMA) to squeeze maximum capacity from finite spectrum.</p>
@@ -1270,7 +1286,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </div>
 
         <h5>Conclusion</h5>
-        <p>Differentiate questions reward <em>contrast clarity</em> over depth — a clean 5–6-row table with distinct axes scores higher than three paragraphs of free prose. Memorise 3–4 differentiating axes for every common pair (analog/digital, FDMA/TDMA, WAN/WLAN, MAHO/NCHO, ISDN/AIN, DSSS/FHSS, Bluetooth/WLL) and you bank 15 easy marks.</p>
+        <p>Differentiate questions reward <em>contrast clarity</em> over depth: a clean 5–6-row table with distinct axes scores higher than three paragraphs of free prose. Memorise 3–4 differentiating axes for every common pair (analog/digital, FDMA/TDMA, WAN/WLAN, MAHO/NCHO, ISDN/AIN, DSSS/FHSS, Bluetooth/WLL) and you bank 15 easy marks.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1373,9 +1389,9 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <div class="mnem">
       <b>All Mnemonics — One Place</b><br>
-      • **Access Schemes:** FDMA, TDMA, CDMA, SDMA (Frequency, Time, Code, Space)<br>
-      • **AuC Security Triplet:** RAND · SRES · Kc<br>
-      • **Handoff Considerations:** Hysteresis, Dwell time, Guard channels, Ping-Pong effect
+      • <b>Access Schemes:</b> FDMA, TDMA, CDMA, SDMA (Frequency, Time, Code, Space)<br>
+      • <b>AuC Security Triplet:</b> RAND · SRES · Kc<br>
+      • <b>Handoff Considerations:</b> Hysteresis, Dwell time, Guard channels, Ping-Pong effect
     </div>
 
     <div class="hot-qs">

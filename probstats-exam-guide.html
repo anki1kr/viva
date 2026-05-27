@@ -127,8 +127,8 @@ nav.chips a{
   text-transform:uppercase;
 }
 nav.chips a:hover{ background:var(--crimson); color:var(--paper); }
-nav.chips a.live{ background:var(--crimson); color:var(--paper); }
 nav.chips a.hot{ background:var(--highlighter); border-color:var(--ink); }
+nav.chips a.live, nav.chips a.live.hot{ background:var(--crimson); color:var(--paper); border-color:var(--ink); }
 
 /* ── WRAP ── */
 .wrap{
@@ -396,6 +396,7 @@ mark{
   background:linear-gradient(180deg, transparent 55%, var(--highlighter) 55%);
   padding:0 1px;
 }
+th mark, thead mark{ background:transparent !important; color:inherit !important; padding:0 !important; }
 strong{ color:var(--ink); font-weight:700; }
 code{
   font-family:"JetBrains Mono",monospace;
@@ -1970,7 +1971,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
     <div class="qcard predicted">
       <div class="qbody"><b>(d) State the memoryless property of Exponential distribution.</b></div>
       <div class="ans">
-        For X ~ Exp(L), <mark>P(X &gt; s + t | X &gt; s) = P(X &gt; t)</mark>. The probability of surviving an additional time t is independent of the age s already reached — the <mark>memoryless property</mark>. This property is shared only with the discrete Geometric and continuous Exponential laws (unlike <mark>uniform</mark> or <mark>normal</mark>).
+        For X ~ Exp(L), <mark>P(X &gt; s + t | X &gt; s) = P(X &gt; t)</mark>. The probability of surviving an additional time t is independent of the age s already reached: the <mark>memoryless property</mark>. This property is shared only with the discrete Geometric and continuous Exponential laws (unlike <mark>uniform</mark> or <mark>normal</mark>).
       </div>
     </div>
 
@@ -2106,7 +2107,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         </div>
 
         <h5>(b) MGF Derivations</h5>
-        <p>The <mark>moment generating</mark> function (<mark>MGF</mark>) M<sub>X</sub>(t) = E[e<sup>tX</sup>] uniquely determines the distribution (when it exists in an open neighbourhood of 0) and produces every moment via M<sub>X</sub><sup>(r)</sup>(0) = E(X<sup>r</sup>). We derive it twice — once for the given Exponential pdf, once for the Binomial (so the student has both the continuous-integral pattern and the discrete-sum pattern to copy in the exam).</p>
+        <p>The <mark>moment generating</mark> function (<mark>MGF</mark>) M<sub>X</sub>(t) = E[e<sup>tX</sup>] uniquely determines the distribution (when it exists in an open neighbourhood of 0) and produces every moment via M<sub>X</sub><sup>(r)</sup>(0) = E(X<sup>r</sup>). We derive it twice: once for the given Exponential pdf, once for the Binomial (so the student has both the continuous-integral pattern and the discrete-sum pattern to copy in the exam).</p>
 
         <p><b>Part (b)(i) — MGF of f(x) = 2e<sup>−2x</sup>, x ≥ 0  (Exponential with λ = 2).</b></p>
         <div class="steps">
@@ -2319,7 +2320,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
               <li>(3 − 2.85)<sup>2</sup> / 2.85 = 0.0225 / 2.85 = 0.0079</li>
             </ul>
             <mark><b>χ²<sub>calc</sub> = 0.0206</b></mark>. Degrees of freedom = (cells after pooling 4) − 1 (constraint Σ) − 1 (estimated λ) = 2.
-            Critical χ<sup>2</sup><sub>0.05, 2</sub> = 5.991. Since 0.0206 ≪ 5.991, <b>do not reject</b> the Poisson hypothesis — the model fits the accident data very well.
+            Critical χ<sup>2</sup><sub>0.05, 2</sub> = 5.991. Since 0.0206 ≪ 5.991, <b>do not reject</b> the Poisson hypothesis: the model fits the accident data very well.
           </div>
         </div>
 
@@ -2467,7 +2468,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
           <div class="step k">
             <b>(iii) Conditional f(y | x):</b>
             f(y | x) = f(x, y) / f<sub>X</sub>(x) = <b>(x + y) / (x + ½)</b>,  0 ≤ y ≤ 1.
-            (At x = 0: f(y | 0) = y/(½) = 2y; at x = 1: f(y | 1) = (1 + y)/1.5 — both still integrate to 1 over y ∈ [0, 1].)
+            (At x = 0: f(y | 0) = y/(½) = 2y; at x = 1: f(y | 1) = (1 + y)/1.5; both still integrate to 1 over y ∈ [0, 1].)
           </div>
           <div class="step k">
             <b>Means E(X) and E(Y):</b>
@@ -2514,10 +2515,10 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>Joint distributions underlie machine-learning feature-correlation matrices (every <code>pandas.DataFrame.corr()</code> call produces a sample covariance matrix), Gaussian copulas in quantitative-finance credit-risk models, recommendation systems where (user, item) ratings form a joint sample, climate models with paired temperature/precipitation fields, and multivariate hypothesis tests (Hotelling's T<sup>2</sup>, MANOVA). The Cov-ρ pair is the foundational object — PCA, factor analysis, portfolio optimisation, and Mahalanobis distance all read from the same covariance matrix.</p>
+        <p>Joint distributions underlie machine-learning feature-correlation matrices (every <code>pandas.DataFrame.corr()</code> call produces a sample covariance matrix), Gaussian copulas in quantitative-finance credit-risk models, recommendation systems where (user, item) ratings form a joint sample, climate models with paired temperature/precipitation fields, and multivariate hypothesis tests (Hotelling's T<sup>2</sup>, MANOVA). The Cov-ρ pair is the foundational object: PCA, factor analysis, portfolio optimisation, and Mahalanobis distance all read from the same covariance matrix.</p>
 
         <h5>Conclusion</h5>
-        <p>Marginals collapse one variable by row/column summation (discrete) or single-axis integration (continuous); conditionals re-normalise the joint by the corresponding marginal. The discrete table yields a very weak positive correlation ρ ≈ 0.098 driven mostly by the (X = 3, Y = 2) cell, while the continuous f(x, y) = x + y produces an almost-zero negative covariance −1/144. Both cases confirm that uncorrelated does not entail independent and that the magnitude of ρ — not its raw sign — carries the strength signal.</p>
+        <p>Marginals collapse one variable by row/column summation (discrete) or single-axis integration (continuous); conditionals re-normalise the joint by the corresponding marginal. The discrete table yields a very weak positive correlation ρ ≈ 0.098 driven mostly by the (X = 3, Y = 2) cell, while the continuous f(x, y) = x + y produces an almost-zero negative covariance −1/144. Both cases confirm that uncorrelated does not entail independent and that the magnitude of ρ, not its raw sign, carries the strength signal.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
@@ -2559,7 +2560,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
       </div>
       <div class="ans">
         <h5>(a) Karl Pearson Correlation Coefficient</h5>
-        <p>The <mark>Karl Pearson r</mark> coefficient measures the strength and direction of <i>linear</i> association between two paired variables — fitted via the <mark>method of least squares</mark>. Key properties:</p>
+        <p>The <mark>Karl Pearson r</mark> coefficient measures the strength and direction of <i>linear</i> association between two paired variables, fitted via the <mark>method of least squares</mark>. Key properties:</p>
         <ul>
           <li><b>Range:</b> −1 ≤ r ≤ +1; r = ±1 ⇔ all (x<sub>i</sub>, y<sub>i</sub>) lie exactly on a straight line.</li>
           <li><b>Unit-free:</b> r is invariant under change of origin and positive scale: r(aX + b, cY + d) = sign(ac) · r(X, Y).</li>
@@ -2707,10 +2708,10 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>The Karl Pearson coefficient is the default association metric in correlation heatmaps used for ML feature selection, finance asset-return diversification, and gene-expression studies. The two regression lines are the simplest case of the normal-equations machinery — every linear-model library (<code>sklearn.linear_model.LinearRegression</code>, R's <code>lm()</code>, Stata's <code>regress</code>) solves the matrix generalisation X<sup>T</sup>Xβ = X<sup>T</sup>y of exactly these equations. The identity r<sup>2</sup> = b<sub>yx</sub>·b<sub>xy</sub> generalises to the coefficient of determination R<sup>2</sup> in multiple regression.</p>
+        <p>The Karl Pearson coefficient is the default association metric in correlation heatmaps used for ML feature selection, finance asset-return diversification, and gene-expression studies. The two regression lines are the simplest case of the normal-equations machinery: every linear-model library (<code>sklearn.linear_model.LinearRegression</code>, R's <code>lm()</code>, Stata's <code>regress</code>) solves the matrix generalisation X<sup>T</sup>Xβ = X<sup>T</sup>y of exactly these equations. The identity r<sup>2</sup> = b<sub>yx</sub>·b<sub>xy</sub> generalises to the coefficient of determination R<sup>2</sup> in multiple regression.</p>
 
         <h5>Conclusion</h5>
-        <p>The computed r ≈ 0.944 confirms a strong positive linear relationship. Both regression lines pass through (X̄, Ȳ) = (28, 28.4) and their slopes multiply to r<sup>2</sup> ≈ 0.8903, recovering r via square root. The technique scales unchanged to multivariate regression via matrix least squares — a single conceptual jump from this 2-variable case.</p>
+        <p>The computed r ≈ 0.944 confirms a strong positive linear relationship. Both regression lines pass through (X̄, Ȳ) = (28, 28.4) and their slopes multiply to r<sup>2</sup> ≈ 0.8903, recovering r via square root. The technique scales unchanged to multivariate regression via matrix least squares, a single conceptual jump from this 2-variable case.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
@@ -2836,7 +2837,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
           <div class="step k">
             <b><mark>Posterior</mark>:</b>
             P(D | +) = 0.0099 / 0.0594 = <mark><b>P(D | +) = 0.1667 (≈ 16.67%)</b></mark>.
-            Interpretation: even after a positive test, the chance of disease is only ~17% because the prior prevalence (1%) is very low — base-rate fallacy in action.
+            Interpretation: even after a positive test, the chance of disease is only ~17% because the prior prevalence (1%) is very low: base-rate fallacy in action.
           </div>
         </div>
 
@@ -2863,10 +2864,10 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>Least-squares curve fitting is the engine of every supervised ML model — gradient descent solves the same normal equations at scale (X<sup>T</sup>X β = X<sup>T</sup>y), and polynomial regression is the direct generalisation of the parabola fit shown here. Bayes' theorem drives Naïve Bayes spam filters, medical-test interpretation in epidemiology, A/B-test posterior updates in growth experimentation, and the foundation of Bayesian deep learning, MCMC, and variational inference. The base-rate fallacy (posterior ≈ 17% despite a 99%-accurate test) is the canonical example cited in clinical-decision-support and screening-policy literature.</p>
+        <p>Least-squares curve fitting is the engine of every supervised ML model: gradient descent solves the same normal equations at scale (X<sup>T</sup>X β = X<sup>T</sup>y), and polynomial regression is the direct generalisation of the parabola fit shown here. Bayes' theorem drives Naïve Bayes spam filters, medical-test interpretation in epidemiology, A/B-test posterior updates in growth experimentation, and the foundation of Bayesian deep learning, MCMC, and variational inference. The base-rate fallacy (posterior ≈ 17% despite a 99%-accurate test) is the canonical example cited in clinical-decision-support and screening-policy literature.</p>
 
         <h5>Conclusion</h5>
-        <p>Parabola fit Y = 1.42 − 1.07X + 0.55X<sup>2</sup> minimises Σ(Y − Ŷ)<sup>2</sup>; residuals sum to zero as required by least squares. Bayes gives P(D | +) ≈ 16.67% — even a 99%-accurate test on a 1%-prevalence disease yields mostly false positives, because the false-positive count 0.05 × 0.99 = 0.0495 swamps the true-positive count 0.99 × 0.01 = 0.0099. Both results showcase how disciplined arithmetic outperforms intuition.</p>
+        <p>Parabola fit Y = 1.42 − 1.07X + 0.55X<sup>2</sup> minimises Σ(Y − Ŷ)<sup>2</sup>; residuals sum to zero as required by least squares. Bayes gives P(D | +) ≈ 16.67%: even a 99%-accurate test on a 1%-prevalence disease yields mostly false positives, because the false-positive count 0.05 × 0.99 = 0.0495 swamps the true-positive count 0.99 × 0.01 = 0.0099. Both results showcase how disciplined arithmetic outperforms intuition.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
@@ -2983,7 +2984,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
             = 1 − 60 / 990
             = 1 − 0.06061
             = <mark><b>ρ<sub>s</sub> = 0.9394</b></mark>.
-            Strong positive agreement between the two judges — every disagreement is exactly ±1 rank.
+            Strong positive agreement between the two judges: every disagreement is exactly ±1 rank.
           </div>
           <div class="step k">
             <b>Cross-check via Karl Pearson on the ranks:</b>
@@ -2993,7 +2994,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         </div>
 
         <h5>(b) Joint pdf — Region Probabilities</h5>
-        <p>For a joint pdf f(x, y), the probability of any measurable region R is P((X, Y) ∈ R) = ∫∫<sub>R</sub> f(x, y) dx dy. When f(x, y) factorises into g(x)·h(y) and the region is a Cartesian product [a, b] × [c, d], the double integral splits into a product of two single integrals — major shortcut. For non-rectangular regions (e.g. X + Y &lt; 1), the inner limits depend on the outer variable and must be derived from the boundary equation.</p>
+        <p>For a joint pdf f(x, y), the probability of any measurable region R is P((X, Y) ∈ R) = ∫∫<sub>R</sub> f(x, y) dx dy. When f(x, y) factorises into g(x)·h(y) and the region is a Cartesian product [a, b] × [c, d], the double integral splits into a product of two single integrals: major shortcut. For non-rectangular regions (e.g. X + Y &lt; 1), the inner limits depend on the outer variable and must be derived from the boundary equation.</p>
         <div class="steps">
           <div class="step k">
             <b>Verify f(x, y) = 4xy is a valid pdf:</b>

@@ -67,8 +67,8 @@ nav.chips a{
   text-decoration:none; white-space:nowrap; text-transform:uppercase;
 }
 nav.chips a:hover{ background:var(--brand); color:var(--paper); }
-nav.chips a.live{ background:var(--brand); color:var(--paper); }
 nav.chips a.hot{ background:var(--highlighter); border-color:var(--ink); }
+nav.chips a.live, nav.chips a.live.hot{ background:var(--brand); color:var(--paper); border-color:var(--ink); }
 
 /* ── WRAP ── */
 .wrap{ position:relative; z-index:1; max-width:760px; margin:0 auto; padding:14px 12px 80px; }
@@ -128,6 +128,7 @@ section.unit{ margin:0 0 36px; scroll-margin-top:100px; }
 .topic li::marker{ color:var(--brand); }
 
 mark{ background:linear-gradient(180deg,transparent 55%,var(--highlighter) 55%); padding:0 1px; }
+th mark, thead mark{ background:transparent !important; color:inherit !important; padding:0 !important; }
 strong{ color:var(--ink); font-weight:700; }
 em{ color:var(--ink-soft); }
 code{ font-family:"JetBrains Mono",monospace; font-size:.86em; background:var(--paper-deep); color:var(--ink); padding:1px 6px; border-radius:3px; border:1px solid var(--rule); }
@@ -568,7 +569,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
   <!-- 4.3 Query Processing -->
   <div class="topic" id="t-4-3">
     <h3>Query Processing &amp; Heuristic Optimization <span class="tag hot">⭐ Repeated 2×</span></h3>
-    <p>Database engines convert declarative SQL into a relational algebra execution tree and optimize it. **Heuristic optimization** applies 6 structural rules to rewrite the query tree cheaply without needing data statistics:</p>
+    <p>Database engines convert declarative SQL into a relational algebra execution tree and optimize it. <b><mark>Heuristic optimization</mark></b> applies 6 structural rules to rewrite the query tree cheaply without needing data statistics:</p>
     <div class="steps">
       <div class="step"><span class="k">1</span><div class="body"><b>Push Selections (σ) down:</b> Filter rows as early as possible (shrinks intermediate table sizes).</div></div>
       <div class="step"><span class="k">2</span><div class="body"><b>Push Projections (π) down:</b> Discard columns early (reduces row widths in memory).</div></div>
@@ -595,7 +596,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
   <!-- 4.5 Concurrency -->
   <div class="topic" id="t-4-5">
     <h3>2PL Concurrency &amp; Strict 2PL Recoverability <span class="tag hot">⭐ Guaranteed 10M</span></h3>
-    <p>To support thousands of concurrent transactions without data corruption, DBMSs use locking. The **Two-Phase Locking (2PL)** protocol guarantees conflict-serializability by splitting transaction locks into two distinct phases:</p>
+    <p>To support thousands of concurrent transactions without data corruption, DBMSs use locking. The <b><mark>Two-Phase Locking (2PL)</mark></b> protocol guarantees conflict-serializability by splitting transaction locks into two distinct phases:</p>
     <div class="steps">
       <div class="step"><span class="k">1</span><div class="body"><b>Growing Phase:</b> Transaction acquires locks (Shared, Exclusive). Cannot release any locks.</div></div>
       <div class="step"><span class="k">2</span><div class="body"><b>Shrinking Phase:</b> Transaction releases locks. Cannot acquire any new locks.</div></div>
@@ -773,7 +774,13 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(j)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>What is a transaction? List its ACID properties.</b></div>
       <div class="ans">
-        A transaction is a logical unit of database execution. <mark>ACID</mark> properties: <b>A</b>tomicity (all-or-nothing), <b>C</b>onsistency (preserves database rules), <b>I</b>solation (independent execution), <b>D</b>urability (survives crashes).
+        A transaction is a logical unit of database execution. The <mark>ACID</mark> properties are:
+        <ul>
+          <li><b>A</b>tomicity: all-or-nothing</li>
+          <li><b>C</b>onsistency: preserves database rules</li>
+          <li><b>I</b>solation: independent execution</li>
+          <li><b>D</b>urability: survives crashes</li>
+        </ul>
       </div>
     </div>
 
@@ -788,7 +795,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>Explain the ANSI/SPARC Three-Schema Architecture in detail with a neat diagram. Differentiate between Logical and Physical Data Independence with concrete examples.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>The <mark>ANSI/SPARC</mark> Three-Schema Architecture is the cornerstone reference model of every modern relational database system. It decouples how data is <em>seen</em> by end-users from how data is <em>structured</em> logically, and from how data is <em>stored</em> physically on disk. The architecture is therefore a contract between three roles: the end-user/application developer (who sees external views), the DBA (who designs the conceptual schema), and the storage engineer / DBMS internals (who manages physical layout). Connecting these three layers are two dynamic <b>mappings</b> — external-to-conceptual and conceptual-to-internal — and it is precisely these mappings that deliver the two flavours of <em>data independence</em> the architecture is famous for.</p>
+        <p>The <mark>ANSI/SPARC</mark> Three-Schema Architecture is the cornerstone reference model of every modern relational database system. It decouples how data is <em>seen</em> by end-users from how data is <em>structured</em> logically, and from how data is <em>stored</em> physically on disk. The architecture is therefore a contract between three roles: the end-user/application developer (who sees external views), the DBA (who designs the conceptual schema), and the storage engineer / DBMS internals (who manages physical layout). Connecting these three layers are two dynamic <b>mappings</b> (external-to-conceptual and conceptual-to-internal), and it is precisely these mappings that deliver the two flavours of <em>data independence</em> the architecture is famous for.</p>
 
         <figure class="diagram-fig">
           <div style="border:1.5px solid var(--ink); border-radius:4px; padding:10px; max-width:440px; margin:0 auto; text-align:left; background:#fff;">
@@ -812,19 +819,19 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <li><b>1. <mark>External</mark> Level (View Level):</b> The highest abstraction layer. Each user-group sees only a customised subset of the database expressed as one or more <b>SQL views</b>. Sensitive columns (salary, password hash) can be hidden from low-privilege roles, and complex multi-table joins can be pre-packaged so application developers query a single virtual table.</li>
           <li><b>2. <mark>Conceptual</mark> Level (Logical Level):</b> The complete, integrated logical schema of the whole database — all base tables, columns, data types, primary keys, foreign keys, CHECK constraints, triggers, and assertions. It is designed and maintained by the DBA and is the only layer that captures the <em>business semantics</em> of the enterprise.</li>
           <li><b>3. <mark>Internal</mark> Level (Physical Level):</b> The lowest abstraction. It describes how rows are actually laid out on disk pages — file organisation (heap, sorted, hashed), index structures (B+ tree, hash, bitmap, GiST), block size, page-fill factor, compression, partitioning, and buffer-pool policy. End-users and applications never address this layer directly.</li>
-          <li><b>External / Conceptual Mapping:</b> Translates a query on a view into a query on the underlying base tables — enables <em><mark>logical data independence</mark></em>.</li>
-          <li><b>Conceptual / Internal Mapping:</b> Translates logical row-level operations into physical block-level I/O on disk — enables <em><mark>physical data independence</mark></em>.</li>
-          <li><b>Single DBA — multiple users:</b> The DBA edits one conceptual schema; thousands of users continue to query their unchanged external views without redeployment.</li>
-          <li><b>Same conceptual schema — many storage backends:</b> The same Employee table can sit on SSD, HDD, or compressed columnar storage; the conceptual layer stays untouched.</li>
+          <li><b>External / Conceptual Mapping:</b> Translates a query on a view into a query on the underlying base tables; enables <em><mark>logical data independence</mark></em>.</li>
+          <li><b>Conceptual / Internal Mapping:</b> Translates logical row-level operations into physical block-level I/O on disk; enables <em><mark>physical data independence</mark></em>.</li>
+          <li><b>Single DBA, multiple users:</b> The DBA edits one conceptual schema; thousands of users continue to query their unchanged external views without redeployment.</li>
+          <li><b>Same conceptual schema, many storage backends:</b> The same Employee table can sit on SSD, HDD, or compressed columnar storage; the conceptual layer stays untouched.</li>
         </ul>
 
         <h5>Worked Example — University Database</h5>
         <p>Consider a <b>University</b> database with one underlying base table <code>STUDENT(<u>RollNo</u>, Name, Branch, CGPA, ContactPhone, GuardianAddress)</code>.</p>
         <ul>
-          <li><b>External view 1 (for Faculty):</b> <code>CREATE VIEW v_faculty AS SELECT RollNo, Name, Branch, CGPA FROM STUDENT;</code> — hides phone and address.</li>
-          <li><b>External view 2 (for Hostel Warden):</b> <code>CREATE VIEW v_warden AS SELECT RollNo, Name, ContactPhone, GuardianAddress FROM STUDENT;</code> — hides academic info.</li>
-          <li><b>Conceptual change:</b> DBA adds <code>Email</code> column to STUDENT. Both views keep working because their SELECT lists do not reference Email — this is <b>logical data independence in action</b>.</li>
-          <li><b>Internal change:</b> DBA creates a B+ tree index on <code>CGPA</code> for faster ranking queries. Neither the STUDENT table definition nor either view changes — this is <b>physical data independence in action</b>.</li>
+          <li><b>External view 1 (for Faculty):</b> <code>CREATE VIEW v_faculty AS SELECT RollNo, Name, Branch, CGPA FROM STUDENT;</code> hides phone and address.</li>
+          <li><b>External view 2 (for Hostel Warden):</b> <code>CREATE VIEW v_warden AS SELECT RollNo, Name, ContactPhone, GuardianAddress FROM STUDENT;</code> hides academic info.</li>
+          <li><b>Conceptual change:</b> DBA adds <code>Email</code> column to STUDENT. Both views keep working because their SELECT lists do not reference Email: this is <b>logical data independence in action</b>.</li>
+          <li><b>Internal change:</b> DBA creates a B+ tree index on <code>CGPA</code> for faster ranking queries. Neither the STUDENT table definition nor either view changes: this is <b>physical data independence in action</b>.</li>
         </ul>
 
         <h5><mark>Logical DI</mark> vs <mark>Physical DI</mark></h5>
@@ -880,24 +887,24 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>A hospital maintains records of Patients (PID, Name, Phone), Doctors (DocID, Name, Specialty), Departments (DeptID, DName), Appointments, and Bills. Design a complete ER Diagram clearly indicating entities, attributes (with keys), cardinality ratios, and participation constraints. Reduce the ER diagram into relational schemas.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>The Entity-Relationship (ER) model represents the real-world business domain as a network of <b><mark>entities</mark></b> (things with independent existence), <b>attributes</b> (properties), and <b><mark>relationships</mark></b> (associations between entities). For the hospital scenario, the design proceeds by mining nouns from the requirement — <em>patient, doctor, department, appointment, bill</em> — and classifying each as a strong entity, weak entity, or relationship. The output of this exercise is a conceptual schema that can be mechanically reduced into normalised relational tables ready for SQL <code>CREATE TABLE</code> statements.</p>
+        <p>The Entity-Relationship (ER) model represents the real-world business domain as a network of <b><mark>entities</mark></b> (things with independent existence), <b>attributes</b> (properties), and <b><mark>relationships</mark></b> (associations between entities). For the hospital scenario, the design proceeds by mining nouns from the requirement (<em>patient, doctor, department, appointment, bill</em>) and classifying each as a strong entity, weak entity, or relationship. The output of this exercise is a conceptual schema that can be mechanically reduced into normalised relational tables ready for SQL <code>CREATE TABLE</code> statements.</p>
 
         <h5>Step 1 — Entity Identification</h5>
         <ul>
-          <li><b>Patient</b> — strong entity (has its own primary key <code>PID</code>; can exist independently in the system even before any appointment is booked).</li>
-          <li><b>Doctor</b> — strong entity (primary key <code>DocID</code>; exists independently of patients).</li>
-          <li><b>Department</b> — strong entity (primary key <code>DeptID</code>; a department exists even if zero doctors are currently assigned to it).</li>
-          <li><b>Bill</b> — <em><mark>weak entity</mark></em>. A bill cannot exist without a patient — if the patient row is deleted, all bills are meaningless. Its partial key <code>BillNo</code> is unique only <em>within</em> a single patient; combined with <code>PID</code> from the owner entity it forms the composite primary key.</li>
-          <li><b>Appointment</b> — modelled as a <em><mark>junction entity</mark></em> rather than a plain relationship, because it has its own descriptive attributes (<code>ApptDate</code>, <code>Diagnosis</code>) and participates in multiple relationships (patient-attends-appointment, doctor-conducts-appointment).</li>
+          <li><b>Patient</b>: strong entity (has its own primary key <code>PID</code>; can exist independently in the system even before any appointment is booked).</li>
+          <li><b>Doctor</b>: strong entity (primary key <code>DocID</code>; exists independently of patients).</li>
+          <li><b>Department</b>: strong entity (primary key <code>DeptID</code>; a department exists even if zero doctors are currently assigned to it).</li>
+          <li><b>Bill</b>: <em><mark>weak entity</mark></em>. A bill cannot exist without a patient: if the patient row is deleted, all bills are meaningless. Its partial key <code>BillNo</code> is unique only <em>within</em> a single patient; combined with <code>PID</code> from the owner entity it forms the composite primary key.</li>
+          <li><b>Appointment</b>: modelled as a <em><mark>junction entity</mark></em> rather than a plain relationship, because it has its own descriptive attributes (<code>ApptDate</code>, <code>Diagnosis</code>) and participates in multiple relationships (patient-attends-appointment, doctor-conducts-appointment).</li>
         </ul>
 
         <h5>Step 2 — Attribute Classification</h5>
         <ul>
-          <li><b>Simple attributes:</b> <code>Name</code>, <code>Specialty</code>, <code>Amount</code> — atomic, single-valued.</li>
+          <li><b>Simple attributes:</b> <code>Name</code>, <code>Specialty</code>, <code>Amount</code>; atomic, single-valued.</li>
           <li><b>Composite attribute:</b> <code>Name</code> may further decompose into <code>(FirstName, LastName)</code> if the business needs surname-based search.</li>
-          <li><b>Multi-valued attribute:</b> Patient <code>{Phone}</code> — drawn with a double oval in Chen notation; one patient may register multiple contact numbers (home, mobile, emergency).</li>
-          <li><b>Derived attribute:</b> <code>Age</code> derived from <code>DateOfBirth</code> — not stored, computed on read.</li>
-          <li><b>Key attribute:</b> <code>PID</code> on Patient and <code>DocID</code> on Doctor — underlined in Chen notation.</li>
+          <li><b>Multi-valued attribute:</b> Patient <code>{Phone}</code>, drawn with a double oval in Chen notation; one patient may register multiple contact numbers (home, mobile, emergency).</li>
+          <li><b>Derived attribute:</b> <code>Age</code> derived from <code>DateOfBirth</code>; not stored, computed on read.</li>
+          <li><b>Key attribute:</b> <code>PID</code> on Patient and <code>DocID</code> on Doctor; underlined in Chen notation.</li>
         </ul>
 
         <figure class="diagram-fig">
@@ -965,7 +972,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <li><b>Strong Entities:</b> Each strong entity becomes a table with its primary key. <code>PATIENT(<u>PID</u>, Name)</code>, <code>DEPARTMENT(<u>DeptID</u>, DName)</code>.</li>
           <li><b>1 : N Relationship (belongs-to):</b> Migrate the primary key of the "1" side as a foreign key into the "N" side. Doctor table absorbs DeptID: <code>DOCTOR(<u>DocID</u>, Name, Specialty, DeptID*)</code>.</li>
           <li><b>Weak Entity (Bill):</b> Create a separate table whose primary key is the composite of the owner's PK plus the partial discriminator: <code>BILL(<u>PID*, BillNo</u>, Date, Amount)</code>. PID is simultaneously a foreign key referencing PATIENT and a part of BILL's primary key.</li>
-          <li><b>Multi-valued Attribute (Patient.Phone):</b> Storing phone numbers as a comma-separated string in the PATIENT row violates 1NF. Decompose into <code>PATIENT_PHONE(<u>PID*, Phone</u>)</code> — composite primary key, PID is also a foreign key.</li>
+          <li><b>Multi-valued Attribute (Patient.Phone):</b> Storing phone numbers as a comma-separated string in the PATIENT row violates 1NF. Decompose into <code>PATIENT_PHONE(<u>PID*, Phone</u>)</code>: composite primary key, PID is also a foreign key.</li>
           <li><b>M : N Relationship (Appointment):</b> Convert the relationship into its own table whose primary key is the composite of both participating entity keys plus any discriminator needed for uniqueness: <code>APPOINTMENT(<u>PID*, DocID*, ApptDate</u>, Diagnosis)</code>.</li>
           <li><b>Derived attribute Age:</b> NOT stored; computed at query time as <code>DATEDIFF(YEAR, DateOfBirth, CURRENT_DATE)</code>.</li>
         </ol>
@@ -1006,10 +1013,10 @@ APPOINTMENT(PID*, DocID*, ApptDate, Diagnosis)
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>The ER model remains the universal sketch language for database design in 2026. Every commercial schema-design tool — Lucidchart, dbdiagram.io, MySQL Workbench, DBeaver, the schema visualisers built into MongoDB Compass and Supabase Studio — uses entity-relationship semantics even when the target store is a NoSQL document database. In agile teams, the ER diagram serves as the single artifact that data engineers, backend developers, and product managers can all read; it precedes (and survives) every framework migration the application layer goes through.</p>
+        <p>The ER model remains the universal sketch language for database design in 2026. Every commercial schema-design tool (Lucidchart, dbdiagram.io, MySQL Workbench, DBeaver, the schema visualisers built into MongoDB Compass and Supabase Studio) uses entity-relationship semantics even when the target store is a NoSQL document database. In agile teams, the ER diagram serves as the single artifact that data engineers, backend developers, and product managers can all read; it precedes (and survives) every framework migration the application layer goes through.</p>
 
         <h5>Conclusion</h5>
-        <p>A faithful ER diagram captures the business rules of the enterprise before a single CREATE TABLE statement is written. The four artefacts produced in this answer — the labelled diagram, the relational schemas, the cardinality × participation matrix, and the reduction pipeline — form a complete bridge from natural-language requirements to a normalised, foreign-key-constrained relational database. Once cardinality, participation, and weak-entity dependencies are correctly identified at the conceptual stage, the translation to SQL is mechanical and the resulting schema is automatically in at least 2NF.</p>
+        <p>A faithful ER diagram captures the business rules of the enterprise before a single CREATE TABLE statement is written. The four artefacts produced in this answer (the labelled diagram, the relational schemas, the cardinality × participation matrix, and the reduction pipeline) form a complete bridge from natural-language requirements to a normalised, foreign-key-constrained relational database. Once cardinality, participation, and weak-entity dependencies are correctly identified at the conceptual stage, the translation to SQL is mechanical and the resulting schema is automatically in at least 2NF.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1035,17 +1042,17 @@ APPOINTMENT(PID*, DocID*, ApptDate, Diagnosis)
       </b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p><mark>Relational algebra</mark> (RA) is the <b>procedural</b> query language of the relational model — it answers <em>how</em> to compute a result by composing operators on relations. SQL is the <b>declarative</b> language — it answers <em>what</em> the user wants, leaving the optimiser to derive the procedure. Mastery of RA is essential because every modern query optimiser (Postgres, MySQL, Oracle, SQL Server, Snowflake) first parses SQL into a relational-algebra tree, then applies algebraic equivalences — selection push-down, join reordering, projection pruning — before producing the physical execution plan that actually reads pages off disk.</p>
+        <p><mark>Relational algebra</mark> (RA) is the <b>procedural</b> query language of the relational model: it answers <em>how</em> to compute a result by composing operators on relations. SQL is the <b>declarative</b> language: it answers <em>what</em> the user wants, leaving the optimiser to derive the procedure. Mastery of RA is essential because every modern query optimiser (Postgres, MySQL, Oracle, SQL Server, Snowflake) first parses SQL into a relational-algebra tree, then applies algebraic equivalences (selection push-down, join reordering, projection pruning) before producing the physical execution plan that actually reads pages off disk.</p>
 
         <h5>Core RA Operators (Quick Reference)</h5>
         <ul>
-          <li><b><mark>Selection (σ)</mark>:</b> filters rows by a predicate — equivalent to SQL <code>WHERE</code>.</li>
-          <li><b><mark>Projection (π)</mark>:</b> picks columns and removes duplicates — equivalent to SQL <code>SELECT DISTINCT</code>.</li>
-          <li><b>ρ (Rename):</b> renames a relation or attribute — equivalent to SQL <code>AS</code>.</li>
-          <li><b><mark>Cartesian product</mark> (×):</b> pairs every row of R with every row of S — equivalent to SQL <code>CROSS JOIN</code>.</li>
-          <li><b><mark>Join (⋈)</mark> (Natural Join):</b> joins on common attribute names — equivalent to SQL <code>INNER JOIN ... USING</code>.</li>
+          <li><b><mark>Selection (σ)</mark>:</b> filters rows by a predicate; equivalent to SQL <code>WHERE</code>.</li>
+          <li><b><mark>Projection (π)</mark>:</b> picks columns and removes duplicates; equivalent to SQL <code>SELECT DISTINCT</code>.</li>
+          <li><b>ρ (Rename):</b> renames a relation or attribute; equivalent to SQL <code>AS</code>.</li>
+          <li><b><mark>Cartesian product</mark> (×):</b> pairs every row of R with every row of S; equivalent to SQL <code>CROSS JOIN</code>.</li>
+          <li><b><mark>Join (⋈)</mark> (Natural Join):</b> joins on common attribute names; equivalent to SQL <code>INNER JOIN ... USING</code>.</li>
           <li><b><mark>Union</mark> (∪), Intersect (∩), <mark>Difference</mark> (−):</b> set-based combination of union-compatible relations.</li>
-          <li><b>÷ (Division):</b> answers "for all" questions — e.g. employees who work on every project.</li>
+          <li><b>÷ (Division):</b> answers "for all" questions, for instance employees who work on every project.</li>
         </ul>
 
         <figure class="diagram-fig">
@@ -1137,10 +1144,10 @@ WHERE w.ProjID = 'S9';</code></pre>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>Although developers write SQL, every modern optimiser — Postgres, MySQL InnoDB, Oracle, SQL Server, BigQuery, Snowflake, ClickHouse — parses the query into a relational-algebra tree (logical plan), then applies algebraic equivalences (selection push-down, join reordering, projection pruning, common-subexpression elimination) before producing a physical plan with concrete operators (hash-join, sort-merge-join, index-only-scan). Reasoning in RA is therefore not academic decoration: it is exactly how the engine that runs your SQL "thinks". Tools such as <code>EXPLAIN ANALYZE</code> in Postgres and <code>EXPLAIN PLAN</code> in Oracle directly show the RA-tree the optimiser chose, and reading them well requires fluency in σ / π / ⋈ notation.</p>
+        <p>Although developers write SQL, every modern optimiser (Postgres, MySQL InnoDB, Oracle, SQL Server, BigQuery, Snowflake, ClickHouse) parses the query into a relational-algebra tree (logical plan), then applies algebraic equivalences (selection push-down, join reordering, projection pruning, common-subexpression elimination) before producing a physical plan with concrete operators (hash-join, sort-merge-join, index-only-scan). Reasoning in RA is therefore not academic decoration: it is exactly how the engine that runs your SQL "thinks". Tools such as <code>EXPLAIN ANALYZE</code> in Postgres and <code>EXPLAIN PLAN</code> in Oracle directly show the RA-tree the optimiser chose, and reading them well requires fluency in σ / π / ⋈ notation.</p>
 
         <h5>Conclusion</h5>
-        <p>RA and SQL are duals — procedural mathematics versus declarative English. A clean RA expression often exposes the cheapest physical plan; conversely, knowing when SQL semantics force <code>INTERSECT</code> or <code>EXISTS</code> rescues developers from the classic "<code>AND</code> on the same column" trap shown in part (c). The procedural RA discipline of always projecting last, joining on the smallest filtered intermediate result, and pushing selections close to the base relations is the same discipline that produces low-latency SQL queries in production OLTP systems.</p>
+        <p>RA and SQL are duals: procedural mathematics versus declarative English. A clean RA expression often exposes the cheapest physical plan; conversely, knowing when SQL semantics force <code>INTERSECT</code> or <code>EXISTS</code> rescues developers from the classic "<code>AND</code> on the same column" trap shown in part (c). The procedural RA discipline of always projecting last, joining on the smallest filtered intermediate result, and pushing selections close to the base relations is the same discipline that produces low-latency SQL queries in production OLTP systems.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1172,11 +1179,11 @@ WHERE w.ProjID = 'S9';</code></pre>
         <ul>
           <li><b>Attribute closure X⁺:</b> the set of all attributes functionally determined by X under FD-set F. Algorithm: start with X, repeatedly apply any FD whose LHS is fully in the current set, add the RHS, stop when nothing changes.</li>
           <li><b>Super key:</b> a set X such that X⁺ = R (all attributes).</li>
-          <li><b><mark>Candidate key</mark>:</b> a <em>minimal</em> super key — no strict subset is a super key.</li>
+          <li><b><mark>Candidate key</mark>:</b> a <em>minimal</em> super key; no strict subset is a super key.</li>
           <li><b>Prime attribute:</b> an attribute that belongs to at least one candidate key. Non-prime = not in any candidate key.</li>
           <li><b>3NF condition (per FD X → Y):</b> either X is a super key, OR Y is a prime attribute. Equivalent: no non-prime attribute transitively depends on a key.</li>
-          <li><b>Lossless decomposition:</b> the natural join of the sub-relations exactly reconstructs R with no extra spurious tuples — guaranteed if the shared attributes form a super key in at least one component.</li>
-          <li><b>Dependency-preserving decomposition:</b> the union of FDs enforceable on individual sub-relations is equivalent to the original F — no FD requires a multi-table join to validate.</li>
+          <li><b>Lossless decomposition:</b> the natural join of the sub-relations exactly reconstructs R with no extra spurious tuples; guaranteed if the shared attributes form a super key in at least one component.</li>
+          <li><b>Dependency-preserving decomposition:</b> the union of FDs enforceable on individual sub-relations is equivalent to the original F; no FD requires a multi-table join to validate.</li>
         </ul>
 
         <h5>(a) Attribute Closure of {A, B}</h5>
@@ -1242,7 +1249,7 @@ R5(F, A)      -- Enforces F → A</code></pre>
 
         <div class="box warn">
           <span class="label">Examiner Trap</span>
-          A common student error is to declare {A, B} the <em>only</em> candidate key and stop. Whenever the FD-set contains a "reverse" path (here <code>F → A</code> and <code>D → F</code>), each candidate-key attribute that appears on the RHS of an FD can be <b>substituted by its determinant</b>, producing additional candidate keys. Always test substitutions — missing a candidate key sinks the 3NF decision because a prime attribute may go undetected.
+          A common student error is to declare {A, B} the <em>only</em> candidate key and stop. Whenever the FD-set contains a "reverse" path (here <code>F → A</code> and <code>D → F</code>), each candidate-key attribute that appears on the RHS of an FD can be <b>substituted by its determinant</b>, producing additional candidate keys. Always test substitutions: missing a candidate key sinks the 3NF decision because a prime attribute may go undetected.
         </div>
 
         <h5>Normalisation Applications</h5>
@@ -1257,10 +1264,10 @@ R5(F, A)      -- Enforces F → A</code></pre>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>In 2026, production OLTP stores — PostgreSQL, MySQL, Oracle, SQL Server — are still designed in 3NF (occasionally BCNF) so that every business fact is stored exactly once and update anomalies cannot occur. By deliberate contrast, modern analytical warehouses such as Snowflake, BigQuery, Amazon Redshift, and Databricks Delta Lake denormalise into <b>star schemas</b> (one fact table plus many dimension tables) because at petabyte scale, the cost of joining normalised tables on every analytical query far outweighs the cost of storing redundant copies of dimension attributes. The 3NF discipline therefore lives at the system-of-record layer; the warehouse layer below it denormalises deliberately.</p>
+        <p>In 2026, production OLTP stores (PostgreSQL, MySQL, Oracle, SQL Server) are still designed in 3NF (occasionally BCNF) so that every business fact is stored exactly once and update anomalies cannot occur. By deliberate contrast, modern analytical warehouses such as Snowflake, BigQuery, Amazon Redshift, and Databricks Delta Lake denormalise into <b>star schemas</b> (one fact table plus many dimension tables) because at petabyte scale, the cost of joining normalised tables on every analytical query far outweighs the cost of storing redundant copies of dimension attributes. The 3NF discipline therefore lives at the system-of-record layer; the warehouse layer below it denormalises deliberately.</p>
 
         <h5>Conclusion</h5>
-        <p>The three-step pipeline demonstrated in this answer — compute closures, enumerate candidate keys by substitution, then synthesise 3NF relations from the minimal cover — is the canonical workflow every DBA follows when designing a transactional schema. 3NF decomposition that is simultaneously lossless and dependency-preserving is the gold standard for OLTP systems: it eliminates redundancy, prevents update/insert/delete anomalies, allows every original constraint to be checked without joining tables back together, and still keeps the join cost reasonable for OLTP workloads with selective indexes on the primary keys.</p>
+        <p>The three-step pipeline demonstrated in this answer (compute closures, enumerate candidate keys by substitution, then synthesise 3NF relations from the minimal cover) is the canonical workflow every DBA follows when designing a transactional schema. 3NF decomposition that is simultaneously lossless and dependency-preserving is the gold standard for OLTP systems: it eliminates redundancy, prevents update/insert/delete anomalies, allows every original constraint to be checked without joining tables back together, and still keeps the join cost reasonable for OLTP workloads with selective indexes on the primary keys.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1282,14 +1289,14 @@ R5(F, A)      -- Enforces F → A</code></pre>
       <div class="qbody"><b>What is Two-Phase Locking (2PL)? Explain its variants (Basic, Conservative, Strict, Rigorous) with a comparison table. Why is Strict 2PL preferred for ensuring transaction recoverability in DBMS? Sketch a cascading abort scenario under basic 2PL.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>Two-Phase Locking (<mark>2PL</mark>) is a <b>pessimistic <mark>concurrency control</mark> protocol</b> that guarantees <em><mark>serializable</mark></em> schedules. The protocol enforces a strict ordering on lock operations of each transaction: a <b><mark>growing phase</mark></b> during which the transaction may acquire any number of locks but may not release any, followed by a <b><mark>shrinking phase</mark></b> in which the transaction may release locks but may not acquire any new ones. The single point at which the transaction switches from growing to shrinking is called its <em>lock point</em>; the relative ordering of lock-points across transactions in a schedule defines the equivalent serial order. This two-phase structure is the fundamental theorem of database concurrency control — any schedule produced by 2PL is guaranteed to be equivalent to <em>some</em> serial schedule.</p>
+        <p>Two-Phase Locking (<mark>2PL</mark>) is a <b>pessimistic <mark>concurrency control</mark> protocol</b> that guarantees <em><mark>serializable</mark></em> schedules. The protocol enforces a strict ordering on lock operations of each transaction: a <b><mark>growing phase</mark></b> during which the transaction may acquire any number of locks but may not release any, followed by a <b><mark>shrinking phase</mark></b> in which the transaction may release locks but may not acquire any new ones. The single point at which the transaction switches from growing to shrinking is called its <em>lock point</em>; the relative ordering of lock-points across transactions in a schedule defines the equivalent serial order. This two-phase structure is the fundamental theorem of database concurrency control: any schedule produced by 2PL is guaranteed to be equivalent to <em>some</em> serial schedule.</p>
 
         <h5>Lock Types &amp; Compatibility</h5>
         <ul>
-          <li><b>Shared lock (S):</b> acquired before any read. Multiple S-locks on the same item are compatible — many transactions can read concurrently.</li>
-          <li><b>Exclusive lock (X):</b> acquired before any write. Incompatible with every other lock on the same item — exactly one writer at a time, and no concurrent readers.</li>
+          <li><b>Shared lock (S):</b> acquired before any read. Multiple S-locks on the same item are compatible: many transactions can read concurrently.</li>
+          <li><b>Exclusive lock (X):</b> acquired before any write. Incompatible with every other lock on the same item: exactly one writer at a time, and no concurrent readers.</li>
           <li><b>Lock-compatibility matrix:</b> <code>S/S = ✓</code>, <code>S/X = ✗</code>, <code>X/S = ✗</code>, <code>X/X = ✗</code>.</li>
-          <li><b>Lock-upgrade:</b> a transaction holding S may upgrade to X if no other transaction holds any lock on the item — but the upgrade must happen during the growing phase.</li>
+          <li><b>Lock-upgrade:</b> a transaction holding S may upgrade to X if no other transaction holds any lock on the item, but the upgrade must happen during the growing phase.</li>
           <li><b>Lock-downgrade:</b> X may be downgraded to S during the shrinking phase only (Strict 2PL forbids this until commit).</li>
         </ul>
 
@@ -1299,14 +1306,14 @@ R5(F, A)      -- Enforces F → A</code></pre>
 T2: read(A); read(B); print(A + B); commit</code></pre>
         <p>A legal Basic-2PL schedule:</p>
         <ol>
-          <li>T1: <code>X-lock(A)</code> · read(A) · write(A) — <em>growing</em></li>
-          <li>T1: <code>X-lock(B)</code> — <em>still growing; lock-point reached at end of step 2</em></li>
-          <li>T1: <code>unlock(A)</code> — <em>shrinking begins</em></li>
-          <li>T2: <code>S-lock(A)</code> · read(A) — sees post-write value 50</li>
+          <li>T1: <code>X-lock(A)</code> · read(A) · write(A), <em>growing</em></li>
+          <li>T1: <code>X-lock(B)</code>, <em>still growing; lock-point reached at end of step 2</em></li>
+          <li>T1: <code>unlock(A)</code>, <em>shrinking begins</em></li>
+          <li>T2: <code>S-lock(A)</code> · read(A), sees post-write value 50</li>
           <li>T1: write(B) · <code>unlock(B)</code> · commit</li>
           <li>T2: <code>S-lock(B)</code> · read(B) · print(50 + 250 = 300) · commit</li>
         </ol>
-        <p>The schedule is conflict-equivalent to the serial order T1 → T2 (T1's lock-point precedes T2's), so it is serialisable. Note however that <b>T2 read A after T1 had already released its X-lock but before T1 committed</b> — this is precisely the cascading-abort hazard that Strict 2PL eliminates by holding X-locks until commit.</p>
+        <p>The schedule is conflict-equivalent to the serial order T1 → T2 (T1's lock-point precedes T2's), so it is serialisable. Note however that <b>T2 read A after T1 had already released its X-lock but before T1 committed</b>: this is precisely the cascading-abort hazard that Strict 2PL eliminates by holding X-locks until commit.</p>
 
         <h5>The 2PL Variants</h5>
         <div class="table-wrap">
@@ -1320,8 +1327,8 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
         </div>
 
         <h5>Why Strict 2PL ensures Recoverability &amp; Cascadelessness</h5>
-        <p>Under Basic 2PL, a transaction can release an Exclusive lock on item X mid-execution. Another transaction can then read that uncommitted value of X and commit. If the first transaction subsequently aborts, the committed transaction has read a <b>dirty value</b>, violating consistency and forcing a <em><mark>cascading abort</mark></em> across every dependent transaction. The DBMS must roll back not just T1 but also T2, T3, … any transaction that read a value T1 wrote — even if those follow-on transactions had already committed. In a high-throughput OLTP system this cascade can grow to hundreds of transactions and effectively halt the database.</p>
-        <p>Strict 2PL <b>retains all exclusive locks until transaction commit or rollback</b>, completely blocking other operations from reading dirty, uncommitted data. As a direct consequence: (1) every schedule is <em>recoverable</em> — no transaction commits before any other transaction whose data it read has committed; and (2) every schedule is <em>cascadeless</em> — no transaction reads data written by an uncommitted transaction. Cascadelessness implies recoverability, so the stronger property is gained essentially for free once Strict 2PL is enforced.</p>
+        <p>Under Basic 2PL, a transaction can release an Exclusive lock on item X mid-execution. Another transaction can then read that uncommitted value of X and commit. If the first transaction subsequently aborts, the committed transaction has read a <b>dirty value</b>, violating consistency and forcing a <em><mark>cascading abort</mark></em> across every dependent transaction. The DBMS must roll back not just T1 but also T2, T3, … any transaction that read a value T1 wrote, even if those follow-on transactions had already committed. In a high-throughput OLTP system this cascade can grow to hundreds of transactions and effectively halt the database.</p>
+        <p>Strict 2PL <b>retains all exclusive locks until transaction commit or rollback</b>, completely blocking other operations from reading dirty, uncommitted data. As a direct consequence: (1) every schedule is <em>recoverable</em>, meaning no transaction commits before any other transaction whose data it read has committed; and (2) every schedule is <em>cascadeless</em>, meaning no transaction reads data written by an uncommitted transaction. Cascadelessness implies recoverability, so the stronger property is gained essentially for free once Strict 2PL is enforced.</p>
 
         <h5>Cascading Abort Scenario (under Basic 2PL)</h5>
         <figure class="diagram-fig">
@@ -1363,7 +1370,7 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
 
         <div class="box warn">
           <span class="label">Pitfall — Deadlock under Strict 2PL</span>
-          Strict and Rigorous 2PL <em>guarantee cascadelessness</em> but do <b>not</b> prevent deadlock — two transactions can each hold a lock the other needs (T1 holds X(A) waits for X(B); T2 holds X(B) waits for X(A)). Production engines therefore add a deadlock-detection cycle in the lock-wait graph (every few seconds) and abort the youngest transaction to break the cycle. Only Conservative 2PL is deadlock-free, but its all-locks-upfront requirement is impractical for SQL workloads where the read-set is not known until the query is parsed.
+          Strict and Rigorous 2PL <em>guarantee cascadelessness</em> but do <b>not</b> prevent deadlock: two transactions can each hold a lock the other needs (T1 holds X(A) waits for X(B); T2 holds X(B) waits for X(A)). Production engines therefore add a deadlock-detection cycle in the lock-wait graph (every few seconds) and abort the youngest transaction to break the cycle. Only Conservative 2PL is deadlock-free, but its all-locks-upfront requirement is impractical for SQL workloads where the read-set is not known until the query is parsed.
         </div>
 
         <h5>Concurrency-Control Applications</h5>
@@ -1382,7 +1389,7 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
         <p>2PL remains the default concurrency mechanism for write-heavy OLTP workloads in 2026: MySQL InnoDB implements Strict 2PL on row locks, and SQL Server uses Strict 2PL by default. PostgreSQL and Oracle layer MVCC on top so reads never block writers, but they still fall back to Strict-2PL-style locking on write-write conflicts. Even distributed databases such as CockroachDB, Spanner, and YugabyteDB encode 2PL-equivalent serialisation guarantees on top of multi-version timestamps, proving that the two-phase principle scales unchanged from a single-node InnoDB instance to a globally-replicated cluster.</p>
 
         <h5>Conclusion</h5>
-        <p>Strict 2PL trades a small amount of concurrency for the strongest practical guarantees — conflict-serialisable, cascadeless, and recoverable schedules — which is why it remains the default isolation strategy whenever transactional correctness must not be sacrificed for throughput. The four-variant ladder (Basic → Conservative → Strict → Rigorous) shows the classic trade-off curve in concurrency control: every step up the ladder loses some concurrency but gains a stronger correctness guarantee, and Strict 2PL sits at the sweet spot adopted by every mainstream relational DBMS in production.</p>
+        <p>Strict 2PL trades a small amount of concurrency for the strongest practical guarantees (conflict-serialisable, cascadeless, and recoverable schedules), which is why it remains the default isolation strategy whenever transactional correctness must not be sacrificed for throughput. The four-variant ladder (Basic → Conservative → Strict → Rigorous) shows the classic trade-off curve in concurrency control: every step up the ladder loses some concurrency but gains a stronger correctness guarantee, and Strict 2PL sits at the sweet spot adopted by every mainstream relational DBMS in production.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1403,12 +1410,12 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
       <div class="qbody"><b>Explain the Write-Ahead Logging (WAL) protocol and discuss recovery using checkpoints. Contrast WAL recovery with the Shadow Paging recovery scheme with a neat comparison table.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>Recovery algorithms ensure database <b>Durability</b> (the D in <mark>ACID</mark>) — once a transaction commits, its effects must survive system crashes, power failures, or media errors. The <b>Write-Ahead Logging (<mark>WAL</mark>)</b> protocol is the universally adopted mechanism for delivering this guarantee in modern DBMS engines. WAL enforces one simple but powerful rule: the log record describing every database modification must reach stable (non-volatile) storage <em>before</em> the dirty database page it describes is allowed to be written to disk. This invariant alone is sufficient to recover the database to a consistent state after any crash, because the log always knows more than (or at least as much as) the on-disk data pages.</p>
+        <p>Recovery algorithms ensure database <b>Durability</b> (the D in <mark>ACID</mark>): once a transaction commits, its effects must survive system crashes, power failures, or media errors. The <b>Write-Ahead Logging (<mark>WAL</mark>)</b> protocol is the universally adopted mechanism for delivering this guarantee in modern DBMS engines. WAL enforces one simple but powerful rule: the log record describing every database modification must reach stable (non-volatile) storage <em>before</em> the dirty database page it describes is allowed to be written to disk. This invariant alone is sufficient to recover the database to a consistent state after any crash, because the log always knows more than (or at least as much as) the on-disk data pages.</p>
 
         <h5>The Two WAL Rules</h5>
         <ul>
           <li><b>Rule 1 (<mark>UNDO</mark> guarantee):</b> The log record for an update <code>(T_i, X, old, new)</code> must be flushed to disk <em>before</em> the modified data page containing X is allowed to be written to disk. This ensures that if T_i has not committed and the system crashes, we can undo X using the <em>old</em> value from the log.</li>
-          <li><b>Rule 2 (<mark>REDO</mark> guarantee):</b> Before a transaction is declared committed, all of its log records — including its &lt;COMMIT T_i&gt; record — must be force-flushed to disk. This ensures that if the system crashes immediately after the commit, the redo phase can re-apply T_i's effects from the log.</li>
+          <li><b>Rule 2 (<mark>REDO</mark> guarantee):</b> Before a transaction is declared committed, all of its log records (including its &lt;COMMIT T_i&gt; record) must be force-flushed to disk. This ensures that if the system crashes immediately after the commit, the redo phase can re-apply T_i's effects from the log.</li>
           <li><b>Log structure:</b> append-only sequence of records <code>&lt;T_i, X, old, new&gt;</code>, <code>&lt;T_i, START&gt;</code>, <code>&lt;T_i, COMMIT&gt;</code>, <code>&lt;T_i, ABORT&gt;</code>, <code>&lt;<mark>CHECKPOINT</mark>, ActiveList&gt;</code>.</li>
           <li><b><mark>LSN</mark> (Log Sequence Number):</b> a monotonically increasing identifier on every log record; data pages remember the LSN of the last log record that modified them so recovery can skip pages already up-to-date.</li>
         </ul>
@@ -1438,9 +1445,9 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
 
         <h5>The 3-Phase <mark>ARIES</mark> Recovery Algorithm</h5>
         <div class="steps">
-          <div class="step"><span class="k">1</span><div class="body"><b>Analysis Phase:</b> Scan log forward from the last checkpoint record. Reconstruct the Active Transaction Table (ATT) — transactions that started but had not committed at crash time — and the Dirty Page Table (DPT) — pages modified in memory but not yet flushed. Determine the start of redo (oldest <code>recLSN</code> in DPT).</div></div>
-          <div class="step"><span class="k">2</span><div class="body"><b><mark>REDO</mark> Phase:</b> Replay history. Scan log forward from the redo-start LSN. For each update record, if the page's on-disk LSN is less than the log record's LSN (page has not yet seen this update), re-apply the <code>NewValue</code>. This brings the on-disk state to exactly where it was at crash time — including the writes of transactions that will subsequently be undone (this <em><mark>repeating history</mark></em> property is what makes ARIES tolerant of partial-write crashes).</div></div>
-          <div class="step"><span class="k">3</span><div class="body"><b><mark>UNDO</mark> Phase:</b> Roll back all transactions in the ATT (those that did not commit). Scan log backward. For each update record of a losing transaction, restore the <code>OldValue</code> and write a <em>Compensation Log Record</em> (<mark>CLR</mark>) that points to the next undoable LSN. CLRs make undo idempotent — if the system crashes mid-undo, recovery restarts safely without re-undoing already-undone work.</div></div>
+          <div class="step"><span class="k">1</span><div class="body"><b>Analysis Phase:</b> Scan log forward from the last checkpoint record. Reconstruct the Active Transaction Table (ATT, transactions that started but had not committed at crash time) and the Dirty Page Table (DPT, pages modified in memory but not yet flushed). Determine the start of redo (oldest <code>recLSN</code> in DPT).</div></div>
+          <div class="step"><span class="k">2</span><div class="body"><b><mark>REDO</mark> Phase:</b> Replay history. Scan log forward from the redo-start LSN. For each update record, if the page's on-disk LSN is less than the log record's LSN (page has not yet seen this update), re-apply the <code>NewValue</code>. This brings the on-disk state to exactly where it was at crash time, including the writes of transactions that will subsequently be undone (this <em><mark>repeating history</mark></em> property is what makes ARIES tolerant of partial-write crashes).</div></div>
+          <div class="step"><span class="k">3</span><div class="body"><b><mark>UNDO</mark> Phase:</b> Roll back all transactions in the ATT (those that did not commit). Scan log backward. For each update record of a losing transaction, restore the <code>OldValue</code> and write a <em>Compensation Log Record</em> (<mark>CLR</mark>) that points to the next undoable LSN. CLRs make undo idempotent: if the system crashes mid-undo, recovery restarts safely without re-undoing already-undone work.</div></div>
         </div>
 
         <h5>Worked Example — Crash &amp; Recovery</h5>
@@ -1490,10 +1497,10 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>The ARIES algorithm — <b>Algorithm for Recovery and Isolation Exploiting Semantics</b> — is the conceptual backbone of every serious DBMS in 2026: PostgreSQL WAL, Oracle redo logs, SQL Server transaction log, MySQL InnoDB redo/undo logs, and SQLite WAL journaling mode all implement WAL with ARIES-style analysis/REDO/UNDO phases anchored on periodic checkpoints. Cloud-native databases (AWS Aurora, Google Spanner, CockroachDB) extend the same principle to distributed settings by replicating the WAL stream to multiple availability zones before acknowledging a commit, achieving cross-region durability without changing the underlying recovery algorithm.</p>
+        <p>The ARIES algorithm (<b>Algorithm for Recovery and Isolation Exploiting Semantics</b>) is the conceptual backbone of every serious DBMS in 2026: PostgreSQL WAL, Oracle redo logs, SQL Server transaction log, MySQL InnoDB redo/undo logs, and SQLite WAL journaling mode all implement WAL with ARIES-style analysis/REDO/UNDO phases anchored on periodic checkpoints. Cloud-native databases (AWS Aurora, Google Spanner, CockroachDB) extend the same principle to distributed settings by replicating the WAL stream to multiple availability zones before acknowledging a commit, achieving cross-region durability without changing the underlying recovery algorithm.</p>
 
         <h5>Conclusion</h5>
-        <p>Write-ahead logging is the silent guarantor of database durability. By enforcing two simple invariants — <em>log before data</em> and <em>flush log on commit</em> — it bounds crash-recovery work to the slice of log between the last checkpoint and the crash point, making sub-second restart times achievable on terabyte-scale systems where shadow paging would be physically impossible due to disk fragmentation. The three ARIES phases (analysis, redo, undo) together with periodic checkpoints, fuzzy or sharp, deliver a recovery algorithm that is correct under arbitrary crash patterns including crashes during recovery itself — a property no shadow-paging scheme has ever matched at production scale.</p>
+        <p>Write-ahead logging is the silent guarantor of database durability. By enforcing two simple invariants (<em>log before data</em> and <em>flush log on commit</em>) it bounds crash-recovery work to the slice of log between the last checkpoint and the crash point, making sub-second restart times achievable on terabyte-scale systems where shadow paging would be physically impossible due to disk fragmentation. The three ARIES phases (analysis, redo, undo) together with periodic checkpoints, fuzzy or sharp, deliver a recovery algorithm that is correct under arbitrary crash patterns including crashes during recovery itself: a property no shadow-paging scheme has ever matched at production scale.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1606,9 +1613,9 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
 
     <div class="mnem">
       <b>All Mnemonics — One Place</b><br>
-      • **DBA Checklist:** SGBTLI (Schema, Grant, Backup, Tuning, Liaison, Integrity)<br>
-      • **Transactions:** ACID (Atomicity, Consistency, Isolation, Durability)<br>
-      • **Relational completeness:** safe TRC = safe DRC = Relational Algebra (Codd)<br>
+      • <b>DBA Checklist:</b> SGBTLI (Schema, Grant, Backup, Tuning, Liaison, Integrity)<br>
+      • <b>Transactions:</b> ACID (Atomicity, Consistency, Isolation, Durability)<br>
+      • <b>Relational completeness:</b> safe TRC = safe DRC = Relational Algebra (Codd)<br>
       • **2PL Phases:** Growing (acquire only) → Shrinking (release only)
     </div>
 
