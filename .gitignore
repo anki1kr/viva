@@ -18,17 +18,11 @@ CLAUDE.md
 prompt.md
 .claude-flow
 .swarm
+ruvector.db
+
 # Personal reference / source material (PYQs, syllabi, scans)
 reference/
 reference/**
-
-# Local draft guide
-normalization-guide.html
-
-# Logs and temp
-*.log
-*.tmp
-*.bak
 
 # MCP plugin databases (ruflo/ruvector etc — not part of site)
 *.db

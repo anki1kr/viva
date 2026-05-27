@@ -1974,9 +1974,11 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
     <div class="qcard predicted">
       <div class="qbody"><b>(e) Write down the relation between raw moments and central moments for the first three moments.</b></div>
       <div class="ans">
-        - u₁ = 0
-        - u₂ = u₂' − (u₁')²
-        - u₃ = u₃' − 3u₂'u₁' + 2(u₁')³
+        <ul>
+          <li>μ₁ = 0</li>
+          <li>μ₂ = μ₂' − (μ₁')²</li>
+          <li>μ₃ = μ₃' − 3μ₂'μ₁' + 2(μ₁')³</li>
+        </ul>
       </div>
     </div>
 
@@ -1990,9 +1992,11 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
     <div class="qcard predicted">
       <div class="qbody"><b>(g) List any three differences between Correlation and Regression.</b></div>
       <div class="ans">
-        1. Correlation measures linear strength; Regression establishes the functional connection.
-        2. Correlation coefficient is symmetric (r_xy = r_yx); Regression coefficients are not (b_yx != b_xy).
-        3. Correlation is unit-less; Regression slopes match the scale of variables.
+        <ul>
+          <li>Correlation measures linear strength; Regression establishes the functional connection.</li>
+          <li>Correlation coefficient is symmetric (r<sub>xy</sub> = r<sub>yx</sub>); Regression coefficients are not (b<sub>yx</sub> ≠ b<sub>xy</sub>).</li>
+          <li>Correlation is unit-less; Regression slopes match the scale of variables.</li>
+        </ul>
       </div>
     </div>
 
@@ -2006,8 +2010,10 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
     <div class="qcard predicted">
       <div class="qbody"><b>(i) State the normal equations for fitting a straight line y = a + bx.</b></div>
       <div class="ans">
-        1. Sum(y) = n*a + b*Sum(x)
-        2. Sum(xy) = a*Sum(x) + b*Sum(x²)
+        <ul>
+          <li>Σy = n·a + b·Σx</li>
+          <li>Σxy = a·Σx + b·Σx²</li>
+        </ul>
       </div>
     </div>
 
@@ -2020,441 +2026,822 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
 
     <div class="part-head">SECTION B (ANSWER ANY FOUR · 60 MARKS)</div>
 
-    <!-- Q1 (Unit 1) -->
-    <div class="qcard predicted">
-      <div class="qhead">
-        <span class="qnum">Q1 [15 M]</span>
-        <span class="tag fav">Unit 1</span>
-        <span class="tag hot">⭐ Normal Distribution</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 25</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BSC 23</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 22</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 23</span>
-      </div>
-      <div class="qbody">
-        <b>(a) Establish the probability density function (PDF) and standard properties of the Normal distribution. [5 M]</b><br>
-        <b>(b) A machine produces bolts. 10% of bolts are defective. If 4 bolts are drawn at random, find the probability that (i) exactly 2 are defective, (ii) at most 1 is defective using Binomial. [5 M]</b><br>
-        <b>(c) Find the percentage of items falling between Z = -1.2 and Z = 1.5 in a standard normal distribution. [5 M]</b>
-      </div>
-      <div class="ans">
-        <h5>(a) Normal Distribution Properties</h5>
-        <p>The normal distribution PDF is symmetric, bell-shaped, and centered at mean M. Standard properties include:</p>
-        <ul>
-          <li>Unimodal: Mean = Median = Mode.</li>
-          <li>Total area under the curve is exactly 1.</li>
-          <li>Inflection points occur at x = M ± S.</li>
-          <li>Empirical Rule: 68.27% within ±1S, 95.45% within ±2S, 99.73% within ±3S.</li>
-        </ul>
-
-        <h5>(b) Binomial Bolt Calculation</h5>
-        <p>X ~ B(n=4, p=0.1, q=0.9).</p>
-        <div class="steps">
-          <div class="step k">
-            <b>(i) Exactly 2 defective (X = 2):</b>
-            P(X = 2) = C(4, 2) * (0.1)^2 * (0.9)^2 = 6 * 0.01 * 0.81 = <b>0.0486 (or 4.86%)</b>.
-          </div>
-          <div class="step k">
-            <b>(ii) At most 1 defective (X &lt;= 1):</b>
-            P(X &lt;= 1) = P(X = 0) + P(X = 1)
-            P(X = 0) = C(4, 0) * (0.9)^4 = 0.6561.
-            P(X = 1) = C(4, 1) * (0.1)^1 * (0.9)^3 = 4 * 0.1 * 0.729 = 0.2916.
-            P(X &lt;= 1) = 0.6561 + 0.2916 = <b>0.9477 (or 94.77%)</b>.
-          </div>
-        </div>
-
-        <h5>(c) Standard Normal Area</h5>
-        <p>P(-1.2 &lt; Z &lt; 1.5) = Φ(1.5) - Φ(-1.2).</p>
-        <p>Using standard Φ tables: Φ(1.5) = 0.9332. Φ(-1.2) = 1 - Φ(1.2) = 1 - 0.8849 = 0.1151.</p>
-        <p>Area = 0.9332 - 0.1151 = 0.8181 = <b>81.81%</b>.</p>
-
-        <div class="score">
-          <b>Marks Allocation:</b>
-          <ul>
-            <li>(a) PDF formula + 4 listed properties: <span class="m">5 M</span></li>
-            <li>(b) Correct p, q identification &amp; binomial step calculations: <span class="m">5 M</span></li>
-            <li>(c) Z-score standardization and table values calculation: <span class="m">5 M</span></li>
-            <li>Total: <span class="m">15 M</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Q2 (Unit 2) -->
+    <!-- Q2 (Unit 1 — Binomial + MGF of continuous pdf) -->
     <div class="qcard predicted">
       <div class="qhead">
         <span class="qnum">Q2 [15 M]</span>
-        <span class="tag fav">Unit 2</span>
-        <span class="tag hot">⭐ Joint PDF</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 24</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BSC 23</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 23</span>
+        <span class="tag fav">Unit 1</span>
+        <span class="tag hot">⭐ Binomial · MGF</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 25 · Q3 · 15M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BSC 23 · Q2 · 12M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 22 · Q4 · 10M</span>
       </div>
       <div class="qbody">
-        <b>(a) The joint PDF of X and Y is given by f(x, y) = k*x*y for 1 &lt;= x &lt;= y &lt;= 2. Find: (i) the constant k, (ii) marginal densities of X and Y. [8 M]</b><br>
-        <b>(b) Define Moment Generating Function (MGF). State and prove the property M_{aX+b}(t) = e^{bt} * M_X(at). [7 M]</b>
+        <b>(a) Derive Mean E(X) = np, Variance Var(X) = npq, and the Mode of a Binomial distribution X ~ B(n, p). [8 M]</b><br>
+        <b>(b) Find the moment generating function (MGF) of the continuous random variable with pdf f(x) = 2e<sup>−2x</sup>, x ≥ 0. Hence state mean and variance. [7 M]</b>
       </div>
       <div class="ans">
-        <h5>(a) Joint PDF Integration</h5>
+        <h5>(a) Binomial — Mean, Variance, Mode</h5>
+        <p>X ~ B(n, p) with P(X = k) = C(n, k) · p<sup>k</sup> · q<sup>n−k</sup>, q = 1 − p.</p>
+
+        <figure class="diagram-fig">
+          <div style="display:grid;grid-template-columns:repeat(11,1fr);gap:4px;align-items:end;height:140px;padding:8px 4px;background:var(--paper-deep);border:1px solid var(--rule);border-radius:8px;">
+            <div style="height:8%;background:var(--brand-soft);border:1px solid var(--brand);border-radius:3px 3px 0 0;"></div>
+            <div style="height:18%;background:var(--brand-soft);border:1px solid var(--brand);border-radius:3px 3px 0 0;"></div>
+            <div style="height:38%;background:var(--brand-soft);border:1px solid var(--brand);border-radius:3px 3px 0 0;"></div>
+            <div style="height:62%;background:var(--brand-soft);border:1px solid var(--brand);border-radius:3px 3px 0 0;"></div>
+            <div style="height:82%;background:var(--brand-soft);border:1px solid var(--brand);border-radius:3px 3px 0 0;"></div>
+            <div style="height:95%;background:var(--brand);border:1px solid var(--brand-deep);border-radius:3px 3px 0 0;"></div>
+            <div style="height:82%;background:var(--brand-soft);border:1px solid var(--brand);border-radius:3px 3px 0 0;"></div>
+            <div style="height:62%;background:var(--brand-soft);border:1px solid var(--brand);border-radius:3px 3px 0 0;"></div>
+            <div style="height:38%;background:var(--brand-soft);border:1px solid var(--brand);border-radius:3px 3px 0 0;"></div>
+            <div style="height:18%;background:var(--brand-soft);border:1px solid var(--brand);border-radius:3px 3px 0 0;"></div>
+            <div style="height:8%;background:var(--brand-soft);border:1px solid var(--brand);border-radius:3px 3px 0 0;"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(11,1fr);gap:4px;font-size:10px;text-align:center;color:var(--muted);padding:2px 4px 0;">
+            <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span style="color:var(--brand);font-weight:700;">5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+          </div>
+          <figcaption><b>Fig 5.1</b> · Binomial PMF for n = 10, p = 0.5. Peak (mode) at k = 5 = np; symmetric since p = q.</figcaption>
+        </figure>
+
         <div class="steps">
           <div class="step k">
-            <b>Find Constant k (Double Integral over support 1 &lt;= x &lt;= y &lt;= 2):</b>
-            ∫₁² [ ∫₁^y k*x*y dx ] dy = 1.
-            Inner integral over x:
-            k*y * [ x^2 / 2 ]₁^y = (k*y / 2) * (y^2 - 1) = (k/2) * (y^3 - y).
-            Outer integral over y:
-            (k/2) * ∫₁² (y^3 - y) dy = (k/2) * [ y^4/4 - y^2/2 ]₁² = 1.
-            Evaluate bounds:
-            [ (16/4 - 4/2) − (1/4 - 1/2) ] = [ (4 - 2) − (-0.25) ] = 2 + 0.25 = 9/4.
-            Therefore, (k/2) * (9/4) = 1  =&gt;  9k / 8 = 1  =&gt;  <b>k = 8/9</b>.
+            <b>Derive Mean E(X) = np:</b>
+            E(X) = Σ<sub>k=0</sub><sup>n</sup> k · C(n, k) · p<sup>k</sup> · q<sup>n−k</sup>.
+            Term k = 0 contributes 0, start at k = 1. Identity: k · C(n, k) = n · C(n − 1, k − 1).
+            E(X) = np · Σ<sub>k=1</sub><sup>n</sup> C(n−1, k−1) · p<sup>k−1</sup> · q<sup>n−k</sup>.
+            Let j = k − 1, sum becomes Σ<sub>j=0</sub><sup>n−1</sup> C(n−1, j) p<sup>j</sup> q<sup>(n−1)−j</sup> = (p + q)<sup>n−1</sup> = 1.
+            ∴ <b>E(X) = np</b>.
           </div>
           <div class="step k">
-            <b>Find Marginal PDF of X, f_X(x):</b>
-            For a fixed x, y ranges from x to 2.
-            f_X(x) = ∫_x² (8/9)*x*y dy = (8/9)*x * [ y^2 / 2 ]_x² = (4/9)*x * (4 - x^2), for 1 &lt;= x &lt;= 2.
+            <b>Derive Variance Var(X) = npq:</b>
+            Compute E[X(X−1)] using k(k−1) · C(n, k) = n(n−1) · C(n−2, k−2):
+            E[X(X−1)] = n(n−1) p<sup>2</sup> · (p + q)<sup>n−2</sup> = n(n−1) p<sup>2</sup>.
+            E(X<sup>2</sup>) = E[X(X−1)] + E(X) = n(n−1)p<sup>2</sup> + np = n<sup>2</sup>p<sup>2</sup> − np<sup>2</sup> + np.
+            Var(X) = E(X<sup>2</sup>) − [E(X)]<sup>2</sup> = n<sup>2</sup>p<sup>2</sup> − np<sup>2</sup> + np − n<sup>2</sup>p<sup>2</sup> = np − np<sup>2</sup> = np(1 − p) = <b>npq</b>.
           </div>
           <div class="step k">
-            <b>Find Marginal PDF of Y, f_Y(y):</b>
-            For a fixed y, x ranges from 1 to y.
-            f_Y(y) = ∫₁^y (8/9)*x*y dx = (8/9)*y * [ x^2 / 2 ]₁^y = (4/9)*y * (y^2 - 1), for 1 &lt;= y &lt;= 2.
+            <b>Derive Mode:</b>
+            Mode is the k that maximises P(X = k). Examine the ratio:
+            P(X = k) / P(X = k − 1) = [(n − k + 1) / k] · (p / q).
+            Ratio ≥ 1 ⇔ k ≤ (n + 1)p. So P(X = k) increases while k &lt; (n + 1)p, then decreases.
+            ∴ <b>Mode = ⌊(n + 1)p⌋</b>. If (n + 1)p is an integer, both (n + 1)p and (n + 1)p − 1 are modes (bimodal).
           </div>
         </div>
 
-        <h5>(b) MGF Proof</h5>
-        <p>M_X(t) = E[e^(tX)].</p>
-        <p>M_{aX+b}(t) = E[ e^(t * (aX + b)) ] = E[ e^(atX + bt) ] = E[ e^(bt) * e^(atX) ].</p>
-        <p>Since e^(bt) is a constant with respect to the expectation operator E, it can be factored out:</p>
-        <p>E[ e^(bt) * e^(atX) ] = e^(bt) * E[ e^(atX) ] = <b>e^(bt) * M_X(at)</b>. ∎</p>
+        <h5>(b) MGF of f(x) = 2e<sup>−2x</sup>, x ≥ 0</h5>
+        <p>This is an Exponential pdf with parameter λ = 2.</p>
+        <div class="steps">
+          <div class="step k">
+            <b>Setup MGF integral:</b>
+            M<sub>X</sub>(t) = E[e<sup>tX</sup>] = ∫<sub>0</sub><sup>∞</sup> e<sup>tx</sup> · 2e<sup>−2x</sup> dx = 2 · ∫<sub>0</sub><sup>∞</sup> e<sup>−(2−t)x</sup> dx.
+          </div>
+          <div class="step k">
+            <b>Evaluate (converges only when 2 − t &gt; 0, i.e. t &lt; 2):</b>
+            ∫<sub>0</sub><sup>∞</sup> e<sup>−(2−t)x</sup> dx = 1 / (2 − t).
+            ∴ <b>M<sub>X</sub>(t) = 2 / (2 − t), valid for t &lt; 2</b>.
+          </div>
+          <div class="step k">
+            <b>Mean and Variance from MGF:</b>
+            M'<sub>X</sub>(t) = 2 / (2 − t)<sup>2</sup>  ⇒  E(X) = M'<sub>X</sub>(0) = 2 / 4 = <b>1/2</b>.
+            M''<sub>X</sub>(t) = 4 / (2 − t)<sup>3</sup>  ⇒  E(X<sup>2</sup>) = M''<sub>X</sub>(0) = 4 / 8 = 1/2.
+            Var(X) = E(X<sup>2</sup>) − [E(X)]<sup>2</sup> = 1/2 − 1/4 = <b>1/4</b>.
+          </div>
+        </div>
 
         <div class="table-wrap">
           <table>
-            <caption>Summary of Joint Results</caption>
+            <caption>Distribution Comparison — Binomial vs Bernoulli vs Exponential</caption>
             <thead>
-              <tr>
-                <th>Target Quantity</th>
-                <th>Calculated Expression</th>
-                <th>Valid Bounds</th>
-              </tr>
+              <tr><th>Property</th><th>Bernoulli(p)</th><th>Binomial(n, p)</th><th>Exponential(λ)</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Constant k</td>
-                <td>8/9</td>
-                <td>N/A</td>
-              </tr>
-              <tr>
-                <td>Marginal f_X(x)</td>
-                <td>(4/9) * x * (4 - x^2)</td>
-                <td>1 &lt;= x &lt;= 2</td>
-              </tr>
-              <tr>
-                <td>Marginal f_Y(y)</td>
-                <td>(4/9) * y * (y^2 - 1)</td>
-                <td>1 &lt;= y &lt;= 2</td>
-              </tr>
+              <tr><td>Type</td><td>Discrete</td><td>Discrete</td><td>Continuous</td></tr>
+              <tr><td>pmf / pdf</td><td>p<sup>x</sup>q<sup>1−x</sup></td><td>C(n,k)p<sup>k</sup>q<sup>n−k</sup></td><td>λe<sup>−λx</sup></td></tr>
+              <tr><td>Mean</td><td>p</td><td>np</td><td>1/λ</td></tr>
+              <tr><td>Variance</td><td>pq</td><td>npq</td><td>1/λ<sup>2</sup></td></tr>
+              <tr><td>MGF</td><td>q + pe<sup>t</sup></td><td>(q + pe<sup>t</sup>)<sup>n</sup></td><td>λ / (λ − t), t &lt; λ</td></tr>
+              <tr><td>Application</td><td>Single yes/no trial</td><td>n independent trials</td><td>Inter-arrival times</td></tr>
             </tbody>
           </table>
         </div>
 
+        <div class="box warn">
+          <b>Pitfall:</b> In MGF integration, missing the convergence condition <b>t &lt; λ</b> (here t &lt; 2) loses marks. Examiner explicitly checks for it.
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Binomial drives A/B-test significance calculators (e.g. Optimizely, Google Optimize), spam classification (k of n words match), and quality-control acceptance sampling. Exponential MGF underlies Poisson-process queueing (call-centre arrival times, server response times).</p>
+
+        <h5>Conclusion</h5>
+        <p>Mean = np, Var = npq, Mode = ⌊(n + 1)p⌋ for Binomial; M<sub>X</sub>(t) = 2/(2 − t) for the given exponential pdf, with E(X) = ½, Var(X) = ¼ recovered from M' and M''. Jacob Bernoulli's <i>Ars Conjectandi</i> (1713) seeded both models.</p>
+
         <div class="score">
           <b>Marks Allocation:</b>
           <ul>
-            <li>(a) Correct double limits + integration for k: <span class="m">4 M</span></li>
-            <li>(a) Marginal integrations for X and Y: <span class="m">4 M</span></li>
-            <li>(b) MGF definition + step-by-step properties factorization proof: <span class="m">7 M</span></li>
+            <li>(a) Mean derivation (binomial-sum trick): <span class="m">3 M</span></li>
+            <li>(a) Variance via E[X(X−1)]: <span class="m">3 M</span></li>
+            <li>(a) Mode = ⌊(n+1)p⌋ via ratio test: <span class="m">2 M</span></li>
+            <li>(b) MGF integral with convergence condition: <span class="m">4 M</span></li>
+            <li>(b) Mean &amp; Variance from M'(0), M''(0): <span class="m">3 M</span></li>
             <li>Total: <span class="m">15 M</span></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Q3 (Unit 3) -->
+    <!-- Q3 (Unit 1 — Normal Z-problem + Poisson fitting) -->
     <div class="qcard predicted">
       <div class="qhead">
         <span class="qnum">Q3 [15 M]</span>
-        <span class="tag fav">Unit 3</span>
-        <span class="tag hot">⭐ Central Tendency</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 22</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 23</span>
+        <span class="tag fav">Unit 1</span>
+        <span class="tag hot">⭐ Normal · Poisson</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 25 · Q4 · 15M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BSC 23 · Q3 · 12M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 23 · Q3 · 10M</span>
       </div>
       <div class="qbody">
-        <b>(a) The following data represents the marks of 100 students in a test. Compute the Mean, Median, and Mode. [10 M]</b><br>
+        <b>(a) The lifetime X of an electric bulb follows N(μ = 120, σ = 40) hours. Find: (i) P(X &lt; 100), (ii) P(100 &lt; X &lt; 180), (iii) P(X &gt; 200). Use the Z-table. [8 M]</b><br>
+        <b>(b) Fit a Poisson distribution to the following frequency data and compute the theoretical (expected) frequencies. [7 M]</b><br>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr>
-                <th>Marks Class</th>
-                <td>0-10</td>
-                <td>10-20</td>
-                <td>20-30</td>
-                <td>30-40</td>
-                <td>40-50</td>
-              </tr>
-              <tr>
-                <th>No. of Students (f)</th>
-                <td>10</td>
-                <td>20</td>
-                <td>35</td>
-                <td>25</td>
-                <td>10</td>
-              </tr>
+              <tr><th>Accidents (x)</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+              <tr><th>Observed f<sub>i</sub></th><td>122</td><td>60</td><td>15</td><td>2</td><td>1</td></tr>
             </thead>
           </table>
         </div>
-        <b>(b) Define skewness and kurtosis. Explain platykurtic, leptokurtic and mesokurtic peak types with diagrams. [5 M]</b>
       </div>
       <div class="ans">
-        <h5>(a) Step-by-Step Averages Calculation</h5>
+        <h5>(a) Normal Distribution — Z-table lookups</h5>
+        <p>Standardise: Z = (X − μ) / σ = (X − 120) / 40.</p>
+
+        <figure class="diagram-fig">
+          <div style="position:relative;height:160px;background:linear-gradient(to top, var(--paper-deep), var(--paper));border:1px solid var(--rule);border-radius:8px;overflow:hidden;">
+            <svg viewBox="0 0 400 160" preserveAspectRatio="none" style="width:100%;height:100%;">
+              <defs>
+                <linearGradient id="bell-shade" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="var(--brand)" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="var(--brand-soft)" stop-opacity="0.85"/>
+                </linearGradient>
+              </defs>
+              <path d="M 0 150 Q 100 150 150 70 Q 200 0 250 70 Q 300 150 400 150 L 400 160 L 0 160 Z" fill="none" stroke="var(--brand)" stroke-width="2"/>
+              <path d="M 100 150 Q 130 130 150 70 Q 200 0 250 70 Q 275 110 290 150 L 100 150 Z" fill="url(#bell-shade)"/>
+              <line x1="200" y1="0" x2="200" y2="160" stroke="var(--brand-deep)" stroke-width="1" stroke-dasharray="3,3"/>
+              <line x1="100" y1="0" x2="100" y2="160" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2,3"/>
+              <line x1="290" y1="0" x2="290" y2="160" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2,3"/>
+              <text x="200" y="155" text-anchor="middle" fill="var(--brand-deep)" font-size="11" font-weight="700">μ=120</text>
+              <text x="100" y="12" text-anchor="middle" fill="var(--muted)" font-size="10">Z=−0.5</text>
+              <text x="290" y="12" text-anchor="middle" fill="var(--muted)" font-size="10">Z=+1.5</text>
+            </svg>
+          </div>
+          <figcaption><b>Fig 5.2</b> · Standard Normal bell curve. Shaded area = P(100 &lt; X &lt; 180) = Φ(1.5) − Φ(−0.5).</figcaption>
+        </figure>
+
+        <div class="table-wrap" style="margin:8px 0;">
+          <table>
+            <caption>Z-table snippet (Φ(z) = P(Z ≤ z))</caption>
+            <thead><tr><th>z</th><th>0.00</th><th>0.50</th><th>1.00</th><th>1.50</th><th>2.00</th></tr></thead>
+            <tbody><tr><th>Φ(z)</th><td>0.5000</td><td>0.6915</td><td>0.8413</td><td>0.9332</td><td>0.9772</td></tr></tbody>
+          </table>
+        </div>
+
         <div class="steps">
           <div class="step k">
-            <b>Compute Mean (Tabulate Mid-points x and fx):</b>
-            Total frequency N = 10 + 20 + 35 + 25 + 10 = 100.
-            - Class 0-10: f=10, Mid-point x=5   =&gt; fx = 50
-            - Class 10-20: f=20, Mid-point x=15  =&gt; fx = 300
-            - Class 20-30: f=35, Mid-point x=25  =&gt; fx = 875
-            - Class 30-40: f=25, Mid-point x=35  =&gt; fx = 875
-            - Class 40-50: f=10, Mid-point x=45  =&gt; fx = 450
-            Sum fx = 50 + 300 + 875 + 875 + 450 = 2550.
-            Mean = Sum fx / N = 2550 / 100 = <b>25.5</b>.
+            <b>(i) P(X &lt; 100):</b>
+            Z = (100 − 120) / 40 = −0.5.
+            P(X &lt; 100) = Φ(−0.5) = 1 − Φ(0.5) = 1 − 0.6915 = <b>0.3085 (30.85%)</b>.
           </div>
           <div class="step k">
-            <b>Compute Median (Cumulative Frequency):</b>
-            - Class 0-10: f=10, cf=10
-            - Class 10-20: f=20, cf=30
-            - Class 20-30: f=35, cf=65   &lt;-- Median Class (since cf=65 &gt;= N/2=50)
-            - Class 30-40: f=25, cf=90
-            - Class 40-50: f=10, cf=100
-            L = 20, h = 10, f = 35, cf_prev = 30.
-            Median = L + [ (N/2 − cf_prev) / f ] * h
-            Median = 20 + [ (50 − 30) / 35 ] * 10 = 20 + [ 200 / 35 ] = 20 + 5.71 = <b>25.71</b>.
+            <b>(ii) P(100 &lt; X &lt; 180):</b>
+            Z<sub>1</sub> = −0.5, Z<sub>2</sub> = (180 − 120)/40 = 1.5.
+            P = Φ(1.5) − Φ(−0.5) = 0.9332 − 0.3085 = <b>0.6247 (62.47%)</b>.
           </div>
           <div class="step k">
-            <b>Compute Mode (Highest Frequency):</b>
-            Modal class is 20-30 (f = 35).
-            L = 20, h = 10, f1 = 35, f0 = 20, f2 = 25.
-            Mode = L + [ (f1 − f0) / (2*f1 − f0 − f2) ] * h
-            Mode = 20 + [ (35 − 20) / (70 − 20 − 25) ] * 10
-            Mode = 20 + [ 15 / 25 ] * 10 = 20 + 6 = <b>26.0</b>.
+            <b>(iii) P(X &gt; 200):</b>
+            Z = (200 − 120) / 40 = 2.0.
+            P(X &gt; 200) = 1 − Φ(2.0) = 1 − 0.9772 = <b>0.0228 (2.28%)</b>.
           </div>
         </div>
 
-        <h5>(b) Skewness, Kurtosis &amp; Peak Shapes</h5>
-        <p>Skewness indicates asymmetry. Kurtosis indicates the peakedness or tail weight of a distribution.</p>
-        <ul>
-          <li><b>Leptokurtic (β₂ &gt; 3):</b> High, sharp peak with thick tails.</li>
-          <li><b>Mesokurtic (β₂ = 3):</b> Normal bell curve peak shape.</li>
-          <li><b>Platykurtic (β₂ &lt; 3):</b> Broad, flat peak with light tails.</li>
-        </ul>
+        <h5>(b) Poisson Fitting</h5>
+        <p>Total N = Σf<sub>i</sub> = 122 + 60 + 15 + 2 + 1 = 200.</p>
+        <div class="steps">
+          <div class="step k">
+            <b>Estimate λ = Σ(f<sub>i</sub>·x<sub>i</sub>) / N:</b>
+            Σ(f·x) = 0·122 + 1·60 + 2·15 + 3·2 + 4·1 = 0 + 60 + 30 + 6 + 4 = 100.
+            <b>λ̂ = 100 / 200 = 0.5</b>.
+          </div>
+          <div class="step k">
+            <b>Theoretical frequencies T<sub>k</sub> = N · P(X = k) = N · e<sup>−λ</sup>λ<sup>k</sup>/k!:</b>
+            <ul>
+              <li>P(X = 0) = e<sup>−0.5</sup> = 0.6065  ⇒  T<sub>0</sub> = 200 × 0.6065 = <b>121.3</b></li>
+              <li>P(X = 1) = λ · P(X = 0) = 0.5 × 0.6065 = 0.30325  ⇒  T<sub>1</sub> = <b>60.65</b></li>
+              <li>P(X = 2) = (λ/2) · P(X = 1) = 0.07581  ⇒  T<sub>2</sub> = <b>15.16</b></li>
+              <li>P(X = 3) = (λ/3) · P(X = 2) = 0.01264  ⇒  T<sub>3</sub> = <b>2.53</b></li>
+              <li>P(X = 4) = (λ/4) · P(X = 3) = 0.00158  ⇒  T<sub>4</sub> = <b>0.32</b></li>
+            </ul>
+            ΣT ≈ 199.96 ≈ N. Observed vs theoretical match closely ⇒ Poisson fits well.
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Observed vs Theoretical (Poisson, λ̂ = 0.5)</caption>
+            <thead><tr><th>x</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>Total</th></tr></thead>
+            <tbody>
+              <tr><th>Observed f<sub>i</sub></th><td>122</td><td>60</td><td>15</td><td>2</td><td>1</td><td>200</td></tr>
+              <tr><th>Theoretical T<sub>i</sub></th><td>121.3</td><td>60.65</td><td>15.16</td><td>2.53</td><td>0.32</td><td>199.96</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box warn">
+          <b>Pitfall:</b> For Φ(−z) always use the symmetry Φ(−z) = 1 − Φ(z). Misreading the table as Φ(−0.5) = 0.6915 (the value for +0.5) is the single most common Z-problem error.
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Normal underlies six-sigma quality control (Motorola 1986), VaR (Value-at-Risk) in finance, and IQ standardisation. Poisson models call-centre arrivals, web-server requests per second, and rare-event insurance claims (Poisson 1837, <i>Recherches sur la probabilité des jugements</i>).</p>
+
+        <h5>Conclusion</h5>
+        <p>Z-standardisation converts any Normal to Φ-table lookups; symmetry handles negative z. Poisson fitting reduces to estimating one parameter λ̂ = sample mean, then plugging into the pmf. Both distributions are workhorses of applied probability.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
           <ul>
-            <li>(a) Correct Mean computation: <span class="m">3 M</span></li>
-            <li>(a) Correct cf table + Median computation: <span class="m">3.5 M</span></li>
-            <li>(a) Correct Mode formula + computation: <span class="m">3.5 M</span></li>
-            <li>(b) Concepts definitions + 3 peak types description: <span class="m">5 M</span></li>
+            <li>(a) Three Z-conversions + Φ lookups: <span class="m">6 M</span></li>
+            <li>(a) Symmetry rule for Φ(−z): <span class="m">2 M</span></li>
+            <li>(b) λ̂ estimation from Σfx / N: <span class="m">2 M</span></li>
+            <li>(b) Five theoretical frequencies + fit comment: <span class="m">5 M</span></li>
             <li>Total: <span class="m">15 M</span></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Q4 (Unit 4) -->
+    <!-- Q4 (Unit 2 — Joint discrete + Joint continuous) -->
     <div class="qcard predicted">
       <div class="qhead">
         <span class="qnum">Q4 [15 M]</span>
-        <span class="tag fav">Unit 4</span>
-        <span class="tag hot">⭐ Destroyed Records</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 24</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ CSE 23</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BSC 23</span>
+        <span class="tag fav">Unit 2</span>
+        <span class="tag hot">⭐ Joint Distribution · Cov · ρ</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 25 · Q5 · 15M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BSC 23 · Q4 · 12M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 23 · Q5 · 10M</span>
       </div>
       <div class="qbody">
-        <b>(a) Reconstruct the partially destroyed laboratory data that leaves only: <code>8X − 10Y + 66 = 0</code> and <code>40X − 18Y = 214</code>. If Variance of X is 9, calculate (i) the means of X and Y, (ii) the correlation coefficient r, (iii) the standard deviation of Y. [10 M]</b><br>
-        <b>(b) Define rank correlation. Find the rank correlation coefficient when Sum(D²) = 30 and n = 10. [5 M]</b>
+        <b>(a) For the joint discrete distribution below, find: (i) marginal P(X), P(Y); (ii) E(X), E(Y), Var(X), Var(Y); (iii) Cov(X, Y) and correlation ρ(X, Y). [8 M]</b><br>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>X \\ Y</th><th>Y = 1</th><th>Y = 2</th></tr>
+            </thead>
+            <tbody>
+              <tr><th>X = 1</th><td>0.1</td><td>0.2</td></tr>
+              <tr><th>X = 2</th><td>0.2</td><td>0.1</td></tr>
+              <tr><th>X = 3</th><td>0.1</td><td>0.3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <b>(b) The joint pdf of (X, Y) is f(x, y) = k(x + y), 0 ≤ x ≤ 1, 0 ≤ y ≤ 1, and 0 elsewhere. Find: (i) k, (ii) marginals f<sub>X</sub>(x), f<sub>Y</sub>(y), (iii) conditional f(y | x). [7 M]</b>
       </div>
       <div class="ans">
-        <h5>(a) Reconstruction of ruined laboratory records</h5>
-        <p>Refer to Topic 4.3 for the complete mathematical derivation steps:</p>
-        <ul>
-          <li>Means: <b>x̄ = 13</b> and <b>ȳ = 17</b> by solving the intersection of the two equations simultaneously.</li>
-          <li>Regression coefficients assigned: b_yx = 0.8 and b_xy = 0.45. Product r^2 = 0.36.</li>
-          <li>Correlation: <b>r = 0.6</b>.</li>
-          <li>Standard deviation: <b>SD_y = 4</b> (using b_yx = r * SD_y / SD_x, with SD_x = 3).</li>
-        </ul>
+        <h5>(a) Joint Discrete — Marginals, Cov, ρ</h5>
 
-        <h5>(b) Rank Correlation Calculation</h5>
-        <p>Given n = 10, Sum(D²) = 30.</p>
-        <p>R = 1 − [ 6 * Sum(D²) ] / [ n * (n^2 − 1) ]</p>
-        <p>R = 1 − [ 6 * 30 ] / [ 10 * (100 − 1) ] = 1 − 180 / 990 = 1 − 2/11 = 9/11 ≈ <b>0.818</b>.</p>
+        <figure class="diagram-fig">
+          <div style="display:grid;grid-template-columns:60px repeat(2,1fr);gap:4px;background:var(--paper-deep);padding:10px;border:1px solid var(--rule);border-radius:8px;">
+            <div></div>
+            <div style="text-align:center;font-weight:700;color:var(--brand-deep);">Y=1</div>
+            <div style="text-align:center;font-weight:700;color:var(--brand-deep);">Y=2</div>
+            <div style="font-weight:700;color:var(--brand-deep);align-self:center;">X=1</div>
+            <div style="background:rgba(159,18,57,0.15);padding:14px;text-align:center;border-radius:4px;font-weight:700;">0.10</div>
+            <div style="background:rgba(159,18,57,0.30);padding:14px;text-align:center;border-radius:4px;font-weight:700;">0.20</div>
+            <div style="font-weight:700;color:var(--brand-deep);align-self:center;">X=2</div>
+            <div style="background:rgba(159,18,57,0.30);padding:14px;text-align:center;border-radius:4px;font-weight:700;">0.20</div>
+            <div style="background:rgba(159,18,57,0.15);padding:14px;text-align:center;border-radius:4px;font-weight:700;">0.10</div>
+            <div style="font-weight:700;color:var(--brand-deep);align-self:center;">X=3</div>
+            <div style="background:rgba(159,18,57,0.15);padding:14px;text-align:center;border-radius:4px;font-weight:700;">0.10</div>
+            <div style="background:rgba(159,18,57,0.45);padding:14px;text-align:center;border-radius:4px;font-weight:700;color:#fff;">0.30</div>
+          </div>
+          <figcaption><b>Fig 5.3</b> · Joint PMF P(X = x, Y = y) heat-grid; darker = higher probability mass.</figcaption>
+        </figure>
+
+        <div class="steps">
+          <div class="step k">
+            <b>Marginals:</b>
+            P(X=1) = 0.1 + 0.2 = 0.3;  P(X=2) = 0.2 + 0.1 = 0.3;  P(X=3) = 0.1 + 0.3 = 0.4.
+            P(Y=1) = 0.1 + 0.2 + 0.1 = 0.4;  P(Y=2) = 0.2 + 0.1 + 0.3 = 0.6.
+            Check: ΣP(X) = 1.0 ✓ and ΣP(Y) = 1.0 ✓.
+          </div>
+          <div class="step k">
+            <b>Means:</b>
+            E(X) = 1(0.3) + 2(0.3) + 3(0.4) = 0.3 + 0.6 + 1.2 = <b>2.1</b>.
+            E(Y) = 1(0.4) + 2(0.6) = 0.4 + 1.2 = <b>1.6</b>.
+          </div>
+          <div class="step k">
+            <b>Variances:</b>
+            E(X<sup>2</sup>) = 1(0.3) + 4(0.3) + 9(0.4) = 0.3 + 1.2 + 3.6 = 5.1.
+            Var(X) = 5.1 − (2.1)<sup>2</sup> = 5.1 − 4.41 = <b>0.69</b>.  SD(X) = √0.69 = 0.8307.
+            E(Y<sup>2</sup>) = 1(0.4) + 4(0.6) = 2.8.
+            Var(Y) = 2.8 − (1.6)<sup>2</sup> = 2.8 − 2.56 = <b>0.24</b>.  SD(Y) = √0.24 = 0.4899.
+          </div>
+          <div class="step k">
+            <b>E(XY):</b>
+            E(XY) = Σ x·y·P(x, y)
+            = 1·1·0.1 + 1·2·0.2 + 2·1·0.2 + 2·2·0.1 + 3·1·0.1 + 3·2·0.3
+            = 0.1 + 0.4 + 0.4 + 0.4 + 0.3 + 1.8 = <b>3.4</b>.
+          </div>
+          <div class="step k">
+            <b>Cov &amp; ρ:</b>
+            Cov(X, Y) = E(XY) − E(X)·E(Y) = 3.4 − (2.1)(1.6) = 3.4 − 3.36 = <b>0.04</b>.
+            ρ(X, Y) = Cov / (SD<sub>X</sub> · SD<sub>Y</sub>) = 0.04 / (0.8307 × 0.4899) = 0.04 / 0.407 ≈ <b>0.0983</b>.
+          </div>
+        </div>
+
+        <h5>(b) Joint Continuous — k, marginals, conditional</h5>
+        <div class="steps">
+          <div class="step k">
+            <b>Find k:</b>
+            ∫<sub>0</sub><sup>1</sup>∫<sub>0</sub><sup>1</sup> k(x + y) dx dy = 1.
+            Inner ∫<sub>0</sub><sup>1</sup> (x + y) dx = [x<sup>2</sup>/2 + xy]<sub>0</sub><sup>1</sup> = ½ + y.
+            Outer k · ∫<sub>0</sub><sup>1</sup> (½ + y) dy = k · [y/2 + y<sup>2</sup>/2]<sub>0</sub><sup>1</sup> = k(½ + ½) = k.
+            ∴ k = 1.  But check: k · 1 = 1 ⇒ <b>k = 1</b>.
+          </div>
+          <div class="step k">
+            <b>Marginal f<sub>X</sub>(x):</b>
+            f<sub>X</sub>(x) = ∫<sub>0</sub><sup>1</sup> (x + y) dy = [xy + y<sup>2</sup>/2]<sub>0</sub><sup>1</sup> = <b>x + ½</b>, 0 ≤ x ≤ 1.
+          </div>
+          <div class="step k">
+            <b>Marginal f<sub>Y</sub>(y):</b>
+            By symmetry of f(x, y) = x + y: f<sub>Y</sub>(y) = <b>y + ½</b>, 0 ≤ y ≤ 1.
+          </div>
+          <div class="step k">
+            <b>Conditional f(y | x):</b>
+            f(y | x) = f(x, y) / f<sub>X</sub>(x) = <b>(x + y) / (x + ½)</b>, 0 ≤ y ≤ 1.
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Joint Discrete Q4(a) — Marginals &amp; Moments Summary</caption>
+            <thead><tr><th>Quantity</th><th>X</th><th>Y</th></tr></thead>
+            <tbody>
+              <tr><th>Mean</th><td>2.1</td><td>1.6</td></tr>
+              <tr><th>Variance</th><td>0.69</td><td>0.24</td></tr>
+              <tr><th>SD</th><td>0.8307</td><td>0.4899</td></tr>
+              <tr><th>Cov(X, Y)</th><td colspan="2" style="text-align:center;">0.04</td></tr>
+              <tr><th>ρ(X, Y)</th><td colspan="2" style="text-align:center;">≈ 0.0983 (weak positive)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box warn">
+          <b>Pitfall:</b> ρ = 0.0983 is "weak positive". Marking it "strongly correlated" loses marks. Always state strength qualitatively: |ρ| &lt; 0.3 weak; 0.3 ≤ |ρ| &lt; 0.7 moderate; |ρ| ≥ 0.7 strong.
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Joint distributions underlie ML feature-correlation matrices (used by every <code>pandas.DataFrame.corr()</code> call), copula models in quantitative finance (Li 2000 Gaussian copula), and recommendation systems where (user, item) ratings form a joint sample.</p>
+
+        <h5>Conclusion</h5>
+        <p>Marginals collapse one variable by row/column summation (discrete) or single-axis integration (continuous). Conditionals re-normalise the joint by the marginal. Covariance and ρ quantify linear dependence — independent X, Y always have Cov = 0 but Cov = 0 does not imply independence.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
           <ul>
-            <li>(a) Reconstructing Means: <span class="m">3 M</span></li>
-            <li>(a) Finding slopes b_yx and b_xy: <span class="m">3 M</span></li>
-            <li>(a) Finding r and standard deviation of Y: <span class="m">4 M</span></li>
-            <li>(b) Rank definition + Spearman calculation step: <span class="m">5 M</span></li>
+            <li>(a) Marginals P(X), P(Y): <span class="m">2 M</span></li>
+            <li>(a) Means, Variances, SDs: <span class="m">3 M</span></li>
+            <li>(a) E(XY), Cov, ρ: <span class="m">3 M</span></li>
+            <li>(b) Constant k via double integral: <span class="m">2 M</span></li>
+            <li>(b) Marginals f<sub>X</sub>, f<sub>Y</sub>: <span class="m">3 M</span></li>
+            <li>(b) Conditional f(y | x): <span class="m">2 M</span></li>
             <li>Total: <span class="m">15 M</span></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Q5 (Unit 4 - Curve Fitting) -->
+    <!-- Q5 (Unit 4 — Karl Pearson bivariate + Two regression equations) -->
     <div class="qcard predicted">
       <div class="qhead">
         <span class="qnum">Q5 [15 M]</span>
         <span class="tag fav">Unit 4</span>
-        <span class="tag hot">⭐ Curve Fitting</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 24</span>
-        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ CSE 23</span>
+        <span class="tag hot">⭐ Karl Pearson · Regression</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 25 · Q6 · 15M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BSC 23 · Q5 · 12M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 23 · Q6 · 10M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 22 · Q7 · 12M</span>
       </div>
       <div class="qbody">
-        <b>(a) Fit a straight line y = a + bx to the following dataset: [7.5 M]</b><br>
+        <b>(a) Compute the Karl Pearson correlation coefficient for the following ten pairs. [8 M]</b><br>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr>
-                <th>x</th>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-              </tr>
-              <tr>
-                <th>y</th>
-                <td>14</td>
-                <td>27</td>
-                <td>40</td>
-                <td>55</td>
-                <td>68</td>
-              </tr>
+              <tr><th>X</th><td>10</td><td>14</td><td>18</td><td>22</td><td>26</td><td>30</td><td>34</td><td>38</td><td>42</td><td>46</td></tr>
+              <tr><th>Y</th><td>18</td><td>12</td><td>24</td><td>20</td><td>30</td><td>28</td><td>34</td><td>36</td><td>42</td><td>40</td></tr>
             </thead>
           </table>
         </div>
-        <b>(b) Fit a second-degree parabola y = a + bx + cx² to the following data: [7.5 M]</b><br>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>x</th>
-                <td>0</td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-              </tr>
-              <tr>
-                <th>y</th>
-                <td>1</td>
-                <td>1.8</td>
-                <td>1.3</td>
-                <td>2.5</td>
-                <td>6.3</td>
-              </tr>
-            </thead>
-          </table>
-        </div>
+        <b>(b) From the data in (a), fit both regression lines (Y on X and X on Y) by the method of least squares. [7 M]</b>
       </div>
       <div class="ans">
-        <h5>(a) Straight Line Fitting</h5>
+        <h5>(a) Karl Pearson Correlation Coefficient</h5>
+
+        <figure class="diagram-fig">
+          <div style="position:relative;height:200px;background:var(--paper-deep);border:1px solid var(--rule);border-radius:8px;padding:8px;">
+            <svg viewBox="0 0 320 180" preserveAspectRatio="none" style="width:100%;height:100%;">
+              <line x1="20" y1="160" x2="310" y2="160" stroke="var(--muted)" stroke-width="1"/>
+              <line x1="20" y1="10" x2="20" y2="160" stroke="var(--muted)" stroke-width="1"/>
+              <line x1="40" y1="140" x2="300" y2="30" stroke="var(--brand)" stroke-width="2.5" stroke-dasharray="5,3"/>
+              <circle cx="48" cy="135" r="4" fill="var(--brand-deep)"/>
+              <circle cx="78" cy="148" r="4" fill="var(--brand-deep)"/>
+              <circle cx="106" cy="118" r="4" fill="var(--brand-deep)"/>
+              <circle cx="134" cy="125" r="4" fill="var(--brand-deep)"/>
+              <circle cx="162" cy="98" r="4" fill="var(--brand-deep)"/>
+              <circle cx="190" cy="105" r="4" fill="var(--brand-deep)"/>
+              <circle cx="218" cy="75" r="4" fill="var(--brand-deep)"/>
+              <circle cx="246" cy="68" r="4" fill="var(--brand-deep)"/>
+              <circle cx="274" cy="38" r="4" fill="var(--brand-deep)"/>
+              <circle cx="302" cy="45" r="4" fill="var(--brand-deep)"/>
+              <text x="165" y="175" text-anchor="middle" fill="var(--muted)" font-size="11">X (10 → 46)</text>
+              <text x="10" y="85" text-anchor="middle" fill="var(--muted)" font-size="11" transform="rotate(-90 10 85)">Y</text>
+              <text x="280" y="20" fill="var(--brand-deep)" font-size="11" font-weight="700">r ≈ 0.95</text>
+            </svg>
+          </div>
+          <figcaption><b>Fig 5.4</b> · Scatter plot of (X, Y) with regression line overlay. Strong positive linear trend ⇒ r close to +1.</figcaption>
+        </figure>
+
         <div class="steps">
           <div class="step k">
-            <b>Compute Sums (n = 5):</b>
-            - Sum(x) = 1 + 2 + 3 + 4 + 5 = 15
-            - Sum(y) = 14 + 27 + 40 + 55 + 68 = 204
-            - Sum(x^2) = 1 + 4 + 9 + 16 + 25 = 55
-            - Sum(xy) = 1(14) + 2(27) + 3(40) + 4(55) + 5(68) = 14 + 54 + 120 + 220 + 340 = 730
+            <b>Compute Sums (n = 10):</b>
+            ΣX = 10+14+18+22+26+30+34+38+42+46 = <b>280</b>.
+            ΣY = 18+12+24+20+30+28+34+36+42+40 = <b>284</b>.
+            ΣX<sup>2</sup>: 100+196+324+484+676+900+1156+1444+1764+2116 = <b>9160</b>.
+            ΣY<sup>2</sup>: 324+144+576+400+900+784+1156+1296+1764+1600 = <b>8944</b>.
+            ΣXY: 10·18+14·12+18·24+22·20+26·30+30·28+34·34+38·36+42·42+46·40
+            = 180+168+432+440+780+840+1156+1368+1764+1840 = <b>8968</b>.
           </div>
           <div class="step k">
-            <b>Substitute into Normal Equations:</b>
-            1) 204 = 5a + 15b
-            2) 730 = 15a + 55b
+            <b>Means:</b>
+            X̄ = 280 / 10 = <b>28</b>;  Ȳ = 284 / 10 = <b>28.4</b>.
           </div>
           <div class="step k">
-            <b>Solve for a and b:</b>
-            Multiply Eq 1 by 3:
-            612 = 15a + 45b.
-            Subtract this from Eq 2:
-            118 = 10b  =&gt;  <b>b = 11.8</b>.
-            Substitute b = 11.8 back into Eq 1:
-            204 = 5a + 15(11.8)
-            204 = 5a + 177  =&gt;  5a = 27  =&gt;  <b>a = 5.4</b>.
-            <b>Fitted Line: y = 5.4 + 11.8*x</b>.
+            <b>Karl Pearson r:</b>
+            r = [n·ΣXY − ΣX·ΣY] / √{ [n·ΣX<sup>2</sup> − (ΣX)<sup>2</sup>] · [n·ΣY<sup>2</sup> − (ΣY)<sup>2</sup>] }
+            Numerator = 10(8968) − 280(284) = 89680 − 79520 = <b>10160</b>.
+            n·ΣX<sup>2</sup> − (ΣX)<sup>2</sup> = 91600 − 78400 = 13200.
+            n·ΣY<sup>2</sup> − (ΣY)<sup>2</sup> = 89440 − 80656 = 8784.
+            Denominator = √(13200 × 8784) = √115,948,800 ≈ <b>10768</b>.
+            <b>r = 10160 / 10768 ≈ 0.944</b> (very strong positive).
           </div>
         </div>
 
-        <h5>(b) Parabola Fitting</h5>
-        <p>Refer to Topic 4.4 for the complete step-by-step resolution of this exact system:</p>
-        <p><b>Fitted Parabola: y = 1.42 − 1.07*x + 0.55*x^2</b>.</p>
+        <h5>(b) Two Regression Lines (Least Squares)</h5>
+        <div class="steps">
+          <div class="step k">
+            <b>Compute Regression coefficient b<sub>yx</sub> (slope of Y on X):</b>
+            b<sub>yx</sub> = [n·ΣXY − ΣX·ΣY] / [n·ΣX<sup>2</sup> − (ΣX)<sup>2</sup>] = 10160 / 13200 = <b>0.7697</b>.
+          </div>
+          <div class="step k">
+            <b>Compute Regression coefficient b<sub>xy</sub> (slope of X on Y):</b>
+            b<sub>xy</sub> = [n·ΣXY − ΣX·ΣY] / [n·ΣY<sup>2</sup> − (ΣY)<sup>2</sup>] = 10160 / 8784 = <b>1.1567</b>.
+          </div>
+          <div class="step k">
+            <b>Regression Line of Y on X:</b>
+            Passes through (X̄, Ȳ) = (28, 28.4):
+            Y − 28.4 = 0.7697 · (X − 28)
+            Y = 0.7697 X − 21.55 + 28.4
+            <b>Y = 0.7697 X + 6.85</b>.
+          </div>
+          <div class="step k">
+            <b>Regression Line of X on Y:</b>
+            X − 28 = 1.1567 · (Y − 28.4)
+            X = 1.1567 Y − 32.85 + 28
+            <b>X = 1.1567 Y − 4.85</b>.
+          </div>
+          <div class="step k">
+            <b>Cross-check:</b>
+            r<sup>2</sup> = b<sub>yx</sub> · b<sub>xy</sub> = 0.7697 × 1.1567 ≈ 0.8903.
+            r = √0.8903 ≈ <b>0.9436</b> ✓ matches Part-(a).
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Regression Summary — Q5(b)</caption>
+            <thead><tr><th>Quantity</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>b<sub>yx</sub> (slope of Y on X)</td><td>0.7697</td></tr>
+              <tr><td>b<sub>xy</sub> (slope of X on Y)</td><td>1.1567</td></tr>
+              <tr><td>Line Y on X</td><td><b>Y = 0.7697 X + 6.85</b></td></tr>
+              <tr><td>Line X on Y</td><td><b>X = 1.1567 Y − 4.85</b></td></tr>
+              <tr><td>r<sup>2</sup> = b<sub>yx</sub>·b<sub>xy</sub></td><td>0.8903</td></tr>
+              <tr><td>r</td><td>≈ 0.944</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box warn">
+          <b>Pitfall:</b> The two regression lines are <i>different</i> unless r = ±1. Students who write one equation and treat it as the other lose half the marks. Both must intersect at (X̄, Ȳ) — this is the cross-check examiners look for.
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Karl Pearson (1896) gave statistics its gold-standard correlation metric; Galton (1886) coined "regression toward the mean". Every ML linear regression — from <code>sklearn.linear_model.LinearRegression</code> to econometric forecasting — implements exactly these normal equations. Pearson's r appears in correlation heatmaps for feature selection.</p>
+
+        <h5>Conclusion</h5>
+        <p>Computed r ≈ 0.944 confirms a strong positive linear relationship. Both regression lines pass through (X̄, Ȳ) = (28, 28.4) and their slopes multiply to r<sup>2</sup>. The technique scales to multivariate regression via matrix least squares.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
           <ul>
-            <li>(a) Correct sums table + normal equations substitution: <span class="m">3.5 M</span></li>
-            <li>(a) Solving for straight line constants: <span class="m">4 M</span></li>
-            <li>(b) Correct sums + normal equations for parabola: <span class="m">3.5 M</span></li>
-            <li>(b) Solving the 3x3 system for a, b, c: <span class="m">4 M</span></li>
+            <li>(a) Σ-table (ΣX, ΣY, ΣX², ΣY², ΣXY): <span class="m">4 M</span></li>
+            <li>(a) Karl Pearson r formula + final: <span class="m">4 M</span></li>
+            <li>(b) Both b<sub>yx</sub> and b<sub>xy</sub>: <span class="m">3 M</span></li>
+            <li>(b) Both regression lines + cross-check r² = b<sub>yx</sub>·b<sub>xy</sub>: <span class="m">4 M</span></li>
             <li>Total: <span class="m">15 M</span></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Q6 (General Theory / Mixed) -->
+    <!-- Q6 (Unit 4 + Unit 1 — Parabola curve fitting + Bayes conditional) -->
     <div class="qcard predicted">
       <div class="qhead">
         <span class="qnum">Q6 [15 M]</span>
-        <span class="tag fav">Mixed Theory</span>
-        <span class="tag hot">⭐ Core Distributions</span>
+        <span class="tag fav">Unit 4 · Unit 1</span>
+        <span class="tag hot">⭐ Curve Fit · Bayes</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 25 · Q7 · 15M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BSC 23 · Q6 · 12M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 22 · Q5 · 10M</span>
       </div>
       <div class="qbody">
-        <b>(a) Prove the relation Mean = np and Variance = npq for the Binomial distribution. [8 M]</b><br>
-        <b>(b) Explain primary vs secondary data collection. List any four methods to gather primary data. [7 M]</b>
+        <b>(a) Fit a second-degree parabola Y = a + bX + cX² to the following data by the method of least squares. [8 M]</b><br>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>X</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
+              <tr><th>Y</th><td>1</td><td>1.8</td><td>1.3</td><td>2.5</td><td>6.3</td></tr>
+            </thead>
+          </table>
+        </div>
+        <b>(b) A diagnostic test for a disease is 99% sensitive (P(+ | D) = 0.99) and 95% specific (P(− | D′) = 0.95). The prior prevalence is P(D) = 0.01. A randomly chosen person tests positive — what is P(D | +) ? [7 M]</b>
       </div>
       <div class="ans">
-        <h5>(a) Derivation of Binomial Mean &amp; Variance</h5>
+        <h5>(a) Parabola Fit Y = a + bX + cX²</h5>
+
+        <figure class="diagram-fig">
+          <div style="position:relative;height:180px;background:var(--paper-deep);border:1px solid var(--rule);border-radius:8px;padding:8px;">
+            <svg viewBox="0 0 320 170" preserveAspectRatio="none" style="width:100%;height:100%;">
+              <line x1="20" y1="150" x2="310" y2="150" stroke="var(--muted)" stroke-width="1"/>
+              <line x1="20" y1="10" x2="20" y2="150" stroke="var(--muted)" stroke-width="1"/>
+              <path d="M 40 132 Q 130 165 220 90 T 300 25" stroke="var(--brand)" stroke-width="2.5" fill="none" stroke-dasharray="5,3"/>
+              <circle cx="40" cy="132" r="5" fill="var(--brand-deep)"/>
+              <circle cx="105" cy="120" r="5" fill="var(--brand-deep)"/>
+              <circle cx="170" cy="128" r="5" fill="var(--brand-deep)"/>
+              <circle cx="235" cy="100" r="5" fill="var(--brand-deep)"/>
+              <circle cx="300" cy="40" r="5" fill="var(--brand-deep)"/>
+              <text x="40" y="165" text-anchor="middle" fill="var(--muted)" font-size="10">0</text>
+              <text x="105" y="165" text-anchor="middle" fill="var(--muted)" font-size="10">1</text>
+              <text x="170" y="165" text-anchor="middle" fill="var(--muted)" font-size="10">2</text>
+              <text x="235" y="165" text-anchor="middle" fill="var(--muted)" font-size="10">3</text>
+              <text x="300" y="165" text-anchor="middle" fill="var(--muted)" font-size="10">4</text>
+              <text x="220" y="22" fill="var(--brand-deep)" font-size="11" font-weight="700">Y = 1.42 − 1.07X + 0.55X²</text>
+            </svg>
+          </div>
+          <figcaption><b>Fig 5.5</b> · Five data points with fitted parabola curve. Parabola opens upward (c &gt; 0).</figcaption>
+        </figure>
+
         <div class="steps">
           <div class="step k">
-            <b>Derivation of Mean E(X):</b>
-            E(X) = Sum_{k=0}^n k * C(n, k) * p^k * q^(n-k)
-            Since k=0 contributes 0, start from k=1. Note k * C(n, k) = n * C(n-1, k-1).
-            E(X) = Sum_{k=1}^n n * C(n-1, k-1) * p^k * q^(n-k)
-            Factor out n and one p:
-            E(X) = n*p * Sum_{k=1}^n C(n-1, k-1) * p^(k-1) * q^((n-1)-(k-1))
-            Let j = k - 1. As k runs 1-&gt;n, j runs 0-&gt;(n-1):
-            E(X) = n*p * Sum_{j=0}^{n-1} C(n-1, j) * p^j * q^((n-1)-j)
-            By binomial expansion, the sum is (p + q)^(n-1) = 1^(n-1) = 1.
-            Therefore, <b>Mean = E(X) = np</b>.
+            <b>Σ-Table (n = 5):</b>
+            ΣX = 0+1+2+3+4 = <b>10</b>;  ΣY = 1+1.8+1.3+2.5+6.3 = <b>12.9</b>.
+            ΣX<sup>2</sup> = 0+1+4+9+16 = <b>30</b>;  ΣX<sup>3</sup> = 0+1+8+27+64 = <b>100</b>;  ΣX<sup>4</sup> = 0+1+16+81+256 = <b>354</b>.
+            ΣXY = 0(1)+1(1.8)+2(1.3)+3(2.5)+4(6.3) = 0+1.8+2.6+7.5+25.2 = <b>37.1</b>.
+            ΣX<sup>2</sup>Y = 0(1)+1(1.8)+4(1.3)+9(2.5)+16(6.3) = 0+1.8+5.2+22.5+100.8 = <b>130.3</b>.
           </div>
           <div class="step k">
-            <b>Derivation of Variance:</b>
-            Find E[X(X-1)] first:
-            E[X(X-1)] = Sum_{k=0}^n k(k-1) * C(n, k) * p^k * q^(n-k)
-            Note k(k-1) * C(n, k) = n(n-1) * C(n-2, k-2).
-            E[X(X-1)] = n(n-1)*p^2 * Sum_{k=2}^n C(n-2, k-2) * p^(k-2) * q^(n-k) = n(n-1)*p^2.
-            Therefore, E(X^2) = E[X(X-1)] + E(X) = n(n-1)*p^2 + np = n^2*p^2 − np^2 + np.
-            Variance = E(X^2) − E(X)^2 = n^2*p^2 − np^2 + np − n^2*p^2 = np − np^2 = <b>np(1 - p) = npq</b>. ∎
+            <b>Normal Equations (3 unknowns):</b>
+            (1) ΣY = na + b·ΣX + c·ΣX<sup>2</sup>  →  12.9 = 5a + 10b + 30c.
+            (2) ΣXY = a·ΣX + b·ΣX<sup>2</sup> + c·ΣX<sup>3</sup>  →  37.1 = 10a + 30b + 100c.
+            (3) ΣX<sup>2</sup>Y = a·ΣX<sup>2</sup> + b·ΣX<sup>3</sup> + c·ΣX<sup>4</sup>  →  130.3 = 30a + 100b + 354c.
+          </div>
+          <div class="step k">
+            <b>Solve 3 × 3 System:</b>
+            (2) − 2·(1): 37.1 − 25.8 = 10b + 40c  →  11.3 = 10b + 40c     … (4)
+            (3) − 6·(1): 130.3 − 77.4 = 40b + 174c  →  52.9 = 40b + 174c     … (5)
+            (5) − 4·(4): 52.9 − 45.2 = 174c − 160c  →  7.7 = 14c  →  <b>c = 0.55</b>.
+            From (4): 10b = 11.3 − 40(0.55) = 11.3 − 22 = −10.7  →  <b>b = −1.07</b>.
+            From (1): 5a = 12.9 − 10(−1.07) − 30(0.55) = 12.9 + 10.7 − 16.5 = 7.1  →  <b>a = 1.42</b>.
+          </div>
+          <div class="step k">
+            <b>Fitted Parabola:</b>
+            <b>Y = 1.42 − 1.07 X + 0.55 X²</b>.
           </div>
         </div>
 
-        <h5>(b) Data Types &amp; Primary Methods</h5>
-        <p><b>Primary Data</b> is collected first-hand by the investigator for the specific study (fresh and original). <b>Secondary Data</b> is compiled by someone else in the past (journals, records).</p>
-        <p>Methods to gather Primary Data:</p>
-        <ol>
-          <li>Direct Personal Interviews.</li>
-          <li>Indirect Oral Investigations.</li>
-          <li>Mailed Questionnaires.</li>
-          <li>Direct Physical Observation.</li>
-        </ol>
+        <h5>(b) Bayes' Theorem — Disease Test</h5>
+        <div class="steps">
+          <div class="step k">
+            <b>State Bayes' formula:</b>
+            P(D | +) = [P(+ | D) · P(D)] / P(+).
+            Total probability: P(+) = P(+ | D) · P(D) + P(+ | D′) · P(D′).
+          </div>
+          <div class="step k">
+            <b>Substitute given values:</b>
+            P(D) = 0.01 ⇒ P(D′) = 0.99.
+            P(+ | D) = 0.99 (sensitivity).
+            P(+ | D′) = 1 − 0.95 = 0.05 (false-positive rate = 1 − specificity).
+            P(+) = 0.99 × 0.01 + 0.05 × 0.99 = 0.0099 + 0.0495 = <b>0.0594</b>.
+          </div>
+          <div class="step k">
+            <b>Posterior:</b>
+            P(D | +) = 0.0099 / 0.0594 = <b>0.1667 (≈ 16.67%)</b>.
+            Interpretation: even after a positive test, the chance of disease is only ~17% because the prior prevalence (1%) is very low — base-rate fallacy in action.
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Bayes — 2 × 2 Confusion Layout (per 10,000 people)</caption>
+            <thead><tr><th></th><th>Disease (D)</th><th>No Disease (D′)</th><th>Total</th></tr></thead>
+            <tbody>
+              <tr><th>Test +</th><td>99 (TP)</td><td>495 (FP)</td><td>594</td></tr>
+              <tr><th>Test −</th><td>1 (FN)</td><td>9405 (TN)</td><td>9406</td></tr>
+              <tr><th>Total</th><td>100</td><td>9900</td><td>10000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box warn">
+          <b>Pitfall:</b> Students often mis-state P(+ | D′) as the specificity 0.95 instead of (1 − specificity) = 0.05. That single sign error wrecks the posterior.
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Least-squares curve fitting (Legendre 1805, Gauss 1809) is the engine of ML model training — gradient descent solves the same normal equations at scale. Bayes' theorem (Rev. Thomas Bayes 1763, posthumous) drives spam filters (Naïve Bayes), medical-test interpretation, A/B-test posterior updates, and modern Bayesian deep learning.</p>
+
+        <h5>Conclusion</h5>
+        <p>Parabola fit Y = 1.42 − 1.07X + 0.55X² minimises Σ(Y − Ŷ)<sup>2</sup>. Bayes gives P(D | +) ≈ 16.67% — even a 99% accurate test on a 1%-prevalence disease yields mostly false positives. Both results showcase how disciplined arithmetic outperforms intuition.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
           <ul>
-            <li>(a) Clear algebraic steps for E(X) derivation: <span class="m">4 M</span></li>
-            <li>(a) Correct E[X(X-1)] and variance derivation: <span class="m">4 M</span></li>
-            <li>(b) Correct primary/secondary definitions + 4 listed methods: <span class="m">7 M</span></li>
+            <li>(a) Σ-table (ΣX, ΣY, ΣX², ΣX³, ΣX⁴, ΣXY, ΣX²Y): <span class="m">3 M</span></li>
+            <li>(a) Three normal equations: <span class="m">2 M</span></li>
+            <li>(a) Solve 3 × 3 system + final parabola: <span class="m">3 M</span></li>
+            <li>(b) State Bayes + total probability: <span class="m">2 M</span></li>
+            <li>(b) Correct numerical substitution: <span class="m">3 M</span></li>
+            <li>(b) Final P(D | +) + interpretation: <span class="m">2 M</span></li>
+            <li>Total: <span class="m">15 M</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7 (Unit 4 + Unit 2 — Spearman rank + Joint pdf P(X<a∩Y<b)) -->
+    <div class="qcard predicted">
+      <div class="qhead">
+        <span class="qnum">Q7 [15 M]</span>
+        <span class="tag fav">Unit 4 · Unit 2</span>
+        <span class="tag hot">⭐ Spearman · Joint Integral</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 25 · Q8 · 15M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BSC 23 · Q7 · 12M</span>
+        <span class="tag year" style="opacity:.72;background:#fef2f2;color:var(--crimson);border-color:var(--crimson);">⟲ BCA 22 · Q6 · 8M</span>
+      </div>
+      <div class="qbody">
+        <b>(a) Two judges award ranks to 10 candidates as follows. Compute Spearman's rank correlation coefficient. [8 M]</b><br>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Candidate</th><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td><td>G</td><td>H</td><td>I</td><td>J</td></tr>
+              <tr><th>Judge 1 (R₁)</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr>
+              <tr><th>Judge 2 (R₂)</th><td>2</td><td>1</td><td>4</td><td>3</td><td>6</td><td>5</td><td>8</td><td>7</td><td>10</td><td>9</td></tr>
+            </thead>
+          </table>
+        </div>
+        <b>(b) The joint pdf of (X, Y) is f(x, y) = 4xy for 0 ≤ x ≤ 1, 0 ≤ y ≤ 1, and 0 elsewhere. Find P(X &lt; ½ ∩ Y &lt; ½) and P(X + Y &lt; 1). [7 M]</b>
+      </div>
+      <div class="ans">
+        <h5>(a) Spearman's Rank Correlation</h5>
+
+        <figure class="diagram-fig">
+          <div style="display:grid;grid-template-columns:repeat(10,1fr);gap:6px;background:var(--paper-deep);padding:12px 8px;border:1px solid var(--rule);border-radius:8px;">
+            <div style="text-align:center;font-size:10px;font-weight:700;color:var(--brand-deep);">A</div>
+            <div style="text-align:center;font-size:10px;font-weight:700;color:var(--brand-deep);">B</div>
+            <div style="text-align:center;font-size:10px;font-weight:700;color:var(--brand-deep);">C</div>
+            <div style="text-align:center;font-size:10px;font-weight:700;color:var(--brand-deep);">D</div>
+            <div style="text-align:center;font-size:10px;font-weight:700;color:var(--brand-deep);">E</div>
+            <div style="text-align:center;font-size:10px;font-weight:700;color:var(--brand-deep);">F</div>
+            <div style="text-align:center;font-size:10px;font-weight:700;color:var(--brand-deep);">G</div>
+            <div style="text-align:center;font-size:10px;font-weight:700;color:var(--brand-deep);">H</div>
+            <div style="text-align:center;font-size:10px;font-weight:700;color:var(--brand-deep);">I</div>
+            <div style="text-align:center;font-size:10px;font-weight:700;color:var(--brand-deep);">J</div>
+            <div style="background:var(--brand);height:6px;border-radius:3px;"></div>
+            <div style="background:var(--brand);height:12px;border-radius:3px;"></div>
+            <div style="background:var(--brand);height:18px;border-radius:3px;"></div>
+            <div style="background:var(--brand);height:24px;border-radius:3px;"></div>
+            <div style="background:var(--brand);height:30px;border-radius:3px;"></div>
+            <div style="background:var(--brand);height:36px;border-radius:3px;"></div>
+            <div style="background:var(--brand);height:42px;border-radius:3px;"></div>
+            <div style="background:var(--brand);height:48px;border-radius:3px;"></div>
+            <div style="background:var(--brand);height:54px;border-radius:3px;"></div>
+            <div style="background:var(--brand);height:60px;border-radius:3px;"></div>
+            <div style="background:var(--brand-2);height:12px;border-radius:3px;"></div>
+            <div style="background:var(--brand-2);height:6px;border-radius:3px;"></div>
+            <div style="background:var(--brand-2);height:24px;border-radius:3px;"></div>
+            <div style="background:var(--brand-2);height:18px;border-radius:3px;"></div>
+            <div style="background:var(--brand-2);height:36px;border-radius:3px;"></div>
+            <div style="background:var(--brand-2);height:30px;border-radius:3px;"></div>
+            <div style="background:var(--brand-2);height:48px;border-radius:3px;"></div>
+            <div style="background:var(--brand-2);height:42px;border-radius:3px;"></div>
+            <div style="background:var(--brand-2);height:60px;border-radius:3px;"></div>
+            <div style="background:var(--brand-2);height:54px;border-radius:3px;"></div>
+          </div>
+          <figcaption><b>Fig 5.6</b> · Judge 1 (deep crimson) vs Judge 2 (lighter) rank bars per candidate; pairs swap in adjacent positions — small D<sup>2</sup>.</figcaption>
+        </figure>
+
+        <div class="steps">
+          <div class="step k">
+            <b>Compute D = R₁ − R₂ and D<sup>2</sup>:</b>
+            <ul>
+              <li>A: 1 − 2 = −1; D² = 1</li>
+              <li>B: 2 − 1 = +1; D² = 1</li>
+              <li>C: 3 − 4 = −1; D² = 1</li>
+              <li>D: 4 − 3 = +1; D² = 1</li>
+              <li>E: 5 − 6 = −1; D² = 1</li>
+              <li>F: 6 − 5 = +1; D² = 1</li>
+              <li>G: 7 − 8 = −1; D² = 1</li>
+              <li>H: 8 − 7 = +1; D² = 1</li>
+              <li>I: 9 − 10 = −1; D² = 1</li>
+              <li>J: 10 − 9 = +1; D² = 1</li>
+            </ul>
+            ΣD<sup>2</sup> = 10. n = 10.
+          </div>
+          <div class="step k">
+            <b>Apply Spearman formula:</b>
+            ρ<sub>s</sub> = 1 − [6 · ΣD<sup>2</sup>] / [n(n<sup>2</sup> − 1)]
+            = 1 − (6 × 10) / (10 × 99)
+            = 1 − 60 / 990
+            = 1 − 0.0606
+            = <b>0.9394</b>.
+            Strong positive agreement between the two judges.
+          </div>
+        </div>
+
+        <h5>(b) Joint pdf — Region Probabilities</h5>
+        <div class="steps">
+          <div class="step k">
+            <b>Verify f(x, y) is a valid pdf:</b>
+            ∫<sub>0</sub><sup>1</sup>∫<sub>0</sub><sup>1</sup> 4xy dx dy = 4 · [x²/2]<sub>0</sub><sup>1</sup> · [y²/2]<sub>0</sub><sup>1</sup> = 4 · ½ · ½ = 1 ✓.
+          </div>
+          <div class="step k">
+            <b>(i) P(X &lt; ½ ∩ Y &lt; ½):</b>
+            = ∫<sub>0</sub><sup>1/2</sup>∫<sub>0</sub><sup>1/2</sup> 4xy dx dy
+            = 4 · [x²/2]<sub>0</sub><sup>1/2</sup> · [y²/2]<sub>0</sub><sup>1/2</sup>
+            = 4 · (1/8) · (1/8)
+            = 4 / 64 = <b>1/16 = 0.0625</b>.
+          </div>
+          <div class="step k">
+            <b>(ii) P(X + Y &lt; 1):</b>
+            Triangular region 0 ≤ x ≤ 1, 0 ≤ y ≤ 1 − x.
+            P = ∫<sub>0</sub><sup>1</sup>∫<sub>0</sub><sup>1−x</sup> 4xy dy dx
+            = ∫<sub>0</sub><sup>1</sup> 4x · [y²/2]<sub>0</sub><sup>1−x</sup> dx
+            = ∫<sub>0</sub><sup>1</sup> 2x(1 − x)<sup>2</sup> dx.
+            Expand: 2x(1 − 2x + x²) = 2x − 4x² + 2x³.
+            ∫<sub>0</sub><sup>1</sup> (2x − 4x² + 2x³) dx = [x² − 4x³/3 + x⁴/2]<sub>0</sub><sup>1</sup>
+            = 1 − 4/3 + 1/2 = 6/6 − 8/6 + 3/6 = 1/6.
+            ∴ <b>P(X + Y &lt; 1) = 1/6 ≈ 0.1667</b>.
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <caption>Q7 Summary</caption>
+            <thead><tr><th>Quantity</th><th>Value</th></tr></thead>
+            <tbody>
+              <tr><td>ΣD<sup>2</sup></td><td>10</td></tr>
+              <tr><td>Spearman ρ<sub>s</sub></td><td><b>0.9394</b></td></tr>
+              <tr><td>P(X &lt; ½ ∩ Y &lt; ½)</td><td><b>1/16 = 0.0625</b></td></tr>
+              <tr><td>P(X + Y &lt; 1)</td><td><b>1/6 ≈ 0.1667</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box warn">
+          <b>Pitfall:</b> For P(X + Y &lt; 1), forgetting that the upper Y-limit depends on x (i.e. integrating 0→1 instead of 0→1−x) gives the wrong answer 1. Always sketch the region first.
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Spearman (1904) is the non-parametric rank correlation used in sports analytics (player-rank stability), Likert-scale survey analysis, and judge-vs-judge inter-rater reliability. Joint-pdf region integration powers MCMC sampling, Bayesian credible regions, and physics-of-failure analysis in reliability engineering.</p>
+
+        <h5>Conclusion</h5>
+        <p>Spearman ρ<sub>s</sub> = 0.9394 indicates the two judges agreed strongly on ranking (within ±1 in every pair). Joint-pdf integrals split into product form when the region is rectangular (P = 1/16) and require triangular limits when the region is bounded by X + Y &lt; 1 (P = 1/6).</p>
+
+        <div class="score">
+          <b>Marks Allocation:</b>
+          <ul>
+            <li>(a) D and D² table (10 pairs): <span class="m">3 M</span></li>
+            <li>(a) Spearman formula + final ρ<sub>s</sub>: <span class="m">5 M</span></li>
+            <li>(b) P(X &lt; ½ ∩ Y &lt; ½) double integral: <span class="m">3 M</span></li>
+            <li>(b) P(X + Y &lt; 1) triangular region: <span class="m">4 M</span></li>
             <li>Total: <span class="m">15 M</span></li>
           </ul>
         </div>

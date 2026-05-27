@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#065f46" />
+<meta name="theme-color" content="#166534" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="WC Mastery" />
@@ -18,7 +18,7 @@
 :root{
   --paper:#f7f1e1; --paper-soft:#fffaef; --paper-deep:#ebe2cc;
   --ink:#1a1209; --ink-soft:#3d2f1c; --muted:#6b5d47; --rule:#d9cfb6;
-  --brand:#065f46; --brand-2:#047857; --brand-soft:#d1fae5; --brand-deep:#064e3b;
+  --brand:#166534; --brand-2:#14532d; --brand-soft:#dcfce7; --brand-deep:#052e16;
   --gold:#ca8a04; --gold-soft:#fef9c3;
   --auburn:#7c2d12; --auburn-soft:#fde6d6;
   --highlighter:#fde047; --highlight-pink:#fbcfe8; --highlight-mint:#bbf7d0;
@@ -28,7 +28,7 @@
   --shadow: 0 1px 0 rgba(26,18,9,.05), 0 8px 24px -10px rgba(26,18,9,.18);
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bot: env(safe-area-inset-bottom, 0px);
-  --svg-ink:#1a1209; --svg-line:#d9cfb6; --svg-brand:#065f46;
+  --svg-ink:#1a1209; --svg-line:#d9cfb6; --svg-brand:#166534;
   --svg-good:#166534; --svg-bad:#9f1239; --svg-gold:#ca8a04;
 }
 *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; min-width:0; }
@@ -47,7 +47,7 @@ body{
 }
 body::before{
   content:""; position:fixed; inset:0;
-  background-image:repeating-linear-gradient(0deg, rgba(6,95,70,.013) 0 1px, transparent 1px 28px);
+  background-image:repeating-linear-gradient(0deg, rgba(22,101,52,.013) 0 1px, transparent 1px 28px);
   pointer-events:none; z-index:0;
 }
 img,svg,video,iframe{ max-width:100%; height:auto; }
@@ -390,8 +390,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <tr><th>Technique</th><th>Core Mechanism</th><th>Advantage</th><th>Primary Drawback</th></tr>
         <tr><td><b>Cell Splitting</b></td><td>Subdivide a congested cell into 4 smaller cells with lower-power antennas.</td><td>Directly increases capacity by 4×.</td><td>Drastically increases signaling load and handovers. High site cost.</td></tr>
         <tr><td><b>Cell Sectoring</b></td><td>Replace omni-directional antenna with 3 directional sector antennas (120°).</td><td>Decreases co-channel interference ($S/I$ increases ~5 dB).</td><td>Reduces trunking efficiency by splitting channels into smaller groups.</td></tr>
-        <li><b>Microzone</b></li>
-        <td>Distribute active micro-antennas inside one cell all wired to one base station.</td><td>No handovers between zones inside the cell; excellent indoor coverage.</td><td>High cabling infrastructure cost.</td>
+        <tr><td><b>Microzone</b></td><td>Distribute active micro-antennas inside one cell all wired to one base station.</td><td>No handovers between zones inside the cell; excellent indoor coverage.</td><td>High cabling infrastructure cost.</td></tr>
       </table>
     </div>
   </div>
@@ -577,18 +576,39 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>Describe the GSM System Architecture in detail with a neat block diagram. Detail the role of Mobile Station (MS), Base Station Subsystem (BSS), and Network Switching Subsystem (NSS) with a table.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>GSM (Global System for Mobile communications) is the canonical 2G digital cellular standard. Its architecture decouples components into three main subsystems connected by standard interfaces (Um, Abis, A), ensuring multi-vendor hardware compatibility.</p>
+        <p>GSM (Global System for Mobile communications) is the canonical 2G digital cellular standard standardised by <b>ETSI in 1990</b> (originally <em>Groupe Spécial Mobile</em>). Its architecture decouples components into four main subsystems connected by standard interfaces (Um, Abis, A), ensuring multi-vendor hardware compatibility.</p>
 
         <figure class="diagram-fig">
-          <div style="border:1.5px solid var(--ink); border-radius:4px; padding:10px; font-family:monospace; font-size:12px; text-align:left; background:#fff; line-height:1.4; max-width:480px; margin:0 auto;">
-            <b>[MS (Handset+SIM)]</b>
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;│ (Um Interface - Air Link)
-            <br><b>[BTS (Antenna)]</b> ── (Abis Interface) ── <b>[BSC (Controller)]</b> &lt;─ (BSS)
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ (A Interface)
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;┌────────────────────────┴────────────────────────┐
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼ (MSC Switch) &lt;── [HLR] · [VLR] · [AuC] · [EIR] &lt;─ (NSS)
+          <div style="display:flex; flex-direction:column; gap:8px; max-width:560px; margin:0 auto; padding:8px; text-align:left;">
+            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px;">
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:8px; text-align:center;">
+                <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.15em; color:var(--brand-deep); font-weight:700;">SUBSYSTEM 1</div>
+                <div style="font-family:'Fraunces',serif; font-weight:700; font-size:13px; margin:4px 0; color:var(--ink);">MS</div>
+                <div style="font-size:10.5px; color:var(--ink-soft); line-height:1.3;">Mobile Station<br>(Handset + SIM)</div>
+              </div>
+              <div style="background:var(--gold-soft); border:1.5px solid var(--gold); border-radius:4px; padding:8px; text-align:center;">
+                <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.15em; color:var(--gold); font-weight:700;">SUBSYSTEM 2</div>
+                <div style="font-family:'Fraunces',serif; font-weight:700; font-size:13px; margin:4px 0; color:var(--ink);">BSS</div>
+                <div style="font-size:10.5px; color:var(--ink-soft); line-height:1.3;">BTS<br>+ BSC</div>
+              </div>
+              <div style="background:var(--crimson-soft); border:1.5px solid var(--crimson); border-radius:4px; padding:8px; text-align:center;">
+                <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.15em; color:var(--crimson); font-weight:700;">SUBSYSTEM 3</div>
+                <div style="font-family:'Fraunces',serif; font-weight:700; font-size:13px; margin:4px 0; color:var(--ink);">NSS</div>
+                <div style="font-size:10.5px; color:var(--ink-soft); line-height:1.3;">MSC+HLR<br>VLR·AuC·EIR</div>
+              </div>
+              <div style="background:var(--auburn-soft); border:1.5px solid var(--auburn); border-radius:4px; padding:8px; text-align:center;">
+                <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.15em; color:var(--auburn); font-weight:700;">SUBSYSTEM 4</div>
+                <div style="font-family:'Fraunces',serif; font-weight:700; font-size:13px; margin:4px 0; color:var(--ink);">OSS</div>
+                <div style="font-size:10.5px; color:var(--ink-soft); line-height:1.3;">Operations<br>Support</div>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6px; padding:0 6px;">
+              <div style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); padding:4px; background:var(--paper-deep); border-radius:3px;">↔ <b style="color:var(--brand)">Um</b> (air)</div>
+              <div style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); padding:4px; background:var(--paper-deep); border-radius:3px;">↔ <b style="color:var(--brand)">Abis</b> (BTS↔BSC)</div>
+              <div style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); padding:4px; background:var(--paper-deep); border-radius:3px;">↔ <b style="color:var(--brand)">A</b> (BSC↔MSC)</div>
+            </div>
           </div>
-          <figcaption><b>Fig 2.4</b> · GSM Architecture showing three decoupled subsystems</figcaption>
+          <figcaption><b>Fig 2.4</b> · GSM four-subsystem architecture — MS · BSS · NSS · OSS with Um/Abis/A interfaces (ETSI 1990)</figcaption>
         </figure>
 
         <h5>The Three Subsystem Groups</h5>
@@ -602,21 +622,29 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
             <tr><td>HLR (Home Location Register)</td><td>The permanent master database storing subscriber profiles, billing details, and current location registers.</td></tr>
             <tr><td>VLR (Visitor Location Register)</td><td>A dynamic local cache database storing temporary profiles of guest mobile users currently active in the MSC zone.</td></tr>
             <tr><td>AuC (Authentication Centre)</td><td>Generates RAND, SRES, and Kc keys using A3/A8 algorithms, providing the MSC with security verification.</td></tr>
+            <tr><td><b>Operations Support Subsystem (OSS)</b></td><td>OMC (Operations &amp; Maintenance Centre)</td><td>Network-wide monitoring, fault management, configuration and performance management — keeps the whole GSM network healthy.</td></tr>
           </table>
         </div>
 
         <div class="box warn">
-          <span class="label">Examiner Trap</span>
-          Do not mix up HLR and VLR. HLR is the permanent database owned by your home network; VLR is a temporary local registry cache holding guest user data to avoid redundant querying back to the home HLR.
+          <span class="label">Examiner Trap — HLR vs VLR</span>
+          Do not mix up HLR and VLR. <b>HLR</b> is the <em>permanent</em> master database owned by your home network (one per operator). <b>VLR</b> is a <em>temporary local registry cache</em> at each MSC holding profiles of guest mobiles currently in that zone — it avoids redundant queries back to the home HLR. Mixing them up costs 2-3 marks every time.
         </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Although 5G NR is the headline 2026 wireless standard, GSM (2G) remains the universal fallback layer for voice. Major carriers (Vodafone, Airtel, T-Mobile) still operate GSM cores for <em>VoLTE fallback</em> and IoT M2M devices. The MS/BSS/NSS partition introduced by ETSI in 1990 also shaped the 3GPP architecture for UMTS, LTE EPC (with MME/HSS replacing MSC/HLR) and 5G SBA — proving the decoupling principle still rules cellular design.</p>
+
+        <h5>Conclusion</h5>
+        <p>GSM's four-subsystem layered architecture remains the textbook reference for cellular system design: clean separation between handset, radio access, switching, and operations enables vendor interoperability, seamless mobility, and roaming. Mastering MS/BSS/NSS/OSS and the AuC security triplet unlocks every subsequent generation question (3G/4G/5G).</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
           <ul>
-            <li><span>GSM history and subsystem background introduction</span><span class="m">2.5M</span></li>
-            <li><span>GSM Architecture Block Diagram (Fig 2.4)</span><span class="m">4.0M</span></li>
-            <li><span>Detailed Subsystems Comparison Table (MS, BSS, NSS)</span><span class="m">5.5M</span></li>
-            <li><span>AuC security triplets &amp; HLR/VLR discussion</span><span class="m">3.0M</span></li>
+            <li><span>GSM history (ETSI 1990) and subsystem background introduction</span><span class="m">2.0M</span></li>
+            <li><span>GSM Architecture Block Diagram (Fig 2.4) — 4 subsystems + interfaces</span><span class="m">4.0M</span></li>
+            <li><span>Detailed Subsystems Comparison Table (MS, BSS, NSS, OSS)</span><span class="m">5.0M</span></li>
+            <li><span>AuC security triplets &amp; HLR/VLR discussion (box.warn)</span><span class="m">2.0M</span></li>
+            <li><span>Modern relevance (VoLTE fallback, IoT) + Conclusion</span><span class="m">2.0M</span></li>
           </ul>
         </div>
       </div>
@@ -631,6 +659,30 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <br>(c) If cell radius R = 2 km, find co-channel reuse ratio Q and co-channel cell distance D.
       </b></div>
       <div class="ans">
+        <h5>Introduction</h5>
+        <p>Frequency reuse is the cornerstone of cellular capacity, formalised by <b>V.H. MacDonald (Bell Labs, 1979)</b> in the seminal AMPS design paper. Same frequency channels are spatially reused at cells separated by a co-channel distance D, organised into clusters of size N where <code>N = i² + ij + j²</code> (allowed N: 3, 4, 7, 9, 12, 13…).</p>
+
+        <figure class="diagram-fig">
+          <div style="display:flex; justify-content:center; gap:8px; padding:10px 4px; flex-wrap:wrap;">
+            <div style="display:grid; grid-template-columns:repeat(3,40px); grid-template-rows:repeat(3,40px); gap:2px;">
+              <div style="background:#fee2e2; border:1.5px solid var(--crimson); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--crimson);">A</div>
+              <div style="background:#fef3c7; border:1.5px solid var(--gold); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--gold);">B</div>
+              <div style="background:#dcfce7; border:1.5px solid var(--brand); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--brand);">C</div>
+              <div style="background:#fde6d6; border:1.5px solid var(--auburn); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--auburn);">D</div>
+              <div style="background:#e0e7ff; border:1.5px solid #4338ca; border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:#4338ca;">E</div>
+              <div style="background:#fce7f3; border:1.5px solid #be185d; border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:#be185d;">F</div>
+              <div style="background:#cffafe; border:1.5px solid #0e7490; border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:#0e7490;">G</div>
+              <div style="background:#fee2e2; border:1.5px solid var(--crimson); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--crimson); opacity:.55;">A'</div>
+              <div style="background:#fef3c7; border:1.5px solid var(--gold); border-radius:4px; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--gold); opacity:.55;">B'</div>
+            </div>
+            <div style="display:flex; flex-direction:column; justify-content:center; max-width:180px; text-align:left;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--brand-deep); font-weight:700; text-transform:uppercase; margin-bottom:4px;">N = 7 Cluster</div>
+              <div style="font-size:12px; color:var(--ink-soft); line-height:1.4;">A→G use distinct channel sets. A repeats at A' once distance <code style="font-size:10px;">D = R√(3N)</code> is met. Co-channel ratio Q = D/R = √21 ≈ 4.58.</div>
+            </div>
+          </div>
+          <figcaption><b>Fig 3.1</b> · N=7 frequency-reuse cluster — distinct channel sets A–G; co-channel cells (A, A') separated by reuse distance D</figcaption>
+        </figure>
+
         <h5>(a) Total Duplex Channels</h5>
         <div class="steps">
           <div class="step"><span class="k">Step 1</span><div class="body">Compute duplex channel width: each call requires one uplink and one downlink simplex channel. Duplex size = <code>2 × 25 kHz = 50 kHz = 0.05 MHz</code>.</div></div>
@@ -658,13 +710,25 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </div>
         <p><b>Answers summary:</b> (a) 500 duplex channels, (b) 68 voice &amp; 3 control channels/cell, (c) Q ≈ 4.58, D ≈ 9.16 km.</p>
 
+        <div class="box warn">
+          <span class="label">Examiner Trap — D/R ratio</span>
+          The most common mis-step is computing <code>D = √(3N)</code> without the <em>× R</em> factor — Q is dimensionless (D/R), but the actual co-channel distance D = Q × R has units of km. Drop the multiplication and you lose 1.5–2 marks. Also: when channels-per-cell isn't an integer, voice channels round <b>down</b> (no half-channel for voice), control channels round <b>up</b> (you can't have fractional signalling).
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>While classic N=7 reuse was the 2G GSM staple, 4G LTE and 5G NR use <b>universal reuse (N=1)</b> with <em>fractional frequency reuse (FFR)</em> and <em>soft frequency reuse (SFR)</em> — interior cell users get the full band, edge users get orthogonal sub-bands. The cluster geometry survives in cell-planning tools like Atoll and ICS Telecom.</p>
+
+        <h5>Conclusion</h5>
+        <p>Frequency reuse remains the most powerful capacity multiplier in any spatially-bounded radio system: by halving the cluster size you double the system capacity, at the cost of tighter interference management. Modern networks push this principle to its physical limit with N=1 + interference coordination.</p>
+
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
           <ul>
-            <li><span>Part A: Duplex conversion and total channel calculations</span><span class="m">4.0M</span></li>
-            <li><span>Part B: Voice and control channel allocations per cell</span><span class="m">4.0M</span></li>
-            <li><span>Part C: Q co-channel ratio calculations</span><span class="m">3.5M</span></li>
-            <li><span>Part C: D distance calculations and final summary</span><span class="m">3.5M</span></li>
+            <li><span>Introduction + Fig 3.1 (N=7 cluster diagram)</span><span class="m">2.5M</span></li>
+            <li><span>Part A: Duplex conversion and total channel calculations</span><span class="m">3.0M</span></li>
+            <li><span>Part B: Voice and control channel allocations per cell</span><span class="m">3.5M</span></li>
+            <li><span>Part C: Q co-channel ratio &amp; D distance calculations</span><span class="m">4.0M</span></li>
+            <li><span>Warn box + Modern relevance + Conclusion</span><span class="m">2.0M</span></li>
           </ul>
         </div>
       </div>
@@ -675,6 +739,32 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q4</span><span class="tag year">Unit 2 Highlight</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Compare MAHO, MCHO, and NCHO handoff strategies. Discuss the practical handoff considerations: hysteresis, dwell time, guard channels, and the ping-pong effect. Trace the 4-stage handoff sequence.</b></div>
       <div class="ans">
+        <h5>Introduction</h5>
+        <p>A handoff (handover) transfers an active call from one radio channel/base station to another without breaking the user session, as the subscriber crosses a cell boundary. The three control strategies — NCHO, MAHO, MCHO — were progressively standardised by <b>ITU-T and ETSI through the 1990s</b> as cellular evolved from 1G analog to 2G/3G digital.</p>
+
+        <figure class="diagram-fig">
+          <div style="display:flex; flex-direction:column; gap:8px; max-width:520px; margin:0 auto; padding:6px;">
+            <div style="display:grid; grid-template-columns:90px 1fr 140px; gap:8px; align-items:center; background:var(--auburn-soft); border:1.5px solid var(--auburn); border-radius:4px; padding:8px 10px;">
+              <div style="font-family:'Fraunces',serif; font-weight:700; font-size:14px; color:var(--auburn);">NCHO</div>
+              <div style="font-size:12px; color:var(--ink-soft); line-height:1.4;">Base Station measures · MSC decides — slow (~10s)</div>
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-align:right; color:var(--auburn);">1G AMPS · Analog</div>
+            </div>
+            <div style="text-align:center; font-size:14px; color:var(--muted); line-height:1;">↓ evolution</div>
+            <div style="display:grid; grid-template-columns:90px 1fr 140px; gap:8px; align-items:center; background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:8px 10px;">
+              <div style="font-family:'Fraunces',serif; font-weight:700; font-size:14px; color:var(--brand);">MAHO</div>
+              <div style="font-size:12px; color:var(--ink-soft); line-height:1.4;">Mobile measures · MSC decides — fast (~1s)</div>
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-align:right; color:var(--brand);">2G GSM · 3G UMTS</div>
+            </div>
+            <div style="text-align:center; font-size:14px; color:var(--muted); line-height:1;">↓ evolution</div>
+            <div style="display:grid; grid-template-columns:90px 1fr 140px; gap:8px; align-items:center; background:var(--gold-soft); border:1.5px solid var(--gold); border-radius:4px; padding:8px 10px;">
+              <div style="font-family:'Fraunces',serif; font-weight:700; font-size:14px; color:var(--gold);">MCHO</div>
+              <div style="font-size:12px; color:var(--ink-soft); line-height:1.4;">Mobile measures · Mobile decides — instant (~0.1s)</div>
+              <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.1em; text-align:right; color:var(--gold);">DECT · Private WLAN</div>
+            </div>
+          </div>
+          <figcaption><b>Fig 4.1</b> · Handoff control evolution — decision authority shifts from network → mobile as latency tightens</figcaption>
+        </figure>
+
         <h5>Handoff Strategies Comparison</h5>
         <div class="table-wrap">
           <table>
@@ -701,13 +791,25 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <div class="step"><span class="k">4</span><div class="body"><b>Complete Phase:</b> MS retunes to the new frequency, establishes link with the new BS, and old BS releases the previous channel back to the pool.</div></div>
         </div>
 
+        <div class="box warn">
+          <span class="label">Examiner Trap — MAHO vs NCHO</span>
+          The classic confusion: <b>NCHO</b> uses <em>base station</em> measurements (mobile is dumb, network is smart) — used in slow 1G AMPS. <b>MAHO</b> uses <em>mobile</em> measurements but the <em>MSC still decides</em> — used in 2G GSM. Don't merge the two; an examiner who reads "mobile measures and decides" for MAHO marks it wrong (that's MCHO, used in DECT).
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>4G LTE and 5G NR replace classical hard handover with <b>soft handover</b> (CDMA2000/UMTS) and <b>make-before-break X2/Xn handover</b> (LTE/NR), where the mobile is briefly connected to both source and target cells — eliminating call drops. Future 6G architectures (3GPP Rel-19+) target <em>zero-interruption mobility</em> using ML-driven handover prediction.</p>
+
+        <h5>Conclusion</h5>
+        <p>Handoff sits at the heart of cellular mobility — the trade-off between measurement accuracy, decision latency, and signalling overhead has driven the entire evolution from NCHO → MAHO → MCHO → soft handover. Coupled with hysteresis, dwell time, and guard channels, modern networks achieve sub-50 ms break times.</p>
+
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
           <ul>
-            <li><span>Handoff Strategies Comparison Table</span><span class="m">4.0M</span></li>
-            <li><span>Four practical considerations (Hysteresis, Dwell, etc.)</span><span class="m">4.0M</span></li>
-            <li><span>4-Stage Handoff Sequence (4 × 1.25M)</span><span class="m">5.0M</span></li>
-            <li><span>Mitigation and conclusion</span><span class="m">2.0M</span></li>
+            <li><span>Introduction + Fig 4.1 (evolution ladder)</span><span class="m">2.5M</span></li>
+            <li><span>Handoff Strategies Comparison Table</span><span class="m">3.0M</span></li>
+            <li><span>Four practical considerations (Hysteresis, Dwell, etc.)</span><span class="m">3.5M</span></li>
+            <li><span>4-Stage Handoff Sequence (4 × 1.0M)</span><span class="m">4.0M</span></li>
+            <li><span>Warn box + Modern relevance + Conclusion</span><span class="m">2.0M</span></li>
           </ul>
         </div>
       </div>
@@ -719,7 +821,28 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>Contrast Cell Splitting, Cell Sectoring, and Microzone cell designs in detail. Explain how each increases coverage or capacity, with a detailed comparison table.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>As cellular subscriber density grows, operators must scale capacity without acquiring expensive new frequency spectrum. Three architectural scaling options are cell splitting, cell sectoring, and microzone deployment.</p>
+        <p>As cellular subscriber density grows, operators must scale capacity without acquiring expensive new frequency spectrum. Three architectural scaling options — <b>cell splitting</b>, <b>cell sectoring</b>, and <b>microzone</b> deployment — were formalised in Lee's seminal cellular design literature (Bell Labs, 1980s) and remain the textbook capacity-extension toolkit.</p>
+
+        <figure class="diagram-fig">
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px; max-width:560px; margin:0 auto; padding:6px;">
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:10px 8px; text-align:center;">
+              <div style="font-size:24px; line-height:1; margin-bottom:4px;">⬢→◇◇◇◇</div>
+              <div style="font-family:'Fraunces',serif; font-weight:700; font-size:13px; color:var(--brand); margin-bottom:4px;">Cell Splitting</div>
+              <div style="font-size:11px; color:var(--ink-soft); line-height:1.35;">One cell → 4 smaller cells. R → R/2. <b>4× capacity</b>.</div>
+            </div>
+            <div style="background:var(--auburn-soft); border:1.5px solid var(--auburn); border-radius:4px; padding:10px 8px; text-align:center;">
+              <div style="font-size:24px; line-height:1; margin-bottom:4px;">◔◓◑</div>
+              <div style="font-family:'Fraunces',serif; font-weight:700; font-size:13px; color:var(--auburn); margin-bottom:4px;">Cell Sectoring</div>
+              <div style="font-size:11px; color:var(--ink-soft); line-height:1.35;">Omni → 3 × 120° sectors. <b>Lower CCI</b>, smaller N.</div>
+            </div>
+            <div style="background:var(--gold-soft); border:1.5px solid var(--gold); border-radius:4px; padding:10px 8px; text-align:center;">
+              <div style="font-size:24px; line-height:1; margin-bottom:4px;">·∴·∴·</div>
+              <div style="font-family:'Fraunces',serif; font-weight:700; font-size:13px; color:var(--gold); margin-bottom:4px;">Microzone</div>
+              <div style="font-size:11px; color:var(--ink-soft); line-height:1.35;">Many micro-antennas, <b>one BS</b>. No intra-cell HO.</div>
+            </div>
+          </div>
+          <figcaption><b>Fig 5.1</b> · Three capacity-extension techniques compared — same goal, very different cost/complexity profiles</figcaption>
+        </figure>
 
         <h5>The Capacity Upgrades Comparison</h5>
         <div class="table-wrap">
@@ -739,13 +862,25 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <li><b>Microzone</b> avoids the handover storm of cell splitting by keeping all low-power zone antennas mapped under a single, central base station controller.</li>
         </ul>
 
+        <div class="box warn">
+          <span class="label">Examiner Trap — Over-sectoring</span>
+          A common over-engineering mistake: dividing a cell into 6 or 12 sectors instead of the standard 3. While this further reduces co-channel interference, it <em>multiplies handoff load</em> (every user now hands off when crossing each sector boundary inside the same cell) and dramatically degrades trunking efficiency (Erlang-B blocks faster on smaller channel groups). Stick to <b>3-sector 120°</b> as the practical sweet spot unless dense urban traffic demands otherwise.
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>2026 networks heavily favour <b>5G small-cell densification</b> — a refinement of cell splitting where pico/femto cells (10–100 m radius) are deployed in malls, stadiums, and street-furniture. Massive-MIMO + <b>3D beamforming</b> in 5G NR effectively realises adaptive sectoring (256 spatial beams replace 3 fixed sectors), and distributed antenna systems (DAS) productise the microzone concept across enterprise indoors and venue stadiums.</p>
+
+        <h5>Conclusion</h5>
+        <p>Cell splitting, sectoring, and microzone form the cellular capacity playbook — each trades capital cost, signalling overhead, and interference geometry differently. Modern small-cell + Massive MIMO designs blend all three approaches, but the underlying physics — same-channel reuse at safe distance — has not changed since Bell Labs 1979.</p>
+
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
           <ul>
-            <li><span>Capacity scaling strategies background introduction</span><span class="m">2.0M</span></li>
-            <li><span>Detailed Splitting vs Sectoring vs Microzone Comparison Table</span><span class="m">5.5M</span></li>
-            <li><span>Trunking efficiency &amp; handover signaling trade-offs</span><span class="m">4.5M</span></li>
-            <li><span> mitigating co-channel interference &amp; conclusion</span><span class="m">3.0M</span></li>
+            <li><span>Introduction + Fig 5.1 (3-card visualisation)</span><span class="m">2.5M</span></li>
+            <li><span>Detailed Splitting vs Sectoring vs Microzone Comparison Table</span><span class="m">5.0M</span></li>
+            <li><span>Trunking efficiency &amp; handover signaling trade-offs</span><span class="m">3.0M</span></li>
+            <li><span>Warn box (over-sectoring) + Modern relevance (5G small cells)</span><span class="m">2.5M</span></li>
+            <li><span>Conclusion</span><span class="m">2.0M</span></li>
           </ul>
         </div>
       </div>
@@ -756,6 +891,39 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q6</span><span class="tag year">Unit 3 Highlight</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Compare FDMA, TDMA, CDMA, and SDMA multiple access techniques in detail with a comparison table. Discuss the code separation concept in CDMA and show a worked bit-level despreading example.</b></div>
       <div class="ans">
+        <h5>Introduction</h5>
+        <p>Multiple access defines how multiple subscribers share a single physical wireless channel. The four canonical schemes — <b>FDMA</b>, <b>TDMA</b>, <b>CDMA</b>, <b>SDMA</b> — partition along orthogonal axes: <em>frequency, time, code, space</em>. FDMA traces back to <b>Bell Labs AMPS (1983)</b>; CDMA was pioneered by <b>Andrew Viterbi at Qualcomm (1989, IS-95)</b>; SDMA is the latest beam-forming era championed by Massive-MIMO 5G NR.</p>
+
+        <figure class="diagram-fig">
+          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:6px; max-width:580px; margin:0 auto; padding:6px;">
+            <div style="background:#fee2e2; border:1.5px solid var(--crimson); border-radius:4px; padding:10px 6px; text-align:center;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.12em; color:var(--crimson); font-weight:700;">AXIS · FREQUENCY</div>
+              <div style="font-family:'Fraunces',serif; font-weight:700; font-size:14px; color:var(--ink); margin:4px 0;">FDMA</div>
+              <div style="font-size:18px; line-height:1; margin:4px 0; letter-spacing:2px;">≡≡≡</div>
+              <div style="font-size:10.5px; color:var(--ink-soft); line-height:1.3;">1G AMPS · separate freq bands</div>
+            </div>
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:10px 6px; text-align:center;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.12em; color:var(--brand); font-weight:700;">AXIS · TIME</div>
+              <div style="font-family:'Fraunces',serif; font-weight:700; font-size:14px; color:var(--ink); margin:4px 0;">TDMA</div>
+              <div style="font-size:18px; line-height:1; margin:4px 0; letter-spacing:2px;">▮▯▮▯</div>
+              <div style="font-size:10.5px; color:var(--ink-soft); line-height:1.3;">2G GSM · time slots per user</div>
+            </div>
+            <div style="background:var(--gold-soft); border:1.5px solid var(--gold); border-radius:4px; padding:10px 6px; text-align:center;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.12em; color:var(--gold); font-weight:700;">AXIS · CODE</div>
+              <div style="font-family:'Fraunces',serif; font-weight:700; font-size:14px; color:var(--ink); margin:4px 0;">CDMA</div>
+              <div style="font-size:14px; line-height:1; margin:6px 0; font-family:monospace;">±1±1±1</div>
+              <div style="font-size:10.5px; color:var(--ink-soft); line-height:1.3;">3G WCDMA · PN codes</div>
+            </div>
+            <div style="background:var(--auburn-soft); border:1.5px solid var(--auburn); border-radius:4px; padding:10px 6px; text-align:center;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.12em; color:var(--auburn); font-weight:700;">AXIS · SPACE</div>
+              <div style="font-family:'Fraunces',serif; font-weight:700; font-size:14px; color:var(--ink); margin:4px 0;">SDMA</div>
+              <div style="font-size:18px; line-height:1; margin:4px 0;">↗↘↖</div>
+              <div style="font-size:10.5px; color:var(--ink-soft); line-height:1.3;">5G MIMO · directed beams</div>
+            </div>
+          </div>
+          <figcaption><b>Fig 6.1</b> · Four multiple-access axes — orthogonal partitioning of the shared wireless medium</figcaption>
+        </figure>
+
         <h5>Multiple Access Schemes Comparison</h5>
         <div class="table-wrap">
           <table>
@@ -782,52 +950,120 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           </div></div>
         </div>
 
+        <div class="box warn">
+          <span class="label">Examiner Trap — TDMA time sync</span>
+          TDMA's biggest practical Achilles heel is <b>tight time synchronisation</b>: every mobile must fire its burst within a ±¼-symbol guard time of its assigned slot, or it collides with neighbours. GSM mobiles correct this via <em>Timing Advance</em> commands from the BTS. Forgetting to mention sync &amp; guard time for TDMA loses 2 marks — examiners check for it specifically.
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>4G LTE and 5G NR use <b>OFDMA</b> (Orthogonal Frequency Division Multiple Access) — a refined FDMA where subcarriers are mutually orthogonal, eliminating guard bands. The uplink in LTE uses <b>SC-FDMA</b> for lower PAPR. Massive-MIMO in 5G is essentially SDMA at scale (64–256 antennas), and the next 6G generation (3GPP Rel-20+) explores <b>non-orthogonal multiple access (NOMA)</b> — multiple users on the same time-frequency resource separated by power level.</p>
+
+        <h5>Conclusion</h5>
+        <p>FDMA, TDMA, CDMA, and SDMA represent the four orthogonal partitionings of the wireless medium; CDMA's mathematical orthogonality unlocked the 3G capacity revolution, and SDMA's spatial dimension now powers 5G Massive-MIMO. Real systems combine multiple axes (OFDMA + SDMA + power-domain NOMA) to squeeze maximum capacity from finite spectrum.</p>
+
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
           <ul>
-            <li><span>FDMA, TDMA, CDMA, SDMA Detailed Comparison Table</span><span class="m">5.5M</span></li>
-            <li><span>CDMA orthogonality &amp; Walsh code concepts</span><span class="m">2.5M</span></li>
-            <li><span>Worked step-by-step bit-level despreading numerical</span><span class="m">5.5M</span></li>
-            <li><span>Near-far problem power control discussion &amp; conclusion</span><span class="m">1.5M</span></li>
+            <li><span>Introduction (Bell Labs/Viterbi) + Fig 6.1 (4-axis grid)</span><span class="m">2.5M</span></li>
+            <li><span>FDMA, TDMA, CDMA, SDMA Detailed Comparison Table</span><span class="m">4.0M</span></li>
+            <li><span>CDMA orthogonality &amp; Walsh code concepts</span><span class="m">2.0M</span></li>
+            <li><span>Worked step-by-step bit-level despreading numerical</span><span class="m">4.0M</span></li>
+            <li><span>Warn box (TDMA sync) + Modern relevance + Conclusion</span><span class="m">2.5M</span></li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Q7 -->
+    <!-- Q7 — Differentiate (BCA examiner signature) -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q7</span><span class="tag year">Unit 3 Highlight</span><span class="tag marks">15M</span></div>
-      <div class="qbody"><b>Explain the need for spread spectrum. Contrast Direct Sequence Spread Spectrum (DSSS) and Frequency Hopping Spread Spectrum (FHSS) with a comparison table. Discuss the 5 major advantages of spread spectrum.</b></div>
+      <div class="qhead"><span class="qnum">Q7</span><span class="tag year">Differentiate · BCA Signature</span><span class="tag marks">15M (5+5+5)</span></div>
+      <div class="qbody"><b>Differentiate between the following pairs (5 marks each):
+        <br>(i) Analog cellular (1G) vs Digital cellular (2G/3G).
+        <br>(ii) FDMA vs TDMA.
+        <br>(iii) WAN (Wide Area Network) vs WLAN (Wireless LAN).
+      </b></div>
       <div class="ans">
-        <h5>Spread Spectrum Systems</h5>
-        <p>A Spread Spectrum system intentionally smears a narrow-band data signal across a much wider radio frequency bandwidth, making it resistant to jamming, eavesdropping, and multipath interference.</p>
+        <p>Differentiate-pair questions are the BCA examiner's signature pattern — every BCA(DS) WC paper since 2023 carries at least one. Each pair below uses a compact table that scores the full 5 marks: 4 distinguishing axes × ~1 mark each, plus a closing one-line contextual note.</p>
 
-        <h5>DSSS vs FHSS Comparison</h5>
+        <figure class="diagram-fig">
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6px; max-width:540px; margin:0 auto; padding:6px;">
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:8px 6px; text-align:center;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.12em; color:var(--brand); font-weight:700;">PAIR (i)</div>
+              <div style="font-family:'Fraunces',serif; font-weight:600; font-size:12.5px; color:var(--ink); margin-top:4px;">Analog ↔ Digital</div>
+              <div style="font-size:10.5px; color:var(--ink-soft); margin-top:3px;">1G vs 2G/3G evolution</div>
+            </div>
+            <div style="background:var(--gold-soft); border:1.5px solid var(--gold); border-radius:4px; padding:8px 6px; text-align:center;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.12em; color:var(--gold); font-weight:700;">PAIR (ii)</div>
+              <div style="font-family:'Fraunces',serif; font-weight:600; font-size:12.5px; color:var(--ink); margin-top:4px;">FDMA ↔ TDMA</div>
+              <div style="font-size:10.5px; color:var(--ink-soft); margin-top:3px;">Multiple-access axes</div>
+            </div>
+            <div style="background:var(--auburn-soft); border:1.5px solid var(--auburn); border-radius:4px; padding:8px 6px; text-align:center;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.12em; color:var(--auburn); font-weight:700;">PAIR (iii)</div>
+              <div style="font-family:'Fraunces',serif; font-weight:600; font-size:12.5px; color:var(--ink); margin-top:4px;">WAN ↔ WLAN</div>
+              <div style="font-size:10.5px; color:var(--ink-soft); margin-top:3px;">Wired vs wireless scope</div>
+            </div>
+          </div>
+          <figcaption><b>Fig 7.1</b> · Three differentiate pairs — each gets its own comparison table (5M each)</figcaption>
+        </figure>
+
+        <h5>(i) Analog Cellular vs Digital Cellular &nbsp;<span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--gold); letter-spacing:.1em;">[5M]</span></h5>
         <div class="table-wrap">
           <table>
-            <tr><th>Aspect</th><th>Direct Sequence (DSSS)</th><th>Frequency Hopping (FHSS)</th></tr>
-            <tr><td><b>Spreading Method</b></td><td>Multiplies data bits by a fast Pseudo-Noise (PN) chip code (e.g. 11-chip Barker code).</td><td>Hops carrier frequency rapidly across many channels according to a PN sequence.</td></tr>
-            <tr><td><b>Bandwidth</b></td><td>Constant. Signal is spread continuously over a wide band.</td><td>Narrow instantaneous bandwidth. Hops across wide band.</td></tr>
-            <tr><td><b>Anti-Jamming</b></td><td>Excellent against wideband noise.</td><td>Outstanding against selective narrow-band jamming.</td></tr>
-            <li><b>Standard Use</b></td><td>3G WCDMA / GPS / ZigBee</td><td>Bluetooth / HomeRF / Military systems</td></tr>
+            <tr><th>Axis</th><th>Analog Cellular (1G)</th><th>Digital Cellular (2G/3G)</th></tr>
+            <tr><td><b>Generation &amp; Era</b></td><td>1G — AMPS (1983) · TACS · NMT</td><td>2G GSM (1991) · IS-95 · 3G UMTS (2001)</td></tr>
+            <tr><td><b>Signal Format</b></td><td>FM (Frequency Modulation) of voice as continuous waveform</td><td>Binary bitstream — voice digitised by a vocoder, then modulated</td></tr>
+            <tr><td><b>Multiple Access</b></td><td>FDMA only (one user per frequency channel)</td><td>TDMA / CDMA — many users share a band</td></tr>
+            <tr><td><b>Capacity / Spectral Efficiency</b></td><td>Low (~10–20 calls per cell)</td><td>3×–10× higher via voice compression + TDMA packing</td></tr>
+            <tr><td><b>Security &amp; Encryption</b></td><td>None — calls easily intercepted with a scanner</td><td>A5/1, A5/3 ciphers + AuC authentication triplet</td></tr>
+            <tr><td><b>Data Services</b></td><td>Voice only</td><td>SMS, GPRS, EDGE, 3G data up to 21 Mbps</td></tr>
           </table>
         </div>
+        <p><em>Contextual note:</em> The 1G→2G transition was driven by spectrum scarcity and the need for secure mobile commerce. Digital cellular set the foundation for every subsequent generation.</p>
 
-        <h5>Five Major Advantages of Spread Spectrum</h5>
-        <ul>
-          <li><b>1. Immunity to Interference:</b> Narrow-band jamming only affects a tiny fraction of the spread signal. De-spreading at the receiver filters out jammer power as background noise.</li>
-          <li><b>2. Low Probability of Intercept (LPI):</b> Because power is spread over a wide band, the signal spectral density falls below the background noise floor, hiding the transmission.</li>
-          <li><b>3. Multi-user Sharing (CDMA):</b> Multiple users can share the same frequency band simultaneously using unique, orthogonal PN codes.</li>
-          <li><b>4. Resistance to Multipath Fading:</b> Wideband signals can isolate multi-path echo arrivals in time, neutralizing fading.</li>
-          <li><b>5. High Privacy:</b> Demodulating the signal requires knowing the exact PN sequence; without it, the transmission looks like white noise.</li>
-        </ul>
+        <h5>(ii) FDMA vs TDMA &nbsp;<span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--gold); letter-spacing:.1em;">[5M]</span></h5>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Axis</th><th>FDMA (Frequency Division)</th><th>TDMA (Time Division)</th></tr>
+            <tr><td><b>Separation Axis</b></td><td>Different <em>frequency band</em> per user</td><td>Different <em>time slot</em> per user (shared frequency)</td></tr>
+            <tr><td><b>Carrier Usage</b></td><td>One narrowband carrier per user, always on</td><td>Single wider carrier; users transmit in turns</td></tr>
+            <tr><td><b>Synchronisation</b></td><td>Not required — analog hardware sufficient</td><td>Tight time sync mandatory (Timing Advance in GSM)</td></tr>
+            <tr><td><b>Hardware Complexity</b></td><td>Simple — single narrow filter per user</td><td>Higher — digital signal processing, frame buffers, slot timing</td></tr>
+            <tr><td><b>Guard Requirements</b></td><td>Guard <em>bands</em> between adjacent frequencies</td><td>Guard <em>times</em> between adjacent slots</td></tr>
+            <tr><td><b>Standard Examples</b></td><td>1G AMPS · cordless DECT downlink</td><td>2G GSM (8 slots/200 kHz) · IS-136 (3 slots)</td></tr>
+          </table>
+        </div>
+        <p><em>Contextual note:</em> Hybrid schemes (FDMA + TDMA in GSM, OFDMA in LTE) blend both axes for maximum spectral efficiency.</p>
+
+        <h5>(iii) WAN vs WLAN &nbsp;<span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--gold); letter-spacing:.1em;">[5M]</span></h5>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Axis</th><th>WAN (Wide Area Network)</th><th>WLAN (Wireless LAN)</th></tr>
+            <tr><td><b>Coverage Geography</b></td><td>Country / continent · 100s of km</td><td>Building / floor · 30–100 m typical</td></tr>
+            <tr><td><b>Connection Medium</b></td><td>Fibre, leased lines, satellites + cellular WWAN</td><td>Wireless (Wi-Fi 802.11 family) over unlicensed 2.4/5/6 GHz</td></tr>
+            <tr><td><b>Data Rate</b></td><td>Variable — 100 Mbps backbone, 10–1000 Mbps user</td><td>Wi-Fi 6/7 reaches 9.6 Gbps theoretical</td></tr>
+            <tr><td><b>Ownership Model</b></td><td>Operated by telco / ISP / enterprise WAN provider</td><td>Owned by enterprise or home user; access points self-installed</td></tr>
+            <tr><td><b>Mobility</b></td><td>Cellular WAN supports city-wide mobility (handoffs)</td><td>Limited roaming within enterprise SSID; no inter-AP handoff at 4G-level</td></tr>
+            <tr><td><b>Standards</b></td><td>MPLS, Frame Relay, 3G/4G/5G WWAN, SD-WAN</td><td>IEEE 802.11a/b/g/n/ac/ax/be (Wi-Fi 6/7)</td></tr>
+          </table>
+        </div>
+        <p><em>Contextual note:</em> Modern enterprises use SD-WAN to extend WLAN traffic seamlessly across multiple sites over the public Internet (zero-trust overlays).</p>
+
+        <div class="box warn">
+          <span class="label">Examiner Tip — Differentiate Format</span>
+          The BCA marking rubric awards <b>one mark per row</b> in the comparison table — aim for 4–5 distinct rows per pair. <em>Don't repeat the same point in different words</em> (e.g. don't say "FDMA uses frequency" + "FDMA separates by band" + "FDMA assigns freq slots" — that's one row, one mark). Each row must surface a <em>different</em> axis of difference.
+        </div>
+
+        <h5>Conclusion</h5>
+        <p>Differentiate questions reward <em>contrast clarity</em> over depth — a clean 5–6-row table with distinct axes scores higher than three paragraphs of free prose. Memorise 3–4 differentiating axes for every common pair (analog/digital, FDMA/TDMA, WAN/WLAN, MAHO/NCHO, ISDN/AIN, DSSS/FHSS, Bluetooth/WLL) and you bank 15 easy marks.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
           <ul>
-            <li><span>Spread Spectrum concepts &amp; need background</span><span class="m">3.0M</span></li>
-            <li><span>Detailed DSSS vs FHSS Comparison Table</span><span class="m">5.0M</span></li>
-            <li><span>Five major advantages with descriptions (5 × 1.4M)</span><span class="m">7.0M</span></li>
+            <li><span>Intro + Fig 7.1 (3-pair overview)</span><span class="m">1.5M</span></li>
+            <li><span>(i) Analog vs Digital cellular comparison table</span><span class="m">4.5M</span></li>
+            <li><span>(ii) FDMA vs TDMA comparison table</span><span class="m">4.5M</span></li>
+            <li><span>(iii) WAN vs WLAN comparison table</span><span class="m">3.0M</span></li>
+            <li><span>Warn box + Conclusion</span><span class="m">1.5M</span></li>
           </ul>
         </div>
       </div>

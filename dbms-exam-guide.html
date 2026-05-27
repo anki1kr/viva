@@ -819,7 +819,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
           <ul>
-            <li><span>Introduction &amp; bitzer/Aristotle equivalent background</span><span class="m">2.0M</span></li>
+            <li><span>Introduction &amp; ANSI/SPARC historical background (1975)</span><span class="m">2.0M</span></li>
             <li><span>Neat stack diagram (Fig 2.2)</span><span class="m">3.0M</span></li>
             <li><span>Explanation of the Three Levels (3 × 1.5M)</span><span class="m">4.5M</span></li>
             <li><span>Logical vs Physical Comparison Table with worked examples</span><span class="m">3.5M</span></li>
@@ -835,17 +835,59 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>A hospital maintains records of Patients (PID, Name, Phone), Doctors (DocID, Name, Specialty), Departments (DeptID, DName), Appointments, and Bills. Design a complete ER Diagram clearly indicating entities, attributes (with keys), cardinality ratios, and participation constraints. Reduce the ER diagram into relational schemas.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>Designing the ER diagram requires isolating strong/weak entities, multi-valued attributes, and participation. **Patient** and **Doctor** are strong entities, while **Bill** is a weak entity dependent on Patient. The junction entity **Appointment** captures the M:N relationship between Patient and Doctor.</p>
+        <p>Designing the ER diagram requires isolating strong/weak entities, multi-valued attributes, and participation. <b>Patient</b> and <b>Doctor</b> are strong entities, while <b>Bill</b> is a weak entity dependent on Patient. The junction entity <b>Appointment</b> captures the M:N relationship between Patient and Doctor.</p>
 
         <figure class="diagram-fig">
-          <div style="border:1.5px solid var(--ink); border-radius:4px; padding:10px; font-family:monospace; font-size:12px; text-align:left; background:#fff; line-height:1.4;">
-            <b>[PATIENT]</b> (<u>PID</u>, Name, {Phone}) ──(1)── has ──(N)──= <b>[[BILL]]</b> (<u>BillNo</u>, Date, Amount)
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;│ (M)<br>&nbsp;&nbsp;&nbsp;&nbsp;└── Enters ── <b>[APPOINTMENT]</b> (<u>ApptDate</u>, Diagnosis)
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;│ (N)<br><b>[DOCTOR]</b> (<u>DocID</u>, Name, Specialty) ──(N)──= belongs ──(1)── <b>[DEPARTMENT]</b> (<u>DeptID</u>, DName)
-            <br><br>
-            <span style="font-size:10px; color:var(--muted);">Legend: == Total Participation; [] Strong Entity; [[]] Weak Entity; {} Multi-valued</span>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; max-width:640px; margin:0 auto; align-items:center;">
+            <div style="background:var(--brand-soft); border:2px solid var(--brand); border-radius:6px; padding:10px; text-align:center;">
+              <b style="color:var(--brand-deep); font-size:13px;">PATIENT</b>
+              <div style="font-size:10.5px; color:var(--muted); margin-top:4px;"><u>PID</u> · Name · {Phone}</div>
+              <div style="font-size:9px; color:var(--muted); font-style:italic; margin-top:2px;">strong entity</div>
+            </div>
+            <div style="text-align:center; font-size:11px; color:var(--crimson);">
+              <span style="display:inline-block; background:#fff; border:1.5px solid var(--crimson); border-radius:50%; padding:6px 10px; font-weight:700;">has</span>
+              <div style="display:flex; align-items:center; gap:4px; justify-content:center; margin-top:4px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--ink); font-weight:700;"><span>1</span><span style="flex:0 0 40px; height:3px; background:var(--ink); display:inline-block;"></span><span>N</span></div>
+            </div>
+            <div style="background:#fef2f2; border:2px double var(--crimson); border-radius:6px; padding:10px; text-align:center;">
+              <b style="color:var(--crimson); font-size:13px;">BILL</b>
+              <div style="font-size:10.5px; color:var(--muted); margin-top:4px;"><u>BillNo</u> · Date · Amount</div>
+              <div style="font-size:9px; color:var(--muted); font-style:italic; margin-top:2px;">weak entity</div>
+            </div>
+
+            <div style="grid-column:1/-1; display:grid; grid-template-columns:1fr auto; gap:10px; align-items:center; padding:6px 0;">
+              <div></div>
+              <div style="font-family:'JetBrains Mono',monospace; font-size:18px; color:var(--brand); line-height:1; text-align:center;">↓ M</div>
+            </div>
+
+            <div style="background:var(--gold-soft); border:2px solid var(--gold); border-radius:6px; padding:10px; text-align:center;">
+              <b style="color:var(--gold); font-size:13px;">APPOINTMENT</b>
+              <div style="font-size:10.5px; color:var(--muted); margin-top:4px;">ApptDate · Diagnosis</div>
+              <div style="font-size:9px; color:var(--muted); font-style:italic; margin-top:2px;">junction entity (M:N)</div>
+            </div>
+            <div style="text-align:center; font-size:11px; color:var(--crimson);">
+              <span style="display:inline-block; background:#fff; border:1.5px solid var(--crimson); border-radius:50%; padding:6px 10px; font-weight:700;">attends</span>
+              <div style="display:flex; align-items:center; gap:4px; justify-content:center; margin-top:4px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--ink); font-weight:700;"><span>M</span><span style="flex:0 0 40px; height:3px; background:var(--ink); display:inline-block;"></span><span>N</span></div>
+            </div>
+            <div style="background:var(--forest-soft); border:2px solid var(--forest); border-radius:6px; padding:10px; text-align:center;">
+              <b style="color:var(--forest); font-size:13px;">DOCTOR</b>
+              <div style="font-size:10.5px; color:var(--muted); margin-top:4px;"><u>DocID</u> · Name · Specialty</div>
+              <div style="font-size:9px; color:var(--muted); font-style:italic; margin-top:2px;">strong entity</div>
+            </div>
+
+            <div style="grid-column:1/-1; display:grid; grid-template-columns:1fr auto 1fr; gap:10px; align-items:center; padding:6px 0;">
+              <div></div>
+              <div style="font-family:'JetBrains Mono',monospace; font-size:18px; color:var(--forest); line-height:1;">↓ N</div>
+              <div></div>
+            </div>
+
+            <div style="grid-column:1/-1; background:#fff; border:2px solid var(--ink-soft); border-radius:6px; padding:10px; text-align:center; max-width:200px; margin:0 auto;">
+              <b style="color:var(--ink); font-size:13px;">DEPARTMENT</b>
+              <div style="font-size:10.5px; color:var(--muted); margin-top:4px;"><u>DeptID</u> · DName</div>
+              <div style="font-size:9px; color:var(--muted); font-style:italic; margin-top:2px;">strong · 1-side of belongs</div>
+            </div>
           </div>
-          <figcaption><b>Fig 2.3</b> · Relational ER Schema Model for Hospital Reservation System</figcaption>
+          <div style="text-align:center; margin-top:8px; font-size:10.5px; color:var(--muted); font-style:italic;">Legend: double border = weak entity · solid line = total participation · dashed = partial</div>
+          <figcaption><b>Fig 2.3</b> · ER schema for Hospital Reservation System — 5 entities, 3 relationships, 1 weak entity (Bill), 1 junction entity (Appointment).</figcaption>
         </figure>
 
         <h5>Relational Reduction Steps</h5>
@@ -865,19 +907,35 @@ PATIENT_PHONE(PID*, Phone)
 APPOINTMENT(PID*, DocID*, ApptDate, Diagnosis)
 (* indicates Foreign Key; Underlines indicate Primary Keys)</code></pre>
 
+        <h5>Cardinality × Participation Matrix</h5>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Cardinality</th><th>Total Participation (double line)</th><th>Partial Participation (single line)</th></tr>
+            <tr><td><b>1 : 1</b></td><td><i>Employee — manages — Department</i> (every dept must have exactly one manager)</td><td><i>Person — owns — Passport</i> (a person may or may not hold one)</td></tr>
+            <tr><td><b>1 : N</b></td><td><i>Department — employs — Employee</i> (every employee belongs to a dept)</td><td><i>Doctor — supervises — Intern</i> (a doctor may have zero interns)</td></tr>
+            <tr><td><b>M : N</b></td><td><i>Patient — Appointment — Doctor</i> (every appointment links both)</td><td><i>Student — enrols — Course</i> (a course may run with zero students)</td></tr>
+          </table>
+        </div>
+
         <div class="box warn">
           <span class="label">Pitfall Check</span>
           Putting multi-valued phone directly inside the main <code>PATIENT</code> table violates 1NF (atomic values). It must be extracted into its own table.
         </div>
+
+        <h5>Modern Relevance</h5>
+        <p>The ER model was introduced by <b>Peter Chen (1976, MIT)</b> and remains the foundation of every commercial schema-design tool in use in 2026 — <b>Lucidchart</b>, <b>dbdiagram.io</b>, <b>DBeaver ER Designer</b>, and the schema visualisers built into <b>MongoDB Compass</b> and <b>Supabase Studio</b> all use Chen-style entity/relationship semantics, even when the underlying store is a NoSQL document database.</p>
+
+        <h5>Conclusion</h5>
+        <p>A faithful ER diagram captures business rules before a single CREATE TABLE is written; the reduction-to-relational-schema procedure is mechanical once cardinality, participation, and weak-entity dependencies are correctly identified at the conceptual stage.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
           <ul>
             <li><span>Entity, attribute, relationship definitions</span><span class="m">2.5M</span></li>
             <li><span>Design and labeling of ER Diagram (Fig 2.3)</span><span class="m">4.5M</span></li>
-            <li><span>Participation and weak-entity handling explanation</span><span class="m">3.0M</span></li>
+            <li><span>Cardinality × participation matrix + weak-entity handling</span><span class="m">3.0M</span></li>
             <li><span>Step-by-step reduction mapping guide</span><span class="m">3.0M</span></li>
-            <li><span>Correct final relational schemas</span><span class="m">2.0M</span></li>
+            <li><span>Correct final relational schemas + conclusion</span><span class="m">2.0M</span></li>
           </ul>
         </div>
       </div>
@@ -893,7 +951,35 @@ APPOINTMENT(PID*, DocID*, ApptDate, Diagnosis)
       </b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>Relational algebra uses procedural Greek symbols (σ, π, ⋈) to show the mathematical join paths, while SQL uses declarative SELECT-FROM-WHERE structures.</p>
+        <p>Relational algebra, formalised by <b>E.F. Codd (1970, Turing Award 1981)</b>, uses procedural Greek symbols (σ, π, ⋈) to show the mathematical join paths, while SQL uses declarative SELECT-FROM-WHERE structures. Every modern query optimiser (Postgres, MySQL, Oracle) internally rewrites SQL into a relational-algebra tree before execution.</p>
+
+        <figure class="diagram-fig">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:0; max-width:440px; margin:0 auto; padding:14px 10px; background:#fff; border:1.5px solid var(--ink); border-radius:4px;">
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:6px; padding:8px 16px; min-width:200px; text-align:center;">
+              <b style="color:var(--brand-deep);">π<sub>Name</sub></b>
+              <div style="font-size:10.5px; color:var(--muted); margin-top:2px;">Projection · keep Name only</div>
+            </div>
+            <div style="width:2px; height:18px; background:var(--brand);"></div>
+            <div style="background:var(--gold-soft); border:1.5px solid var(--gold); border-radius:6px; padding:8px 16px; min-width:200px; text-align:center;">
+              <b style="color:var(--gold);">σ<sub>ProjID='S9'</sub></b>
+              <div style="font-size:10.5px; color:var(--muted); margin-top:2px;">Selection · filter rows</div>
+            </div>
+            <div style="width:2px; height:18px; background:var(--gold);"></div>
+            <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:6px; padding:8px 16px; min-width:200px; text-align:center;">
+              <b style="color:var(--forest);">⋈<sub>EmpID</sub></b>
+              <div style="font-size:10.5px; color:var(--muted); margin-top:2px;">Natural Join</div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; width:100%; max-width:280px; margin-top:0; position:relative;">
+              <div style="border-top:2px solid var(--forest); border-left:2px solid var(--forest); border-top-left-radius:6px; height:18px; margin-right:-10px;"></div>
+              <div style="border-top:2px solid var(--forest); border-right:2px solid var(--forest); border-top-right-radius:6px; height:18px; margin-left:-10px;"></div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; width:100%; max-width:280px;">
+              <div style="background:#fff; border:1.5px solid var(--ink-soft); border-radius:6px; padding:8px; text-align:center;"><b>Employee</b><div style="font-size:10px; color:var(--muted);">base relation</div></div>
+              <div style="background:#fff; border:1.5px solid var(--ink-soft); border-radius:6px; padding:8px; text-align:center;"><b>WorkOn</b><div style="font-size:10px; color:var(--muted);">base relation</div></div>
+            </div>
+          </div>
+          <figcaption><b>Fig 2.5</b> · Query-evaluation tree — RA operators applied bottom-up: scan base relations → join on EmpID → filter by ProjID → project Name. Optimisers reorder selections downward (push σ before ⋈) for speed.</figcaption>
+        </figure>
 
         <h5>(a) Employees earning > 50,000</h5>
         <ul>
@@ -934,6 +1020,12 @@ WHERE w.ProjID = 'S9';</code></pre>
 );</code></pre>
           </li>
         </ul>
+
+        <h5>Modern Relevance</h5>
+        <p>Although developers write SQL, every modern optimiser — Postgres, MySQL InnoDB, Oracle, SQL Server, BigQuery, Snowflake — parses the query into a relational-algebra tree (logical plan), then applies algebraic equivalences (selection push-down, join reordering, projection pruning) before producing a physical plan. Reasoning in RA is therefore not academic decoration: it is exactly how the engine that runs your SQL "thinks".</p>
+
+        <h5>Conclusion</h5>
+        <p>RA and SQL are duals — procedural mathematics versus declarative English. A clean RA expression often exposes the cheapest physical plan; conversely, knowing when SQL semantics force <code>INTERSECT</code> or <code>EXISTS</code> rescues developers from the classic "<code>AND</code> on the same column" trap shown in part (c).</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -983,6 +1075,21 @@ WHERE w.ProjID = 'S9';</code></pre>
         </ul>
         <p>Candidate Keys: <b>{A, B}, {F, B}, {D, B}</b>.</p>
 
+        <figure class="diagram-fig">
+          <div style="display:flex; flex-direction:column; gap:6px; max-width:480px; margin:0 auto; padding:10px; background:#fff; border:1.5px solid var(--ink); border-radius:4px;">
+            <div style="background:#fef2f2; border-left:4px solid var(--crimson); padding:8px 10px; border-radius:3px;"><b>R (Unnormalised):</b> repeating groups, multi-valued cells</div>
+            <div style="text-align:center; color:var(--crimson); font-size:13px; font-style:italic;">↓ atomicity (E.F. Codd 1971)</div>
+            <div style="background:var(--brand-soft); border-left:4px solid var(--brand); padding:8px 10px; border-radius:3px;"><b>1NF:</b> all attribute values are atomic</div>
+            <div style="text-align:center; color:var(--crimson); font-size:13px; font-style:italic;">↓ remove partial dependencies on candidate key</div>
+            <div style="background:var(--gold-soft); border-left:4px solid var(--gold); padding:8px 10px; border-radius:3px;"><b>2NF:</b> every non-prime attribute fully depends on the whole key</div>
+            <div style="text-align:center; color:var(--crimson); font-size:13px; font-style:italic;">↓ remove transitive dependencies (X → Y → Z)</div>
+            <div style="background:var(--forest-soft); border-left:4px solid var(--forest); padding:8px 10px; border-radius:3px;"><b>3NF:</b> no non-prime attribute transitively depends on a key</div>
+            <div style="text-align:center; color:var(--crimson); font-size:13px; font-style:italic;">↓ every determinant must be a super key (Boyce &amp; Codd 1974)</div>
+            <div style="background:#fff7ed; border-left:4px solid var(--auburn); padding:8px 10px; border-radius:3px;"><b>BCNF:</b> strictest — only super-key determinants allowed</div>
+          </div>
+          <figcaption><b>Fig 2.6</b> · Normal-form cascade — each step removes one class of anomaly from the previous form.</figcaption>
+        </figure>
+
         <h5>(c) Decompose R into 3NF</h5>
         <p>To decompose R into 3NF, we must create a relation for each functional dependency in the minimal cover to ensure dependency preservation:</p>
         <pre><code>R1(A, C)      -- Enforces A → C
@@ -1001,6 +1108,12 @@ R5(F, A)      -- Enforces F → A</code></pre>
             <br>Sequential joins successfully reconstruct the entire relation. <b>100% Lossless</b>.
           </li>
         </ul>
+
+        <h5>Modern Relevance</h5>
+        <p>The progression 1NF → 2NF → 3NF was introduced by <b>E.F. Codd (1971)</b>, and BCNF was tightened a few years later by <b>Raymond Boyce and Codd (1974)</b>. Production OLTP stores — Postgres, MySQL, Oracle — are typically designed in 3NF to eliminate update anomalies. By deliberate contrast, modern analytical warehouses such as <b>Snowflake</b>, <b>BigQuery</b>, and <b>Amazon Redshift</b> denormalise into star schemas (fact + dimension tables) because read-side join cost dominates over storage redundancy at petabyte scale.</p>
+
+        <h5>Conclusion</h5>
+        <p>3NF decomposition that is both lossless and dependency-preserving is the gold standard for transactional systems: it eliminates redundancy, prevents update/insert/delete anomalies, and still allows every original constraint to be checked without joining tables back together.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1039,15 +1152,47 @@ R5(F, A)      -- Enforces F → A</code></pre>
 
         <h5>Cascading Abort Scenario (under Basic 2PL)</h5>
         <figure class="diagram-fig">
-          <div style="border:1.5px solid var(--ink); border-radius:4px; padding:10px; font-family:monospace; font-size:12.5px; text-align:left; background:#fff; line-height:1.4;">
-            T1 (X-Lock A) ── Write A ── (Unlock A) ── (Basic 2PL Shrink) ─────────────── Abort!
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ (Dirty Read A)
-            <br>T2 ────────────────────────────── (X-Lock A) ── Read A ── Write A ── Commit!
-            <br><br>
-            <span style="font-size:11px; color:var(--crimson); font-weight:bold;">T2 committed dirty data from aborted T1! T2 must be aborted, violating Durability.</span>
+          <div style="max-width:600px; margin:0 auto;">
+            <div style="display:grid; grid-template-columns:60px repeat(6, 1fr); gap:4px; align-items:stretch;">
+              <div style="grid-column:1/-1; display:grid; grid-template-columns:60px repeat(6,1fr); gap:4px; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase; padding-bottom:2px; border-bottom:1px solid var(--rule); margin-bottom:4px;">
+                <div></div>
+                <div style="text-align:center;">t1</div>
+                <div style="text-align:center;">t2</div>
+                <div style="text-align:center;">t3</div>
+                <div style="text-align:center;">t4</div>
+                <div style="text-align:center;">t5</div>
+                <div style="text-align:center;">t6</div>
+              </div>
+
+              <div style="background:var(--brand); color:var(--paper); font-weight:700; padding:8px 6px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:12px;">T1</div>
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:3px; padding:6px 4px; text-align:center; font-size:10.5px;"><b>X-Lock A</b></div>
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:3px; padding:6px 4px; text-align:center; font-size:10.5px;"><b>Write A</b></div>
+              <div style="background:var(--gold-soft); border:1.5px solid var(--gold); border-radius:3px; padding:6px 4px; text-align:center; font-size:10.5px;"><b>Unlock A</b><br><span style="font-size:9px; color:var(--muted)">shrink</span></div>
+              <div style="background:#fff; border:1px dashed var(--rule); border-radius:3px;"></div>
+              <div style="background:#fff; border:1px dashed var(--rule); border-radius:3px;"></div>
+              <div style="background:#fee2e2; border:2px solid var(--crimson); border-radius:3px; padding:6px 4px; text-align:center; font-size:10.5px;"><b style="color:var(--crimson)">ABORT!</b></div>
+
+              <div style="background:var(--forest); color:var(--paper); font-weight:700; padding:8px 6px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:12px;">T2</div>
+              <div style="background:#fff; border:1px dashed var(--rule); border-radius:3px;"></div>
+              <div style="background:#fff; border:1px dashed var(--rule); border-radius:3px;"></div>
+              <div style="background:#fff; border:1px dashed var(--rule); border-radius:3px;"></div>
+              <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:3px; padding:6px 4px; text-align:center; font-size:10.5px;"><b>X-Lock A</b><br><span style="font-size:9px; color:var(--crimson); font-weight:700;">dirty!</span></div>
+              <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:3px; padding:6px 4px; text-align:center; font-size:10.5px;"><b>Read A</b></div>
+              <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:3px; padding:6px 4px; text-align:center; font-size:10.5px;"><b>Commit</b><br><span style="font-size:9px; color:var(--crimson); font-weight:700;">must abort</span></div>
+            </div>
+
+            <div style="margin-top:10px; padding:8px 10px; background:#fee2e2; border-left:4px solid var(--crimson); border-radius:3px; font-size:12px;">
+              <b style="color:var(--crimson);">⚠ Hazard:</b> T2 read &amp; committed dirty data <em>before</em> T1's abort at t6 — T2 must now also be rolled back. <b>Strict 2PL fixes this</b> by holding locks until commit/abort.
+            </div>
           </div>
-          <figcaption><b>Fig 2.4</b> · Cascading abort hazard under Basic 2PL due to premature lock release</figcaption>
+          <figcaption><b>Fig 2.4</b> · Cascading abort under Basic 2PL — T1 releases its X-lock on A too early (t3), letting T2 read uncommitted data; T1's later abort forces T2 to abort too.</figcaption>
         </figure>
+
+        <h5>Modern Relevance</h5>
+        <p>2PL was formalised by <b>K.P. Eswaran, J.N. Gray, R.A. Lorie and I.L. Traiger (IBM System R, 1976)</b> in the foundational paper that defined serializability for database concurrency. In 2026, <b>MySQL InnoDB</b> still implements Strict 2PL on row locks, while <b>Postgres</b> and <b>Oracle</b> use Multi-Version Concurrency Control (MVCC) — pioneered by <b>D.P. Reed (MIT, 1978)</b> — to allow readers and writers to proceed without blocking, falling back to locking only on write-write conflicts.</p>
+
+        <h5>Conclusion</h5>
+        <p>Strict 2PL trades a small amount of concurrency for the strongest practical guarantees — cascadeless, recoverable, and conflict-serializable schedules — which is why it remains the default isolation strategy whenever transactional correctness must not be sacrificed for throughput.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1067,7 +1212,30 @@ R5(F, A)      -- Enforces F → A</code></pre>
       <div class="qbody"><b>Explain the Write-Ahead Logging (WAL) protocol and discuss recovery using checkpoints. Contrast WAL recovery with the Shadow Paging recovery scheme with a neat comparison table.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>Recovery algorithms ensure database Durability (the D in ACID) after system crashes. The **Write-Ahead Logging (WAL)** protocol guarantees that log entries describing updates are written to stable storage *before* dirty database pages are flushed to disk.</p>
+        <p>Recovery algorithms ensure database Durability (the D in ACID) after system crashes. The <b>Write-Ahead Logging (WAL)</b> protocol — formalised by <b>C. Mohan and colleagues at IBM Almaden (1992)</b> as the ARIES algorithm — guarantees that log entries describing updates are written to stable storage <i>before</i> dirty database pages are flushed to disk.</p>
+
+        <figure class="diagram-fig">
+          <div style="max-width:520px; margin:0 auto; padding:12px; background:#fff; border:1.5px solid var(--ink); border-radius:4px;">
+            <div style="display:flex; align-items:center; gap:4px; flex-wrap:wrap; justify-content:center;">
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); padding:6px 10px; border-radius:4px; font-size:11.5px;"><b>T1 begin</b></div>
+              <div style="color:var(--brand); font-size:14px;">→</div>
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); padding:6px 10px; border-radius:4px; font-size:11.5px;"><b>T1 write A</b></div>
+              <div style="color:var(--brand); font-size:14px;">→</div>
+              <div style="background:var(--gold-soft); border:1.5px solid var(--gold); padding:6px 10px; border-radius:4px; font-size:11.5px;"><b>T2 begin</b></div>
+              <div style="color:var(--brand); font-size:14px;">→</div>
+              <div style="background:var(--forest); color:var(--paper); border:1.5px solid var(--forest); padding:6px 10px; border-radius:4px; font-size:11.5px; font-weight:700; letter-spacing:.05em;">CHECKPOINT</div>
+              <div style="color:var(--brand); font-size:14px;">→</div>
+              <div style="background:var(--gold-soft); border:1.5px solid var(--gold); padding:6px 10px; border-radius:4px; font-size:11.5px;"><b>T2 commit</b></div>
+              <div style="color:var(--brand); font-size:14px;">→</div>
+              <div style="background:var(--crimson); color:var(--paper); border:1.5px solid var(--crimson); padding:6px 10px; border-radius:4px; font-size:11.5px; font-weight:700;">✗ CRASH</div>
+            </div>
+            <div style="margin-top:14px; padding-top:10px; border-top:1px dashed var(--rule); display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:12px;">
+              <div style="padding:8px; background:var(--forest-soft); border-left:3px solid var(--forest); border-radius:3px;"><b style="color:var(--forest);">→ REDO</b><br>From checkpoint forward (T2 commit re-applied)</div>
+              <div style="padding:8px; background:#fee2e2; border-left:3px solid var(--crimson); border-radius:3px;"><b style="color:var(--crimson);">← UNDO</b><br>Backward from crash (T1 active → rollback A)</div>
+            </div>
+          </div>
+          <figcaption><b>Fig 2.7</b> · WAL log timeline. On crash, Analysis scans from the last checkpoint, REDO replays committed writes forward, UNDO reverts uncommitted writes backward.</figcaption>
+        </figure>
 
         <h5>The 3-Phase ARIES Recovery Algorithm</h5>
         <div class="steps">
@@ -1082,15 +1250,21 @@ R5(F, A)      -- Enforces F → A</code></pre>
             <tr><th>Metric</th><th>Write-Ahead Logging (WAL)</th><th>Shadow Paging</th></tr>
             <tr><td><b>Mechanism</b></td><td>Sequential updates written to a continuous log file. Data updated in-place.</td><td>Maintains two page tables (Current &amp; Shadow). Writes modified blocks to new pages. Swaps pointers on commit.</td></tr>
             <tr><td><b>Write Cost</b></td><td>Low. Sequential log append I/O is extremely fast.</td><td>High. Fragments disk blocks due to random page writing.</td></tr>
-            <li><b>Concurrency</b></td><td>High. Multiple transactions write to the log concurrently.</td><td>Low. Atomic page swaps effectively serialize transactions.</td></tr>
+            <tr><td><b>Concurrency</b></td><td>High. Multiple transactions write to the log concurrently.</td><td>Low. Atomic page swaps effectively serialize transactions.</td></tr>
             <tr><td><b>Partial Rollback</b></td><td>Easy. Simply scan backward in the log and undo a single transaction.</td><td>Extremely difficult. Must discard the entire current page table.</td></tr>
           </table>
         </div>
 
         <div class="box warn">
-          <span class="label">pitfall</span>
+          <span class="label">Pitfall</span>
           Shadow paging is obsolete in production databases due to disk fragmentation and poor concurrent write throughput, though it is still popular in university theory papers.
         </div>
+
+        <h5>Modern Relevance</h5>
+        <p>The ARIES algorithm — <b>Algorithm for Recovery and Isolation Exploiting Semantics</b> — was published by <b>C. Mohan and colleagues (IBM Almaden, 1992)</b> and is the conceptual backbone of every serious DBMS in 2026: <b>PostgreSQL</b> WAL, <b>Oracle</b> redo logs, <b>SQL Server</b> transaction log, <b>MySQL InnoDB</b> redo/undo logs, and <b>SQLite</b> WAL journaling mode all implement WAL with ARIES-style analysis/REDO/UNDO phases anchored on periodic checkpoints.</p>
+
+        <h5>Conclusion</h5>
+        <p>Write-ahead logging is the silent guarantor of durability: by enforcing log-before-data, it bounds crash-recovery work to the slice of log between the last checkpoint and the crash, making sub-second restart times achievable on terabyte-scale systems where shadow paging would be physically impossible.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>

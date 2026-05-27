@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<meta name="theme-color" content="#ca8a04" />
+<meta name="theme-color" content="#0f766e" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="LOC Mastery" />
@@ -18,8 +18,8 @@
 :root{
   --paper:#f7f1e1; --paper-soft:#fffaef; --paper-deep:#ebe2cc;
   --ink:#1a1209; --ink-soft:#3d2f1c; --muted:#6b5d47; --rule:#d9cfb6;
-  --brand:#ca8a04; --brand-2:#a16207; --brand-soft:#fef3c7; --brand-deep:#854d0e;
-  --gold:#ca8a04; --highlighter:#fde047;
+  --brand:#0f766e; --brand-2:#115e59; --brand-soft:#ccfbf1; --brand-deep:#134e4a;
+  --gold:#0f766e; --highlighter:#fde047;
   --highlight-pink:#fbcfe8; --highlight-mint:#bbf7d0;
   --navy:#1e3a8a; --navy-soft:#dbeafe;
   --crimson:#9f1239; --crimson-soft:#fee2e2;
@@ -28,15 +28,15 @@
   --shadow: 0 1px 0 rgba(26,18,9,.05), 0 8px 24px -10px rgba(26,18,9,.18);
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bot: env(safe-area-inset-bottom, 0px);
-  --svg-ink:#1a1209; --svg-line:#d9cfb6; --svg-brand:#ca8a04;
-  --svg-good:#166534; --svg-bad:#9f1239; --svg-gold:#a16207;
+  --svg-ink:#1a1209; --svg-line:#d9cfb6; --svg-brand:#0f766e;
+  --svg-good:#166534; --svg-bad:#9f1239; --svg-gold:#115e59;
 }
 *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; min-width:0; }
 html{ scroll-behavior:smooth; max-width:100%; }
 body{
   margin:0; font-family:"Spectral",Georgia,serif; font-size:15.5px; line-height:1.6; color:var(--ink);
   background:
-    radial-gradient(ellipse at top left, rgba(254,243,199,.7), transparent 60%),
+    radial-gradient(ellipse at top left, rgba(204,251,241,.7), transparent 60%),
     radial-gradient(ellipse at bottom right, rgba(241,224,193,.5), transparent 70%),
     var(--paper);
   background-attachment:fixed;
@@ -47,7 +47,7 @@ body{
 }
 body::before{
   content:""; position:fixed; inset:0;
-  background-image:repeating-linear-gradient(0deg, rgba(202,138,4,.012) 0 1px, transparent 1px 28px);
+  background-image:repeating-linear-gradient(0deg, rgba(15,118,110,.012) 0 1px, transparent 1px 28px);
   pointer-events:none; z-index:0;
 }
 img,svg,video,iframe{ max-width:100%; height:auto; }
@@ -77,7 +77,7 @@ nav.chips a.hot{ background:var(--highlighter); border-color:var(--ink); }
 .cover{
   margin:0 0 32px; padding:22px 18px 20px;
   background:
-    radial-gradient(circle at 15% 18%, rgba(254,243,199,.6), transparent 40%),
+    radial-gradient(circle at 15% 18%, rgba(204,251,241,.6), transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(251,207,232,.25), transparent 45%),
     var(--paper-soft);
   border:1.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink); border-radius:4px; position:relative;
@@ -317,7 +317,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <tr><th>Mode</th><th>Effective Address (EA) Formula</th><th>Key Characteristics / Use Case</th></tr>
         <tr><td><b>Immediate</b></td><td>Operand is in instruction itself</td><td>Loads constants fast (e.g. <code>MOV AX, 5</code>).</td></tr>
         <tr><td><b>Direct / Absolute</b></td><td>EA = Address Field (A)</td><td>Simple variable access; address is fixed.</td></tr>
-        <li><b>Indirect</b></td><td>EA = M[A]</td><td>Pointer dereferencing. Memory contains pointer.</td></tr>
+        <tr><td><b>Indirect</b></td><td>EA = M[A]</td><td>Pointer dereferencing. Memory contains pointer.</td></tr>
         <tr><td><b>Register</b></td><td>No EA; operand is in Register R</td><td>Fastest. Operating inside CPU registers.</td></tr>
         <tr><td><b>Register Indirect</b></td><td>EA = R</td><td>Array traversal (e.g. <code>MOV AX, [BX]</code>).</td></tr>
         <tr><td><b>Relative</b></td><td>EA = PC + A</td><td>Position-independent code; jumps and branches.</td></tr>
@@ -519,7 +519,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(d)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>Why does a DMA controller have priority over the CPU for bus control?</b></div>
       <div class="ans">
-        I/O peripheral data is highly **volatile**. If incoming high-speed peripheral data is not read instantly from the channel, it will overwrite and be lost. The CPU's execution, however, can be paused without data loss.
+        I/O peripheral data is highly <b>volatile</b>. If incoming high-speed peripheral data is not read instantly from the channel, it will overwrite and be lost. The CPU's execution, however, can be paused without data loss.
       </div>
     </div>
 
@@ -555,7 +555,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(h)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>Explain the difference between write-through and write-back cache policies.</b></div>
       <div class="ans">
-        In **Write-Through**, cache and main memory are updated simultaneously on writes. In **Write-Back**, updates occur only in the cache; the main memory block is updated only when that cache line is evicted (dirty bit tracking).
+        In <b>Write-Through</b>, cache and main memory are updated simultaneously on writes. In <b>Write-Back</b>, updates occur only in the cache; the main memory block is updated only when that cache line is evicted (dirty bit tracking).
       </div>
     </div>
 
@@ -607,6 +607,21 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           </table>
         </div>
 
+        <figure class="diagram-fig">
+          <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:6px; max-width:560px; margin:0 auto; font-size:11.5px;">
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:3px; padding:6px;"><b style="color:var(--brand-deep)">Immediate</b><br>EA = inside IR</div>
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:3px; padding:6px;"><b style="color:var(--brand-deep)">Direct</b><br>EA = A</div>
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:3px; padding:6px;"><b style="color:var(--brand-deep)">Indirect</b><br>EA = M[A]</div>
+            <div style="background:var(--paper-soft); border:1.5px solid var(--ink); border-radius:3px; padding:6px;"><b>Register</b><br>operand in R</div>
+            <div style="background:var(--paper-soft); border:1.5px solid var(--ink); border-radius:3px; padding:6px;"><b>Reg-Indirect</b><br>EA = R</div>
+            <div style="background:var(--paper-soft); border:1.5px solid var(--ink); border-radius:3px; padding:6px;"><b>Relative</b><br>EA = PC + A</div>
+            <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:3px; padding:6px;"><b style="color:var(--forest)">Indexed</b><br>EA = IX + A</div>
+            <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:3px; padding:6px;"><b style="color:var(--forest)">Base-Reg</b><br>EA = BAR + A</div>
+            <div style="background:var(--auburn-soft); border:1.5px solid var(--auburn); border-radius:3px; padding:6px;"><b style="color:var(--auburn)">Stack</b><br>EA = SP (TOS)</div>
+          </div>
+          <figcaption><b>Fig 1.2</b> &middot; The 9 addressing modes grouped by source &mdash; in-instruction (brand), register-based (paper), index-modified (forest), implicit-stack (auburn).</figcaption>
+        </figure>
+
         <h5>Worked Numerical Example</h5>
         <p><b>System State:</b> PC = <code>0x0200</code>, Address Field (A) = <code>0x0150</code>, Register R1 = <code>0x0300</code>, Index Register IX = <code>0x0050</code>. Memory Contents: <code>M[0x0150] = 0x0700</code>, <code>M[0x0300] = <code>0x0900</code></code>.</p>
         <div class="steps">
@@ -614,6 +629,17 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <div class="step"><span class="k">Relative</span><div class="body"><code>EA = PC + A = 0x0200 + 0x0150 = 0x0350</code>.</div></div>
           <div class="step"><span class="k">RegInd</span><div class="body"><code>EA = R1 = 0x0300</code>. Operand = <code>M[0x0300] = 0x0900</code>.</div></div>
         </div>
+
+        <h5>Modern Relevance</h5>
+        <p>RISC architectures (ARM, RISC-V) deliberately restrict addressing modes to <b>load-store + register + immediate + PC-relative</b> only — fewer modes mean simpler pipeline decoders and uniform instruction latency. CISC architectures (x86-64) preserve the full mode palette (direct, indexed scaled, RIP-relative, segment-based) because a single complex instruction can shrink code size by 30–40%. Apple Silicon's M-series chips reach 5+ GHz on this RISC simplicity bet.</p>
+
+        <div class="box warn">
+          <span class="label">Common pitfalls</span>
+          Confusing <b>Immediate vs Direct</b>: in Immediate the value <i>is</i> the operand (no memory touched); in Direct the operand lives at the address inside the instruction (one memory read). Also: Register-Indirect (<code>[BX]</code>) reads memory pointed-to by a register — different from Register (<code>BX</code>) which uses the register itself. Examiners deduct marks for "Indirect = EA + R" — Indirect is <code>M[A]</code>, Register-Indirect is <code>R</code>.
+        </div>
+
+        <h5>Conclusion</h5>
+        <p>Addressing modes are the ISA's contract with the compiler — they trade decoder complexity for code density and runtime flexibility. Mastering the EA formula for each mode is non-negotiable for any compiler-backend or low-level systems engineer.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -631,8 +657,8 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
     <div class="qcard predicted">
       <div class="qhead"><span class="qnum">Q3</span><span class="tag year">Unit 1 Numerical</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Solve the following data representation problems step-by-step:
-        <br>(a) Represent -262.125 in IEEE-754 Single-Precision floating-point format.
-        <br>(b) Perform Booth's signed multiplication trace for -6 × -9.
+        <br>(a) [10M] Represent -262.125 in IEEE-754 Single-Precision floating-point format AND perform Booth's signed multiplication trace for -6 × -9.
+        <br>(b) [5M] Define a Stack-CPU (zero-address machine). Convert <code>(A+B)*(C-D)</code> to Reverse Polish Notation (RPN) and trace the stack state through every operator.
       </b></div>
       <div class="ans">
         <h5>(a) IEEE-754 Single Precision: -262.125</h5>
@@ -668,13 +694,52 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </div>
         <p><b>Combined result (A, Q):</b> <code>00001 10110₂ = +54₁₀</code>. <b>Perfect check!</b></p>
 
+        <h5>(b) Stack-CPU + RPN Evaluation: <code>(A+B)*(C-D)</code></h5>
+        <p>A <b>Stack-CPU</b> (zero-address machine) holds all operands on an implicit operand stack. Instructions name no operand — they pop the top of stack (TOS), operate, and push the result. RPN (postfix) maps naturally because the operator appears immediately after its two operands.</p>
+
+        <p><b>Infix → RPN conversion:</b> <code>(A+B)*(C-D)</code> &nbsp;⟶&nbsp; <code>A B + C D - *</code></p>
+
+        <figure class="diagram-fig">
+          <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:4px; max-width:560px; margin:0 auto; font-family:'JetBrains Mono',monospace; font-size:11px;">
+            <div style="background:var(--paper-soft); border:1.5px solid var(--ink); border-radius:3px; padding:6px 4px;"><b style="color:var(--brand)">PUSH A</b><br>TOS→ <b>A</b></div>
+            <div style="background:var(--paper-soft); border:1.5px solid var(--ink); border-radius:3px; padding:6px 4px;"><b style="color:var(--brand)">PUSH B</b><br>B<br>A</div>
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:3px; padding:6px 4px;"><b style="color:var(--brand)">ADD</b><br>TOS→ <b>A+B</b></div>
+            <div style="background:var(--paper-soft); border:1.5px solid var(--ink); border-radius:3px; padding:6px 4px;"><b style="color:var(--brand)">PUSH C</b><br>C<br>A+B</div>
+            <div style="background:var(--paper-soft); border:1.5px solid var(--ink); border-radius:3px; padding:6px 4px;"><b style="color:var(--brand)">PUSH D</b><br>D<br>C<br>A+B</div>
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:3px; padding:6px 4px;"><b style="color:var(--brand)">SUB</b><br>C-D<br>A+B</div>
+            <div style="background:#fffbe5; border:1.5px dashed var(--gold); border-radius:3px; padding:6px 4px;"><b style="color:var(--brand)">MUL</b><br>TOS→ <b>(A+B)*(C-D)</b></div>
+          </div>
+          <figcaption><b>Fig 1.3</b> · Stack state after each RPN token. ADD/SUB/MUL pop top two, push result.</figcaption>
+        </figure>
+
+        <div class="steps">
+          <div class="step"><span class="k">1</span><div class="body"><code>PUSH A</code> → Stack: <code>[A]</code>.</div></div>
+          <div class="step"><span class="k">2</span><div class="body"><code>PUSH B</code> → Stack: <code>[A, B]</code>.</div></div>
+          <div class="step"><span class="k">3</span><div class="body"><code>ADD</code> → pop B, pop A, push <code>A+B</code>. Stack: <code>[A+B]</code>.</div></div>
+          <div class="step"><span class="k">4</span><div class="body"><code>PUSH C</code> → Stack: <code>[A+B, C]</code>.</div></div>
+          <div class="step"><span class="k">5</span><div class="body"><code>PUSH D</code> → Stack: <code>[A+B, C, D]</code>.</div></div>
+          <div class="step"><span class="k">6</span><div class="body"><code>SUB</code> → pop D, pop C, push <code>C-D</code>. Stack: <code>[A+B, C-D]</code>.</div></div>
+          <div class="step"><span class="k">7</span><div class="body"><code>MUL</code> → pop <code>C-D</code>, pop <code>A+B</code>, push product. <b>Result on TOS: <code>(A+B)*(C-D)</code></b>.</div></div>
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Every CPU FPU implements IEEE-754 — ARM Cortex-M0/M3 ship single-precision-only FPUs; Cortex-M7 adds double. Booth's algorithm remains the standard signed multiplier in modern ALU silicon. Stack machines power JVM bytecode, .NET CLR IL, WebAssembly, and PostScript — RPN is the on-disk format of every <code>.class</code> file.</p>
+
+        <div class="box warn">
+          <span class="label">Common pitfalls</span>
+          The IEEE-754 <b>bias trap</b>: students write the raw exponent instead of <code>E + 127</code>. For E = -3, the field stores <code>124</code> not <code>-3</code>. Booth: the implicit <code>Q₋₁ = 0</code> bit is mandatory on init — skipping it shifts every operation by one pass. RPN: do not reverse operand order on subtraction — the second-popped value is the minuend, the first-popped is the subtrahend.
+        </div>
+
+        <h5>Conclusion</h5>
+        <p>IEEE-754 unifies floating-point hardware; Booth's encoding halves the number of additions for signed multiplication; the stack-CPU model proves zero-address ISAs are sufficient for arbitrary arithmetic — three orthogonal techniques the modern CPU uses simultaneously.</p>
+
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
           <ul>
-            <li><span>Part A: Binary and normalization calculations</span><span class="m">3.5M</span></li>
-            <li><span>Part A: Biased exponent and final IEEE string conversion</span><span class="m">4.0M</span></li>
-            <li><span>Part B: Verification setup and M/Q initializations</span><span class="m">2.5M</span></li>
-            <li><span>Part B: Correct 5-pass Booth's multiplication trace table</span><span class="m">5.0M</span></li>
+            <li><span>(a) IEEE-754 binary + normalization + biased exponent</span><span class="m">5.0M</span></li>
+            <li><span>(a) Booth's 5-pass trace table + verification</span><span class="m">5.0M</span></li>
+            <li><span>(b) Stack-CPU definition + Infix→RPN conversion</span><span class="m">2.0M</span></li>
+            <li><span>(b) Stack trace diagram + 7-step state evolution</span><span class="m">3.0M</span></li>
           </ul>
         </div>
       </div>
@@ -689,17 +754,24 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <p>In a microprogrammed control unit, control signals are generated by reading microinstructions from a dedicated Control Memory (ROM). The Control Address Register (CAR) stores the address of the microinstruction currently being executed.</p>
 
         <figure class="diagram-fig">
-          <div style="border:1.5px solid var(--ink); border-radius:4px; padding:10px; font-family:monospace; font-size:12.5px; text-align:left; background:#fff; line-height:1.4; max-width:480px; margin:0 auto;">
-            <b>[Instruction Opcode]</b> ──&gt; [Opcode Mapping Logic] ──┐
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼
-            <br><b>[Next Address Generator]</b> ──&gt; <b>[CAR (Control Address Reg)]</b>
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▲&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└───── [Branch Logic] &lt;─────────┴──&gt; <b>[Control Memory (ROM)]</b>
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>[Control Word Signals]</b>
+          <div style="display:flex; flex-direction:column; gap:8px; max-width:520px; margin:0 auto; align-items:stretch;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <div style="background:var(--paper-soft); border:1.5px solid var(--ink); border-radius:4px; padding:10px; font-weight:700; text-align:center; font-size:13px;">Instruction Opcode</div>
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:10px; font-weight:700; text-align:center; font-size:13px;">Opcode Mapping Logic</div>
+            </div>
+            <div style="text-align:center; font-family:monospace; color:var(--muted);">&#x2193;</div>
+            <div style="background:#fffbe5; border:1.5px solid var(--gold); border-radius:4px; padding:12px; font-weight:700; text-align:center; font-size:14px;">Next-Address Generator (MUX over 4 sources)</div>
+            <div style="text-align:center; font-family:monospace; color:var(--muted);">&#x2193;</div>
+            <div style="background:var(--brand-soft); border:2px solid var(--brand); border-radius:4px; padding:12px; font-weight:700; text-align:center; font-size:14px; color:var(--brand-deep);">CAR &middot; Control Address Register</div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:start;">
+              <div style="background:var(--paper-soft); border:1.5px dashed var(--muted); border-radius:4px; padding:8px; font-size:12px; text-align:center;">&#x2191; feedback from Branch Logic</div>
+              <div style="text-align:center; font-family:monospace; color:var(--muted); padding-top:8px;">&#x2193;</div>
+            </div>
+            <div style="background:var(--paper-soft); border:1.5px solid var(--ink); border-radius:4px; padding:10px; font-weight:700; text-align:center; font-size:13px;">Control Memory (ROM) &mdash; stores micro-instructions</div>
+            <div style="text-align:center; font-family:monospace; color:var(--muted);">&#x2193;</div>
+            <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:4px; padding:10px; font-weight:700; text-align:center; font-size:13px; color:var(--forest);">Control Word &rarr; ALU / Bus / Register signals</div>
           </div>
-          <figcaption><b>Fig 2.5</b> · Microprogrammed control address sequencer block diagram</figcaption>
+          <figcaption><b>Fig 2.5</b> &middot; Microprogrammed control address sequencer &mdash; opcode mapping feeds the next-address MUX; CAR drives Control ROM; output is the active control word.</figcaption>
         </figure>
 
         <h5>Address Sequencing &amp; Mappings</h5>
@@ -716,6 +788,30 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <div class="step"><span class="k">44</span><div class="body">ADD 3: <code>AC ← AC + MBR; Update Flags</code>. Next = Branch to FETCH. CAR updates: <code>CAR = 0</code>.</div></div>
         </div>
         <p>This trace demonstrates the precise coordination of register transfer logic through all four sequencing operations.</p>
+
+        <h5>Hardwired vs Micro-programmed — Comparison Table</h5>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Criterion</th><th>Hardwired CU</th><th>Micro-programmed CU</th></tr>
+            <tr><td><b>Speed</b></td><td>Very fast — combinational gate logic, ~1 clock per control word.</td><td>Slower — requires Control-ROM fetch per microinstruction.</td></tr>
+            <tr><td><b>Flexibility</b></td><td>Rigid — adding an instruction needs PCB redesign or new silicon mask.</td><td>Flexible — patch ROM image, no hardware change.</td></tr>
+            <tr><td><b>Design effort</b></td><td>High — manual state-machine + Boolean minimization.</td><td>Lower — write microcode in symbolic form, assemble to ROM.</td></tr>
+            <tr><td><b>Cost (small ISA)</b></td><td>Low — gate count proportional to instructions.</td><td>High — ROM area dominates for small ISAs.</td></tr>
+            <tr><td><b>Best for</b></td><td>RISC, embedded, GPU shader cores.</td><td>CISC, mainframes, x86 / IBM-360.</td></tr>
+            <tr><td><b>Example chips</b></td><td>ARM Cortex-M0, RISC-V Rocket, MIPS R3000.</td><td>Intel Core (i7/i9), AMD Zen, IBM z-Architecture.</td></tr>
+          </table>
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Modern x86 (Intel Core, AMD Zen) still uses <b>microcode</b> on top of an internal RISC-like µop pipeline. After Spectre/Meltdown (2018), Intel released microcode firmware patches (IBRS, IBPB barriers) deployed via BIOS updates and OS late-loading — proof that micro-programmed CUs offer field-upgradable silicon. Apple's M-series and ARM Cortex use hardwired control for inner pipeline, microcode only for rare slow paths (cache flushes, exception entry).</p>
+
+        <div class="box warn">
+          <span class="label">Common pitfalls</span>
+          Students often write "hardwired = slow, micro-programmed = fast" — it is the <b>opposite</b>. Hardwired is faster because gates run at signal-propagation speed; micro-programmed has the extra ROM-read latency. Also: the CAR is NOT the same as the CPU's PC — CAR addresses microinstructions inside the Control-ROM, PC addresses macroinstructions in main memory.
+        </div>
+
+        <h5>Conclusion</h5>
+        <p>Address sequencing is the heartbeat of a microprogrammed CU — four next-address sources (increment / opcode-map / unconditional branch / conditional branch) drive every CISC instruction. The flexibility paid for by speed loss is what kept x86 alive through five decades of ISA evolution.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -746,17 +842,21 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>DMA Controller Block Diagram</h5>
         <figure class="diagram-fig">
-          <div style="border:1.5px solid var(--ink); border-radius:4px; padding:10px; font-family:monospace; font-size:12px; text-align:left; background:#fff; line-height:1.4; max-width:460px; margin:0 auto;">
-            &lt;────── System Address &amp; Data Buses ──────&gt;
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▲&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▲&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▲
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼
-            <br><b>[Address Register]</b>&nbsp;&nbsp;&nbsp;<b>[Word Count Reg]</b>&nbsp;&nbsp;&nbsp;<b>[Control Register]</b>
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│ (Count == 0?)
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▼
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>[Interrupt to CPU]</b>
-            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(DMA Request / Acknowledge links to peripheral device)
+          <div style="display:flex; flex-direction:column; gap:8px; max-width:520px; margin:0 auto;">
+            <div style="background:var(--ink); color:var(--paper); border-radius:4px; padding:8px; font-weight:700; text-align:center; font-size:12px; letter-spacing:.08em; text-transform:uppercase;">System Address &amp; Data Buses</div>
+            <div style="text-align:center; font-family:monospace; color:var(--muted);">&#x2195;</div>
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:10px 6px; text-align:center; font-weight:700; font-size:12px;">Address<br>Register</div>
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:10px 6px; text-align:center; font-weight:700; font-size:12px;">Word Count<br>Register</div>
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:10px 6px; text-align:center; font-weight:700; font-size:12px;">Control<br>Register</div>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:center; gap:8px; font-size:12px; color:var(--muted);"><span style="font-family:monospace;">&#x2193;</span><i>(Count == 0?)</i></div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <div style="background:var(--crimson-soft); border:1.5px solid var(--crimson); border-radius:4px; padding:10px; text-align:center; font-weight:700; font-size:12px; color:var(--crimson);">Interrupt to CPU<br><span style="font-weight:400; color:var(--ink);">(transfer complete)</span></div>
+              <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:4px; padding:10px; text-align:center; font-weight:700; font-size:12px; color:var(--forest);">DMA REQ / ACK<br><span style="font-weight:400; color:var(--ink);">(to peripheral)</span></div>
+            </div>
           </div>
-          <figcaption><b>Fig 2.6</b> · DMA Controller block register layout</figcaption>
+          <figcaption><b>Fig 2.6</b> &middot; DMA controller registers &mdash; address + word-count + control words sit between system buses and peripheral handshake.</figcaption>
         </figure>
 
         <h5>The Three DMA Transfer Modes</h5>
@@ -765,6 +865,26 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <li><b>2. Cycle-Stealing Mode:</b> The DMA steals a single bus clock cycle from the CPU to transfer a single word, then immediately releases the bus back. This interleaves transfer with CPU instruction execution, minimizing CPU starvation.</li>
           <li><b>3. Transparent Mode:</b> The DMA controller transfers data only during CPU cycles when the processor is executing internal instructions (e.g. Decode) and does not require the external system bus. Has zero impact on CPU performance.</li>
         </ul>
+
+        <h5>Worked Numerical — Cycle-Stealing Bandwidth Cost</h5>
+        <p><b>Given:</b> Block size B = 4 KB, sustained DMA transfer rate R = 800 MB/s, CPU clock f = 2 GHz. Find the percentage of CPU cycles stolen per second.</p>
+        <div class="steps">
+          <div class="step"><span class="k">1</span><div class="body"><b>Formula:</b> bytes/sec transferred by DMA = R. Each cycle-steal transfers 1 word = 4 B. Cycles stolen/sec = <code>R / 4</code>.</div></div>
+          <div class="step"><span class="k">2</span><div class="body"><b>Substitute:</b> Cycles stolen/sec = <code>(800 × 10⁶ B/s) / 4 B = 2 × 10⁸ cycles/s</code>.</div></div>
+          <div class="step"><span class="k">3</span><div class="body"><b>Arithmetic:</b> CPU clock cycles/sec = <code>2 × 10⁹</code>. Steal % = <code>(2 × 10⁸) / (2 × 10⁹) × 100</code>.</div></div>
+          <div class="step"><span class="k">4</span><div class="body"><b>Final answer:</b> <span style="background:var(--brand-soft); border:1.5px solid var(--brand); padding:3px 8px; border-radius:3px; font-weight:700;">CPU cycle-steal overhead = 10 %</span> — CPU runs at 90% effective throughput while DMA streams.</div></div>
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>PCIe DMA is the bus backbone of every modern GPU — NVIDIA's CUDA host-to-device transfers use DMA engines on each PCIe lane. NVMe SSDs use <b>queue-pair DMA</b> bypassing the CPU entirely, hitting 7+ GB/s on Gen4. Interrupt delivery has evolved from legacy 8259A PIC to <b>MSI-X</b> (Message-Signaled Interrupts) where each device can post up to 2048 distinct vectors directly into APIC tables — eliminating interrupt-line sharing latency.</p>
+
+        <div class="box warn">
+          <span class="label">Common pitfalls</span>
+          <b>Priority inversion</b>: if a high-priority interrupt is locked out waiting for a low-priority handler's spinlock, system response stalls. The Mars Pathfinder rover bug (1997) was a textbook priority inversion. Also: confusing <b>vectored vs polled</b> interrupts — vectored jumps to a per-source ISR address (fast); polled scans a status word in a loop (slow). DMA cycle-stealing is NOT free — every stolen cycle the CPU cannot fetch.
+        </div>
+
+        <h5>Conclusion</h5>
+        <p>DMA divorces data movement from instruction execution — the single biggest throughput unlock in computer organisation since Eckert-Mauchly. The three transfer modes trade CPU starvation against I/O latency, and modern hardware (PCIe MSI-X, NVMe) is built directly on top of these 1970s primitives.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -784,7 +904,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>Describe Flynn's Classification of parallel computer architectures with a neat diagram. Discuss the three pipeline hazards (structural, data, control) and how each is resolved.</b></div>
       <div class="ans">
         <h5>Flynn's Parallel Classification</h5>
-        <p>Flynn's taxonomy classifies computer architectures based on the number of concurrent **Instruction Streams** and **Data Streams** processed:</p>
+        <p>Flynn's taxonomy classifies computer architectures based on the number of concurrent <b>Instruction Streams</b> and <b>Data Streams</b> processed:</p>
         <div class="table-wrap">
           <table>
             <tr><th>Data \ Instruction</th><th>Single Instruction (SI)</th><th>Multiple Instruction (MI)</th></tr>
@@ -792,6 +912,17 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
             <tr><td><b>Multiple Data (MD)</b></td><td><b>SIMD</b> (GPUs, vector array processors)</td><td><b>MIMD</b> (Modern multi-core processors)</td></tr>
           </table>
         </div>
+
+        <figure class="diagram-fig">
+          <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:5px; max-width:560px; margin:0 auto; font-size:11.5px; text-align:center;">
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:3px; padding:8px 4px;"><b style="color:var(--brand-deep)">IF</b><br>Fetch</div>
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:3px; padding:8px 4px;"><b style="color:var(--brand-deep)">ID</b><br>Decode</div>
+            <div style="background:#fffbe5; border:1.5px solid var(--gold); border-radius:3px; padding:8px 4px;"><b style="color:var(--gold)">EX</b><br>Execute</div>
+            <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:3px; padding:8px 4px;"><b style="color:var(--forest)">MEM</b><br>Memory</div>
+            <div style="background:var(--auburn-soft); border:1.5px solid var(--auburn); border-radius:3px; padding:8px 4px;"><b style="color:var(--auburn)">WB</b><br>Write-Back</div>
+          </div>
+          <figcaption><b>Fig 3.1</b> &middot; Classic 5-stage RISC pipeline (MIPS). Each clock advances every instruction one stage right; hazards interrupt this clean flow.</figcaption>
+        </figure>
 
         <h5>Pipeline Hazards &amp; Resolutions</h5>
         <ul>
@@ -807,6 +938,26 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
             <br><i>Resolution:</i> <b>Branch Prediction</b> (predicting whether a branch is taken or not), using Branch Target Buffers (BTB), or employing Delayed Branching (filling delay slots with useful instructions).
           </li>
         </ul>
+
+        <h5>Worked Numerical — Pipeline Speedup</h5>
+        <p><b>Given:</b> n = 1000 instructions, k = 5 pipeline stages. Find ideal speedup S<sub>p</sub> over sequential execution.</p>
+        <div class="steps">
+          <div class="step"><span class="k">1</span><div class="body"><b>Formula:</b> Sequential time T<sub>seq</sub> = <code>n × k</code> cycles. Pipelined time T<sub>pipe</sub> = <code>k + (n − 1)</code> cycles. Speedup S<sub>p</sub> = <code>(n × k) / (k + n − 1)</code>.</div></div>
+          <div class="step"><span class="k">2</span><div class="body"><b>Substitute:</b> S<sub>p</sub> = <code>(1000 × 5) / (5 + 1000 − 1)</code>.</div></div>
+          <div class="step"><span class="k">3</span><div class="body"><b>Arithmetic:</b> S<sub>p</sub> = <code>5000 / 1004 = 4.9801</code>.</div></div>
+          <div class="step"><span class="k">4</span><div class="body"><b>Final answer:</b> <span style="background:var(--brand-soft); border:1.5px solid var(--brand); padding:3px 8px; border-radius:3px; font-weight:700;">S<sub>p</sub> ≈ 4.98×</span> — close to ideal limit k = 5 (asymptotically: <code>limₙ→∞ S<sub>p</sub> = k</code>).</div></div>
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Modern CPUs have <b>14+ stage pipelines</b> (Intel Skylake = 14, AMD Zen 4 = 19) with aggressive <b>speculative execution</b> and out-of-order issue. The <b>Spectre</b> attack (2018) abuses speculative branch execution — the CPU mis-predicts, executes instructions on the bad path, and even after rollback the cache state leaks data via timing side-channels. MIMD MIMDs ship in every laptop today; SIMD lives on as AVX-512 / ARM SVE; GPUs are massively-parallel SIMD machines.</p>
+
+        <div class="box warn">
+          <span class="label">Common pitfalls</span>
+          <b>RAW / WAR / WAW mix-up</b>: RAW (Read-After-Write) is a <i>true</i> dependency that needs forwarding — instruction j reads what i wrote. WAR (Write-After-Read) is anti-dependency, WAW is output dependency — both arise only in out-of-order pipelines and are solved by <b>register renaming</b>, not forwarding. Also: forwarding does NOT eliminate load-use hazards — a one-cycle stall is still required if a load result is used by the very next ALU op.
+        </div>
+
+        <h5>Conclusion</h5>
+        <p>Pipelining trades latency for throughput; hazards are the cost of that bargain. Forwarding, branch prediction, and register renaming push pipelines toward their theoretical limit S<sub>p</sub> = k — but Spectre proved that aggressive speculation creates security holes that hardware fixes (eIBRS) cannot fully close.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -842,6 +993,15 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           </div></div>
         </div>
         <p><b>Address structure:</b> <code>TAG (17 bits) · SET (11 bits) · WORD (4 bits)</code>.</p>
+
+        <figure class="diagram-fig">
+          <div style="display:grid; grid-template-columns:17fr 11fr 4fr; gap:0; max-width:560px; margin:0 auto; border:1.5px solid var(--ink); border-radius:3px; overflow:hidden;">
+            <div style="background:var(--brand-soft); padding:14px 6px; text-align:center; border-right:1.5px solid var(--ink);"><b style="color:var(--brand-deep); font-size:14px;">TAG</b><br><span style="font-family:monospace; font-size:11px;">17 bits</span></div>
+            <div style="background:var(--forest-soft); padding:14px 6px; text-align:center; border-right:1.5px solid var(--ink);"><b style="color:var(--forest); font-size:14px;">SET</b><br><span style="font-family:monospace; font-size:11px;">11 bits</span></div>
+            <div style="background:var(--auburn-soft); padding:14px 6px; text-align:center;"><b style="color:var(--auburn); font-size:14px;">WORD</b><br><span style="font-family:monospace; font-size:11px;">4 bits</span></div>
+          </div>
+          <figcaption><b>Fig 4.1</b> &middot; 32-bit physical address split for 2-way set-associative cache &mdash; TAG identifies block, SET picks the 2-way bucket, WORD picks byte inside 16-byte block.</figcaption>
+        </figure>
 
         <h5>(b) Page Replacement Tracing (4 Frames)</h5>
         <p><b>Page string:</b> <code>7, 5, 3, 2, 1, 0, 4, 7, 4, 2, 0, 1, 3, 5</code>. Initial frames are empty.</p>
@@ -889,6 +1049,27 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
             <br><b>Optimal Page Faults = 10</b>.
           </li>
         </ul>
+
+        <h5>FIFO vs LRU vs Optimal — Comparison Table</h5>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Algorithm</th><th>Eviction policy</th><th>Faults (this ref-string)</th><th>Hit rate (14 refs)</th><th>Implementation cost</th><th>Practical use</th></tr>
+            <tr><td><b>FIFO</b></td><td>Evict the oldest-loaded page (queue order).</td><td>12</td><td>14.3%</td><td>Cheap — one FIFO queue.</td><td>Rare. Suffers Belady's anomaly (more frames → more faults).</td></tr>
+            <tr><td><b>LRU</b></td><td>Evict the least-recently-used page (timestamp).</td><td>11</td><td>21.4%</td><td>Expensive — timestamp every reference.</td><td>Approximated by <b>CLOCK</b> / <b>Aging</b> in real OS kernels (Linux, Windows).</td></tr>
+            <tr><td><b>Optimal</b></td><td>Evict the page used farthest in future.</td><td>10</td><td>28.6%</td><td>Impossible online — needs future ref-string.</td><td>Theoretical lower bound — benchmark only.</td></tr>
+          </table>
+        </div>
+
+        <h5>Modern Relevance</h5>
+        <p>Intel CPUs ship a <b>3-level cache hierarchy</b> — L1 (32 KB per core, ~4 cycles), L2 (1 MB per core, ~12 cycles), L3 (shared, 8–96 MB, ~40 cycles), DRAM (~200 cycles). True LRU is too expensive for hardware, so caches use <b>pseudo-LRU</b> tree-bits or <b>NRU</b> (Not-Recently-Used). Operating systems implement <b>CLOCK / Second-Chance</b> as a cheap LRU approximation for page replacement. Apple's M-series unifies CPU/GPU memory, eliminating PCIe-DMA copies entirely.</p>
+
+        <div class="box warn">
+          <span class="label">Common pitfalls</span>
+          <b>TLB miss ≠ cache miss</b>: a TLB miss means the virtual-to-physical mapping is not cached in the MMU's TLB (page-walk required, ~100 cycles); a cache miss means the data line is not in L1/L2/L3 (DRAM fetch, ~200 cycles). A reference can be a TLB hit + cache miss, or vice versa. Also: in the page-replacement trace, count the <b>compulsory misses</b> (initial fills of empty frames) — many students forget the first 4 references all count as faults.
+        </div>
+
+        <h5>Conclusion</h5>
+        <p>Cache mapping decides where a block can sit; replacement decides which block leaves. The address split (TAG · SET · WORD) is determined entirely by power-of-two arithmetic, and the choice of FIFO / LRU / Optimal trades implementation cost against hit rate — a tradeoff the OS kernel still negotiates daily.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
