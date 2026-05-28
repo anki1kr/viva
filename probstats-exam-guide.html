@@ -16,9 +16,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Spectral:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#f7f1e1;
-  --paper-soft:#fffaef;
-  --paper-deep:#ebe2cc;
+  --paper:#f3ead2;
+  --paper-soft:#faf2dc;
+  --paper-deep:#e6dbb8;
   --ink:#1a1209;
   --ink-soft:#3d2f1c;
   --muted:#6b5d47;
@@ -146,11 +146,11 @@ nav.chips a.live, nav.chips a.live.hot{ background:var(--crimson); color:var(--p
     radial-gradient(circle at 15% 18%, rgba(254,226,226,.55), transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(253,224,71,.3), transparent 45%),
     var(--paper-soft);
-  border:1.5px solid var(--ink);
-  box-shadow:4px 4px 0 var(--ink);
-  border-radius:4px; position:relative; overflow:hidden;
+  border:1px solid var(--rule);
+  box-shadow:none;
+  border-radius:6px; position:relative; overflow:hidden;
 }
-@media(min-width:600px){ .cover{ margin:0 -4px 40px; padding:32px 28px 28px; box-shadow:6px 6px 0 var(--ink); } }
+@media(min-width:600px){ .cover{ margin:0 -4px 40px; padding:32px 28px 28px; box-shadow:none; } }
 .cover .stamp{
   position:absolute; top:16px; right:18px;
   border:1.5px solid var(--crimson); color:var(--crimson);
@@ -558,13 +558,14 @@ td code{ font-size:11.5px; }
 /* ── Q CARDS ── */
 .qcard{
   margin:14px 0;
-  padding:12px 14px;
+  padding:8px 10px;
   background:#fff;
-  border:1.5px solid var(--ink);
+  border:1px solid var(--rule);
   border-radius:4px;
-  box-shadow:3px 3px 0 var(--ink);
+  box-shadow:none;
   scroll-margin-top:100px;
 }
+@media(min-width:600px){ .qcard{ padding:12px 14px; } }
 .qhead{
   display:flex; justify-content:space-between;
   align-items:flex-start; gap:10px;
@@ -661,7 +662,7 @@ td code{ font-size:11.5px; }
 /* PYQ-specific styles */
 .qcard.pyq{ border-color:var(--ink); }
 .qcard.repeated{ border-color:var(--crimson); box-shadow:3px 3px 0 var(--crimson); background:#fffafa; }
-.qcard.predicted{ border-color:var(--gold); box-shadow:3px 3px 0 var(--gold); background:#fffbeb; }
+.qcard.predicted{ border-color:var(--rule); box-shadow:none; background:#fffbeb; }
 .qcard.repeated .qno{ color:var(--crimson); }
 .qcard.predicted .qno{ color:var(--gold); }
 
@@ -1946,28 +1947,28 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
     <div class="qcard predicted">
       <div class="qbody"><b>(a) Define cumulative distribution function (CDF) of a random variable and state its range.</b></div>
       <div class="ans">
-        <mark>CDF</mark> (cumulative <mark>distribution function</mark>) is F(x) = P(X &lt;= x). The range of CDF is strictly bounded in <mark>[0, 1]</mark> since it is a cumulative measure of probability.
+        <mark>CDF</mark> (cumulative <mark>distribution function</mark>) is F(x) = P(X &lt;= x). It tells you the chance that X is at most x. The CDF range is always inside <mark>[0, 1]</mark> because it is a stack of probabilities.
       </div>
     </div>
 
     <div class="qcard predicted">
       <div class="qbody"><b>(b) A coin is tossed 3 times. What is the probability of getting at least 2 heads?</b></div>
       <div class="ans">
-        Sample space size = 2^3 = 8. Favourable outcomes (at least 2 heads): {HHT, HTH, THH, HHH} = 4 outcomes. Probability = 4/8 = <mark><b>0.5</b></mark>.
+        Total ways = 2^3 = 8. Good outcomes (2 or 3 heads): {HHT, HTH, THH, HHH} = 4. Probability = 4/8 = <mark><b>0.5</b></mark>.
       </div>
     </div>
 
     <div class="qcard predicted">
       <div class="qbody"><b>(c) Find the mode of the dataset: 8, 12, 15, 12, 19, 23, 12, 8, 15.</b></div>
       <div class="ans">
-        The number 12 appears most frequently (3 times). <mark>Mode</mark> = <mark><b>12</b></mark>.
+        The number 12 shows up most often (3 times). <mark>Mode</mark> = <mark><b>12</b></mark>.
       </div>
     </div>
 
     <div class="qcard predicted">
       <div class="qbody"><b>(d) State the memoryless property of Exponential distribution.</b></div>
       <div class="ans">
-        For X ~ Exp(L), <mark>P(X &gt; s + t | X &gt; s) = P(X &gt; t)</mark>. The probability of surviving an additional time t is independent of the age s already reached: the <mark>memoryless property</mark>. This property is shared only with the discrete Geometric and continuous Exponential laws (unlike <mark>uniform</mark> or <mark>normal</mark>).
+        For X ~ Exp(L), <mark>P(X &gt; s + t | X &gt; s) = P(X &gt; t)</mark>. The chance of waiting an extra time t does not depend on the time s already spent waiting. This is the <mark>memoryless property</mark>. Only the discrete Geometric and the Exponential have it (not <mark>uniform</mark> or <mark>normal</mark>).
       </div>
     </div>
 
@@ -1985,21 +1986,21 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
     <div class="qcard predicted">
       <div class="qbody"><b>(f) If Cov(X,Y) = 15, SD(X) = 5, and SD(Y) = 6, find the correlation coefficient r.</b></div>
       <div class="ans">
-        <mark>Karl Pearson</mark> r = <mark>Cov(X,Y)</mark> / [ SD(X) * SD(Y) ] = 15 / (5 * 6) = 15 / 30 = <mark><b>r = 0.5</b></mark>.
+        <mark>Karl Pearson</mark> r = <mark>Cov(X,Y)</mark> / [ SD(X) · SD(Y) ] = 15 / (5 · 6) = 15 / 30 = <mark><b>r = 0.5</b></mark>. This shows a moderate positive link between X and Y.
       </div>
     </div>
 
     <div class="qcard predicted">
       <div class="qbody"><b>(g) List any three differences between Correlation and Regression.</b></div>
       <div class="ans">
-        Correlation gives one number r; regression gives a slope (<mark>regression coefficient</mark>) and intercept per axis.
+        Correlation gives one number r. Regression gives a slope (<mark>regression coefficient</mark>) plus an intercept for each axis.
         <div class="table-wrap">
           <table>
             <thead><tr><th>Parameter</th><th>Correlation</th><th>Regression</th></tr></thead>
             <tbody>
-              <tr><td>Purpose</td><td>Measures <b>strength</b> &amp; direction of linear association</td><td>Establishes the <b>functional</b> dependency (predictive equation)</td></tr>
-              <tr><td>Symmetry</td><td>Symmetric: r<sub>xy</sub> = r<sub>yx</sub></td><td>Asymmetric: b<sub>yx</sub> ≠ b<sub>xy</sub></td></tr>
-              <tr><td>Units</td><td>Unit-less, bounded in [−1, +1]</td><td>Slope carries units of Y/X (unbounded)</td></tr>
+              <tr><td>Purpose</td><td>Shows <b>strength</b> and direction of linear link</td><td>Builds a <b>predictive</b> equation Y = a + bX</td></tr>
+              <tr><td>Symmetry</td><td>Same both ways: r<sub>xy</sub> = r<sub>yx</sub></td><td>Two different slopes: b<sub>yx</sub> ≠ b<sub>xy</sub></td></tr>
+              <tr><td>Units</td><td>No units, sits in [−1, +1]</td><td>Slope has units of Y per X (no fixed range)</td></tr>
             </tbody>
           </table>
         </div>
@@ -2009,7 +2010,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
     <div class="qcard predicted">
       <div class="qbody"><b>(h) What is a platykurtic distribution? State its β₂ (kurtosis) value.</b></div>
       <div class="ans">
-        A <mark>platykurtic distribution</mark> has a flatter peak and lighter tails than a normal distribution. Its kurtosis value satisfies <mark><b>β₂ &lt; 3</b></mark>.
+        A <mark>platykurtic distribution</mark> has a flat peak and thin tails — flatter than the normal curve. Its kurtosis is <mark><b>β₂ &lt; 3</b></mark>. Example: spread of daily Sensex returns in a calm month.
       </div>
     </div>
 
@@ -2026,7 +2027,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
     <div class="qcard predicted">
       <div class="qbody"><b>(j) Write down the MGF of Poisson distribution.</b></div>
       <div class="ans">
-        The <mark>MGF</mark> is <mark>M_X(t) = exp( λ · (e^t − 1) )</mark> where λ is the parameter (mean rate) of the <mark>Poisson</mark> distribution. (For <mark>binomial</mark>: M_X(t) = (q + p·e^t)^n.)
+        The <mark>MGF</mark> is <mark>M_X(t) = exp( λ · (e^t − 1) )</mark>, where λ is the mean rate of the <mark>Poisson</mark>. For comparison, the <mark>binomial</mark> MGF is M_X(t) = (q + p·e^t)^n.
       </div>
     </div>
 
@@ -2048,12 +2049,12 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
       </div>
       <div class="ans">
         <h5>(a) Binomial — Mean, Variance, Mode</h5>
-        <p>The <mark>Binomial distribution</mark> models the count of "successes" in n independent <mark>Bernoulli trials</mark>, each with probability p of success and q = 1 − p of failure. Writing X ~ B(n, p):</p>
+        <p>The <mark>Binomial distribution</mark> counts "successes" in n independent <mark>Bernoulli trials</mark>. Each trial has success chance p and failure chance q = 1 − p. Think: n IPL matches, each with win-chance p. Write X ~ B(n, p):</p>
         <ul>
           <li><b>pmf:</b> P(X = k) = C(n, k) · p<sup>k</sup> · q<sup>n−k</sup>, k = 0, 1, …, n.</li>
-          <li><b>Support:</b> X ∈ {0, 1, …, n} — discrete and finite. <b><mark>Mean = np</mark></b>, <b><mark>Variance = npq</mark></b>.</li>
-          <li><b>Sum of <mark>Bernoulli trials</mark>:</b> X = Σ<sub>i=1</sub><sup>n</sup> X<sub>i</sub> where each X<sub>i</sub> ~ Bernoulli(p); this representation gives the quickest derivation of E and Var by linearity.</li>
-          <li><b>Closure under addition:</b> If X ~ B(n<sub>1</sub>, p) and Y ~ B(n<sub>2</sub>, p) are independent, X + Y ~ B(n<sub>1</sub> + n<sub>2</sub>, p).</li>
+          <li><b>Support:</b> X is in {0, 1, …, n} — discrete and finite. <b><mark>Mean = np</mark></b>, <b><mark>Variance = npq</mark></b>.</li>
+          <li><b>Sum of <mark>Bernoulli trials</mark>:</b> X = Σ<sub>i=1</sub><sup>n</sup> X<sub>i</sub>, each X<sub>i</sub> ~ Bernoulli(p). This view gives the fastest way to find E and Var.</li>
+          <li><b>Adds nicely:</b> If X ~ B(n<sub>1</sub>, p) and Y ~ B(n<sub>2</sub>, p) are independent, X + Y ~ B(n<sub>1</sub> + n<sub>2</sub>, p).</li>
           <li><b><mark>MGF</mark>:</b> <mark>M<sub>X</sub>(t) = (q + p·e<sup>t</sup>)<sup>n</sup></mark>.</li>
         </ul>
 
@@ -2103,7 +2104,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         </div>
 
         <h5>(b) MGF Derivations</h5>
-        <p>The <mark>moment generating</mark> function (<mark>MGF</mark>) M<sub>X</sub>(t) = E[e<sup>tX</sup>] uniquely determines the distribution (when it exists in an open neighbourhood of 0) and produces every moment via M<sub>X</sub><sup>(r)</sup>(0) = E(X<sup>r</sup>). We derive it twice: once for the given Exponential pdf, once for the Binomial (so the student has both the continuous-integral pattern and the discrete-sum pattern to copy in the exam).</p>
+        <p>The <mark>moment generating</mark> function (<mark>MGF</mark>) is M<sub>X</sub>(t) = E[e<sup>tX</sup>]. It fixes the full distribution and gives every moment by the rule M<sub>X</sub><sup>(r)</sup>(0) = E(X<sup>r</sup>). We work it out twice: once for the given Exponential pdf (continuous integral), once for the Binomial (discrete sum). Copy whichever pattern the exam asks.</p>
 
         <p><b>Part (b)(i) — MGF of f(x) = 2e<sup>−2x</sup>, x ≥ 0  (Exponential with λ = 2).</b></p>
         <div class="steps">
@@ -2165,17 +2166,17 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         <div class="box warn">
           <b>Pitfalls:</b>
           <ul style="margin:6px 0 0 18px;">
-            <li>In MGF integration, missing the convergence condition <b>t &lt; λ</b> (here t &lt; 2) loses marks. Examiner explicitly checks for it.</li>
-            <li>For Mode, ⌊(n + 1)p⌋ is the floor — writing (n + 1)p when (n + 1)p is fractional is wrong (e.g. n = 9, p = 0.4 ⇒ Mode = ⌊4⌋ = 4, not 4.0 stated loosely).</li>
-            <li>Confusing E[X(X − 1)] with E(X<sup>2</sup>) is the classic trap. Always recover E(X<sup>2</sup>) = E[X(X − 1)] + E(X) before subtracting [E(X)]<sup>2</sup>.</li>
+            <li>In MGF integration, missing the rule <b>t &lt; λ</b> (here t &lt; 2) loses marks. The examiner checks for it.</li>
+            <li>For Mode, ⌊(n + 1)p⌋ is the floor — writing (n + 1)p when it is a fraction is wrong. Example: n = 9, p = 0.4 gives Mode = ⌊4⌋ = 4, not 4.0 loose.</li>
+            <li>Mixing up E[X(X − 1)] with E(X<sup>2</sup>) is the classic trap. Always get E(X<sup>2</sup>) = E[X(X − 1)] + E(X) before subtracting [E(X)]<sup>2</sup>.</li>
           </ul>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>Binomial powers A/B-test significance calculators (Optimizely, Google Optimize, VWO), spam classifiers (k of n vocabulary words match), and acceptance-sampling tables in manufacturing QC. The Exponential MGF underlies Poisson-process queueing (M/M/1 call-centre and web-server response models), reliability "bathtub-curve" mid-life predictions, and the rate parameter in survival regression. The MGF technique itself is the standard route to prove the Central Limit Theorem and to derive sums of independent random variables.</p>
+        <p>Binomial drives A/B-test calculators, spam filters (k of n words match), and quality-control sampling tables. The Exponential MGF runs Poisson-process queue models (M/M/1 call centres, web servers), bathtub-curve reliability charts, and survival-regression rates. The MGF trick itself is the main route to prove the Central Limit Theorem and to find sums of independent random variables.</p>
 
         <h5>Conclusion</h5>
-        <p>For X ~ B(n, p): Mean = np, Var = npq, Mode = ⌊(n + 1)p⌋. For the given Exponential pdf f(x) = 2e<sup>−2x</sup>: M<sub>X</sub>(t) = 2/(2 − t) for t &lt; 2, yielding E(X) = ½ and Var(X) = ¼ via the first two derivatives at 0. The MGF method generalises uniformly to every distribution in the comparison table and is the preferred tool whenever moments of any order are required.</p>
+        <p>For X ~ B(n, p): Mean = np, Var = npq, Mode = ⌊(n + 1)p⌋. For the given Exponential pdf f(x) = 2e<sup>−2x</sup>: M<sub>X</sub>(t) = 2/(2 − t) for t &lt; 2. Then E(X) = ½ and Var(X) = ¼ from the first two derivatives at 0. The MGF method works for every standard distribution. Use it whenever you need any moment.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
@@ -2215,13 +2216,13 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
       </div>
       <div class="ans">
         <h5>(a) Normal Distribution — Z-table lookups</h5>
-        <p>The Normal distribution N(μ, σ<sup>2</sup>) is the bell-shaped continuous law with pdf f(x) = (1/σ√(2π)) · exp[−(x − μ)<sup>2</sup>/(2σ<sup>2</sup>)]. Key properties used in every Z-problem:</p>
+        <p>The Normal distribution N(μ, σ<sup>2</sup>) is the bell curve. Its pdf is f(x) = (1/σ√(2π)) · exp[−(x − μ)<sup>2</sup>/(2σ<sup>2</sup>)]. Think of student heights or exam marks — they cluster around a mean and taper on both sides. Key rules for every Z-problem:</p>
         <ul>
-          <li><b>Standardisation:</b> <mark>Z = (X−μ)/σ</mark> ~ N(0, 1); every probability statement P(X ≤ a) is converted into P(Z ≤ z) and looked up via the <mark>Φ-table</mark>.</li>
-          <li><b>Symmetry of Z about 0:</b> Φ(−z) = 1 − Φ(z); negative-z values are never tabulated, only computed via this rule.</li>
-          <li><b>Tail / interval rules:</b> P(X &gt; a) = 1 − Φ(z); P(a &lt; X &lt; b) = Φ(z<sub>b</sub>) − Φ(z<sub>a</sub>).</li>
-          <li><b>Empirical <mark>68-95-99.7</mark> rule:</b> P(|X − μ| ≤ σ) ≈ 0.6827, ≤ 2σ ≈ 0.9545, ≤ 3σ ≈ 0.9973 — useful sanity-check for Z values.</li>
-          <li><b>Linearity:</b> aX + b ~ N(aμ + b, a<sup>2</sup>σ<sup>2</sup>); sum of independent Normals is Normal.</li>
+          <li><b>Standardise:</b> <mark>Z = (X−μ)/σ</mark> ~ N(0, 1). Convert P(X ≤ a) into P(Z ≤ z) and look up the <mark>Φ-table</mark>.</li>
+          <li><b>Symmetry around 0:</b> Φ(−z) = 1 − Φ(z). Negative z is never in the table; use this rule.</li>
+          <li><b>Tail and range rules:</b> P(X &gt; a) = 1 − Φ(z); P(a &lt; X &lt; b) = Φ(z<sub>b</sub>) − Φ(z<sub>a</sub>).</li>
+          <li><b><mark>68-95-99.7</mark> rule:</b> chance of staying within σ ≈ 68%, within 2σ ≈ 95%, within 3σ ≈ 99.7%. Quick sanity check.</li>
+          <li><b>Linear shift:</b> aX + b ~ N(aμ + b, a<sup>2</sup>σ<sup>2</sup>). Sum of independent Normals is also Normal.</li>
         </ul>
         <p>For this problem μ = 120, σ = 40, so Z = (X − 120) / 40.</p>
 
@@ -2274,7 +2275,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         </div>
 
         <h5>(b) Poisson Fitting</h5>
-        <p>The <mark>Poisson</mark> distribution X ~ Poisson(λ) with P(X = k) = e<sup>−λ</sup> λ<sup>k</sup>/k! is the limit of B(n, p) when n → ∞, p → 0, np → λ. Its defining feature is <mark>E(X) = Var(X) = λ</mark>, so any frequency dataset whose sample mean ≈ sample variance is a candidate for Poisson modelling. We fit the distribution by Method of Moments: equate sample mean to <mark>λ̂</mark>.</p>
+        <p>The <mark>Poisson</mark> X ~ Poisson(λ) has P(X = k) = e<sup>−λ</sup> λ<sup>k</sup>/k!. It is the limit of B(n, p) when n is large, p is small, and np = λ. Its key sign is <mark>E(X) = Var(X) = λ</mark>. So any data where the sample mean ≈ sample variance is a good Poisson candidate. Example: number of road accidents per day, calls per hour, defects per chip. We fit by Method of Moments: set sample mean = <mark>λ̂</mark>.</p>
         <p>Total observations N = Σf<sub>i</sub> = 122 + 60 + 15 + 2 + 1 = 200.</p>
         <div class="steps">
           <div class="step k">
@@ -2335,18 +2336,18 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         <div class="box warn">
           <b>Pitfalls:</b>
           <ul style="margin:6px 0 0 18px;">
-            <li>For Φ(−z) always use the symmetry Φ(−z) = 1 − Φ(z). Misreading the table as Φ(−0.5) = 0.6915 (the value for +0.5) is the single most common Z-problem error.</li>
-            <li>In Poisson fitting, students compute the wrong λ if they use Σx/n (number of distinct x values) instead of Σf·x / Σf (sample mean weighted by frequency).</li>
-            <li>Chi-square needs T<sub>i</sub> ≥ 5 in every cell — failing to pool the tail (T<sub>3</sub> = 2.53, T<sub>4</sub> = 0.32) inflates χ<sup>2</sup> artificially.</li>
-            <li>Degrees-of-freedom: remember to subtract 1 extra for the estimated parameter λ — using d.f. = k − 1 instead of k − 2 is a frequent slip.</li>
+            <li>For Φ(−z) always use symmetry: Φ(−z) = 1 − Φ(z). Reading Φ(−0.5) as 0.6915 (the value for +0.5) is the most common Z-problem error.</li>
+            <li>For Poisson fitting, the wrong λ comes from using Σx/n (count of distinct x) instead of Σf·x / Σf (mean weighted by frequency).</li>
+            <li>Chi-square needs T<sub>i</sub> ≥ 5 in every cell. Skipping the pool step (T<sub>3</sub> = 2.53, T<sub>4</sub> = 0.32) inflates χ<sup>2</sup>.</li>
+            <li>Degrees of freedom: subtract one extra for the estimated λ. Using d.f. = k − 1 instead of k − 2 is a frequent slip.</li>
           </ul>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>The Normal distribution underwrites Six-Sigma quality control (process capability Cp, Cpk), Value-at-Risk (VaR) in finance, IQ standardisation, manufacturing tolerance bands, and the assumption baseline for every t-test and ANOVA. The Poisson distribution models call-centre arrival counts, web-server requests per second, packet arrivals on a router, rare-event insurance claims, defects per silicon wafer, and goals per football match. Both distributions are the default inference workhorses in modern data-science pipelines.</p>
+        <p>The Normal curve drives Six-Sigma quality control (Cp, Cpk), Value-at-Risk in finance, IQ scores, tolerance bands in manufacturing, and is the base for every t-test and ANOVA. Poisson models call-centre arrivals, web-server hits per second, router packets, insurance claims, wafer defects, and football goals. Both are default tools in modern data-science work.</p>
 
         <h5>Conclusion</h5>
-        <p>Z-standardisation converts any Normal probability to a Φ-table lookup; the symmetry rule Φ(−z) = 1 − Φ(z) handles the negative-z half-plane that tables omit. Poisson fitting reduces to one-parameter Method-of-Moments (λ̂ = x̄), and the resulting theoretical frequencies match the observed accident data with χ<sup>2</sup><sub>calc</sub> = 0.0206 ≪ critical value, so the Poisson assumption is statistically justified.</p>
+        <p>Z-standardisation turns any Normal probability into a Φ-table lookup. The symmetry rule Φ(−z) = 1 − Φ(z) covers the negative side that tables skip. Poisson fitting needs just one number (λ̂ = x̄). The fitted frequencies match the accident data with χ<sup>2</sup><sub>calc</sub> = 0.0206, far below the critical value. So the Poisson fit is safe.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
@@ -2390,7 +2391,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
       </div>
       <div class="ans">
         <h5>(a) Joint Discrete — Marginals, Cov, ρ</h5>
-        <p>For a bivariate discrete random vector (X, Y) the <mark>marginal</mark> of X is obtained by summing the <mark>joint distribution</mark> pmf across all Y values: P(X = x) = Σ<sub>y</sub> P(X = x, Y = y) (row sums in the joint table). <mark>Cov(X,Y)</mark> = E(XY) − E(X)E(Y) measures linear co-movement, and the <mark>correlation ρ</mark>(X, Y) = Cov / (σ<sub>X</sub> σ<sub>Y</sub>) normalises it into [−1, +1]. <mark>Independence</mark> ⇒ Cov = 0, but Cov = 0 does <i>not</i> imply independence (a key examiner trap).</p>
+        <p>For a pair (X, Y) of discrete RVs, the <mark>marginal</mark> of X is the row sum of the <mark>joint distribution</mark>: P(X = x) = Σ<sub>y</sub> P(X = x, Y = y). <mark>Cov(X,Y)</mark> = E(XY) − E(X)E(Y) shows <mark>how they vary together</mark>. The <mark>correlation ρ</mark>(X, Y) = Cov / (σ<sub>X</sub> σ<sub>Y</sub>) scales it into [−1, +1]. <mark>Independence</mark> gives Cov = 0, but Cov = 0 does <i>not</i> mean independent — a key trap.</p>
 
         <figure class="diagram-fig">
           <div style="display:grid;grid-template-columns:60px repeat(2,1fr);gap:4px;background:var(--paper-deep);padding:10px;border:1px solid var(--rule);border-radius:8px;">
@@ -2443,7 +2444,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         </div>
 
         <h5>(b) Joint Continuous — k, marginals, conditional, Cov</h5>
-        <p>For a bivariate continuous distribution the <mark>marginal PDF</mark> f<sub>X</sub>(x) integrates the joint density across the full range of Y (and vice-versa). The <mark>conditional PDF</mark> is f(y | x) = f(x, y) / f<sub>X</sub>(x), defined wherever f<sub>X</sub>(x) &gt; 0. The <mark>covariance</mark> integral is Cov(X, Y) = ∫∫ (x − μ<sub>X</sub>)(y − μ<sub>Y</sub>) f(x, y) dx dy = E(XY) − E(X)E(Y).</p>
+        <p>For a continuous pair (X, Y), the <mark>marginal PDF</mark> f<sub>X</sub>(x) is the joint density integrated over all y (and the other way for Y). The <mark>conditional PDF</mark> is f(y | x) = f(x, y) / f<sub>X</sub>(x), valid where f<sub>X</sub>(x) &gt; 0. The <mark>covariance</mark> as an integral is Cov(X, Y) = ∫∫ (x − μ<sub>X</sub>)(y − μ<sub>Y</sub>) f(x, y) dx dy = E(XY) − E(X)E(Y).</p>
         <div class="steps">
           <div class="step k">
             <b>(i) Find k (normalisation):</b>
@@ -2504,17 +2505,17 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         <div class="box warn">
           <b>Pitfalls:</b>
           <ul style="margin:6px 0 0 18px;">
-            <li>ρ ≈ 0.098 is "weak positive" — marking it "strongly correlated" loses marks. Strength scale: |ρ| &lt; 0.3 weak; 0.3 ≤ |ρ| &lt; 0.7 moderate; |ρ| ≥ 0.7 strong.</li>
-            <li>For continuous marginals, integrating x out of f(x, y) gives f<sub>Y</sub>(y), not f<sub>X</sub>(x) — sign of which axis you integrate over is the most common slip.</li>
-            <li>Cov = 0 ⇏ independence; verify f(x, y) = f<sub>X</sub>(x)·f<sub>Y</sub>(y) before claiming independence.</li>
+            <li>ρ ≈ 0.098 is "weak positive". Calling it "strongly correlated" loses marks. Strength scale: |ρ| &lt; 0.3 weak; 0.3 ≤ |ρ| &lt; 0.7 moderate; |ρ| ≥ 0.7 strong.</li>
+            <li>For continuous marginals, integrating x out of f(x, y) gives f<sub>Y</sub>(y), not f<sub>X</sub>(x). Picking the wrong axis is the top slip.</li>
+            <li>Cov = 0 does not mean independent. Check f(x, y) = f<sub>X</sub>(x)·f<sub>Y</sub>(y) before claiming independence.</li>
           </ul>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>Joint distributions underlie machine-learning feature-correlation matrices (every <code>pandas.DataFrame.corr()</code> call produces a sample covariance matrix), Gaussian copulas in quantitative-finance credit-risk models, recommendation systems where (user, item) ratings form a joint sample, climate models with paired temperature/precipitation fields, and multivariate hypothesis tests (Hotelling's T<sup>2</sup>, MANOVA). The Cov-ρ pair is the foundational object: PCA, factor analysis, portfolio optimisation, and Mahalanobis distance all read from the same covariance matrix.</p>
+        <p>Joint distributions sit under ML feature-correlation matrices (every <code>pandas.DataFrame.corr()</code> call builds one). They power Gaussian copulas in credit risk, recommendation systems where (user, item) ratings form joint data, climate models with paired temperature and rainfall fields, and multivariate tests like Hotelling's T<sup>2</sup>. The Cov-ρ pair is the base for PCA, factor analysis, and portfolio optimisation.</p>
 
         <h5>Conclusion</h5>
-        <p>Marginals collapse one variable by row/column summation (discrete) or single-axis integration (continuous); conditionals re-normalise the joint by the corresponding marginal. The discrete table yields a very weak positive correlation ρ ≈ 0.098 driven mostly by the (X = 3, Y = 2) cell, while the continuous f(x, y) = x + y produces an almost-zero negative covariance −1/144. Both cases confirm that uncorrelated does not entail independent and that the magnitude of ρ, not its raw sign, carries the strength signal.</p>
+        <p>Marginals collapse one variable: row or column sums for discrete, one-axis integral for continuous. Conditionals re-scale the joint by the marginal. The discrete table gives a weak positive ρ ≈ 0.098, driven mostly by the (X = 3, Y = 2) cell. The continuous f(x, y) = x + y gives an almost-zero negative covariance −1/144. Both cases show: uncorrelated does not mean independent, and the size of ρ (not just its sign) shows strength.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
@@ -2556,15 +2557,15 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
       </div>
       <div class="ans">
         <h5>(a) Karl Pearson Correlation Coefficient</h5>
-        <p>The <mark>Karl Pearson r</mark> coefficient measures the strength and direction of <i>linear</i> association between two paired variables, fitted via the <mark>method of least squares</mark>. Key properties:</p>
+        <p>The <mark>Karl Pearson r</mark> shows the strength and direction of the <i>linear</i> link between two paired variables, fitted using the <mark>method of least squares</mark>. Think cricket batting averages vs strike rates. Key properties:</p>
         <ul>
-          <li><b>Range:</b> −1 ≤ r ≤ +1; r = ±1 ⇔ all (x<sub>i</sub>, y<sub>i</sub>) lie exactly on a straight line.</li>
-          <li><b>Unit-free:</b> r is invariant under change of origin and positive scale: r(aX + b, cY + d) = sign(ac) · r(X, Y).</li>
-          <li><b>Symmetry:</b> r<sub>xy</sub> = r<sub>yx</sub> (only one number, unlike regression).</li>
+          <li><b>Range:</b> −1 ≤ r ≤ +1. r = ±1 means all (x<sub>i</sub>, y<sub>i</sub>) sit exactly on a straight line.</li>
+          <li><b>No units:</b> r does not change if you shift or scale the data: r(aX + b, cY + d) = sign(ac) · r(X, Y).</li>
+          <li><b>Symmetry:</b> r<sub>xy</sub> = r<sub>yx</sub>. Only one number, unlike regression.</li>
           <li><b>Sign:</b> matches the sign of Cov(X, Y) and of both regression slopes.</li>
-          <li><b>Limitation:</b> measures only linear association; r ≈ 0 does not exclude strong non-linear patterns (e.g. y = x<sup>2</sup> on a symmetric x-range).</li>
+          <li><b>Limit:</b> catches only linear links. r ≈ 0 does not rule out strong curves like y = x<sup>2</sup> on a symmetric x-range.</li>
         </ul>
-        <p>Two equivalent computational forms:</p>
+        <p>Two equivalent formulas:</p>
         <p style="margin-left:14px;">(deviation form) r = Σ(x − x̄)(y − ȳ) / √[Σ(x − x̄)<sup>2</sup> · Σ(y − ȳ)<sup>2</sup>]<br>
         (raw-score form) r = [n·ΣXY − ΣX·ΣY] / √{[n·ΣX<sup>2</sup> − (ΣX)<sup>2</sup>][n·ΣY<sup>2</sup> − (ΣY)<sup>2</sup>]}</p>
 
@@ -2696,18 +2697,18 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         <div class="box warn">
           <b>Pitfalls:</b>
           <ul style="margin:6px 0 0 18px;">
-            <li>The two regression lines are <i>different</i> unless r = ±1. Writing one equation and treating it as the other loses half the marks.</li>
-            <li>Both regression lines must intersect at (X̄, Ȳ) — this is the cross-check examiners look for.</li>
-            <li>Forgetting to take the square root when reporting r from b<sub>yx</sub>·b<sub>xy</sub> reports r<sup>2</sup> instead of r — a 2-mark error.</li>
-            <li>Sign of r must match the common sign of both b coefficients; if one b is positive and the other negative, the arithmetic has an error.</li>
+            <li>The two regression lines are <i>different</i> unless r = ±1. Writing one and reusing it as the other loses half the marks.</li>
+            <li>Both regression lines must cross at (X̄, Ȳ). This is the cross-check examiners look for.</li>
+            <li>Forgetting the square root when finding r from b<sub>yx</sub>·b<sub>xy</sub> gives r<sup>2</sup> instead of r. That is a 2-mark error.</li>
+            <li>The sign of r must match the sign of both b values. If one b is +ve and the other −ve, you have a math error.</li>
           </ul>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>The Karl Pearson coefficient is the default association metric in correlation heatmaps used for ML feature selection, finance asset-return diversification, and gene-expression studies. The two regression lines are the simplest case of the normal-equations machinery: every linear-model library (<code>sklearn.linear_model.LinearRegression</code>, R's <code>lm()</code>, Stata's <code>regress</code>) solves the matrix generalisation X<sup>T</sup>Xβ = X<sup>T</sup>y of exactly these equations. The identity r<sup>2</sup> = b<sub>yx</sub>·b<sub>xy</sub> generalises to the coefficient of determination R<sup>2</sup> in multiple regression.</p>
+        <p>Karl Pearson r is the default link metric in correlation heatmaps for ML feature picking, finance return diversification, and gene studies. The two regression lines are the simplest case of normal-equation math. Every linear model library (<code>sklearn.linear_model.LinearRegression</code>, R's <code>lm()</code>, Stata's <code>regress</code>) solves the matrix form X<sup>T</sup>Xβ = X<sup>T</sup>y of these same equations. The rule r<sup>2</sup> = b<sub>yx</sub>·b<sub>xy</sub> grows into the R<sup>2</sup> score in multiple regression.</p>
 
         <h5>Conclusion</h5>
-        <p>The computed r ≈ 0.944 confirms a strong positive linear relationship. Both regression lines pass through (X̄, Ȳ) = (28, 28.4) and their slopes multiply to r<sup>2</sup> ≈ 0.8903, recovering r via square root. The technique scales unchanged to multivariate regression via matrix least squares, a single conceptual jump from this 2-variable case.</p>
+        <p>The computed r ≈ 0.944 shows a strong positive linear link. Both regression lines pass through (X̄, Ȳ) = (28, 28.4). Their slopes multiply to r<sup>2</sup> ≈ 0.8903, recovering r via square root. The same method scales to multi-variable regression via matrix least squares — one small jump from this 2-variable case.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
@@ -2746,7 +2747,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
       </div>
       <div class="ans">
         <h5>(a) Parabola Fit <mark>Y = a + bX + cX²</mark></h5>
-        <p>The <mark>method of least squares</mark> chooses (a, b, c) that minimise S = Σ(Y<sub>i</sub> − a − bX<sub>i</sub> − cX<sub>i</sub><sup>2</sup>)<sup>2</sup>. Setting ∂S/∂a = ∂S/∂b = ∂S/∂c = 0 yields the three <mark>normal equations</mark> below. The same pattern generalises: an n-degree polynomial gives n + 1 normal equations symmetric in ΣX<sup>k</sup>.</p>
+        <p>The <mark>method of least squares</mark> picks (a, b, c) that make S = Σ(Y<sub>i</sub> − a − bX<sub>i</sub> − cX<sub>i</sub><sup>2</sup>)<sup>2</sup> as small as possible. Setting ∂S/∂a = ∂S/∂b = ∂S/∂c = 0 gives the three <mark>normal equations</mark> below. The same pattern grows: an n-degree polynomial gives n + 1 normal equations using sums of X<sup>k</sup>.</p>
 
         <figure class="diagram-fig">
           <div style="position:relative;height:180px;background:var(--paper-deep);border:1px solid var(--rule);border-radius:8px;padding:8px;">
@@ -2816,7 +2817,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         </div>
 
         <h5>(b) <mark>Bayes' theorem</mark> — Disease Test</h5>
-        <p><mark>Bayes' theorem</mark> converts a forward (model → data) probability into a backward (data → model) inference: <mark>posterior</mark> P(D | +) = P(+ | D) P(D) / P(+), where the <mark>prior</mark> is P(D) and P(+) is reconstructed from total probability over the partition {D, D′}. The two diagnostic-test inputs are <mark>sensitivity</mark> P(+ | D) and <mark>specificity</mark> P(− | D′); the false-positive rate is 1 − specificity.</p>
+        <p><mark>Bayes' theorem</mark> flips a forward chance (model to data) into a backward one (data to model): <mark>posterior</mark> P(D | +) = P(+ | D) P(D) / P(+). The <mark>prior</mark> is P(D), and P(+) comes from the total probability rule over {D, D′}. The two test inputs are <mark>sensitivity</mark> P(+ | D) and <mark>specificity</mark> P(− | D′). The false-positive rate is 1 − specificity.</p>
         <div class="steps">
           <div class="step k">
             <b>State Bayes' formula:</b>
@@ -2852,18 +2853,18 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         <div class="box warn">
           <b>Pitfalls:</b>
           <ul style="margin:6px 0 0 18px;">
-            <li>Students often mis-state P(+ | D′) as the specificity 0.95 instead of (1 − specificity) = 0.05. That sign error wrecks the posterior.</li>
-            <li>Forgetting to expand P(+) via total probability and dividing by P(+ | D) instead is the second most common error — it yields the prior unchanged.</li>
-            <li>In the parabola fit, students sometimes round c then propagate the rounded c into the equation for b, accumulating error. Keep c, b, a in symbolic form until the last step.</li>
-            <li>Counting (X, Y) pairs into Σ but forgetting Σ-table needs ΣX<sup>3</sup>, ΣX<sup>4</sup>, ΣX<sup>2</sup>Y (six sums, not three) is a 3-mark omission.</li>
+            <li>Students often write P(+ | D′) as the specificity 0.95 instead of (1 − specificity) = 0.05. That sign error wrecks the posterior.</li>
+            <li>Skipping the total probability step for P(+) and dividing by P(+ | D) instead is the second top error. It leaves the prior unchanged.</li>
+            <li>In the parabola fit, rounding c early then using it for b stacks up error. Keep c, b, a as symbols until the last step.</li>
+            <li>The Σ table needs six sums for a parabola: ΣX, ΣX<sup>2</sup>, ΣX<sup>3</sup>, ΣX<sup>4</sup>, ΣXY, ΣX<sup>2</sup>Y. Forgetting the last three costs 3 marks.</li>
           </ul>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>Least-squares curve fitting is the engine of every supervised ML model: gradient descent solves the same normal equations at scale (X<sup>T</sup>X β = X<sup>T</sup>y), and polynomial regression is the direct generalisation of the parabola fit shown here. Bayes' theorem drives Naïve Bayes spam filters, medical-test interpretation in epidemiology, A/B-test posterior updates in growth experimentation, and the foundation of Bayesian deep learning, MCMC, and variational inference. The base-rate fallacy (posterior ≈ 17% despite a 99%-accurate test) is the canonical example cited in clinical-decision-support and screening-policy literature.</p>
+        <p>Least-squares curve fitting is the engine of every supervised ML model. Gradient descent solves the same normal equations at scale (X<sup>T</sup>X β = X<sup>T</sup>y). Polynomial regression is the direct grown-up form of the parabola fit. Bayes' theorem drives Naïve Bayes spam filters, medical-test reading, A/B-test posterior updates, and the base for Bayesian deep learning. The base-rate trap (posterior ≈ 17% even with a 99%-accurate test) is the classic example cited in clinical-decision and screening policy.</p>
 
         <h5>Conclusion</h5>
-        <p>Parabola fit Y = 1.42 − 1.07X + 0.55X<sup>2</sup> minimises Σ(Y − Ŷ)<sup>2</sup>; residuals sum to zero as required by least squares. Bayes gives P(D | +) ≈ 16.67%: even a 99%-accurate test on a 1%-prevalence disease yields mostly false positives, because the false-positive count 0.05 × 0.99 = 0.0495 swamps the true-positive count 0.99 × 0.01 = 0.0099. Both results showcase how disciplined arithmetic outperforms intuition.</p>
+        <p>Parabola fit Y = 1.42 − 1.07X + 0.55X<sup>2</sup> makes Σ(Y − Ŷ)<sup>2</sup> smallest. Residuals sum to zero, as least squares needs. Bayes gives P(D | +) ≈ 16.67%. Even a 99%-accurate test on a 1%-prevalence disease gives mostly false positives. The false-positive count 0.05 × 0.99 = 0.0495 swamps the true-positive count 0.99 × 0.01 = 0.0099. Both results show how clean arithmetic beats gut feeling.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
@@ -2905,13 +2906,13 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
       </div>
       <div class="ans">
         <h5>(a) <mark>Spearman rank correlation</mark></h5>
-        <p><mark>Spearman rank correlation</mark> <mark>ρ<sub>s</sub></mark> is the non-parametric <mark>rank-based</mark> Karl Pearson coefficient computed on the ranks of X and Y rather than their raw values. Properties:</p>
+        <p><mark>Spearman rank correlation</mark> <mark>ρ<sub>s</sub></mark> is the <mark>rank-based</mark> Karl Pearson r, computed on the ranks of X and Y instead of raw values. Useful when you only have positions (1st, 2nd, 3rd) — like judges scoring a dance contest. Properties:</p>
         <ul>
           <li><b>Formula (no ties):</b> ρ<sub>s</sub> = 1 − 6·ΣD<sup>2</sup> / [n(n<sup>2</sup> − 1)], where D = R<sub>X</sub> − R<sub>Y</sub>.</li>
-          <li><b>Range:</b> −1 ≤ ρ<sub>s</sub> ≤ +1; ρ<sub>s</sub> = +1 ⇔ ranks are identical, ρ<sub>s</sub> = −1 ⇔ exactly reversed.</li>
-          <li><b>Captures <mark>monotone</mark> (not just linear) relationships:</b> handles "y rises faster than x" curves where Pearson r underestimates.</li>
-          <li><b>Robust to outliers:</b> only relative order matters; an extreme value occupies one rank slot.</li>
-          <li><b>Tie correction:</b> when ranks tie, replace each tied set with the average of their positions and add the correction Σ(t<sub>j</sub><sup>3</sup> − t<sub>j</sub>)/12 to ΣD<sup>2</sup>.</li>
+          <li><b>Range:</b> −1 ≤ ρ<sub>s</sub> ≤ +1. ρ<sub>s</sub> = +1 means ranks are the same; ρ<sub>s</sub> = −1 means ranks are flipped.</li>
+          <li><b>Catches <mark>monotone</mark> links (not just linear):</b> handles curves where y rises faster than x. Pearson r misses these.</li>
+          <li><b>Tough on outliers:</b> only order matters. An extreme value just takes one rank slot.</li>
+          <li><b>Tie fix:</b> when ranks tie, give the tied set the average of their positions. Add Σ(t<sub>j</sub><sup>3</sup> − t<sub>j</sub>)/12 to ΣD<sup>2</sup>.</li>
         </ul>
 
         <figure class="diagram-fig">
@@ -2990,7 +2991,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         </div>
 
         <h5>(b) Joint pdf — Region Probabilities</h5>
-        <p>For a joint pdf f(x, y), the probability of any measurable region R is P((X, Y) ∈ R) = ∫∫<sub>R</sub> f(x, y) dx dy. When f(x, y) factorises into g(x)·h(y) and the region is a Cartesian product [a, b] × [c, d], the double integral splits into a product of two single integrals: major shortcut. For non-rectangular regions (e.g. X + Y &lt; 1), the inner limits depend on the outer variable and must be derived from the boundary equation.</p>
+        <p>For a joint pdf f(x, y), the chance of any region R is P((X, Y) ∈ R) = ∫∫<sub>R</sub> f(x, y) dx dy. When f(x, y) = g(x)·h(y) and the region is a rectangle [a, b] × [c, d], the double integral splits into two single ones — a big shortcut. For non-rectangular regions like X + Y &lt; 1, the inner limit depends on the outer variable. Get it from the boundary line.</p>
         <div class="steps">
           <div class="step k">
             <b>Verify f(x, y) = 4xy is a valid pdf:</b>
@@ -3034,18 +3035,18 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
         <div class="box warn">
           <b>Pitfalls:</b>
           <ul style="margin:6px 0 0 18px;">
-            <li>For P(X + Y &lt; 1), forgetting that the upper Y-limit depends on x (i.e. integrating 0 → 1 instead of 0 → 1 − x) yields the wrong answer 1. Always sketch the region first.</li>
-            <li>Spearman ρ<sub>s</sub> requires that <b>both</b> R<sub>1</sub> and R<sub>2</sub> be valid permutations of 1, …, n — students sometimes leave the raw marks in one column and ranks in the other, producing nonsense.</li>
-            <li>The formula 1 − 6ΣD<sup>2</sup>/[n(n<sup>2</sup> − 1)] assumes no ties; with ties, use the tie-corrected version or compute Karl Pearson r directly on the average-ranks.</li>
-            <li>Don't confuse "rank correlation" with "ordinal correlation in general" — Spearman specifically measures monotone agreement of ranks.</li>
+            <li>For P(X + Y &lt; 1), forgetting that the upper Y-limit depends on x (using 0 → 1 instead of 0 → 1 − x) gives the wrong answer 1. Always sketch the region first.</li>
+            <li>Spearman ρ<sub>s</sub> needs <b>both</b> R<sub>1</sub> and R<sub>2</sub> to be ranks from 1 to n. Leaving raw marks in one column and ranks in the other gives nonsense.</li>
+            <li>The formula 1 − 6ΣD<sup>2</sup>/[n(n<sup>2</sup> − 1)] assumes no ties. With ties, use the tie-fix or run Karl Pearson r on the average-ranks.</li>
+            <li>"Rank correlation" is not the same as "any ordinal correlation". Spearman measures monotone agreement of ranks only.</li>
           </ul>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>Spearman's ρ<sub>s</sub> is the non-parametric rank correlation deployed in sports analytics (season-to-season player-ranking stability), Likert-scale survey analysis, judge-vs-judge inter-rater reliability, and feature ranking in monotone-but-non-linear ML pipelines. Joint-pdf region integration is the workhorse of Bayesian credible-region computation, Markov-chain Monte Carlo (MCMC) target evaluation, multivariate risk modelling (joint loss exceedance probabilities), and physics-of-failure reliability engineering where failure boundaries are defined by inequalities on multiple stress variables.</p>
+        <p>Spearman's ρ<sub>s</sub> is used in sports analytics (season-to-season player ranking), Likert-scale surveys, judge-vs-judge agreement, and feature ranking in ML pipelines where the link is monotone but not straight. Joint-pdf region integration is the workhorse of Bayesian credible regions, MCMC target evaluation, multi-variable risk models (joint loss limits), and failure engineering where failure boundaries are inequalities on multiple stress variables.</p>
 
         <h5>Conclusion</h5>
-        <p>Spearman ρ<sub>s</sub> = 0.9394 indicates the two judges agreed strongly on ranking (within ±1 in every pair); cross-verified by applying Karl Pearson r to the ranks themselves, both methods give 0.9394 to four decimal places. Joint-pdf integrals split into product form when the region is rectangular (P(X &lt; ½ ∩ Y &lt; ½) = 1/16) and require dependent limits when the region is triangular (P(X + Y &lt; 1) = 1/6). Sketching the integration region first prevents both limit errors and sign errors.</p>
+        <p>Spearman ρ<sub>s</sub> = 0.9394 shows the two judges agreed strongly on ranking (every pair off by just ±1). Cross-check via Karl Pearson r on the ranks: both methods give 0.9394 to four decimal places. Joint-pdf integrals split into product form for rectangle regions (P(X &lt; ½ ∩ Y &lt; ½) = 1/16). They need linked limits for triangle regions (P(X + Y &lt; 1) = 1/6). Sketch the region first to avoid both limit errors and sign errors.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
@@ -3069,6 +3070,28 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
     <div class="kicker">⚡ last-hour revision block · cards &amp; mnemonics</div>
     <h2>Cheat Sheet</h2>
     <p class="lede">All essential formulas, distributions, kurtosis bounds, and least-square equations condensed into a single high-density revision panel.</p>
+  </div>
+
+  <div class="cheat-section" style="margin-bottom:18px; padding:14px; border:1.5px solid var(--ink); border-radius:6px; background:#fffefb;">
+    <div class="cs-head" style="margin-bottom:10px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--crimson);">📚 Full Syllabus — One Glance (BCD-202-V · 4 Units)</div>
+    <div style="display:grid; grid-template-columns:1fr; gap:10px;">
+      <div style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">Unit I · Random Variables &amp; Distribution Functions</b>
+        <div style="font-size:13.5px; margin-top:4px;">Discrete &amp; continuous RVs · CDF F(x) = P(X ≤ x) · pmf/pdf · Uniform · <b>Binomial</b> (np, npq, MGF) · <b>Poisson</b> (mean = var = λ, recursion) · <b>Normal</b> N(μ, σ²) · Z = (X−μ)/σ · 68-95-99.7 rule · <b>Exponential</b> (memoryless) · <b>Geometric</b> (first success) · Bayes' theorem.</div>
+      </div>
+      <div style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">Unit II · Moments, MGF &amp; Two-Dim RVs</b>
+        <div style="font-size:13.5px; margin-top:4px;">Raw &amp; central moments (μ<sub>r</sub>′, μ<sub>r</sub>) · Mean, Variance, Skewness β<sub>1</sub>, Kurtosis β<sub>2</sub> · <b>MGF</b> M<sub>X</sub>(t) = E(e<sup>tX</sup>) · joint pmf/pdf · marginal &amp; conditional · <b>Cov(X,Y)</b> = E(XY) − E(X)E(Y) · correlation ρ = Cov/(σ<sub>X</sub>σ<sub>Y</sub>) · independence ⇒ Cov = 0 (not reverse).</div>
+      </div>
+      <div style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">Unit III · Descriptive Statistics</b>
+        <div style="font-size:13.5px; margin-top:4px;">Data classification (raw, grouped, frequency) · <b>Central tendency</b>: Mean, Median, Mode (Mode ≈ 3·Median − 2·Mean) · combined mean · <b>Dispersion</b>: range, MD, variance, SD, CV · <b>Skewness</b> (Pearson, Bowley) · <b>Kurtosis</b>: lepto β<sub>2</sub>&gt;3, meso = 3, platy &lt; 3.</div>
+      </div>
+      <div style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">Unit IV · Correlation &amp; Curve Fitting</b>
+        <div style="font-size:13.5px; margin-top:4px;"><b>Karl Pearson r</b> (raw-score formula) · <b>Spearman rank</b> ρ<sub>s</sub> = 1 − 6ΣD²/[n(n²−1)] · two <b>regression lines</b> Y on X, X on Y · b<sub>yx</sub> · b<sub>xy</sub> = r² · regression lines meet at (X̄, Ȳ) · <b>least-squares curve fitting</b>: straight line, parabola, exponential y = a·b<sup>x</sup>, power y = a·x<sup>b</sup>.</div>
+      </div>
+    </div>
   </div>
 
   <div class="toc" style="box-shadow: none; border-color: var(--gold); background: var(--gold-soft); margin-bottom: 24px;">
@@ -3122,6 +3145,195 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
   ∑x²y = a*∑x² + b*∑x³ + c*∑x⁴
     </pre>
   </div>
+
+  <!-- ===== Part-A 1.5M Quick-Fire Drill ===== -->
+  <div class="cheat-section" style="margin-top:24px; margin-bottom:18px; padding:14px; border:1.5px solid var(--ink); border-radius:6px; background:#fffefb;">
+    <div class="cs-head" style="margin-bottom:10px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--crimson);">🎯 Part-A 1.5M Quick-Fire Drill — 10 One-Line Hits</div>
+    <p style="font-size:13px; color:var(--muted); margin:0 0 12px 0;">Ten Part-A sub-questions, each answered in 2–4 lines. Memorise the structure; in the exam, copy the bullet and add one example.</p>
+    <div style="display:grid; grid-template-columns:1fr; gap:8px;">
+
+      <div class="cheat-card" style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">1. Define CDF &amp; state two properties.</b>
+        <div style="font-size:13.5px; margin-top:4px;"><b>CDF</b>: F(x) = P(X ≤ x) for all x ∈ ℝ. <b>Properties</b>: (i) <mark>0 ≤ F(x) ≤ 1</mark>; (ii) F is <mark>non-decreasing</mark>, right-continuous; (iii) F(−∞) = 0, F(+∞) = 1.</div>
+      </div>
+
+      <div class="cheat-card" style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">2. Mean &amp; variance of uniform U(a, b).</b>
+        <div style="font-size:13.5px; margin-top:4px;">pdf: f(x) = 1/(b−a) for a ≤ x ≤ b. <b>Mean</b> = <mark>(a+b)/2</mark>. <b>Variance</b> = <mark>(b−a)²/12</mark>. Constant pdf ⇒ rectangle of area 1.</div>
+      </div>
+
+      <div class="cheat-card" style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">3. If mean + var of B(n=5) = 4.8, find p.</b>
+        <div style="font-size:13.5px; margin-top:4px;">np + npq = 4.8 ⇒ 5p + 5pq = 4.8 ⇒ 5p(1 + q) = 4.8 ⇒ p(1 + 1 − p) = 0.96 ⇒ p(2 − p) = 0.96 ⇒ p² − 2p + 0.96 = 0 ⇒ <mark><b>p = 0.4</b></mark> (rejecting p = 1.6 &gt; 1). Hence q = 0.6.</div>
+      </div>
+
+      <div class="cheat-card" style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">4. Three properties of Normal distribution.</b>
+        <div style="font-size:13.5px; margin-top:4px;">(i) <mark>Symmetric, bell-shaped</mark> about mean μ; mean = median = mode; (ii) <mark>68-95-99.7</mark> within 1σ, 2σ, 3σ; (iii) Skewness = 0, Kurtosis β₂ = 3 (mesokurtic).</div>
+      </div>
+
+      <div class="cheat-card" style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">5. Define Poisson distribution + conditions.</b>
+        <div style="font-size:13.5px; margin-top:4px;"><b>P(X = k) = e<sup>−λ</sup> λ<sup>k</sup> / k!</b>, k = 0, 1, 2,… <b>Conditions</b>: (i) events <mark>independent</mark>; (ii) rate λ constant per unit interval; (iii) two events cannot occur simultaneously. <b>Mean = Var = λ</b>.</div>
+      </div>
+
+      <div class="cheat-card" style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">6. Find K for f(x) = Kx², 0 ≤ x ≤ 3.</b>
+        <div style="font-size:13.5px; margin-top:4px;">∫₀³ Kx² dx = 1 ⇒ K · [x³/3]₀³ = 1 ⇒ K · 9 = 1 ⇒ <mark><b>K = 1/9</b></mark>. Always use ∫ pdf = 1 over the support; solve for the constant.</div>
+      </div>
+
+      <div class="cheat-card" style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">7. Three properties of joint distribution function F(x, y).</b>
+        <div style="font-size:13.5px; margin-top:4px;">(i) <mark>0 ≤ F(x, y) ≤ 1</mark>; (ii) F(−∞, y) = F(x, −∞) = 0, F(+∞, +∞) = 1; (iii) <mark>non-decreasing</mark> in both x and y; (iv) F<sub>X</sub>(x) = F(x, +∞), F<sub>Y</sub>(y) = F(+∞, y) give marginals.</div>
+      </div>
+
+      <div class="cheat-card" style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">8. Marginal density from joint f(x, y).</b>
+        <div style="font-size:13.5px; margin-top:4px;"><b>Continuous</b>: f<sub>X</sub>(x) = ∫<sub>−∞</sub><sup>+∞</sup> f(x, y) dy; f<sub>Y</sub>(y) = ∫<sub>−∞</sub><sup>+∞</sup> f(x, y) dx. <b>Discrete</b>: p<sub>X</sub>(x<sub>i</sub>) = Σ<sub>j</sub> p(x<sub>i</sub>, y<sub>j</sub>); <mark>row sum = marginal of X, column sum = marginal of Y</mark>.</div>
+      </div>
+
+      <div class="cheat-card" style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">9. Merits &amp; demerits of Karl Pearson coefficient.</b>
+        <div style="font-size:13.5px; margin-top:4px;"><b>Merits</b>: <mark>direction + magnitude</mark> in one value; widely used; can be tested for significance. <b>Demerits</b>: assumes <mark>linear</mark> relationship + bivariate normal; sensitive to <mark>outliers</mark>; tedious without calculator; can be misleading if curvilinear.</div>
+      </div>
+
+      <div class="cheat-card" style="padding:10px 12px; border:1px solid var(--rule); border-left:3px solid var(--crimson); border-radius:4px; background:var(--paper-soft);">
+        <b style="color:var(--crimson);">10. Three properties of regression coefficient.</b>
+        <div style="font-size:13.5px; margin-top:4px;">(i) <mark>b<sub>yx</sub> · b<sub>xy</sub> = r²</mark>, so r = ±√(b<sub>yx</sub>·b<sub>xy</sub>) with sign of either b; (ii) both b<sub>yx</sub>, b<sub>xy</sub> have the <mark>same sign</mark> as r; (iii) <b>AM(b<sub>yx</sub>, b<sub>xy</sub>) ≥ |r|</b>; (iv) regression coefficients are <mark>independent of origin</mark> but not of scale.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== If You Remember Only 5 Things ===== -->
+  <div class="cheat-section" style="margin-bottom:18px; padding:14px; border:2.5px solid var(--crimson); border-radius:6px; background:#fef7f7;">
+    <div class="cs-head" style="margin-bottom:10px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--crimson);">⭐ If You Remember Only 5 Things — Walk In With These</div>
+    <p style="font-size:13px; color:var(--muted); margin:0 0 12px 0;">Five high-leverage formulas. If the brain blanks in the hall, these five recover ~40 marks across Q4–Q7.</p>
+    <div style="display:grid; grid-template-columns:1fr; gap:10px;">
+
+      <div style="padding:12px 14px; border:1.5px solid var(--crimson); border-left:5px solid var(--crimson); border-radius:4px; background:#fff;">
+        <div style="display:flex; gap:10px; align-items:flex-start;">
+          <div style="font-size:22px; font-weight:800; color:var(--crimson); line-height:1; min-width:32px;">1</div>
+          <div>
+            <b style="color:var(--crimson);">Karl Pearson r (raw-score form)</b>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:13px; margin-top:6px; padding:8px; background:var(--paper-soft); border-radius:3px;">r = [n·Σxy − Σx·Σy] / √[(n·Σx² − (Σx)²) · (n·Σy² − (Σy)²)]</div>
+            <div style="font-size:13px; margin-top:6px;">Direct from the table; no need for means/SD. Powers <mark>every "find r"</mark> question.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:12px 14px; border:1.5px solid var(--crimson); border-left:5px solid var(--crimson); border-radius:4px; background:#fff;">
+        <div style="display:flex; gap:10px; align-items:flex-start;">
+          <div style="font-size:22px; font-weight:800; color:var(--crimson); line-height:1; min-width:32px;">2</div>
+          <div>
+            <b style="color:var(--crimson);">Two regression lines + cross-check</b>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:13px; margin-top:6px; padding:8px; background:var(--paper-soft); border-radius:3px;">Y on X: b<sub>yx</sub> = r · σ<sub>y</sub>/σ<sub>x</sub> ; line: y − ȳ = b<sub>yx</sub>(x − x̄)<br>X on Y: b<sub>xy</sub> = r · σ<sub>x</sub>/σ<sub>y</sub> ; line: x − x̄ = b<sub>xy</sub>(y − ȳ)<br>Check: <mark>r² = b<sub>yx</sub> · b<sub>xy</sub></mark> ; lines meet at (x̄, ȳ)</div>
+            <div style="font-size:13px; margin-top:6px;">Memorise <b>"Y on X uses σ<sub>y</sub>/σ<sub>x</sub>"</b> (y over x in formula matches "y on x").</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:12px 14px; border:1.5px solid var(--crimson); border-left:5px solid var(--crimson); border-radius:4px; background:#fff;">
+        <div style="display:flex; gap:10px; align-items:flex-start;">
+          <div style="font-size:22px; font-weight:800; color:var(--crimson); line-height:1; min-width:32px;">3</div>
+          <div>
+            <b style="color:var(--crimson);">Normal — Z-standardisation + Empirical Rule</b>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:13px; margin-top:6px; padding:8px; background:var(--paper-soft); border-radius:3px;">Z = (X − μ) / σ<br>P(μ − σ ≤ X ≤ μ + σ) ≈ <mark>68%</mark><br>P(μ − 2σ ≤ X ≤ μ + 2σ) ≈ <mark>95%</mark><br>P(μ − 3σ ≤ X ≤ μ + 3σ) ≈ <mark>99.7%</mark></div>
+            <div style="font-size:13px; margin-top:6px;">Any "find probability that X exceeds…" reduces to a Z lookup. Carry the table mentally.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:12px 14px; border:1.5px solid var(--crimson); border-left:5px solid var(--crimson); border-radius:4px; background:#fff;">
+        <div style="display:flex; gap:10px; align-items:flex-start;">
+          <div style="font-size:22px; font-weight:800; color:var(--crimson); line-height:1; min-width:32px;">4</div>
+          <div>
+            <b style="color:var(--crimson);">Joint pdf pipeline — marginal · conditional · Cov · ρ</b>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:13px; margin-top:6px; padding:8px; background:var(--paper-soft); border-radius:3px;">f<sub>X</sub>(x) = ∫ f(x,y) dy  ; f<sub>Y</sub>(y) = ∫ f(x,y) dx<br>f(y|x) = f(x,y) / f<sub>X</sub>(x)<br>Cov(X,Y) = E(XY) − E(X)·E(Y)<br><mark>ρ = Cov(X,Y) / (σ<sub>X</sub> · σ<sub>Y</sub>)</mark></div>
+            <div style="font-size:13px; margin-top:6px;">Q4 appears in <b>every</b> ProbStats paper. Drill the discrete-table and continuous-pdf forms both.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding:12px 14px; border:1.5px solid var(--crimson); border-left:5px solid var(--crimson); border-radius:4px; background:#fff;">
+        <div style="display:flex; gap:10px; align-items:flex-start;">
+          <div style="font-size:22px; font-weight:800; color:var(--crimson); line-height:1; min-width:32px;">5</div>
+          <div>
+            <b style="color:var(--crimson);">Bayes' posterior</b>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:13px; margin-top:6px; padding:8px; background:var(--paper-soft); border-radius:3px;">P(A | B) = [P(B | A) · P(A)] / P(B)<br>where P(B) = Σ<sub>i</sub> P(B | A<sub>i</sub>) · P(A<sub>i</sub>)  (Total Probability)</div>
+            <div style="font-size:13px; margin-top:6px;">Read as <mark>"prior × likelihood / evidence"</mark>. Classic stems: defective-item factories, medical-test sensitivity, urn-with-replacement.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== Key Formulas Mini-Table ===== -->
+  <div class="cheat-section" style="margin-bottom:18px; padding:14px; border:1.5px solid var(--ink); border-radius:6px; background:#fffefb;">
+    <div class="cs-head" style="margin-bottom:10px; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--crimson);">📐 Key Formulas — Single Reference Table</div>
+    <p style="font-size:13px; color:var(--muted); margin:0 0 12px 0;">Every formula needed across Unit I–IV in one scannable matrix. Numerical-heavy subject = full working required, never paraphrase.</p>
+    <div class="table-wrap" style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:13px; border:1.5px solid var(--ink);">
+        <thead>
+          <tr style="background:var(--ink); color:var(--paper);">
+            <th style="padding:8px 10px; text-align:left; border:1px solid var(--ink); border-right:1px solid var(--rule);">Topic</th>
+            <th style="padding:8px 10px; text-align:left; border:1px solid var(--ink); border-right:1px solid var(--rule);">Formula</th>
+            <th style="padding:8px 10px; text-align:left; border:1px solid var(--ink); border-right:1px solid var(--rule);">Mean</th>
+            <th style="padding:8px 10px; text-align:left; border:1px solid var(--ink); border-right:1px solid var(--rule);">Variance</th>
+            <th style="padding:8px 10px; text-align:left; border:1px solid var(--ink);">MGF / Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><b style="color:var(--crimson);">Binomial B(n, p)</b></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule); font-family:'JetBrains Mono',monospace;">P(X=k) = C(n,k) p<sup>k</sup> q<sup>n−k</sup></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><mark>np</mark></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><mark>npq</mark></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); font-family:'JetBrains Mono',monospace;">(q + p·e<sup>t</sup>)<sup>n</sup></td>
+          </tr>
+          <tr style="background:var(--paper-soft);">
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><b style="color:var(--crimson);">Poisson P(λ)</b></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule); font-family:'JetBrains Mono',monospace;">P(X=k) = e<sup>−λ</sup>·λ<sup>k</sup>/k!</td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><mark>λ</mark></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><mark>λ</mark></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); font-family:'JetBrains Mono',monospace;">e<sup>λ(e<sup>t</sup>−1)</sup> · limit of B(n,p) as n→∞, np=λ</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><b style="color:var(--crimson);">Normal N(μ, σ²)</b></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule); font-family:'JetBrains Mono',monospace;">Z = (X − μ)/σ</td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><mark>μ</mark></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><mark>σ²</mark></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); font-family:'JetBrains Mono',monospace;">e<sup>μt + ½σ²t²</sup> · 68-95-99.7 rule</td>
+          </tr>
+          <tr style="background:var(--paper-soft);">
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><b style="color:var(--crimson);">Exponential Exp(λ)</b></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule); font-family:'JetBrains Mono',monospace;">f(x) = λ·e<sup>−λx</sup>, x ≥ 0</td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><mark>1/λ</mark></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><mark>1/λ²</mark></td>
+            <td style="padding:8px 10px; border:1px solid var(--rule); font-family:'JetBrains Mono',monospace;">λ/(λ − t), t &lt; λ · <b>memoryless</b></td>
+          </tr>
+          <tr>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><b style="color:var(--crimson);">Karl Pearson r</b></td>
+            <td colspan="4" style="padding:8px 10px; border:1px solid var(--rule); font-family:'JetBrains Mono',monospace;"><mark>r = [n·Σxy − Σx·Σy] / √[(n·Σx² − (Σx)²)·(n·Σy² − (Σy)²)]</mark> · range −1 ≤ r ≤ +1</td>
+          </tr>
+          <tr style="background:var(--paper-soft);">
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><b style="color:var(--crimson);">Regression slopes</b></td>
+            <td colspan="4" style="padding:8px 10px; border:1px solid var(--rule); font-family:'JetBrains Mono',monospace;">b<sub>yx</sub> = r·σ<sub>y</sub>/σ<sub>x</sub> · b<sub>xy</sub> = r·σ<sub>x</sub>/σ<sub>y</sub> · check: <mark>r² = b<sub>yx</sub>·b<sub>xy</sub></mark> · lines meet at (x̄, ȳ)</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><b style="color:var(--crimson);">Spearman rank ρ<sub>s</sub></b></td>
+            <td colspan="4" style="padding:8px 10px; border:1px solid var(--rule); font-family:'JetBrains Mono',monospace;"><mark>ρ<sub>s</sub> = 1 − 6·ΣD² / [n(n² − 1)]</mark> where D = R<sub>x</sub> − R<sub>y</sub> · use when data is ranked / ordinal / outliers present</td>
+          </tr>
+          <tr style="background:var(--paper-soft);">
+            <td style="padding:8px 10px; border:1px solid var(--rule); border-right:1px solid var(--rule);"><b style="color:var(--crimson);">Bayes' theorem</b></td>
+            <td colspan="4" style="padding:8px 10px; border:1px solid var(--rule); font-family:'JetBrains Mono',monospace;"><mark>P(A<sub>i</sub> | B) = P(B | A<sub>i</sub>)·P(A<sub>i</sub>) / Σ<sub>j</sub> P(B | A<sub>j</sub>)·P(A<sub>j</sub>)</mark> · prior × likelihood / evidence</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </section>
 
 <!-- ============ FOOTER ============ -->

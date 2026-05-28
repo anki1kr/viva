@@ -16,7 +16,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Spectral:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#f7f1e1; --paper-soft:#fffaef; --paper-deep:#ebe2cc;
+  --paper:#f3ead2; --paper-soft:#faf2dc; --paper-deep:#e6dbb8;
   --ink:#1a1209; --ink-soft:#3d2f1c; --muted:#6b5d47; --rule:#d9cfb6;
   --brand:#0f766e; --brand-2:#115e59; --brand-soft:#ccfbf1; --brand-deep:#134e4a;
   --gold:#0f766e; --highlighter:#fde047;
@@ -80,9 +80,9 @@ nav.chips a.live, nav.chips a.live.hot{ background:var(--brand); color:var(--pap
     radial-gradient(circle at 15% 18%, rgba(204,251,241,.6), transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(251,207,232,.25), transparent 45%),
     var(--paper-soft);
-  border:1.5px solid var(--ink); box-shadow:4px 4px 0 var(--ink); border-radius:4px; position:relative;
+  border:1px solid var(--rule); box-shadow:none; border-radius:6px; position:relative;
 }
-@media(min-width:600px){ .cover{ margin:0 -6px 48px; padding:32px 28px 28px; box-shadow:6px 6px 0 var(--ink); } }
+@media(min-width:600px){ .cover{ margin:0 -6px 48px; padding:32px 28px 28px; } }
 .cover .stamp{ position:absolute; top:18px; right:20px; border:1.5px solid var(--brand); color:var(--brand); padding:4px 10px; font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.18em; transform:rotate(4deg); background:rgba(255,250,239,.6); }
 .cover .meta-line{ font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.22em; color:var(--muted); text-transform:uppercase; margin-bottom:18px; }
 .cover h1{ font-family:"Fraunces",serif; font-variation-settings:"opsz" 144,"SOFT" 50; font-weight:600; font-size:clamp(30px,9vw,72px); line-height:.92; letter-spacing:-.02em; margin:0 0 4px; }
@@ -172,8 +172,9 @@ tbody tr:nth-child(odd){ background:rgba(235,226,204,.35); }
 .part-head{ font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.22em; text-transform:uppercase; background:var(--ink); color:var(--paper); padding:5px 12px; margin:14px 0 8px; display:inline-block; border-radius:2px; }
 
 /* qcard */
-.qcard{ margin:16px 0; padding:13px 14px; background:#fff; border:1.5px solid var(--ink); border-radius:4px; box-shadow:3px 3px 0 var(--ink); }
-.qcard.predicted{ border-left:6px solid var(--brand); background:#fffefb; }
+.qcard{ margin:14px 0; padding:8px 10px; background:#fff; border:1px solid var(--rule); border-radius:4px; box-shadow:none; }
+.qcard.predicted{ background:#fffefb; }
+@media(min-width:600px){ .qcard{ padding:12px 14px; } }
 .qhead{ display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin-bottom:8px; padding-bottom:8px; border-bottom:1px dashed var(--rule); }
 .qhead .qnum{ font-family:"Fraunces",serif; font-weight:700; color:var(--brand); font-size:16px; font-style:italic; }
 .qhead .tag{ font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.16em; padding:2px 7px; text-transform:uppercase; border:1px solid var(--ink); background:var(--paper-soft); color:var(--ink); border-radius:2px; }
@@ -491,13 +492,13 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(a)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>Define a Program Status Word (PSW). What are its primary flags?</b></div>
       <div class="ans">
-        <p>The <mark>PSW</mark> is a dedicated CPU register storing <mark>status bits (flags)</mark> updated by ALU operations. Primary flags in x86:</p>
+        <p>The <mark>PSW</mark> is a small CPU register. It holds <mark>status bits (flags)</mark>. The ALU updates these bits after every operation. Main x86 flags:</p>
         <ul>
-          <li><b><mark>CF</mark></b>: Carry Flag, set on unsigned overflow out of MSB.</li>
-          <li><b><mark>ZF</mark></b>: Zero Flag, set when the result equals zero.</li>
-          <li><b><mark>SF</mark></b>: Sign Flag, copies the MSB of the result.</li>
-          <li><b><mark>OF</mark></b>: Overflow Flag, set on signed (2's-complement) overflow.</li>
-          <li><b><mark>PF</mark></b>: Parity Flag, set when the low byte has even parity.</li>
+          <li><b><mark>CF</mark></b>: Carry Flag. Set when unsigned add overflows the top bit.</li>
+          <li><b><mark>ZF</mark></b>: Zero Flag. Set when the result is zero.</li>
+          <li><b><mark>SF</mark></b>: Sign Flag. Copies the top bit (sign) of the result.</li>
+          <li><b><mark>OF</mark></b>: Overflow Flag. Set on signed (2's-complement) overflow.</li>
+          <li><b><mark>PF</mark></b>: Parity Flag. Set when the low byte has even parity.</li>
         </ul>
       </div>
     </div>
@@ -507,7 +508,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(b)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>Explain the Stored-Program concept.</b></div>
       <div class="ans">
-        Proposed by <mark>John von Neumann in 1945</mark>, the <mark>stored-program</mark> concept specifies that program instructions and operand data are stored together in the <mark>same read-write memory address space</mark>, allowing instructions to be manipulated as data.
+        <mark>John von Neumann</mark> gave this idea in <mark>1945</mark>. The <mark>stored-program</mark> concept says program instructions and data sit together in the <mark>same read-write memory</mark>. So instructions can be treated like data too.
       </div>
     </div>
 
@@ -519,9 +520,9 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <div class="table-wrap">
           <table>
             <tr><th>Parameter</th><th>Direct</th><th>Indirect</th></tr>
-            <tr><td><b>Definition</b></td><td>Address field in the instruction <i>is</i> the Effective Address of the operand (<code>EA = A</code>).</td><td>Address field points to a memory location that <i>holds</i> the EA of the operand (<code>EA = M[A]</code>).</td></tr>
-            <tr><td><b>Memory refs</b></td><td>One memory access to fetch operand.</td><td>Two memory accesses — one for pointer, one for operand.</td></tr>
-            <tr><td><b>Example</b></td><td><code>MOV AX, [1000]</code> — read operand at address 1000.</td><td><code>MOV AX, @[1000]</code> — read pointer at 1000, then operand at that address.</td></tr>
+            <tr><td><b>Definition</b></td><td>The address in the instruction <i>is</i> the operand's address (<code>EA = A</code>).</td><td>The address in the instruction points to a memory cell that <i>holds</i> the operand's real address (<code>EA = M[A]</code>).</td></tr>
+            <tr><td><b>Memory refs</b></td><td>One memory read to get the operand.</td><td>Two memory reads: one for the pointer, one for the operand.</td></tr>
+            <tr><td><b>Example</b></td><td><code>MOV AX, [1000]</code> — read operand at address 1000.</td><td><code>MOV AX, @[1000]</code> — read pointer at 1000, then read operand at that pointer.</td></tr>
           </table>
         </div>
       </div>
@@ -532,7 +533,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(d)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>Why does a DMA controller have priority over the CPU for bus control?</b></div>
       <div class="ans">
-        I/O peripheral data is highly <b><mark>volatile</mark></b>. If incoming high-speed peripheral data is not read instantly from the channel, it will overwrite and be lost. The CPU's execution, however, can be paused without data loss.
+        I/O device data is highly <b><mark>volatile</mark></b>. If fast incoming data is not read at once, the next byte overwrites it and the old data is lost. The CPU work, by contrast, can be paused safely. No data is lost. So DMA wins the bus.
       </div>
     </div>
 
@@ -542,9 +543,9 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>List the three primary pipeline hazards with a single sentence each.</b></div>
       <div class="ans">
         <ul>
-          <li><b><mark>Structural Hazard</mark></b>: hardware conflicts (e.g. concurrent instruction-fetch and data-access).</li>
-          <li><b><mark>Data Hazard</mark></b>: instructions attempting to read data before a previous write completes.</li>
-          <li><b><mark>Control Hazard</mark></b>: delays caused by jump and branch decisions.</li>
+          <li><b><mark>Structural Hazard</mark></b>: two stages need the same hardware in the same cycle (e.g. fetch + data read on one memory port).</li>
+          <li><b><mark>Data Hazard</mark></b>: an instruction tries to read a value before the earlier instruction writes it.</li>
+          <li><b><mark>Control Hazard</mark></b>: jumps and branches delay the pipeline because the next address is not yet known.</li>
         </ul>
       </div>
     </div>
@@ -554,7 +555,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(f)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>Define spatial and temporal locality of reference.</b></div>
       <div class="ans">
-        <b><mark>Temporal Locality</mark>:</b> A memory location accessed once is highly likely to be accessed again in the near future. <b><mark>Spatial Locality</mark>:</b> Memory locations physically adjacent to a recently accessed address are highly likely to be accessed next.
+        <b><mark>Temporal Locality</mark>:</b> If a memory cell is used once, it is very likely to be used again soon. Example: loop counter <code>i</code>. <b><mark>Spatial Locality</mark>:</b> Cells near a recently used cell are very likely to be used next. Example: walking through an array.
       </div>
     </div>
 
@@ -563,7 +564,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(g)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>Write the formula for pipeline speedup S_p and define its variables.</b></div>
       <div class="ans">
-        Formula: <code>S_p = (n × k) / (k + n − 1)</code>, where <code>n</code> is the total number of <mark>instructions</mark>, and <code>k</code> is the total number of <mark>pipeline stages</mark>.
+        Formula: <code>S_p = (n × k) / (k + n − 1)</code>. Here <code>n</code> = number of <mark>instructions</mark> and <code>k</code> = number of <mark>pipeline stages</mark>. As <code>n</code> gets big, speedup tends to <code>k</code>.
       </div>
     </div>
 
@@ -575,9 +576,9 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <div class="table-wrap">
           <table>
             <tr><th>Parameter</th><th>Write-Through</th><th>Write-Back</th></tr>
-            <tr><td><b>Definition</b></td><td>Every cache write is propagated to main memory simultaneously — cache and RAM stay in lock-step.</td><td>Writes update only the cache line; main memory is updated lazily on eviction (dirty-bit triggered).</td></tr>
-            <tr><td><b>Memory traffic</b></td><td>High — every write generates a bus transaction.</td><td>Low — only dirty evictions touch RAM.</td></tr>
-            <tr><td><b>Example</b></td><td>Intel L1 d-cache historically used write-through to L2 for simpler coherence.</td><td>Modern L2/L3 (Intel Skylake, AMD Zen) use write-back with MESI/MOESI coherence.</td></tr>
+            <tr><td><b>Definition</b></td><td>Every cache write also goes to main memory at once. Cache and RAM always match.</td><td>Writes update only the cache line. RAM is updated later, only when the line is evicted (dirty bit triggers it).</td></tr>
+            <tr><td><b>Memory traffic</b></td><td>High. Every write hits the bus.</td><td>Low. Only dirty evictions touch RAM.</td></tr>
+            <tr><td><b>Example</b></td><td>Old Intel L1 data cache used write-through to L2 for simple coherence.</td><td>Modern L2/L3 (Intel Skylake, AMD Zen) use write-back with MESI/MOESI coherence.</td></tr>
           </table>
         </div>
       </div>
@@ -598,7 +599,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qhead"><span class="qnum">Q1(j)</span><span class="tag marks">1.5M</span></div>
       <div class="qbody"><b>What is the function of the Instruction Register (IR) and Program Counter (PC)?</b></div>
       <div class="ans">
-        The <b><mark>Program Counter (PC)</mark></b> holds the memory address of the next instruction to be fetched. The <b><mark>Instruction Register (IR)</mark></b> holds the actual opcode of the instruction currently being decoded and executed.
+        The <b><mark>Program Counter (PC)</mark></b> holds the address of the next instruction to fetch. The <b><mark>Instruction Register (IR)</mark></b> holds the actual opcode of the instruction being decoded and run right now.
       </div>
     </div>
 
@@ -613,13 +614,13 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>What are addressing modes? Describe the 9 standard addressing modes with their EA formulas. Provide a worked numerical trace for direct, relative, and register-indirect effective addresses on a memory system.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p><mark>Addressing modes</mark> are the rules baked into an Instruction Set Architecture (ISA) that tell the CPU <i>how to compute the <mark>effective address (EA)</mark></i> of an operand from the bits in the instruction. They convert the limited address field of an opcode into the full memory or register reference actually needed at execution time. The choice of mode is the ISA's main lever for trading <b>code density</b> (shorter binaries), <b>execution speed</b> (fewer memory cycles), <b>flexibility</b> (arrays, pointers, recursion, relocation) and <b>decoder complexity</b>. A typical 32-bit instruction word allocates only 8–16 bits to the address field — addressing modes bridge that gap to the 32 or 64-bit effective addresses real programs need.</p>
+        <p><mark>Addressing modes</mark> are rules built into the ISA. They tell the CPU <i>how to find the <mark>effective address (EA)</mark></i> of an operand from the bits in the instruction. The instruction has only a small address field (often 8–16 bits). The real memory address can be 32 or 64 bits wide. Addressing modes bridge this gap. They also let the CPU trade <b>code size</b>, <b>speed</b>, <b>flexibility</b>, and <b>decoder cost</b>. Example: a smartphone CPU runs the same instruction set on millions of programs only because addressing modes hide the address gap.</p>
         <ul>
-          <li><b>Purpose 1 — code compaction:</b> a short address field can refer to a large memory through indirection, indexing or base-displacement.</li>
-          <li><b>Purpose 2 — flexibility for compilers:</b> indexed and indirect modes let one piece of code walk arrays, structures and linked lists without rewriting.</li>
-          <li><b>Purpose 3 — relocation / position-independence:</b> relative and base-register modes make a program runnable at any memory location without re-linking.</li>
-          <li><b>Purpose 4 — recursion / re-entrancy:</b> stack-relative addressing supports nested calls with local frames.</li>
-          <li><b>Purpose 5 — ISA differentiation:</b> CISC (x86) preserves a full palette; RISC (ARM, RISC-V) prunes to a small set for pipeline simplicity.</li>
+          <li><b>Use 1 — smaller code:</b> a short address field can reach a big memory via indirection or indexing.</li>
+          <li><b>Use 2 — flexible compilers:</b> indexed and indirect modes let one piece of code walk arrays, structs, linked lists without rewriting.</li>
+          <li><b>Use 3 — relocation:</b> relative and base-register modes let a program run at any memory address. No re-linking needed.</li>
+          <li><b>Use 4 — recursion:</b> stack-based addressing handles nested calls with local frames.</li>
+          <li><b>Use 5 — ISA style:</b> CISC (x86) keeps the full set; RISC (ARM, RISC-V) keeps only a few for pipeline simplicity.</li>
         </ul>
 
         <h5>The 9 Standard Addressing Modes</h5>
@@ -680,20 +681,20 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>Modern Relevance</h5>
         <ul>
-          <li><b>x86-64 (CISC):</b> keeps the full palette: direct, indirect, indexed-scaled (<code>[base + index*scale + disp]</code>), RIP-relative for PIE binaries, segment-based (FS/GS) for thread-local storage.</li>
-          <li><b>ARM AArch64 (RISC):</b> only <i>load-store + immediate + register + register-shifted + PC-relative</i>. No indirect, no direct-to-memory ALU ops — every memory touch is an explicit <code>LDR</code>/<code>STR</code>.</li>
-          <li><b>RISC-V:</b> even leaner — only <i>immediate + register + register+offset + PC-relative</i>. No indexed, no auto-increment. The simplicity is what lets RISC-V tape-out in months instead of years.</li>
-          <li><b>Apple Silicon M-series</b> reaches 5+ GHz precisely because ARM64's pruned addressing modes let the front-end decode 8 instructions per cycle without combinatorial blowup.</li>
-          <li><b>JVM / .NET CLR / WebAssembly</b> all use a zero-address (stack) ISA — RPN naturally maps onto a stack and makes bytecode trivially portable.</li>
+          <li><b>x86-64 (CISC):</b> keeps the full set: direct, indirect, scaled-indexed (<code>[base + index*scale + disp]</code>), RIP-relative for PIE binaries, segment (FS/GS) for thread-local data.</li>
+          <li><b>ARM AArch64 (RISC):</b> only <i>load-store + immediate + register + register-shifted + PC-relative</i>. No indirect, no direct-to-memory ALU ops. Every memory touch is an explicit <code>LDR</code>/<code>STR</code>.</li>
+          <li><b>RISC-V:</b> even leaner. Only <i>immediate + register + register+offset + PC-relative</i>. No indexed, no auto-increment. This simplicity is why a RISC-V core can be taped out in months, not years.</li>
+          <li><b>Apple Silicon M-series</b> hits 5+ GHz because ARM64's small mode set lets the front-end decode 8 instructions per cycle without blowing up the decoder.</li>
+          <li><b>JVM / .NET CLR / WebAssembly</b> all use a zero-address (stack) ISA. RPN maps neatly onto a stack. Bytecode runs anywhere.</li>
         </ul>
 
         <div class="box warn">
           <span class="label">Common pitfalls</span>
-          (1) <b>Immediate vs Direct</b>: in Immediate the value <i>is</i> the operand (no memory touched); in Direct the operand lives at the address inside the instruction (one memory read). (2) <b>Register-Indirect (<code>[BX]</code>)</b> reads memory pointed-to by a register — different from <b>Register (<code>BX</code>)</b> which uses the register itself. (3) Examiners deduct marks for "Indirect = EA + R" — Indirect is <code>M[A]</code>, Register-Indirect is <code>R</code>. (4) <b>Relative</b> always uses PC of the <i>next</i> instruction (post-fetch PC), not the current one. (5) <b>Indexed and Base</b> look the same arithmetically — distinguish by intent: indexed walks data, base relocates code.
+          (1) <b>Immediate vs Direct</b>: in Immediate the value <i>is</i> the operand (no memory read). In Direct the operand sits at the address inside the instruction (one memory read). (2) <b>Register-Indirect (<code>[BX]</code>)</b> reads memory at the register's value. This is different from <b>Register (<code>BX</code>)</b>, which uses the register itself. (3) Examiners cut marks for "Indirect = EA + R". Indirect is <code>M[A]</code>. Register-Indirect is <code>R</code>. (4) <b>Relative</b> always uses the <i>next</i> PC (after fetch), not the current PC. (5) <b>Indexed and Base</b> look the same in math but differ by use: indexed walks data, base relocates code.
         </div>
 
         <h5>Conclusion</h5>
-        <p>Addressing modes are the ISA's contract with the compiler — they trade decoder complexity for code density and runtime flexibility. Mastering the EA formula for each mode is non-negotiable for any compiler-backend or low-level systems engineer.</p>
+        <p>Addressing modes are the ISA's contract with the compiler. They trade decoder cost for code density and flexibility. Knowing the EA formula for each mode is a must for any compiler or low-level systems engineer.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -716,7 +717,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       </b></div>
       <div class="ans">
         <h5>(a) IEEE-754 Single Precision Format — Layout</h5>
-        <p><mark>IEEE-754</mark> single-precision (32-bit) splits a real number into three fields: <mark>sign</mark>, <mark>exponent</mark>, <mark>mantissa</mark>. The value represented is <code>(-1)^S × 1.M × 2^(E - 127)</code> for normalized numbers (the leading 1 of the mantissa is implicit / "hidden"), with <mark>bias 127</mark>.</p>
+        <p><mark>IEEE-754</mark> single-precision (32-bit) splits a real number into three parts: <mark>sign</mark>, <mark>exponent</mark>, <mark>mantissa</mark>. The value is <code>(-1)^S × 1.M × 2^(E - 127)</code> for normal numbers. The leading 1 of the mantissa is hidden (not stored). The <mark>bias is 127</mark>.</p>
         <figure class="diagram-fig">
           <div style="display:grid; grid-template-columns:1fr 8fr 23fr; gap:0; max-width:560px; margin:0 auto; border:1.5px solid var(--ink); border-radius:3px; overflow:hidden; font-family:'JetBrains Mono',monospace;">
             <div style="background:var(--crimson-soft); padding:10px 4px; text-align:center; border-right:1.5px solid var(--ink);"><b style="color:var(--crimson); font-size:13px;">S</b><br><span style="font-size:10px;">1 bit</span></div>
@@ -761,7 +762,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </div>
 
         <h5>(b) Booth's Algorithm — Why &amp; How</h5>
-        <p><mark>Booth's algorithm</mark> performs <mark>signed (2's-complement) multiplication</mark> by examining consecutive bit-pairs <code>Q₀Q₋₁</code> of the multiplier and choosing one of four actions, then arithmetic-shifting right. It converts long runs of 1s into single add/subtract operations — accelerating multiplication of negative numbers without sign-extension.</p>
+        <p><mark>Booth's algorithm</mark> does <mark>signed (2's-complement) multiplication</mark>. It looks at the last two bits <code>Q₀Q₋₁</code> of the multiplier, picks one of four actions, then shifts right. A long run of 1s becomes one subtract + one add instead of many adds. So multiplying negative numbers gets faster. No sign-extension needed.</p>
         <div class="table-wrap">
           <table>
             <tr><th>Q₀Q₋₁ pair</th><th>Action on A</th><th>Interpretation</th></tr>
@@ -794,7 +795,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <p><b>Combined result (A, Q):</b> <mark><b><code>00001 10110₂ = +54₁₀</code></b></mark>. <b>Perfect check!</b></p>
 
         <h5>(b) Stack-CPU + RPN Evaluation: <code>(A+B)*(C-D)</code></h5>
-        <p>A <b><mark>stack-based CPU</mark></b> (zero-address machine) holds all operands on an implicit operand stack. Instructions name no operand — they pop the top of stack (TOS), operate, and push the result. <mark>RPN</mark> (postfix) maps naturally because the operator appears immediately after its two operands.</p>
+        <p>A <b><mark>stack-based CPU</mark></b> (zero-address machine) keeps all operands on a hidden operand stack. Instructions name no operand. They just pop the top of stack (TOS), do the work, and push the result. <mark>RPN</mark> (postfix) fits this style. The operator comes right after its two operands. Think of it like a cinema multiplex queue: last in, first out.</p>
 
         <p><b>Infix → RPN conversion:</b> <code>(A+B)*(C-D)</code> &nbsp;⟶&nbsp; <code>A B + C D - *</code></p>
 
@@ -823,29 +824,29 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>Stack-CPU Characteristics &amp; Trade-offs</h5>
         <ul>
-          <li><b>Zero-address instructions:</b> arithmetic opcodes carry no operand fields ⇒ short instruction words, dense bytecode.</li>
-          <li><b>Implicit operand source:</b> ADD/SUB/MUL always pop two from TOS and push the result. Only PUSH and POP touch memory.</li>
-          <li><b>Natural RPN mapping:</b> a postfix expression executed left-to-right is the program.</li>
-          <li><b>Re-entrancy:</b> stack-based local frames support recursion without register save/restore.</li>
-          <li><b>Cost:</b> all temporaries hit the stack — slower than register machines, but trivially portable across architectures (JVM, Wasm).</li>
-          <li><b>Pop ordering trap:</b> for non-commutative ops (SUB, DIV), the second-popped value is the minuend, first-popped is the subtrahend.</li>
+          <li><b>Zero-address instructions:</b> math opcodes carry no operand field. So instruction words are short and bytecode is dense.</li>
+          <li><b>Hidden operand source:</b> ADD/SUB/MUL always pop two from TOS and push the result. Only PUSH and POP touch memory.</li>
+          <li><b>RPN fits naturally:</b> a postfix expression read left-to-right <i>is</i> the program.</li>
+          <li><b>Recursion is easy:</b> stack frames support nested calls. No need to save/restore registers.</li>
+          <li><b>Cost:</b> every temporary goes on the stack. Slower than register machines. But the bytecode is portable (JVM, Wasm).</li>
+          <li><b>Pop order trap:</b> for SUB and DIV, the second pop is the first operand. The first pop is the second operand.</li>
         </ul>
 
         <h5>Modern Relevance</h5>
         <ul>
-          <li><b>IEEE-754 ubiquity:</b> every commodity CPU's FPU implements it — ARM Cortex-M0/M3 ship single-precision-only FPUs, Cortex-M7 adds double, x86 SSE/AVX work on packed singles/doubles.</li>
-          <li><b>Booth in silicon:</b> modern multipliers use <i>Radix-4 Booth recoding</i> (examines 3-bit windows) plus <i>Wallace-tree reduction</i> to compute 64-bit products in ~3 cycles. The classical 2-bit Booth still appears in low-power DSPs and embedded ASICs.</li>
-          <li><b>Stack machines in production:</b> JVM bytecode (every <code>.class</code> file), .NET CIL, WebAssembly, PostScript, and Forth all execute on virtual stack machines. WebAssembly's stack ISA is what makes a 2 MB binary run identically on x86, ARM, and RISC-V.</li>
-          <li><b>FMA fusion:</b> modern AVX-512 / ARM NEON pipelines fuse multiply-add into one rounding (<code>a*b + c</code>), gaining precision and halving instruction count for matrix kernels.</li>
+          <li><b>IEEE-754 is everywhere:</b> every commodity CPU FPU uses it. ARM Cortex-M0/M3 ship single-precision FPUs. Cortex-M7 adds double. x86 SSE/AVX work on packed singles/doubles.</li>
+          <li><b>Booth in silicon:</b> modern multipliers use <i>Radix-4 Booth</i> (looks at 3 bits) plus <i>Wallace-tree reduction</i>. They compute 64-bit products in about 3 cycles. The classic 2-bit Booth still shows up in low-power DSPs.</li>
+          <li><b>Stack machines in production:</b> JVM bytecode (every <code>.class</code> file), .NET CIL, WebAssembly, PostScript, Forth — all run on virtual stack machines. Wasm's stack ISA lets a 2 MB binary run the same on x86, ARM, RISC-V.</li>
+          <li><b>FMA fusion:</b> AVX-512 and ARM NEON fuse multiply-add into one rounding (<code>a*b + c</code>). More precision, half the instructions for matrix work.</li>
         </ul>
 
         <div class="box warn">
           <span class="label">Common pitfalls</span>
-          (1) <b>Bias trap</b>: write the biased exponent <code>E + 127</code>, not the raw exponent. For E = -3, the field stores <code>124</code>, not <code>-3</code> or <code>-3 + 127</code> miscomputed. (2) <b>Hidden bit</b>: the leading <code>1.</code> of normalized mantissa is implicit — never write it into the 23 stored bits. (3) Booth: the implicit <code>Q₋₁ = 0</code> bit is mandatory on init — skipping it shifts every operation by one pass. (4) Booth uses <b>Arithmetic</b> Shift Right (sign-bit preserving), not Logical Shift Right. (5) RPN: do not reverse operand order on subtraction — the second-popped value is the minuend, the first-popped is the subtrahend.
+          (1) <b>Bias trap</b>: write the biased exponent <code>E + 127</code>, not the raw exponent. For E = -3, the field stores <code>124</code>. (2) <b>Hidden bit</b>: the leading <code>1.</code> of a normal mantissa is hidden. Never write it into the 23 stored bits. (3) Booth: the starting <code>Q₋₁ = 0</code> bit is a must. Skip it and every pass shifts wrong. (4) Booth uses <b>Arithmetic</b> Shift Right (keeps the sign bit), not Logical Shift Right. (5) RPN: do not flip operand order on SUB. The second-popped value is the minuend. The first-popped is the subtrahend.
         </div>
 
         <h5>Conclusion</h5>
-        <p>IEEE-754 unified floating-point across every architecture after 1985; Booth's encoding cut signed-multiplication adds by ~50% and remains the basis of every modern multiplier tree; the zero-address stack-CPU model is what made portable bytecode (JVM, Wasm) feasible. All three primitives — float representation, signed multiplier, evaluator stack — coexist inside every modern CPU and runtime.</p>
+        <p>IEEE-754 made floating-point one standard across all CPUs after 1985. Booth's encoding cut signed-multiply adds by about 50%. It is still the base of every modern multiplier tree. The zero-address stack-CPU model made portable bytecode (JVM, Wasm) possible. All three ideas — float format, signed multiplier, evaluator stack — live inside every modern CPU and runtime.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -866,12 +867,12 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>Describe Microprogrammed Control Address Sequencing with a neat block diagram. Trace the CAR (Control Address Register) or μPC values through the execution cycle of an ADD M microroutine.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>A <b>Control Unit (CU)</b> generates the timing and control signals that orchestrate the data path — when to fetch, decode, route operands, latch results, and increment PC. The CU is realised in one of two ways:</p>
+        <p>A <b>Control Unit (CU)</b> makes the timing and control signals. It tells the CPU when to fetch, decode, route operands, latch results, and step PC. There are two ways to build a CU:</p>
         <ul>
-          <li><b><mark>Hardwired</mark> CU</b> — fixed combinational/sequential logic. Inputs: opcode + status flags + step counter. Outputs: hard-coded control lines.</li>
-          <li><b><mark>Micro-programmed</mark> CU</b> (Wilkes, 1951) — control signals are <i>fetched as microinstructions</i> from a small fast Control Memory (a ROM). Each macro-instruction expands into a <i>microroutine</i>: a sequence of microinstructions that drive the data path register-transfer by register-transfer.</li>
+          <li><b><mark>Hardwired</mark> CU</b> — fixed logic gates. Inputs: opcode + flags + step counter. Outputs: hard-wired control lines.</li>
+          <li><b><mark>Micro-programmed</mark> CU</b> (Wilkes, 1951) — control signals are <i>fetched as microinstructions</i> from a small fast Control Memory (a ROM). One main instruction expands into a <i>microroutine</i>: a list of microinstructions that drive the data path one register-transfer at a time.</li>
         </ul>
-        <p>Inside the microprogrammed CU, the <b><mark>CAR</mark> (Control Address Register)</b>, also called μPC, holds the address of the microinstruction currently being read out of Control Memory. After every microcycle the CAR is updated by the <b>Address Sequencer</b> via one of four next-address sources. The <b><mark>CDR</mark> (Control Data Register)</b> latches the fetched microinstruction so its bits can drive the control lines during the same clock period.</p>
+        <p>Inside the microprogrammed CU, the <b><mark>CAR</mark> (Control Address Register)</b> (also called μPC) holds the address of the microinstruction being read from Control Memory. After every microcycle, the <b>Address Sequencer</b> updates the CAR. It picks from four next-address sources. The <b><mark>CDR</mark> (Control Data Register)</b> latches the fetched microinstruction so its bits can drive control lines in the same clock cycle.</p>
 
         <figure class="diagram-fig">
           <div style="display:flex; flex-direction:column; gap:8px; max-width:520px; margin:0 auto; align-items:stretch;">
@@ -895,24 +896,24 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         </figure>
 
         <h5>Address Sequencing — the 4 Next-Address Sources</h5>
-        <p>After each microinstruction, the Next-Address Generator multiplexes the new CAR value from exactly one of these four sources:</p>
+        <p>After each microinstruction, the Next-Address Generator picks the new CAR value from one of four sources:</p>
         <ul>
-          <li><b>(1) Increment:</b> <code>CAR ← CAR + 1</code>. The default — used inside a microroutine to step linearly. Implemented by a simple +1 adder.</li>
-          <li><b>(2) <mark>Mapping logic</mark> (Opcode-Map):</b> the instruction's opcode is concatenated with zeros (e.g. <code>00·OPCODE·00</code>) or routed through a PLA to produce the start address of that instruction's microroutine. This is the FETCH ⇒ EXECUTE jump.</li>
+          <li><b>(1) Increment:</b> <code>CAR ← CAR + 1</code>. The default. Used inside a microroutine to step linearly. A simple +1 adder does this.</li>
+          <li><b>(2) <mark>Mapping logic</mark> (Opcode-Map):</b> the opcode is padded with zeros (e.g. <code>00·OPCODE·00</code>) or fed through a PLA to give the start address of that instruction's microroutine. This is the FETCH ⇒ EXECUTE jump.</li>
           <li><b>(3) Unconditional Branch:</b> CAR ← absolute address from the microinstruction's branch field. Used to jump between microroutines (e.g. EXECUTE ⇒ FETCH).</li>
-          <li><b>(4) Conditional Branch:</b> CAR ← address-field if the selected status bit (Zero, Carry, Overflow, Interrupt) is true; otherwise <code>CAR + 1</code>. This is how the CU handles conditional opcodes like <code>JZ</code>, <code>BCS</code>.</li>
+          <li><b>(4) Conditional Branch:</b> CAR ← address-field if the selected status bit (Zero, Carry, Overflow, Interrupt) is true. Else <code>CAR + 1</code>. This is how the CU handles conditional opcodes like <code>JZ</code>, <code>BCS</code>.</li>
         </ul>
-        <p>The selection between these four is controlled by a 2-bit field inside every microinstruction, decoded by the <b>Next-Address MUX</b>.</p>
+        <p>A 2-bit field inside every microinstruction picks which of the four sources is used. The <b>Next-Address MUX</b> decodes it.</p>
 
         <h5>Mapping Logic — Worked Example</h5>
-        <p>Suppose the instruction opcode is 4 bits and the Control Memory has 7-bit addresses. A typical mapping concatenates bits as:</p>
+        <p>Say the opcode is 4 bits and Control Memory uses 7-bit addresses. A common mapping joins bits like this:</p>
         <div class="steps">
           <div class="step"><span class="k">Map</span><div class="body"><code>CAR(next) = 0 || OPCODE(4 bits) || 00</code> ⇒ for opcode <code>1010</code> (ADD), CAR becomes <code>0 1010 00₂ = 40</code> (decimal).</div></div>
         </div>
-        <p>This places the ADD microroutine at address 40 — and reserves 4 slots (<code>40, 41, 42, 43</code>) for its microinstructions before colliding with the next opcode (<code>1011</code> at 44).</p>
+        <p>So the ADD microroutine starts at address 40. Four slots (<code>40, 41, 42, 43</code>) are reserved before the next opcode (<code>1011</code>) starts at 44.</p>
 
         <h5>CAR Trace — Microroutine for <code>ADD R1, R2</code></h5>
-        <p>Assume FETCH starts at Control Memory address <code>0</code>; opcode <code>ADD</code> = <code>1010</code> maps to start address <code>40</code>. The instruction is <code>R1 ← R1 + R2</code>. Status flags ZF, CF updated.</p>
+        <p>Assume FETCH starts at Control Memory address <code>0</code>. Opcode <code>ADD</code> = <code>1010</code> maps to start address <code>40</code>. The instruction is <code>R1 ← R1 + R2</code>. Status flags ZF, CF get updated.</p>
         <div class="steps">
           <div class="step"><span class="k">0</span><div class="body"><b>FETCH-1:</b> <code>MAR ← PC</code>. Next-source = <i>Increment</i>. CAR ⇒ <code>1</code>.</div></div>
           <div class="step"><span class="k">1</span><div class="body"><b>FETCH-2:</b> <code>MBR ← M[MAR]; PC ← PC + 1</code>. Next-source = <i>Increment</i>. CAR ⇒ <code>2</code>.</div></div>
@@ -926,9 +927,9 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>Vertical vs Horizontal Microinstruction Encoding</h5>
         <ul>
-          <li><b><mark>Horizontal</mark> microcode:</b> one bit per control line, no decoding — wide microinstruction (~100 bits), maximum parallelism, low decode delay. Used in mainframe CPUs.</li>
-          <li><b><mark>Vertical</mark> microcode:</b> encoded fields decoded into mutually exclusive control signals — narrow (~16–32 bits), less parallelism, lower ROM area. Used in small CISC chips.</li>
-          <li><b><mark>Nano-programming</mark>:</b> two-level — vertical microinstructions index into a horizontal nanoroutine. Trades extra ROM read for very low total ROM bits.</li>
+          <li><b><mark>Horizontal</mark> microcode:</b> one bit per control line, no decoding. Wide microinstruction (~100 bits). Max parallel work. Low decode delay. Used in mainframe CPUs.</li>
+          <li><b><mark>Vertical</mark> microcode:</b> packed fields decoded into mutually exclusive control signals. Narrow (~16–32 bits). Less parallel work. Smaller ROM. Used in small CISC chips.</li>
+          <li><b><mark>Nano-programming</mark>:</b> two-level. Vertical microinstructions index into a horizontal nanoroutine. Trades one extra ROM read for far fewer total ROM bits.</li>
         </ul>
 
         <h5>Hardwired vs Micro-programmed — Comparison Table</h5>
@@ -946,20 +947,20 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>Modern Relevance</h5>
         <ul>
-          <li><b>x86 microcode patching:</b> Intel Core and AMD Zen translate macro-instructions into internal RISC-like <i>µops</i> via microcode ROM. After the 2018 Spectre/Meltdown disclosures, Intel shipped microcode firmware updates (IBRS, IBPB barriers, eIBRS) delivered through BIOS and OS late-loading — patching silicon behaviour without re-spinning the chip.</li>
-          <li><b>ARM Cortex / Apple M-series:</b> mostly hardwired control for the inner pipeline; microcode used only for rare slow paths (cache flushes, IRQ entry, system-call entry).</li>
-          <li><b>IBM z-Architecture:</b> still ships <i>millicode</i>: a high-level microcode that implements arcane CISC instructions like <code>STCK</code> (Store Clock) in software-like macros — preserving forty years of binary compatibility.</li>
-          <li><b>GPU shader cores</b> (NVIDIA SM, AMD CU) are hardwired — every nanosecond of microcode fetch latency would crush 4096-thread throughput.</li>
-          <li><b>FPGA soft-cores</b> (PicoBlaze, NIOS-II) use micro-programmed CUs because flipping ROM bits is faster than re-routing LUTs.</li>
+          <li><b>x86 microcode patching:</b> Intel Core and AMD Zen turn macro-instructions into internal RISC-like <i>µops</i> via microcode ROM. After the 2018 Spectre/Meltdown leaks, Intel shipped microcode firmware updates (IBRS, IBPB, eIBRS) via BIOS and OS. They patched silicon behaviour without making a new chip.</li>
+          <li><b>ARM Cortex / Apple M-series:</b> mostly hardwired control for the inner pipeline. Microcode is used only for rare slow paths (cache flushes, IRQ entry, system-call entry).</li>
+          <li><b>IBM z-Architecture:</b> still ships <i>millicode</i> — high-level microcode that runs odd CISC instructions like <code>STCK</code> (Store Clock) as software-like macros. This keeps forty years of binary compatibility.</li>
+          <li><b>GPU shader cores</b> (NVIDIA SM, AMD CU) are hardwired. Even a tiny microcode-fetch delay would kill 4096-thread speed.</li>
+          <li><b>FPGA soft-cores</b> (PicoBlaze, NIOS-II) use micro-programmed CUs because flipping ROM bits is faster than re-wiring LUTs.</li>
         </ul>
 
         <div class="box warn">
           <span class="label">Common pitfalls</span>
-          (1) <b>Hardwired vs micro-programmed speed</b>: hardwired is <i>faster</i> (gate-propagation speed), micro-programmed is <i>slower</i> (extra ROM-read per microcycle). Students routinely invert this. (2) <b>CAR ≠ PC</b>: CAR addresses microinstructions inside the Control-ROM; PC addresses macro-instructions in main memory. They run on different clocks and address spaces. (3) <b>Mapping logic ≠ Opcode</b>: mapping is the transform that produces the start address — typically padding/concatenation, not just the opcode itself. (4) Confusing <b>horizontal</b> (wide, no decode) with <b>vertical</b> (narrow, decoded) microcode.
+          (1) <b>Speed</b>: hardwired is <i>faster</i> (raw gate speed). Micro-programmed is <i>slower</i> (extra ROM read per microcycle). Students often flip this. (2) <b>CAR ≠ PC</b>: CAR addresses microinstructions inside the Control-ROM. PC addresses main instructions in RAM. Different clocks, different address spaces. (3) <b>Mapping logic ≠ Opcode</b>: mapping transforms the opcode into the start address (usually padding + join). It is not just the opcode by itself. (4) Don't mix up <b>horizontal</b> (wide, no decode) with <b>vertical</b> (narrow, decoded) microcode.
         </div>
 
         <h5>Conclusion</h5>
-        <p>Address sequencing is the heartbeat of a microprogrammed CU — four next-address sources (increment, opcode-map, unconditional branch, conditional branch) drive every CISC instruction through its fetch–decode–execute lifetime. The flexibility paid for by ROM-fetch latency is what kept x86 binary-compatible across forty-five years of silicon evolution, and what made the 2018 Spectre microcode patches deployable in days instead of years.</p>
+        <p>Address sequencing is the heartbeat of a microprogrammed CU. Four next-address sources (increment, opcode-map, unconditional branch, conditional branch) drive every CISC instruction through fetch–decode–execute. The cost is ROM-fetch delay. The reward is flexibility. That is why x86 stayed binary-compatible for 45 years, and why the 2018 Spectre microcode patches shipped in days, not years.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -980,32 +981,32 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>Compare Programmed I/O, Interrupt-Driven I/O, and Direct Memory Access (DMA) in detail. Draw the DMA Controller Block Diagram and explain its three transfer modes.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p>An <b>I/O transfer scheme</b> is the protocol by which the CPU coordinates data movement between a peripheral and main memory. As I/O device speeds climbed from punch-card readers (10 char/s) to NVMe SSDs (7 GB/s), three successive schemes evolved — each trading more silicon area for less CPU involvement. Programmed I/O wastes CPU cycles on polling; interrupt-driven I/O reclaims those cycles between transfers; <mark>DMA</mark> removes the CPU from the data path entirely.</p>
+        <p>An <b>I/O transfer scheme</b> is the rule the CPU uses to move data between a device and RAM. Device speeds went from punch-card readers (10 char/s) to NVMe SSDs (7 GB/s). Three schemes grew over time. Each one uses more hardware to give the CPU more free time. Programmed I/O wastes CPU cycles in a poll loop. Interrupt-driven I/O frees the CPU between transfers. <mark>DMA</mark> takes the CPU out of the data path completely. Think of DMA like a bus depot: trucks load and unload by themselves while the driver rests.</p>
 
         <h5>I/O Transfer Schemes — Detailed Comparison</h5>
         <div class="table-wrap">
           <table>
             <tr><th>Aspect</th><th>Programmed I/O</th><th>Interrupt-Driven I/O</th><th>Direct Memory Access (DMA)</th></tr>
-            <tr><td><b>CPU Involvement</b></td><td>Continuous polling loop on status bit.</td><td>Only on start + completion ISR.</td><td>Zero during transfer; CPU executes unrelated work.</td></tr>
-            <tr><td><b>Data path</b></td><td>Device → CPU register → memory (CPU mediates each word).</td><td>Same as polled, but only between interrupts.</td><td>Device ↔ memory directly via system bus.</td></tr>
-            <tr><td><b>Speed</b></td><td>Slow — bounded by polling overhead.</td><td>Medium — context-switch cost per interrupt.</td><td>Fast — hardware-rate transfer to RAM.</td></tr>
-            <tr><td><b>Hardware cost</b></td><td>None beyond standard I/O ports.</td><td>Interrupt controller (PIC / APIC).</td><td>Dedicated DMA controller + bus arbitration.</td></tr>
-            <tr><td><b>CPU efficiency</b></td><td>Very low — wastes cycles polling.</td><td>Medium — CPU works between events.</td><td>Very high — CPU productive throughout.</td></tr>
-            <tr><td><b>Granularity</b></td><td>Word-by-word.</td><td>Word-by-word (or small bursts).</td><td>Large blocks (KB–MB).</td></tr>
-            <tr><td><b>Best use</b></td><td>Slow simple devices (UART, GPIO).</td><td>Keyboard, mouse, low-rate sensors.</td><td>Disk, network NIC, GPU, audio.</td></tr>
+            <tr><td><b>CPU Involvement</b></td><td>Polls a status bit non-stop.</td><td>Only on start and on the done ISR.</td><td>Zero during transfer. CPU runs other work.</td></tr>
+            <tr><td><b>Data path</b></td><td>Device → CPU register → memory. CPU touches every word.</td><td>Same as polled, but only between interrupts.</td><td>Device ↔ memory directly over the bus.</td></tr>
+            <tr><td><b>Speed</b></td><td>Slow. Polling overhead caps it.</td><td>Medium. Context switch costs per interrupt.</td><td>Fast. Hardware-rate transfer to RAM.</td></tr>
+            <tr><td><b>Hardware cost</b></td><td>None extra beyond plain I/O ports.</td><td>Interrupt controller (PIC / APIC).</td><td>DMA controller + bus arbitration.</td></tr>
+            <tr><td><b>CPU efficiency</b></td><td>Very low. Cycles wasted polling.</td><td>Medium. CPU works between events.</td><td>Very high. CPU stays productive.</td></tr>
+            <tr><td><b>Granularity</b></td><td>One word at a time.</td><td>One word or small burst.</td><td>Big blocks (KB–MB).</td></tr>
+            <tr><td><b>Best use</b></td><td>Slow simple devices (UART, GPIO).</td><td>Keyboard, mouse, slow sensors.</td><td>Disk, network NIC, GPU, audio.</td></tr>
           </table>
         </div>
 
         <h5>Interrupt Mechanics — Step-by-Step</h5>
         <ul>
-          <li><b>1. Interrupt Request (IRQ):</b> peripheral asserts an INT line into the interrupt controller.</li>
-          <li><b>2. Acknowledgement (INTA):</b> CPU finishes the current instruction, asserts INTA, the device places its <i>vector number</i> on the data bus.</li>
-          <li><b>3. Save context:</b> PC and PSW pushed to stack; IF (Interrupt-enable Flag) cleared to mask further interrupts.</li>
-          <li><b>4. Vectored dispatch:</b> <mark>interrupt vector</mark> table lookup at <code>IVT_BASE + vector × 4</code> loads the ISR start address into PC.</li>
-          <li><b>5. ISR execution:</b> handler services device, clears the IRQ source, may re-enable IF for nested handling.</li>
-          <li><b>6. Return (IRET):</b> pops PSW and PC; CPU resumes interrupted program transparently.</li>
+          <li><b>1. Interrupt Request (IRQ):</b> the device raises an INT line to the interrupt controller.</li>
+          <li><b>2. Acknowledgement (INTA):</b> CPU finishes the current instruction, raises INTA. The device puts its <i>vector number</i> on the data bus.</li>
+          <li><b>3. Save context:</b> PC and PSW are pushed to the stack. The IF (Interrupt-enable Flag) is cleared to block new interrupts.</li>
+          <li><b>4. Vectored dispatch:</b> CPU looks up the <mark>interrupt vector</mark> table at <code>IVT_BASE + vector × 4</code>. It loads the ISR start address into PC.</li>
+          <li><b>5. ISR execution:</b> the handler serves the device, clears the IRQ source. It can re-enable IF for nested handling.</li>
+          <li><b>6. Return (IRET):</b> pops PSW and PC. CPU resumes the old program smoothly.</li>
         </ul>
-        <p><b><mark>Maskable</mark></b> interrupts (INTR) respect IF; <b>non-maskable</b> interrupts (<mark>NMI</mark>) bypass IF for catastrophic events (memory parity error, watchdog timeout).</p>
+        <p><b><mark>Maskable</mark></b> interrupts (INTR) respect IF. <b>Non-maskable</b> interrupts (<mark>NMI</mark>) ignore IF. NMI is used for serious events like memory parity errors or watchdog timeout.</p>
 
         <h5>DMA Controller Block Diagram</h5>
         <figure class="diagram-fig">
@@ -1028,9 +1029,9 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>The Three DMA Transfer Modes</h5>
         <ul>
-          <li><b>1. <mark>Burst mode</mark> (Block transfer):</b> The DMA controller seizes the bus via HOLD, transfers the entire block (1 KB–4 MB) continuously, then releases the bus with HLDA. CPU sits idle waiting for the bus. <i>Best for</i> high-rate sequential transfers (disk-to-RAM, SATA, NVMe).</li>
-          <li><b>2. <mark>Cycle-stealing</mark> mode:</b> DMA grabs one bus cycle per transfer, moves a single word, releases the bus immediately. Interleaves transfer with CPU execution. CPU still runs, but at reduced effective throughput. <i>Best for</i> moderate-rate devices (sound card, slower NICs).</li>
-          <li><b>3. <mark>Transparent mode</mark> (Hidden DMA):</b> DMA transfers only during clock cycles when CPU is internally busy (decode, internal ALU work) and is <i>not</i> using the system bus. Zero CPU performance impact, but requires precise CPU-state visibility and limits transfer rate. <i>Best for</i> CPU-coupled devices where any stall is unacceptable.</li>
+          <li><b>1. <mark>Burst mode</mark> (Block transfer):</b> The DMA controller grabs the bus with HOLD. It moves the full block (1 KB–4 MB) without breaks. Then it lets go with HLDA. CPU waits during this time. <i>Best for</i> fast bulk transfers (disk-to-RAM, SATA, NVMe).</li>
+          <li><b>2. <mark>Cycle-stealing</mark> mode:</b> DMA grabs one bus cycle, moves one word, releases the bus right away. Interleaves with CPU work. CPU keeps running but at lower speed. <i>Best for</i> medium-speed devices (sound card, slow NICs).</li>
+          <li><b>3. <mark>Transparent mode</mark> (Hidden DMA):</b> DMA moves data only when CPU is busy inside (decode, ALU work) and is <i>not</i> using the bus. Zero impact on CPU speed. But it needs detailed CPU-state visibility and is slower overall. <i>Best for</i> tightly-coupled devices where any stall is bad.</li>
         </ul>
         <div class="table-wrap">
           <table>
@@ -1052,20 +1053,20 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>Modern Relevance</h5>
         <ul>
-          <li><b>NVMe SSDs:</b> use <i>queue-pair DMA</i> — host posts commands to submission queues in RAM; the SSD's DMA engine pulls commands and pushes data directly between flash and RAM. Hits 7+ GB/s on PCIe Gen4 x4 with the CPU idle.</li>
-          <li><b>GPU DMA:</b> NVIDIA CUDA host-to-device transfers and AMD ROCm both ride PCIe DMA. Recent <i>GPUDirect RDMA</i> lets a NIC DMA straight into GPU memory, bypassing host RAM — critical for AI training clusters.</li>
-          <li><b><mark>MSI-X</mark> interrupts:</b> the legacy Intel 8259A PIC supported 15 IRQ lines. Modern <i>Message-Signaled Interrupt-X</i> lets each PCIe device post up to 2048 distinct vectors as memory writes to the LAPIC, eliminating IRQ-line sharing and racing.</li>
-          <li><b>IOMMU isolation:</b> Intel VT-d / AMD-Vi remap DMA addresses per device — a malicious peripheral cannot DMA into kernel memory. Mandatory for PCIe passthrough in virtualization.</li>
-          <li><b>Embedded ARM Cortex-M:</b> ships with a <i>DMA Controller</i> peripheral (e.g. STM32 DMA1/DMA2) so a serial port can feed ADC samples into RAM with the M4 core sleeping — battery-life critical.</li>
+          <li><b>NVMe SSDs:</b> use <i>queue-pair DMA</i>. Host writes commands to queues in RAM. The SSD's DMA engine pulls commands and pushes data straight between flash and RAM. Hits 7+ GB/s on PCIe Gen4 x4 with the CPU idle.</li>
+          <li><b>GPU DMA:</b> NVIDIA CUDA and AMD ROCm both use PCIe DMA for host-to-device transfers. New <i>GPUDirect RDMA</i> lets a NIC DMA straight into GPU memory, skipping host RAM. Critical for AI training clusters.</li>
+          <li><b><mark>MSI-X</mark> interrupts:</b> the old Intel 8259A PIC had only 15 IRQ lines. New <i>Message-Signaled Interrupt-X</i> lets each PCIe device post up to 2048 distinct vectors as memory writes to the LAPIC. No more IRQ-line sharing or races.</li>
+          <li><b>IOMMU isolation:</b> Intel VT-d / AMD-Vi remap DMA addresses per device. A bad device cannot DMA into kernel memory. Required for PCIe passthrough in virtualization.</li>
+          <li><b>Embedded ARM Cortex-M:</b> ships with a built-in <i>DMA Controller</i> (e.g. STM32 DMA1/DMA2). A serial port can feed ADC samples to RAM while the M4 core sleeps. Saves battery.</li>
         </ul>
 
         <div class="box warn">
           <span class="label">Common pitfalls</span>
-          (1) <b>Priority inversion</b>: a high-priority handler blocked waiting on a low-priority handler's spinlock causes the Mars Pathfinder 1997 watchdog-reboot. Mitigated by <i>priority inheritance</i>. (2) <b>Vectored vs polled interrupts</b>: vectored jumps to a per-source ISR address (fast); polled scans a global status word to find the source (slow). (3) <b>DMA cycle-stealing is not free</b> — every stolen cycle the CPU cannot fetch. (4) <b>DMA cache coherence</b>: on systems without snooping, a DMA write into RAM does not invalidate stale data in the L1/L2 cache — software must explicitly flush. Modern x86/ARM use bus-snooping caches to avoid this.
+          (1) <b>Priority inversion</b>: a high-priority handler stuck waiting on a low-priority handler's spinlock. This caused the Mars Pathfinder 1997 watchdog reboot. Fix: <i>priority inheritance</i>. (2) <b>Vectored vs polled</b>: vectored jumps to a per-source ISR address (fast). Polled scans a global status word to find the source (slow). (3) <b>Cycle-stealing is not free</b>. Every stolen cycle is a cycle CPU can't fetch. (4) <b>DMA cache coherence</b>: without snooping, a DMA write to RAM does not invalidate stale data in L1/L2. Software must flush. Modern x86/ARM use snooping caches to handle this.
         </div>
 
         <h5>Conclusion</h5>
-        <p>DMA divorces data movement from instruction execution — the single biggest throughput unlock in computer organisation since Eckert-Mauchly. The three transfer modes trade CPU starvation against I/O latency, and the entire modern I/O fabric (PCIe MSI-X, NVMe queue-pair DMA, GPUDirect RDMA, IOMMU isolation) is built directly on top of these 1970s primitives.</p>
+        <p>DMA splits data movement from instruction work. This was the biggest speed gain in computer organisation since Eckert-Mauchly. The three transfer modes trade CPU stalls for I/O delay. All modern I/O (PCIe MSI-X, NVMe queue-pair DMA, GPUDirect RDMA, IOMMU isolation) is built on these 1970s ideas.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1086,7 +1087,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="qbody"><b>Describe Flynn's Classification of parallel computer architectures with a neat diagram. Discuss the three pipeline hazards (structural, data, control) and how each is resolved.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
-        <p><mark>Flynn's taxonomy</mark> (1966) classifies parallel computer architectures along two axes — the number of concurrent <b>Instruction Streams</b> and the number of concurrent <b>Data Streams</b>. The 2×2 matrix that emerges is the canonical framework for every modern parallel system, from a uni-core embedded chip to a GPU shading 4096 pixels per clock.</p>
+        <p><mark>Flynn's taxonomy</mark> (1966) sorts parallel computers by two axes: the number of parallel <b>Instruction Streams</b> and the number of parallel <b>Data Streams</b>. The 2×2 box it forms still names every modern parallel system, from a tiny embedded chip to a GPU shading 4096 pixels per clock.</p>
 
         <h5>Flynn's Parallel Classification</h5>
         <div class="table-wrap">
@@ -1097,11 +1098,11 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           </table>
         </div>
         <ul>
-          <li><b><mark>SISD</mark>:</b> classic Von Neumann machine — one IF/ID/EX/MEM/WB pipeline operating on one operand per cycle. Examples: Intel 8086, ARM Cortex-M0.</li>
-          <li><b><mark>SIMD</mark>:</b> one control unit broadcasts one instruction to N data lanes that each apply it to a different element. Examples: NVIDIA GPU warps (32-wide SIMT), Intel AVX-512 (8 doubles per instruction), Cray-1 vector processor.</li>
-          <li><b><mark>MISD</mark>:</b> N instruction streams operate on the same data — used in <i>redundant</i> systems where each stream verifies the others. Examples: Space Shuttle's quad-redundant 4-AP1 voting computers, signal-processing systolic arrays.</li>
-          <li><b><mark>MIMD</mark>:</b> N cores each fetch their own instructions and operate on their own data. Examples: every modern multi-core x86/ARM CPU, message-passing clusters, NUMA servers.</li>
-          <li><b>SPMD</b> (Single Program Multiple Data) is a software pattern <i>on top of</i> MIMD — same binary, different data partitions. The OpenMP, MPI, and CUDA programming models.</li>
+          <li><b><mark>SISD</mark>:</b> classic Von Neumann machine. One IF/ID/EX/MEM/WB pipeline. One operand per cycle. Examples: Intel 8086, ARM Cortex-M0.</li>
+          <li><b><mark>SIMD</mark>:</b> one control unit sends one instruction to N data lanes. Each lane runs it on its own element. Examples: NVIDIA GPU warps (32-wide SIMT), Intel AVX-512 (8 doubles per instruction), Cray-1 vector processor.</li>
+          <li><b><mark>MISD</mark>:</b> N instruction streams work on the same data. Used in <i>redundant</i> systems where each stream checks the others. Examples: Space Shuttle's quad-redundant 4-AP1 voting computers, signal-processing systolic arrays.</li>
+          <li><b><mark>MIMD</mark>:</b> N cores each fetch their own instructions and work on their own data. Examples: every modern multi-core x86/ARM CPU, message-passing clusters, NUMA servers.</li>
+          <li><b>SPMD</b> (Single Program Multiple Data) is a software pattern that sits <i>on top of</i> MIMD. Same binary, different data slices. OpenMP, MPI, and CUDA all use this.</li>
         </ul>
 
         <figure class="diagram-fig">
@@ -1167,32 +1168,32 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>Pipeline Hazards &amp; Resolutions</h5>
         <ul>
-          <li><b>1. Structural Hazard:</b> two pipeline stages attempt to use the same physical hardware resource in the same cycle.
-            <br><i>Examples:</i> single-port memory needs both IF (instruction fetch) and MEM (load/store) in the same cycle; a single floating-point unit serving both ADD.F and MUL.F.
-            <br><i>Resolutions:</i> (a) split into separate instruction and data caches (<b>Harvard architecture</b>); (b) duplicate the resource (multiple FPUs); (c) insert a bubble (NOP) to stall the conflicting stage.
+          <li><b>1. Structural Hazard:</b> two pipeline stages want the same hardware in the same cycle.
+            <br><i>Examples:</i> single-port memory needs both IF (instruction fetch) and MEM (load/store) at once. One FPU serving both ADD.F and MUL.F.
+            <br><i>Fixes:</i> (a) split into separate instruction and data caches (<b>Harvard architecture</b>); (b) add more units (extra FPUs); (c) insert a bubble (NOP) to stall the clashing stage.
           </li>
-          <li><b>2. Data Hazard:</b> instruction <i>j</i> depends on a result from instruction <i>i</i> that has not finished WB.
+          <li><b>2. Data Hazard:</b> instruction <i>j</i> needs a result from instruction <i>i</i> that has not yet reached WB.
             <br><i>Three sub-types:</i>
             <ul>
-              <li><b><mark>RAW</mark> (Read-After-Write):</b> j reads what i writes. True dependency. Example: <code>I1: ADD R1, R2, R3; I2: SUB R4, R1, R5</code>.</li>
-              <li><b><mark>WAR</mark> (Write-After-Read):</b> j writes a register i hasn't read yet. Anti-dependency — only matters in out-of-order pipelines.</li>
-              <li><b><mark>WAW</mark> (Write-After-Write):</b> two instructions write the same register. Output dependency — only matters in out-of-order.</li>
+              <li><b><mark>RAW</mark> (Read-After-Write):</b> j reads what i writes. A true dependency. Example: <code>I1: ADD R1, R2, R3; I2: SUB R4, R1, R5</code>.</li>
+              <li><b><mark>WAR</mark> (Write-After-Read):</b> j writes a register i has not yet read. Anti-dependency. Only matters in out-of-order pipelines.</li>
+              <li><b><mark>WAW</mark> (Write-After-Write):</b> two instructions write the same register. Output dependency. Only matters in out-of-order.</li>
             </ul>
-            <i>Resolutions:</i> (a) <b>Operand <mark>forwarding</mark> (bypassing)</b>: route the EX/MEM result directly back to the ALU input of the next instruction; (b) <b>compiler scheduling</b>: reorder independent instructions between i and j; (c) <b><mark>stalling</mark></b>: insert pipeline bubbles; (d) <b>register renaming</b>: eliminate WAR/WAW by giving each write a fresh physical register.
+            <i>Fixes:</i> (a) <b>Operand <mark>forwarding</mark> (bypassing)</b>: route the EX/MEM result straight back to the next instruction's ALU input; (b) <b>compiler scheduling</b>: move independent instructions between i and j; (c) <b><mark>stalling</mark></b>: insert pipeline bubbles; (d) <b>register renaming</b>: kill WAR/WAW by giving each write a fresh physical register.
           </li>
-          <li><b>3. Control Hazard (Branch Hazard):</b> branch/jump instructions change the PC after fetch has begun on the next sequential instruction — wrong instructions are already in the pipeline.
-            <br><i>Resolutions:</i>
+          <li><b>3. Control Hazard (Branch Hazard):</b> branch and jump change the PC after the next instruction has already started its fetch. Wrong instructions are already in the pipe.
+            <br><i>Fixes:</i>
             <ul>
-              <li><b><mark>Branch Prediction</mark> (BTB + 2-bit saturating counter):</b> guess taken/not-taken from history; ~95% accurate for typical loops.</li>
-              <li><b>Delayed Branch (MIPS):</b> ISA guarantees the instruction after the branch executes regardless — compiler fills the delay slot.</li>
-              <li><b>Branch Target Buffer (BTB):</b> caches recent branch destinations to redirect IF on the same cycle the branch decodes.</li>
-              <li><b>Speculative Execution:</b> fetch + execute predicted path before resolution; squash and replay on mis-prediction.</li>
+              <li><b><mark>Branch Prediction</mark> (BTB + 2-bit saturating counter):</b> guess taken / not-taken from history. About 95% right for normal loops.</li>
+              <li><b>Delayed Branch (MIPS):</b> the ISA promises that the instruction after the branch always runs. The compiler fills that delay slot.</li>
+              <li><b>Branch Target Buffer (BTB):</b> stores recent branch targets so IF can redirect in the same cycle the branch decodes.</li>
+              <li><b>Speculative Execution:</b> fetch and run the predicted path before the branch resolves. Squash and replay on mis-predict.</li>
             </ul>
           </li>
         </ul>
 
         <h5>RAW Hazard Trace — Forwarding vs Stall</h5>
-        <p>Code sequence <code>I1: ADD R1, R2, R3</code> (writes R1 in WB) and <code>I2: SUB R4, R1, R5</code> (reads R1 in ID). Without forwarding, I2's ID is one cycle ahead of I1's WB ⇒ 2-cycle stall. With <b>EX→EX forwarding</b>, the I1 ALU result is routed directly to I2's EX input ⇒ 0 stall. With a load-use sequence (I1 is <code>LW R1, 0(R6)</code>), forwarding cannot eliminate the load latency ⇒ 1-cycle stall is still required.</p>
+        <p>Code: <code>I1: ADD R1, R2, R3</code> (writes R1 in WB) then <code>I2: SUB R4, R1, R5</code> (reads R1 in ID). Without forwarding, I2's ID is one cycle ahead of I1's WB. So we get a 2-cycle stall. With <b>EX→EX forwarding</b>, I1's ALU result is routed straight to I2's EX input. So 0 stall. For a load-use pair (I1 = <code>LW R1, 0(R6)</code>), forwarding cannot remove the load delay. So 1-cycle stall is still needed.</p>
 
         <h5>Worked Numerical — Pipeline Speedup</h5>
         <p><b>Given:</b> n = 1000 instructions, k = 5 pipeline stages. Find ideal speedup S<sub>p</sub> over sequential execution.</p>
@@ -1205,21 +1206,21 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
         <h5>Modern Relevance</h5>
         <ul>
-          <li><b>Deep pipelines:</b> Intel Skylake ~14 stages, AMD Zen 4 ~19 stages, Apple M3 ~16 stages. Deeper pipelines raise clock frequency but increase branch-mispredict penalty (≥ k cycles wasted).</li>
-          <li><b>Out-of-order issue + register renaming:</b> Modern cores (Zen 4, M3, Skylake) rename to 200+ physical registers and dynamically schedule 6–10 µops per cycle, hiding cache-miss latency.</li>
-          <li><b>SIMD lives on:</b> Intel AVX-512 (16 floats per instr), ARM SVE / SVE2 (scalable to 2048 bits), NVIDIA SIMT warps (32-wide). One add instruction can perform 64 FP ops on H100 tensor cores.</li>
-          <li><b>MIMD everywhere:</b> Every smartphone has at least 4 cores; data-centre Sapphire Rapids has 60 P-cores. Apple M3 Max = 12 P + 4 E cores.</li>
-          <li><b>Spectre / Meltdown (2018):</b> speculative execution leaks data via cache timing side-channels — mispredicted-path loads pollute the cache before squash. Hardware mitigations (eIBRS, STIBP, Retpoline) still cost 5–30% performance on syscall-heavy workloads.</li>
-          <li><b>VLIW (a sibling of SIMD):</b> Itanium and modern Qualcomm Hexagon DSPs encode multiple parallel ops per instruction word, exposing parallelism to the compiler instead of the hardware scheduler.</li>
+          <li><b>Deep pipelines:</b> Intel Skylake ~14 stages, AMD Zen 4 ~19 stages, Apple M3 ~16 stages. Deeper pipelines raise clock speed but waste more cycles on a branch mispredict (≥ k cycles lost).</li>
+          <li><b>Out-of-order issue + register renaming:</b> Modern cores (Zen 4, M3, Skylake) rename to 200+ physical registers and schedule 6–10 µops per cycle. This hides cache-miss delay.</li>
+          <li><b>SIMD is still alive:</b> Intel AVX-512 (16 floats per instruction), ARM SVE / SVE2 (up to 2048 bits), NVIDIA SIMT warps (32-wide). One add instruction can do 64 FP ops on H100 tensor cores.</li>
+          <li><b>MIMD is everywhere:</b> every smartphone has at least 4 cores. Data-centre Sapphire Rapids has 60 P-cores. Apple M3 Max = 12 P + 4 E cores.</li>
+          <li><b>Spectre / Meltdown (2018):</b> speculative execution leaks data via cache timing side-channels. Wrong-path loads dirty the cache before squash. Hardware fixes (eIBRS, STIBP, Retpoline) still cost 5–30% on syscall-heavy workloads.</li>
+          <li><b>VLIW (cousin of SIMD):</b> Itanium and Qualcomm Hexagon DSPs pack many parallel ops in one instruction word. The compiler handles the parallel work, not the hardware.</li>
         </ul>
 
         <div class="box warn">
           <span class="label">Common pitfalls</span>
-          (1) <b>RAW vs WAR vs WAW</b>: RAW is a <i>true</i> dependency needing forwarding/stall; WAR and WAW are <i>false</i> dependencies fixed by register renaming, not forwarding. (2) <b>Forwarding does not eliminate load-use stalls</b> — a load result is not ready until the end of MEM, so the immediately-following ALU op must still wait one cycle. (3) <b>Speedup formula:</b> use <code>n·k / (k + n − 1)</code>, not the lazy <code>k</code> — for small <i>n</i> the speedup is far below <i>k</i>. (4) <b>MISD vs MIMD</b>: MISD is rare (fault-tolerant voting); MIMD is everywhere. Don't claim a multi-core laptop is MISD.
+          (1) <b>RAW vs WAR vs WAW</b>: RAW is a <i>true</i> dependency. It needs forwarding or stall. WAR and WAW are <i>false</i> dependencies. Fix them with register renaming, not forwarding. (2) <b>Forwarding cannot remove load-use stalls</b>. A load result is ready only at the end of MEM. So the next ALU op must wait one cycle. (3) <b>Speedup formula</b>: use <code>n·k / (k + n − 1)</code>, not the lazy <code>k</code>. For small <i>n</i> the speedup is far below <i>k</i>. (4) <b>MISD vs MIMD</b>: MISD is rare (fault-tolerant voting). MIMD is everywhere. Don't call a multi-core laptop MISD.
         </div>
 
         <h5>Conclusion</h5>
-        <p>Flynn's 1966 2×2 matrix still describes every parallel machine built today — SISD chips boot, SIMD chips render, MIMD chips serve, MISD chips fly spacecraft. Pipelining is the silicon trick that converted Flynn's SISD into a 5×-throughput machine, and hazards are the cost of that trick. Forwarding, branch prediction, and register renaming push pipelines toward the theoretical limit S<sub>p</sub> = k, but Spectre proved aggressive speculation creates security holes that hardware fixes (eIBRS, STIBP) cannot fully close.</p>
+        <p>Flynn's 1966 2×2 box still names every parallel machine built today. SISD chips boot. SIMD chips render. MIMD chips serve. MISD chips fly spacecraft. Pipelining is the trick that made SISD 5× faster. Hazards are the cost. Forwarding, branch prediction, and register renaming push the pipeline toward the limit S<sub>p</sub> = k. But Spectre showed that aggressive speculation creates security holes that hardware fixes (eIBRS, STIBP) cannot fully seal.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1242,11 +1243,11 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       </b></div>
       <div class="ans">
         <h5>Introduction — Cache Mapping</h5>
-        <p>A <b>cache</b> is a small high-speed memory placed between the CPU and main memory to exploit <i>temporal</i> and <i>spatial locality</i>. The physical address generated by the CPU must be partitioned so the cache can answer two questions in one cycle: <i>"Is this block here?"</i> (tag compare) and <i>"Where in the block?"</i> (byte offset). The partitioning depends on the mapping scheme:</p>
+        <p>A <b>cache</b> is a small fast memory between the CPU and main memory. It uses <i>temporal</i> and <i>spatial locality</i> to give a quick answer. Think of it like a library card desk that keeps the most-asked books near the counter. The physical address from the CPU is split so the cache can answer two questions in one cycle: <i>"Is this block here?"</i> (tag compare) and <i>"Which byte in the block?"</i> (byte offset). The split depends on the mapping scheme:</p>
         <ul>
-          <li><b><mark>Direct-mapped</mark>:</b> address = TAG · LINE · WORD. Each block maps to exactly one cache line.</li>
-          <li><b><mark>Fully associative</mark>:</b> address = TAG · WORD. A block can sit in any cache line — needs N-way parallel tag compare.</li>
-          <li><b>k-way <mark>set-associative</mark>:</b> address = <mark>TAG · SET · WORD</mark>. Each block maps to a SET (group of k lines), any line within. Compromise between direct and fully-associative.</li>
+          <li><b><mark>Direct-mapped</mark>:</b> address = TAG · LINE · WORD. Each block maps to one fixed cache line.</li>
+          <li><b><mark>Fully associative</mark>:</b> address = TAG · WORD. A block can sit in any line. Needs N-way parallel tag compare.</li>
+          <li><b>k-way <mark>set-associative</mark>:</b> address = <mark>TAG · SET · WORD</mark>. Each block maps to a SET (group of k lines). Any line within the set is fine. A middle ground between direct and fully associative.</li>
         </ul>
 
         <h5>(a) Cache Bits Computation — Given Configuration</h5>
@@ -1267,7 +1268,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
           <div class="step"><span class="k">3</span><div class="body"><b>Sets (2-way)</b> = <code>4096 / 2 = 2048</code> ⇒ <code>SET = log₂(2048) = 11 bits</code>.</div></div>
           <div class="step"><span class="k">4</span><div class="body"><b>TAG</b> = <code>32 − 11 − 4 = 17 bits</code>.</div></div>
         </div>
-        <p>Result identical to part (a) — confirms the address split depends only on cache/block sizes and address width, not main-memory size beyond its width.</p>
+        <p>Same result as part (a). This shows the address split depends only on cache size, block size, and address width. Main memory size matters only via its bit width.</p>
 
         <figure class="diagram-fig">
           <div style="display:grid; grid-template-columns:17fr 11fr 4fr; gap:0; max-width:560px; margin:0 auto; border:1.5px solid var(--ink); border-radius:3px; overflow:hidden;">
@@ -1348,21 +1349,21 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <h5>Modern Relevance</h5>
         <ul>
           <li><b>3-level cache hierarchy:</b> Intel Sapphire Rapids — L1 (48 KB/core, 5 cyc), L2 (2 MB/core, 14 cyc), L3 (shared, up to 105 MB, ~40 cyc), DRAM (~200 cyc). Apple M3 Pro: L1 (192 KB/perf-core), L2 (16 MB shared per cluster).</li>
-          <li><b>Pseudo-LRU:</b> True LRU needs <code>log₂(k!)</code> bits per set — too expensive. Caches use <i>tree-PLRU</i> (one bit per node in a binary tree over the k ways) or <i>NRU</i> (Not-Recently-Used).</li>
-          <li><b>Inclusive vs exclusive caches:</b> Intel uses inclusive (L3 contains every L1/L2 line) for coherence simplicity; AMD Zen uses victim/exclusive caching to grow effective capacity.</li>
-          <li><b>CLOCK / Second-Chance:</b> Linux <code>mm/swap.c</code>, Windows <code>WorkingSet</code> manager — both implement a circular reference-bit scan that approximates LRU at O(1) per page.</li>
-          <li><b>TLB hierarchy:</b> modern x86 has L1 ITLB (64 entries), L1 DTLB (64 entries), L2 STLB (~1500 entries). A page-walk after STLB miss costs ~100 cycles on a hot page-table cache, ~400+ cycles cold.</li>
-          <li><b>Huge pages:</b> 2 MB and 1 GB pages reduce TLB pressure for big workloads (databases, JVM heaps). One 2 MB TLB entry covers what would otherwise need 512 entries.</li>
-          <li><b>Unified memory (Apple M-series):</b> CPU and GPU share the same physical RAM and the same caches — eliminates PCIe DMA copies that would otherwise dominate ML inference latency.</li>
+          <li><b>Pseudo-LRU:</b> true LRU needs <code>log₂(k!)</code> bits per set. Too costly. Caches use <i>tree-PLRU</i> (one bit per node in a binary tree over the k ways) or <i>NRU</i> (Not-Recently-Used).</li>
+          <li><b>Inclusive vs exclusive caches:</b> Intel uses inclusive (L3 holds every L1/L2 line) for easy coherence. AMD Zen uses victim/exclusive caching to grow total size.</li>
+          <li><b>CLOCK / Second-Chance:</b> Linux <code>mm/swap.c</code> and Windows <code>WorkingSet</code> manager both run a circular reference-bit scan. It approximates LRU at O(1) per page.</li>
+          <li><b>TLB hierarchy:</b> modern x86 has L1 ITLB (64 entries), L1 DTLB (64 entries), L2 STLB (~1500 entries). A page-walk after STLB miss takes ~100 cycles on a hot page-table cache, ~400+ cycles cold.</li>
+          <li><b>Huge pages:</b> 2 MB and 1 GB pages cut TLB pressure for big workloads (databases, JVM heaps). One 2 MB TLB entry covers what would otherwise need 512 entries.</li>
+          <li><b>Unified memory (Apple M-series):</b> CPU and GPU share the same physical RAM and same caches. No PCIe DMA copies. This used to dominate ML inference delay.</li>
         </ul>
 
         <div class="box warn">
           <span class="label">Common pitfalls</span>
-          (1) <b>TLB miss ≠ cache miss:</b> a TLB miss means the virtual-to-physical mapping is missing (page-walk, ~100 cyc); a cache miss means the data line is missing from L1/L2/L3 (DRAM fetch, ~200 cyc). A single reference can be a TLB hit + cache miss, or vice versa. (2) In the page-replacement trace, <b>count compulsory misses</b> — the first 4 references all count as faults when frames start empty. (3) <b>Belady's anomaly</b>: FIFO can produce <i>more</i> faults with <i>more</i> frames — never assume "more frames is always better". (4) <b>SET ≠ LINE:</b> in direct-mapped the index field selects a line; in set-associative the same field selects a set (group of k lines). (5) <b>Write policy:</b> write-through (every store hits memory; safe, slow) vs write-back (stores buffer in cache, flushed on eviction; fast, requires dirty bit and coherence protocol like MESI).
+          (1) <b>TLB miss ≠ cache miss:</b> a TLB miss means the virtual-to-physical map is missing (page-walk, ~100 cyc). A cache miss means the data line is missing from L1/L2/L3 (DRAM fetch, ~200 cyc). A single reference can be a TLB hit + cache miss, or the other way. (2) In a page-replacement trace, <b>count the compulsory misses</b>. The first 4 references all count as faults when frames start empty. (3) <b>Belady's anomaly</b>: FIFO can give <i>more</i> faults with <i>more</i> frames. Never assume "more frames is always better". (4) <b>SET ≠ LINE:</b> in direct-mapped the index picks a line. In set-associative the same field picks a set (group of k lines). (5) <b>Write policy:</b> write-through (every store hits memory; safe, slow) vs write-back (stores buffer in cache, flushed on eviction; fast, needs dirty bit and coherence like MESI).
         </div>
 
         <h5>Conclusion</h5>
-        <p>Cache mapping decides <i>where</i> a block can sit; replacement decides <i>which</i> block leaves. The address split (<mark>TAG · SET · WORD</mark>) is determined entirely by power-of-two arithmetic on cache size, block size and address width. The choice between FIFO, LRU, and Optimal trades implementation cost against hit rate — <mark>Belady's Optimal</mark> is the theoretical lower bound, LRU and its CLOCK approximation get within a few percent, and FIFO survives only where simplicity outweighs correctness. The same tradeoff the OS kernel still negotiates daily inside <code>mm/swap.c</code>.</p>
+        <p>Cache mapping decides <i>where</i> a block can sit. Replacement decides <i>which</i> block leaves. The address split (<mark>TAG · SET · WORD</mark>) comes from power-of-two arithmetic on cache size, block size, and address width. FIFO, LRU, and Optimal trade cost for hit rate. <mark>Belady's Optimal</mark> is the theoretical floor. LRU (and its CLOCK approximation) gets within a few percent. FIFO survives only where simplicity wins over correctness. The OS kernel still solves this tradeoff inside <code>mm/swap.c</code> every day.</p>
 
         <div class="score">
           <b>Mark Allocation (15 Marks)</b>
@@ -1389,6 +1390,77 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
     <div class="kicker">⚡ Cheat Sheet</div>
     <h2>Last-Hour Revision</h2>
     <p class="lede">Review these high-yield card summaries the morning of 8 June before entering the exam hall.</p>
+  </div>
+
+  <!-- ── FULL SYLLABUS ONE-GLANCE PANEL ── -->
+  <div class="cheat-section" style="margin-bottom:18px; padding:14px; border:1.5px solid var(--ink); border-radius:6px; background:#fffefb;">
+    <div class="cs-head" style="margin-bottom:10px;">📚 Full Syllabus — One Glance (BCG-208-V · 4 Units)</div>
+    <div style="display:grid; grid-template-columns:1fr; gap:10px;">
+
+      <!-- Unit I -->
+      <div style="border:1px solid var(--rule); border-radius:5px; padding:10px 12px; background:var(--paper-soft);">
+        <b style="color:var(--brand-deep); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase;">Unit I · Functional Blocks + Data Rep + Arithmetic</b>
+        <ul style="margin:6px 0 0; padding-left:20px; font-size:13.5px;">
+          <li><mark>Functional blocks</mark>: CPU, Memory, I/O, System bus, Von Neumann vs Harvard.</li>
+          <li><mark>Instruction cycle</mark>: Fetch → Decode → Execute → Store. RTL micro-ops.</li>
+          <li><mark>Registers</mark>: PC, IR, MAR, MBR, AC, PSW. <mark>Stored-program</mark> concept (von Neumann 1945).</li>
+          <li><mark>Number systems</mark>: binary, octal, hex; signed magnitude, 1's & 2's complement.</li>
+          <li><mark>Floating-point</mark>: IEEE-754 single (1+8+23) / double (1+11+52). Bias = 127 / 1023.</li>
+          <li><mark>Booth's algorithm</mark>: signed multiplication via Q₀Q₋₁ pair lookup + ASR.</li>
+          <li><mark>Restoring & non-restoring division</mark>; <mark>Booth radix-4</mark> + Wallace tree (modern).</li>
+          <li><mark>Addressing modes</mark>: Immediate, Direct, Indirect, Register, Reg-Ind, Relative, Indexed, Base-Reg, Stack.</li>
+          <li><mark>Instruction formats</mark>: 3-addr, 2-addr, 1-addr, 0-addr (stack/RPN).</li>
+        </ul>
+      </div>
+
+      <!-- Unit II -->
+      <div style="border:1px solid var(--rule); border-radius:5px; padding:10px 12px; background:var(--paper-soft);">
+        <b style="color:var(--brand-deep); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase;">Unit II · x86 CPU + Control Unit + I/O</b>
+        <ul style="margin:6px 0 0; padding-left:20px; font-size:13.5px;">
+          <li><mark>x86 architecture</mark>: 8086 register set, segmentation, real vs protected mode.</li>
+          <li><mark>Control Unit</mark>: Hardwired (gate logic) vs <mark>Micro-programmed</mark> (Wilkes 1951, ROM).</li>
+          <li><mark>CAR / CDR</mark>: Control Address Reg + Control Data Reg. μPC drives Control Memory.</li>
+          <li><mark>Address sequencing</mark>: 4 sources — Increment, Mapping logic, Uncond branch, Cond branch.</li>
+          <li><mark>Horizontal vs Vertical</mark> microcode; Nano-programming (two-level).</li>
+          <li><mark>I/O techniques</mark>: Programmed I/O (poll), Interrupt-driven, <mark>DMA</mark>.</li>
+          <li><mark>Interrupts</mark>: IRQ → INTA → save context → IVT lookup → ISR → IRET. Maskable / NMI.</li>
+          <li><mark>DMA controller</mark>: Address reg + Word count + Control reg. Three modes: Burst / Cycle-stealing / Transparent.</li>
+          <li>I/O bus structure, daisy chaining, priority arbitration.</li>
+        </ul>
+      </div>
+
+      <!-- Unit III -->
+      <div style="border:1px solid var(--rule); border-radius:5px; padding:10px 12px; background:var(--paper-soft);">
+        <b style="color:var(--brand-deep); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase;">Unit III · Pipelining + Parallel + Coherence</b>
+        <ul style="margin:6px 0 0; padding-left:20px; font-size:13.5px;">
+          <li><mark>Flynn's taxonomy</mark>: SISD, SIMD, MISD, MIMD. SPMD as MIMD software pattern.</li>
+          <li><mark>Pipelining</mark>: 5-stage RISC (IF-ID-EX-MEM-WB). Speedup <code>S = nk/(k+n−1)</code>.</li>
+          <li><mark>Hazards</mark>: Structural (resource clash), Data (RAW/WAR/WAW), Control (branch).</li>
+          <li><mark>Resolutions</mark>: Forwarding (bypassing), Stalls, Compiler scheduling, Register renaming.</li>
+          <li><mark>Branch handling</mark>: Prediction (2-bit counter), Delayed branch, BTB, Speculative execution.</li>
+          <li><mark>Vector / Array processors</mark>: Cray-1, SIMD lanes, AVX-512, NVIDIA SIMT warp (32-wide).</li>
+          <li><mark>Cache coherence</mark>: MESI / MOESI protocols. Bus snooping, directory-based.</li>
+          <li><mark>Multiprocessors</mark>: UMA, NUMA, message-passing clusters.</li>
+        </ul>
+      </div>
+
+      <!-- Unit IV -->
+      <div style="border:1px solid var(--rule); border-radius:5px; padding:10px 12px; background:var(--paper-soft);">
+        <b style="color:var(--brand-deep); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em; text-transform:uppercase;">Unit IV · Memory Organisation</b>
+        <ul style="margin:6px 0 0; padding-left:20px; font-size:13.5px;">
+          <li><mark>Memory hierarchy</mark>: Reg → L1 → L2 → L3 → DRAM → SSD → HDD. Cost ↑, speed ↓.</li>
+          <li><mark>Locality</mark>: Temporal (re-access soon) + Spatial (neighbour access).</li>
+          <li><mark>Cache mapping</mark>: Direct, Fully associative, k-way Set-associative.</li>
+          <li><mark>Address split</mark>: TAG · SET · WORD. WORD = log₂(block); SET = log₂(lines/k); TAG = remainder.</li>
+          <li><mark>Hit ratio</mark>: H = hits / (hits + misses). Effective access time <code>T = H·Tc + (1−H)·Tm</code>.</li>
+          <li><mark>Memory interleaving</mark>: low-order vs high-order; banked DRAM for parallel access.</li>
+          <li><mark>Virtual memory</mark>: Paging, Page table, TLB. Page fault → OS swap.</li>
+          <li><mark>Page replacement</mark>: FIFO (Belady's anomaly), LRU, Optimal, CLOCK / Second-Chance.</li>
+          <li><mark>Write policies</mark>: Write-through (RAM always synced) vs Write-back (lazy, dirty bit).</li>
+        </ul>
+      </div>
+
+    </div>
   </div>
 
   <div class="cheat-section">
@@ -1486,6 +1558,64 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="hot-item"><span class="hi-badge high">★ 10M</span><b>Microprogrammed sequencing</b> — Sequencer diagram + CAR trace through fetch/execute microroutines.</div>
     </div>
   </div>
+
+  <!-- ── PART-A 1.5M QUICK-FIRE DRILL ── -->
+  <div class="cheat-section" style="margin-top:18px; padding:14px; border:1.5px solid var(--ink); border-radius:6px; background:#fffefb;">
+    <div class="cs-head" style="margin-bottom:10px;">⚡ Part-A 1.5M Quick-Fire Drill (10 one-liners)</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th style="width:36%;">Question stem</th><th>One-line answer</th></tr>
+        <tr><td><b>9 addressing modes?</b></td><td>Immediate, Direct, Indirect, Register, Reg-Ind, Relative, Indexed, Base-Reg, Stack. (Implied sometimes counted as 10th.)</td></tr>
+        <tr><td><b>PSW flags (x86)?</b></td><td><mark>CF, ZF, SF, OF, PF, AF, DF, IF, TF</mark> — Carry, Zero, Sign, Overflow, Parity, Aux, Direction, Interrupt, Trap.</td></tr>
+        <tr><td><b>Flynn's 4 classes?</b></td><td><mark>SISD</mark> (uni-core), <mark>SIMD</mark> (GPU/AVX), <mark>MISD</mark> (rare, fault-tolerant), <mark>MIMD</mark> (multi-core).</td></tr>
+        <tr><td><b>3 pipeline hazards?</b></td><td>Structural (HW clash), Data (RAW/WAR/WAW), Control (branch delay).</td></tr>
+        <tr><td><b>RAW vs WAR vs WAW?</b></td><td>RAW = read-after-write (true). WAR = write-after-read (anti). WAW = write-after-write (output). WAR/WAW only matter in out-of-order.</td></tr>
+        <tr><td><b>Memory interleaving?</b></td><td>Split RAM into <i>banks</i>. Consecutive addresses go to different banks. So multiple words can be fetched in parallel.</td></tr>
+        <tr><td><b>Hit ratio formula?</b></td><td><code>H = hits / (hits + misses)</code>. Effective access <code>T = H·Tc + (1−H)·Tm</code>.</td></tr>
+        <tr><td><b>Hardwired vs Micro-programmed?</b></td><td>Hardwired = gate logic, <i>fast</i>, hard to change. Micro-programmed = ROM-based, <i>slower</i>, easy to patch (Intel microcode).</td></tr>
+        <tr><td><b>DMA controller priority over CPU?</b></td><td>I/O data is <mark>volatile</mark>. If not read at once, next byte overwrites it. CPU work can pause safely. So DMA wins the bus.</td></tr>
+        <tr><td><b>Pipeline speedup formula?</b></td><td><code>S_p = (n·k) / (k + n − 1)</code>. As n → ∞, S_p → k (number of stages).</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── KEY FORMULAS MINI-TABLE ── -->
+  <div class="cheat-section" style="margin-top:18px; padding:14px; border:1.5px solid var(--ink); border-radius:6px; background:#fffefb;">
+    <div class="cs-head" style="margin-bottom:10px;">📐 Key Formulas — All in One Place</div>
+    <div class="table-wrap">
+      <table>
+        <tr><th style="width:32%;">Concept</th><th style="width:38%;">Formula</th><th>Notes</th></tr>
+        <tr><td><b>Pipeline speedup</b></td><td><code>S = nk / (k + n − 1)</code></td><td>n = instructions, k = stages. Limit = k.</td></tr>
+        <tr><td><b>Pipelined time</b></td><td><code>T_pipe = (k + n − 1) · τ</code></td><td>τ = clock period.</td></tr>
+        <tr><td><b>Sequential time</b></td><td><code>T_seq = n · k · τ</code></td><td>No pipeline.</td></tr>
+        <tr><td><b>Hit ratio</b></td><td><code>H = hits / total refs</code></td><td>0 ≤ H ≤ 1.</td></tr>
+        <tr><td><b>Effective access time</b></td><td><code>T_eff = H·Tc + (1−H)·Tm</code></td><td>Tc = cache time, Tm = memory time.</td></tr>
+        <tr><td><b>Cache fields (k-way SA)</b></td><td><code>WORD = log₂(block bytes)</code><br><code>SET = log₂(lines / k)</code><br><code>TAG = addr_bits − SET − WORD</code></td><td>Direct: SET → LINE. Fully assoc: SET = 0.</td></tr>
+        <tr><td><b>Cache lines</b></td><td><code>lines = cache_size / block_size</code></td><td>—</td></tr>
+        <tr><td><b>Number of sets</b></td><td><code>sets = lines / k</code></td><td>k = associativity.</td></tr>
+        <tr><td><b>Direct mapping EA</b></td><td><code>EA = A</code></td><td>1 memory access.</td></tr>
+        <tr><td><b>Indirect EA</b></td><td><code>EA = M[A]</code></td><td>2 memory accesses.</td></tr>
+        <tr><td><b>Relative EA</b></td><td><code>EA = PC + A</code></td><td>PC = next instruction's PC.</td></tr>
+        <tr><td><b>Indexed EA</b></td><td><code>EA = IX + A</code></td><td>Array walk.</td></tr>
+        <tr><td><b>IEEE-754 single</b></td><td><code>(-1)^S × 1.M × 2^(E−127)</code></td><td>1 sign + 8 exp + 23 mant. Bias 127.</td></tr>
+        <tr><td><b>IEEE-754 double</b></td><td><code>(-1)^S × 1.M × 2^(E−1023)</code></td><td>1 + 11 + 52. Bias 1023.</td></tr>
+        <tr><td><b>Cycle-steal %</b></td><td><code>(R / word_bytes) / f_cpu × 100</code></td><td>R = DMA rate, f_cpu = CPU clock.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── IF YOU REMEMBER ONLY 5 THINGS ── -->
+  <div class="cheat-section" style="margin-top:18px; padding:14px; border:2px dashed var(--brand); border-radius:6px; background:var(--brand-soft);">
+    <div class="cs-head" style="margin-bottom:10px; color:var(--brand-deep);">🧠 If You Remember Only 5 Things — Walk in With These</div>
+    <ol style="margin:0; padding-left:24px; font-size:14.5px; line-height:1.7;">
+      <li><b>Micro-programmed CU + CAR trace.</b> The CAR holds the next microinstruction address. It is updated by one of <mark>4 sources</mark>: Increment, Mapping (opcode → start), Uncond Branch, Cond Branch. Walk the ADD R1, R2 trace: addr 0 (FETCH-1) → 1 → 2 (decode, map) → 40 → 41 → 42 → 43 → back to 0.</li>
+      <li><b>Pipeline hazards + speedup.</b> Three hazards: <mark>Structural</mark> (HW clash, fix with Harvard split), <mark>Data</mark> (RAW/WAR/WAW, fix with forwarding + renaming), <mark>Control</mark> (branch delay, fix with prediction + BTB). Speedup formula: <code>S = nk/(k+n−1)</code>. For n=1000, k=5 → S ≈ 4.98×.</li>
+      <li><b>Cache mapping bit-split.</b> Given cache size, block size, associativity, address width — compute <mark>TAG · SET · WORD</mark>. WORD = log₂(block). Lines = cache/block. Sets = lines/k. SET = log₂(sets). TAG = remainder. (64 KB, 16 B block, 2-way, 32-bit addr → TAG=17, SET=11, WORD=4.)</li>
+      <li><b>DMA cycle-stealing + 3 modes.</b> DMA has bus priority because I/O data is volatile. Three modes: <mark>Burst</mark> (full block, CPU stalled), <mark>Cycle-stealing</mark> (1 cycle per word, CPU slows), <mark>Transparent</mark> (only on idle CPU cycles, zero impact). Block diagram: Address reg + Word count + Control reg.</li>
+      <li><b>FIFO / LRU / Optimal trace.</b> Practice the standard 14-ref string with 4 frames. FIFO = evict oldest (Belady's anomaly possible). LRU = evict least recently used. Optimal = evict page used farthest in future (theoretical floor). Always count the first 4 compulsory misses.</li>
+    </ol>
+  </div>
+
 </section>
 
 <footer class="end">
