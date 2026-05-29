@@ -287,10 +287,10 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 <section class="howto solid" id="scope">
   <h4>📌 Syllabus snapshot · 4 Units (BCG-202-V)</h4>
   <ul>
-    <li><b>Unit I</b> — Basics &amp; Architecture — Purpose, 3-Schema Architecture, Data Independence, DBA/Users roles, Component modules, DBMS Languages. <span class="priority">High-yield</span></li>
-    <li><b>Unit II</b> — ER &amp; Relational Model — Terminology, Keys hierarchy, Integrity constraints, Cardinality/Participation, Strong/Weak entities, Gen/Spec. <span class="priority">⭐ Highest-yield</span></li>
-    <li><b>Unit III</b> — Relational Algebra &amp; Calculus — Unary/Binary operations, Joins, Division, Tuple/Domain Relational Calculus, Codd's Theorem. <span class="priority">Medium-yield</span></li>
-    <li><b>Unit IV</b> — RDB Design &amp; Systems — FDs, Armstrong's axioms, Normalization (1NF-BCNF, 4NF/5NF), SQL queries/views, Query processing, B-Trees, 2PL Concurrency, WAL Checkpoint recovery, Security (DAC, MAC, RBAC), DDBMS. <span class="priority">⭐ Highest-yield (50%)</span></li>
+    <li><b>Unit I</b> — Basic Concepts &amp; Architecture — Purpose, characteristics, advantages of DB approach; Data/Information/Records/files; DBA, DB Designers, DBMS users; Functions &amp; components; Data models, schema, instances; Three-Schema Architecture; Data Independence; Centralized / 2-Tier / 3-Tier / n-Tier; DBMS Languages; Classification. <span class="priority">High-yield</span></li>
+    <li><b>Unit II</b> — ER &amp; Relational Model — Relational model terminology, data structure, properties of relations; Keys, Domains, Integrity constraints; Relational schemes; Entity types, entity sets, attributes; Relationship types/instances, ER diagrams, abstraction &amp; integration; Hierarchical &amp; Network data models. <span class="priority">⭐ Highest-yield</span></li>
+    <li><b>Unit III</b> — Relational Algebra &amp; Calculus — Unary ops (Select, Project, Rename); RA from set theory, Cartesian product; Binary ops; Generalized Projection; Aggregate Functions &amp; Grouping; Tuple Relational Calculus; Domain Relational Calculus. <span class="priority">Medium-yield</span></li>
+    <li><b>Unit IV</b> — RDB Design &amp; Systems — Functional dependencies, Modification anomalies, 1NF–3NF, BCNF, 4NF &amp; 5NF, computing closures of FDs; SQL (data types, basic queries, Insert/Delete/Update, Views); Query processing &amp; optimization; concept of security; concurrency &amp; recovery; introduction to Distributed DBMS. <span class="priority">⭐ Highest-yield (50%)</span></li>
   </ul>
 </section>
 
@@ -346,7 +346,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
         <div style="text-align:center; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--crimson);">↕ Internal-Conceptual Mapping (Provides Physical DI)</div>
         <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:4px; padding:10px;">
           <b style="color:var(--forest); font-size:12px; font-family:'JetBrains Mono',monospace;">INTERNAL LEVEL</b>
-          <p style="margin:2px 0 0; font-size:13.5px; color:var(--ink);">Physical storage blueprint (B+ Trees, file block layouts, indexes).</p>
+          <p style="margin:2px 0 0; font-size:13.5px; color:var(--ink);">Physical storage blueprint (file block layouts, indexes, access paths).</p>
         </div>
       </div>
       <figcaption><b>Fig 1.1</b> · ANSI/SPARC 3-Schema Architecture showing logical and physical separation layers</figcaption>
@@ -355,7 +355,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
     <div class="table-wrap">
       <table>
         <tr><th>Independence Type</th><th>Decoupled Layers</th><th>Example Scenario</th></tr>
-        <tr><td><b>Physical Data Independence</b></td><td>Internal ↔ Conceptual</td><td>Add a B+ Tree index to speed up searches. Conceptual schema tables remain completely unchanged.</td></tr>
+        <tr><td><b>Physical Data Independence</b></td><td>Internal ↔ Conceptual</td><td>Add an index to speed up searches. Conceptual schema tables remain completely unchanged.</td></tr>
         <tr><td><b>Logical Data Independence</b></td><td>Conceptual ↔ External</td><td>Split a table into two smaller ones (normalization). Existing user views remain operational via custom SELECT joins.</td></tr>
       </table>
     </div>
@@ -499,20 +499,20 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
   <!-- 3.2 Calculus -->
   <div class="topic" id="t-3-2">
-    <h3>Relational Calculus &amp; Codd's Theorem <span class="tag hot">⭐ Repeated 3×</span></h3>
+    <h3>Relational Calculus (TRC &amp; DRC) <span class="tag hot">⭐ Repeated 3×</span></h3>
     <p>Unlike procedural algebra, relational calculus is <b>declarative</b> — it describes <em>what</em> data to retrieve without stating <em>how</em> to retrieve it.</p>
     <ul>
-      <li><b>Tuple Relational Calculus (TRC):</b> Query variables range over entire tuples.
+      <li><b><mark>Tuple Relational Calculus (TRC)</mark>:</b> Query variables range over entire tuples (rows).
         <br>Form: <code>{ t | P(t) }</code>. Dot notation is used: <code>t.Name</code>. Basis of SQL.</li>
-      <li><b>Domain Relational Calculus (DRC):</b> Query variables range over individual column values (domains).
-        <br>Form: <code>{ &lt;x₁, x₂&gt; | P(x₁, x₂) }</code>. Positional notation. Basis of QBE (Query-By-Example).</li>
+      <li><b><mark>Domain Relational Calculus (DRC)</mark>:</b> Query variables range over individual column values (domains).
+        <br>Form: <code>{ &lt;x₁, x₂&gt; | P(x₁, x₂) }</code>. Positional notation.</li>
     </ul>
-    <div class="box def"><span class="label">Codd's Theorem</span>
-      Relational Algebra, safe Tuple Relational Calculus, and safe Domain Relational Calculus are mathematically equivalent in expressive power. A language is "relationally complete" if it can express any query written in safe TRC.
+    <div class="box def"><span class="label">Relational Completeness</span>
+      Relational Algebra, safe TRC and safe DRC all have the <b>same expressive power</b> — any query you can write in one, you can write in the others. A query language is "relationally complete" if it can express every query in safe relational calculus.
     </div>
     <div class="box warn">
-      <span class="label">Crucial Pitfall: Unsafe Queries</span>
-      A query is <em>unsafe</em> if it returns an infinite number of tuples (e.g., <code>{ t | ¬Student(t) }</code> - returns every possible tuple in the universe not in Student). Safe calculus restricts operations to the active domain of the database.
+      <span class="label">Pitfall: Unsafe Queries</span>
+      A query is <em>unsafe</em> if it returns an infinite number of tuples (e.g. <code>{ t | ¬Student(t) }</code> — every possible tuple NOT in Student). A <b>safe expression</b> restricts results to values actually present in the database (the active domain).
     </div>
   </div>
 </section>
@@ -524,7 +524,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
   <div class="unit-head">
     <div class="kicker">Unit IV · Core Systems</div>
     <h2><span class="num">04</span>Database Design, SQL &amp;<br>Transaction Processing</h2>
-    <p class="lede">Normalization, SQL queries, B-Trees, transaction recoverability, and security architectures.</p>
+    <p class="lede">Normalization, SQL queries, query processing, concurrency, recovery, and the concept of security.</p>
   </div>
 
   <!-- 4.1 FDs & Closures -->
@@ -576,17 +576,19 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
     </div>
   </div>
 
-  <!-- 4.4 B-Trees -->
+  <!-- 4.4 Query Processing & Optimization -->
   <div class="topic" id="t-4-4">
-    <h3>How B-Trees Index Databases <span class="tag hot">⭐ Repeated 3×</span></h3>
-    <div class="box def"><span class="label">B+ Tree Indexing</span>
-      A balanced, self-sorting multi-way search tree where all data records/pointers reside exclusively in the leaf nodes, while internal nodes store only routing keys.
+    <h3>Query Processing &amp; Optimization</h3>
+    <div class="box def"><span class="label">Query Processing</span>
+      The steps the DBMS takes to turn a high-level SQL query into a low-level set of operations on the stored data, then run it efficiently.
     </div>
     <ul>
-      <li><b>Point Lookup:</b> Descend from root to leaf in O(log N) operations. Multi-million row searches resolve in 3 to 4 disk reads.</li>
-      <li><b>Range Scans:</b> Extremely fast because leaf nodes are sequentially linked together in a doubly-linked list. Find the lower bound, then scan sequentially.</li>
-      <li><b>Self-Balancing:</b> Leaf overflows cause splits pushing the median key up. Underflows trigger borrowing from siblings or merging, maintaining a perfectly balanced height.</li>
+      <li><b>Parsing &amp; translation:</b> check the SQL for syntax errors, then convert it into a <mark>relational algebra</mark> expression.</li>
+      <li><b>Optimization:</b> the query optimizer builds several execution plans for the same query and picks the cheapest one (least disk reads / time).</li>
+      <li><b>Evaluation:</b> the query processor runs the chosen plan and returns the result rows.</li>
+      <li><b>Heuristic rules:</b> push <mark>Selection (σ)</mark> down (filter early), push <mark>Projection (π)</mark> down (drop unused columns early), convert Cartesian products into Joins. These shrink the data early and speed up the query.</li>
     </ul>
+    <div class="box tip"><span class="label">Exam tip</span> Syllabus phrase: "General strategies of query processing, query optimization, query processor." Focus on the 3 steps + the heuristic push-down rules.</div>
   </div>
 
   <!-- 4.5 Concurrency -->
@@ -633,14 +635,18 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
   <!-- 4.7 Security -->
   <div class="topic" id="t-4-7">
-    <h3>Database Security Architectures</h3>
+    <h3>Concept of Security in DBMS</h3>
+    <div class="box def"><span class="label">Database Security</span>
+      Protecting the database from unauthorised access, accidental loss, and malicious damage — so only the right people can read or change the right data.
+    </div>
     <ul>
-      <li><b>Authentication:</b> Verification of identity (Passwords, LDAP, MFA). Always precedes authorization.</li>
-      <li><b>Authorization:</b> Restricting operations via SQL permissions (<code>GRANT SELECT, INSERT ON Student TO Registrar</code>).</li>
-      <li><b>Discretionary Access Control (DAC):</b> The owner of a table has complete control and can grant or revoke access to other users at their discretion. Standard SQL.</li>
-      <li><b>Mandatory Access Control (MAC):</b> Access is strictly determined by system-enforced security clearances and object classifications (e.g. Top Secret, Confidential, Public). Clearance must be ≥ Classification.</li>
-      <li><b>Role-Based Access Control (RBAC):</b> Permissions are assigned to logical Roles (e.g., Accountant, Developer), and Users are mapped to those Roles. Highly scalable.</li>
+      <li><b><mark>Authentication</mark>:</b> proving who you are — login with a password before any access. Answers "are you a valid user?"</li>
+      <li><b><mark>Authorization</mark>:</b> deciding what an authenticated user is allowed to do — done with SQL <code>GRANT</code> and <code>REVOKE</code>. Example: <code>GRANT SELECT ON Student TO Registrar;</code></li>
+      <li><b>Integrity:</b> constraints (entity, referential, domain) keep the data correct and consistent.</li>
+      <li><b>Backup &amp; recovery:</b> regular backups + the recovery log protect against data loss after a crash.</li>
+      <li><b>Encryption:</b> sensitive data (passwords, payment info) is stored in scrambled form so a leak is useless without the key.</li>
     </ul>
+    <div class="box tip"><span class="label">Exam tip</span> Syllabus lists this only as "concept of security" — a general 5-mark answer (authentication + authorization + GRANT/REVOKE + integrity + backup) is enough. No need for advanced access-control models.</div>
   </div>
 </section>
 
@@ -824,7 +830,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
             <tr><th>Axis</th><th>Physical Data Independence</th><th>Logical Data Independence</th></tr>
             <tr><td><b>Layers</b></td><td>Internal ↔ Conceptual</td><td>Conceptual ↔ External</td></tr>
             <tr><td><b>Meaning</b></td><td>Change disk storage. Tables stay the same.</td><td>Change tables. User views stay the same.</td></tr>
-            <tr><td><b>Example</b></td><td>Add a B+ Tree index on <code>Student(Roll)</code>. Table structure is unchanged. Queries run faster.</td><td>Split <code>Employee(<u>EmpID</u>, Name, Salary)</code> into <code>EmpBasic(<u>EmpID</u>, Name)</code> and <code>EmpPay(<u>EmpID</u>, Salary)</code>. Old apps keep working through a join view.</td></tr>
+            <tr><td><b>Example</b></td><td>Add an index on <code>Student(Roll)</code>. Table structure is unchanged. Queries run faster.</td><td>Split <code>Employee(<u>EmpID</u>, Name, Salary)</code> into <code>EmpBasic(<u>EmpID</u>, Name)</code> and <code>EmpPay(<u>EmpID</u>, Salary)</code>. Old apps keep working through a join view.</td></tr>
             <tr><td><b>How easy?</b></td><td>Easy. Every DBMS supports it.</td><td>Hard. Needs careful view mapping.</td></tr>
           </table>
         </div>
@@ -1607,7 +1613,7 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
         <ul>
           <li><b>External:</b> Customized user views</li>
           <li><b>Conceptual:</b> Global logical tables (DBA)</li>
-          <li><b>Internal:</b> B+ Trees &amp; disk allocation</li>
+          <li><b>Internal:</b> file storage, indexes &amp; disk allocation</li>
           <li><b>Physical DI:</b> Swap Internal, Conceptual unchanged</li>
           <li><b>Logical DI:</b> Swap Conceptual, External unchanged</li>
         </ul>
@@ -1810,7 +1816,7 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
           <li><b>TRC:</b> { t | predicate(t) } — variable = tuple</li>
           <li><b>DRC:</b> { ⟨x,y⟩ | predicate(x,y) } — variables = attr values</li>
           <li>Both need <b>safety</b> (finite answer)</li>
-          <li>📌 <b>Codd's Theorem:</b> RA = safe TRC = safe DRC</li>
+          <li>📌 <b>Relational completeness:</b> RA = safe TRC = safe DRC</li>
         </ul>
       </div>
       <div class="cheat-card">
