@@ -2308,16 +2308,8 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
             ΣT = 121.30 + 60.65 + 15.16 + 2.53 + 0.32 = <b>199.96 ≈ N</b> ✓.
           </div>
           <div class="step k">
-            <b><mark>χ² goodness-of-fit</mark>:</b>
-            χ<sup>2</sup> = Σ (O<sub>i</sub> − T<sub>i</sub>)<sup>2</sup> / T<sub>i</sub>. Pool the last two cells (T &lt; 5 rule: combine x = 3 and x = 4 into one cell with O = 3, T = 2.85).
-            <ul>
-              <li>(122 − 121.30)<sup>2</sup> / 121.30 = 0.49 / 121.30 = 0.0040</li>
-              <li>(60 − 60.65)<sup>2</sup> / 60.65 = 0.4225 / 60.65 = 0.0070</li>
-              <li>(15 − 15.16)<sup>2</sup> / 15.16 = 0.0256 / 15.16 = 0.0017</li>
-              <li>(3 − 2.85)<sup>2</sup> / 2.85 = 0.0225 / 2.85 = 0.0079</li>
-            </ul>
-            <mark><b>χ²<sub>calc</sub> = 0.0206</b></mark>. Degrees of freedom = (cells after pooling 4) − 1 (constraint Σ) − 1 (estimated λ) = 2.
-            Critical χ<sup>2</sup><sub>0.05, 2</sub> = 5.991. Since 0.0206 ≪ 5.991, <b>do not reject</b> the Poisson hypothesis: the model fits the accident data very well.
+            <b>Compare observed vs theoretical:</b>
+            The fitted frequencies (121.30, 60.65, 15.16, 2.53, 0.32) track the observed (122, 60, 15, 2, 1) closely at every value of x, so the <mark>Poisson model is a good fit</mark> for the data.
           </div>
         </div>
 
@@ -2328,7 +2320,6 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
             <tbody>
               <tr><th>Observed f<sub>i</sub></th><td>122</td><td>60</td><td>15</td><td>2</td><td>1</td><td>200</td></tr>
               <tr><th>Theoretical T<sub>i</sub></th><td>121.30</td><td>60.65</td><td>15.16</td><td>2.53</td><td>0.32</td><td>199.96</td></tr>
-              <tr><th>(O − T)<sup>2</sup>/T</th><td>0.0040</td><td>0.0070</td><td>0.0017</td><td colspan="2" style="text-align:center;">0.0079 (pooled)</td><td><b>χ<sup>2</sup> = 0.0206</b></td></tr>
             </tbody>
           </table>
         </div>
@@ -2338,16 +2329,15 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
           <ul style="margin:6px 0 0 18px;">
             <li>For Φ(−z) always use symmetry: Φ(−z) = 1 − Φ(z). Reading Φ(−0.5) as 0.6915 (the value for +0.5) is the most common Z-problem error.</li>
             <li>For Poisson fitting, the wrong λ comes from using Σx/n (count of distinct x) instead of Σf·x / Σf (mean weighted by frequency).</li>
-            <li>Chi-square needs T<sub>i</sub> ≥ 5 in every cell. Skipping the pool step (T<sub>3</sub> = 2.53, T<sub>4</sub> = 0.32) inflates χ<sup>2</sup>.</li>
-            <li>Degrees of freedom: subtract one extra for the estimated λ. Using d.f. = k − 1 instead of k − 2 is a frequent slip.</li>
+            <li>Use the recursion P(k) = (λ/k)·P(k−1) to get the frequencies fast; recomputing e<sup>−λ</sup>λ<sup>k</sup>/k! from scratch each time wastes exam minutes and invites arithmetic slips.</li>
           </ul>
         </div>
 
         <h5>Modern Relevance</h5>
-        <p>The Normal curve drives Six-Sigma quality control (Cp, Cpk), Value-at-Risk in finance, IQ scores, tolerance bands in manufacturing, and is the base for every t-test and ANOVA. Poisson models call-centre arrivals, web-server hits per second, router packets, insurance claims, wafer defects, and football goals. Both are default tools in modern data-science work.</p>
+        <p>The Normal curve drives Six-Sigma quality control (Cp, Cpk), Value-at-Risk in finance, IQ scores, and tolerance bands in manufacturing. Poisson models call-centre arrivals, web-server hits per second, router packets, insurance claims, wafer defects, and football goals. Both are default tools in modern data-science work.</p>
 
         <h5>Conclusion</h5>
-        <p>Z-standardisation turns any Normal probability into a Φ-table lookup. The symmetry rule Φ(−z) = 1 − Φ(z) covers the negative side that tables skip. Poisson fitting needs just one number (λ̂ = x̄). The fitted frequencies match the accident data with χ<sup>2</sup><sub>calc</sub> = 0.0206, far below the critical value. So the Poisson fit is safe.</p>
+        <p>Z-standardisation turns any Normal probability into a Φ-table lookup. The symmetry rule Φ(−z) = 1 − Φ(z) covers the negative side that tables skip. Poisson fitting needs just one number (λ̂ = x̄). The fitted frequencies (121.30, 60.65, 15.16, 2.53, 0.32) match the observed accident data closely at every count, so the Poisson fit is sound.</p>
 
         <div class="score">
           <b>Marks Allocation:</b>
@@ -2356,7 +2346,7 @@ Verify r^2 = b_yx * b_xy  (where r has same sign as slopes)</div>
             <li>(a) Symmetry rule for Φ(−z) and interval logic: <span class="m">3 M</span></li>
             <li>(b) Σfx-table + λ̂ estimation: <span class="m">2 M</span></li>
             <li>(b) Five theoretical frequencies via recursion: <span class="m">3 M</span></li>
-            <li>(b) χ<sup>2</sup> goodness-of-fit + verdict: <span class="m">2 M</span></li>
+            <li>(b) Observed-vs-theoretical comparison + fit verdict: <span class="m">2 M</span></li>
             <li>Total: <span class="m">15 M</span></li>
           </ul>
         </div>

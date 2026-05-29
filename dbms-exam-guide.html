@@ -267,6 +267,38 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
   th, td{ font-size:12px; padding:5px 7px; }
   .table-wrap{ margin:10px 0; }
 }
+
+/* ── DIAGRAM-MOBILE-OPT · stack multi-col diagrams, scroll wide ones, lift tiny labels (all phones) ── */
+@media(max-width:599px){
+  .diagram-fig{ overflow-x:auto; -webkit-overflow-scrolling:touch; padding:8px 6px 6px; }
+  .diagram-fig > div{ max-width:100% !important; }
+  /* Collapse conceptual multi-column grids (incl. ER cardinality connector rows) to one readable column.
+     The 60px+repeat(6,1fr) timeline is deliberately NOT collapsed — it scrolls inside .diagram-fig. */
+  .diagram-fig [style*="grid-template-columns:1fr 1fr 1fr"],
+  .diagram-fig [style*="grid-template-columns:1fr 1fr"],
+  .diagram-fig [style*="grid-template-columns: 1fr 1fr"],
+  .diagram-fig [style*="grid-template-columns:1fr auto"],
+  .diagram-fig [style*="repeat(3,1fr)"],
+  .diagram-fig [style*="repeat(3, 1fr)"],
+  .diagram-fig [style*="repeat(2,1fr)"],
+  .diagram-fig [style*="repeat(2, 1fr)"]{ grid-template-columns:1fr !important; }
+  /* Tighten generous gaps so stacked boxes aren't sparse */
+  .diagram-fig [style*="gap:14px"]{ gap:8px !important; }
+  .diagram-fig [style*="gap:16px"]{ gap:8px !important; }
+  .diagram-fig [style*="gap:18px"]{ gap:9px !important; }
+  .diagram-fig [style*="gap:24px"]{ gap:10px !important; }
+  /* Lift the tiniest labels to a legible size on phones */
+  .diagram-fig [style*="font-size:9px"],
+  .diagram-fig [style*="font-size:9.5px"],
+  .diagram-fig [style*="font-size:10px"],
+  .diagram-fig [style*="font-size:10.5px"]{ font-size:11.5px !important; }
+  /* Drop fixed min-widths that force horizontal overflow */
+  .diagram-fig [style*="min-width:180px"],
+  .diagram-fig [style*="min-width:200px"],
+  .diagram-fig [style*="min-width:220px"],
+  .diagram-fig [style*="min-width:240px"]{ min-width:0 !important; width:100%; }
+  .diagram-fig figcaption{ font-size:10.5px; line-height:1.45; }
+}
 @media print{
   @page{ margin:1.4cm 1.2cm; }
   html,body{ background:#fff !important; color:#000 !important; font-size:11pt; }
@@ -348,7 +380,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
     </div>
     <div class="box prof">
       <span class="label">Professor Pattern</span>
-      Tested 2/6 papers (verbatim BCA25). For a 5M answer, always cite 3 specific file-system anomalies (redundancy, access difficulty, lack of concurrency control) and show how the DBMS solves each.
+      Appears verbatim in BCA May-25 / Dec-25. For a 5M answer, always cite 3 specific file-system anomalies (redundancy, access difficulty, lack of concurrency control) and show how the DBMS solves each.
     </div>
   </div>
 
@@ -413,6 +445,43 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <li><b>Naive/End Users:</b> Clerks interacting only with built forms (clicks, no SQL awareness).</li>
       <li><b>Database Designers:</b> Architect the logical schema (ER diagrams) prior to DBA deployment.</li>
     </ul>
+  </div>
+
+  <!-- 1.4 Tier architectures & classification -->
+  <div class="topic" id="t-1-4">
+    <h3>DBMS Architectures (Tier) &amp; Classification</h3>
+    <div class="box def"><span class="label">Tier ≠ Schema</span>
+      <b>Tier architecture</b> describes <em>where the software physically runs</em> (client / server / DB machine). This is <mark>different</mark> from the <b>three-schema</b> architecture (which is about levels of <em>abstraction</em>). Examiners love this trap — keep the two separate.
+    </div>
+
+    <figure class="diagram-fig">
+      <div style="display:flex; flex-direction:column; gap:8px; max-width:480px; margin:0 auto;">
+        <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:8px; text-align:center; font-size:12.5px;"><b>1-Tier · Centralized</b><br>user + app + DB on one machine</div>
+        <div style="text-align:center; color:var(--brand); font-weight:700;">↓</div>
+        <div style="background:var(--gold-soft); border:1.5px solid var(--gold); border-radius:4px; padding:8px; text-align:center; font-size:12.5px;"><b>2-Tier · Client–Server</b><br>client app ⇄ DB server (direct SQL / ODBC)</div>
+        <div style="text-align:center; color:var(--gold); font-weight:700;">↓</div>
+        <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:4px; padding:8px; text-align:center; font-size:12.5px;"><b>3-Tier / n-Tier</b><br>client ⇄ <b>application server</b> ⇄ DB server (web apps)</div>
+      </div>
+      <figcaption><b>Fig 1.4</b> · DBMS tiers — adding a middle application layer improves scalability and security; the client never touches the DB directly.</figcaption>
+    </figure>
+
+    <h4>Tier Architectures</h4>
+    <ul>
+      <li><b><mark>Centralized (1-tier)</mark></b>: everything — data, DBMS, application, user — on a single machine. No network; used for standalone/personal databases.</li>
+      <li><b><mark>2-tier (Client–Server)</mark></b>: the client application talks <em>directly</em> to the DB server through an API (ODBC / JDBC). Business logic lives on the client. Fine for small LANs, hard to scale.</li>
+      <li><b><mark>3-tier</mark></b>: a middle <mark>application server</mark> sits between client and DB. Client → app server (business logic) → DB server. The client never sees the DB → better <mark>security</mark> and <mark>scalability</mark>. Standard for web applications.</li>
+      <li><b><mark>n-tier</mark></b>: 3-tier extended with extra layers (web server, cache, load balancer) for large enterprise systems.</li>
+    </ul>
+
+    <h4>Classification of DBMS</h4>
+    <div class="table-wrap"><table>
+      <tr><th>Criterion</th><th>Types</th></tr>
+      <tr><td><b>Data model</b></td><td>Relational · Hierarchical · Network · Object-oriented · Object-relational · NoSQL</td></tr>
+      <tr><td><b>No. of users</b></td><td>Single-user (PC) · Multi-user (shared server)</td></tr>
+      <tr><td><b>No. of sites</b></td><td>Centralized (one site) · Distributed (many sites)</td></tr>
+      <tr><td><b>Purpose</b></td><td>General-purpose · Special-purpose (e.g. OLTP transaction systems)</td></tr>
+      <tr><td><b>Access</b></td><td>Open-source (MySQL, PostgreSQL) · Commercial (Oracle, SQL Server)</td></tr>
+    </table></div>
   </div>
 </section>
 
@@ -488,6 +557,37 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <div class="step"><span class="k">5</span><div class="body"><b>Multi-valued Attributes:</b> Pull into a separate table. Schema: <code>AttrTable(<u>OwnerPK, AttributeValue</u>)</code>.</div></div>
     </div>
   </div>
+
+  <!-- 2.4 Data models: hierarchical, network, relational -->
+  <div class="topic" id="t-2-4">
+    <h3>Data Models — Hierarchical, Network, Relational <span class="tag fav">★ Dec-25 Q7</span></h3>
+    <div class="box def"><span class="label">What is a data model?</span>
+      A <mark>data model</mark> is a set of concepts for describing the structure of a database — its data, relationships and constraints. The three classic record-based models evolved in order: <b>Hierarchical → Network → Relational</b>.
+    </div>
+
+    <figure class="diagram-fig">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:520px; margin:0 auto;">
+        <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:8px; font-size:12px;"><b>Hierarchical</b><br>Tree · one parent → many children (1:N). IBM IMS.</div>
+        <div style="background:var(--gold-soft); border:1.5px solid var(--gold); border-radius:4px; padding:8px; font-size:12px;"><b>Network</b><br>Graph · a child may have many parents (M:N) via "sets". CODASYL.</div>
+        <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:4px; padding:8px; font-size:12px;"><b>Relational</b><br>Tables (relations) linked by keys. Oracle, MySQL.</div>
+        <div style="background:#fef2f2; border:1.5px solid var(--crimson); border-radius:4px; padding:8px; font-size:12px;"><b>Object-Oriented</b><br>Data as objects (attributes + methods). db4o, ObjectDB.</div>
+      </div>
+      <figcaption><b>Fig 2.9</b> · Evolution of data models — relational replaced the navigational hierarchical/network models with declarative, key-based access.</figcaption>
+    </figure>
+
+    <div class="table-wrap"><table>
+      <tr><th>Parameter</th><th>Hierarchical</th><th>Network</th><th>Relational</th></tr>
+      <tr><td><b>Structure</b></td><td>Tree</td><td>Graph (sets)</td><td>Tables</td></tr>
+      <tr><td><b>Relationship</b></td><td>1:N only</td><td>M:N allowed</td><td>Any, via keys</td></tr>
+      <tr><td><b>Access</b></td><td>Navigational (pointers)</td><td>Navigational (pointers)</td><td><mark>Declarative</mark> (SQL)</td></tr>
+      <tr><td><b>Redundancy</b></td><td>High</td><td>Lower</td><td>Controlled</td></tr>
+      <tr><td><b>Example</b></td><td>IBM IMS</td><td>CODASYL / IDMS</td><td>Oracle, MySQL</td></tr>
+    </table></div>
+
+    <div class="box why"><span class="label">Why relational won</span>
+      Hierarchical and network models force the programmer to <em>navigate pointers</em> by hand and can't easily change structure without rewriting code (and hierarchical can't even express M:N directly). The <mark>relational model</mark> hides physical pointers behind keys and lets you ask <em>what</em> you want in SQL, not <em>how</em> to fetch it.
+    </div>
+  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ -->
@@ -509,10 +609,16 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
     <ul>
       <li><b>Select (σ):</b> Unary operator. Filters rows based on a predicate. Syntax: <code>σ<sub>Marks &gt; 75</sub>(Student)</code>.</li>
       <li><b>Project (π):</b> Unary operator. Discards columns, keeping only specified ones. Syntax: <code>π<sub>Name, Course</sub>(Student)</code>.</li>
+      <li><b>Rename (ρ):</b> Unary operator. Renames a relation or its attributes so the same relation can be used twice (needed for self-joins). Syntax: <code>ρ<sub>S</sub>(Student)</code>.</li>
+      <li><b><mark>Generalized Projection (π)</mark>:</b> Extends Project to allow <mark>arithmetic / computed expressions</mark> in the column list, not just plain attribute names. Syntax: <code>π<sub>Name, Salary×12 → AnnualPay</sub>(Emp)</code>.</li>
       <li><b>Cartesian Product (×):</b> Binary operator. Combines every row of R1 with every row of R2. Result size: |R1| × |R2| rows.</li>
       <li><b>Theta Join (⋈<sub>θ</sub>):</b> Combines selection and Cartesian product. Syntax: <code>R1 ⋈<sub>R1.id = R2.id</sub> R2</code>.</li>
       <li><b>Division (÷):</b> Used for "for all" queries. If R(A,B) and S(B), then R ÷ S yields tuples in R(A) that are paired with <em>every</em> tuple in S.</li>
     </ul>
+
+    <div class="box tip"><span class="label">Aggregate Functions &amp; Grouping (𝒢)</span>
+      The aggregate operator groups rows and applies <mark>SUM, AVG, COUNT, MIN, MAX</mark>. Syntax: <code><sub>Dept</sub>𝒢<sub>AVG(Salary)</sub>(Emp)</code> — group Emp by Dept, average salary per group. (SQL equivalent: <code>GROUP BY Dept</code>.)
+    </div>
 
     <div class="box tip">
       <span class="label">Worked Joins Analogy</span>
@@ -670,8 +776,12 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
       <li><b>Integrity:</b> constraints (entity, referential, domain) keep the data correct and consistent.</li>
       <li><b>Backup &amp; recovery:</b> regular backups + the recovery log protect against data loss after a crash.</li>
       <li><b>Encryption:</b> sensitive data (passwords, payment info) is stored in scrambled form so a leak is useless without the key.</li>
+      <li><b><mark>Access-control models</mark>:</b> <b><mark>DAC</mark></b> (Discretionary) — the data owner grants/revokes rights with <code>GRANT</code>/<code>REVOKE</code>; this is what SQL uses. <b><mark>MAC</mark></b> (Mandatory) — the system assigns security <em>labels</em> (e.g. Secret, Confidential); a user reads a row only if their clearance ≥ the row's classification. Used in military / high-security DBs.</li>
     </ul>
-    <div class="box tip"><span class="label">Exam tip</span> Syllabus lists this only as "concept of security" — a general 5-mark answer (authentication + authorization + GRANT/REVOKE + integrity + backup) is enough. No need for advanced access-control models.</div>
+    <div class="box tip"><span class="label">Exam tip</span> BCA May-25 asked <b>mandatory access control (MAC)</b> directly (5M) — so know <mark>DAC vs MAC</mark>. Full "concept of security" answer = authentication + authorization (GRANT/REVOKE) + DAC/MAC + integrity + backup/recovery + encryption.</div>
+
+    <div class="box why"><span class="label">Intro to Distributed DBMS (BCA May-25 Q6a · 5M)</span>
+      A <mark>distributed DBMS</mark> stores the database across many sites (machines) but shows users <em>one</em> logical database. Key features: <b><mark>transparency</mark></b> (location/fragmentation hidden from the user), <b><mark>fragmentation</mark></b> (split a table horizontally/vertically across sites), <b><mark>replication</mark></b> (keep copies on several sites for availability), <b>local autonomy</b>, and <b>higher reliability</b> (one site down ≠ whole DB down). Cost: concurrency control and recovery are harder across sites.</div>
   </div>
 </section>
 
@@ -692,7 +802,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 a -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(a)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(a)</span></div>
+      <div class="qhead"><span class="qnum">Q1(a)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA May-25 Q1(a)</span></div>
       <div class="qbody"><b>What do you mean by system log?</b></div>
       <div class="ans">
         A <mark>system log</mark> (transaction log) is a file that records every change made to the database, in order. Each entry stores the transaction ID, the data item, its old value, and its new value. It is used for <mark>recovery</mark> after a crash. Example: a UPI payment failure is undone by reading its log entry.
@@ -701,7 +811,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 b -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(b)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(b)</span></div>
+      <div class="qhead"><span class="qnum">Q1(b)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA May-25 Q1(b)</span></div>
       <div class="qbody"><b>What is a composite attribute? Give an example.</b></div>
       <div class="ans">
         A <mark>composite attribute</mark> is one attribute that can be split into smaller sub-parts. Example: <code>Address</code> splits into House-No, Street, City, PIN. In the ER diagram it is drawn as an oval with smaller ovals joined to it. Opposite is a <em>simple (atomic)</em> attribute like <code>Age</code>.
@@ -710,7 +820,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 c -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(c)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(f)</span></div>
+      <div class="qhead"><span class="qnum">Q1(c)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA May-25 Q1(f)</span></div>
       <div class="qbody"><b>What do you mean by cardinality? What are the different kinds?</b></div>
       <div class="ans">
         <mark>Cardinality</mark> tells how many rows of one entity link to rows of another in a relationship. Three kinds:
@@ -724,7 +834,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 d -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(d)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(g)</span></div>
+      <div class="qhead"><span class="qnum">Q1(d)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA May-25 Q1(g)</span></div>
       <div class="qbody"><b>What are participation constraints in a relationship in the ER model?</b></div>
       <div class="ans">
         Participation says whether <em>every</em> entity row must join the relationship.
@@ -737,7 +847,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 e -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(e)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(e)</span></div>
+      <div class="qhead"><span class="qnum">Q1(e)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA May-25 Q1(e)</span></div>
       <div class="qbody"><b>What are the unary operations in Relational Algebra?</b></div>
       <div class="ans">
         Unary operations work on <em>one</em> relation at a time. Three of them:
@@ -751,7 +861,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 f -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(f)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(c)</span></div>
+      <div class="qhead"><span class="qnum">Q1(f)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA May-25 Q1(c)</span></div>
       <div class="qbody"><b>What is the lossless join property?</b></div>
       <div class="ans">
         When a table is split into smaller tables (decomposition), the <mark>lossless join</mark> property means joining them back gives the <em>exact</em> original rows — no extra (spurious) rows, no lost rows. It is a must-have for safe normalization. Test: the common column of the two pieces must be a key of at least one piece.
@@ -760,7 +870,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 g -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(g)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(d)</span></div>
+      <div class="qhead"><span class="qnum">Q1(g)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA May-25 Q1(d)</span></div>
       <div class="qbody"><b>What do you mean by trivial dependency?</b></div>
       <div class="ans">
         A <mark>functional dependency</mark> <code>X → Y</code> is <mark>trivial</mark> when Y is already part of X (Y ⊆ X). It is always true, so it adds no new rule. Example: <code>{RollNo, Name} → Name</code>. Opposite is a <em>non-trivial</em> FD like <code>RollNo → Name</code>.
@@ -769,7 +879,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 h -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(h)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(j)</span></div>
+      <div class="qhead"><span class="qnum">Q1(h)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA May-25 Q1(j)</span></div>
       <div class="qbody"><b>Write any two of Armstrong's inference rules.</b></div>
       <div class="ans">
         <mark>Armstrong's axioms</mark> are rules to find all FDs. Any two:
@@ -783,7 +893,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 i -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(i)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(i)</span></div>
+      <div class="qhead"><span class="qnum">Q1(i)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA May-25 Q1(i)</span></div>
       <div class="qbody"><b>What is the purpose of the GROUP BY clause in a SELECT statement?</b></div>
       <div class="ans">
         <mark>GROUP BY</mark> puts rows that share a value into one group, then runs an aggregate (COUNT, SUM, AVG, MIN, MAX) on each group. Example: <code>SELECT Dept, AVG(Salary) FROM Emp GROUP BY Dept;</code> gives the average salary per department. <code>HAVING</code> filters the groups after grouping.
@@ -792,11 +902,89 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 j -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(j)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(h)</span></div>
+      <div class="qhead"><span class="qnum">Q1(j)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA May-25 Q1(h)</span></div>
       <div class="qbody"><b>What is a timestamp in concurrency control?</b></div>
       <div class="ans">
         A <mark>timestamp</mark> is a unique number the DBMS gives each transaction at its start (usually by clock or counter). Older transactions get smaller numbers. The <mark>timestamp ordering</mark> protocol uses these numbers to decide the order of conflicting reads and writes, so the result stays serialisable — without using locks.
       </div>
+    </div>
+
+    <!-- ======================================================= -->
+    <!-- SECTION A — also from BCA Dec-25 (distinct shorts) -->
+    <!-- ======================================================= -->
+    <div class="part-head" style="background:var(--amber);">Also Part-A in BCA Dec-25 · BCA-17-203</div>
+    <div class="box tip"><span class="label">Two papers, two short-lists</span> The <b>Dec-2025</b> paper (BCA-17-203) set a <b>different</b> Part-A from May-25 — more definition-based. Both are fair game for June-26, so drill this second list too. Amber chips = Dec-25; blue chips above = May-25.</div>
+
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q1(a)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.8;background:#fff8e7;color:var(--amber);border-color:var(--amber);">⟲ BCA Dec-25 Q1(a)</span></div>
+      <div class="qbody"><b>Differentiate between Data and Information.</b></div>
+      <div class="ans"><mark>Data</mark> = raw, unprocessed facts and figures with no meaning on their own (e.g. <code>90, 85, 78</code>). <mark>Information</mark> = data that has been processed, organised and given context so it becomes useful (e.g. <em>"average marks = 84.3"</em>). Data is the input; information is the meaningful output.</div>
+    </div>
+
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q1(b)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.8;background:#fff8e7;color:var(--amber);border-color:var(--amber);">⟲ BCA Dec-25 Q1(b)</span></div>
+      <div class="qbody"><b>List any three advantages of the Database Approach over File-based Systems.</b></div>
+      <div class="ans">
+        <ul>
+          <li><b><mark>Controlled redundancy</mark></b>: data stored once, not copied in many files.</li>
+          <li><b><mark>Consistency &amp; integrity</mark></b>: one update reflects everywhere; constraints enforced.</li>
+          <li><b><mark>Concurrent access, security &amp; backup</mark></b>: many users safely, with access control and recovery.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q1(c)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.8;background:#fff8e7;color:var(--amber);border-color:var(--amber);">⟲ BCA Dec-25 Q1(c)</span></div>
+      <div class="qbody"><b>Define Data Independence and mention its two types.</b></div>
+      <div class="ans"><mark>Data independence</mark> is the ability to change the schema at one level without altering the level above it. Two types: <b><mark>Logical DI</mark></b> (change the conceptual schema — add a column — without changing external views/apps) and <b><mark>Physical DI</mark></b> (change storage/indexes — internal schema — without changing the conceptual schema).</div>
+    </div>
+
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q1(d)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.8;background:#fff8e7;color:var(--amber);border-color:var(--amber);">⟲ BCA Dec-25 Q1(d)</span></div>
+      <div class="qbody"><b>What is a Schema?</b></div>
+      <div class="ans">A <mark>schema</mark> is the overall <b>logical design / structure</b> of the database — the tables, their columns, data types, keys and constraints. It is defined once and rarely changes. The actual data stored at a given moment is the <em>instance</em> (it changes constantly).</div>
+    </div>
+
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q1(e)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.8;background:#fff8e7;color:var(--amber);border-color:var(--amber);">⟲ BCA Dec-25 Q1(e)</span></div>
+      <div class="qbody"><b>Define Primary Key and Foreign Key with examples.</b></div>
+      <div class="ans">A <mark>primary key</mark> is an attribute (or set) that <b>uniquely identifies</b> each row and cannot be NULL — e.g. <code>StudentID</code> in STUDENT. A <mark>foreign key</mark> is an attribute that <b>refers to the primary key of another table</b> to link them — e.g. <code>Dept_ID</code> in EMPLOYEE referencing <code>Department.Dept_ID</code>.</div>
+    </div>
+
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q1(f)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.8;background:#fff8e7;color:var(--amber);border-color:var(--amber);">⟲ BCA Dec-25 Q1(f)</span></div>
+      <div class="qbody"><b>What is an Entity Set? Give one suitable example.</b></div>
+      <div class="ans">An <mark>entity set</mark> is a collection of similar entities that share the same attributes. Example: all individual student records — <code>{S1, S2, S3, …}</code> — together form the <b>STUDENT</b> entity set, each described by RollNo, Name, Course.</div>
+    </div>
+
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q1(g)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.8;background:#fff8e7;color:var(--amber);border-color:var(--amber);">⟲ BCA Dec-25 Q1(g)</span></div>
+      <div class="qbody"><b>Differentiate between Relational Algebra and Relational Calculus.</b></div>
+      <div class="ans">
+        <div class="table-wrap"><table>
+          <tr><th>Parameter</th><th>Relational Algebra</th><th>Relational Calculus</th></tr>
+          <tr><td><b>Nature</b></td><td><mark>Procedural</mark> — specifies <em>how</em> to get the result, step by step</td><td><mark>Non-procedural</mark> — specifies <em>what</em> result is wanted</td></tr>
+          <tr><td><b>Basis</b></td><td>Operators: σ, π, ⋈, ∪, −</td><td>Predicate logic: ∃, ∀ (TRC / DRC)</td></tr>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q1(h)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.8;background:#fff8e7;color:var(--amber);border-color:var(--amber);">⟲ BCA Dec-25 Q1(h)</span></div>
+      <div class="qbody"><b>Define Functional Dependency with a suitable example.</b></div>
+      <div class="ans">A <mark>functional dependency</mark> <code>X → Y</code> means the value of X <b>uniquely determines</b> the value of Y — for any two rows with the same X, the Y must also match. Example: <code>RollNo → Name</code> (each RollNo maps to exactly one student Name).</div>
+    </div>
+
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q1(i)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.8;background:#fff8e7;color:var(--amber);border-color:var(--amber);">⟲ BCA Dec-25 Q1(i)</span></div>
+      <div class="qbody"><b>What is a View in SQL? Why is it used?</b></div>
+      <div class="ans">A <mark>view</mark> is a <b>virtual table</b> defined by a stored <code>SELECT</code> query — it holds no data of its own, just the query. Used for <b>security</b> (hide sensitive columns), <b>simplicity</b> (reuse a complex join by name), and <b>logical data independence</b>. Example: <code>CREATE VIEW v_emp AS SELECT Name, Dept FROM Employee;</code></div>
+    </div>
+
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q1(j)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.8;background:#fff8e7;color:var(--amber);border-color:var(--amber);">⟲ BCA Dec-25 Q1(j)</span></div>
+      <div class="qbody"><b>What is Concurrency Control?</b></div>
+      <div class="ans"><mark>Concurrency control</mark> is the set of techniques (<mark>locking</mark>, <mark>2PL</mark>, <mark>timestamp ordering</mark>) that manage simultaneous transactions so they don't interfere with each other. It keeps the database consistent by preventing problems like <em>lost update</em>, <em>dirty read</em> and <em>unrepeatable read</em>.</div>
     </div>
 
     <!-- ======================================================= -->
@@ -806,7 +994,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q2 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q2</span><span class="tag hot">★★★ BCA-25 Q3(b) + DBMS25-BCA Q3</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q2</span><span class="tag hot">★★★ BCA May-25 Q3(b) + BCA Dec-25 Q3</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Explain the ANSI/SPARC Three-Schema Architecture in detail with a neat diagram. Differentiate between Logical and Physical Data Independence with concrete examples.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
@@ -898,7 +1086,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q3 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q3</span><span class="tag hot">★★★ BCA-25 Q3(a) Banking + DBMS25-BCA Q4 University</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q3</span><span class="tag hot">★★★ BCA May-25 Q3(a) Banking + BCA Dec-25 Q4 University</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>A hospital maintains records of Patients (PID, Name, Phone), Doctors (DocID, Name, Specialty), Departments (DeptID, DName), Appointments, and Bills. Design a complete ER Diagram clearly indicating entities, attributes (with keys), cardinality ratios, and participation constraints. Reduce the ER diagram into relational schemas.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
@@ -1049,7 +1237,7 @@ APPOINTMENT(PID*, DocID*, ApptDate, Diagnosis)
 
     <!-- Q4 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q4</span><span class="tag hot">★★★ BCA-25 Q5(a) RA incl Division</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q4</span><span class="tag hot">★★★ BCA May-25 Q5(a) RA incl Division</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Given the Schema: Employee(EmpID, Name, Salary, DeptID), Project(ProjID, ProjName, ChiefArch), WorkOn(EmpID, ProjID, Hours). Write the query expressions in BOTH Relational Algebra and SQL:
         <br>(a) Find names of all employees who earn more than 50,000.
         <br>(b) Find names of all employees working on Project 'S9'.
@@ -1180,7 +1368,7 @@ WHERE w.ProjID = 'S9';</code></pre>
 
     <!-- Q5 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q5</span><span class="tag hot">★★★ BCA-25 Q5(b) BCNF + DBMS25-BCA Q6 Normalization</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q5</span><span class="tag hot">★★★ BCA May-25 Q5(b) BCNF + BCA Dec-25 Q6 Normalization</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Given relation schema R(A, B, C, D, E, F) and the set of Functional Dependencies: F = {A→C, AB→D, BC→E, D→F, F→A}.
         <br>(a) Compute the attribute closure {A, B}⁺.
         <br>(b) Find all candidate keys of R.
@@ -1300,7 +1488,7 @@ R5(F, A)      -- Enforces F → A</code></pre>
 
     <!-- Q6 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q6</span><span class="tag hot">★★★ BCA-25 Q4(a) Conflict Serializability + 2PL</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q6</span><span class="tag hot">★★★ BCA May-25 Q4(a) Conflict Serializability + 2PL</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>What is Two-Phase Locking (2PL)? Explain its variants (Basic, Conservative, Strict, Rigorous) with a comparison table. Why is Strict 2PL preferred for ensuring transaction recoverability in DBMS? Sketch a cascading abort scenario under basic 2PL.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
@@ -1421,7 +1609,7 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
 
     <!-- Q7 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q7</span><span class="tag hot">★★ BCA-25 Q6(b) Shadow Paging + Recovery</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q7</span><span class="tag hot">★★ BCA May-25 Q6(b) Shadow Paging + Recovery</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Explain the Write-Ahead Logging (WAL) protocol and discuss recovery using checkpoints. Contrast WAL recovery with the Shadow Paging recovery scheme with a neat comparison table.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
@@ -1486,7 +1674,7 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
         <h5>WAL vs Shadow Paging Comparison</h5>
         <div class="table-wrap">
           <table>
-            <tr><th>Metric</th><th>Write-Ahead Logging (<mark>WAL</mark>)</th><th><mark>Shadow Paging</mark></th></tr>
+            <tr><th>Metric</th><th>Write-Ahead Logging (WAL)</th><th>Shadow Paging</th></tr>
             <tr><td><b>Mechanism</b></td><td>Updates written one by one to a log file. Data is updated in place.</td><td>Keeps two page tables (Current and Shadow). Writes changed blocks to new pages. Swaps pointers on commit.</td></tr>
             <tr><td><b>Write Cost</b></td><td>Low. Append-only log writes are very fast.</td><td>High. Splits disk blocks because of random page writes.</td></tr>
             <tr><td><b>Concurrency</b></td><td>High. Many transactions write to the log in parallel.</td><td>Low. Atomic page swaps force transactions to run one at a time.</td></tr>
@@ -1532,10 +1720,10 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
 
     <!-- Q8 — DBMS Users + Components + DBA (appeared as Part-B in BOTH BCA papers) -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q8</span><span class="tag hot">★★★ BCA-25 Q2(a) 10M + DBMS25-BCA Q2 (components 10M + users 5M)</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q8</span><span class="tag hot">★★★ BCA May-25 Q2(a) 10M + BCA Dec-25 Q2 (components 10M + users 5M)</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Explain the components of a DBMS environment with a neat diagram. Define the different types of DBMS users and the role of the DBA.</b></div>
       <div class="ans">
-        <div class="box tip"><span class="label">Why this is here</span> This topic showed up as a Part-B question in <b>both</b> BCA papers (BCA-MAY-25 Q2a · DBMS25-BCA Q2). It is the easiest 10-15 marks in the paper — pure theory, no numerical. Do not skip it.</div>
+        <div class="box tip"><span class="label">Why this is here</span> This topic showed up as a Part-B question in <b>both</b> BCA papers (BCA May-25 Q2a · BCA Dec-25 Q2). It is the easiest 10-15 marks in the paper — pure theory, no numerical. Do not skip it.</div>
 
         <h5>What is a DBMS Environment?</h5>
         <p>A <mark>DBMS</mark> is the software that sits between users and the stored data. The full environment has five parts working together: <mark>hardware</mark>, <mark>software</mark>, <mark>data</mark>, <mark>users</mark>, and <mark>procedures</mark>.</p>
@@ -1602,6 +1790,73 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
             <li><span>Types of DBMS users table</span><span class="m">4.0M</span></li>
             <li><span>DBA roles (SGBTLI)</span><span class="m">3.0M</span></li>
             <li><span>Modern relevance + conclusion</span><span class="m">2.0M</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q9 — Keys + Integrity Constraints (BCA Dec-25 Q5) -->
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q9</span><span class="tag hot">★★★ BCA Dec-25 Q5 · Keys 5M + Integrity 10M</span><span class="tag marks">15M</span></div>
+      <div class="qbody">Define and explain the various types of keys used in the Relational Model. Discuss the different integrity constraints in a relational database with suitable examples.</div>
+      <div class="ans">
+        <h5>Part A — Types of Keys (5M)</h5>
+        <div class="table-wrap"><table>
+          <tr><th>Key</th><th>Meaning</th><th>Example (STUDENT)</th></tr>
+          <tr><td><b><mark>Super key</mark></b></td><td>Any attribute set that uniquely identifies a tuple (may carry extra attrs)</td><td>{RollNo}, {RollNo, Name}</td></tr>
+          <tr><td><b><mark>Candidate key</mark></b></td><td>Minimal super key — no proper subset is itself a super key</td><td>RollNo, Email</td></tr>
+          <tr><td><b><mark>Primary key</mark></b></td><td>Chosen candidate key; must be <mark>unique + NOT NULL</mark></td><td>RollNo</td></tr>
+          <tr><td><b>Alternate key</b></td><td>Candidate keys not chosen as primary</td><td>Email</td></tr>
+          <tr><td><b><mark>Foreign key</mark></b></td><td>Attribute referencing the primary key of another relation</td><td>Dept_ID in STUDENT → DEPARTMENT.Dept_ID</td></tr>
+          <tr><td><b>Composite key</b></td><td>Key formed of two or more attributes together</td><td>{OrderID, ProductID} in ORDER_ITEM</td></tr>
+        </table></div>
+
+        <h5>Part B — Integrity Constraints (10M)</h5>
+        <p><mark>Integrity constraints</mark> are rules the DBMS enforces on every insert / update / delete so the database always stays correct and consistent. Four main types:</p>
+        <ul>
+          <li><b><mark>Domain constraint</mark>:</b> each attribute value must come from its declared domain (type / range). <em>Violation:</em> <code>'abc'</code> in an integer <code>Age</code> column, or <code>Age = -5</code>.</li>
+          <li><b><mark>Key constraint</mark> (uniqueness):</b> no two tuples may share the same primary-key value. <em>Violation:</em> two students with <code>RollNo = 101</code>.</li>
+          <li><b><mark>Entity integrity</mark>:</b> the primary-key attribute(s) can <mark>never be NULL</mark> — a NULL key can't identify a row. <em>Violation:</em> inserting a STUDENT with <code>RollNo = NULL</code>.</li>
+          <li><b><mark>Referential integrity</mark>:</b> a foreign-key value must match an existing primary key in the referenced relation, <em>or</em> be NULL. <em>Violation:</em> EMPLOYEE with <code>Dept_ID = 99</code> when no department 99 exists.</li>
+        </ul>
+
+        <figure class="diagram-fig">
+          <div style="display:grid; grid-template-columns:1fr auto 1fr; gap:10px; align-items:center; max-width:560px; margin:0 auto;">
+            <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:6px; padding:10px; text-align:center;"><b>EMPLOYEE</b><br><span style="font-size:11px;">EmpID (PK) · Name · <mark>Dept_ID (FK)</mark></span></div>
+            <div style="text-align:center; color:var(--brand); font-weight:700; font-size:12px;">FK&nbsp;→<br>must exist</div>
+            <div style="background:var(--forest-soft); border:1.5px solid var(--forest); border-radius:6px; padding:10px; text-align:center;"><b>DEPARTMENT</b><br><span style="font-size:11px;"><mark>Dept_ID (PK)</mark> · DName</span></div>
+          </div>
+          <figcaption><b>Fig P.1</b> · Referential integrity — every EMPLOYEE.Dept_ID must match an existing DEPARTMENT.Dept_ID (or be NULL).</figcaption>
+        </figure>
+
+        <h5>Worked Example</h5>
+        <p>DEPARTMENT holds Dept_ID ∈ {10, 20, 30}. EMPLOYEE inserts:</p>
+        <ul>
+          <li><code>(E1, Raj, 20)</code> → <mark><b>valid</b></mark> (dept 20 exists).</li>
+          <li><code>(E2, Sita, NULL)</code> → valid (FK NULL allowed — not yet assigned).</li>
+          <li><code>(E3, Amit, 50)</code> → <mark><b>rejected</b></mark> — referential integrity (no dept 50).</li>
+          <li><code>(NULL, Ravi, 10)</code> → <mark><b>rejected</b></mark> — entity integrity (PK is NULL).</li>
+        </ul>
+
+        <div class="table-wrap"><table>
+          <tr><th>Constraint</th><th>Enforces</th><th>SQL enforced by</th></tr>
+          <tr><td>Domain</td><td>Valid type / range per column</td><td>data type + <code>CHECK</code></td></tr>
+          <tr><td>Key</td><td>Unique primary key</td><td><code>PRIMARY KEY</code> / <code>UNIQUE</code></td></tr>
+          <tr><td>Entity integrity</td><td>PK not NULL</td><td><code>PRIMARY KEY</code> (implicit NOT NULL)</td></tr>
+          <tr><td>Referential</td><td>FK matches a PK or NULL</td><td><code>FOREIGN KEY … REFERENCES</code></td></tr>
+        </table></div>
+
+        <div class="box warn"><span class="label">Examiner trap</span> Entity integrity = <b>primary</b> key not NULL. Referential integrity = <b>foreign</b> key matches a PK. Students swap these two — keep them straight.</div>
+
+        <div class="score">
+          <b>Mark Allocation</b>
+          <ul>
+            <li><span>Key types table (6 keys + examples)</span><span class="m">5M</span></li>
+            <li><span>Four integrity constraints + violation each</span><span class="m">4M</span></li>
+            <li><span>Referential-integrity diagram</span><span class="m">2M</span></li>
+            <li><span>Worked example (valid / rejected inserts)</span><span class="m">2M</span></li>
+            <li><span>Enforcement table + examiner trap</span><span class="m">2M</span></li>
+            <li><span>Total</span><span class="m">15M</span></li>
           </ul>
         </div>
       </div>
@@ -1911,15 +2166,15 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
     </div>
 
     <div class="hot-qs">
-      <h4>🎯 Highest Exam Probability — from BOTH BCA papers (BCA-MAY-25 BCG-202-V + DBMS25-BCA)</h4>
-      <div class="hot-item"><span class="hi-badge vhigh">★★★ 15M</span><b>ER Diagram scenario</b> — Banking (BCA-25 Q3a) / University (DBMS25-BCA Q4) / Hospital. Design ER + reduce to relational tables. <b>In BOTH papers — near-certain.</b></div>
-      <div class="hot-item"><span class="hi-badge vhigh">★★★ 15M</span><b>Normalization</b> — given relation + FDs → candidate keys → decompose to 3NF/BCNF (BCA-25 Q5b BCNF, DBMS25-BCA Q6). + Modification anomalies. <b>In BOTH.</b></div>
-      <div class="hot-item"><span class="hi-badge vhigh">★★★ 15M</span><b>Three-Schema + Data Independence</b> — 3-level diagram + Logical vs Physical DI table (BCA-25 Q3b, DBMS25-BCA Q3). <b>In BOTH.</b></div>
-      <div class="hot-item"><span class="hi-badge vhigh">★★★ 10M</span><b>DBMS Users + types</b> — End-user / App programmer / DBA / Analyst (BCA-25 Q2a 10M, DBMS25-BCA Q2 5M). <b>In BOTH — do NOT skip, easy marks.</b></div>
-      <div class="hot-item"><span class="hi-badge vhigh">★★★ 10M</span><b>Relational Algebra queries</b> — incl. DIVISION ("borrowed ALL books by X") + Join. BCA-25 Q5a Employee/Books/Loan schema.</div>
-      <div class="hot-item"><span class="hi-badge high">★★ 10M</span><b>Conflict serializability</b> — given T1/T2/T3 schedules → precedence graph → is it serialisable? (BCA-25 Q4a) + 2PL variants.</div>
-      <div class="hot-item"><span class="hi-badge high">★★ 5-10M</span><b>Keys + Integrity Constraints</b> — types of keys + domain/entity/referential/key (DBMS25-BCA Q5).</div>
-      <div class="hot-item"><span class="hi-badge med">★ 5M</span><b>Recovery</b> — Shadow Paging (BCA-25 Q6b) + WAL/checkpoints. And <b>Distributed DB features</b> (BCA-25 Q6a).</div>
+      <h4>🎯 Highest Exam Probability — from BOTH BCA papers (BCA May-25 · BCG-202-V + BCA Dec-25 · BCA-17-203)</h4>
+      <div class="hot-item"><span class="hi-badge vhigh">★★★ 15M</span><b>ER Diagram scenario</b> — Banking (BCA May-25 Q3a) / University (BCA Dec-25 Q4) / Hospital. Design ER + reduce to relational tables. <b>In BOTH papers — near-certain.</b></div>
+      <div class="hot-item"><span class="hi-badge vhigh">★★★ 15M</span><b>Normalization</b> — given relation + FDs → candidate keys → decompose to 3NF/BCNF (BCA May-25 Q5b BCNF, BCA Dec-25 Q6). + Modification anomalies. <b>In BOTH.</b></div>
+      <div class="hot-item"><span class="hi-badge vhigh">★★★ 15M</span><b>Three-Schema + Data Independence</b> — 3-level diagram + Logical vs Physical DI table (BCA May-25 Q3b, BCA Dec-25 Q3). <b>In BOTH.</b></div>
+      <div class="hot-item"><span class="hi-badge vhigh">★★★ 10M</span><b>DBMS Users + types</b> — End-user / App programmer / DBA / Analyst (BCA May-25 Q2a 10M, BCA Dec-25 Q2 5M). <b>In BOTH — do NOT skip, easy marks.</b></div>
+      <div class="hot-item"><span class="hi-badge vhigh">★★★ 10M</span><b>Relational Algebra queries</b> — incl. DIVISION ("borrowed ALL books by X") + Join. BCA May-25 Q5a Employee/Books/Loan schema.</div>
+      <div class="hot-item"><span class="hi-badge high">★★ 10M</span><b>Conflict serializability</b> — given T1/T2/T3 schedules → precedence graph → is it serialisable? (BCA May-25 Q4a) + 2PL variants.</div>
+      <div class="hot-item"><span class="hi-badge high">★★ 5-10M</span><b>Keys + Integrity Constraints</b> — types of keys + domain/entity/referential/key (BCA Dec-25 Q5).</div>
+      <div class="hot-item"><span class="hi-badge med">★ 5M</span><b>Recovery</b> — Shadow Paging (BCA May-25 Q6b) + WAL/checkpoints. And <b>Distributed DB features</b> (BCA May-25 Q6a).</div>
     </div>
   </div>
 
