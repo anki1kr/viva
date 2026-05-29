@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -16,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Spectral:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#f3ead2; --paper-soft:#faf2dc; --paper-deep:#e6dbb8;
+  --paper:#ffffff; --paper-soft:#fafafa; --paper-deep:#f2f2f2;
   --ink:#1a1209; --ink-soft:#3d2f1c; --muted:#6b5d47; --rule:#d9cfb6;
   --brand:#1e3a8a; --brand-2:#1e40af; --brand-soft:#dbeafe; --brand-deep:#172554;
   --gold:#ca8a04; --gold-soft:#fff8e7; --highlighter:#fde047;
@@ -375,12 +374,12 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
     </div>
     <div class="mnem">
       <b>Mnemonic: "SGBTLI" (DBA Checklist)</b><br>
-      • <b>S</b>chema Definition &amp; Modification (DDL ownership)<br>
-      • <b>G</b>ranting Authorizations (Security &amp; access control via SQL GRANT)<br>
-      • <b>B</b>ackup &amp; Recovery policies (RTO/RPO setup)<br>
-      • <b>T</b>uning Performance (Query optimization &amp; indexing)<br>
-      • <b>L</b>iaison with Users (Evolving schema to meet business needs)<br>
-      • <b>I</b>ntegrity constraint enforcement
+      • <b>S</b>chema design &amp; change (owns DDL)<br>
+      • <b>G</b>rant access (SQL GRANT / REVOKE)<br>
+      • <b>B</b>ackup &amp; recovery plans<br>
+      • <b>T</b>une speed (query tuning &amp; indexes)<br>
+      • <b>L</b>isten to users (update schema as needs change)<br>
+      • <b>I</b>ntegrity rules &amp; checks
     </div>
     <h4>Categories of DBMS Users</h4>
     <ul>
@@ -655,12 +654,6 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
     <p class="lede">Calibrated predicted theory questions with complete model answers matching the academic marking rubric.</p>
   </div>
 
-  <div class="exam-paper">
-    <div class="ep-hd">
-      <h2>BCG-202-V · DBMS Predicted Paper</h2>
-      <div class="ep-meta">75 Marks · 3 Hours · Mock Exam</div>
-    </div>
-
     <!-- ======================================================= -->
     <!-- SECTION A -->
     <!-- ======================================================= -->
@@ -668,122 +661,110 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q1 a -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(a)</span><span class="tag marks">1.5M</span></div>
-      <div class="qbody"><b>Define Metadata. Give one concrete example.</b></div>
+      <div class="qhead"><span class="qnum">Q1(a)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(a)</span></div>
+      <div class="qbody"><b>What do you mean by system log?</b></div>
       <div class="ans">
-        Metadata is "<mark>data</mark> about data". It tells the DBMS what each piece of stored data looks like. It sits in the system catalog and lists the <mark>schema</mark>, rules, data types, and file layout.
-        <br><i>Example:</i> in the Aadhaar database, one metadata row says <code>Column: AadhaarNo, Type: CHAR(12), Constraint: NOT NULL</code>.
+        A <mark>system log</mark> (transaction log) is a file that records every change made to the database, in order. Each entry stores the transaction ID, the data item, its old value, and its new value. It is used for <mark>recovery</mark> after a crash. Example: a UPI payment failure is undone by reading its log entry.
       </div>
     </div>
 
     <!-- Q1 b -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(b)</span><span class="tag marks">1.5M</span></div>
-      <div class="qbody"><b>Differentiate Logical and Physical Data Independence.</b></div>
+      <div class="qhead"><span class="qnum">Q1(b)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(b)</span></div>
+      <div class="qbody"><b>What is a composite attribute? Give an example.</b></div>
       <div class="ans">
-        <div class="table-wrap">
-          <table>
-            <tr><th>Parameter</th><th><mark>Logical DI</mark></th><th><mark>Physical DI</mark></th></tr>
-            <tr><td><b>Definition</b></td><td>Power to change the main schema (tables) without breaking user views or apps.</td><td>Power to change how data is stored on disk without changing the main schema.</td></tr>
-            <tr><td><b>Example</b></td><td>IRCTC adds a new <code>Aadhaar</code> column to the <code>Passenger</code> table. Old booking queries still work.</td><td>IRCTC adds a B+ Tree index on <code>Passenger(PNR)</code>. Table layout looks the same to users.</td></tr>
-          </table>
-        </div>
+        A <mark>composite attribute</mark> is one attribute that can be split into smaller sub-parts. Example: <code>Address</code> splits into House-No, Street, City, PIN. In the ER diagram it is drawn as an oval with smaller ovals joined to it. Opposite is a <em>simple (atomic)</em> attribute like <code>Age</code>.
       </div>
     </div>
 
     <!-- Q1 c -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(c)</span><span class="tag marks">1.5M</span></div>
-      <div class="qbody"><b>What is the difference between Super Key and Candidate Key?</b></div>
+      <div class="qhead"><span class="qnum">Q1(c)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(f)</span></div>
+      <div class="qbody"><b>What do you mean by cardinality? What are the different kinds?</b></div>
       <div class="ans">
-        <div class="table-wrap">
-          <table>
-            <tr><th>Parameter</th><th>Super Key</th><th>Candidate Key</th></tr>
-            <tr><td><b>Definition</b></td><td>Any group of columns that picks out one row uniquely. Extra columns are OK.</td><td>The smallest super key. Drop any column and it stops being unique.</td></tr>
-            <tr><td><b>Example</b></td><td>In a college Student table: <code>{RollNo}</code>, <code>{RollNo, Name}</code>, <code>{RollNo, Email}</code> all work.</td><td>Only <code>{RollNo}</code>. You cannot drop RollNo and still get a unique row.</td></tr>
-          </table>
-        </div>
+        <mark>Cardinality</mark> tells how many rows of one entity link to rows of another in a relationship. Three kinds:
+        <ul>
+          <li><b>1:1</b> — Person ↔ Aadhaar card</li>
+          <li><b>1:N</b> — Department → many Employees</li>
+          <li><b>M:N</b> — Students ↔ Courses (each takes many, each has many)</li>
+        </ul>
       </div>
     </div>
 
     <!-- Q1 d -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(d)</span><span class="tag marks">1.5M</span></div>
-      <div class="qbody"><b>Explain the Entity Integrity Constraint.</b></div>
+      <div class="qhead"><span class="qnum">Q1(d)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(g)</span></div>
+      <div class="qbody"><b>What are participation constraints in a relationship in the ER model?</b></div>
       <div class="ans">
-        The Entity Integrity rule says: no part of the <mark>primary key</mark> can be <code>NULL</code>. Every row must have a real value in its PK column. This makes sure every row can be found by its PK. Example: in a UPI payments table, <code>TxnID</code> is the PK — it can never be empty.
+        Participation says whether <em>every</em> entity row must join the relationship.
+        <ul>
+          <li><b>Total (==):</b> every row must take part. A <code>Loan</code> must belong to a <code>Customer</code> — shown by a double line.</li>
+          <li><b>Partial (—):</b> taking part is optional. Not every Customer has a Loan — shown by a single line.</li>
+        </ul>
       </div>
     </div>
 
     <!-- Q1 e -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(e)</span><span class="tag marks">1.5M</span></div>
-      <div class="qbody"><b>Why is a checkpoint created in database recovery logs?</b></div>
+      <div class="qhead"><span class="qnum">Q1(e)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(e)</span></div>
+      <div class="qbody"><b>What are the unary operations in Relational Algebra?</b></div>
       <div class="ans">
-        A <mark>checkpoint</mark> writes all changed memory pages and log records to safe disk storage. After a crash, the DBMS only reads the log back to the last checkpoint, not from the start. This cuts recovery time a lot. Example: Paytm uses checkpoints so a server crash recovers in seconds, not hours.
+        Unary operations work on <em>one</em> relation at a time. Three of them:
+        <ul>
+          <li><b>σ (Selection):</b> picks rows that match a condition. <code>σ<sub>Salary&gt;50000</sub>(Emp)</code></li>
+          <li><b>π (Projection):</b> picks listed columns. <code>π<sub>Name,Salary</sub>(Emp)</code></li>
+          <li><b>ρ (Rename):</b> renames a relation or its columns.</li>
+        </ul>
       </div>
     </div>
 
     <!-- Q1 f -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(f)</span><span class="tag marks">1.5M</span></div>
-      <div class="qbody"><b>Define a View in SQL and list its primary benefits.</b></div>
+      <div class="qhead"><span class="qnum">Q1(f)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(c)</span></div>
+      <div class="qbody"><b>What is the lossless join property?</b></div>
       <div class="ans">
-        A <mark>View</mark> is a fake table built from a saved SQL query. It does not store rows on disk. The DBMS runs the query each time the view is used. Benefits:
-        <ul>
-          <li><b>Security:</b> hides private columns (e.g. salary, password) from junior staff.</li>
-          <li><b>Simplicity:</b> hides complex joins, so the app just queries one virtual table.</li>
-        </ul>
+        When a table is split into smaller tables (decomposition), the <mark>lossless join</mark> property means joining them back gives the <em>exact</em> original rows — no extra (spurious) rows, no lost rows. It is a must-have for safe normalization. Test: the common column of the two pieces must be a key of at least one piece.
       </div>
     </div>
 
     <!-- Q1 g -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(g)</span><span class="tag marks">1.5M</span></div>
-      <div class="qbody"><b>State the primary difference between Tuple Relational Calculus and Domain Relational Calculus.</b></div>
+      <div class="qhead"><span class="qnum">Q1(g)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(d)</span></div>
+      <div class="qbody"><b>What do you mean by trivial dependency?</b></div>
       <div class="ans">
-        <div class="table-wrap">
-          <table>
-            <tr><th>Parameter</th><th><mark>Tuple Relational Calculus</mark> (TRC)</th><th><mark>Domain Relational Calculus</mark> (DRC)</th></tr>
-            <tr><td><b>Definition</b></td><td>Variable holds one full row at a time. Pick columns with dot (<code>t.Name</code>).</td><td>Variable holds one column value at a time. Row is written as a list of values.</td></tr>
-            <tr><td><b>Example</b></td><td><code>{ t | t &isin; Student &and; t.Age &gt; 20 }</code></td><td><code>{ &lt;n, a&gt; | &lt;n, a&gt; &isin; Student &and; a &gt; 20 }</code></td></tr>
-          </table>
-        </div>
+        A <mark>functional dependency</mark> <code>X → Y</code> is <mark>trivial</mark> when Y is already part of X (Y ⊆ X). It is always true, so it adds no new rule. Example: <code>{RollNo, Name} → Name</code>. Opposite is a <em>non-trivial</em> FD like <code>RollNo → Name</code>.
       </div>
     </div>
 
     <!-- Q1 h -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(h)</span><span class="tag marks">1.5M</span></div>
-      <div class="qbody"><b>Define BCNF. When does a 3NF relation fail BCNF?</b></div>
+      <div class="qhead"><span class="qnum">Q1(h)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(j)</span></div>
+      <div class="qbody"><b>Write any two of Armstrong's inference rules.</b></div>
       <div class="ans">
-        A table is in <mark>BCNF</mark> if for every <mark>functional dependency</mark> <code>X → A</code>, the left side X is a super key. A 3NF table fails BCNF when it has an FD <code>X → A</code> where A is a prime attribute (part of some candidate key) but X is <em>not</em> a super key.
+        <mark>Armstrong's axioms</mark> are rules to find all FDs. Any two:
+        <ul>
+          <li><b>Reflexivity:</b> if Y ⊆ X then X → Y</li>
+          <li><b>Augmentation:</b> if X → Y then XZ → YZ</li>
+          <li><b>Transitivity:</b> if X → Y and Y → Z then X → Z</li>
+        </ul>
       </div>
     </div>
 
     <!-- Q1 i -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(i)</span><span class="tag marks">1.5M</span></div>
-      <div class="qbody"><b>Write the SQL query to add a column Email to an existing Student table.</b></div>
+      <div class="qhead"><span class="qnum">Q1(i)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(i)</span></div>
+      <div class="qbody"><b>What is the purpose of the GROUP BY clause in a SELECT statement?</b></div>
       <div class="ans">
-        Use the <mark>ALTER TABLE</mark> command:
-        <br><code>ALTER TABLE Student ADD Email VARCHAR(50);</code>
-        <br>This adds a new <code>Email</code> column to the existing table. Old rows get <code>NULL</code> in that column.
+        <mark>GROUP BY</mark> puts rows that share a value into one group, then runs an aggregate (COUNT, SUM, AVG, MIN, MAX) on each group. Example: <code>SELECT Dept, AVG(Salary) FROM Emp GROUP BY Dept;</code> gives the average salary per department. <code>HAVING</code> filters the groups after grouping.
       </div>
     </div>
 
     <!-- Q1 j -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q1(j)</span><span class="tag marks">1.5M</span></div>
-      <div class="qbody"><b>What is a transaction? List its ACID properties.</b></div>
+      <div class="qhead"><span class="qnum">Q1(j)</span><span class="tag marks">1.5M</span><span class="tag year" style="opacity:.72;background:#dbeafe;color:var(--navy);border-color:var(--navy);">⟲ BCA-25 Q1(h)</span></div>
+      <div class="qbody"><b>What is a timestamp in concurrency control?</b></div>
       <div class="ans">
-        A <mark>transaction</mark> is a single unit of work in the database. It groups one or more SQL statements together. Example: a UPI payment is one transaction (debit sender + credit receiver). The <mark>ACID</mark> rules are:
-        <ul>
-          <li><b>A</b>tomicity: all steps run, or none run.</li>
-          <li><b>C</b>onsistency: the database rules stay true.</li>
-          <li><b>I</b>solation: parallel transactions do not see each other's half-done work.</li>
-          <li><b>D</b>urability: once committed, the result survives a crash.</li>
-        </ul>
+        A <mark>timestamp</mark> is a unique number the DBMS gives each transaction at its start (usually by clock or counter). Older transactions get smaller numbers. The <mark>timestamp ordering</mark> protocol uses these numbers to decide the order of conflicting reads and writes, so the result stays serialisable — without using locks.
       </div>
     </div>
 
@@ -794,7 +775,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q2 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q2</span><span class="tag year">Unit 1 Highlight</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q2</span><span class="tag hot">★★★ BCA-25 Q3(b) + DBMS25-BCA Q3</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Explain the ANSI/SPARC Three-Schema Architecture in detail with a neat diagram. Differentiate between Logical and Physical Data Independence with concrete examples.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
@@ -886,7 +867,7 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
 
     <!-- Q3 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q3</span><span class="tag year">Unit 2 Highlight</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q3</span><span class="tag hot">★★★ BCA-25 Q3(a) Banking + DBMS25-BCA Q4 University</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>A hospital maintains records of Patients (PID, Name, Phone), Doctors (DocID, Name, Specialty), Departments (DeptID, DName), Appointments, and Bills. Design a complete ER Diagram clearly indicating entities, attributes (with keys), cardinality ratios, and participation constraints. Reduce the ER diagram into relational schemas.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
@@ -1037,7 +1018,7 @@ APPOINTMENT(PID*, DocID*, ApptDate, Diagnosis)
 
     <!-- Q4 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q4</span><span class="tag year">Unit 3 Highlight</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q4</span><span class="tag hot">★★★ BCA-25 Q5(a) RA incl Division</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Given the Schema: Employee(EmpID, Name, Salary, DeptID), Project(ProjID, ProjName, ChiefArch), WorkOn(EmpID, ProjID, Hours). Write the query expressions in BOTH Relational Algebra and SQL:
         <br>(a) Find names of all employees who earn more than 50,000.
         <br>(b) Find names of all employees working on Project 'S9'.
@@ -1168,7 +1149,7 @@ WHERE w.ProjID = 'S9';</code></pre>
 
     <!-- Q5 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q5</span><span class="tag year">Unit 4 Highlight</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q5</span><span class="tag hot">★★★ BCA-25 Q5(b) BCNF + DBMS25-BCA Q6 Normalization</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Given relation schema R(A, B, C, D, E, F) and the set of Functional Dependencies: F = {A→C, AB→D, BC→E, D→F, F→A}.
         <br>(a) Compute the attribute closure {A, B}⁺.
         <br>(b) Find all candidate keys of R.
@@ -1288,7 +1269,7 @@ R5(F, A)      -- Enforces F → A</code></pre>
 
     <!-- Q6 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q6</span><span class="tag year">Unit 4 Highlight</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q6</span><span class="tag hot">★★★ BCA-25 Q4(a) Conflict Serializability + 2PL</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>What is Two-Phase Locking (2PL)? Explain its variants (Basic, Conservative, Strict, Rigorous) with a comparison table. Why is Strict 2PL preferred for ensuring transaction recoverability in DBMS? Sketch a cascading abort scenario under basic 2PL.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
@@ -1409,7 +1390,7 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
 
     <!-- Q7 -->
     <div class="qcard predicted">
-      <div class="qhead"><span class="qnum">Q7</span><span class="tag year">Unit 4 Highlight</span><span class="tag marks">15M</span></div>
+      <div class="qhead"><span class="qnum">Q7</span><span class="tag hot">★★ BCA-25 Q6(b) Shadow Paging + Recovery</span><span class="tag marks">15M</span></div>
       <div class="qbody"><b>Explain the Write-Ahead Logging (WAL) protocol and discuss recovery using checkpoints. Contrast WAL recovery with the Shadow Paging recovery scheme with a neat comparison table.</b></div>
       <div class="ans">
         <h5>Introduction</h5>
@@ -1518,7 +1499,83 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
       </div>
     </div>
 
-  </div><!-- /exam-paper -->
+    <!-- Q8 — DBMS Users + Components + DBA (appeared as Part-B in BOTH BCA papers) -->
+    <div class="qcard predicted">
+      <div class="qhead"><span class="qnum">Q8</span><span class="tag hot">★★★ BCA-25 Q2(a) 10M + DBMS25-BCA Q2 (components 10M + users 5M)</span><span class="tag marks">15M</span></div>
+      <div class="qbody"><b>Explain the components of a DBMS environment with a neat diagram. Define the different types of DBMS users and the role of the DBA.</b></div>
+      <div class="ans">
+        <div class="box tip"><span class="label">Why this is here</span> This topic showed up as a Part-B question in <b>both</b> BCA papers (BCA-MAY-25 Q2a · DBMS25-BCA Q2). It is the easiest 10-15 marks in the paper — pure theory, no numerical. Do not skip it.</div>
+
+        <h5>What is a DBMS Environment?</h5>
+        <p>A <mark>DBMS</mark> is the software that sits between users and the stored data. The full environment has five parts working together: <mark>hardware</mark>, <mark>software</mark>, <mark>data</mark>, <mark>users</mark>, and <mark>procedures</mark>.</p>
+
+        <h5>Five Components</h5>
+        <ul>
+          <li><b><mark>Hardware</mark>:</b> the physical machines — servers, disks, RAM, network. Where the database actually lives.</li>
+          <li><b><mark>Software</mark>:</b> the DBMS engine itself (Oracle, MySQL, PostgreSQL) + the OS + the app programs.</li>
+          <li><b><mark>Data</mark>:</b> the actual stored records + the <mark>metadata</mark> (data about data, in the system catalog).</li>
+          <li><b><mark>Users</mark>:</b> the people who use the system (see types below).</li>
+          <li><b><mark>Procedures</mark>:</b> the rules and instructions for using the system — backup steps, login rules, recovery steps.</li>
+        </ul>
+
+        <figure class="diagram-fig">
+          <div style="display:flex; flex-direction:column; gap:8px; max-width:460px; margin:0 auto;">
+            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:8px;">
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:8px; text-align:center; font-size:12px;"><b>End Users</b><br>forms / apps</div>
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:8px; text-align:center; font-size:12px;"><b>App Programmers</b><br>write code + SQL</div>
+              <div style="background:var(--brand-soft); border:1.5px solid var(--brand); border-radius:4px; padding:8px; text-align:center; font-size:12px;"><b>DBA</b><br>admin + control</div>
+            </div>
+            <div style="text-align:center; color:var(--brand); font-weight:700;">↓ requests ↓</div>
+            <div style="background:var(--gold-soft); border:2px solid var(--gold); border-radius:4px; padding:10px; text-align:center;"><b>DBMS Software Engine</b><br><span style="font-size:11.5px;">Query Processor · Transaction Manager · Buffer Manager · Recovery Manager</span></div>
+            <div style="text-align:center; color:var(--gold); font-weight:700;">↓ reads / writes ↓</div>
+            <div style="background:var(--forest-soft); border:2px solid var(--forest); border-radius:4px; padding:10px; text-align:center;"><b>Stored Database</b><br><span style="font-size:11.5px;">Data + Metadata (System Catalog) on disk</span></div>
+          </div>
+          <figcaption><b>Fig 8.1</b> · DBMS environment — users send requests to the DBMS engine, which reads/writes the stored database.</figcaption>
+        </figure>
+
+        <h5>Types of DBMS Users</h5>
+        <div class="table-wrap">
+          <table>
+            <tr><th>User</th><th>What they do</th><th>SQL skill</th></tr>
+            <tr><td><b><mark>End User</mark></b> (Naive)</td><td>Uses ready-made forms / apps. E.g. a bank clerk using a deposit screen.</td><td>None</td></tr>
+            <tr><td><b><mark>Application Programmer</mark></b></td><td>Writes the application programs + embeds SQL in code.</td><td>High</td></tr>
+            <tr><td><b><mark>Sophisticated User</mark></b> / Analyst</td><td>Writes own ad-hoc SQL queries for reports + analysis.</td><td>High</td></tr>
+            <tr><td><b><mark>DBA</mark></b></td><td>Controls the whole database — design, security, backup, tuning.</td><td>Expert</td></tr>
+            <tr><td><b>Database Designer</b></td><td>Designs the schema, tables, relationships before the DB goes live.</td><td>High</td></tr>
+          </table>
+        </div>
+
+        <h5>Role of the DBA (mnemonic: SGBTLI)</h5>
+        <ul>
+          <li><b><mark>S</mark>chema design &amp; change</b> — owns the DDL (CREATE / ALTER tables).</li>
+          <li><b><mark>G</mark>rant access</b> — GRANT / REVOKE rights (security &amp; authorisation).</li>
+          <li><b><mark>B</mark>ackup &amp; recovery</b> — plans backups, restores after a crash.</li>
+          <li><b><mark>T</mark>une performance</b> — adds indexes, speeds up slow queries.</li>
+          <li><b><mark>L</mark>isten to users</b> — updates the schema as business needs change.</li>
+          <li><b><mark>I</mark>ntegrity rules</b> — sets and enforces constraints to keep data correct.</li>
+        </ul>
+
+        <div class="box warn"><span class="label">Examiner Trap</span> Do not mix up <b>Database Designer</b> (builds the schema before launch) with <b>DBA</b> (runs and protects it after launch). They are listed as separate users.</div>
+
+        <h5>Modern Relevance</h5>
+        <p>In 2026, cloud databases (Amazon RDS, Google Cloud SQL) automate much of the DBA's backup and tuning work, but the <mark>DBA</mark> role is still vital for security, schema design and cost control. Indian firms like Zoho, Razorpay and IRCTC employ dedicated DBA teams to keep huge databases fast and safe.</p>
+
+        <h5>Conclusion</h5>
+        <p>A DBMS environment is more than just software — it is five parts (hardware, software, data, users, procedures) working as one. Different users interact at different levels, from a naive end user clicking a form to a DBA controlling the entire system. A clear grasp of these roles is the foundation of every later DBMS topic.</p>
+
+        <div class="score">
+          <b>Mark Allocation (15 Marks)</b>
+          <ul>
+            <li><span>DBMS environment intro + 5 components</span><span class="m">4.0M</span></li>
+            <li><span>Components diagram with users → engine → storage</span><span class="m">2.0M</span></li>
+            <li><span>Types of DBMS users table</span><span class="m">4.0M</span></li>
+            <li><span>DBA roles (SGBTLI)</span><span class="m">3.0M</span></li>
+            <li><span>Modern relevance + conclusion</span><span class="m">2.0M</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
 </section>
 
 <!-- ══════════════════════════════════════════════════════════ -->
@@ -1531,28 +1588,6 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
     <p class="lede">Review these high-yield card summaries the morning of 1 June before entering the exam hall.</p>
   </div>
 
-  <div class="cheat-section" style="margin-bottom:18px; padding:14px; border:1.5px solid var(--ink); border-radius:6px; background:#fffefb;">
-    <div class="cs-head" style="margin-bottom:10px;">📚 Full Syllabus — One Glance (BCG-202-V · 4 Units)</div>
-    <div style="display:grid; grid-template-columns:1fr; gap:10px;">
-      <div style="padding:10px 12px; background:var(--brand-soft); border-left:3px solid var(--brand); border-radius:4px;">
-        <b style="color:var(--brand-deep);">UNIT I — Basic Concepts &amp; DBMS Architecture</b><br>
-        <span style="font-size:13.5px;">Data vs Information · Database vs File System · DB users (End-user, App programmer, DBA, System analyst) · DBA roles (SGBTLI: Schema, Grant, Backup, Tuning, Liaison, Integrity) · 3-Schema Architecture (External · Conceptual · Internal) · Data Independence (Logical &amp; Physical) · Data Models (Hierarchical · Network · Relational · ER · Object) · DBMS Components &amp; Languages (DDL · DML · DCL · TCL) · Metadata &amp; System Catalog · Centralised vs Client-Server.</span>
-      </div>
-      <div style="padding:10px 12px; background:var(--gold-soft); border-left:3px solid var(--gold); border-radius:4px;">
-        <b style="color:var(--gold);">UNIT II — ER Model &amp; Relational Model</b><br>
-        <span style="font-size:13.5px;">Entities (Strong · Weak) · Attributes (Simple · Composite · Multi-valued · Derived · Key) · Relationships &amp; Degree · Cardinality (1:1, 1:N, M:N) · Participation (Total · Partial) · Generalisation / Specialisation / Aggregation · ER → Relational reduction · Keys hierarchy (Super · Candidate · Primary · Alternate · Foreign · Composite) · Integrity Constraints (Domain · Entity · Referential · Key) · Relational schema notation · Codd's 12 Rules.</span>
-      </div>
-      <div style="padding:10px 12px; background:var(--forest-soft); border-left:3px solid var(--forest); border-radius:4px;">
-        <b style="color:var(--forest);">UNIT III — Relational Algebra &amp; Calculus</b><br>
-        <span style="font-size:13.5px;">Unary ops (σ Selection · π Projection · ρ Rename) · Set ops (∪ Union · ∩ Intersection · − Difference · × Cartesian) · Join ops (⋈ Natural · Theta · Equi · Outer Left/Right/Full · Semi · Anti) · Division (÷) · Tuple Relational Calculus (TRC) · Domain Relational Calculus (DRC) · Safe expressions · Codd's Theorem (RA = safe TRC = safe DRC) · Query trees · Heuristic optimisation (push σ down, push π down).</span>
-      </div>
-      <div style="padding:10px 12px; background:var(--auburn-soft); border-left:3px solid var(--auburn); border-radius:4px;">
-        <b style="color:var(--auburn);">UNIT IV — RDB Design, SQL, Transactions &amp; Recovery</b><br>
-        <span style="font-size:13.5px;">Functional Dependencies (Trivial · Non-trivial · Partial · Transitive · Full) · Armstrong's Axioms (Reflexivity · Augmentation · Transitivity + Union · Decomposition · Pseudo-transitivity) · Attribute closure X⁺ · Minimal cover · Normalisation (1NF · 2NF · 3NF · BCNF · 4NF · 5NF) · Lossless &amp; Dependency-preserving decomposition · SQL (DDL · DML · DQL · Joins · Subqueries · Views · Indexes) · Query Processing &amp; Optimisation · B-Trees / B+ Trees / Hash indexes · Transactions &amp; ACID · Schedules (Serial · Serialisable · Recoverable · Cascadeless · Strict) · Concurrency Control (2PL variants: Basic · Conservative · Strict · Rigorous · Timestamp ordering · MVCC) · Deadlock (Detection · Prevention) · Recovery (Log-based · WAL · Checkpoints · Shadow Paging · ARIES) · Security (DAC · MAC · RBAC) · DDBMS basics.</span>
-      </div>
-    </div>
-  </div>
-
   <div class="cheat-section">
     <div class="cs-head">⚡ DBMS Master Cheat Sheet</div>
     <div class="cheat-grid">
@@ -1560,11 +1595,11 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
         <div class="cc-h">DBA Responsibilities (SGBTLI)</div>
         <ul>
           <li><b>S</b>chema Definition &amp; Modification</li>
-          <li><b>G</b>ranting Authorizations (GRANT/REVOKE)</li>
-          <li><b>B</b>ackups &amp; Recovery policies</li>
-          <li><b>T</b>uning Performance &amp; Indexing</li>
-          <li><b>L</b>iaison with Users</li>
-          <li><b>I</b>ntegrity constraints</li>
+          <li><b>G</b>rant access (GRANT / REVOKE)</li>
+          <li><b>B</b>ackup &amp; recovery plans</li>
+          <li><b>T</b>une performance &amp; indexes</li>
+          <li><b>L</b>isten to users (handle requests)</li>
+          <li><b>I</b>ntegrity rules &amp; checks</li>
         </ul>
       </div>
       <div class="cheat-card">
@@ -1634,23 +1669,226 @@ T2: read(A); read(B); print(A + B); commit</code></pre>
           <li>4. Convert Cartesian products to Joins (⋈)</li>
         </ul>
       </div>
+      <div class="cheat-card">
+        <div class="cc-h">Data vs Information · DB vs File</div>
+        <ul>
+          <li><b>Data:</b> raw facts (e.g. <code>23</code>)</li>
+          <li><b>Information:</b> processed data (e.g. "age = 23 yrs")</li>
+          <li><b>File System:</b> redundancy, no concurrency, weak security</li>
+          <li><b>DBMS:</b> ACID, sharing, recovery, security, integrity</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">DB Users (4 Types)</div>
+        <ul>
+          <li><b>End-User:</b> uses forms/apps (no SQL)</li>
+          <li><b>Application Programmer:</b> writes app code + SQL</li>
+          <li><b>DBA:</b> schema, grant, backup, tuning, integrity</li>
+          <li><b>System Analyst / Sophisticated User:</b> ad-hoc SQL, reports</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Data Models (5)</div>
+        <ul>
+          <li><b>Hierarchical:</b> tree, 1:N only (IMS)</li>
+          <li><b>Network:</b> graph, M:N allowed (CODASYL)</li>
+          <li><b>Relational:</b> tables + keys (Codd 1970)</li>
+          <li><b>ER:</b> entities + relationships (design level)</li>
+          <li><b>Object:</b> classes + inheritance (OODBMS)</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">DBMS Architectures (Tiers)</div>
+        <ul>
+          <li><b>Centralised:</b> single mainframe, all DB + app on one server</li>
+          <li><b>2-Tier Client/Server:</b> client = UI, server = DB+logic</li>
+          <li><b>3-Tier:</b> UI · application server · DB server (web apps)</li>
+          <li><b>n-Tier:</b> + load balancer · cache · CDN · API gateway</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Aggregate Functions &amp; Grouping</div>
+        <ul>
+          <li><b>COUNT · SUM · AVG · MIN · MAX</b></li>
+          <li><b>GROUP BY:</b> groups rows that share a value</li>
+          <li><b>HAVING:</b> filter on groups (after aggregation)</li>
+          <li><b>WHERE</b> filters rows BEFORE grouping</li>
+          <li>Example: <code>SELECT dept, AVG(salary) FROM emp GROUP BY dept HAVING AVG(salary) &gt; 50000;</code></li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Modification Anomalies</div>
+        <ul>
+          <li><b>Insertion anomaly:</b> can't add a fact without adding unrelated data</li>
+          <li><b>Update anomaly:</b> changing one fact in many rows risks inconsistency</li>
+          <li><b>Deletion anomaly:</b> deleting one row loses unrelated data</li>
+          <li>📌 Cured by <b>normalisation</b> (1NF → 3NF/BCNF)</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">SQL Languages (DDL/DML/DCL/TCL)</div>
+        <ul>
+          <li><b>DDL:</b> CREATE · ALTER · DROP · TRUNCATE · RENAME</li>
+          <li><b>DML:</b> INSERT · UPDATE · DELETE · MERGE</li>
+          <li><b>DQL:</b> SELECT</li>
+          <li><b>DCL:</b> GRANT · REVOKE</li>
+          <li><b>TCL:</b> COMMIT · ROLLBACK · SAVEPOINT</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Entities &amp; Attributes</div>
+        <ul>
+          <li><b>Strong entity:</b> own primary key (Student)</li>
+          <li><b>Weak entity:</b> depends on owner (Dependent → Employee)</li>
+          <li><b>Simple · Composite · Multi-valued · Derived · Key</b></li>
+          <li><b>Degree:</b> # of entities in relationship (unary/binary/ternary)</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Cardinality &amp; Participation</div>
+        <ul>
+          <li><b>1:1</b> — Person ↔ Passport</li>
+          <li><b>1:N</b> — Department → Employees</li>
+          <li><b>M:N</b> — Student ↔ Course</li>
+          <li><b>Total (==):</b> every entity must participate</li>
+          <li><b>Partial (—):</b> participation optional</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Gen / Spec / Aggregation</div>
+        <ul>
+          <li><b>Generalisation:</b> bottom-up (Cars + Trucks → Vehicle)</li>
+          <li><b>Specialisation:</b> top-down (Employee → Manager + Engineer)</li>
+          <li><b>Aggregation:</b> treat a relationship as an entity</li>
+          <li>📌 Used in ISA hierarchies</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">ER → Relational Reduction</div>
+        <ul>
+          <li><b>Strong entity</b> → table with PK from key attrs</li>
+          <li><b>Weak entity</b> → table with owner's PK + discriminator</li>
+          <li><b>1:N</b> → add PK of "1" side as FK on "N" side</li>
+          <li><b>M:N</b> → new junction table with both PKs</li>
+          <li><b>Multi-valued attr</b> → separate table</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Integrity Constraints (4)</div>
+        <ul>
+          <li><b>Domain:</b> value within data type/range (age &gt; 0)</li>
+          <li><b>Entity:</b> PK never NULL</li>
+          <li><b>Referential:</b> FK matches existing PK (or NULL)</li>
+          <li><b>Key:</b> uniqueness preserved</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">RA Operators (Quick)</div>
+        <ul>
+          <li><b>σ (Selection):</b> filter rows where condition</li>
+          <li><b>π (Projection):</b> keep listed columns</li>
+          <li><b>ρ (Rename):</b> rename relation/attribute</li>
+          <li><b>∪ ∩ −:</b> Union, Intersection, Difference</li>
+          <li><b>×:</b> Cartesian product</li>
+          <li><b>⋈:</b> Natural Join (auto on common attrs)</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Join Types</div>
+        <ul>
+          <li><b>Inner / Equi:</b> matches both sides</li>
+          <li><b>Natural ⋈:</b> auto on shared column</li>
+          <li><b>Theta:</b> condition is non-equality</li>
+          <li><b>Outer (L/R/Full):</b> keeps unmatched + NULLs</li>
+          <li><b>Semi:</b> matching tuples from left</li>
+          <li><b>Anti:</b> non-matching tuples from left</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">TRC vs DRC</div>
+        <ul>
+          <li><b>TRC:</b> { t | predicate(t) } — variable = tuple</li>
+          <li><b>DRC:</b> { ⟨x,y⟩ | predicate(x,y) } — variables = attr values</li>
+          <li>Both need <b>safety</b> (finite answer)</li>
+          <li>📌 <b>Codd's Theorem:</b> RA = safe TRC = safe DRC</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">FD Types</div>
+        <ul>
+          <li><b>Trivial:</b> A → A</li>
+          <li><b>Non-trivial:</b> A → B (B ⊄ A)</li>
+          <li><b>Partial:</b> only part of composite key → non-key</li>
+          <li><b>Transitive:</b> A → B and B → C ⇒ A → C</li>
+          <li><b>Full:</b> entire composite key → non-key</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Armstrong's Axioms</div>
+        <ul>
+          <li><b>Reflexivity:</b> Y ⊆ X ⇒ X → Y</li>
+          <li><b>Augmentation:</b> X → Y ⇒ XZ → YZ</li>
+          <li><b>Transitivity:</b> X → Y, Y → Z ⇒ X → Z</li>
+          <li>+ Union · Decomposition · Pseudo-transitivity (derived)</li>
+          <li>📌 Used to compute attribute closure X⁺</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Closure X⁺ &amp; Minimal Cover</div>
+        <ul>
+          <li><b>X⁺:</b> all attributes derivable from X using FDs</li>
+          <li>If X⁺ = all attrs ⇒ X is a <b>superkey</b></li>
+          <li><b>Minimal cover:</b> right-side singletons + remove extraneous attrs + remove redundant FDs</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Schedule Types</div>
+        <ul>
+          <li><b>Serial:</b> txns run one after another</li>
+          <li><b>Serialisable:</b> result = some serial schedule</li>
+          <li><b>Recoverable:</b> commit only after dependencies commit</li>
+          <li><b>Cascadeless:</b> read only committed data</li>
+          <li><b>Strict:</b> no read/write on uncommitted data</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">Security (Concept)</div>
+        <ul>
+          <li><b>Authentication:</b> who are you? (login + password)</li>
+          <li><b>Authorisation:</b> what can you do? (GRANT / REVOKE)</li>
+          <li><b>Audit:</b> log every action for accountability</li>
+          <li><b>Encryption:</b> protect data at rest + in transit</li>
+        </ul>
+      </div>
+      <div class="cheat-card">
+        <div class="cc-h">DDBMS Basics</div>
+        <ul>
+          <li><b>Distributed:</b> data spread across sites, looks single</li>
+          <li><b>Fragmentation:</b> horizontal (rows), vertical (cols), mixed</li>
+          <li><b>Replication:</b> copies on multiple sites for fault-tolerance</li>
+          <li><b>CAP Theorem:</b> pick 2 of Consistency, Availability, Partition-tolerance</li>
+        </ul>
+      </div>
     </div>
 
     <div class="mnem">
       <b>All Mnemonics — One Place</b><br>
-      • <b>DBA Checklist:</b> SGBTLI (Schema, Grant, Backup, Tuning, Liaison, Integrity)<br>
+      • <b>DBA Checklist:</b> SGBTLI (Schema, Grant, Backup, Tune, Listen, Integrity)<br>
       • <b>Transactions:</b> ACID (Atomicity, Consistency, Isolation, Durability)<br>
       • <b>Relational completeness:</b> safe TRC = safe DRC = Relational Algebra (Codd)<br>
-      • **2PL Phases:** Growing (acquire only) → Shrinking (release only)
+      • <b>2PL Phases:</b> Growing (acquire only) → Shrinking (release only)
     </div>
 
     <div class="hot-qs">
-      <h4>🎯 Highest Exam Probability checklist</h4>
-      <div class="hot-item"><span class="hi-badge vhigh">★★ 15M</span><b>Normalization numerical</b> — R(ABCD...) with FDs, compute candidate keys, decompose to 3NF/BCNF, check lossless + dependency-preservation.</div>
-      <div class="hot-item"><span class="hi-badge vhigh">★★ 15M</span><b>ER Diagram scenario design</b> — Hospital/Library minworld scenario ER design + Relational table reduction schemas.</div>
-      <div class="hot-item"><span class="hi-badge vhigh">★★ 15M</span><b>Three-Schema architecture</b> — Detail levels with stacked diagram + Logical vs Physical DI comparison table.</div>
-      <div class="hot-item"><span class="hi-badge high">★ 10M</span><b>Strict 2PL</b> — Concurrency variants (Basic/Strict/Rigorous) + Cascading Abort proof diagram.</div>
-      <div class="hot-item"><span class="hi-badge high">★ 10M</span><b>WAL Recovery</b> — ARIES 3-Phase crash recovery (Analysis, Redo, Undo) + WAL vs Shadow Paging table.</div>
+      <h4>🎯 Highest Exam Probability — from BOTH BCA papers (BCA-MAY-25 BCG-202-V + DBMS25-BCA)</h4>
+      <div class="hot-item"><span class="hi-badge vhigh">★★★ 15M</span><b>ER Diagram scenario</b> — Banking (BCA-25 Q3a) / University (DBMS25-BCA Q4) / Hospital. Design ER + reduce to relational tables. <b>In BOTH papers — near-certain.</b></div>
+      <div class="hot-item"><span class="hi-badge vhigh">★★★ 15M</span><b>Normalization</b> — given relation + FDs → candidate keys → decompose to 3NF/BCNF (BCA-25 Q5b BCNF, DBMS25-BCA Q6). + Modification anomalies. <b>In BOTH.</b></div>
+      <div class="hot-item"><span class="hi-badge vhigh">★★★ 15M</span><b>Three-Schema + Data Independence</b> — 3-level diagram + Logical vs Physical DI table (BCA-25 Q3b, DBMS25-BCA Q3). <b>In BOTH.</b></div>
+      <div class="hot-item"><span class="hi-badge vhigh">★★★ 10M</span><b>DBMS Users + types</b> — End-user / App programmer / DBA / Analyst (BCA-25 Q2a 10M, DBMS25-BCA Q2 5M). <b>In BOTH — do NOT skip, easy marks.</b></div>
+      <div class="hot-item"><span class="hi-badge vhigh">★★★ 10M</span><b>Relational Algebra queries</b> — incl. DIVISION ("borrowed ALL books by X") + Join. BCA-25 Q5a Employee/Books/Loan schema.</div>
+      <div class="hot-item"><span class="hi-badge high">★★ 10M</span><b>Conflict serializability</b> — given T1/T2/T3 schedules → precedence graph → is it serialisable? (BCA-25 Q4a) + 2PL variants.</div>
+      <div class="hot-item"><span class="hi-badge high">★★ 5-10M</span><b>Keys + Integrity Constraints</b> — types of keys + domain/entity/referential/key (DBMS25-BCA Q5).</div>
+      <div class="hot-item"><span class="hi-badge med">★ 5M</span><b>Recovery</b> — Shadow Paging (BCA-25 Q6b) + WAL/checkpoints. And <b>Distributed DB features</b> (BCA-25 Q6a).</div>
     </div>
   </div>
 
