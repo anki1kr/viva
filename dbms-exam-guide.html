@@ -131,6 +131,8 @@ th mark, thead mark{ background:transparent !important; color:inherit !important
 strong{ color:var(--ink); font-weight:700; }
 em{ color:var(--ink-soft); }
 code{ font-family:"JetBrains Mono",monospace; font-size:.86em; background:var(--paper-deep); color:var(--ink); padding:1px 6px; border-radius:3px; border:1px solid var(--rule); }
+pre{ margin:12px 0; padding:10px 12px; background:var(--paper-deep); border:1px solid var(--rule); border-radius:4px; overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; font-size:12.5px; line-height:1.5; }
+pre code{ background:none; border:none; padding:0; font-size:inherit; white-space:pre; }
 .mnem{ display:block; margin:10px 0; padding:10px 14px; background:#fffbe5; border:1.5px dashed var(--gold); border-radius:4px; font-family:"Caveat",cursive; font-size:19px; color:var(--ink-soft); line-height:1.25; }
 .mnem b{ font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.2em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:4px; font-weight:700; }
 
@@ -159,7 +161,7 @@ th:last-child, td:last-child{ border-right:none; }
 tbody tr:nth-child(odd){ background:rgba(235,226,204,.35); }
 
 /* ── DIAGRAM-FIG (CSS diagrams) ── */
-.diagram-fig{ margin:14px -2px; padding:10px 6px 8px; background:#fffefb; border:1.5px solid var(--ink); border-radius:4px; text-align:center; }
+.diagram-fig{ margin:14px -2px; padding:10px 6px 8px; background:#fffefb; border:1.5px solid var(--ink); border-radius:4px; text-align:center; overflow-x:auto; }
 .diagram-fig figcaption{ font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; margin-top:6px; padding:0 4px; line-height:1.4; }
 .diagram-fig figcaption b{ color:var(--brand); font-weight:700; }
 
@@ -241,6 +243,29 @@ footer.end .meta{ font-family:"JetBrains Mono",monospace; font-size:10px; letter
   .wrap{ padding:12px 10px 60px; }
   .cover{ padding:18px 14px 16px; }
   .cheat-grid{ grid-template-columns:1fr; }
+
+  /* Remove shadows that push content beyond viewport edge */
+  .exam-paper{ box-shadow:none; margin:12px 0; }
+  .cheat-section{ box-shadow:none !important; }
+  .cheat-card{ box-shadow:none; }
+
+  /* Collapse 2/3-col inline grids inside diagram figures to single column.
+     The 60px+6-col timeline grid is excluded — it scrolls via overflow-x:auto on .diagram-fig. */
+  .diagram-fig [style*="grid-template-columns:1fr 1fr 1fr"],
+  .diagram-fig [style*="grid-template-columns:1fr 1fr"],
+  .diagram-fig [style*="grid-template-columns:repeat(3,1fr)"],
+  .diagram-fig [style*="grid-template-columns: repeat(3, 1fr)"] {
+    grid-template-columns:1fr !important;
+  }
+
+  /* Remove fixed min-widths inside diagrams that overflow narrow screens */
+  .diagram-fig [style*="min-width:200px"]{ min-width:0 !important; width:100%; }
+
+  /* Readability */
+  .ans{ font-size:14.5px; line-height:1.65; }
+  .qbody{ font-size:14.5px; }
+  th, td{ font-size:12px; padding:5px 7px; }
+  .table-wrap{ margin:10px 0; }
 }
 @media print{
   @page{ margin:1.4cm 1.2cm; }

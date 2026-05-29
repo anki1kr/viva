@@ -224,6 +224,8 @@ h3 .badge{
 .viva-card.loc   .stripe{ background:var(--gold); }
 .viva-card.ctrc  .stripe{ background:#7c2d12; }
 .viva-card.iks   .stripe{ background:#a16207; }
+.viva-card.cn    .stripe{ background:#854d0e; }
+.viva-card.de    .stripe{ background:#9a3412; }
 
 .viva-card .inner{ padding:18px 16px 16px; }
 
@@ -240,6 +242,8 @@ h3 .badge{
 .viva-card.loc   .subject-code{ color:var(--gold); }
 .viva-card.ctrc  .subject-code{ color:#7c2d12; }
 .viva-card.iks   .subject-code{ color:#a16207; }
+.viva-card.cn    .subject-code{ color:#854d0e; }
+.viva-card.de    .subject-code{ color:#9a3412; }
 
 .viva-card .name{
   font-family:"Fraunces",serif;
@@ -275,6 +279,8 @@ h3 .badge{
 .viva-card.loc   .pill{ color:#854d0e;        background:#fef3c7; }
 .viva-card.ctrc  .pill{ color:#7c2d12;        background:#fde8d8; border-color:#7c2d12; }
 .viva-card.iks   .pill{ color:#92400e;        background:#fef3c7; border-color:#a16207; }
+.viva-card.cn    .pill{ color:#854d0e;        background:#f7e6cf; border-color:#854d0e; }
+.viva-card.de    .pill{ color:#9a3412;        background:#fbe4d6; border-color:#9a3412; }
 
 /* Topics list */
 .viva-card .topics{
@@ -307,6 +313,8 @@ h3 .badge{
 .viva-card.loc   .cta{ background:var(--gold);    color:#fff; }
 .viva-card.ctrc  .cta{ background:#7c2d12;        color:#fff; }
 .viva-card.iks   .cta{ background:#a16207;        color:#fff; }
+.viva-card.cn    .cta{ background:#854d0e;        color:#fff; }
+.viva-card.de    .cta{ background:#9a3412;        color:#fff; }
 .viva-card .cta .arr{ font-size:20px; font-weight:300; }
 
 /* ── HOW TO USE ── */
@@ -686,6 +694,59 @@ input,textarea,select{ font-size:16px; }
       <div class="cta">Open P&amp;S Exam Guide <span class="arr">›</span></div>
     </a>
 
+    <!-- ── SEM-2 SEPARATOR (full-width, no data-exam-end → never auto-hides) ── -->
+    <div class="sem2-sep" style="grid-column:1/-1; display:flex; align-items:center; gap:14px; margin:22px 2px 6px;">
+      <span style="flex:1; height:2px; background:var(--ink); opacity:.22;"></span>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:.28em; text-transform:uppercase; font-weight:700; color:var(--ink); white-space:nowrap;">📚 Sem 2</span>
+      <span style="flex:1; height:2px; background:var(--ink); opacity:.22;"></span>
+    </div>
+
+    <!-- Computer Networks -->
+    <a href="cn-exam-guide.html" class="viva-card cn">
+      <span class="stripe"></span>
+      <div class="inner">
+        <div class="subject-code">BCG-112-V · Sem-2</div>
+        <div class="name">CN Exam</div>
+        <div class="full">Computer Networks · University Paper</div>
+        <div class="pills">
+          <span class="pill">High-yield Notes</span>
+          <span class="pill">Q1–Q7 Predicted</span>
+          <span class="pill">Cheat Sheet</span>
+        </div>
+        <ul class="topics">
+          <li>4 Units · OSI · Multiplexing · ARQ</li>
+          <li>CRC / Hamming / subnetting / UDP numericals</li>
+          <li>May-24 + May-25 frequency calibration</li>
+          <li>Full mark-accurate model answers</li>
+          <li>Last-hour cheat cards</li>
+        </ul>
+      </div>
+      <div class="cta">Open CN Exam Guide <span class="arr">›</span></div>
+    </a>
+
+    <!-- Digital Electronics-II -->
+    <a href="de-exam-guide.html" class="viva-card de">
+      <span class="stripe"></span>
+      <div class="inner">
+        <div class="subject-code">BCG-104-V · Sem-2</div>
+        <div class="name">DE Exam</div>
+        <div class="full">Digital Electronics-II · University Paper</div>
+        <div class="pills">
+          <span class="pill">High-yield Notes</span>
+          <span class="pill">Q1–Q7 Predicted</span>
+          <span class="pill">Cheat Sheet</span>
+        </div>
+        <ul class="topics">
+          <li>4 Units · Logic families · Counters · ADCs</li>
+          <li>Quine-McCluskey / Hamming / BCD / counter-design worked</li>
+          <li>May-24 + May-25 frequency calibration</li>
+          <li>Fully-worked numericals + boxed answers</li>
+          <li>Formula cheat cards for last hour</li>
+        </ul>
+      </div>
+      <div class="cta">Open DE Exam Guide <span class="arr">›</span></div>
+    </a>
+
   </div>
 
   <div class="tip">
@@ -695,7 +756,7 @@ input,textarea,select{ font-size:16px; }
   <!-- ── FOOTER ── -->
   <footer class="end">
     <h4>Exam me <b>full marks!</b></h4>
-    <div class="meta">BCA(DS)-IV · DBMS · P&amp;S · DSUR · LOC · WC · CTRC · IKS · 2026</div>
+    <div class="meta">BCA(DS)-IV · DBMS · P&amp;S · DSUR · LOC · WC · CTRC · IKS &nbsp;·&nbsp; Sem-2 · CN · DE · 2026</div>
     <span class="offline-status" id="offlineStatus">⚡ Checking offline status…</span>
   </footer>
 
