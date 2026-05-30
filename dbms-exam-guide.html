@@ -1,4 +1,4 @@
-<html lang="en">
+﻿<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -134,7 +134,9 @@ code{ font-family:"JetBrains Mono",monospace; font-size:.86em; background:var(--
 pre{ margin:12px 0; padding:10px 12px; background:var(--paper-deep); border:1px solid var(--rule); border-radius:4px; overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; font-size:12.5px; line-height:1.5; }
 pre code{ background:none; border:none; padding:0; font-size:inherit; white-space:pre; }
 .mnem{ display:block; margin:10px 0; padding:10px 14px; background:#fffbe5; border:1.5px dashed var(--gold); border-radius:4px; font-family:"Caveat",cursive; font-size:19px; color:var(--ink-soft); line-height:1.25; }
-.mnem b{ font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.2em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:4px; font-weight:700; }
+.mnem b{ font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.2em; color:var(--gold); text-transform:uppercase; display:inline; margin-bottom:0; font-weight:700; }
+.mnem > b:first-child{ display:block; margin-bottom:8px; }
+.mnem b:not(:first-child){ font-family:"Caveat",cursive; font-size:inherit; letter-spacing:0; text-transform:none; }
 
 /* ── BOXES ── */
 .box{ margin:12px 0; padding:10px 12px 10px 14px; border-radius:4px; background:var(--paper-soft); border-left:4px solid var(--brand); font-size:14px; }
